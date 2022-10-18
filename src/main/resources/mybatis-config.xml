@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<!-- 만약에 null 데이터가 전달되었으면 빈칸이 아닌 NULL로 인식하도록 설정 -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="kr.co.movieyouhwan.admin.homepage.banner.domain.Banner" alias="Banner"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.homepage.faq.domain.Faq" alias="Faq"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.homepage.notice.domain.Notice" alias="Notice"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.homepage.qna.domain.QnaReply" alias="QnaReply"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.movie.domain.Movie" alias="Movie"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.movie.domain.MovieImg" alias="MovieImg"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.movie.domain.MovieVideo" alias="MovieVideo"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.sales.domain.Sales" alias="Sales"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.store.domain.Store" alias="Store"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.theater.domain.Theater" alias="Theater"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.theater.domain.TheaterSchedule" alias="TheaterSchedule"/>
+		<typeAlias type="kr.co.movieyouhwan.common.error.Error" alias="Error"/>
+		<typeAlias type="kr.co.movieyouhwan.common.page.PageInfo" alias="PageInfo"/>
+		<typeAlias type="kr.co.movieyouhwan.user.cinema.domain.Cinema" alias="Cinema"/>
+		<typeAlias type="kr.co.movieyouhwan.user.cinema.domain.CinemaFavorite" alias="CinemaFavorite"/>
+		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.Match" alias="Match"/>
+		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.MatchOption" alias="MatchOption"/>
+		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.MateOption" alias="MateOption"/>
+		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.MateReport" alias="MateReport"/>
+		<typeAlias type="kr.co.movieyouhwan.user.member.domain.Member" alias="Member"/>
+		<typeAlias type="kr.co.movieyouhwan.user.member.domain.PointHistory" alias="PointHistory"/>
+		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MovieCancle" alias="MovieCancle"/>
+		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MoviePay" alias="MoviePay"/>
+		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MovieReview" alias="MovieReview"/>
+		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MovieReviewReport" alias="MovieReviewReport"/>
+		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MovieTicket" alias="MovieTicket"/>
+		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MovieZzim" alias="MovieZzim"/>
+		<typeAlias type="kr.co.movieyouhwan.user.qna.domain.Qna" alias="Qna"/>
+		<typeAlias type="kr.co.movieyouhwan.user.store.domain.Cart" alias="Cart"/>
+		<typeAlias type="kr.co.movieyouhwan.user.store.domain.Product" alias="Product"/>
+		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreBuy" alias="StoreBuy"/>
+		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreCancle" alias="StoreCancle"/>
+		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StorePay" alias="StorePay"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappers/banner-mapper.xml"/>
+		<mapper resource="mappers/cinema-mapper.xml"/>
+		<mapper resource="mappers/faq-mapper.xml"/>
+		<mapper resource="mappers/movie-mapper.xml"/>
+		<mapper resource="mappers/notice-mapper.xml"/>
+		<mapper resource="mappers/qna-mapper.xml"/>
+		<mapper resource="mappers/report-mapper.xml"/>
+		<mapper resource="mappers/sales-mapper.xml"/>
+		<mapper resource="mappers/store-mapper.xml"/>
+		<mapper resource="mappers/theater-mapper.xml"/>
+		<mapper resource="mappers/cinema-mapper.xml"/>
+		<mapper resource="mappers/mate-mapper.xml"/>
+		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/movie-mapper.xml"/>
+		<mapper resource="mappers/qna-mapper.xml"/>
+		<mapper resource="mappers/store-mapper.xml"/>
+		<mapper resource="mappers/theater-mapper.xml"/>
+	</mappers>
+</configuration>
