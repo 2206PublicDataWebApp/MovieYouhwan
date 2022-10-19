@@ -1,0 +1,87 @@
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>무비유환 : 영화정보</title>
+    <style>
+      /* 합칠 때 빼고 넣기 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0 auto;
+      }
+
+      #user-wrapper {
+        width: 1200px;
+        margin: 0 auto;
+      }
+      /* 여기까지 */
+
+      #movie-list {
+        text-align: center;
+      }
+
+      #top3-movie {
+      }
+
+      li {
+        width: 25%;
+        height: 100%;
+        float: left;
+        text-align: center;
+        padding: 10px 0 10px 0;
+        list-style: none; /* 합칠 때 빼고 넣기 */
+      }
+
+      .movie-menu-active {
+        background: #0f1a3b;
+        color: white;
+        border: 1px solid;
+        border-color: #0f1a3b;
+      }
+
+      .movie-menu-inactive {
+        border: 1px solid;
+        color: black;
+      }
+
+      .search-input {
+        border: 1px solid;
+        width: 50%;
+        height: 30px;
+        margin-right: 10px;
+        border-radius: 2px;
+      }
+
+      .search-btn {
+        border: 1px solid;
+        border-color: #0f1a3b;
+        width: 5%;
+        height: 30px;
+        background-color: #0f1a3b;
+        color: white;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="user-wrapper">
+      <div id="top3-movie"></div>
+      <div id="movie-list">
+        <input class="search-input" type="text" placeholder="검색어를 입력하세요" />
+        <button class="search-btn">검색</button>
+        <ul>
+          <a href="#"><li class="movie-menu-active">전체보기</li></a>
+          <a href="#"><li class="movie-menu-inactive">현재 상영 영화</li></a>
+          <a href="#"><li class="movie-menu-inactive">상영 예정 영화</li></a>
+          <a href="#"><li class="movie-menu-inactive">상영 종료 영화</li></a>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

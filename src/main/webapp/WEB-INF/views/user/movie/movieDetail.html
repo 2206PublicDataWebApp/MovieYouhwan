@@ -1,0 +1,40 @@
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>무비유환 : 영화 상세 정보</title>
+    <style>
+      /* 합칠 때 빼고 넣기 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0 auto;
+      }
+
+      #user-wrapper {
+        width: 1200px;
+        margin: 0 auto;
+      }
+      /* 여기까지 */
+
+      .movie-poster {
+        position: absolute;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="user-wrapper">
+      <div id="movie-detail-main"><img class="movie-poster" src="/resources/images/Image 3@1x.png" /></div>
+      <div id="movie-info"></div>
+      <div id="movie-review"></div>
+    </div>
+  </body>
+</html>
