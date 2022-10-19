@@ -1,0 +1,40 @@
+@font-face {
+  font-family: mice;
+  src: url('../font/MICEGothic.ttf');
+}
+
+@font-face {
+  font-family: mice-bold;
+  src: url('../font/MICEGothic\ Bold.ttf');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: mice;
+}
+
+body {
+  margin: 0 auto;
+  padding-top: 100px;
+}
+
+a {
+  color: #0f1a3b;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+#user-wrapper {
+  margin: 0 auto;
+  width: 1200px;
+}
+
+#admin-wrapper {
+  width: 1000px;
+}
