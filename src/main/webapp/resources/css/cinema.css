@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+	margin : 0 auto;
+}
+
+/* adminCinemaRegister(관리자) */
+#cinemainsert-wrapper {
+	width : 1000px;
+	margin : 0 auto;
+}
+	.title {
+		flaot : left;
+		color : #0F1A3B;
+	}
+	.input {
+		float : right;
+	}
+	#title-wrap {
+		width : 430px;
+		margin-bottom : 25px;
+	}
+		#title-input {
+			width : 300px;
+			height : 25px;
+			border : solid 1px #0F1A3B;
+		}
+	#area-wrap {
+		width : 275px;
+		margin-bottom : 25px;
+	}

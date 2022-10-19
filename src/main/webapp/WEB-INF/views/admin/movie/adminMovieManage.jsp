@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>무비유환 : 영화 목록(관리자)</title>
+<title>무비유환 : 영화 관리(관리자)</title>
 </head>
 <body>
 

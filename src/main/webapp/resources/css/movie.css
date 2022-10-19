@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+	margin : 0 auto;
+}
+
+/* adminMovieRegister(관리자) */
+#movieinsert-wrapper {
+	width : 1000px;
+	margin : 0 auto;
+}
+	.title {
+		flaot : left;
+		color : #0F1A3B;
+	}
+	.input {
+		float : right;
+	}
+	#title-wrap {
+		width : 430px;
+		margin-bottom : 25px;
+	}
+		#title-input {
+			width : 300px;
+			height : 25px;
+			border : solid 1px #0F1A3B;
+		}
+	#type-wrap {
+		width : 510px;
+		margin-bottom : 25px;
+	}
+		.type-input {
+			margin-left : 15px;
+			margin-right : 5px;
+			border : solid 1px #0F1A3B;
+		}
+	#runtime-wrap {
+		width : 280px;
+		margin-bottom : 25px;
+	}
+		#runtime-input {
+			width : 150px;
+			height : 25px;
+			border : solid 1px #0F1A3B;
+		}
+	#director-wrap {
+		width : 430px;
+		margin-bottom : 25px;
+	}
+		#director-input {
+			width : 300px;
+			height : 25px;
+			border : solid 1px #0F1A3B;
+		}
+	#actor-wrap {
+		width : 430px;
+		margin-bottom : 25px;
+	}
+		#actor-input {
+			width : 300px;
+			height : 25px;
+			border : solid 1px #0F1A3B;
+			
+		}
+	#age-wrap {
+		width : 765px;
+		margin-bottom : 25px;
+	}
+		.age-input {
+			margin-left : 15px;
+			margin-right : 5px;
+			border : solid 1px #0F1A3B;
+		}
+	.date-wrap {
+		width : 332px;
+		margin-bottom : 25px;
+		
+	}
+		.date-input {
+			float : right;
+			width : 200px;
+			height : 25px;
+			border : solid 1px #0F1A3B;
+		}
+	#story-wrap {
+		width : 1000px;
+		margin-bottom : 350px;
+	}
+		#story-title {
+			display : inline;
+		}
+		#story-input {
+			width : 867px;
+			height : 350px;
+			resize : none;
+			border : solid 1px #0F1A3B;
+		}
+		
+	#imgfile-wrap {
+		width : 517px;
+		margin-bottom : 25px;
+	}
+	#videofile-wrap {
+		width : 592px;
+		margin-bottom : 25px;
+	}
+	.file-wrap {
+		float : right;
+	}	
+	.file-wrap #imgload-name {
+		display : inline-block;
+		height : 25px;
+		padding : 0 10px;
+		vertical-align : middle;
+		border : solid 1px #0F1A3B;
+		width : 300px;
+		color : #0F1A3B;
+	}
+	.file-wrap #videoload-name {
+		display : inline-block;
+		height : 25px;
+		padding : 0 10px;
+		vertical-align : middle;
+		border : solid 1px #0F1A3B;
+		width : 300px;
+		color : #0F1A3B;
+	}
+	.file-wrap label {
+		display : inline-block;
+		color : #fff;
+		padding : 5px 5px 5px 5px;
+		vertical-align : middle;
+		background-color : #0F1A3B;
+		cursor : pointer;
+		width : 70px;
+		height : 25px;
+		text-align : center;
+		font-size : 12px;
+		margin-left : 10px;
+	}
+	#video-remove {
+		width : 70px;
+		height : 25px;
+		color : #fff;
+		font-size : 12px;
+		border : solid 1px #0F1A3B;
+		background-color : #0F1A3B;
+	}
+	.file-wrap input[type="file"] {
+		position : absolute;
+		width : 0;
+		height : 0;
+		padding : 0;
+		overflow : hidden;
+		border : 0;
+	}
+	#movieregister-button {
+		width : 100px;
+		height : 30px;
+		float : right;
+		background-color : #0F1A3B;
+		color : #fff;
+		margin-bottom : 100px;
+	}
+	.add-button {
+		width : 30px;
+		height : 22px;
+		font-size : 10px;
+		background-color : #0F1A3B;
+		color : #fff;
+		border : solid 1px #0F1A3B;
+	}
