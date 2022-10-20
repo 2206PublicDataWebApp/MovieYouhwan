@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>무비유환 : 영화 등록(관리자)</title>
-<link href="../resources/css/movie.css" rel="stylesheet">
+<link href="../../../resources/css/common.css" rel="stylesheet"/>
+<link href="../resources/css/movie.css" rel="stylesheet"/>
 <script src="/resources/js/jquery-3.6.1.min.js"></script>
 <script src="/resources/js/movie.js"></script>
 </head>
@@ -86,5 +87,6 @@
 		<br><br><br>
 		<input type="button" value="등록" id="movieregister-button">
 	</div>
+	<jsp:include page="../../common/footer.jsp"></jsp:include>
 </body>
 </html>

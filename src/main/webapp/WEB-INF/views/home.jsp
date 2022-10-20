@@ -13,5 +13,6 @@
     <div id="banner"></div>
     <div id="user-wrapper">
     </div>
+    <jsp:include page="common/footer.jsp"></jsp:include>
   </body>
 </html>
