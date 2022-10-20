@@ -6,35 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>관리자 : FAQ 목록</title>
-    <script src="/resources/js/jquery-3.6.1.min.js"></script>
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
+    <script src="/resources/js/jquery-3.6.1.min.js"></script>
+    <link rel="stylesheet" href="/resources/css/common.css" />
     <style>
-      /* 합칠 때 빼고 넣기 */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      @font-face {
+        font-family: mice-bold;
+        src: url('../font/MICEGothic\ Bold.ttf');
       }
-
-      body {
-        margin: 0 auto;
-      }
-
-      #admin-wrapper {
-        width: 1000px;
-        margin: 0 auto;
-      }
-
-      a {
-        text-decoration: none;
-        color: #0f1a3b;
-      }
-      /* 여기까지 */
-
-      button {
-        cursor: pointer;
-      }
-
       .search-input {
         border: 1px solid;
         width: 50%;
@@ -54,7 +33,7 @@
       }
 
       #search-area {
-        margin: 20px 0 20px 0;
+        margin: 30px 0;
       }
 
       hr {
@@ -72,7 +51,7 @@
         border-radius: 2px;
       }
 
-      .modify-btn {
+      .register-btn {
         margin-left: 180px;
         border: 1px solid #0f1a3b;
         background-color: #0f1a3b;
@@ -89,56 +68,93 @@
         height: 30px;
       }
 
-      .check-td {
-        width: 80px;
+      #board-header {
+        font-weight: mice-bold;
+        padding: 20px 0;
+        border: none;
       }
-      .num-td {
-        width: 130px;
-      }
-      .type-td {
-        width: 130px;
-      }
-      .title-td {
-        width: 860px;
-        padding-left: 30px;
-      }
-      #title-td {
+
+      .board-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
         text-align: center;
+        padding: 10px 0 10px 0;
       }
 
-      table,
-      td {
-        font-size: 13px;
-        border-collapse: collapse;
-        line-height: 40px;
-      }
-
-      th {
-        border-collapse: collapse;
-        line-height: 50px;
-      }
-
-      tr {
+      .board-answer {
+        display: flex;
         border-bottom: 1px solid gray;
-        text-align: center;
+      }
+
+      .board-row {
+        display: flex;
+        border-bottom: 1px solid gray;
+      }
+
+      #check-header,
+      .check-col {
+        width: 5%;
+      }
+      #num-header,
+      .num-col {
+        width: 5%;
+      }
+      #type-header,
+      .type-col {
+        width: 20%;
+      }
+      #title-header,
+      .title-col {
+        width: 70%;
+      }
+
+      .title-col,
+      .board-answer {
+        text-align: left;
+      }
+
+      .answer-content {
+        width: 85%;
+        padding: 20px 40px 20px 30px;
+      }
+
+      .board-answer::before {
+        display: inline-block;
+        content: 'A. ';
+        height: 100%;
+        padding: 20px 0 20px 70px;
+        float: left;
+      }
+
+      .title-col::before {
+        display: inline-block;
+        content: 'Q. ';
+        margin: 0 5px;
+      }
+      .modify-btn-area {
+        width: 8%;
+      }
+      .modify-btn {
+        margin: 20px 0;
+        border: 1px solid #0f1a3b;
+        background-color: #0f1a3b;
+        color: white;
+        width: 90%;
+        height: 30px;
       }
 
       i {
         float: right;
       }
 
-      #content {
-        background-color: lightgray;
+      .no-show {
+        display: none;
       }
 
-      .arccodion-btn {
-        font-size: 13px;
-        text-align: left;
-        vertical-align: middle;
-        background-color: white;
-        width: 100%;
-        border: none;
-        height: 100%;
+      a {
+        cursor: pointer;
       }
     </style>
   </head>
@@ -155,58 +171,64 @@
         </select>
         <input class="search-input" type="text" placeholder="검색어를 입력하세요" />
         <button class="search-btn">검색</button>
-        <button class="modify-btn">등록</button>
+        <button class="register-btn">등록</button>
         <button class="delete-btn">삭제</button>
       </div>
+
       <hr />
-      <table>
-        <thead>
-          <tr>
-            <th class="check-td">체크박스</th>
-            <th class="num-td">번호</th>
-            <th class="type-td">구분</th>
-            <th id="title-td">질문</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>체크박스</td>
-            <td>1</td>
-            <td>영화관</td>
-            <td class="title-td">
-              <button class="arccodion-btn" onclick="showContent(this);">영화관 위치는 어떻게 찾나요?<i class="fa-solid fa-chevron-down"></i></button>
-            </td>
-          </tr>
-          <tr>
-            <td>체크박스</td>
-            <td>1</td>
-            <td>영화관</td>
-            <td class="title-td">
-              <button class="arccodion-btn" onclick="showContent(this);">영화관 위치는 어떻게 찾나요?<i class="fa-solid fa-chevron-down"></i></button>
-            </td>
-          </tr>
-          <tr class="content"></tr>
-          <tr>
-            <td>체크박스</td>
-            <td>1</td>
-            <td>영화관</td>
-            <td class="title-td">
-              <button class="arccodion-btn" onclick="showContent(this);">영화관 위치는 어떻게 찾나요?<i class="fa-solid fa-chevron-down"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="board">
+        <div class="board-row" id="board-header">
+          <div id="check-header"><input id="check-all" type="checkbox" name="delete-check" /></div>
+          <div id="num-header">번호</div>
+          <div id="type-header">구분</div>
+          <div id="title-header">질문</div>
+        </div>
+        <hr />
+        <div class="board-row">
+          <div class="check-col"><input type="checkbox" name="delete-check" /></div>
+          <div class="num-col">1</div>
+          <div class="type-col">영화</div>
+          <div class="title-col">
+            <a>Lorem, ipsum dolor sit amet consectetur adipisicing elit.<i class="fa-solid fa-chevron-down"></i></a>
+          </div>
+        </div>
+        <div class="board-answer no-show">
+          <div class="answer-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut ullam dolorem dolores recusandae reiciendis accusamus mollitia velit iusto nulla quo, delectus commodi possimus. Illo nam consectetur asperiores sint, facere quos! Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur quis a veniam officiis nisi nesciunt pariatur, iusto sit facilis neque soluta unde impedit delectus? Mollitia voluptates facere assumenda quo veritatis.</div>
+          <div class="modify-btn-area"><button class="modify-btn">수정</button></div>
+        </div>
+
+        <div class="board-row">
+          <div class="check-col"><input type="checkbox" name="delete-check" /></div>
+          <div class="num-col">2</div>
+          <div class="type-col">영화관</div>
+          <div class="title-col">
+            <a>Lorem, ipsum dolor sit amet consectetur adipisicing elit.<i class="fa-solid fa-chevron-down"></i></a>
+          </div>
+        </div>
+        <div class="board-answer no-show">
+          <div class="answer-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut ullam dolorem dolores recusandae reiciendis accusamus mollitia velit iusto nulla quo, delectus commodi possimus. Illo nam consectetur asperiores sint, facere quos! Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur quis a veniam officiis nisi nesciunt pariatur, iusto sit facilis neque soluta unde impedit delectus? Mollitia voluptates facere assumenda quo veritatis.</div>
+          <div class="modify-btn-area"><button class="modify-btn">수정</button></div>
+        </div>
+      </div>
     </div>
     <script>
-      function showContent(obj) {
-        if ($('#content') != null) {
-          $('#content').remove();
+      $('a').click(function () {
+        let answer = $(this).parent().parent().next('.board-answer');
+        console.log(answer);
+        console.log(answer.siblings('.board-answer'));
+        answer.toggleClass('no-show');
+        answer.siblings('.board-answer').addClass('no-show');
+      });
+
+      $('#check-all').change(function () {
+        console.log($('.check-col').children('input:checkbox'));
+        if ($(this).is(':checked')) {
+          console.log('true');
+          $('.check-col').children('input:checkbox').prop('checked', true);
+        } else {
+          $('.check-col').children('input:checkbox').prop('checked', false);
         }
-        console.log($(obj));
-        var contentArea = $(obj).parent().parent();
-        console.log(contentArea);
-        contentArea.after("<tr id='content'><td colspan='4'>;;네이버 지도 보고 오세요</td></tr>");
-      }
+      });
     </script>
   </body>
 </html>
