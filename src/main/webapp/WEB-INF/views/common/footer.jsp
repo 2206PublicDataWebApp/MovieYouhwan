@@ -5,21 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>무비유환 : footer</title>
-<style>
-	#footer-wrapper {
-		margin : 0 auto;
-		margin-top : 60px;
-		height : 120px;
-		background-color : #0F1A3B;
-	}
-	#footer-inside {
-		width : 1200px;
-		margin : 0 auto;
-		padding-top : 20px;
-		color : #fff;
-		font-size : 12px;
-	}
-</style>
+<link rel="stylesheet" href="../../../resources/css/common.css" />
+<link rel="stylesheet" href="../../../resources/css/footer.css" />
 </head>
 <body>
 	<div id="footer-wrapper">

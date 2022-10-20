@@ -3,4 +3,26 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CinemaMapper">
+	<resultMap type ="Cinema" id="CinemaResultMap">
+		<id property="cinemaNo" column="CINEMA_NO"/>
+		<result property="cinemaName" column="CINEMA_NAME"/>
+		<result property="cinemaArea" column="CINEMA_AREA"/>
+		<result property="cinemaAddress" column="CINEMA_ADDRESS"/>
+		<result property="cinemaTel" column="CINEMA_TEL"/>
+		<result property="cinemaContent" column="CINEMA_CONTENT"/>
+		<result property="cinemaPark" column="CINEMA_PARK"/>
+		<result property="cinemaPublic" column="CINEMA_PUBLIC"/>
+		<result property="cinemaImgName" column="CINEMA_IMG_NAME"/>
+		<result property="cinemaImgRename" column="CINEMA_IMG_RENAME"/>
+		<result property="cinemaImgPath" column="CINEMA_IMG_PATH"/>
+		<result property="cinemaStatus" column="CINEMA_STATUS"/>
+	</resultMap>
+	<!-- 영화관 등록(관리자) -->
+	<insert id="insertCinema">
+		INSERT INTO CINEMA_TBL VALUES(SEQ_CINEMA_NO.NEXTVAL, #{cinemaName}, #{cinemaArea}, #{cinemaAddress}, #{cinemaTel}, #{cinemaContent}, #{cinemaPark}, #{cinemaPublic}, #{cinemaImgName}, #{cinemaImgRename}, #{cinemaImgPath}, DEFAULT)
+	</insert>
+	<!-- 영화관 리스트(관리자) -->
+	<select id="selectAllCinema" resultMap="CinemaResultMap">
+		SELECT * FROM CINEMA_TBL WHERE CINEMA_STATUS = 'Y' ORDER BY CINEMA_NO DESC
+	</select>
 </mapper>

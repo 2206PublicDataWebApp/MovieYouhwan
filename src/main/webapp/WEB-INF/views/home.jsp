@@ -19,5 +19,6 @@
 	<jsp:include page="common/header.jsp"></jsp:include>
 	<div id="main-banner"></div>
 	<div id="user-wrapper"></div>
+	<jsp:include page="common/footer.jsp"></jsp:include>
 </body>
 </html>
