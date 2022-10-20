@@ -1,0 +1,80 @@
+@font-face {
+  font-family: mice-bold;
+  src: url('../font/MICEGothic\ Bold.ttf');
+}
+
+/* TODO: 반응형 어떻게 할지 생각해보기
+@media screen and (max-width: 1000px) {
+  #user-wrapper {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #user-wrapper {
+    width: 100%;
+  }
+}
+*/
+
+#store-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+#store-tab {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.store-tab-item {
+  width: 150px;
+  height: 50px;
+  flex-grow: 1;
+}
+
+.store-tab-item a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  cursor: default;
+}
+
+.store-tab-item a:hover {
+  border-bottom: 3px solid #0f1a3b;
+  font-family: mice-bold;
+}
+
+#store-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#store-links li {
+  padding: 5px 10px;
+}
+
+#store-links li a {
+  padding: 5px 10px;
+}
+
+.store-btn {
+  width: 130px;
+  height: 30px;
+}
+
+#store-buy-btn {
+  color: #fff;
+  background-color: #0f1a3b;
+  border-color: #0f1a3b;
+}
+
+#store-cart-btn {
+  background-color: #e59500;
+  border-color: #e59500;
+}
