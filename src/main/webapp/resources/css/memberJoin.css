@@ -1,4 +1,3 @@
-@charset "UTF-8";
 #container{
     margin: 0 auto;
     padding: 0 100px;
@@ -42,7 +41,6 @@
     margin-bottom: 30px;
     border-radius: 1px;
     justify-content: space-between;
-    align-items: flex-start;
     flex-direction: column;
     
 }
@@ -106,4 +104,56 @@
 #input-gender-wrap{
     display: inline;
     margin-left:  20px;
+    font-size: 10pt;
+}
+/* 성별 버튼 */
+input[type='radio'] {
+    -webkit-appearance:none;
+    width:10px;
+    height:10px;
+    border:1px solid #E59500;
+    border-radius:50%;
+    outline:none;
+    background:#E59500;
+  }
+  input[type='radio']:before {
+    content:'';
+    display:block;
+    width:60%;
+    height:60%;
+    margin: 20% auto;  
+    border-radius:50%;  
+  }
+  input[type='radio']:checked:before {
+  	background:#0F1A3B;
+  }
+
+.input-button{
+    display: flex;
+}
+.login-add_input_wrap{
+    margin-bottom: 5px;
+}
+
+#zipcode-btn{
+    border: 0px solid #0F1A3B;
+    margin-left: 10px;
+    background-color: #0F1A3B;
+    color: #ffffff;
+}
+#phone-btn{
+    border: 0px solid #0F1A3B;
+    margin-left: 10px;
+    background-color: #0F1A3B;
+    color: #ffffff; 
+    display: flex;
+}
+#profile-info{
+    margin-top: 3px;
+    font-size: 5pt;
+    line-height: 120%;
+    color: #393939f3;
+}
+.fa-solid fa-user{
+    width: 100px;
 }
