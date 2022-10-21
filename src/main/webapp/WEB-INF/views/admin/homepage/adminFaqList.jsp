@@ -9,6 +9,7 @@
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
     <link rel="stylesheet" href="/resources/css/common.css" />
+    <link rel="stylesheet" href="/resources/css/adminhome.css" />
     <style>
       @font-face {
         font-family: mice-bold;
@@ -33,7 +34,7 @@
       }
 
       #search-area {
-        margin: 30px 0;
+        margin: 20px 0;
       }
 
       hr {
@@ -163,6 +164,14 @@
       <h3><a href="#">FAQ 관리</a></h3>
       <br />
       <hr />
+      <div id="homepage-menu">
+        <ul id="homepage-tab">
+          <li class="homepage-tab-item"><a href="#">배너</a></li>
+          <li class="homepage-tab-item"><a href="#">FAQ</a></li>
+          <li class="homepage-tab-item"><a href="#">Q&A</a></li>
+          <li class="homepage-tab-item"><a href="#">공지사항</a></li>
+        </ul>
+      </div>
       <div id="search-area">
         <select>
           <option>제목</option>
@@ -214,8 +223,6 @@
     <script>
       $('a').click(function () {
         let answer = $(this).parent().parent().next('.board-answer');
-        console.log(answer);
-        console.log(answer.siblings('.board-answer'));
         answer.toggleClass('no-show');
         answer.siblings('.board-answer').addClass('no-show');
       });
