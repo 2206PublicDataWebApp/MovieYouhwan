@@ -1,153 +1,215 @@
 @charset "UTF-8";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-	margin : 0 auto;
-}
-
 /* adminCinemaRegister(관리자) */
-#cinemainsert-wrapper {
-	width : 1000px;
-	margin : 0 auto;
+.title {
+	flaot : left;
+	color : #0F1A3B;
 }
-	.title {
-		flaot : left;
-		color : #0F1A3B;
-	}
-	.input {
-		float : right;
-	}
-	#title-wrap {
-		width : 430px;
-		margin-bottom : 25px;
-	}
-		#title-input {
-			width : 300px;
-			height : 25px;
-			border : solid 1px #0F1A3B;
-		}
-	#area-wrap {
-		width : 310px;
-		margin-bottom : 25px;
-	}
-		.area-input {
-			margin-left : 15px;
-			margin-right : 5px;
-		}
-	#plus-address {
-		width : 495px;
-		margin-bottom : 10px;
-	}
-	#detail-address {
-		width : 430px;
-		margin-bottom : 55px;
-	}
-		#address-title {
-			display : inline;
-		}
-		#sample4_roadAddress {
-			width : 300px;
-			height : 25px;
-			border : solid 1px #0F1A3B;
-		}
-		#sample4_detailAddress {
-			width : 300px;
-			height : 25px;
-			border : solid 1px #0F1A3B;		
-		}
-		#address-button {
-			width : 55px;
-			height : 25px;
-			color : white;
-			background-color : #0F1A3B;	
-			margin-left : 10px;
-		}
-	#tel-wrap {
-		width : 430px;
-		margin-bottom : 25px;
-	}
-		#tel-input {
-			width : 300px;
-			height : 25px;
-			border : solid 1px #0F1A3B;
-		}
-	#one-wrap {
-		width : 430px;
-		margin-bottom : 25px;
-	}
-		#one-input {
-			width : 300px;
-			height : 25px;
-			border : solid 1px #0F1A3B;
-		}
-	.ride-wrap {
-		width : 530px;
-		margin-bottom : 90px;	
-	}
-		.ride-input {
-			width : 400px;
-			height : 100px;
-			float : right;
-			resize : none;
-			border : solid 1px #0F1A3B;
-		}
-	#imgfile-wrap {
-		width : 515px;
-		margin-bottom : 25px;
-	}
-	.file-wrap {
-		float : right;
-	}	
-	.file-wrap #imgload-name {
-		display : inline-block;
-		height : 25px;
-		padding : 0 10px;
-		vertical-align : middle;
-		border : solid 1px #0F1A3B;
+.input {
+	float : right;
+}
+#title-wrap {
+	width : 430px;
+	margin-bottom : 25px;
+}
+	#title-input {
 		width : 300px;
-		color : #0F1A3B;
-	}
-	.file-wrap label {
-		display : inline-block;
-		color : #fff;
-		padding : 5px 5px 5px 5px;
-		vertical-align : middle;
-		background-color : #0F1A3B;
-		cursor : pointer;
-		width : 70px;
 		height : 25px;
-		text-align : center;
-		font-size : 12px;
+		border : solid 1px #0F1A3B;
+	}
+#area-wrap {
+	width : 310px;
+	margin-bottom : 25px;
+}
+	.area-input {
+		margin-left : 15px;
+		margin-right : 5px;
+	}
+#plus-address {
+	width : 495px;
+	margin-bottom : 10px;
+}
+#detail-address {
+	width : 430px;
+	margin-bottom : 55px;
+}
+	#address-title {
+		display : inline;
+	}
+	#sample4_roadAddress {
+		width : 300px;
+		height : 25px;
+		border : solid 1px #0F1A3B;
+	}
+	#sample4_detailAddress {
+		width : 300px;
+		height : 25px;
+		border : solid 1px #0F1A3B;		
+	}
+	#address-button {
+		width : 55px;
+		height : 25px;
+		color : white;
+		background-color : #0F1A3B;	
 		margin-left : 10px;
 	}
-	.file-wrap input[type="file"] {
-		position : absolute;
-		width : 0;
-		height : 0;
-		padding : 0;
-		overflow : hidden;
-		border : 0;
-	}
-	.add-button {
-		width : 30px;
-		height : 22px;
-		font-size : 10px;
-		background-color : #0F1A3B;
-		color : #fff;
+#tel-wrap {
+	width : 430px;
+	margin-bottom : 25px;
+}
+	#tel-input {
+		width : 300px;
+		height : 25px;
 		border : solid 1px #0F1A3B;
 	}
-	#cinemaregister-button {
+#one-wrap {
+	width : 430px;
+	margin-bottom : 25px;
+}
+	#one-input {
+		width : 300px;
+		height : 25px;
+		border : solid 1px #0F1A3B;
+	}
+.ride-wrap {
+	width : 530px;
+	margin-bottom : 90px;	
+}
+	.ride-input {
+		width : 400px;
+		height : 100px;
+		float : right;
+		resize : none;
+		border : solid 1px #0F1A3B;
+	}
+#imgfile-wrap {
+	width : 515px;
+	margin-bottom : 25px;
+}
+.file-wrap {
+	float : right;
+}	
+.file-wrap #imgload-name {
+	display : inline-block;
+	height : 25px;
+	padding : 0 10px;
+	vertical-align : middle;
+	border : solid 1px #0F1A3B;
+	width : 300px;
+	color : #0F1A3B;
+}
+.file-wrap label {
+	display : inline-block;
+	color : #fff;
+	padding : 5px 5px 5px 5px;
+	vertical-align : middle;
+	background-color : #0F1A3B;
+	cursor : pointer;
+	width : 70px;
+	height : 25px;
+	text-align : center;
+	font-size : 12px;
+	margin-left : 10px;
+}
+.file-wrap input[type="file"] {
+	position : absolute;
+	width : 0;
+	height : 0;
+	padding : 0;
+	overflow : hidden;
+	border : 0;
+}
+.add-button {
+	width : 30px;
+	height : 22px;
+	font-size : 10px;
+	background-color : #0F1A3B;
+	color : #fff;
+	border : solid 1px #0F1A3B;
+}
+#cinemaregister-button {
+	width : 100px;
+	height : 30px;
+	float : right;
+	background-color : #0F1A3B;
+	color : #fff;
+	margin-bottom : 100px;
+}
+
+/* adminCinemaList(관리자) */
+#cinemalist-top {
+	margin-bottom : 45px;
+	display : flex;
+}
+	#cinemalist-text {
+		margin-top : 10px;
+		margin-right : 690px;
+	}
+	.cinemalist-button {
+		width : 100px;
+		height : 40px;
+		color : white;
+		margin-left : 10px;
+		border : solid 1px #0F1A3B;
+		background-color : #0F1A3B;
+		float : right;
+	}
+.cinemalist-title {
+	display : flex;
+}
+	.list-area {
+		width : 110px;
+		margin-top : 20px;
+		margin-bottom : 20px;
+	}
+	.list-name {
+		width : 200px;
+		margin-top : 20px;
+		margin-bottom : 20px;
+	}
+	.list-address {
+		width : 340px;
+		margin-top : 20px;
+		margin-bottom : 20px;
+	}
+	.list-tel {
+		width : 200px;
+		margin-top : 20px;
+		margin-bottom : 20px;
+	}
+	.list-theater {
+		width : 150px;
+		margin-top : 20px;
+		margin-bottom : 20px;
+	}
+/* adminCinemaDetail(관리자) */
+.cinema-detailtitle {
+	width : 180px;
+	height : 60px;
+}
+#cinemadetail-buttonwrap {
+	display : flex;
+	margin-top : 50px;
+	margin-bottom : 50px;
+	float : right;
+}
+	.cinemadetail-button {
 		width : 100px;
 		height : 30px;
-		float : right;
-		background-color : #0F1A3B;
-		color : #fff;
-		margin-bottom : 100px;
+		margin-left : 20px;
 	}
-	
-/* adminCinemaList(관리자) */
+	#cdupdate-button {
+		color : #0F1A3B;
+		border : solid 1px #0F1A3B;
+		background-color : white;
+	}
+	#cddelete-button {
+		color : #0F1A3B;
+		border : solid 1px #0F1A3B;
+		background-color : white;	
+	}
+	#cdlist-button {
+		color : white;
+		border : solid 1px #0F1A3B;
+		background-color : #0F1A3B;
+	}

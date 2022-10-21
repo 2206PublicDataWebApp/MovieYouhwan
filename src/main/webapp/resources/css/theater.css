@@ -1,1 +1,64 @@
 @charset "UTF-8";
+
+/* adminTheaterRegister(관리자) */
+.title {
+	flaot : left;
+	color : #0F1A3B;
+}
+.input {
+	float : right;
+}
+#cinema-wrap {
+	width : 320px;
+	margin-bottom : 25px;
+}
+	#cinema-input {
+		width : 170px;
+		height : 25px;
+		border : solid 1px #0F1A3B;
+	}
+#name-wrap {
+	width : 300px;
+	margin-bottom : 25px;
+}
+	#name-input {
+		width : 150px;
+		height : 25px;
+		border : solid 1px #0F1A3B;
+	}
+#seat-wrap {
+	width : 210px;
+	margin-bottom : 15px;
+}
+	#seat-button {
+		width : 60px;
+		height : 20px;
+		font-size : 12px;
+		color : white;
+		background-color : #0F1A3B;
+	}
+.seat-choice {
+	width : 283px;
+	margin-bottom : 12px;
+}
+	.seat-text {
+		float : right;
+		margin-left : 5px;
+		margin-right : 5px;
+	}
+	.seat-input {
+		float : right;
+		width : 50px;
+		height : 25px;
+		margin-left : 5px;
+		margin-right : 5px;
+		border : solid 1px #0F1A3B;
+	}
+#theater-button {
+	width : 100px;
+	height : 30px;
+	float : right;
+	margin-top : 80px;
+	color : white;
+	background-color : #0F1A3B;
+}
