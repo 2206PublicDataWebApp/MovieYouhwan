@@ -9,7 +9,7 @@
 #join_header{
     text-align: center;
     color: #0F1A3B;
-    margin-top: 50px;
+    margin-top: 90px;
 }
 .membership-form{
     box-sizing: border-box;
@@ -106,15 +106,16 @@
     margin-left:  20px;
     font-size: 10pt;
 }
+
 /* 성별 버튼 */
 input[type='radio'] {
     -webkit-appearance:none;
-    width:10px;
-    height:10px;
-    border:1px solid #E59500;
+    width:15px;
+    height:15px;
+    border:1px solid #ffbf00;
     border-radius:50%;
     outline:none;
-    background:#E59500;
+    background:#ffbf00;
   }
   input[type='radio']:before {
     content:'';
@@ -147,6 +148,8 @@ input[type='radio'] {
     background-color: #0F1A3B;
     color: #ffffff; 
     display: flex;
+    width: 100px;
+    justify-content: center;
 }
 #profile-info{
     margin-top: 3px;
@@ -156,4 +159,97 @@ input[type='radio'] {
 }
 .fa-solid fa-user{
     width: 100px;
+}
+#img-update-btn{
+    border: 0.3px solid #0F1A3B;
+    background-color: #ffffff;
+    color: #0F1A3B;
+    font-size: 5pt;
+    width: 50px;
+    height: 15px;
+    text-align: center;
+    line-height: 15px;
+    margin-top: 5px;
+}
+#profile-form{
+    display: flex;
+    justify-content: space-between;
+}
+#profile-img-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* 체크박스 */
+.checkAll {
+    -webkit-appearance:none;
+    width:15px;
+    height:15px;
+    border:1px solid #b1b1b1;
+    border-radius:50%;
+    outline:none;
+    background:#b1b1b1;
+  }
+.checkAll:before {
+    content:'';
+    display:block;
+    width:60%;
+    height:60%;
+    margin: 20% auto;  
+    border-radius:50%;  
+  }
+.checkAll:checked:before {
+  	background:#4d4d4d;
+  }
+#membershipAgreement{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+#agreeAllCheck{
+    display: flex;
+}
+#allAgreeTerms{
+    margin-left: 15px;
+    font-size: 8pt;
+    font-weight: 800;
+    color: #4d4d4d;
+}
+#checkTerms{
+    margin-left: 15px;
+    font-size: 8pt;
+    font-weight: 800;
+    color: #4d4d4d;
+}
+.agreecheck{
+    display: flex;
+}
+/* 작은체크박스 */
+.check {
+    -webkit-appearance:none;
+    width:15px;
+    height:15px;
+    border:1px solid #b1b1b1;
+    border-radius:50%;
+    outline:none;
+    background:#fffefe;
+  }
+.check:before {
+    content:'';
+    display:block;
+    width:60%;
+    height:60%;
+    margin: 20% auto;  
+    border-radius:50%;  
+  }
+.check:checked:before {
+  	background:#4d4d4d;
+  }
+#join-btn{
+    width: 100%;
+    height: 40px;
+    background-color: #0F1A3B;
+    border-radius: 0%;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 30px;
 }

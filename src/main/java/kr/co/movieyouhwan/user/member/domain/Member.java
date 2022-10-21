@@ -1,5 +1,230 @@
 package kr.co.movieyouhwan.user.member.domain;
 
-public class Member {
+import java.util.Date;
 
+public class Member {
+	private String memberId;
+	private String memberPwd;
+	private String memberName;
+	private String memberNick;
+	private String memberBirth;
+	private String memberGender;
+	private String memberPhone;
+	private String memberEmail;
+	private String memberImgName;
+	private String memberImgRename;
+	private String memberImgPath;
+	private Date memberSignUpDate;
+	private String memberLevel;
+	private String memberPoint;
+	private String socialCode;
+	private String socialType;
+	private String memberStatus;	// 회원존재 여부
+	private String mateStatus;		// 메이브 서비스 사용 여부
+	private int mateReportCount;	// 신고받은 횟수
+	private Date mateRestartDate;	// 메이트 신고 해제일
+	
+	public Member() {}
+	
+	@Override
+	public String toString() {
+		return "Member [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
+				+ ", memberNick=" + memberNick + ", memberBirth=" + memberBirth + ", memberGender=" + memberGender
+				+ ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberImgName=" + memberImgName
+				+ ", memberImgRename=" + memberImgRename + ", memberImgPath=" + memberImgPath + ", memberSignUpDate="
+				+ memberSignUpDate + ", memberLevel=" + memberLevel + ", memberPoint=" + memberPoint + ", socialCode="
+				+ socialCode + ", socialType=" + socialType + ", memberStatus=" + memberStatus + ", mateStatus="
+				+ mateStatus + ", mateReportCount=" + mateReportCount + ", mateRestartDate=" + mateRestartDate + "]";
+	}
+
+	public Member(String memberId, String memberPwd, String memberName, String memberNick, String memberBirth,
+			String memberGender, String memberPhone, String memberEmail, String memberImgName, String memberImgRename,
+			String memberImgPath, Date memberSignUpDate, String memberLevel, String memberPoint, String socialCode,
+			String socialType, String memberStatus, String mateStatus, int mateReportCount, Date mateRestartDate) {
+		super();
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+		this.memberName = memberName;
+		this.memberNick = memberNick;
+		this.memberBirth = memberBirth;
+		this.memberGender = memberGender;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+		this.memberImgName = memberImgName;
+		this.memberImgRename = memberImgRename;
+		this.memberImgPath = memberImgPath;
+		this.memberSignUpDate = memberSignUpDate;
+		this.memberLevel = memberLevel;
+		this.memberPoint = memberPoint;
+		this.socialCode = socialCode;
+		this.socialType = socialType;
+		this.memberStatus = memberStatus;
+		this.mateStatus = mateStatus;
+		this.mateReportCount = mateReportCount;
+		this.mateRestartDate = mateRestartDate;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getMemberPwd() {
+		return memberPwd;
+	}
+
+	public void setMemberPwd(String memberPwd) {
+		this.memberPwd = memberPwd;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getMemberNick() {
+		return memberNick;
+	}
+
+	public void setMemberNick(String memberNick) {
+		this.memberNick = memberNick;
+	}
+
+	public String getMemberBirth() {
+		return memberBirth;
+	}
+
+	public void setMemberBirth(String memberBirth) {
+		this.memberBirth = memberBirth;
+	}
+
+	public String getMemberGender() {
+		return memberGender;
+	}
+
+	public void setMemberGender(String memberGender) {
+		this.memberGender = memberGender;
+	}
+
+	public String getMemberPhone() {
+		return memberPhone;
+	}
+
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
+	}
+
+	public String getMemberEmail() {
+		return memberEmail;
+	}
+
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
+	}
+
+	public String getMemberImgName() {
+		return memberImgName;
+	}
+
+	public void setMemberImgName(String memberImgName) {
+		this.memberImgName = memberImgName;
+	}
+
+	public String getMemberImgRename() {
+		return memberImgRename;
+	}
+
+	public void setMemberImgRename(String memberImgRename) {
+		this.memberImgRename = memberImgRename;
+	}
+
+	public String getMemberImgPath() {
+		return memberImgPath;
+	}
+
+	public void setMemberImgPath(String memberImgPath) {
+		this.memberImgPath = memberImgPath;
+	}
+
+	public Date getMemberSignUpDate() {
+		return memberSignUpDate;
+	}
+
+	public void setMemberSignUpDate(Date memberSignUpDate) {
+		this.memberSignUpDate = memberSignUpDate;
+	}
+
+	public String getMemberLevel() {
+		return memberLevel;
+	}
+
+	public void setMemberLevel(String memberLevel) {
+		this.memberLevel = memberLevel;
+	}
+
+	public String getMemberPoint() {
+		return memberPoint;
+	}
+
+	public void setMemberPoint(String memberPoint) {
+		this.memberPoint = memberPoint;
+	}
+
+	public String getSocialCode() {
+		return socialCode;
+	}
+
+	public void setSocialCode(String socialCode) {
+		this.socialCode = socialCode;
+	}
+
+	public String getSocialType() {
+		return socialType;
+	}
+
+	public void setSocialType(String socialType) {
+		this.socialType = socialType;
+	}
+
+	public String getMemberStatus() {
+		return memberStatus;
+	}
+
+	public void setMemberStatus(String memberStatus) {
+		this.memberStatus = memberStatus;
+	}
+
+	public String getMateStatus() {
+		return mateStatus;
+	}
+
+	public void setMateStatus(String mateStatus) {
+		this.mateStatus = mateStatus;
+	}
+
+	public int getMateReportCount() {
+		return mateReportCount;
+	}
+
+	public void setMateReportCount(int mateReportCount) {
+		this.mateReportCount = mateReportCount;
+	}
+
+	public Date getMateRestartDate() {
+		return mateRestartDate;
+	}
+
+	public void setMateRestartDate(Date mateRestartDate) {
+		this.mateRestartDate = mateRestartDate;
+	}
+	
+	
+	
+	
 }
