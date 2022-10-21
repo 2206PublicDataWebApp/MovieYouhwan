@@ -3,25 +3,18 @@
   src: url('../font/MICEGothic\ Bold.ttf');
 }
 
-/* TODO: 반응형 어떻게 할지 생각해보기
-@media screen and (max-width: 1000px) {
-  #user-wrapper {
-    width: 90%;
-  }
+/* 공통 */
+#store-wrapper {
+  margin: 0 auto;
+  width: 1000px;
 }
-
-@media screen and (max-width: 768px) {
-  #user-wrapper {
-    width: 100%;
-  }
-}
-*/
 
 #store-menu {
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-align: center;
+  border-bottom: 1px solid #ccc;
 }
 
 #store-tab {
@@ -49,10 +42,53 @@
   font-family: mice-bold;
 }
 
+.product-type {
+  margin-top: 30px;
+}
+
+.product-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.product-item {
+  width: 300px;
+}
+
+.product-img {
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.product-detail {
+  margin: 10px 0;
+}
+
+.product-detail .product-desc {
+  color: gray;
+}
+
+.product-detail .product-name {
+  font-family: mice-bold;
+}
+
+.store-btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-store-list {
+  width: 140px;
+  height: 35px;
+  border: none;
+}
+
+/* 사용자 */
 #store-links {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 }
 
 #store-links li {
@@ -63,18 +99,49 @@
   padding: 5px 10px;
 }
 
-.store-btn {
-  width: 130px;
-  height: 30px;
-}
-
-#store-buy-btn {
+.btn-store-list.btn-store-buy {
   color: #fff;
   background-color: #0f1a3b;
-  border-color: #0f1a3b;
 }
 
-#store-cart-btn {
+.btn-store-list.btn-store-cart {
   background-color: #e59500;
-  border-color: #e59500;
+  line-height: 37.5px;
+}
+
+/* 관리자 */
+
+#btn-store-register {
+  background-color: #0f1a3b;
+  color: #fff;
+  margin-right: 10px;
+}
+
+#btn-store-reorder {
+  background-color: #e59500;
+  color: #fff;
+}
+
+.btn-store-list.btn-store-modify {
+  background-color: #fff;
+  border: 1.5px solid #0f1a3b;
+  color: #0f1a3b;
+  font-family: mice-bold;
+}
+
+.btn-store-list.btn-store-modify:active {
+  background-color: #0f1a3b;
+  color: #fff;
+}
+
+.btn-store-list.btn-store-delete {
+  background-color: #fff;
+  border: 1.5px solid #e2202c;
+  color: #e2202c;
+  font-family: mice-bold;
+}
+
+.btn-store-list.btn-store-delete:active {
+  background-color: #e2202c;
+  color: #fff;
 }
