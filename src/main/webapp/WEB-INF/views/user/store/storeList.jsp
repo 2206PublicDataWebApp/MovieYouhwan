@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,10 +16,10 @@
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     <div id="store-banner"><img src="" alt="배너사진" /></div>
-    <hr />
-    <div id="user-wrapper">
+    <div id="store-wrapper">
       <div id="store-menu">
         <ul id="store-tab">
+          <%-- store-tab-item 반복, 링크 수정 --%>
           <li class="store-tab-item"><a href="#">콤보</a></li>
           <li class="store-tab-item"><a href="#">팝콘</a></li>
           <li class="store-tab-item"><a href="#">음료</a></li>
@@ -33,45 +32,23 @@
           </li>
         </ul>
       </div>
-      <hr />
       <div id="store-main">
-        <div id="product-section">
-          <h3 id="product-type">콤보</h3>
-          <ul id="product-list">
+        <%-- #product-per-type 반복 --%>
+        <div class="product-per-type">
+          <%-- .product-type에 동적으로 id 값 주기 --%>
+          <h3 class="product-type">콤보</h3>
+          <ul class="product-list">
+            <%-- .product-item 반복 --%>
             <li class="product-item">
-              <img src="/resources/images/solo_combo.jpg" alt="상품사진" class="product-img" width="300px" />
+              <img src="/resources/images/storeProduct/solo_combo.jpg" alt="${product.productImageRename}" class="product-img" />
               <div class="product-detail">
                 <p class="product-desc">${product.productDesc}</p>
                 <p class="product-name">${product.productName}</p>
                 <p class="product-price">${product.productPrice}</p>
               </div>
-              <div class="store-btn-area">
-                <button class="store-btn" id="store-buy-btn">구매</button>
-                <button class="store-btn" id="store-cart-btn"><i class="fa-solid fa-cart-plus"></i></button>
-              </div>
-            </li>
-            <li class="product-item">
-              <img src="/resources/images/solo_combo.jpg" alt="상품사진" class="product-img" width="300px" />
-              <div class="product-detail">
-                <p class="product-desc">${product.productDesc}</p>
-                <p class="product-name">${product.productName}</p>
-                <p class="product-price">${product.productPrice}</p>
-              </div>
-              <div class="store-btn-area">
-                <button class="store-btn" id="store-buy-btn">구매</button>
-                <button class="store-btn" id="store-cart-btn"><i class="fa-solid fa-cart-plus"></i></button>
-              </div>
-            </li>
-            <li class="product-item">
-              <img src="/resources/images/solo_combo.jpg" alt="상품사진" class="product-img" width="300px" />
-              <div class="product-detail">
-                <p class="product-desc">${product.productDesc}</p>
-                <p class="product-name">${product.productName}</p>
-                <p class="product-price">${product.productPrice}</p>
-              </div>
-              <div class="store-btn-area">
-                <button class="store-btn" id="store-buy-btn">구매</button>
-                <button class="store-btn" id="store-cart-btn"><i class="fa-solid fa-cart-plus"></i></button>
+              <div class="store-btn">
+                <button class="btn-store-list btn-store-buy">구매</button>
+                <button class="btn-store-list btn-store-cart"><i class="fa-solid fa-cart-plus"></i></button>
               </div>
             </li>
           </ul>
