@@ -32,13 +32,3 @@ ul, ol {
 button {
 	cursor : pointer;
 }
-
-#user-wrapper {
-	margin: 0 auto;
-	width: 1200px;
-}
-
-#admin-wrapper {
-	margin : 0 auto;
-	width: 1000px;
-}

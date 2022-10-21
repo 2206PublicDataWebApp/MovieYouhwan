@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>무비유환 : 영화관 수정(관리자)</title>
+<link href="../../../resources/css/common.css" rel="stylesheet">
+<link href="../resources/css/cinema.css" rel="stylesheet">
 </head>
 <body>
-
 </body>
 </html>

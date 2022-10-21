@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +29,7 @@ public class CinemaController {
 	private CinemaService cService;
 	
 	/**
-	 * 영화관 등록 화면(관리자)
+	 * 영화관 등록 화면
 	 * @return
 	 */
 	@RequestMapping(value="/admin/adminCinemaRegister.yh", method=RequestMethod.GET)
@@ -37,7 +38,7 @@ public class CinemaController {
 	}
 	
 	/**
-	 * 영화관 등록(관리자)
+	 * 영화관 등록
 	 * @param mv
 	 * @param cinema
 	 * @param address1
@@ -80,7 +81,7 @@ public class CinemaController {
 	}
 	
 	/**
-	 * 영화관 목록 화면(관리자)
+	 * 영화관 목록 화면
 	 * @return
 	 */
 	@RequestMapping(value="/admin/adminCinemaList.yh", method=RequestMethod.GET)
@@ -91,5 +92,49 @@ public class CinemaController {
 		mv.addObject("cList", cList);
 		mv.setViewName("admin/cinema/adminCinemaList");
 		return mv;
+	}
+	
+	/**
+	 * 영화관 상세 화면
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminCinemaDetail.yh", method=RequestMethod.GET)
+	public ModelAndView CinemaDetailView(
+			ModelAndView mv,
+			@RequestParam("cinemaNo") int cinemaNo,
+			HttpSession session) {
+		Cinema cinema = cService.printOneCinema(cinemaNo);
+		session.setAttribute("cinemaNo", cinema.getCinemaNo());
+		mv.addObject("cinema", cinema);
+		mv.setViewName("/admin/cinema/adminCinemaDetail");
+		return mv;
+	}
+	
+	/**
+	 * 영화관 수정 화면
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminCinemaModify.yh", method=RequestMethod.GET)
+	public String cinemaModifyView() {
+		return "/admin/cinema/adminCinemaModify";
+	}
+	
+	/**
+	 * 영화관 삭제
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminCinemaRemove.yh", method=RequestMethod.GET)
+	public String cinemaDataRemove(
+			Model model,
+			HttpSession session) {
+		int cinemaNo = (Integer)session.getAttribute("cinemaNo");
+		int result = cService.removeOneCinema(cinemaNo);
+		if(result > 0) {
+			session.removeAttribute("cinemaNo");
+		}
+		return "redirect:/admin/adminCinemaList.yh";
 	}
 }

@@ -1,3 +1,4 @@
+// 카카오 주소 찾기 
 function sample4_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -25,9 +26,18 @@ function sample4_execDaumPostcode() {
     }).open();
 }
 
+// 파일 등록 디자인
 $(function() {
 	$("#img-file").on('change', function() {
 		var imgName = $("#img-file").val();
 		$("#imgload-name").val(imgName);
 	});
 })
+
+// 영화관 삭제 기능
+function cinemaDataRemove() {
+	event.preventDefault();
+	if(confirm("영화관을 삭제하시겠습니까?")) {
+		location.href="/admin/adminCinemaRemove.yh";
+	}
+}
