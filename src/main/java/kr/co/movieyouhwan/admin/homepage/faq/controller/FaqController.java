@@ -8,7 +8,14 @@ public class FaqController {
 	
 	@RequestMapping(value="/admin/adminFaqList.yh")
 	public String adminFaqListView() {
-		return "/admin/homepage/adminFaqList";
+		return "admin/homepage/adminFaqList";
 	}
+	
+	@RequestMapping(value="/admin/adminFaqWriteForm.yh")
+	public String adminFaqWriteForm() {
+		return "admin/homepage/adminFaqWrite";
+	}
+	
+	
 
 }
