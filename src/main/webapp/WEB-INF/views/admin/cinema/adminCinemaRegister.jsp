@@ -12,7 +12,7 @@
 <script src="/resources/js/cinema.js"></script>
 </head>
 <body>
-	<div id="admin-wrapper">
+	<div class="cinema-wrapper">
 		<br><br><br>
 		<h3>영화관 등록</h3><br><br>
 		<form action="/admin/adminCinemaInsert.yh" method="post" enctype="multipart/form-data">
@@ -59,7 +59,6 @@
 					<label for="img-file">파일찾기</label>
 					<input type="file" id="img-file" class="upload-file" name="uploadFile">
 				</div>
-				<input type="button" value="추가" id="img-add" class="add-button">
 			</div>
 			<br><br><br>
 			<input type="submit" value="등록" id="cinemaregister-button">

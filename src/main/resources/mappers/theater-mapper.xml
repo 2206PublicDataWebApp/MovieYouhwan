@@ -3,8 +3,32 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="TheaterMapper">
+	<resultMap type="Theater" id="TheaterResultMap">
+		<id property="theaterNo" column="THEATER_NO"/>
+		<result property="tCinemaNo" column="T_CINEMA_NO"/>
+		<result property="theaterName" column="THEATER_NAME"/>
+		<result property="theaterSeatoneRow" column="THEATER_SEATONE_ROW"/>
+		<result property="theaterSeatoneColumn" column="THEATER_SEATONE_COLUMN"/>
+		<result property="theaterSeattwoRow" column="THEATER_SEATTWO_ROW"/>
+		<result property="theaterSeattwoColumn" column="THEATER_SEATTWO_COLUMN"/>
+		<result property="theaterSeatthreeRow" column="THEATER_SEATTHREE_ROW"/>
+		<result property="theaterSeatthreeColumn" column="THEATER_SEATTHREE_COLUMN"/>
+		<result property="theaterStatus" column="THEATER_STATUS"/>
+	</resultMap>
 	<!-- 상영관 등록(관리자) -->
 	<insert id="insertTheater">
-		INSERT INTO THEATER_TBL VALUES(SEQ_THEATER_NO.NEXTVAL, #{tCinemaNo}, #{theaterName}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+		INSERT INTO THEATER_TBL VALUES(SEQ_THEATER_NO.NEXTVAL, #{tCinemaNo}, #{theaterName}, #{theaterSeatoneRow}, #{theaterSeatoneColumn}, #{theaterSeattwoRow}, #{theaterSeattwoColumn}, #{theaterSeatthreeRow}, #{theaterSeatthreeColumn}, DEFAULT)
 	</insert>
+	<!-- 상영관 삭제(관리자) -->
+	<delete id="deleteOneTheater">
+		DELETE FROM THEATER_TBL WHERE THEATER_NO = #{theaterNo}
+	</delete>
+	<!-- 상영관 리스트(관리자) -->
+	<select id="selectAllTheater" resultMap="TheaterResultMap">
+		SELECT * FROM THEATER_TBL WHERE THEATER_STATUS = 'Y' ORDER BY T_CINEMA_NO, THEATER_NAME
+	</select>
+	<!-- 상영관 상세(관리자) -->
+	<select id="selectOneTheater" resultMap="TheaterResultMap">
+		SELECT * FROM THEATER_TBL WHERE THEATER_NO = #{theaterNo} AND THEATER_STATUS = 'Y'
+	</select>
 </mapper>

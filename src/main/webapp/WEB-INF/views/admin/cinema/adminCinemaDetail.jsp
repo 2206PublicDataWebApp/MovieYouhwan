@@ -12,7 +12,7 @@
 <script src="/resources/js/cinema.js"></script>
 </head>
 <body>
-	<div id="admin-wrapper">
+	<div class="cinema-wrapper">
 		<br><br><br>
 		<h3>영화관 상세</h3><br><br>
 		<table>
@@ -26,14 +26,14 @@
 			</tr>
 			<tr>
 				<td class="cinema-detailtitle">주소</td>
-				<td>${cinema.cinemaAddress }</td>
+				<td>${cinema.cinemaAddress1 }, ${cinema.cinemaAddress2 }</td>
 			</tr>
 			<tr>
 				<td class="cinema-detailtitle">전화번호</td>
 				<td>${cinema.cinemaTel }</td>
 			</tr>
 			<tr>
-				<td class="cinema-detailtitle">한줄 소개</td>
+				<td class="cinema-detailtitle">한줄소개</td>
 				<td>${cinema.cinemaContent }</td>
 			</tr>
 			<tr>
@@ -50,7 +50,7 @@
 			</tr>
 		</table>
 		<div id="cinemadetail-buttonwrap">
-			<button id="cdupdate-button" class="cinemadetail-button" onclick="location.href='/admin/adminCinemaModify.yh'">수정하기</button>
+			<button id="cdupdate-button" class="cinemadetail-button" onclick="location.href='/admin/adminCinemaModify.yh?cinemaNo=${cinema.cinemaNo}'">수정하기</button>
 			<button id="cddelete-button" class="cinemadetail-button" onclick="cinemaDataRemove();">삭제하기</button>
 			<button id="cdlist-button" class="cinemadetail-button" onclick="location.href='/admin/adminCinemaList.yh'">목록으로</button>
 		</div>

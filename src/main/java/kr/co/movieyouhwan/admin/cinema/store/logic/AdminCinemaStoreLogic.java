@@ -5,11 +5,11 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import kr.co.movieyouhwan.admin.cinema.store.CinemaStore;
+import kr.co.movieyouhwan.admin.cinema.store.AdminCinemaStore;
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
 
 @Repository
-public class CinemaStoreLogic implements CinemaStore {
+public class AdminCinemaStoreLogic implements AdminCinemaStore {
 	// 영화관 등록
 	@Override
 	public int insertCinema(SqlSessionTemplate session, Cinema cinema) {
@@ -35,6 +35,13 @@ public class CinemaStoreLogic implements CinemaStore {
 	@Override
 	public int deleteOneCinema(SqlSessionTemplate session, int cinemaNo) {
 		int result = session.delete("CinemaMapper.deleteOneCinema", cinemaNo);
+		return result;
+	}
+
+	// 영화관 수정
+	@Override
+	public int updateCinema(SqlSessionTemplate session, Cinema cinema) {
+		int result = session.update("CinemaMapper.updateCinema", cinema);
 		return result;
 	}
 

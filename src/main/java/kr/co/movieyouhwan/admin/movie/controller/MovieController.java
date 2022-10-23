@@ -10,7 +10,7 @@ public class MovieController {
 	 * @return
 	 */
 	@RequestMapping(value="/admin/adminMovieRegister.yh")
-	public String MovieRegisterView() {
+	public String movieRegisterView() {
 		return "/admin/movie/adminMovieRegister";
 	}
 }

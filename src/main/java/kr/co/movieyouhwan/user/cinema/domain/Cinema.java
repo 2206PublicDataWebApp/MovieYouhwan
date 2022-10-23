@@ -4,7 +4,8 @@ public class Cinema {
 	private int cinemaNo; // 영화관 순번
 	private String cinemaName; // 영화관 이름
 	private String cinemaArea; // 영화관 지역
-	private String cinemaAddress; // 영화관 주소
+	private String cinemaAddress1; // 영화관 도로명주소
+	private String cinemaAddress2; // 영화관 상세주소
 	private String cinemaTel; // 영화관 전화번호
 	private String cinemaContent; // 영화관 한줄소개
 	private String cinemaPark; // 영화관 주차정보
@@ -16,14 +17,15 @@ public class Cinema {
 	
 	public Cinema() {}
 
-	public Cinema(int cinemaNo, String cinemaName, String cinemaArea, String cinemaAddress, String cinemaTel,
-			String cinemaContent, String cinemaPark, String cinemaPublic, String cinemaImgName, String cinemaImgRename,
-			String cinemaImgPath, String cinemaStatus) {
+	public Cinema(int cinemaNo, String cinemaName, String cinemaArea, String cinemaAddress1, String cinemaAddress2,
+			String cinemaTel, String cinemaContent, String cinemaPark, String cinemaPublic, String cinemaImgName,
+			String cinemaImgRename, String cinemaImgPath, String cinemaStatus) {
 		super();
 		this.cinemaNo = cinemaNo;
 		this.cinemaName = cinemaName;
 		this.cinemaArea = cinemaArea;
-		this.cinemaAddress = cinemaAddress;
+		this.cinemaAddress1 = cinemaAddress1;
+		this.cinemaAddress2 = cinemaAddress2;
 		this.cinemaTel = cinemaTel;
 		this.cinemaContent = cinemaContent;
 		this.cinemaPark = cinemaPark;
@@ -58,12 +60,20 @@ public class Cinema {
 		this.cinemaArea = cinemaArea;
 	}
 
-	public String getCinemaAddress() {
-		return cinemaAddress;
+	public String getCinemaAddress1() {
+		return cinemaAddress1;
 	}
 
-	public void setCinemaAddress(String cinemaAddress) {
-		this.cinemaAddress = cinemaAddress;
+	public void setCinemaAddress1(String cinemaAddress1) {
+		this.cinemaAddress1 = cinemaAddress1;
+	}
+
+	public String getCinemaAddress2() {
+		return cinemaAddress2;
+	}
+
+	public void setCinemaAddress2(String cinemaAddress2) {
+		this.cinemaAddress2 = cinemaAddress2;
 	}
 
 	public String getCinemaTel() {
@@ -133,9 +143,9 @@ public class Cinema {
 	@Override
 	public String toString() {
 		return "Cinema [cinemaNo=" + cinemaNo + ", cinemaName=" + cinemaName + ", cinemaArea=" + cinemaArea
-				+ ", cinemaAddress=" + cinemaAddress + ", cinemaTel=" + cinemaTel + ", cinemaContent=" + cinemaContent
-				+ ", cinemaPark=" + cinemaPark + ", cinemaPublic=" + cinemaPublic + ", cinemaImgName=" + cinemaImgName
-				+ ", cinemaImgRename=" + cinemaImgRename + ", cinemaImgPath=" + cinemaImgPath + ", cinemaStatus="
-				+ cinemaStatus + "]";
+				+ ", cinemaAddress1=" + cinemaAddress1 + ", cinemaAddress2=" + cinemaAddress2 + ", cinemaTel="
+				+ cinemaTel + ", cinemaContent=" + cinemaContent + ", cinemaPark=" + cinemaPark + ", cinemaPublic="
+				+ cinemaPublic + ", cinemaImgName=" + cinemaImgName + ", cinemaImgRename=" + cinemaImgRename
+				+ ", cinemaImgPath=" + cinemaImgPath + ", cinemaStatus=" + cinemaStatus + "]";
 	}
 }

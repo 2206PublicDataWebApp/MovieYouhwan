@@ -4,7 +4,7 @@ import java.util.List;
 
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
 
-public interface CinemaService {
+public interface AdminCinemaService {
 	// 영화관 등록
 	public int registerCinema(Cinema cinema);
 	// 영화관 리스트
@@ -13,5 +13,6 @@ public interface CinemaService {
 	public Cinema printOneCinema(int cinemaNo);
 	// 영화관 삭제
 	public int removeOneCinema(int cinemaNo);
-
+	// 영화관 수정
+	public int modifyCinema(Cinema cinema);
 }

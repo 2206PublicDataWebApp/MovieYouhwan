@@ -82,7 +82,7 @@
 				<input type="file" id="video-file" class="upload-file">
 				<input type="button" id="video-remove" value="삭제" onclick="removefile();">
 			</div>
-			<input type="button" value="추가" id="video-add" class="add-button" onclick="addfile();">
+			<input type="button" value="추가" id="video-add" class="add-button" onclick="addfile()">
 		</div>
 		<br><br><br>
 		<input type="button" value="등록" id="movieregister-button">
