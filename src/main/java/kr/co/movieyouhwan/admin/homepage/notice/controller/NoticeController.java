@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class NoticeController {
 	@RequestMapping(value="/admin/adminNoticeList.yh")
 	public String adminNoticeListView() {
-		return "admin/homepage/adminNoticeList";
+		return "admin/homepage/adminSiteManage";
 	}
 	
 	@RequestMapping(value="/admin/adminNoticeDetail.yh")

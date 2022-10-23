@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,11 +9,16 @@
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
     <link rel="stylesheet" href="/resources/css/common.css" />
-    <link rel="stylesheet" href="/resources/css/adminhome.css" />
+    <link rel="stylesheet" href="/resources/css/support.css" />
     <style>
       @font-face {
         font-family: mice-bold;
         src: url('../font/MICEGothic\ Bold.ttf');
+      }
+
+      #admin-wrapper {
+        width: 1000px;
+        margin: 0 auto;
       }
       .search-input {
         border: 1px solid;
@@ -50,7 +55,7 @@
         margin-left: 10px;
         border-radius: 2px;
       }
-      .register-btn {
+      .left-top-dark-btn {
         margin-left: 180px;
         border: 1px solid #0f1a3b;
         background-color: #0f1a3b;
@@ -59,7 +64,7 @@
         height: 30px;
       }
 
-      .delete-btn {
+      .right-top-white-btn {
         border: 1px solid #0f1a3b;
         background-color: white;
         color: black;
@@ -79,15 +84,16 @@
       }
 
       .num-col {
-        width: 15%;
+        width: 10%;
       }
 
       .title-col {
-        width: 60%;
+        width: 70%;
+        text-align: left;
       }
 
       .date-col {
-        width: 20%;
+        width: 15%;
       }
 
       .check-col {
@@ -98,58 +104,68 @@
         text-align: center;
       }
 
-      .title-col {
-        text-align: left;
+      homepage 탭메뉴 
+      #homepage-notice {
+        border-bottom: 3px solid #0f1a3b;
       }
     </style>
   </head>
-  <body>
-    <div id="admin-wrapper">
-      <h3><a href="#">공지사항 관리</a></h3>
-      <br />
-      <hr />
-      <div id="homepage-menu">
-        <ul id="homepage-tab">
-          <li class="homepage-tab-item"><a href="#">배너</a></li>
-          <li class="homepage-tab-item"><a href="#">FAQ</a></li>
-          <li class="homepage-tab-item"><a href="#">Q&A</a></li>
-          <li class="homepage-tab-item"><a href="#">공지사항</a></li>
-        </ul>
-      </div>
-      <div id="search-area">
-        <select>
-          <option>제목</option>
-          <option>내용</option>
-          <option>전체</option>
-        </select>
-        <input class="search-input" type="text" placeholder="검색어를 입력하세요" />
-        <button class="search-btn">검색</button>
-        <button class="register-btn">등록</button>
-        <button class="delete-btn">삭제</button>
-      </div>
-      <hr />
-      <div id="board">
-        <div class="board-row" id="board-header">
-          <div class="num-col">번호</div>
-          <div class="title-col">제목</div>
-          <div class="date-col">등록일</div>
-          <div class="check-col"><input id="check-all" type="checkbox" name="delete-check" /></div>
-        </div>
-        <div class="board-row">
-          <div class="num-col">1</div>
-          <div class="title-col"><a href="#">영화관람권 가격 변경 안내</a></div>
-          <div class="date-col">2022-10-07</div>
-          <div class="check-col"><input type="checkbox" name="delete-check" /></div>
-        </div>
-        <div class="board-row">
-          <div class="num-col">2</div>
-          <div class="title-col"><a href="#">무비유환 개인정보처리방침 개정 안내</a></div>
-          <div class="date-col">2022-09-25</div>
-          <div class="check-col"><input type="checkbox" name="delete-check" /></div>
-        </div>
-      </div>
-    </div>
-    <script>
+  <body> -->
+<!-- <h3><a href="#">공지사항 관리</a></h3>
+  <br />
+  <hr />
+  <div id="homepage-menu">
+    <ul id="homepage-tab">
+      <li class="homepage-tab-item" id="homepage-banner"><a href="#">배너</a></li>
+      <li class="homepage-tab-item" id="homepage-faq="><a href="#">FAQ</a></li>
+      <li class="homepage-tab-item" id="homepage-qna"><a href="#">Q&A</a></li>
+      <li class="homepage-tab-item" id="homepage-notice"><a href="#">공지사항</a></li>
+    </ul>
+  </div>
+  <div id="search-area">
+    <select>
+      <option>제목</option>
+      <option>내용</option>
+      <option>전체</option>
+    </select>
+    <input class="search-input" type="text" placeholder="검색어를 입력하세요" />
+    <button class="search-btn">검색</button>
+    <button class="left-top-dark-btn">등록</button>
+    <button class="right-top-white-btn">삭제</button>
+  </div>
+  <hr /> -->
+<div id="search-area">
+  <select>
+    <option>제목</option>
+    <option>내용</option>
+    <option>전체</option>
+  </select>
+  <input class="search-input" type="text" placeholder="검색어를 입력하세요" />
+  <button class="search-btn">검색</button>
+  <button class="left-top-dark-btn" id="">등록</button>
+  <button class="right-top-white-btn">삭제</button>
+</div>
+<div id="board">
+  <div class="board-row" id="board-header">
+    <div class="num-col">번호</div>
+    <div class="title-col">제목</div>
+    <div class="date-col">등록일</div>
+    <div class="check-col"><input id="notice-check-all" type="checkbox" name="delete-check" /></div>
+  </div>
+  <div class="board-row">
+    <div class="num-col">1</div>
+    <div class="title-col"><a href="#">영화관람권 가격 변경 안내</a></div>
+    <div class="date-col">2022-10-07</div>
+    <div class="check-col"><input class="notice-check support-check" type="checkbox" name="delete-check" /></div>
+  </div>
+  <div class="board-row">
+    <div class="num-col">2</div>
+    <div class="title-col"><a href="#">무비유환 개인정보처리방침 개정 안내</a></div>
+    <div class="date-col">2022-09-25</div>
+    <div class="check-col"><input class="notice-check support-check" type="checkbox" name="delete-check" /></div>
+  </div>
+</div>
+<!-- <script>
       $('#check-all').change(function () {
         console.log($('.check-col').children('input:checkbox'));
         if ($(this).is(':checked')) {
@@ -159,6 +175,15 @@
           $('.check-col').children('input:checkbox').prop('checked', false);
         }
       });
+
+      $('.homepage-tab-item').mouseover(function () {
+        console.log('mouseover');
+        $('#homepage-notice').css('border', 'none');
+      });
+
+      $('.homepage-tab-item').mouseout(function () {
+        $('#homepage-notice').css('border-bottom', '3px solid #0f1a3b');
+      });
     </script>
   </body>
-</html>
+</html> -->
