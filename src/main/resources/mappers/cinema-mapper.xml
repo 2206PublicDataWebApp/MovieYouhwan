@@ -7,7 +7,8 @@
 		<id property="cinemaNo" column="CINEMA_NO"/>
 		<result property="cinemaName" column="CINEMA_NAME"/>
 		<result property="cinemaArea" column="CINEMA_AREA"/>
-		<result property="cinemaAddress" column="CINEMA_ADDRESS"/>
+		<result property="cinemaAddress1" column="CINEMA_ADDRESS1"/>
+		<result property="cinemaAddress2" column="CINEMA_ADDRESS2"/>
 		<result property="cinemaTel" column="CINEMA_TEL"/>
 		<result property="cinemaContent" column="CINEMA_CONTENT"/>
 		<result property="cinemaPark" column="CINEMA_PARK"/>
@@ -19,8 +20,12 @@
 	</resultMap>
 	<!-- 영화관 등록(관리자) -->
 	<insert id="insertCinema">
-		INSERT INTO CINEMA_TBL VALUES(SEQ_CINEMA_NO.NEXTVAL, #{cinemaName}, #{cinemaArea}, #{cinemaAddress}, #{cinemaTel}, #{cinemaContent}, #{cinemaPark}, #{cinemaPublic}, #{cinemaImgName}, #{cinemaImgRename}, #{cinemaImgPath}, DEFAULT)
+		INSERT INTO CINEMA_TBL VALUES(SEQ_CINEMA_NO.NEXTVAL, #{cinemaName}, #{cinemaArea}, #{cinemaAddress1}, #{cinemaAddress2}, #{cinemaTel}, #{cinemaContent}, #{cinemaPark}, #{cinemaPublic}, #{cinemaImgName}, #{cinemaImgRename}, #{cinemaImgPath}, DEFAULT)
 	</insert>
+	<!-- 영화관 수정(관리자) -->
+	<update id="updateCinema">
+		UPDATE CINEMA_TBL SET CINEMA_NAME = #{cinemaName}, CINEMA_AREA = #{cinemaArea}, CINEMA_ADDRESS1 = #{cinemaAddress1}, CINEMA_ADDRESS2 = #{cinemaAddress2}, CINEMA_TEL = #{cinemaTel}, CINEMA_CONTENT = #{cinemaContent}, CINEMA_PARK = #{cinemaPark}, CINEMA_PUBLIC = #{cinemaPublic}, CINEMA_IMG_NAME = #{cinemaImgName}, CINEMA_IMG_RENAME = #{cinemaImgRename}, CINEMA_IMG_PATH = #{cinemaImgPath} WHERE CINEMA_NO = #{cinemaNo}
+	</update>
 	<!-- 영화관 삭제(관리자) -->
 	<delete id="deleteOneCinema">
 		DELETE FROM CINEMA_TBL WHERE CINEMA_NO = #{cinemaNo}

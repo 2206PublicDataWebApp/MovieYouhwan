@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
 
-public interface CinemaStore {
+public interface AdminCinemaStore {
 	// 영화관 등록
 	public int insertCinema(SqlSessionTemplate session, Cinema cinema);
 	// 영화관 리스트
@@ -15,4 +15,6 @@ public interface CinemaStore {
 	public Cinema selectOneCinema(SqlSessionTemplate session, int cinemaNo);
 	// 영화관 삭제
 	public int deleteOneCinema(SqlSessionTemplate session, int cinemaNo);
+	// 영화관 수정
+	public int updateCinema(SqlSessionTemplate session, Cinema cinema);
 }

@@ -8,15 +8,13 @@
 <title>무비유환 : 상영관 등록(관리자)</title>
 <link href="../../../resources/css/common.css" rel="stylesheet">
 <link href="../resources/css/theater.css" rel="stylesheet">
-<script src="/resources/js/jquery-3.6.1.min.js"></script>
 </head>
 <body>
-	<div id="admin-wrapper">
-		<br><br><br>
-		<h3>상영관 등록</h3><br><br>
+	<div class="theater-wrapper">
+		<br><br><h3>상영관 등록</h3><br><br>
 		<form action="/admin/adminTheaterInsert.yh" method="post" enctype="multipart/form-data">
 			<div id="cinema-wrap">
-				<span class="title">영화관 선택</span>
+				<span class="title">영화관</span>
 				<c:if test="${!empty cList}">
 					<select id="cinema-input" class="input" name="tCinemaNo">
 						<c:forEach items="${cList}" var="cinema" varStatus="i">
@@ -31,9 +29,7 @@
 			</div>
 			<div id="seat-wrap">
 				<span class="title">좌석 생성</span>
-				<input type="button" id="seat-button" class="input" value="미리보기"><br>
 			</div>
-			<!-- option value값이 저장이 안됩니다.. -->
 			<div class="seat-choice">
 				<span class="title">첫번째</span>
 				<select class="seat-input" name="theaterSeatoneRow">

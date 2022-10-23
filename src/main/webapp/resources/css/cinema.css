@@ -1,5 +1,19 @@
 @charset "UTF-8";
 
+.widecinema-wrapper {
+	width : 1200px;
+	margin : 0 auto;
+}
+.cinema-wrapper {
+	width : 680px;
+	margin : 0 auto;	
+}
+.usercinema-wrapper {
+	width : 1200px;
+	margin : 0 auto;
+	padding-top : 100px;
+}
+
 /* adminCinemaRegister(관리자) */
 .title {
 	flaot : left;
@@ -77,7 +91,7 @@
 }
 	.ride-input {
 		width : 400px;
-		height : 100px;
+		height : 80px;
 		float : right;
 		resize : none;
 		border : solid 1px #0F1A3B;
@@ -89,7 +103,19 @@
 .file-wrap {
 	float : right;
 }	
+#file-wrap {
+	float : right;
+}	
 .file-wrap #imgload-name {
+	display : inline-block;
+	height : 25px;
+	padding : 0 10px;
+	vertical-align : middle;
+	border : solid 1px #0F1A3B;
+	width : 300px;
+	color : #0F1A3B;
+}
+#file-wrap #imgload-name {
 	display : inline-block;
 	height : 25px;
 	padding : 0 10px;
@@ -111,6 +137,19 @@
 	font-size : 12px;
 	margin-left : 10px;
 }
+#file-wrap label {
+	display : inline-block;
+	color : #fff;
+	padding : 5px 5px 5px 5px;
+	vertical-align : middle;
+	background-color : #0F1A3B;
+	cursor : pointer;
+	width : 70px;
+	height : 25px;
+	text-align : center;
+	font-size : 12px;
+	margin-left : 10px;
+}
 .file-wrap input[type="file"] {
 	position : absolute;
 	width : 0;
@@ -119,13 +158,13 @@
 	overflow : hidden;
 	border : 0;
 }
-.add-button {
-	width : 30px;
-	height : 22px;
-	font-size : 10px;
-	background-color : #0F1A3B;
-	color : #fff;
-	border : solid 1px #0F1A3B;
+#file-wrap input[type="file"] {
+	position : absolute;
+	width : 0;
+	height : 0;
+	padding : 0;
+	overflow : hidden;
+	border : 0;
 }
 #cinemaregister-button {
 	width : 100px;
@@ -138,12 +177,12 @@
 
 /* adminCinemaList(관리자) */
 #cinemalist-top {
-	margin-bottom : 45px;
+	margin-bottom : 60px;
 	display : flex;
 }
 	#cinemalist-text {
 		margin-top : 10px;
-		margin-right : 690px;
+		margin-right : 890px;
 	}
 	.cinemalist-button {
 		width : 100px;
@@ -158,22 +197,22 @@
 	display : flex;
 }
 	.list-area {
-		width : 110px;
+		width : 120px;
 		margin-top : 20px;
 		margin-bottom : 20px;
 	}
 	.list-name {
-		width : 200px;
+		width : 240px;
 		margin-top : 20px;
 		margin-bottom : 20px;
 	}
 	.list-address {
-		width : 340px;
+		width : 380px;
 		margin-top : 20px;
 		margin-bottom : 20px;
 	}
 	.list-tel {
-		width : 200px;
+		width : 220px;
 		margin-top : 20px;
 		margin-bottom : 20px;
 	}
@@ -181,6 +220,15 @@
 		width : 150px;
 		margin-top : 20px;
 		margin-bottom : 20px;
+	}
+	.ctheater-button {
+		width : 60px;
+		height : 30px;
+		margin-top : 13px;
+		margin-right : 10px;
+		color : white;
+		border : solid 1px #0F1A3B;
+		background-color : #0F1A3B;
 	}
 /* adminCinemaDetail(관리자) */
 .cinema-detailtitle {
@@ -213,3 +261,95 @@
 		border : solid 1px #0F1A3B;
 		background-color : #0F1A3B;
 	}
+/* adminCinemaModify(관리자) */
+.modifycinema-wrap {
+	width : 800px;
+	display : flex;
+	margin-bottom : 40px;
+}
+.modifyaddress-wrap {
+	width : 800px;
+	display : flex;
+	margin-bottom : 2px;
+}
+	#modify-address {
+		margin-bottom : 38px;
+	}
+.first {
+	width : 20%;
+	margin-top : 10px;
+}
+.second {
+	width : 80%;
+	margin-top : 10px;
+}
+	#area-modify {
+		margin-right : 10px;
+	}
+	.area-modify {
+		margin-right : 10px;
+		margin-left : 15px;
+	}
+	.ride-modify {
+		width : 400px;
+		height : 80px;
+		resize : none;
+		border : solid 1px #0F1A3B;
+	}
+	#imgmodify-wrap {
+		width : 545px;
+		margin-bottom : 25px;
+	}
+	#imgmodify-wrap #imgmodify-name {
+		display : inline-block;
+		height : 25px;
+		padding : 0 10px;
+		vertical-align : middle;
+		border : solid 1px #0F1A3B;
+		width : 300px;
+		color : #0F1A3B;
+	}
+	#modifyadd-wrap {
+		width : 545px;
+		margin-top : -19px;
+	}
+	#modifyadd-wrap #modifyadd-name {
+		display : inline-block;
+		height : 25px;
+		padding : 0 10px;
+		margin-right : 5px;
+		vertical-align : middle;
+		border : solid 1px #0F1A3B;
+		width : 300px;
+		color : #0F1A3B;
+	}
+#modify-buttonarea {
+	margin-top : 30px;
+	margin-bottom : 50px;
+	float : right;
+}
+.modify-button {
+	width : 80px;
+	height : 30px;
+}
+	#modify-list {
+		color : #0F1A3B;
+		border : solid 1px #0F1A3B;
+		background-color : white;
+	}
+	#modify-done {
+		color : white;
+		border : solid 1px #0F1A3B;
+		background-color : #0F1A3B;
+	}
+
+/* userCinemaList(사용자) */
+#userCinema-img {
+	width : 100%;
+	height : 400px;
+}
+.ucinemalist-outside {
+	width : 250px;
+	height : 250px;	
+	border : solid 1px #0F1A3B;
+}

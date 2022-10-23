@@ -11,8 +11,7 @@
 		<li class="navbar-menuList"><a href="#">영화</a></li>
 		<li class="navbar-menuList"><a href="#">영화관 </a></li>
 		<li class="navbar-menuList"><a href="#">메이트</a></li>
-		<li id="navbar-logo"><a href="#"> <img
-				src="/resources/images/logo.png" alt="" width="150px" />
+		<li id="navbar-logo"><a href="#"> <img src="/resources/images/logo.png" alt="" width="150px" />
 		</a></li>
 		<li class="navbar-menuList"><a href="#">예매</a></li>
 		<li class="navbar-menuList"><a href="#">스토어</a></li>

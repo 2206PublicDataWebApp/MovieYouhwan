@@ -17,23 +17,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.movieyouhwan.admin.cinema.service.CinemaService;
+import kr.co.movieyouhwan.admin.cinema.service.AdminCinemaService;
+import kr.co.movieyouhwan.admin.theater.domain.Theater;
+import kr.co.movieyouhwan.admin.theater.service.AdminTheaterService;
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
 
 @Controller
-public class CinemaController {
+public class AdminCinemaController {
 	@Autowired
-	private CinemaService cService;
+	private AdminCinemaService aCinemaService;
+	@Autowired
+	private AdminTheaterService aTheaterService;
 	
 	/**
 	 * 영화관 등록 화면
 	 * @return
 	 */
 	@RequestMapping(value="/admin/adminCinemaRegister.yh", method=RequestMethod.GET)
-	public String CinemaRegisterView() {
+	public String cinemaRegisterView() {
 		return "/admin/cinema/adminCinemaRegister";
 	}
 	
@@ -41,8 +44,6 @@ public class CinemaController {
 	 * 영화관 등록
 	 * @param mv
 	 * @param cinema
-	 * @param address1
-	 * @param address2
 	 * @param uploadFile
 	 * @param multipartRequest
 	 * @param request
@@ -51,14 +52,11 @@ public class CinemaController {
 	 * @throws IllegalStateException 
 	 */
 	@RequestMapping(value="/admin/adminCinemaInsert.yh", method=RequestMethod.POST)
-	public ModelAndView CinemaRegister(
+	public ModelAndView cinemaRegister(
 			ModelAndView mv,
 			@ModelAttribute Cinema cinema,
-			@RequestParam("cinemaAddress1") String address1,
-			@RequestParam("cinemaAddress2") String address2,
 			@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile,
 			HttpServletRequest request) throws IllegalStateException, IOException {
-		cinema.setCinemaAddress(address1 + "," + address2); // 도로명주소 + 상세주소 합치기
 		String cinemaFileName = uploadFile.getOriginalFilename(); // 단일 이미지 등록
 		if(!cinemaFileName.equals("")) {
 			String root = request.getSession().getServletContext().getRealPath("resources\\images");
@@ -75,7 +73,7 @@ public class CinemaController {
 			cinema.setCinemaImgRename(cinemaFileRename);
 			cinema.setCinemaImgPath(cinemaFilePath);
 		}
-		int result = cService.registerCinema(cinema);
+		int result = aCinemaService.registerCinema(cinema);
 		mv.setViewName("redirect:/admin/adminCinemaList.yh");
 		return mv;
 	}
@@ -85,11 +83,14 @@ public class CinemaController {
 	 * @return
 	 */
 	@RequestMapping(value="/admin/adminCinemaList.yh", method=RequestMethod.GET)
-	public ModelAndView CinemaListView(
+	public ModelAndView adminCinemaListView(
 			ModelAndView mv,
-			@ModelAttribute Cinema cinema) {
-		List<Cinema> cList = cService.printAllCinema();
+			@ModelAttribute Cinema cinema,
+			@ModelAttribute Theater theater) {
+		List<Cinema> cList = aCinemaService.printAllCinema();
+		List<Theater> tList = aTheaterService.printAllTheater();
 		mv.addObject("cList", cList);
+		mv.addObject("tList", tList);
 		mv.setViewName("admin/cinema/adminCinemaList");
 		return mv;
 	}
@@ -100,11 +101,11 @@ public class CinemaController {
 	 * @return
 	 */
 	@RequestMapping(value="/admin/adminCinemaDetail.yh", method=RequestMethod.GET)
-	public ModelAndView CinemaDetailView(
+	public ModelAndView adminCinemaDetailView(
 			ModelAndView mv,
-			@RequestParam("cinemaNo") int cinemaNo,
+			@RequestParam("cinemaNo") Integer cinemaNo,
 			HttpSession session) {
-		Cinema cinema = cService.printOneCinema(cinemaNo);
+		Cinema cinema = aCinemaService.printOneCinema(cinemaNo);
 		session.setAttribute("cinemaNo", cinema.getCinemaNo());
 		mv.addObject("cinema", cinema);
 		mv.setViewName("/admin/cinema/adminCinemaDetail");
@@ -116,8 +117,52 @@ public class CinemaController {
 	 * @return
 	 */
 	@RequestMapping(value="/admin/adminCinemaModify.yh", method=RequestMethod.GET)
-	public String cinemaModifyView() {
-		return "/admin/cinema/adminCinemaModify";
+	public ModelAndView cinemaModifyView(
+			ModelAndView mv,
+			@RequestParam("cinemaNo") Integer cinemaNo,
+			HttpSession session) {
+		Cinema cinema = aCinemaService.printOneCinema(cinemaNo);
+		mv.addObject("cinema", cinema);
+		mv.setViewName("/admin/cinema/adminCinemaModify");
+		return mv;
+	}
+	
+	/**
+	 * 영화관 수정 기능
+	 * @param mv
+	 * @param cinema
+	 * @param uploadFile
+	 * @param request
+	 * @return
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	@RequestMapping(value="/admin/adminCinemaUpdate.yh", method=RequestMethod.POST)
+	public ModelAndView cinemaModify(
+			ModelAndView mv,
+			@ModelAttribute Cinema cinema,
+			@RequestParam("cinemaNo") Integer cinemaNo,
+			@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile,
+			HttpServletRequest request) throws IllegalStateException, IOException {
+		String cinemaFileName = reloadFile.getOriginalFilename();
+		if(reloadFile != null && !cinemaFileName.equals("")) {
+			String root = request.getSession().getServletContext().getRealPath("resources\\images");
+			String savePath = root + "\\cinemaLodeImg";
+			File file = new File(savePath + "\\" + cinema.getCinemaImgRename());
+			if(file.exists()) {
+				file.delete();
+			}
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String cinemaImgRename = sdf.format(new Date(System.currentTimeMillis())) + "." + cinemaFileName.substring(cinemaFileName.lastIndexOf(".")+1);
+			String cinemaImgPath = savePath + "\\" + cinemaImgRename;
+			reloadFile.transferTo(new File(cinemaImgPath));
+			cinema.setCinemaImgName(cinemaFileName);
+			cinema.setCinemaImgRename(cinemaImgRename);
+			cinema.setCinemaImgPath(cinemaImgPath);
+		}
+		int result = aCinemaService.modifyCinema(cinema);
+		mv.setViewName("redirect:/admin/adminCinemaDetail.yh?cinemaNo="+cinemaNo);
+		return mv;
 	}
 	
 	/**
@@ -131,7 +176,7 @@ public class CinemaController {
 			Model model,
 			HttpSession session) {
 		int cinemaNo = (Integer)session.getAttribute("cinemaNo");
-		int result = cService.removeOneCinema(cinemaNo);
+		int result = aCinemaService.removeOneCinema(cinemaNo);
 		if(result > 0) {
 			session.removeAttribute("cinemaNo");
 		}

@@ -13,6 +13,10 @@ $(function() {
 function addfile() {
 	var number = 2;
 	var divTag = $("#videofile-wrap");
-	$(divTag).append("<div class='file-wrap'><input id='videoload-name' value='첨부파일' placeholder='첨부파일'><label for='video-file'>파일찾기</label> <input type='file' id='video-file' class='upload-file'><input type='button' id='video-remove' value='삭제' onclick='removefile();'></div><br>");
+	$(divTag).append("<div class='fileadd-wrap'><input id='videoload-addname' value='첨부파일' placeholder='첨부파일'><label for='video-addfile'>파일찾기</label><input type='file' id='video-addfile' class='upload-file'><input type='button' id='video-remove' value='삭제' onclick='removefile();'></div><br>");
 	number = number + 1;
+	$("#video-addfile").on('change', function() {
+		var videoName = $("#video-addfile").val();
+		$("#videoload-addname").val(videoName);
+	});
 }

@@ -111,7 +111,11 @@ body {
 	}
 	.file-wrap {
 		float : right;
+		margin-bottom : 18px;
 	}	
+	.fileadd-wrap {
+		margin-left : 132px;
+	}
 	.file-wrap #imgload-name {
 		display : inline-block;
 		height : 25px;
@@ -130,6 +134,16 @@ body {
 		width : 300px;
 		color : #0F1A3B;
 	}
+	.fileadd-wrap #videoload-addname {
+		display : inline-block;
+		height : 25px;
+		padding : 0 10px;
+		margin-right : 5px;
+		vertical-align : middle;
+		border : solid 1px #0F1A3B;
+		width : 300px;
+		color : #0F1A3B;
+	}
 	.file-wrap label {
 		display : inline-block;
 		color : #fff;
@@ -143,15 +157,37 @@ body {
 		font-size : 12px;
 		margin-left : 10px;
 	}
+	.fileadd-wrap label {
+		display : inline-block;
+		color : #fff;
+		padding : 5px 5px 5px 5px;
+		vertical-align : middle;
+		background-color : #0F1A3B;
+		cursor : pointer;
+		width : 70px;
+		height : 25px;
+		text-align : center;
+		font-size : 12px;
+		margin-left : 10px;
+		margin-right : 5px;
+	}
 	#video-remove {
 		width : 70px;
 		height : 25px;
 		color : #fff;
 		font-size : 12px;
-		border : solid 1px #0F1A3B;
+		border : solid 2px #0F1A3B;
 		background-color : #0F1A3B;
 	}
 	.file-wrap input[type="file"] {
+		position : absolute;
+		width : 0;
+		height : 0;
+		padding : 0;
+		overflow : hidden;
+		border : 0;
+	}
+	.fileadd-wrap input[type="file"] {
 		position : absolute;
 		width : 0;
 		height : 0;
