@@ -19,7 +19,7 @@
     <div id="store-wrapper">
       <div id="store-menu">
         <ul id="store-tab">
-          <%-- store-tab-item 반복, 링크 수정 --%>
+          <%-- TODO: Use c:forEach to repeat .store-tab-item, Modify values of href attr --%>
           <li class="store-tab-item"><a href="#">콤보</a></li>
           <li class="store-tab-item"><a href="#">팝콘</a></li>
           <li class="store-tab-item"><a href="#">음료</a></li>
@@ -28,17 +28,17 @@
         <ul id="store-links">
           <li><a href="#">구매내역</a></li>
           <li>
-            <a href="#">장바구니<i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="/store/cart.yh">장바구니<i class="fa-solid fa-cart-shopping"></i></a>
           </li>
         </ul>
       </div>
       <div id="store-main">
-        <%-- #product-per-type 반복 --%>
+        <%-- TODO: Use c:forEach to repeat #product-per-type--%>
         <div class="product-per-type">
-          <%-- .product-type에 동적으로 id 값 주기 --%>
+          <%-- TODO: Bring value of id of .product-type from DB --%>
           <h3 class="product-type">콤보</h3>
           <ul class="product-list">
-            <%-- .product-item 반복 --%>
+            <%-- TODO: Use c:forEach to repeat .product-item --%>
             <li class="product-item">
               <img src="/resources/images/storeProduct/solo_combo.jpg" alt="${product.productImageRename}" class="product-img" />
               <div class="product-detail">

@@ -18,7 +18,6 @@
 		<typeAlias type="kr.co.movieyouhwan.admin.movie.domain.MovieImg" alias="MovieImg"/>
 		<typeAlias type="kr.co.movieyouhwan.admin.movie.domain.MovieVideo" alias="MovieVideo"/>
 		<typeAlias type="kr.co.movieyouhwan.admin.sales.domain.Sales" alias="Sales"/>
-		<typeAlias type="kr.co.movieyouhwan.admin.store.domain.Store" alias="Store"/>
 		<typeAlias type="kr.co.movieyouhwan.admin.theater.domain.Theater" alias="Theater"/>
 		<typeAlias type="kr.co.movieyouhwan.admin.theater.domain.TheaterSchedule" alias="TheaterSchedule"/>
 		<typeAlias type="kr.co.movieyouhwan.common.error.Error" alias="Error"/>
@@ -41,7 +40,7 @@
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.Cart" alias="Cart"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.Product" alias="Product"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreBuy" alias="StoreBuy"/>
-		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreCancle" alias="StoreCancle"/>
+		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreCancel" alias="StoreCancel"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StorePay" alias="StorePay"/>
 	</typeAliases>
 	

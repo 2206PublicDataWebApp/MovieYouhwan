@@ -48,12 +48,17 @@
 
 .product-list {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-end;
+  flex-wrap: wrap;
 }
 
 .product-item {
   width: 300px;
+}
+
+.product-item:nth-child(3n-1) {
+  margin: 0 50px;
 }
 
 .product-img {
@@ -109,8 +114,9 @@
   line-height: 37.5px;
 }
 
-/* 관리자 */
+/** 관리자 */
 
+/* 상품 목록 */
 #btn-store-register {
   background-color: #0f1a3b;
   color: #fff;
@@ -120,6 +126,11 @@
 #btn-store-reorder {
   background-color: #e59500;
   color: #fff;
+}
+
+.btn-store-mng {
+  width: 100px;
+  height: 35px;
 }
 
 .btn-store-list.btn-store-modify {
@@ -144,4 +155,105 @@
 .btn-store-list.btn-store-delete:active {
   background-color: #e2202c;
   color: #fff;
+}
+
+#modal-store-register {
+  display: none;
+}
+
+#modal-store-modify {
+  display: none;
+}
+
+/* 상품 재배치 */
+#btn-store-cancel {
+  background-color: #e2e2e2;
+  color: #0f1a3b;
+  margin-right: 10px;
+}
+
+#btn-store-save {
+  background-color: #0f1a3b;
+  color: #fff;
+}
+
+/* 상품 등록 (모달) */
+.modal-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.modal-store {
+  position: relative;
+  width: 600px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  margin-left: -300px;
+  margin-top: -200px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.modal-store .modal-title {
+  padding: 10px;
+}
+
+.modal-store .modal-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 85%;
+  padding: 30px 0 5px 0;
+}
+
+.modal-form .modal-img-area {
+  text-align: center;
+  border: 1px solid #e2e2e2;
+}
+
+.modal-form .modal-img-area i {
+  padding: 60px;
+}
+
+.modal-form .product-img {
+  display: none;
+}
+
+.modal-form .modal-select,
+.modal-form .modal-input {
+  width: 100%;
+  height: 80%;
+}
+
+.modal-form .modal-input {
+  padding-left: 3px;
+}
+
+.modal-btn-area {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  padding: 10px 0;
+}
+
+.modal-btn {
+  width: 80px;
+  height: 30px;
+}
+
+.modal-btn-save {
+  background-color: #0f1a3b;
+  color: #fff;
+}
+
+.modal-btn-cancel {
+  background-color: #e2e2e2;
+  color: #000;
 }

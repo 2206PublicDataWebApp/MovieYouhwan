@@ -15,7 +15,6 @@
     <script src="/resources/js/store.js" defer></script>
   </head>
   <body>
-    <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     <div id="store-wrapper">
       <div id="store-menu">
         <ul id="store-tab">
@@ -33,7 +32,7 @@
         <%-- #product-per-type 반복 --%>
         <div class="product-per-type">
           <%-- .product-type에 동적으로 id 값 주기 --%>
-          <h3 class="product-type">콤보</h3>
+          <h2 class="product-type">콤보</h2>
           <ul class="product-list">
             <%-- .product-item 반복 --%>
             <li class="product-item">
@@ -51,6 +50,12 @@
           </ul>
         </div>
       </div>
+    </div>
+    <div id="modal-store-register">
+      <jsp:include page="adminStoreRegister.jsp" />
+    </div>
+    <div id="modal-store-modify">
+      <jsp:include page="adminStoreModify.jsp" />
     </div>
   </body>
 </html>
