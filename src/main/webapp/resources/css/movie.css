@@ -100,23 +100,23 @@ body {
 			resize : none;
 			border : solid 1px #0F1A3B;
 		}
-		
 	#imgfile-wrap {
-		width : 517px;
+		width : 518px;
 		margin-bottom : 25px;
 	}
 	#videofile-wrap {
-		width : 592px;
+		width : 518px;
 		margin-bottom : 25px;
 	}
-	.file-wrap {
+	.img-wrap {
 		float : right;
 		margin-bottom : 18px;
 	}	
-	.fileadd-wrap {
-		margin-left : 132px;
-	}
-	.file-wrap #imgload-name {
+	.video-wrap {
+		float : right;
+		margin-bottom : 18px;
+	}	
+	.img-wrap #imgload-name {
 		display : inline-block;
 		height : 25px;
 		padding : 0 10px;
@@ -125,7 +125,7 @@ body {
 		width : 300px;
 		color : #0F1A3B;
 	}
-	.file-wrap #videoload-name {
+	.video-wrap #videoload-name {
 		display : inline-block;
 		height : 25px;
 		padding : 0 10px;
@@ -134,17 +134,7 @@ body {
 		width : 300px;
 		color : #0F1A3B;
 	}
-	.fileadd-wrap #videoload-addname {
-		display : inline-block;
-		height : 25px;
-		padding : 0 10px;
-		margin-right : 5px;
-		vertical-align : middle;
-		border : solid 1px #0F1A3B;
-		width : 300px;
-		color : #0F1A3B;
-	}
-	.file-wrap label {
+	.img-wrap label {
 		display : inline-block;
 		color : #fff;
 		padding : 5px 5px 5px 5px;
@@ -157,7 +147,96 @@ body {
 		font-size : 12px;
 		margin-left : 10px;
 	}
-	.fileadd-wrap label {
+	.video-wrap label {
+		display : inline-block;
+		color : #fff;
+		padding : 5px 5px 5px 5px;
+		vertical-align : middle;
+		background-color : #0F1A3B;
+		cursor : pointer;
+		width : 70px;
+		height : 25px;
+		text-align : center;
+		font-size : 12px;
+		margin-left : 10px;
+	}
+	.img-wrap input[type="file"] {
+		position : absolute;
+		width : 0;
+		height : 0;
+		padding : 0;
+		overflow : hidden;
+		border : 0;
+	}
+	.video-wrap input[type="file"] {
+		position : absolute;
+		width : 0;
+		height : 0;
+		padding : 0;
+		overflow : hidden;
+		border : 0;
+	}
+	.imgadd-wrap {
+		width : 500px;
+		margin-left : 132px;
+	}
+	.videoadd-wrap {
+		width : 500px;
+		margin-left : 132px;
+	}
+	.imgadd-wrap #imgload-name {
+		display : inline-block;
+		height : 25px;
+		padding : 0 10px;
+		vertical-align : middle;
+		border : solid 1px #0F1A3B;
+		width : 300px;
+		color : #0F1A3B;
+	}
+	.videoadd-wrap #videoload-name {
+		display : inline-block;
+		height : 25px;
+		padding : 0 10px;
+		vertical-align : middle;
+		border : solid 1px #0F1A3B;
+		width : 300px;
+		color : #0F1A3B;
+	}
+	.imgadd-wrap [id^=imgload-addname] {
+		display : inline-block;
+		height : 25px;
+		padding : 0 10px;
+		margin-right : 5px;
+		vertical-align : middle;
+		border : solid 1px #0F1A3B;
+		width : 300px;
+		color : #0F1A3B;
+	}
+	.videoadd-wrap [id^=videoload-addname] {
+		display : inline-block;
+		height : 25px;
+		padding : 0 10px;
+		margin-right : 5px;
+		vertical-align : middle;
+		border : solid 1px #0F1A3B;
+		width : 300px;
+		color : #0F1A3B;
+	}
+	.imgadd-wrap label {
+		display : inline-block;
+		color : #fff;
+		padding : 5px 5px 5px 5px;
+		vertical-align : middle;
+		background-color : #0F1A3B;
+		cursor : pointer;
+		width : 70px;
+		height : 25px;
+		text-align : center;
+		font-size : 12px;
+		margin-left : 10px;
+		margin-right : 5px;
+	}
+	.videoadd-wrap label {
 		display : inline-block;
 		color : #fff;
 		padding : 5px 5px 5px 5px;
@@ -176,10 +255,18 @@ body {
 		height : 25px;
 		color : #fff;
 		font-size : 12px;
-		border : solid 2px #0F1A3B;
+		border : solid 3px #0F1A3B;
 		background-color : #0F1A3B;
 	}
-	.file-wrap input[type="file"] {
+	#img-remove {
+		width : 70px;
+		height : 25px;
+		color : #fff;
+		font-size : 12px;
+		border : solid 3px #0F1A3B;
+		background-color : #0F1A3B;
+	}
+	.imgadd-wrap input[type="file"] {
 		position : absolute;
 		width : 0;
 		height : 0;
@@ -187,7 +274,7 @@ body {
 		overflow : hidden;
 		border : 0;
 	}
-	.fileadd-wrap input[type="file"] {
+	.videoadd-wrap input[type="file"] {
 		position : absolute;
 		width : 0;
 		height : 0;

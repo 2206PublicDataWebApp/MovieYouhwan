@@ -32,6 +32,12 @@ $(function() {
 		var imgName = $("#img-file").val();
 		$("#imgload-name").val(imgName);
 	});
+	
+	$("#imgadd-file").on('change', function() {
+		var imgName = $("#imgadd-file").val();
+		$("#modifyadd-name").val(imgName);
+		console.log(imgName);
+	});
 })
 
 // 영화관 삭제 기능
@@ -40,17 +46,4 @@ function cinemaDataRemove() {
 	if(confirm("영화관을 삭제하시겠습니까?")) {
 		location.href="/admin/adminCinemaRemove.yh";
 	}
-}
-
-// 영화관 이미지 수정
-function modifyimg() {
-	var divTag = $("#imgmodify-wrap");
-	var removeTag = $(".file-wrap");
-	$(divTag).append("<div id='modifyadd-wrap'><div id='file-wrap'><input id='modifyadd-name' value='첨부파일' placeholder='첨부파일'><label for='imgadd-file'>파일찾기</label><input type='file' id='imgadd-file' class='upload-file' name='reloadFile'></div></div><br>");
-	$(removeTag).remove();
-	
-	$("#imgadd-file").on('change', function() {
-		var imgName = $("#imgadd-file").val();
-		$("#modifyadd-name").val(imgName);
-	});
 }

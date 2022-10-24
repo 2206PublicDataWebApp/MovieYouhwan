@@ -29,8 +29,8 @@
 			</div>
 		</div>
 		<div id="runtime-wrap">
-			<span class="title">상영 시간</span>
-			<input type="text" id="runtime-input" class="input"><br>
+			<span class="title">상영 시간 (분)</span>
+			<input type="text" id="runtime-input" class="input" placeholder=" 숫자만 입력해주세요."><br>
 		</div>
 		<div id="director-wrap">
 			<span class="title">감독</span>
@@ -67,22 +67,21 @@
 		</div>
 		<div id="imgfile-wrap">
 			<span class="title">사진 등록</span>
-			<div class="file-wrap">
+			<div class="img-wrap">
 				<input id="imgload-name" value="첨부파일" placeholder="첨부파일">
 				<label for="img-file">파일찾기</label>
 				<input type="file" id="img-file" class="upload-file">
 			</div>
-			<input type="button" value="추가" id="img-add" class="add-button">
+			<input type="button" value="추가" id="img-add" class="add-button" onclick="addimgfile()">
 		</div>
 		<div id="videofile-wrap">
 			<span class="title">영상 등록</span>
-			<div class="file-wrap">
+			<div class="video-wrap">
 				<input id="videoload-name" value="첨부파일" placeholder="첨부파일">
 				<label for="video-file">파일찾기</label>
 				<input type="file" id="video-file" class="upload-file">
-				<input type="button" id="video-remove" value="삭제" onclick="removefile();">
 			</div>
-			<input type="button" value="추가" id="video-add" class="add-button" onclick="addfile()">
+			<input type="button" value="추가" id="video-add" class="add-button" onclick="addvideofile()">
 		</div>
 		<br><br><br>
 		<input type="button" value="등록" id="movieregister-button">

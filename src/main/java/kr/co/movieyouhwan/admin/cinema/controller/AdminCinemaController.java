@@ -144,8 +144,9 @@ public class AdminCinemaController {
 			@RequestParam("cinemaNo") Integer cinemaNo,
 			@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile,
 			HttpServletRequest request) throws IllegalStateException, IOException {
-		String cinemaFileName = reloadFile.getOriginalFilename();
-		if(reloadFile != null && !cinemaFileName.equals("")) {
+		String modifyCinemaFileName = reloadFile.getOriginalFilename();
+		// 새로운 사진 변경
+		if(reloadFile != null && !modifyCinemaFileName.equals("")) {
 			String root = request.getSession().getServletContext().getRealPath("resources\\images");
 			String savePath = root + "\\cinemaLodeImg";
 			File file = new File(savePath + "\\" + cinema.getCinemaImgRename());
@@ -153,12 +154,18 @@ public class AdminCinemaController {
 				file.delete();
 			}
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			String cinemaImgRename = sdf.format(new Date(System.currentTimeMillis())) + "." + cinemaFileName.substring(cinemaFileName.lastIndexOf(".")+1);
+			String cinemaImgRename = sdf.format(new Date(System.currentTimeMillis())) + "." + modifyCinemaFileName.substring(modifyCinemaFileName.lastIndexOf(".")+1);
 			String cinemaImgPath = savePath + "\\" + cinemaImgRename;
 			reloadFile.transferTo(new File(cinemaImgPath));
-			cinema.setCinemaImgName(cinemaFileName);
+			cinema.setCinemaImgName(modifyCinemaFileName);
 			cinema.setCinemaImgRename(cinemaImgRename);
 			cinema.setCinemaImgPath(cinemaImgPath);
+		} else {
+			// 기존 사진 가져오기
+			Cinema cinemaOriginal=aCinemaService.printOneCinema(cinema.getCinemaNo());
+			cinema.setCinemaImgName(cinemaOriginal.getCinemaImgName());
+			cinema.setCinemaImgRename(cinemaOriginal.getCinemaImgRename());
+			cinema.setCinemaImgPath(cinemaOriginal.getCinemaImgPath());
 		}
 		int result = aCinemaService.modifyCinema(cinema);
 		mv.setViewName("redirect:/admin/adminCinemaDetail.yh?cinemaNo="+cinemaNo);
