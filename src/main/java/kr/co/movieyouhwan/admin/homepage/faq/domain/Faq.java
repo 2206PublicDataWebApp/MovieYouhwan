@@ -5,10 +5,10 @@ import java.sql.Date;
 public class Faq {
 	private int faqMo;
 	private String admimId;
-	private String noticeTitle;
-	private String noticeContent;
+	private String faqTitle;
+	private String faqType;
+	private String faqContent;
 	private Date noticeCreate;
-	
 	public int getFaqMo() {
 		return faqMo;
 	}
@@ -21,17 +21,23 @@ public class Faq {
 	public void setAdmimId(String admimId) {
 		this.admimId = admimId;
 	}
-	public String getNoticeTitle() {
-		return noticeTitle;
+	public String getFaqTitle() {
+		return faqTitle;
 	}
-	public void setNoticeTitle(String noticeTitle) {
-		this.noticeTitle = noticeTitle;
+	public void setFaqTitle(String faqTitle) {
+		this.faqTitle = faqTitle;
 	}
-	public String getNoticeContent() {
-		return noticeContent;
+	public String getFaqType() {
+		return faqType;
 	}
-	public void setNoticeContent(String noticeContent) {
-		this.noticeContent = noticeContent;
+	public void setFaqType(String faqType) {
+		this.faqType = faqType;
+	}
+	public String getFaqContent() {
+		return faqContent;
+	}
+	public void setFaqContent(String faqContent) {
+		this.faqContent = faqContent;
 	}
 	public Date getNoticeCreate() {
 		return noticeCreate;
