@@ -83,10 +83,16 @@
     margin-left: 20px;
 }
 .movie-name{
-    font-size: 15pt;
-    margin: 10px 20px;
+    font-size: 20pt;
+    margin: 20px 20px 45px;
     font-weight: 800;
     color: #393939;
+    display: flex;
+}
+.film-rating{
+    width: 30px;
+    height: 30px;
+    margin: auto 10px;
 }
 .detail-wrap{
     display: flex;
@@ -95,27 +101,32 @@
     
 }
 .info-title{
-    font-weight: 600;
+    font-weight: 800;
     color: #585858;
 }
 .info-details{
-    left: 45%;
+    left: 38%;
     position:absolute;
-    font-weight: 300;
+    font-weight: 600;
     color: #585858;
 }
 .info-wrap-2{
     position:absolute;
     left: 70%;
-    margin-top: 30px;
-    margin-left: 20px;
+    margin-top: 270px;
+    margin-left: 50px;
     width: 200px;
     padding-top: 30px;
     display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
+
 .detail-wrap-2{
     display: flex;
     margin: 10px 20px;
+    
+    
 }
 .info-title-2{
     font-weight: 600;
@@ -153,13 +164,23 @@ li{
     font-weight: 800;
     margin: 5px;
 }
-.delete-btn{
+.ticketing-btn{
     background-color: white;
     color: #585858;
+    width: 90px;
+    height: 35px;
+    border-style: solid;
+    border-width: 1px;
+    font-weight: 800;
+    margin: 5px;
+    border-radius: 50px;
 }
-.review-btn{
-    background-color: #0F1A3B;
-    color: white;
+
+.fa-solid{
+    color: #f50000;
+    font-size: 25pt;
+    margin: 0 10px;
+    
 }
 .btn{
     display: flex;
@@ -167,3 +188,4 @@ li{
     /* margin-left: 690px; */
     /* margin-bottom: 700px; */
 }
+
