@@ -9,6 +9,7 @@
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
     <link rel="stylesheet" href="/resources/css/common.css" />
+    <link rel="stylesheet" href="/resources/css/support.css" />
     <style>
       @font-face {
         font-family: mice-bold;
@@ -33,9 +34,13 @@
         padding: 10px;
         margin: 20px 0;
         height: 400px;
-        width: 100%;
+        width: 98%;
         resize: none;
         outline: none;
+      }
+
+      #input-content-area {
+        text-align: center;
       }
 
       #btn-area {
@@ -58,26 +63,37 @@
         width: 12%;
         height: 40px;
       }
+
+      #input-title-area {
+        width: 100%;
+      }
     </style>
   </head>
   <body>
     <div id="admin-wrapper">
-      <h3><a href="#">FAQ 등록</a></h3>
-      <br />
-      <hr />
-      <div id="input-title-area">
-        <input id="input-title" type="text" />
-      </div>
-
-      <hr />
-      <div id="input-content-area">
-        <textarea id="input-content" wrap="hard" cols="100"> </textarea>
-      </div>
-
-      <div id="btn-area">
-        <button id="cancel-btn">취소</button>
-        <button id="register-btn">등록</button>
-      </div>
+      <form method="post">
+        <input type="hidden" name="adminId" value="eunhye0910" />
+        <input type="hidden" name="noticeNo" value="193014" />
+        <h3><a href="#">FAQ 등록</a></h3>
+        <br />
+        <hr />
+        <div id="input-title-area">
+          <select>
+            <option value="">영화관</option>
+            <option value="">회원</option>
+            <option value="">스토어</option>
+            <option value="">결제</option>
+            <option value="">환불</option>
+          </select>
+          <input id="input-title" name="faqTitle" type="text" />
+        </div>
+        <hr />
+        <div id="input-content-area"><textarea id="input-content" name="faqContent" wrap="hard" cols="100"> </textarea></div>
+        <div id="btn-area">
+          <button id="cancel-btn" type="button" onclick="javascript:history.go(-1);">취소</button>
+          <button id="register-btn" type="submit" onclick="javascript:form.action='/admin/faqRegister.yh'">등록</button>
+        </div>
+      </form>
     </div>
   </body>
 </html>

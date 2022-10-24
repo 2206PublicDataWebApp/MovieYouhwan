@@ -16,22 +16,22 @@
     <div id="admin-wrapper">
       <div id="homepage-menu">
         <ul id="homepage-tab">
-          <li class="homepage-tab-item" id="homepage-tab-banner"><a class="homepage-tab-border">배너</a></li>
+          <li class="homepage-tab-item" id="homepage-tab-banner"><a class="homepage-tab-border">Q&A</a></li>
           <li class="homepage-tab-item" id="homepage-tab-faq"><a>FAQ</a></li>
-          <li class="homepage-tab-item" id="homepage-tab-qna"><a>Q&A</a></li>
-          <li class="homepage-tab-item" id="homepage-tab-notice"><a>공지사항</a></li>
+          <li class="homepage-tab-item" id="homepage-tab-qna"><a>공지사항</a></li>
+          <li class="homepage-tab-item" id="homepage-tab-notice"><a>배너</a></li>
         </ul>
       </div>
 
       <hr />
-      <div class="page" id="banner-page"></div>
+      <div class="page no-show" id="qna-page"></div>
       <div class="page no-show" id="faq-page">
         <jsp:include page="adminFaqList.jsp" />
       </div>
-      <div class="page no-show" id="qna-page"></div>
       <div class="page no-show" id="notice-page">
         <jsp:include page="adminNoticeList.jsp" />
       </div>
+      <div class="page" id="banner-page"></div>
     </div>
   </body>
 </html>

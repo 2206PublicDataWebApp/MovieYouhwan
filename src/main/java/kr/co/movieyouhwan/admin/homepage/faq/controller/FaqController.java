@@ -10,8 +10,12 @@ import kr.co.movieyouhwan.admin.homepage.faq.domain.Faq;
 
 @Controller
 public class FaqController {
+	@RequestMapping(value="/admin/site/manage.yh")
+	public String adminSiteManageView() {
+		return "admin/homepage/adminSiteManage";
+	}
 	
-	@RequestMapping(value="/admin/adminFaqList.yh")
+	@RequestMapping(value="/admin/FaqList.yh")
 	public String adminFaqListView() {
 		return "admin/homepage/adminFaqList";
 	}
@@ -23,11 +27,9 @@ public class FaqController {
 	
 	@RequestMapping(value="/admin/faqRegister.yh", method=RequestMethod.POST)
 	public String adminFaqWrite(ModelAndView mv, @ModelAttribute Faq faq) {
-		System.out.println(faq.getNoticeTitle());
-		System.out.println(faq.getNoticeContent());
+		System.out.println(faq.getFaqTitle());
+		System.out.println(faq.getFaqContent());
 		return "admin/homepage/adminFaqList";
 	}
 	
-	
-
 }
