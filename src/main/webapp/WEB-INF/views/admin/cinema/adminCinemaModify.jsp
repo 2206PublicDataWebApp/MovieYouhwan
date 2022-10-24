@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="cinema-wrapper">
-		<br><br><br><h3>영화관 수정</h3><br><br>
+		<br><br><h3>영화관 수정</h3><br><br>
 		<form action="/admin/adminCinemaUpdate.yh" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="cinemaNo" value="${cinema.cinemaNo }">
 			<div class="modifycinema-wrap">
@@ -72,10 +72,13 @@
 			</div>
 			<div id="imgmodify-wrap">
 				<span class="title">이미지</span>
-				<div class="file-wrap">
-					<input id="imgmodify-name" value="${cinema.cinemaImgName }" placeholder="${cinema.cinemaImgName }">
-					<label onclick="modifyimg()">변경하기</label>
-				</div>
+				<div id='modifyadd-wrap'>
+					<div id='file-wrap'>
+						<input id='modifyadd-name' value='${cinema.cinemaImgName }'>
+						<label for='imgadd-file'>파일찾기</label>
+						<input type='file' id='imgadd-file' class='upload-file' name='reloadFile'>
+					</div>
+				</div><br>
 			</div>
 			<div id="modify-buttonarea">
 				<button id="modify-list" class="cinemadetail-button" onclick="location.href='/admin/adminCinemaList.yh'">목록으로</button>

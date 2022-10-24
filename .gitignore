@@ -2,6 +2,7 @@
 .settings
 .project
 .springBeans
+.metadata
 .DS_Store
 bin/*
 target/*
