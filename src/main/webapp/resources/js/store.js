@@ -25,12 +25,12 @@ cancelBtn.click(function () {
 
 // 상품 재배치
 $('#btn-store-reorder').click(function () {
-  $(location).attr('href', '/admin/store/reorderList.yh');
+  $(location).attr('href', '/admin/store/reorderView.yh');
 });
-$('.sortable').sortable();
+$('.sortable').sortable({});
 $('#btn-store-cancel').click(function () {
   if (confirm('변경사항이 저장되지 않습니다. 정말 취소하시겠습니까?')) {
-    $(location).attr('href', '/admin/store/list.yh');
+    $(location).attr('href', '/admin/store/manage.yh');
   }
 });
 

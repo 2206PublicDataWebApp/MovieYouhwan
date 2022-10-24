@@ -35,7 +35,7 @@
       </table>
       <div class="modal-btn-area">
         <button class="modal-btn modal-btn-save">저장</button>
-        <button class="modal-btn modal-btn-cancel">취소</button>
+        <button type="button" class="modal-btn modal-btn-cancel">취소</button>
       </div>
     </form>
   </div>

@@ -17,6 +17,7 @@
     <script src="/resources/js/store.js" defer></script>
   </head>
   <body>
+    <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
     <div id="store-wrapper">
       <div id="store-menu">
         <ul id="store-tab">
@@ -80,12 +81,6 @@
           </ul>
         </div>
       </div>
-    </div>
-    <div id="modal-store-register">
-      <jsp:include page="adminStoreRegister.jsp" />
-    </div>
-    <div id="modal-store-modify">
-      <jsp:include page="adminStoreModify.jsp" />
     </div>
   </body>
 </html>

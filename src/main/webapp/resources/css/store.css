@@ -54,11 +54,7 @@
 }
 
 .product-item {
-  width: 300px;
-}
-
-.product-item:nth-child(3n-1) {
-  margin: 0 50px;
+  width: 333px;
 }
 
 .product-img {
@@ -111,6 +107,7 @@
 
 .btn-store-list.btn-store-cart {
   background-color: #e59500;
+  color: #fff;
   line-height: 37.5px;
 }
 

@@ -12,12 +12,12 @@ public class AdminStoreController {
   @Autowired
   AdminStoreService aStoreService;
 
-  @RequestMapping(value = "/admin/store/list.yh")
+  @RequestMapping(value = "/admin/store/manage.yh")
   public String adminStoreList() {
     return "admin/store/adminStoreList";
   }
   
-  @RequestMapping(value = "/admin/store/reorderList.yh")
+  @RequestMapping(value = "/admin/store/reorderView.yh")
   public String adminStoreReorder() {
     return "admin/store/adminStoreReorder";
   }
