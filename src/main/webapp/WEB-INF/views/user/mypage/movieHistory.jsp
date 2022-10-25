@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/movieHistory.css" />
+<link rel="stylesheet" href="/resources/css/myPage.css" />
 <link rel="stylesheet" href="/resources/css/common.css" />
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/footer.css" />
@@ -15,6 +16,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/user/mypage/myPage.jsp"></jsp:include>
 <div class="history-btn-wrap">
     <button id="history-btn-1">예매내역</button>
     <button id="history-btn-2">관람영화</button>

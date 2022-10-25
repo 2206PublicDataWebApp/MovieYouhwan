@@ -28,8 +28,16 @@ public class UserMyController {
 	 * 찜한 영화
 	 * @return
 	 */
-	@RequestMapping(value="/my/moviezzim.yh", method=RequestMethod.GET)
+	@RequestMapping(value="/my/zzim.yh", method=RequestMethod.GET)
 	public String movieZzim() {
 		return"/user/mypage/zzim";
+	}
+	/**
+	 * 포인트 조회
+	 * @return
+	 */
+	@RequestMapping(value="/my/point.yh", method=RequestMethod.GET)
+	public String point() {
+		return"/user/mypage/point";
 	}
 }

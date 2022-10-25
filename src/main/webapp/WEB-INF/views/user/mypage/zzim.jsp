@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/zzim.css" />
+<link rel="stylesheet" href="/resources/css/myPage.css" />
 <link rel="stylesheet" href="/resources/css/common.css" />
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/footer.css" />
@@ -13,6 +14,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/user/mypage/myPage.jsp"></jsp:include>
 <div id="inner-wrap">
     <div id="conut-wrap">
         <span id="movie-History">내가 찜한 영화 <span id="movie-count">3</span>건</span>

@@ -52,8 +52,9 @@
 }
 #movie-count{
     color: #E59500;
-    text-decoration: underline;
+    s
     font-size: 30pt;
+    font-weight: bold;
 }
 .movie-detail-info{
     width: 935px;

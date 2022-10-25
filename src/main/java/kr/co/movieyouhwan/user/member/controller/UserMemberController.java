@@ -28,8 +28,9 @@ public class UserMemberController {
 	 */
 	@RequestMapping(value="/member/login.yh", method=RequestMethod.GET)
 	public String memberLogin() {
-		return "user/member/memberLogin";
+		return "/user/member/memberLogin";
 	}
 	
-	
+
 }
+
