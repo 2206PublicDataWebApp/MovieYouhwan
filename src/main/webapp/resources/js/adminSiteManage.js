@@ -1,3 +1,14 @@
+// 페이지가 로드될 때 탭 메뉴 선택
+init();
+function init() {
+  let idx = $('#tabIndex').val();
+  console.log(idx);
+  $('.page').eq(idx).removeClass('no-show');
+  $('.page').eq(idx).siblings('.page').addClass('no-show');
+  $('.homepage-tab-item>a').eq(idx).addClass('homepage-tab-border');
+  $('.homepage-tab-item>a').eq(idx).parent().siblings().children().removeClass('homepage-tab-border');
+}
+
 // faq 답변 아코디언
 $('.answer-title').click(function () {
   let answer = $(this).parent().parent().next('.faq-board-answer');
@@ -23,8 +34,9 @@ $('#faq-check-all').change(function () {
   }
 });
 
+// 탭 메뉴 클릭 시 이벤트
 $('.homepage-tab-item>a').click(function () {
-  // 1. 탭메뉴 아래 border-bottom
+  // 1. 탭메뉴 아래 선 border-bottom
   $(this).toggleClass('homepage-tab-border');
   $(this).parent().siblings().children().removeClass('homepage-tab-border');
   let idx = $(this).index('.homepage-tab-item>a');

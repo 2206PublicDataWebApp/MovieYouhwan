@@ -10,10 +10,10 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="kr.co.movieyouhwan.admin.homepage.banner.domain.Banner" alias="Banner"/>
-		<typeAlias type="kr.co.movieyouhwan.admin.homepage.faq.domain.Faq" alias="Faq"/>
-		<typeAlias type="kr.co.movieyouhwan.admin.homepage.notice.domain.Notice" alias="Notice"/>
-		<typeAlias type="kr.co.movieyouhwan.admin.homepage.qna.domain.QnaReply" alias="QnaReply"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.site.domain.Banner" alias="Banner"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.site.domain.Faq" alias="Faq"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.site.domain.Notice" alias="Notice"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.site.domain.QnaReply" alias="QnaReply"/>
 		<typeAlias type="kr.co.movieyouhwan.admin.movie.domain.Movie" alias="Movie"/>
 		<typeAlias type="kr.co.movieyouhwan.admin.movie.domain.MovieImg" alias="MovieImg"/>
 		<typeAlias type="kr.co.movieyouhwan.admin.movie.domain.MovieVideo" alias="MovieVideo"/>
@@ -42,6 +42,7 @@
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreBuy" alias="StoreBuy"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreCancel" alias="StoreCancel"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StorePay" alias="StorePay"/>
+		<typeAlias type="kr.co.movieyouhwan.user.myPage.domain.My" alias="My"/>
 	</typeAliases>
 	
 	<mappers>
