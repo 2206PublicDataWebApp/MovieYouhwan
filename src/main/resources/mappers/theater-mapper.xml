@@ -19,6 +19,9 @@
 	<insert id="insertTheater">
 		INSERT INTO THEATER_TBL VALUES(SEQ_THEATER_NO.NEXTVAL, #{tCinemaNo}, #{theaterName}, #{theaterSeatoneRow}, #{theaterSeatoneColumn}, #{theaterSeattwoRow}, #{theaterSeattwoColumn}, #{theaterSeatthreeRow}, #{theaterSeatthreeColumn}, DEFAULT)
 	</insert>
+	<update id="updateTheater">
+		UPDATE THEATER_TBL SET T_CINEMA_NO = #{tCinemaNo}, THEATER_NAME = #{theaterName}, THEATER_SEATONE_ROW = #{theaterSeatoneRow}, THEATER_SEATONE_COLUMN = #{theaterSeatoneColumn}, THEATER_SEATTWO_ROW = #{theaterSeattwoRow}, THEATER_SEATTWO_COLUMN = #{theaterSeattwoColumn}, THEATER_SEATTHREE_ROW = #{theaterSeatthreeRow}, THEATER_SEATTHREE_COLUMN = #{theaterSeatthreeColumn} WHERE THEATER_NO = #{theaterNo}
+	</update>
 	<!-- 상영관 삭제(관리자) -->
 	<delete id="deleteOneTheater">
 		DELETE FROM THEATER_TBL WHERE THEATER_NO = #{theaterNo}

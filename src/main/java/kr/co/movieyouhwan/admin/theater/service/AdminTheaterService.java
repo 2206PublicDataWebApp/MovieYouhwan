@@ -11,7 +11,8 @@ public interface AdminTheaterService {
 	public List<Theater> printAllTheater();
 	// 상영관 상세
 	public Theater printOneTheater(Integer theaterNo);
-	// 영화관 삭제
+	// 상영관 수정
+	public int modifyTheater(Theater theater);
+	// 상영관 삭제
 	public int removeOneTheater(int theaterNo);
-
 }

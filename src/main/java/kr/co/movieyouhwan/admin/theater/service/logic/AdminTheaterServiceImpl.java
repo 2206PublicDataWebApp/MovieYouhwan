@@ -38,11 +38,17 @@ public class AdminTheaterServiceImpl implements AdminTheaterService{
 		return theater;
 	}
 	
-	// 영화관 삭제
+	// 상영관 수정
+	@Override
+	public int modifyTheater(Theater theater) {
+		int result = aTheaterStore.updateTheater(session, theater);
+		return result;
+	}
+	
+	// 상영관 삭제
 	@Override
 	public int removeOneTheater(int theaterNo) {
 		int result = aTheaterStore.deleteOneTheater(session, theaterNo);
 		return result;
 	}
-
 }

@@ -10,6 +10,12 @@ body {
 	margin : 0 auto;
 }
 
+.widemovie-wrapper {
+	width : 1400px;
+	margin : 0 auto;
+	margin-top : 30px;
+}
+
 /* adminMovieRegister(관리자) */
 #movieinsert-wrapper {
 	width : 1000px;
@@ -32,7 +38,7 @@ body {
 			border : solid 1px #0F1A3B;
 		}
 	#type-wrap {
-		width : 485px;
+		width : 552px;
 		margin-bottom : 25px;
 	}
 		.type-input {
@@ -297,4 +303,88 @@ body {
 		background-color : #0F1A3B;
 		color : #fff;
 		margin-bottom : 100px;
+	}
+/* adminMovieList(관리자) */
+#movielist-top {
+	margin-bottom : 60px;
+	display : flex;
+}
+#movietop-text {
+	margin-top : 4px;
+	margin-right : 360px;
+}
+#movie-searchwrap {
+	display : flex;
+}
+#movie-search {
+	width : 400px;
+	height : 30px;
+	border : solid 1px #0F1A3B;
+	margin-right : 10px;
+}
+#search-button {
+	width : 80px;
+	height : 30px;
+	margin-right : 375px;
+	color : white;
+	background-color : #0F1A3B;
+	border : solid 1px #0F1A3B;
+}
+#movie-button {
+	width : 100px;
+	height : 30px;
+	color : white;
+	background-color : #0F1A3B;
+	border : solid 1px #0F1A3B;
+}
+.movielist-title {
+	display : flex;
+}
+	.list-num {
+		width : 5%;
+		margin-top : 20px;
+		margin-bottom : 20px;
+		text-align : center;
+	}
+	.list-title {
+		width : 18%;
+		margin-top : 20px;
+		margin-bottom : 20px;
+	}
+	.list-genre {
+		width : 12%;
+		margin-top : 20px;
+		margin-bottom : 20px;
+	}
+	.list-director {
+		width : 8%;
+		margin-top : 20px;
+		margin-bottom : 20px;
+	}
+	.list-actor {
+		width : 26%;
+		margin-top : 20px;
+		margin-bottom : 20px;
+	}
+	.list-runtime {
+		width : 5%;
+		margin-top : 20px;
+		margin-bottom : 20px;
+	}
+	.list-age {
+		width : 16%;
+		margin-top : 20px;
+		margin-bottom : 20px;
+		text-align : center;
+	}
+	.listimg-age {
+		width : 16%;
+		margin-top : 15px;
+		margin-bottom : 15px;
+		text-align : center;
+	}
+	.list-status {
+		width : 10%;
+		margin-top : 20px;
+		margin-bottom : 20px;
 	}

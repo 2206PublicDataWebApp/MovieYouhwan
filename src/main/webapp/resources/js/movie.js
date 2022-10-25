@@ -15,7 +15,7 @@ let num = 1;
 function addimgfile() {
 	var choice = 2;
 	var fileTag = $("#imgfile-wrap");
-	$(fileTag).append("<div class='imgadd-wrap'><input id='imgload-addname"+num+"' value='첨부파일' placeholder='첨부파일'><label for='img-addfile"+num+"'>파일찾기</label><input type='file' id='img-addfile"+num+"' class='upload-file'><input type='button' id='img-remove' value='삭제' onclick='removeimgfile();'></div><br>")
+	$(fileTag).append("<div class='imgadd-wrap'><input id='imgload-addname"+num+"' value='첨부파일' placeholder='첨부파일'><label for='img-addfile"+num+"'>파일찾기</label><input type='file' id='img-addfile"+num+"' class='upload-file' name='uploadImgFile'><input type='button' id='img-remove' value='삭제' onclick='removeimgfile();'></div><br>")
 	choice = choice + 1;
 	bindingChange(num++);
 }
@@ -36,7 +36,7 @@ let count = 1;
 function addvideofile() {
 	var number = 2;
 	var divTag = $("#videofile-wrap");
-	$(divTag).append("<div class='videoadd-wrap'><input id='videoload-addname"+ count +"' value='첨부파일' placeholder='첨부파일'><label for='video-addfile"+count+"'>파일찾기</label><input type='file' id='video-addfile"+count+"' class='upload-file'><input type='button' id='video-remove' value='삭제' onclick='removevideofile();'></div><br>");
+	$(divTag).append("<div class='videoadd-wrap'><input id='videoload-addname"+ count +"' value='첨부파일' placeholder='첨부파일'><label for='video-addfile"+count+"'>파일찾기</label><input type='file' id='video-addfile"+count+"' class='upload-file' name='uploadVideoFile'><input type='button' id='video-remove' value='삭제' onclick='removevideofile();'></div><br>");
 	number = number + 1;
 	bindChange(count++);
 }
