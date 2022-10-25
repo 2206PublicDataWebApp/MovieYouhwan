@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/resources/css/common.css" />
 <link rel="stylesheet" href="/resources/css/myPage.css" />
-
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 <script src="/resources/js/jquery-3.6.1.min.js"></script>
 <script src="/resources/js/header.js.js" defer></script>
@@ -50,15 +50,15 @@
         </div>
         <div id="bottom-line"></div>
         <div class="point-mate">
-            <div class="point-wrap">
-                <div id="point">POINT</div>
+            <div class="my-point-wrap">
+                <div id="my-point">POINT</div>
                 <a href="#">
                     <div id="mypoint">580P</div>
                 </a>
             </div>
                 <div id="bottom-line2"></div>
             <dib class="mate-wrap">
-                <div id="mate">MATE</div>
+                <div id="my-mate">MATE</div>
                 <a href="#">
                     <div id="mymate">3명</div>
                 </a>
@@ -73,5 +73,3 @@
         <button class="myMenu-end">문의내역</button>
     </div>
 </div>
-</body>
-</html>
