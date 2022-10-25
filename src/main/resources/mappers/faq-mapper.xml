@@ -3,4 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="FaqMapper">
+	<resultMap type="Faq" id="faqResultMap">
+		<id property="faqNo" column="FAQ_NO"></id>
+		<result property="adminId" column="ADMIN_ID"/>
+		<result property="faqTitle" column="FAQ_TITLE"/>
+		<result property="faqType" column="FAQ_TYPE"/>
+		<result property="faqContent" column="FAQ_CONTENT"/>
+		<result property="faqCreate" column="FAQ_CREATE"/>
+	</resultMap>
+	
+	<insert id="insertFaq">
+	 INSERT INTO FAQ_TBL VALUES(#{faqNo}, #{adminId}, #{faqTitle}, #{faqType}, #{faqContent} , DEFAULT)
+	</insert>
+	
+	
+	
+	<select id="selectFaqList" resultMap="faqResultMap">
+		SELECT * FROM FAQ_TBL ORDER BY FAQ_NO DESC	
+	</select>
 </mapper>
