@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="/resources/css/common.css" />
     <link rel="stylesheet" href="/resources/css/header.css" />
     <link rel="stylesheet" href="/resources/css/store.css" />
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="/resources/css/jquery-ui.min.css" />
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" defer></script>
+    <script src="/resources/js/jquery-ui.min.js" defer></script>
     <script src="/resources/js/header.js" defer></script>
-    <script src="/resources/js/store.js" defer></script>
+    <script src="/resources/js/adminStore.js" defer></script>
   </head>
   <body>
     <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>

@@ -3,7 +3,7 @@
   src: url('../font/MICEGothic\ Bold.ttf');
 }
 
-/* 공통 */
+/** 공통 */
 #store-wrapper {
   margin: 0 auto;
   width: 1000px;
@@ -48,13 +48,17 @@
 
 .product-list {
   display: flex;
-  justify-content: flex-start;
   align-items: flex-end;
   flex-wrap: wrap;
 }
 
 .product-item {
   width: 333px;
+}
+
+.product-item > a {
+  display: block;
+  text-align: center;
 }
 
 .product-img {
@@ -85,7 +89,9 @@
   border: none;
 }
 
-/* 사용자 */
+/** 사용자 */
+
+/* 상품 목록 */
 #store-links {
   display: flex;
   justify-content: space-between;
@@ -109,6 +115,125 @@
   background-color: #e59500;
   color: #fff;
   line-height: 37.5px;
+}
+
+/* 장바구니 > 결제하기 > 결제완료 */
+#store-step-box {
+  display: flex;
+  border: 1px solid #e2e2e2;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 30px;
+  color: gray;
+}
+
+#store-step-box i {
+  color: darkgray;
+}
+
+#store-step-box > i {
+  margin: 0 50px;
+}
+
+.store-each-step {
+  display: flex;
+  align-items: center;
+}
+
+.store-each-step > i {
+  margin-right: 10px;
+}
+
+/* 장바구니 */
+#store-step-complete i {
+  color: #0f1a3b;
+}
+#store-step-cart p {
+  color: #0f1a3b;
+  font-family: mice-bold;
+}
+
+/* 결제 */
+#store-step-pay i {
+  color: #0f1a3b;
+}
+#store-step-pay p {
+  color: #0f1a3b;
+  font-family: mice-bold;
+}
+
+/** 결제 완료 */
+#store-step-complete i {
+  color: #0f1a3b;
+}
+
+#store-step-complete p {
+  color: #0f1a3b;
+  font-family: mice-bold;
+}
+
+#store-complete-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+  padding: 30px 0;
+  border-top: 1px solid #000;
+}
+
+#msg-store-complete {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+#tbl-store-complete {
+  width: 50%;
+  margin: 20px 0;
+  border-collapse: collapse;
+}
+
+#tbl-store-complete tr {
+  height: 50px;
+}
+
+#tbl-store-complete tr:nth-child(2) {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+#tbl-store-complete th {
+  text-align: left;
+}
+
+#tbl-store-complete td {
+  text-align: right;
+}
+
+#store-complete-main > p {
+  width: 100%;
+  padding-top: 10px;
+  margin-bottom: 50px;
+  border-top: 1px solid gray;
+}
+
+.btn-store-complete {
+  width: 150px;
+  height: 40px;
+  /* font-family: mice-bold; */
+}
+
+.btn-store-complete#btn-store-history {
+  background-color: #fff;
+  border: 1px solid #0f1a3b;
+}
+
+.btn-store-complete#btn-store-list {
+  background-color: #0f1a3b;
+  border: 1px solid #0f1a3b;
+  color: #fff;
 }
 
 /** 관리자 */

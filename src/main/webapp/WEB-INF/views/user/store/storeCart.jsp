@@ -12,6 +12,35 @@
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="/resources/js/header.js" defer></script>
+    <script src="/resources/js/userStore.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <div id="store-wrapper">
+      <div id="store-step-box">
+        <div id="store-step-cart" class="store-each-step">
+          <i class="fa-solid fa-cart-shopping fa-3x"></i>
+          <div>
+            <p>STEP 01</p>
+            <p>장바구니</p>
+          </div>
+        </div>
+        <i class="fa-solid fa-chevron-right fa-3x"></i>
+        <div class="store-each-step">
+          <i class="fa-regular fa-credit-card fa-3x"></i>
+          <div>
+            <p>STEP 02</p>
+            <p>결제하기</p>
+          </div>
+        </div>
+        <i class="fa-solid fa-chevron-right fa-3x"></i>
+        <div class="store-each-step">
+          <i class="fa-regular fa-circle-check fa-3x"></i>
+          <div>
+            <p>STEP 03</p>
+            <p>결제완료</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
