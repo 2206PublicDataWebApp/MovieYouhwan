@@ -13,8 +13,7 @@
 </head>
 <body>
 	<div class="cinema-wrapper">
-		<br><br><br>
-		<h3>영화관 등록</h3><br><br>
+		<br><br><h3>영화관 등록</h3><br><br>
 		<form action="/admin/adminCinemaInsert.yh" method="post" enctype="multipart/form-data">
 			<div id="title-wrap">
 				<span class="title">지점명</span>

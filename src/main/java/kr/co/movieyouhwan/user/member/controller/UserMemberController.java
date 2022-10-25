@@ -30,7 +30,5 @@ public class UserMemberController {
 	public String memberLogin() {
 		return "/user/member/memberLogin";
 	}
-	
-
 }
 

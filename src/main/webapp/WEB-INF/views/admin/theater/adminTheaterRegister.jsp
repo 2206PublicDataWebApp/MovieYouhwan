@@ -14,7 +14,7 @@
 		<br><br><h3>상영관 등록</h3><br><br>
 		<form action="/admin/adminTheaterInsert.yh" method="post" enctype="multipart/form-data">
 			<div id="cinema-wrap">
-				<span class="title">영화관</span>
+				<span class="title">지점명</span>
 				<c:if test="${!empty cList}">
 					<select id="cinema-input" class="input" name="tCinemaNo">
 						<c:forEach items="${cList}" var="cinema" varStatus="i">

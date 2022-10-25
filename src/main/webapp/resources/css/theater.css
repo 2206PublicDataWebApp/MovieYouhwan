@@ -73,8 +73,11 @@
 }
 /* adminTheaterDetail(관리자) */
 #detail-cinemawrap {
-	width : 200px;
+	display : flex;
 	margin-bottom : 30px;
+}
+#cinema-title {
+	margin-right : 132px;
 }
 #detail-namewrap {
 	width : 200px;
@@ -125,3 +128,23 @@
 	background-color : white;
 	border : solid 1px #0F1A3B;
 }
+/* adminTheaterModify.jsp */
+#modify-buttonarea {
+	margin-top : 80px;
+	float : right;
+}
+	#modify-list {
+		width : 80px;
+		height : 30px;
+		margin-right : 20px;
+		color : #0F1A3B;
+		background-color : white;
+		border : solid 1px #0F1A3B;
+	}
+	#modify-done {
+		width : 80px;
+		height : 30px;
+		color : white;
+		background-color : #0F1A3B;
+		border : solid 1px #0F1A3B;
+	}

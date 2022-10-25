@@ -30,6 +30,13 @@ public class AdminTheaterStoreLogic implements AdminTheaterStore {
 		Theater theater = session.selectOne("TheaterMapper.selectOneTheater", theaterNo);
 		return theater;
 	}
+	
+	// 상영관 수정
+	@Override
+	public int updateTheater(SqlSessionTemplate session, Theater theater) {
+		int result = session.update("TheaterMapper.updateTheater", theater);
+		return result;
+	}
 
 	// 상영관 삭제
 	@Override

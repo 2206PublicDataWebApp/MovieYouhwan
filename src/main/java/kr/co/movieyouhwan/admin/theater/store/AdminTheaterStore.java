@@ -13,6 +13,8 @@ public interface AdminTheaterStore {
 	public List<Theater> selectAllTheater(SqlSessionTemplate session);
 	// 상영관 상세
 	public Theater selectOneTheater(SqlSessionTemplate session, Integer theaterNo);
+	// 상영관 수정
+	public int updateTheater(SqlSessionTemplate session, Theater theater);
 	// 상영관 삭제
 	public int deleteOneTheater(SqlSessionTemplate session, int theaterNo);
 }

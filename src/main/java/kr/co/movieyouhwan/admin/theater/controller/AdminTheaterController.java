@@ -40,14 +40,14 @@ public class AdminTheaterController {
 	}
 	
 	/**
-	 * 상영관 등록
+	 * 상영관 등록 기능
 	 * @param mv
 	 * @param theater
 	 * @param cinemaNo
 	 * @return
 	 */
 	@RequestMapping(value="/admin/adminTheaterInsert.yh", method=RequestMethod.POST)
-	public ModelAndView TheaterRegister(
+	public ModelAndView TheaterInsert(
 			ModelAndView mv,
 			@ModelAttribute Theater theater) {
 		int result = aTheaterService.registerTheater(theater);
@@ -56,7 +56,7 @@ public class AdminTheaterController {
 	}
 	
 	/**
-	 * 상영관 상세
+	 * 상영관 상세 화면
 	 * @param mv
 	 * @param theaterNo
 	 * @param session
@@ -66,11 +66,50 @@ public class AdminTheaterController {
 	public ModelAndView adminTheaterDetailView(
 			ModelAndView mv,
 			@RequestParam("theaterNo") Integer theaterNo,
+			@RequestParam("cinemaName") String cinemaName,
 			HttpSession session) {
 		Theater theater = aTheaterService.printOneTheater(theaterNo);
 		session.setAttribute("theaterNo", theater.getTheaterNo());
 		mv.addObject("theater", theater);
+		mv.addObject("cinemaName", cinemaName);
 		mv.setViewName("/admin/theater/adminTheaterDetail");
+		return mv;
+	}
+	
+	/**
+	 * 상영관 수정 화면
+	 * @param mv
+	 * @param theaterNo
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminModifyView.yh", method=RequestMethod.GET)
+	public ModelAndView adminTheaterModifyView(
+			ModelAndView mv,
+			@ModelAttribute Cinema cinema,
+			@RequestParam("theaterNo") Integer theaterNo) {
+		List<Cinema> cList = aCinemaService.printAllCinema();
+		Theater theater = aTheaterService.printOneTheater(theaterNo);
+		mv.addObject("cList", cList);
+		mv.addObject("theater", theater);
+		mv.setViewName("/admin/theater/adminTheaterModify");
+		return mv;
+	}
+	
+	/**
+	 * 상영관 수정 기능
+	 * @param mv
+	 * @param theater
+	 * @param theaterNo
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminTheaterUpdate.yh", method=RequestMethod.POST)
+	public ModelAndView adminTheaterUpdate(
+			ModelAndView mv,
+			@ModelAttribute Theater theater,
+			@RequestParam("theaterNo") Integer theaterNo,
+			@RequestParam("cinemaName") String cinemaName) {
+		int result = aTheaterService.modifyTheater(theater);
+		mv.setViewName("redirect:/admin/adminTheaterDetail.yh?theaterNo="+theaterNo+"&cinemaName="+cinemaName);
 		return mv;
 	}
 	

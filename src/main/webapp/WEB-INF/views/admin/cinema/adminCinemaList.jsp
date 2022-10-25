@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>무비유환 : 영화관 리스트(관리자)</title>
-<link href="../../../resources/css/common.css" rel="stylesheet">
-<link href="../resources/css/cinema.css" rel="stylesheet">
+<link href="/resources/css/common.css" rel="stylesheet">
+<link href="/resources/css/cinema.css" rel="stylesheet">
 </head>
 <body>
 	<div class="widecinema-wrapper">
@@ -34,7 +34,7 @@
 					<c:if test="${!empty tList }">
 						<c:forEach items="${tList }" var="theater" varStatus="i">
 							<c:if test="${cinema.cinemaNo eq theater.tCinemaNo}">
-								<button class="ctheater-button" onclick="location.href='/admin/adminTheaterDetail.yh?theaterNo=${theater.theaterNo}'">${theater.theaterName }</button>
+								<button class="ctheater-button" onclick="location.href='/admin/adminTheaterDetail.yh?theaterNo=${theater.theaterNo}&cinemaName=${cinema.cinemaName }'">${theater.theaterName }</button>
 							</c:if>
 						</c:forEach>
 					</c:if>
