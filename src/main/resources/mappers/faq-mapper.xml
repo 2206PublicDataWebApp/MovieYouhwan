@@ -15,9 +15,14 @@
 	<insert id="insertFaq">
 	 INSERT INTO FAQ_TBL VALUES(#{faqNo}, #{adminId}, #{faqTitle}, #{faqType}, #{faqContent} , DEFAULT)
 	</insert>
+	<update id="updateFaq">
+		UPDATE FAQ_TBL SET FAQ_TITLE=#{faqTitle}, FAQ_TYPE=#{faqType}, FAQ_CONTENT=#{faqContent} WHERE FAQ_NO=#{faqNo}
+	</update>
 	
 	
-	
+	<select id="selectFaq" resultMap="faqResultMap">
+		SELECT * FROM FAQ_TBL WHERE FAQ_NO=#{faqNo}
+	</select>
 	<select id="selectFaqList" resultMap="faqResultMap">
 		SELECT * FROM FAQ_TBL ORDER BY FAQ_NO DESC	
 	</select>

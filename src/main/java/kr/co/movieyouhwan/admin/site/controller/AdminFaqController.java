@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.movieyouhwan.admin.site.domain.Faq;
@@ -21,7 +22,7 @@ public class AdminFaqController {
  * @param mv
  * @return
  */
-	@RequestMapping(value="/admin/FaqWriteForm.yh")
+	@RequestMapping(value="/admin/faqWriteForm.yh")
 	public String adminFaqWriteForm() {
 		return "admin/site/adminFaqWrite";
 		
@@ -38,6 +39,33 @@ public class AdminFaqController {
 		int result=aFaqService.registerFaq(faq);
 		mv.addObject("tabIndex", 1);
 		mv.setViewName("redirect:/admin/site/manage.yh");
+		return mv;
+	}
+	
+	/**
+	 * FAQ 수정 화면에 들어갈 데이터 준비 & 수정화면으로 이동 
+	 * @return
+	 */
+	@RequestMapping(value="/admin/faqModifyForm.yh", method=RequestMethod.POST)
+	public ModelAndView adminFaqModifyForm(
+			ModelAndView mv,
+			@RequestParam("faqNo") int faqNo) {
+		Faq fOne=aFaqService.printOneFaq(faqNo);
+		System.out.println(fOne.toString());
+		if(fOne!=null) {
+			mv.addObject("faq", fOne);
+			mv.setViewName("admin/site/adminFaqModify");
+		}
+		return mv;
+	}
+
+	@RequestMapping(value="/admin/faqModify.yh", method=RequestMethod.POST)
+	public ModelAndView adminFaqModify(ModelAndView mv, @ModelAttribute Faq faq) {
+		int result=aFaqService.modifyFaq(faq);
+		if(result>0) {
+			mv.addObject("tabIndex", 1);
+			mv.setViewName("redirect:/admin/site/manage.yh");
+		}
 		return mv;
 	}
 	

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,16 +37,9 @@ public class AdminSiteController {
 		// 선택될 Tab 메뉴 index 정보 
 		Integer idx=tabIndex==null?0:tabIndex;
 		mv.addObject("tabIndex", idx);
-		
-		
-		
 		// faq List 불러오기
 		List<Faq> fList=aFaqService.printFaqList();
 		mv.addObject("fList", fList);
-		
-		
-		
-		
 		mv.setViewName("admin/site/adminSiteManage");
 		return mv;
 	}
