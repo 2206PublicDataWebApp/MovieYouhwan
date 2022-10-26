@@ -18,7 +18,7 @@
 	float : right;
 }
 #cinema-wrap {
-	width : 320px;
+	width : 255px;
 	margin-bottom : 25px;
 }
 	#cinema-input {
@@ -111,7 +111,7 @@
 	margin-bottom : 50px;
 }
 .detail-button {
-	width : 80px;
+	width : 100px;
 	height : 30px;
 	float : right;
 	margin-left : 20px;
@@ -120,7 +120,7 @@
 	border : solid 1px #0F1A3B;
 }
 .tdetail-button {
-	width : 80px;
+	width : 100px;
 	height : 30px;
 	float : right;
 	margin-left : 20px;
@@ -134,7 +134,7 @@
 	float : right;
 }
 	#modify-list {
-		width : 80px;
+		width : 100px;
 		height : 30px;
 		margin-right : 20px;
 		color : #0F1A3B;
@@ -142,7 +142,7 @@
 		border : solid 1px #0F1A3B;
 	}
 	#modify-done {
-		width : 80px;
+		width : 100px;
 		height : 30px;
 		color : white;
 		background-color : #0F1A3B;

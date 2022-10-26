@@ -85,11 +85,11 @@ public class AdminTheaterController {
 	@RequestMapping(value="/admin/adminModifyView.yh", method=RequestMethod.GET)
 	public ModelAndView adminTheaterModifyView(
 			ModelAndView mv,
+			@RequestParam("cinemaName") String cinemaName,
 			@ModelAttribute Cinema cinema,
 			@RequestParam("theaterNo") Integer theaterNo) {
-		List<Cinema> cList = aCinemaService.printAllCinema();
 		Theater theater = aTheaterService.printOneTheater(theaterNo);
-		mv.addObject("cList", cList);
+		mv.addObject("cinemaName", cinemaName);
 		mv.addObject("theater", theater);
 		mv.setViewName("/admin/theater/adminTheaterModify");
 		return mv;
@@ -106,10 +106,10 @@ public class AdminTheaterController {
 	public ModelAndView adminTheaterUpdate(
 			ModelAndView mv,
 			@ModelAttribute Theater theater,
-			@RequestParam("theaterNo") Integer theaterNo,
-			@RequestParam("cinemaName") String cinemaName) {
+			@RequestParam("cinemaName") String cinemaName,
+			@RequestParam("theaterNo") Integer theaterNo) {
 		int result = aTheaterService.modifyTheater(theater);
-		mv.setViewName("redirect:/admin/adminTheaterDetail.yh?theaterNo="+theaterNo+"&cinemaName="+cinemaName);
+		mv.setViewName("redirect:/admin/adminCinemaList.yh");
 		return mv;
 	}
 	

@@ -7,9 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,7 +67,7 @@ public class AdminMovieController {
 			if(!movieImgName.equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources\\images");
 				String savePath = root + "\\movieLodeImg";
-				SimpleDateFormat simpledf = new SimpleDateFormat("yyyyMMddHHmmss");
+				SimpleDateFormat simpledf = new SimpleDateFormat("yyyyMMddHHmmSS");
 				String movieImgRename = simpledf.format(new Date(System.currentTimeMillis())) + "." + movieImgName.substring(movieImgName.lastIndexOf(".")+1);
 				File file = new File(savePath);
 				if(!file.exists()) {
@@ -86,7 +88,7 @@ public class AdminMovieController {
 			if(!movieVideoName.equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources\\\\images");
 				String savePath = root + "\\movieLodeVideo";
-				SimpleDateFormat simpledf = new SimpleDateFormat("yyyyMMddHHmmss");
+				SimpleDateFormat simpledf = new SimpleDateFormat("yyyyMMddHHmmSS");
 				String movieVideoRename = simpledf.format(new Date(System.currentTimeMillis())) + "." + movieVideoName.substring(movieVideoName.lastIndexOf(".")+1);
 				File file = new File(savePath);
 				if(!file.exists()) {
@@ -141,5 +143,71 @@ public class AdminMovieController {
 		mv.addObject("searchName", searchName);
 		mv.setViewName("/admin/movie/adminMovieList");
 		return mv;
+	}
+	
+	/**
+	 * 영화 상세 화면
+	 * @param mv
+	 * @param movieNo
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminMovieDetail.yh", method=RequestMethod.GET)
+	public ModelAndView adminMovieDetailView(
+			ModelAndView mv,
+			@RequestParam("movieNo") Integer movieNo,
+			HttpSession session) {
+		Movie movie = aMovieService.printOneMovie(movieNo);
+		List<MovieImg> miList = aMovieService.printAllMovieImg(movieNo);
+		List<MovieVideo> mvList = aMovieService.printAllMovieVideo(movieNo);
+		System.out.println(miList);
+		session.setAttribute("movieNo", movie.getMovieNo());
+		mv.addObject("movie", movie);
+		mv.addObject("miList", miList);
+		mv.addObject("mvList", mvList);
+		mv.setViewName("/admin/movie/adminMovieDetail");
+		return mv;
+	}
+
+	/**
+	 * 영화 수정 화면
+	 * @param mv
+	 * @param movieNo
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminMovieModify.yh", method=RequestMethod.GET)
+	public ModelAndView movieModifyView(
+			ModelAndView mv,
+			@RequestParam("movieNo") Integer movieNo,
+			HttpSession session) {
+		Movie movie = aMovieService.printOneMovie(movieNo);
+		List<MovieImg> movieImg = aMovieService.printAllMovieImg(movieNo);
+		List<MovieVideo> movieVideo = aMovieService.printAllMovieVideo(movieNo); 
+		mv.addObject("movie", movie);
+		mv.addObject("movieImg", movieImg);
+		mv.addObject("movieVideo", movieVideo);
+		mv.setViewName("/admin/movie/adminMovieModify");
+		return mv;
+	}
+
+	/**
+	 * 영화 삭제 기능
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminMovieRemove.yh", method=RequestMethod.GET)
+	public String movieDataRemove(
+			Model model,
+			HttpSession session) {
+		int movieNo = (Integer)session.getAttribute("movieNo");
+		int result1 = aMovieService.removeOneMovie(movieNo);
+		int result2 = aMovieService.removeOneMovieImg(movieNo);
+		int result3 = aMovieService.removeOneMovieVideo(movieNo);
+		if(result1 > 0 && result2 > 0 && result3 > 0) {
+			session.removeAttribute("movieNo");
+		}
+		return "redirect:/admin/adminMovieList.yh";
 	}
 }

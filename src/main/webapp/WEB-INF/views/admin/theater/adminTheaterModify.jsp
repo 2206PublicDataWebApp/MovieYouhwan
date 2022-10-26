@@ -6,28 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>무비유환 : 상영관 수정(관리자)</title>
-<link href="../../../resources/css/common.css" rel="stylesheet">
-<link href="../resources/css/theater.css" rel="stylesheet">
+<link href="/resources/css/common.css" rel="stylesheet">
+<link href="/resources/css/header.css" rel="stylesheet"/>
+<link href="/resources/css/theater.css" rel="stylesheet">
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
 	<div class="theater-wrapper">
 		<br><br><h3>상영관 수정</h3><br><br>
 		<form action="/admin/adminTheaterUpdate.yh" method="post">
 			<input type="hidden" name="theaterNo" value="${theater.theaterNo }" />
+			<input type="hidden" name="cinemaName" value="${cinemaName }">
 			<div id="cinema-wrap">
 				<span class="title">지점명</span>
-				<c:if test="${!empty cList}">
-						<select id="cinema-input" class="input" name="tCinemaNo">
-							<c:forEach items="${cList}" var="cinema" varStatus="i">
-								<input type="hidden" name="cinemaName" value="${cinema.cinemaName }" />
-								<option value="${cinema.cinemaNo }" <c:if test="${theater.tCinemaNo eq cinema.cinemaNo}">selected</c:if>>${cinema.cinemaName }</option>
-							</c:forEach>
-						</select>
-					</c:if>
+				<span class="input">${cinemaName }</span>
 			</div>
 			<div id="name-wrap">
 				<span class="title">상영관 이름</span>
-				<input type="text" id="name-input" class="input" name="theaterName" value=" ${theater.theaterName }" placeholder=" ex) 1관, 2관, 3관" spellcheck="false" autocomplete="off"><br>
+				<input type="text" id="name-input" class="input" name="theaterName" value="${theater.theaterName }" placeholder=" ex) 1관, 2관, 3관" spellcheck="false" autocomplete="off"><br>
 			</div>
 			<div id="seat-wrap">
 				<span class="title">좌석 생성</span>
@@ -142,8 +138,8 @@
 				</select>
 			</div>
 			<div id="modify-buttonarea">
-				<button id="modify-list"onclick="location.href='/admin/adminCinemaList.yh'">목록으로</button>
-				<input type="submit" id="modify-done" value="수정하기">
+				<button id="modify-list" onclick="location.href='/admin/adminCinemaList.yh'">목록</button>
+				<input type="submit" id="modify-done" value="수정">
 			</div>
 		</form>
 	</div>
