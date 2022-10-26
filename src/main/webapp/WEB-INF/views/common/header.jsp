@@ -4,8 +4,8 @@
 	<a href="#" class="navbar-toggleBtn show" id="bars"><i class="fa-solid fa-bars show"></i></a>
 	<a href="#" class="navbar-toggleBtn" id="xmark"><i class="fa-solid fa-xmark"></i></a>
 	<ul id="navbar-links">
-		<li><a href="#">로그인</a></li>
-		<li><a href="#">회원가입</a></li>
+		<li><a href="/member/login.yh">로그인</a></li>
+		<li><a href="/member/joinView.yh">회원가입</a></li>
 	</ul>
 	<ul id="navbar-menuList">
 		<li class="navbar-menuItem"><a href="#">영화</a></li>

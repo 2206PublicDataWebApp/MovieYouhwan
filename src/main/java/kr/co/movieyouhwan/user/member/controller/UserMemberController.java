@@ -2,9 +2,13 @@ package kr.co.movieyouhwan.user.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.member.service.UserMemberService;
 @Controller
 public class UserMemberController {
@@ -18,6 +22,19 @@ public class UserMemberController {
 	@RequestMapping(value="/member/joinView.yh", method=RequestMethod.GET)
 	public String memberJoinView() {
 		return "/user/member/memberJoin";
+	}
+	/**
+	 * 
+	 * @param member
+	 * @param mv
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/member/join.yh",method = RequestMethod.POST)
+	public ModelAndView memberJoin(
+			@ModelAttribute Member member,
+			ModelAndView mv) {
+		return mv;
 	}
 	
 	/**
