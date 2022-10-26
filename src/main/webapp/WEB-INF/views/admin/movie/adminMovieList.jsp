@@ -40,13 +40,13 @@
 		<c:if test="${!empty mList }">
 			<c:forEach items="${mList }" var="movie" varStatus="i">
 				<div class="movielist-title">
-					<div class="list-num">${i.count }</div>
-					<div class="list-title">${movie.movieTitle }</div>
-					<div class="list-genre">${movie.movieGenre }</div>
-					<div class="list-director">${movie.movieDirector }</div>
-					<div class="list-actor">${movie.movieActor }</div>
-					<div class="list-runtime">${movie.movieRuntime }분</div>
-					<div class="listimg-age">
+					<div class="list-num" onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">${i.count }</div>
+					<div class="list-title" onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">${movie.movieTitle }</div>
+					<div class="list-genre" onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">${movie.movieGenre }</div>
+					<div class="list-director" onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">${movie.movieDirector }</div>
+					<div class="list-actor" onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">${movie.movieActor }</div>
+					<div class="list-runtime" onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">${movie.movieRuntime }분</div>
+					<div class="listimg-age"  onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">
 						<c:if test="${movie.movieAge eq '전체' }">
 							<img src="/resources/images/movie/전체.jpg" width="30px" height="30px" />
 						</c:if>
@@ -60,12 +60,12 @@
 							<img src="/resources/images/movie/청불.jpg" width="30px" height="30px" />
 						</c:if>
 					</div>
-					<div class="list-status">
+					<div class="list-status"  onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">
 						<fmt:formatDate var="today" value="${now }" pattern="yyyy-MM-dd"/>
 						<c:if test="${movie.movieStartday > today}">
 							<p>상영예정</p>
 						</c:if>
-						<c:if test="${movie.movieStartday < today && movie.movieEndday > today}">
+						<c:if test="${movie.movieStartday <= today && movie.movieEndday > today}">
 							<p>상영중</p>
 						</c:if>
 						<c:if test="${movie.movieStartday < today && movie.movieEndday < today}">

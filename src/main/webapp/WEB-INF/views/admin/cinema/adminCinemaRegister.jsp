@@ -5,13 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>무비유환 : 영화관 등록(관리자)</title>
-<link href="../../../resources/css/common.css" rel="stylesheet">
-<link href="../resources/css/cinema.css" rel="stylesheet">
+<link href="/resources/css/common.css" rel="stylesheet">
+<link href="/resources/css/header.css" rel="stylesheet"/>
+<link href="/resources/css/cinema.css" rel="stylesheet">
 <script src="/resources/js/jquery-3.6.1.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/resources/js/cinema.js"></script>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
 	<div class="cinema-wrapper">
 		<br><br><h3>영화관 등록</h3><br><br>
 		<form action="/admin/adminCinemaInsert.yh" method="post" enctype="multipart/form-data">
@@ -60,7 +62,10 @@
 				</div>
 			</div>
 			<br><br><br>
-			<input type="submit" value="등록" id="cinemaregister-button">
+			<div class="button-list">
+				<button type="button" class="go-list" onclick="location.href='/admin/adminCinemaList.yh'">목록</button>
+				<input type="submit" value="등록" id="cinemaregister-button">
+			</div>
 		</form>
 	</div>
 	<jsp:include page="../../common/footer.jsp"></jsp:include>

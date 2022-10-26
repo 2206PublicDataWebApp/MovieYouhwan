@@ -53,5 +53,46 @@ public class AdminMovieServiceImpl implements AdminMovieService{
 		List<Movie> mList = aMovieStore.selectSearchMovie(session, searchName);
 		return mList;
 	}
+	
+	// 영화 상세
+	@Override
+	public Movie printOneMovie(Integer movieNo) {
+		Movie movie = aMovieStore.selectOneMovie(session, movieNo);
+		return movie;
+	}
+	
+	// 영화 상세 (사진)
+	@Override
+	public List<MovieImg> printAllMovieImg(Integer movieNo) {
+		List<MovieImg> miList = aMovieStore.selectOneMovieImg(session, movieNo);
+		return miList;
+	}
 
+	// 영화 상세 (영상)
+	@Override
+	public List<MovieVideo> printAllMovieVideo(Integer movieNo) {
+		List<MovieVideo> mvList = aMovieStore.selectOneMovieVideo(session, movieNo);
+		return mvList;
+	}
+
+	// 영화 삭제
+	@Override
+	public int removeOneMovie(int movieNo) {
+		int result = aMovieStore.deleteOneMovie(session, movieNo);
+		return result;
+	}
+	
+	// 영화 삭제 (사진)
+	@Override
+	public int removeOneMovieImg(int movieNo) {
+		int result = aMovieStore.deleteOneMovieImg(session, movieNo);
+		return result;
+	}
+
+	// 영화 삭제 (영상)
+	@Override
+	public int removeOneMovieVideo(int movieNo) {
+		int result = aMovieStore.deleteOneMovieVideo(session, movieNo);
+		return result;
+	}
 }

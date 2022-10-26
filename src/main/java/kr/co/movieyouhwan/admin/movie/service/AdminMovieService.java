@@ -17,4 +17,16 @@ public interface AdminMovieService {
 	public List<Movie> printAllMovie();
 	// 영화 검색
 	public List<Movie> printSearchMovie(String searchName);
+	// 영화 상세
+	public Movie printOneMovie(Integer movieNo);
+	// 영화 상세 (사진)
+	public List<MovieImg> printAllMovieImg(Integer movieNo);
+	// 영화 상세 (영상)
+	public List<MovieVideo> printAllMovieVideo(Integer movieNo);
+	// 영화 삭제
+	public int removeOneMovie(int movieNo);
+	// 영화 삭제 (사진)
+	public int removeOneMovieImg(int movieNo);
+	// 영화 삭제 (영상)
+	public int removeOneMovieVideo(int movieNo);
 }

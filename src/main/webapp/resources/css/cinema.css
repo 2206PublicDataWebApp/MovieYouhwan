@@ -166,13 +166,24 @@
 	overflow : hidden;
 	border : 0;
 }
+.button-list {
+	float : right;
+	margin-bottom : 100px;
+}
+.go-list {
+	width : 100px;
+	height : 30px;
+	margin-right : 10px;
+	color : #0F1A3B;
+	border : solid 1px #0F1A3B;
+	background-color : white;
+}
 #cinemaregister-button {
 	width : 100px;
 	height : 30px;
-	float : right;
 	background-color : #0F1A3B;
-	color : #fff;
-	margin-bottom : 100px;
+	border : solid 1px #0F1A3B;
+	color : white;
 }
 
 /* adminCinemaList(관리자) */
