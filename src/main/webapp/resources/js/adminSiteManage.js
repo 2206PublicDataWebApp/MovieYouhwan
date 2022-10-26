@@ -13,7 +13,7 @@ function init() {
 $('.answer-title').click(function () {
   let answer = $(this).parent().parent().next('.faq-board-answer');
   answer.toggleClass('no-show');
-  answer.siblings('.faq-board-answer').addClass('no-show');
+  answer.parent().siblings().children('.faq-board-answer').addClass('no-show');
 });
 
 // notice 전체 선택
