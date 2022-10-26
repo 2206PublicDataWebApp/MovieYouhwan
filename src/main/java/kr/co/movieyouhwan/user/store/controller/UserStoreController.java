@@ -27,7 +27,7 @@ public class UserStoreController {
   // 스토어 장바구니 View
   @RequestMapping(value="/store/cartView.yh")
   public ModelAndView storeCartView(ModelAndView mv) {
-    mv.setViewName("user/store/cartView");
+    mv.setViewName("user/store/storeCart");
     return mv;
   }
   

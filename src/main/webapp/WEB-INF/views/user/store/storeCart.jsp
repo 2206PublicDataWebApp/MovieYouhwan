@@ -15,6 +15,7 @@
     <script src="/resources/js/userStore.js" defer></script>
   </head>
   <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     <div id="store-wrapper">
       <div id="store-step-box">
         <div id="store-step-cart" class="store-each-step">
@@ -40,6 +41,61 @@
             <p>결제완료</p>
           </div>
         </div>
+      </div>
+      <div id="store-cart-list">
+        <div id="ghead-cart-list">
+          <div><input type="checkbox" /></div>
+          <div>상품</div>
+          <div>옵션</div>
+          <div>판매금액</div>
+          <div>수량</div>
+          <div>구매금액</div>
+        </div>
+        <div id="gbody-cart-list">
+          <div><input type="checkbox" /></div>
+          <div><img src="" alt="상품사진" /></div>
+          <div>핫도그</div>
+          <div>
+            <select name="productOption" id="">
+              <option value="">칠리</option>
+              <option value="">치즈</option>
+            </select>
+          </div>
+          <div>29000</div>
+          <div>
+            <input type="number" name="productCount" min="1" max="10" step="1" value="1" />
+            <button>변경</button>
+          </div>
+          <div>90000</div>
+          <div><input type="checkbox" /></div>
+          <div><img src="" alt="상품사진" /></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <button id="btn-cart-delete">삭제</button>
+      </div>
+      <div id="store-cart-price">
+        <div id="ghead-cart-price">
+          <div>총 상품 금액</div>
+          <div></div>
+          <div>할인 금액</div>
+          <div></div>
+          <div>총 결제 예정 금액</div>
+        </div>
+        <div id="gbody-cart-price">
+          <div>21,900 원</div>
+          <div></div>
+          <div>0 원</div>
+          <div></div>
+          <div>21,900 원</div>
+        </div>
+      </div>
+      <div id="cart-btn-area">
+        <button class="btn-store-cart" id="btn-cart-back">돌아가기</button>
+        <button class="btn-store-cart" id="btn-cart-pay">구매하기</button>
       </div>
     </div>
   </body>
