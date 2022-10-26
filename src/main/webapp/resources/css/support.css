@@ -36,6 +36,7 @@ a {
 /* 검색창 */
 
 .search-input {
+  padding-left: 10px;
   border: 1px solid;
   width: 50%;
   height: 30px;
@@ -220,6 +221,8 @@ input:checked {
 .answer-content {
   width: 80%;
   padding: 20px 40px 20px 30px;
+  line-height: 1.5em;
+  white-space: pre;
 }
 
 #faq-title-header {

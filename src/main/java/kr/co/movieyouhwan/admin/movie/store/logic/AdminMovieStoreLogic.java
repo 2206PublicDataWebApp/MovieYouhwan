@@ -48,4 +48,45 @@ public class AdminMovieStoreLogic implements AdminMovieStore {
 		return mList;
 	}
 
+	// 영화 상세
+	@Override
+	public Movie selectOneMovie(SqlSessionTemplate session, Integer movieNo) {
+		Movie movie = session.selectOne("MovieMapper.selectOntMovie", movieNo);
+		return movie;
+	}
+
+	// 영화 상세 (사진)
+	@Override
+	public List<MovieImg> selectOneMovieImg(SqlSessionTemplate session, Integer movieNo) {
+		List<MovieImg> miList = session.selectList("MovieMapper.selectAllMovieImg", movieNo);
+		return miList;
+	}
+
+	// 영화 상세 (영상)
+	@Override
+	public List<MovieVideo> selectOneMovieVideo(SqlSessionTemplate session, Integer movieNo) {
+		List<MovieVideo> mvList = session.selectList("MovieMapper.selectAllMovieVideo", movieNo);
+		return mvList;
+	}
+
+	// 영화 삭제
+	@Override
+	public int deleteOneMovie(SqlSessionTemplate session, int movieNo) {
+		int result = session.delete("MovieMapper.deleteOneMovie", movieNo);
+		return result;
+	}
+
+	// 영화 삭제 (사진)
+	@Override
+	public int deleteOneMovieImg(SqlSessionTemplate session, int movieNo) {
+		int result = session.delete("MovieMapper.deleteOneMovieImg", movieNo);
+		return result;
+	}
+
+	// 영화 삭제 (영상)
+	@Override
+	public int deleteOneMovieVideo(SqlSessionTemplate session, int movieNo) {
+		int result = session.delete("MovieMapper.deleteOneMovieVideo", movieNo);
+		return result;
+	}
 }

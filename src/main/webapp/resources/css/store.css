@@ -146,12 +146,97 @@
 }
 
 /* 장바구니 */
-#store-step-complete i {
+#store-step-cart i {
   color: #0f1a3b;
 }
 #store-step-cart p {
   color: #0f1a3b;
   font-family: mice-bold;
+}
+
+#store-cart-list,
+#store-cart-price {
+  display: grid;
+  padding-top: 30px;
+  text-align: center;
+}
+
+#store-cart-list > div > div,
+#store-cart-price > div > div {
+  padding: 20px 0;
+}
+
+[id^='ghead-cart'] {
+  display: grid;
+  border-top: 1px solid black;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+[id^='gbody-cart'] {
+  display: grid;
+  border-bottom: 1px solid gray;
+}
+
+#ghead-cart-list {
+  grid-template-columns: 1fr 8fr 3fr 3fr 3fr 2fr;
+}
+
+#gbody-cart-list {
+  grid-template-columns: 1fr 3fr 5fr 3fr 3fr 3fr 2fr;
+  margin-bottom: 10px;
+}
+
+#gbody-cart-list > div:nth-child(7n-4) {
+  text-align: left;
+}
+
+#gbody-cart-list select {
+  width: 80%;
+  padding: 2px;
+}
+
+#gbody-cart-list input[type='number'] {
+  padding: 2px;
+}
+
+#btn-cart-delete {
+  width: 50px;
+  height: 30px;
+  background-color: #fff;
+  color: #0f1a3b;
+  border: 1px solid #0f1a3b;
+}
+
+#ghead-cart-price,
+#gbody-cart-price {
+  grid-template-columns: 4fr 1fr 4fr 1fr 4fr;
+}
+
+#gbody-cart-price div {
+  font-family: mice-bold;
+}
+
+#cart-btn-area {
+  text-align: center;
+  padding: 50px 0;
+}
+
+#cart-btn-area .btn-store-cart {
+  width: 150px;
+  height: 40px;
+}
+
+#cart-btn-area #btn-cart-back {
+  margin-right: 5px;
+  background-color: #fff;
+  border: 1px solid #0f1a3b;
+  color: #0f1a3b;
+}
+
+#cart-btn-area #btn-cart-pay {
+  margin-left: 5px;
+  background-color: #0f1a3b;
+  color: #fff;
 }
 
 /* 결제 */
@@ -228,9 +313,11 @@
 .btn-store-complete#btn-store-history {
   background-color: #fff;
   border: 1px solid #0f1a3b;
+  margin-right: 5px;
 }
 
 .btn-store-complete#btn-store-list {
+  margin-left: 5px;
   background-color: #0f1a3b;
   border: 1px solid #0f1a3b;
   color: #fff;

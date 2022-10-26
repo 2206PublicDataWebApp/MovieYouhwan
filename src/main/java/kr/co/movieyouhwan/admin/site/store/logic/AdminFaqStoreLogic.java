@@ -24,6 +24,19 @@ public class AdminFaqStoreLogic implements AdminFaqStore{
 		List<Faq> fList=session.selectList("FaqMapper.selectFaqList");
 		return fList;
 	}
+
+	@Override
+	public Faq selectFaq(SqlSessionTemplate session, Integer faqNo) {
+		Faq fOne=session.selectOne("FaqMapper.selectFaq", faqNo);
+		return fOne;
+	}
+
+	@Override
+	public int updateFaq(SqlSessionTemplate session, Faq faq) {
+		int result=session.update("FaqMapper.updateFaq", faq);
+		return result;
+	}
+	
 }
 
 

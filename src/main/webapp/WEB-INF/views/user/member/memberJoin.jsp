@@ -22,7 +22,7 @@
             <div id="container">
                 <div class="membership-form">
                     <h1 id="join_header">회 원 가 입</h1>
-                        <form action="#" method="post">
+                        <form action="/member/join.yh" method="post">
                         <div id="join_content">
                             <div class="login-input">
                                 <div class="input-name-wrap">
@@ -151,7 +151,7 @@
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
                                         <div class="input-name">
-                                            휴대폰 번호
+                                  	          휴대폰 번호
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
                                     </div>
@@ -159,7 +159,7 @@
                                 <div class="login-input_wrap">
                                     <div class="input-button">
                                         <input type="text" id="memberPhone" name="memberPhone" placeholder="- 없이 입력 (01020221020)" maxlength="11" class="login-input_input"/>
-                                        <input type="button" id="phone-btn" name="phone-btn" onclick="" value="인증하기"> 
+                                        <input type="button" id="phone-confirm" name="phone-confirm" onclick="" value="인증하기"> 
                                     </div>
                                 </div>
                             </div>
@@ -167,13 +167,13 @@
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
                                         <div class="input-name">
-                                            이메일
+                                 	          이메일
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="text" id="memberEmali" name="memberEmali" placeholder="movieyoohwan@mail.com" maxlength="30" class="login-input_input">
+                                    <input type="text" id="memberEmail" name="memberEmail" placeholder="movieyoohwan@mail.com" maxlength="30" class="login-input_input">
                                 </div>
                             </div>
                             <div class="login-input">
@@ -181,16 +181,15 @@
                                     <div id="profile-form">
                                         <div id="profile-title">
                                             <div class="input-name">
-                                                프로필사진
+                               		                 프로필사진
                                             </div>
-                                            <div id="profile-info">회원님을 알릴 수 있는 사진을 등록해주세요<br>
-                                                등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다
+                                            <div id="profile-info">회원님을 알릴 수 있는 사진을 등록해주세요<br>등록된 사진은 회원님의 게시물이나 댓글들에 사용됩니다
                                             </div>
                                         </div>
                                         <div id="profile-img-form">
                                             <i class="fa-solid fa-user fa-2x"></i>
                                             <label for="profile-img" id="img-update-btn">사진등록</label>
-                                            <input type="file" id="profile-img" name="profile-img" style= display:none;>
+                                            <input type="file" id="profile-img" name="memberImgName" style= display:none;>
                                         </div>
                                     </div>
                                 </div>
@@ -209,7 +208,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" id="join-btn" name="join-btn">가입하기</button>
+                            <button type="submit" name="join-btn">가입하기</button>
                         </div>
                     </form>
                 </div>

@@ -52,3 +52,10 @@ function removevideofile() {
 		$(divTag).children('div:last').remove();
 	}
 }
+
+function removeMovieData() {
+	event.preventDefault();
+	if(confirm("선택한 영화를 삭제하시겠습니까?")) {
+		location.href="/admin/adminMovieRemove.yh";
+	}
+}

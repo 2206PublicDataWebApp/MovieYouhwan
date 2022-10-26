@@ -19,5 +19,17 @@ public interface AdminMovieStore {
 	public List<Movie> selectAllMovie(SqlSessionTemplate session);
 	// 영화 검색 
 	public List<Movie> selectSearchMovie(SqlSessionTemplate session, String searchName);
+	// 영화 상세
+	public Movie selectOneMovie(SqlSessionTemplate session, Integer movieNo);
+	// 영화 상세 (사진)
+	public List<MovieImg> selectOneMovieImg(SqlSessionTemplate session, Integer movieNo);
+	// 영화 상세 (영상)
+	public List<MovieVideo> selectOneMovieVideo(SqlSessionTemplate session, Integer movieNo);
+	// 영화 삭제
+	public int deleteOneMovie(SqlSessionTemplate session, int movieNo);
+	// 영화 삭제 (사진)
+	public int deleteOneMovieImg(SqlSessionTemplate session, int movieNo);
+	// 영화 삭제 (영상)
+	public int deleteOneMovieVideo(SqlSessionTemplate session, int movieNo);
 
 }

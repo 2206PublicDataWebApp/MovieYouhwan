@@ -32,4 +32,15 @@ public class AdminFaqServiceImpl implements AdminFaqService{
 		return fList;
 	}
 
+	@Override
+	public Faq printOneFaq(Integer faqNo) {
+		Faq fOne=aFaqStore.selectFaq(session, faqNo);
+		return fOne;
+	}
+
+	@Override
+	public int modifyFaq(Faq faq) {
+		int result=aFaqStore.updateFaq(session, faq);
+		return result;
+	}
 }

@@ -67,7 +67,7 @@
 		<div id="theater-detailbutton">
 			<button class="detail-button" onclick="javascript:history.go(-1);">목록</button>
 			<button class="tdetail-button" onclick="theaterDataRemove();">삭제</button>
-			<button class="tdetail-button" onclick="location.href='/admin/adminModifyView.yh?theaterNo=${theater.theaterNo}'">수정</button>
+			<button class="tdetail-button" onclick="location.href='/admin/adminModifyView.yh?theaterNo=${theater.theaterNo}&cinemaName=${cinemaName }'">수정</button>
 		</div>
 	</div>
 </body>

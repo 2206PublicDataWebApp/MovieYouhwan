@@ -15,6 +15,11 @@ body {
 	margin : 0 auto;
 	margin-top : 30px;
 }
+.movie-wrapper {
+	width : 1000px;
+	margin : 0 auto;
+	margin-top : 30px;
+}
 
 /* adminMovieRegister(관리자) */
 #movieinsert-wrapper {
@@ -388,3 +393,101 @@ body {
 		margin-top : 20px;
 		margin-bottom : 20px;
 	}
+/* adminMovieDetail(관리자) */
+.movie-product {
+	width : 100%;
+	margin : 0 auto;
+}
+#movie-imgwrap {
+	float : left;
+	margin-right: 50px;
+}
+#movie-textwrap {
+	display : flex;
+}
+	#detail-movietitle {
+		margin-top : 5px;
+		margin-right : 30px;
+	}
+	#movie-next {
+		width : 80px;
+		height : 30px;
+		margin-right : 10px;
+		font-weight : bold;
+		color : green;
+		background-color : white;
+		border : solid 3px green;
+	}
+	#movie-start {
+		width : 80px;
+		height : 30px;
+		margin-right : 10px;
+		font-weight : bold;
+		color : #0F1A3B;
+		background-color : white;
+		border : solid 3px #0F1A3B;
+	}
+	#movie-end {
+		width : 80px;
+		height : 30px;
+		margin-right : 10px;
+		font-weight : bold;
+		color : red;
+		background-color : white;
+		border : solid 3px red;
+	}
+	#movie-datewrap {
+		display : flex;
+	}
+		.detail-text {
+			margin-top : 25px;
+			margin-right : 40px;
+			margin-bottom : 25px;
+		}
+	#movie-information {
+		display : flex;
+	}
+	.detail-actor {
+		margin-bottom : 25px;
+	}
+	#detail-button {
+	}
+		.change-button {
+			width : 100px;
+			height : 30px;
+			margin-top : 28px;
+			margin-bottom : 50px;
+			margin-right : 10px;
+			color : #0F1A3B;
+			border : solid 1px #0F1A3B;
+			background-color : white;
+		}
+		.go-movieList {
+			width : 100px;
+			height : 30px;
+			margin-top : 28px;
+			margin-bottom : 50px;
+			color : white;
+			border : solid 1px #0F1A3B;
+			background-color : #0F1A3B;
+		}
+	#content-text {
+		margin-top : 50px;
+		margin-bottom : 25px;
+	}
+	#content-detail {
+		white-space: pre;
+		line-height: 1.8em;
+	}
+	#video-text {
+		margin-top : 80px;
+		margin-bottom : 25px;
+	}
+.detail-video {
+	width : 990px;
+	margin-bottom : 40px;
+	margin-right : 10px;
+}
+.detail-lastvideo {
+	width : 990px;
+}
