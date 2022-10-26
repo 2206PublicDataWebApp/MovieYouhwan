@@ -8,8 +8,13 @@ import kr.co.movieyouhwan.admin.site.domain.Faq;
 
 public interface AdminFaqStore {
 
-	int insertFaq(SqlSessionTemplate session, Faq faq);
+	public int insertFaq(SqlSessionTemplate session, Faq faq);
 
-	List<Faq> selectFaqList(SqlSessionTemplate session);
+	public List<Faq> selectFaqList(SqlSessionTemplate session);
+
+	public Faq selectFaq(SqlSessionTemplate session, Integer faqNo);
+
+	public int updateFaq(SqlSessionTemplate session, Faq faq);
+	
 
 }

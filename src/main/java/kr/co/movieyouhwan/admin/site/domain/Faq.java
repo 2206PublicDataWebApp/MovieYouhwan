@@ -3,6 +3,7 @@ package kr.co.movieyouhwan.admin.site.domain;
 import java.sql.Date;
 
 public class Faq {
+	
 	private int faqNo;
 	private String adminId;
 	private String faqTitle;
@@ -47,6 +48,11 @@ public class Faq {
 		this.faqCreate = noticeCreate;
 	}
 	
+	@Override
+	public String toString() {
+		return "Faq [faqNo=" + faqNo + ", adminId=" + adminId + ", faqTitle=" + faqTitle + ", faqType=" + faqType
+				+ ", faqContent=" + faqContent + ", faqCreate=" + faqCreate + "]";
+	}
 	
 
 }
