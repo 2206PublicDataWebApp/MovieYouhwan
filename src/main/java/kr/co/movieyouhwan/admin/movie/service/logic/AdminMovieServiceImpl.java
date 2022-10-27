@@ -95,4 +95,12 @@ public class AdminMovieServiceImpl implements AdminMovieService{
 		int result = aMovieStore.deleteOneMovieVideo(session, movieNo);
 		return result;
 	}
+
+	// 영화 수정
+	@Override
+	public int modifyMovieData(Movie movie) {
+		int result = aMovieStore.updateMovieData(session, movie);
+		return result;
+	}
+
 }

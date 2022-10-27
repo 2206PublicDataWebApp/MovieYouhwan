@@ -48,7 +48,7 @@ function bindChange(count) {
 }
 function removevideofile() {
 	var divTag = $("#videofile-wrap");
-	if($(divTag).children('div').length > 1) {
+	if($(divTag).children('div').length > 1) { 
 		$(divTag).children('div:last').remove();
 	}
 }
@@ -58,4 +58,10 @@ function removeMovieData() {
 	if(confirm("선택한 영화를 삭제하시겠습니까?")) {
 		location.href="/admin/adminMovieRemove.yh";
 	}
+}
+
+function removeOriginImg() {
+	var divTag = $("#imglist-wrap");
+	$(divTag).children('p:last').remove();
+	$(divTag).children('i:last').remove();
 }

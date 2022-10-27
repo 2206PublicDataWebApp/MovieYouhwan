@@ -182,12 +182,36 @@ public class AdminMovieController {
 			@RequestParam("movieNo") Integer movieNo,
 			HttpSession session) {
 		Movie movie = aMovieService.printOneMovie(movieNo);
-		List<MovieImg> movieImg = aMovieService.printAllMovieImg(movieNo);
-		List<MovieVideo> movieVideo = aMovieService.printAllMovieVideo(movieNo); 
+		List<MovieImg> miList = aMovieService.printAllMovieImg(movieNo);
+		List<MovieVideo> mvList = aMovieService.printAllMovieVideo(movieNo); 
 		mv.addObject("movie", movie);
-		mv.addObject("movieImg", movieImg);
-		mv.addObject("movieVideo", movieVideo);
+		mv.addObject("miList", miList);
+		mv.addObject("mvList", mvList);
 		mv.setViewName("/admin/movie/adminMovieModify");
+		return mv;
+	}
+	
+	/**
+	 * 영화 수정 기능
+	 * @param mv
+	 * @param movie
+	 * @param reloadImgFile
+	 * @param reloadVideoFile
+	 * @param movieImgNoArray
+	 * @param movieVideoNoArray
+	 * @param request
+	 * @return
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	@RequestMapping(value="/admin/adminMovieUpdate.yh", method=RequestMethod.POST)
+	public ModelAndView movieModify(
+			ModelAndView mv,
+			@ModelAttribute Movie movie,
+			@ModelAttribute MovieImg movieImg,
+			@ModelAttribute MovieVideo movieVideo,
+			@RequestParam("movieImgNo") Integer movieImgNo,
+			HttpSession session) {
 		return mv;
 	}
 

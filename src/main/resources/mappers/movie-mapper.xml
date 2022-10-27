@@ -51,14 +51,18 @@
 	<insert id="insertMovieVideo">
 		INSERT INTO MOVIE_VIDEO_TBL VALUES(SEQ_MOVIE_VIDEO_NO.NEXTVAL, SEQ_MOVIE_NO.CURRVAL, #{movieVideoName}, #{movieVideoRename}, #{movieVideoPath})
 	</insert>
+	<update id="updateOneMovie">
+		UPDATE MOVIE_TBL SET MOVIE_TITLE = #{movieTitle}, MOVIE_GENRE = #{movieGenre}, MOVIE_RUNTIME = #{movieRuntime}, MOVIE_DIRECTOR = #{movieDirector}, MOVIE_ACTOR = #{movieActor}, MOVIE_AGE = #{movieAge}, MOVIE_STARTDAY = #{movieStartday}, MOVIE_TICKETINGDAY = #{movieTicketingday}, MOVIE_ENDDAY = #{movieEndday}, MOVIE_CONTENT = #{movieContent} WHERE MOVIE_NO = #{movieNo} 
+	</update>
 	<!-- 영화 삭제(관리자) -->
 	<delete id="deleteOneMovie">
 		DELETE FROM MOVIE_TBL WHERE MOVIE_NO = #{movieNo}
 	</delete>
-	<!-- 영화 사진 삭제(관리자) -->
+	<!-- 영화 사진 삭제 - 영화번호기준(관리자) -->
 	<delete id="deleteOneMovieImg">
 		DELETE FROM MOVIE_IMG_TBL WHERE MOVIE_NO = #{movieNo}
 	</delete>
+	<!-- 영화 영상 삭제(관리자) -->
 	<delete id="deleteOneMovieVideo">
 		DELETE FROM MOVIE_VIDEO_TBL WHERE MOVIE_NO = #{movieNo}
 	</delete>
