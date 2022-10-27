@@ -32,12 +32,16 @@
 		INSERT INTO MEMBER_TBL(MEMBER_ID, MEMBER_PW, MEMBER_NAME, 
 			MEMBER_NICK, MEMBER_BIRTH, MEMBER_GENDER, MEMBER_PHONE, 
 			MEMBER_EMAIL, MEMBER_IMG_NAME, MEMBER_IMG_RENAME, 
-			MEMBER_IMG_PATH, MEMBER_SIGNUP_DATE, MEMBER_LEVEL, 
-			MEMBER_POINT, SOCIAL_CODE, SOCIAL_TYPE, MEMBER_STATUS, 
-			MATE_STATUS, MATE_REPORT_COUNT, MATE_RESTART_DATE)
+			MEMBER_IMG_PATH, SOCIAL_CODE, SOCIAL_TYPE)
 			VALUES (#{memberId}, #{memberPwd}, #{memberName}, #{memberNick}, #{memberBirth}, 
 	        #{memberGender}, #{memberPhone}, #{memberEmail}, #{memberImgName}, #{memberImgRename}, 
-	        #{memberImgPath}, DEFAULT, #{memberLevel}, #{memberPoint}, #{socialCode}, #{socialType}, #{memberStatus}, #{mateStatus}, 
-	        #{mateReportCount}, #{mateRestartDate})
+	        #{memberImgPath}, #{socialCode}, #{socialType})
 	</insert>
+	
+	<!-- 로그인 -->
+	<!-- <select id="selectLoginOne" resultMap="memberResultMap">
+		SELECT MEMBER_ID, MEMBER_NAME FROM MEMBER_TBL
+		WHERE MEMBER_ID = #{ememberId} AND MEMBER_PW = #{memberPwd} 
+		AND MEMBER_STATUS = 'Y'
+	</select> -->
 </mapper>

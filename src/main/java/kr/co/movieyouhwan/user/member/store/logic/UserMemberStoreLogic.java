@@ -26,6 +26,12 @@ public class UserMemberStoreLogic implements UserMemberStore {
 		int result = session.insert("MemberMapper.insertMember", member);
 		return result;
 	}
+
+	@Override
+	public Member selectLoginMember(SqlSessionTemplate session, Member member) {
+		Member mOne = session.selectOne("MemberMapper.selectLoginOne", member);
+		return mOne;
+	}
 }
 
 	

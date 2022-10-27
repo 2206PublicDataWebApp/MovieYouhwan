@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/resources/css/footer.css" />
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 <script src="/resources/js/jquery-3.6.1.min.js"></script>
-<script src="/resources/js/header.js.js" defer></script>
+<script src="/resources/js/header.js" defer></script>
 <title>무비유환 - 회원가입</title>
 </head>
 <body>
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="password" id="memberPwd2" name="memberPwd2" placeholder="비밀번호 재입력" maxlength="20" class="login-input_input"/>
+                                    <input type="password" id="memberPwd-chk" name="memberPwd-chk" placeholder="비밀번호 재입력" maxlength="20" class="login-input_input"/>
                                 </div>
                             </div>
                             <div class="login-input">
@@ -118,8 +118,8 @@
                                 <div class="login-input_wrap">
                                     <div id="input-gender-wrap">
                                         <!-- css 추가해야함 -->
-                                        <label for="female"><input type="radio" id="memberGender" name="memberGender" value="woman" checked/>여</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <label for="male"><input type="radio" id="memberGender" name="memberGender" value="man"/>남</label><br>  
+                                        <label for="female"><input type="radio" id="memberGender" name="memberGender" value="여" checked/>여</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="male"><input type="radio" id="memberGender" name="memberGender" value="남"/>남</label><br>  
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +208,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" name="join-btn">가입하기</button>
+                            <button type="submit" id="join-btn" name="join-btn">가입하기</button>
                         </div>
                     </form>
                 </div>

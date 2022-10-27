@@ -23,5 +23,12 @@ public class UserMemberServiceImpl implements UserMemberService {
 		return result;
 		
 	}
+
+	@Override
+	public Member loginMember(Member member) {
+		Member mOne 
+		= uMemberStore.selectLoginMember(session, member);
+		return mOne;
+	}
 	
 }

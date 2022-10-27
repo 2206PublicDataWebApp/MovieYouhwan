@@ -1,10 +1,11 @@
 #container{
-    margin: 0 auto;
+    margin: 0 auto 130px;
     padding: 0 100px;
     width: 800px;
     height: 1200px;
     /* background-color: rgb(244, 244, 244); */
     box-sizing: border-box;
+    
 }
 #join_header{
     text-align: center;
@@ -251,5 +252,6 @@ input[type='radio'] {
     border-radius: 0%;
     color: #ffffff;
     font-weight: bold;
-    margin-bottom: 30px;
+    
+    
 }
