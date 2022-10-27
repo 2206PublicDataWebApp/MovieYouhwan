@@ -36,6 +36,12 @@ public class AdminFaqStoreLogic implements AdminFaqStore{
 		int result=session.update("FaqMapper.updateFaq", faq);
 		return result;
 	}
+
+	@Override
+	public int deleteFaqList(SqlSessionTemplate session, String deleteNo) {
+		int result=session.delete("FaqMapper.deleteFaqList", deleteNo);
+		return result;
+	}
 	
 }
 

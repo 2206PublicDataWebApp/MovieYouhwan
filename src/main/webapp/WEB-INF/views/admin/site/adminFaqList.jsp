@@ -10,13 +10,14 @@
     <button type="submit" class="search-btn" onclick="javascript:form.action='/admin/faqSearch.yh'">검색</button>
 
     <button type="button" class="left-top-dark-btn" onclick="location.href='/admin/faqWriteForm.yh'">등록</button>
-    <button type="submit" class="right-top-white-btn" onclick="javascript:form.action='/admin/faqRemove.yh'">삭제</button>
+    <button type="button" class="right-top-white-btn" onclick=deleteFaq();>삭제</button>
   </div>
 </form>
 
+
 <div id="board">
   <div class="board-row" id="board-header">
-    <div class="check-col"><input id="faq-check-all" type="checkbox" name="delete-check" /></div>
+    <div class="check-col"><input id="faq-check-all" type="checkbox" name="delete-check"/></div>
     <div class="num-col">번호</div>
     <div class="type-col">구분</div>
     <div id="faq-title-header">질문</div>
@@ -44,28 +45,7 @@
           <div class="modify-btn-area"><button type="submit" class="faq-modify-btn">수정</button></div>
         </div>
       </form>
-      
-      <form action="/admin/faqModifyForm.yh" method="post">
-        <div class="board-row">
-          <input type="hidden" name="faqNo" value="${faq.faqNo}">
-          <div class="check-col"><input class="faq-check support-check" type="checkbox" name="delete-check" value="${faq.faqNo}" /></div>
-          <div class="num-col">${i.count}</div>
-          <div class="type-col">
-            <c:if test="${faq.faqType eq 'theater'}">영화관</c:if>
-            <c:if test="${faq.faqType eq 'member'}">회원</c:if>
-            <c:if test="${faq.faqType eq 'store'}">스토어</c:if>
-            <c:if test="${faq.faqType eq 'pay'}">결제</c:if>
-            <c:if test="${faq.faqType eq 'refund'}">환불</c:if>
-          </div>
-          <div class="title-col">
-            <a class="answer-title">${faq.faqTitle}<i class="fa-solid fa-chevron-down"></i></a>
-          </div>
-        </div>
-        <div class="faq-board-answer no-show">
-          <div class="answer-content">${faq.faqContent}</div>
-          <div class="modify-btn-area"><button type="submit" class="faq-modify-btn">수정</button></div>
-        </div>
-      </form>
     </c:forEach>
   </c:if>
 </div>
+

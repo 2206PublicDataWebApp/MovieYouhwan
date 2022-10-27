@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.movieyouhwan.admin.site.domain.Faq;
+import kr.co.movieyouhwan.admin.site.domain.Notice;
 import kr.co.movieyouhwan.admin.site.service.AdminBannerService;
 import kr.co.movieyouhwan.admin.site.service.AdminFaqService;
 import kr.co.movieyouhwan.admin.site.service.AdminNoticeService;
@@ -22,8 +23,11 @@ public class AdminSiteController {
 	
 	@Autowired
 	private AdminFaqService aFaqService;
-	private AdminNoticeService aNoticeServie;
+	@Autowired
+	private AdminNoticeService aNoticeService;
+	
 	private AdminQnaService aQnaService;
+	
 	private AdminBannerService aBannerService;
 	
 	/**
@@ -40,7 +44,14 @@ public class AdminSiteController {
 		// faq List 불러오기
 		List<Faq> fList=aFaqService.printFaqList();
 		mv.addObject("fList", fList);
+		
+		
+		List<Notice> nList=aNoticeService.printNoticeList();
+		mv.addObject("nList", nList);
+		System.out.println(nList.get(0).toString());
+		
 		mv.setViewName("admin/site/adminSiteManage");
 		return mv;
 	}
+	
 }

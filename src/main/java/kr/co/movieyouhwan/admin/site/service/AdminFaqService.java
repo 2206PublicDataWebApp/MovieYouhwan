@@ -14,4 +14,6 @@ public interface AdminFaqService {
 	public Faq printOneFaq(Integer faqNo);
 
 	public int modifyFaq(Faq faq);
+
+	public int deleteFaqList(String deleteNo);
 }

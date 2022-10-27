@@ -13,11 +13,15 @@
 	</resultMap>
 	
 	<insert id="insertFaq">
-	 INSERT INTO FAQ_TBL VALUES(#{faqNo}, #{adminId}, #{faqTitle}, #{faqType}, #{faqContent} , DEFAULT)
+	 INSERT INTO FAQ_TBL VALUES(FAQ_SEQ.NEXTVAL, #{adminId}, #{faqTitle}, #{faqType}, #{faqContent} , DEFAULT)
 	</insert>
 	<update id="updateFaq">
 		UPDATE FAQ_TBL SET FAQ_TITLE=#{faqTitle}, FAQ_TYPE=#{faqType}, FAQ_CONTENT=#{faqContent} WHERE FAQ_NO=#{faqNo}
 	</update>
+	
+	<delete id="deleteFaqList">
+		DELETE FROM FAQ_TBL WHERE FAQ_NO IN (${deleteNo})
+	</delete>
 	
 	
 	<select id="selectFaq" resultMap="faqResultMap">

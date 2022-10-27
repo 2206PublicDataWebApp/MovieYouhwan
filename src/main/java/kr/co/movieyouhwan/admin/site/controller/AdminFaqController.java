@@ -1,5 +1,7 @@
 package kr.co.movieyouhwan.admin.site.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,8 +39,10 @@ public class AdminFaqController {
 	@RequestMapping(value="/admin/faqRegister.yh", method=RequestMethod.POST)
 	public ModelAndView adminFaqWrite(ModelAndView mv, @ModelAttribute Faq faq) {
 		int result=aFaqService.registerFaq(faq);
-		mv.addObject("tabIndex", 1);
-		mv.setViewName("redirect:/admin/site/manage.yh");
+		if (result>0) {
+			mv.addObject("tabIndex", 1);
+			mv.setViewName("redirect:/admin/site/manage.yh");
+		}
 		return mv;
 	}
 	
@@ -69,6 +73,14 @@ public class AdminFaqController {
 		return mv;
 	}
 	
-	
-	
+	@RequestMapping(value="/admin/faqDelete.yh", method=RequestMethod.POST)
+	public ModelAndView adminFaqDelete(ModelAndView mv, @RequestParam("checkDeleteNo") String deleteNo) {
+		deleteNo=deleteNo.substring(0, deleteNo.length()-1);
+		int result=aFaqService.deleteFaqList(deleteNo);
+		if(result>0) {
+			mv.addObject("tabIndex", 1);
+			mv.setViewName("redirect:/admin/site/manage.yh");
+		}
+		return mv;
+	}
 }

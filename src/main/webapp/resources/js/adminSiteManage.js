@@ -2,7 +2,6 @@
 init();
 function init() {
   let idx = $('#tabIndex').val();
-  console.log(idx);
   $('.page').eq(idx).removeClass('no-show');
   $('.page').eq(idx).siblings('.page').addClass('no-show');
   $('.homepage-tab-item>a').eq(idx).addClass('homepage-tab-border');
@@ -97,3 +96,22 @@ $('.support-check').click(function () {
     }
   }
 });
+
+// faq checkbox 선택 삭제
+function deleteFaq() {
+  let check = '';
+  // 선택된 checkbox들의 value값(=faqNo) 모으기
+  $('.faq-check:checked').each(function (index, item) {
+    check += $(item).val();
+    check += ',';
+  });
+
+  // form 태그와 그 안에 input 태그를 만들어서 body에 붙이고 submit하기
+  if (check.length != 0) {
+    let checkDeleteForm = $('<form></form>').attr('action', '/admin/faqDelete.yh').attr('method', 'post').attr('id', 'checkDeleteForm');
+    checkDeleteForm.append($('<input/>').attr('type', 'hidden').attr('name', 'checkDeleteNo').attr('value', check));
+    $('body').append(checkDeleteForm);
+    $('#checkDeleteForm').submit();
+  }
+  console.log(check);
+}
