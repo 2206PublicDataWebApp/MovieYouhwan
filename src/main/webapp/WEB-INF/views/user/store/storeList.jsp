@@ -29,7 +29,7 @@
         <ul id="store-links">
           <li><a href="/my/myPage.yh">구매내역</a></li>
           <li>
-            <a href="/store/cartView.yh">장바구니<i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="/store/cart.yh">장바구니<i class="fa-solid fa-cart-shopping"></i></a>
           </li>
         </ul>
       </div>

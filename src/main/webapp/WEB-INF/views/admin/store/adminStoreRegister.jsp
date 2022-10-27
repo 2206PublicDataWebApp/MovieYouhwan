@@ -7,7 +7,7 @@
       <table width="500px" height="150px">
         <tr>
           <td rowspan="4" width="30%" class="modal-img-area">
-            <label for="register-img"><i class="fa-solid fa-file-image fa-lg"></i></label><input type="file" class="product-img" id="register-img" accept="image/png, image/jpeg" required />
+            <label for="register-img"><i class="fa-solid fa-file-image fa-lg"></i></label><input type="file" name="productImg" class="product-img" id="register-img" accept="image/png, image/jpeg" required />
           </td>
           <th width="20%">구분</th>
           <td width="50%">

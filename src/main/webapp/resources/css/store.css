@@ -3,11 +3,13 @@
   src: url('../font/MICEGothic\ Bold.ttf');
 }
 
-/** 공통 */
+/** 공통 (사용자, 관리자) */
 #store-wrapper {
   margin: 0 auto;
   width: 1000px;
 }
+
+/* storeList, storeDetail, adminStoreList, adminStoreReorder - 탭 메뉴 */
 
 #store-menu {
   display: flex;
@@ -42,6 +44,7 @@
   font-family: mice-bold;
 }
 
+/* storeList, adminStoreList, adminStoreReorder - 상품 목록 */
 .product-type {
   margin-top: 30px;
 }
@@ -91,7 +94,7 @@
 
 /** 사용자 */
 
-/* 상품 목록 */
+/* storeList, storeDetail - 탭 메뉴 링크 */
 #store-links {
   display: flex;
   justify-content: space-between;
@@ -106,6 +109,8 @@
   padding: 5px 10px;
 }
 
+/* storeList */
+
 .btn-store-list.btn-store-buy {
   color: #fff;
   background-color: #0f1a3b;
@@ -117,7 +122,110 @@
   line-height: 37.5px;
 }
 
-/* 장바구니 > 결제하기 > 결제완료 */
+/* storeDetail */
+
+#grid-store-detail {
+  display: grid;
+  grid-template-columns: 3fr 1fr 2fr 2fr 1fr;
+  grid-template-rows: repeat(2, 5fr) repeat(5, 4fr);
+  place-content: stretch;
+  align-items: center;
+  margin: 30px 0 50px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+}
+
+.gitem-store-detail {
+  padding: 3px 0;
+}
+
+/* 상품명 */
+.gitem-store-detail:nth-child(1) {
+  grid-column: 1 / 6;
+  grid-row: 1 / 2;
+  border-bottom: 1px solid #000;
+  padding-bottom: 15px;
+}
+
+/* 상품사진 */
+.gitem-store-detail:nth-child(2) {
+  grid-row: 2 / 8;
+  padding: 3px;
+  text-align: center;
+}
+
+/* 상품가격 */
+.gitem-store-detail:nth-child(3) {
+  grid-column: 2 / 6;
+}
+
+/* 상품구성, 유효기간 */
+.gitem-store-detail:nth-child(5),
+.gitem-store-detail:nth-child(7) {
+  grid-column: 3 / 6;
+}
+
+/* 상품옵션*/
+.gitem-store-detail:nth-child(8) {
+  grid-column: 2 / 4;
+}
+
+.gitem-store-detail select {
+  width: 330px;
+  height: 35px;
+}
+
+/* 상품수량  */
+.gitem-store-detail:nth-child(9) {
+  grid-column: 4 / 6;
+}
+
+.gitem-store-detail input[type='number'] {
+  width: 330px;
+  height: 35px;
+  padding: 2px;
+}
+
+/* 총상품금액 */
+.gitem-store-detail:nth-child(10) {
+  grid-column: 2 / 5;
+  text-align: right;
+}
+
+.gitem-store-detail:nth-child(11) {
+  grid-column: 5 / 6;
+  text-align: right;
+}
+
+/* 구매버튼 */
+.gitem-store-detail:nth-child(12) {
+  grid-column: 2 / 4;
+  justify-self: start;
+}
+
+/* 장바구니버튼 */
+.gitem-store-detail:nth-child(13) {
+  grid-column: 4 / 6;
+  justify-self: end;
+}
+
+.btn-detail {
+  width: 330px;
+  height: 40px;
+}
+
+.btn-detail#btn-detail-buy {
+  background-color: #0f1a3b;
+  color: #fff;
+}
+
+.btn-detail#btn-detail-cart {
+  padding-top: 1px;
+  background-color: #e59500;
+  color: #fff;
+}
+
+/* storeCart, storePay, storeComplete - 스텝 박스 */
 #store-step-box {
   display: flex;
   border: 1px solid #e2e2e2;
@@ -145,7 +253,8 @@
   margin-right: 10px;
 }
 
-/* 장바구니 */
+/* storeCart */
+
 #store-step-cart i {
   color: #0f1a3b;
 }
@@ -239,7 +348,8 @@
   color: #fff;
 }
 
-/* 결제 */
+/* storePay */
+
 #store-step-pay i {
   color: #0f1a3b;
 }
@@ -248,7 +358,8 @@
   font-family: mice-bold;
 }
 
-/** 결제 완료 */
+/** storeComplete */
+
 #store-step-complete i {
   color: #0f1a3b;
 }
@@ -325,7 +436,7 @@
 
 /** 관리자 */
 
-/* 상품 목록 */
+/* adminStoreList */
 #btn-store-register {
   background-color: #0f1a3b;
   color: #fff;
@@ -374,7 +485,8 @@
   display: none;
 }
 
-/* 상품 재배치 */
+/* adminStoreReorder */
+
 #btn-store-cancel {
   background-color: #e2e2e2;
   color: #0f1a3b;
@@ -386,7 +498,8 @@
   color: #fff;
 }
 
-/* 상품 등록 (모달) */
+/* adminStoreRegister, adminStoreModify */
+
 .modal-wrapper {
   position: absolute;
   width: 100%;
