@@ -89,4 +89,11 @@ public class AdminMovieStoreLogic implements AdminMovieStore {
 		int result = session.delete("MovieMapper.deleteOneMovieVideo", movieNo);
 		return result;
 	}
+
+	// 영화 수정
+	@Override
+	public int updateMovieData(SqlSessionTemplate session, Movie movie) {
+		int result = session.update("MovieMapper.updateOneMovie", movie);
+		return result;
+	}
 }

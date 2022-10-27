@@ -26,6 +26,10 @@ body {
 	width : 1000px;
 	margin : 0 auto;
 }
+#movie-wrapper {
+	width : 1000px;
+	margin : 0 auto;
+}
 	.title {
 		flaot : left;
 		color : #0F1A3B;
@@ -112,12 +116,34 @@ body {
 			border : solid 1px #0F1A3B;
 		}
 	#imgfile-wrap {
-		width : 518px;
+		margin-bottom : 25px;
+	}
+	#movie-wrapper #imgfile-wrap {
 		margin-bottom : 25px;
 	}
 	#videofile-wrap {
 		width : 518px;
+		float : left;
+		margin-top : 20px;
 		margin-bottom : 25px;
+	}
+	#movie-wrapper #videofile-wrap {
+		width : 593px;
+		float : left;
+		margin-top : 20px;
+		margin-bottom : 25px;
+	}
+	#videomodify-wrap {
+		width : 593px;
+		float : left;
+		margin-top : 20px;
+		margin-bottom : 25px;	
+	}
+	#imgmodify-wrap {
+		width : 593px;
+		float : left;
+		margin-top : 20px;
+		margin-bottom : 25px;	
 	}
 	.img-wrap {
 		float : right;
@@ -491,3 +517,87 @@ body {
 .detail-lastvideo {
 	width : 990px;
 }
+
+/* adminMovieModify(관리자) */
+#movievideo-modify {
+	margin-top : 30px;
+}
+#moviemodify-imgtext {
+	float : left;
+	margin-top : 3px;
+	margin-right : 5px;
+}
+#moviemodify-videotext {
+	float : left;
+	margin-top : 3px;
+	margin-right : 5px;
+}
+#moviemodify-imgadd {
+	width : 30px;
+	height : 25px;
+	color : white;
+	background-color : #0F1A3B;	
+	border : solid 1px #0F1A3B;	
+}	
+	#imgmodify-filewrap {
+		margin-top : -40px;
+		margin-left : 132px;
+	}
+	#imgmodify-listwrap {
+		margin-bottom : 15px;
+	}
+	#imgmodify-filewrap #imgmodify-loadname {
+		display : inline-block;
+		height : 25px;
+		padding : 0 10px;
+		vertical-align : middle;
+		border : solid 1px #0F1A3B;
+		width : 300px;
+		color : #0F1A3B;
+	}
+	#imgmodify-filewrap label {
+		display : inline-block;
+		color : #fff;
+		padding : 5px 5px 5px 5px;
+		vertical-align : middle;
+		background-color : #0F1A3B;
+		cursor : pointer;
+		width : 70px;
+		height : 25px;
+		text-align : center;
+		font-size : 12px;
+		margin-left : 10px;
+	}
+	#imgmodify-button {
+		width : 30px;
+		height : 25px;
+		color : white;
+		background-color : #0F1A3B;
+	}
+#moviemodify-videoadd {
+	width : 30px;
+	height : 25px;
+	color : white;
+	background-color : #0F1A3B;	
+	border : solid 1px #0F1A3B;	
+}
+#moviemodify-button {
+	margin-top : 100px;
+	margin-bottom : 50px;
+	float : right;
+}
+	#mbutton-back {
+		width : 100px;
+		height : 30px;
+		margin-right : 10px;
+		color : #0F1A3B;
+		background-color : white;
+		border : solid 1px #0F1A3B;
+	}
+	#mbutton-go {
+		width : 100px;
+		height : 30px;
+		color : white;
+		background-color : #0F1A3B;	
+		border : solid 1px #0F1A3B;	
+	}
