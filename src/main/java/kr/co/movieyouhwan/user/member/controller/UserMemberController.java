@@ -1,5 +1,8 @@
 package kr.co.movieyouhwan.user.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,7 +19,7 @@ public class UserMemberController {
 	private UserMemberService uMemberService;
 	/**
 	 * 회원가입 화면
-	 * 기능 구현 전
+	 * 구현 중
 	 * @return
 	 */
 	@RequestMapping(value="/member/joinView.yh", method=RequestMethod.GET)
@@ -34,18 +37,49 @@ public class UserMemberController {
 	public ModelAndView memberJoin(
 			@ModelAttribute Member member,
 			ModelAndView mv) {
+		uMemberService.registerMember(member);
+		mv.setViewName("redirect:/member/loginSuccess.yh");
 		return mv;
 	}
 	
 	/**
-	 * 로그인 페이지 
-	 * 기능 구현 전
+	 * 로그인
+	 * 구현 중
 	 * method=RequestMethod.POST로 변경할 것
 	 * @return
 	 */
-	@RequestMapping(value="/member/login.yh", method=RequestMethod.GET)
-	public String memberLogin() {
-		return "/user/member/memberLogin";
+	@RequestMapping(value="/member/login.yh", method=RequestMethod.POST)
+	public ModelAndView memberLogin(
+			@ModelAttribute Member member
+			,ModelAndView mv
+			,HttpServletRequest request) {
+		try {
+			Member loginUser = uMemberService.loginMember(member);
+			if(loginUser != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("loginUser", loginUser);
+				mv.setViewName("redirect:/home.yh");
+				
+			}else {
+				mv.addObject("msg", "잘못된 입력입니다.");
+				mv.setViewName("common/errorPage");
+			}
+			
+		} catch (Exception e) {
+			mv.addObject("msg",e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	/**
+	 * 로그인 후 이동할 페이지
+	 * 안됨 아직.
+	 * 
+	 */
+	@RequestMapping(value = "/member/loginSuccess.yh", method = RequestMethod.GET)
+	public String memberJoinSuccess() {
+		return "/user/member/joinSuccess";
 	}
 }
 
