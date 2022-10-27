@@ -15,6 +15,7 @@ public interface AdminFaqStore {
 	public Faq selectFaq(SqlSessionTemplate session, Integer faqNo);
 
 	public int updateFaq(SqlSessionTemplate session, Faq faq);
-	
 
+	public int deleteFaqList(SqlSessionTemplate session, String deleteNo);
+	
 }

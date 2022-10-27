@@ -43,4 +43,10 @@ public class AdminFaqServiceImpl implements AdminFaqService{
 		int result=aFaqStore.updateFaq(session, faq);
 		return result;
 	}
+
+	@Override
+	public int deleteFaqList(String deleteNo) {
+		int result=aFaqStore.deleteFaqList(session,deleteNo);
+		return result;
+	}
 }

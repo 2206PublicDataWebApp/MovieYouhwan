@@ -8,7 +8,7 @@
     </select>
     <input class="search-input" type="text" placeholder="검색어를 입력하세요" />
     <button class="search-btn">검색</button>
-    <button type="button" class="left-top-dark-btn" id="">등록</button>
+    <button type="button" class="left-top-dark-btn" onclick="location.href='/admin/noticeWriteForm.yh'">등록</button>
     <button class="right-top-white-btn">삭제</button>
   </div>
 </form>
@@ -19,6 +19,7 @@
     <div class="date-col">등록일</div>
     <div class="check-col"><input id="notice-check-all" type="checkbox" name="delete-check" /></div>
   </div>
+
   <div class="board-row">
     <div class="num-col">1</div>
     <div class="title-col"><a href="#">영화관람권 가격 변경 안내</a></div>
@@ -31,6 +32,16 @@
     <div class="date-col">2022-09-25</div>
     <div class="check-col"><input class="notice-check support-check" type="checkbox" name="delete-check" /></div>
   </div>
+  <c:if test="${!empty nList}">
+    <c:forEach items="${nList}" var="notice" varStatus="i">
+      <div class="board-row">
+        <div class="num-col">${i.count}</div>
+        <div class="title-col"><a href="location.href='/admin/noticeDetailView.yh?noticeNo=${notice.noticeNo}">${notice.notieTitle}</a></div>
+        <div class="date-col">${notice.noticeCreate}</div>
+        <div class="check-col"><input class="notice-check support-check" type="checkbox" name="delete-check" /></div>
+      </div>
+    </c:forEach>
+  </c:if>
 </div>
 <!-- <script>
       $('#check-all').change(function () {
