@@ -43,13 +43,11 @@ public class AdminSiteController {
 		mv.addObject("tabIndex", idx);
 		// faq List 불러오기
 		List<Faq> fList=aFaqService.printFaqList();
-		mv.addObject("fList", fList);
 		
+		mv.addObject("fList", fList);
 		
 		List<Notice> nList=aNoticeService.printNoticeList();
 		mv.addObject("nList", nList);
-		System.out.println(nList.get(0).toString());
-		
 		mv.setViewName("admin/site/adminSiteManage");
 		return mv;
 	}

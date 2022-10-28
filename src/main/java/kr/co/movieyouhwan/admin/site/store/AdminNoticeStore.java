@@ -12,4 +12,15 @@ public interface AdminNoticeStore {
 
 	List<Notice> selectNoticeList(SqlSessionTemplate session);
 
+	int deleteNoticeList(SqlSessionTemplate session, String deleteNo);
+	
+	Notice selectPrevNotice(SqlSessionTemplate session, int noticeNo );
+	
+	Notice selectNextNotice(SqlSessionTemplate session, int noticeNo);
+
+	Notice selectNotice(SqlSessionTemplate session, int noticeNo);
+
+	int deleteNotice(SqlSessionTemplate session, int noticeNo);
+
+	
 }

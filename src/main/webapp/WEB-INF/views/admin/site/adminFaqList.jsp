@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <form method="post">
   <div id="search-area">
     <select>
@@ -12,6 +13,7 @@
     <button type="button" class="left-top-dark-btn" onclick="location.href='/admin/faqWriteForm.yh'">등록</button>
     <button type="button" class="right-top-white-btn" onclick=deleteFaq();>삭제</button>
   </div>
+  <hr />
 </form>
 
 

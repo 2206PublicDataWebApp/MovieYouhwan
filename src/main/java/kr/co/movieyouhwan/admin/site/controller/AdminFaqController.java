@@ -55,7 +55,6 @@ public class AdminFaqController {
 			ModelAndView mv,
 			@RequestParam("faqNo") int faqNo) {
 		Faq fOne=aFaqService.printOneFaq(faqNo);
-		System.out.println(fOne.toString());
 		if(fOne!=null) {
 			mv.addObject("faq", fOne);
 			mv.setViewName("admin/site/adminFaqModify");

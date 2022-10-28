@@ -9,6 +9,10 @@ public class Notice {
 	private String noticeTitle;
 	private String noticeContent;
 	private Date noticeCreate;
+	private Notice prevNotice;
+	private Notice nextNotice;
+	
+	
 	public int getNoticeNo() {
 		return noticeNo;
 	}
@@ -39,10 +43,24 @@ public class Notice {
 	public void setNoticeCreate(Date noticeCreate) {
 		this.noticeCreate = noticeCreate;
 	}
+	
+	public Notice getPrevNotice() {
+		return prevNotice;
+	}
+	public void setPrevNotice(Notice prevNotice) {
+		this.prevNotice = prevNotice;
+	}
+	public Notice getNextNotice() {
+		return nextNotice;
+	}
+	public void setNextNotice(Notice nextNotice) {
+		this.nextNotice = nextNotice;
+	}
 	@Override
 	public String toString() {
 		return "Notice [noticeNo=" + noticeNo + ", adminId=" + adminId + ", noticeTitle=" + noticeTitle
-				+ ", noticeContent=" + noticeContent + ", noticeCreate=" + noticeCreate + "]";
+				+ ", noticeContent=" + noticeContent + ", noticeCreate=" + noticeCreate + ", prevNotice=" + prevNotice
+				+ ", nextNotice=" + nextNotice + "]";
 	}
 	
 	
