@@ -116,6 +116,7 @@ body {
 			border : solid 1px #0F1A3B;
 		}
 	#imgfile-wrap {
+		width : 517px;
 		margin-bottom : 25px;
 	}
 	#movie-wrapper #imgfile-wrap {
@@ -540,13 +541,13 @@ body {
 	border : solid 1px #0F1A3B;	
 }	
 	#imgmodify-filewrap {
-		margin-top : -40px;
+		margin-top : -25px;
 		margin-left : 132px;
 	}
-	#imgmodify-listwrap {
+	.imgmodify-listwrap {
 		margin-bottom : 15px;
 	}
-	#imgmodify-filewrap #imgmodify-loadname {
+	#imgmodify-filewrap [id^=imgmodify-loadname] {
 		display : inline-block;
 		height : 25px;
 		padding : 0 10px;
@@ -554,6 +555,16 @@ body {
 		border : solid 1px #0F1A3B;
 		width : 300px;
 		color : #0F1A3B;
+	}
+	[id^=imgmodify-addname] {
+		display : inline-block;
+		height : 25px;
+		padding : 0 10px;
+		margin-right : 5px;
+		vertical-align : middle;
+		border : solid 1px #0F1A3B;
+		width : 300px;
+		color : #0F1A3B;	
 	}
 	#imgmodify-filewrap label {
 		display : inline-block;

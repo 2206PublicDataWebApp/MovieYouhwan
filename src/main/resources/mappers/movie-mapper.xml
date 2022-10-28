@@ -51,8 +51,13 @@
 	<insert id="insertMovieVideo">
 		INSERT INTO MOVIE_VIDEO_TBL VALUES(SEQ_MOVIE_VIDEO_NO.NEXTVAL, SEQ_MOVIE_NO.CURRVAL, #{movieVideoName}, #{movieVideoRename}, #{movieVideoPath})
 	</insert>
+	<!-- 영화 수정(관리자) -->
 	<update id="updateOneMovie">
 		UPDATE MOVIE_TBL SET MOVIE_TITLE = #{movieTitle}, MOVIE_GENRE = #{movieGenre}, MOVIE_RUNTIME = #{movieRuntime}, MOVIE_DIRECTOR = #{movieDirector}, MOVIE_ACTOR = #{movieActor}, MOVIE_AGE = #{movieAge}, MOVIE_STARTDAY = #{movieStartday}, MOVIE_TICKETINGDAY = #{movieTicketingday}, MOVIE_ENDDAY = #{movieEndday}, MOVIE_CONTENT = #{movieContent} WHERE MOVIE_NO = #{movieNo} 
+	</update>
+	<!-- 영화 수정 (사진 수정) -->
+	<update id="updateOneMovieImg">
+		UPDATE MOVIE_IMG_TBL SET MOVIE_IMG_NAME = #{movieImgName}, MOVIE_IMG_RENAME = #{movieImgRename}, MOVIE_IMG_PATH = #{movieImgPath} WHERE MOVIE_IMG_NO = ${movieImgNo}
 	</update>
 	<!-- 영화 삭제(관리자) -->
 	<delete id="deleteOneMovie">
@@ -61,6 +66,10 @@
 	<!-- 영화 사진 삭제 - 영화번호기준(관리자) -->
 	<delete id="deleteOneMovieImg">
 		DELETE FROM MOVIE_IMG_TBL WHERE MOVIE_NO = #{movieNo}
+	</delete>
+	<!-- 영화 사진 삭제 - 영화사진번호기준(관리자) -->
+	<delete id="deleteMovieImg">
+		DELETE FROM MOVIE_IMG_TBL WHERE MOVIE_IMG_NO = #{movieImgNo}
 	</delete>
 	<!-- 영화 영상 삭제(관리자) -->
 	<delete id="deleteOneMovieVideo">
@@ -81,10 +90,10 @@
 	</select>
 	<!-- 영화 상세 사진(관리자) -->
 	<select id="selectAllMovieImg" resultMap="MovieImgResultMap">
-		SELECT * FROM MOVIE_IMG_TBL WHERE MOVIE_NO = #{movieNo} ORDER BY MOVIE_IMG_RENAME
+		SELECT * FROM MOVIE_IMG_TBL WHERE MOVIE_NO = #{movieNo} ORDER BY MOVIE_IMG_NO
 	</select>
 	<!-- 영화 상세 영상(관리자) -->
 	<select id="selectAllMovieVideo" resultMap="MovieVideoResultMap">
-		SELECT * FROM MOVIE_VIDEO_TBL WHERE MOVIE_NO = #{movieNo} ORDER BY MOVIE_VIDEO_RENAME
+		SELECT * FROM MOVIE_VIDEO_TBL WHERE MOVIE_NO = #{movieNo} ORDER BY MOVIE_VIDEO_NO
 	</select>
 </mapper>

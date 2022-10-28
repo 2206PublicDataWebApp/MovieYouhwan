@@ -11,7 +11,7 @@
 .usercinema-wrapper {
 	width : 1200px;
 	margin : 0 auto;
-	padding-top : 100px;
+	padding-top : 60px;
 }
 
 /* adminCinemaRegister(관리자) */
@@ -361,7 +361,74 @@
 	height : 400px;
 }
 .ucinemalist-outside {
-	width : 250px;
-	height : 250px;	
+	width : 100%;
+	height : 250px;
+}
+.ucinemalist-inside {
+	width : 220px;
+	height : 160px;	
+	margin-right : 50px;
+	float : left;
+	border : solid 1px #0F1A3B;
+}
+.one-cinema {
+	width : 180px;
+	height : 120px;
+	margin : 0 auto;
+	margin-top : 20px;
+}
+	.favorite-cinema {
+		width : 30px;
+		height : 30px;
+	}
+		.cinema-fontwrap {
+			margin-top : 10px;
+		}
+			.cinema-font {
+				font-size : 13px;
+			}
+		.cinema-buttonwrap {
+			margin-top : 15px;
+		}
+			.cinema-button {
+				width : 60px;
+				height : 20px;
+				font-size : 12px;
+				background-color : white;
+				border : solid 1px #0F1A3B;
+				border-radius : 10px;
+			}
+			
+/* userCinemaDetail(사용자) */
+.cinemaImg-wrapper {
+	width : 100%;
+	height : 450px;
+	margin-top : -5px;
+}
+	.cinemaImg {
+		width : 100%;
+		height : 450px;
+	}
+.usercinema-bottom {
+	margin-bottom : 25px;
+}
+	#usercinema-listbutton {
+		width : 100px;
+		height : 30px;
+		color : #0F1A3B;
+		background-color : white;
+		border : solid 1px #0F1A3B;
+	}
+#movie-menu {
+	width : 100%;
+	height: 50px;
+}
+.movie-menu-item {
+	width : 50%;
+	height: 40px;
+	float : left;
+	margin-top : 20px;
+	text-align : center;
+	line-height : 40px;
 	border : solid 1px #0F1A3B;
 }

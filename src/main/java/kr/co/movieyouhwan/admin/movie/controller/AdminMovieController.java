@@ -160,7 +160,6 @@ public class AdminMovieController {
 		Movie movie = aMovieService.printOneMovie(movieNo);
 		List<MovieImg> miList = aMovieService.printAllMovieImg(movieNo);
 		List<MovieVideo> mvList = aMovieService.printAllMovieVideo(movieNo);
-		System.out.println(miList);
 		session.setAttribute("movieNo", movie.getMovieNo());
 		mv.addObject("movie", movie);
 		mv.addObject("miList", miList);
@@ -196,22 +195,67 @@ public class AdminMovieController {
 	 * @param mv
 	 * @param movie
 	 * @param reloadImgFile
-	 * @param reloadVideoFile
 	 * @param movieImgNoArray
-	 * @param movieVideoNoArray
+	 * @param movieImgRenameArray
 	 * @param request
 	 * @return
-	 * @throws IOException 
-	 * @throws IllegalStateException 
+	 * @throws IllegalStateException
+	 * @throws IOException
 	 */
 	@RequestMapping(value="/admin/adminMovieUpdate.yh", method=RequestMethod.POST)
 	public ModelAndView movieModify(
 			ModelAndView mv,
 			@ModelAttribute Movie movie,
-			@ModelAttribute MovieImg movieImg,
-			@ModelAttribute MovieVideo movieVideo,
+			@RequestParam(value="reloadImgFile", required=false) List<MultipartFile> reloadImgFile,
+			@RequestParam("movieImgNo") int [] movieImgNoArray,
+			@RequestParam("movieImgRename") String[] movieImgRenameArray,
+			HttpServletRequest request) throws IllegalStateException, IOException {
+		int num = 0;
+		MovieImg movieImg = null;
+		int result1 = aMovieService.modifyMovieData(movie);
+		for(MultipartFile mf : reloadImgFile) {
+			String movieImgName = mf.getOriginalFilename();
+			if(!movieImgName.equals("")) {
+				String root = request.getSession().getServletContext().getRealPath("resources\\images");
+				String savePath = root + "\\movieLodeImg";
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmSS");
+				String movieFileRename = movieImgRenameArray[num];
+				File file = new File(savePath + "\\" + movieFileRename);
+				if(file.exists()) {
+					file.delete();
+				}
+				String movieImgRename = sdf.format(new Date(System.currentTimeMillis())) + num + "." + movieImgName.substring(movieImgName.lastIndexOf(".")+1);
+				file = new File(savePath);
+				mf.transferTo(new File(savePath + "\\" + movieImgRename));
+				String movieImgPath = savePath + "\\" + movieImgRename;
+				movieImg = new MovieImg();
+				movieImg.setMovieImgName(movieImgName);
+				movieImg.setMovieImgRename(movieImgRename);
+				movieImg.setMovieImgPath(movieImgPath);
+				int movieImgNo = movieImgNoArray[num];
+				movieImg.setMovieImgNo(movieImgNo);
+				int result2 = aMovieService.modifyMoiveImg(movieImg);
+			}
+			num = num + 1;
+		}
+		mv.setViewName("redirect:/admin/adminMovieList.yh");
+		return mv;
+	}
+	
+	/**
+	 * 영화 수정 (이미지 삭제)
+	 * @param mv
+	 * @param movieImgNo
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminMovieImgDelete.yh", method=RequestMethod.POST)
+	public ModelAndView movieImgDeleteModify(
+			ModelAndView mv,
 			@RequestParam("movieImgNo") Integer movieImgNo,
 			HttpSession session) {
+		int result1 = aMovieService.removeMovieImg(movieImgNo);
+		mv.setViewName("redirect:/admin/adminMovieList.yh");
 		return mv;
 	}
 
