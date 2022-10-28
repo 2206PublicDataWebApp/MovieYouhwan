@@ -31,7 +31,7 @@
                                     	        아이디
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
-                                            <div class="id-error">사용 불가능한 ID입니다</div>
+                                            <div class="id-error" id="id_check"></div>
                                             <!-- <div class="id-ok">사용 가능한 ID입니다</span> -->
                                     </div>
                                 </div>
@@ -123,30 +123,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="login-input">
-                                <div class="input-name-wrap">
-                                    <div class="check-wrap">
-                                        <div class="input-name">
-                                            주소
-                                            <span class="required-input">&nbsp;⦁</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="login-add_input_wrap">
-                                    우편번호
-                                    <div class="input-button">
-                                        <input type="text" id="memberZipcode" name="memberZipcode" placeholder="우편번호" maxlength="6" class="login-input_input"/>
-                                        <input type="button" id="zipcode-btn" name="zipcode-btn" onclick="" value="우편번호검색"> 
-                                    </div>
-                                </div>
-                                주소 1, 2
-                                <div class="login-add_input_wrap">
-                                    <input type="text" id="address1" name="address1" placeholder="기본주소"" maxlength="40" class="login-input_input"/>
-                                </div>
-                                <div class="login-add_input_wrap">
-                                    <input type="text" id="address2" name="address2" placeholder="상세주소"" maxlength="50" class="login-input_input"/>
-                                </div>
-                            </div> -->
+			<!-- 주소 필요없어서 뺐음. -->
                             <div class="login-input">
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">

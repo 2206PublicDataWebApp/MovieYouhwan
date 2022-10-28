@@ -11,6 +11,15 @@ public class UserMyController {
 	 * 기능 구현 전
 	 * @return
 	 */
+	@RequestMapping(value="/my/myPageMain.yh", method=RequestMethod.GET)
+	public String myPage() {
+		return"/user/mypage/myPageMain";
+	}
+	/**
+	 * 마이페이지 상단
+	 * 기능 구현 전
+	 * @return
+	 */
 	@RequestMapping(value="/my/myPage.yh", method=RequestMethod.GET)
 	public String myPageView() {
 		return"/user/mypage/myPage";

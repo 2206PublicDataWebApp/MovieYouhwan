@@ -15,17 +15,18 @@ public class Member {
 	private String memberImgRename;
 	private String memberImgPath;
 	private Date memberSignUpDate;
-	private String memberLevel;
+	private String memberLevel;	// 회원 등급
 	private String memberPoint;
 	private String socialCode;
 	private String socialType;
-	private String memberStatus;	// 회원존재 여부
+	private String memberYn;	// 회원존재 여부
 	private String mateStatus;		// 메이브 서비스 사용 여부
 	private int mateReportCount;	// 신고받은 횟수
 	private Date mateRestartDate;	// 메이트 신고 해제일
+	private String memberType;		// 회원 구분
 	
 	public Member() {}
-	
+
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
@@ -33,35 +34,9 @@ public class Member {
 				+ ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberImgName=" + memberImgName
 				+ ", memberImgRename=" + memberImgRename + ", memberImgPath=" + memberImgPath + ", memberSignUpDate="
 				+ memberSignUpDate + ", memberLevel=" + memberLevel + ", memberPoint=" + memberPoint + ", socialCode="
-				+ socialCode + ", socialType=" + socialType + ", memberStatus=" + memberStatus + ", mateStatus="
-				+ mateStatus + ", mateReportCount=" + mateReportCount + ", mateRestartDate=" + mateRestartDate + "]";
-	}
-
-	public Member(String memberId, String memberPwd, String memberName, String memberNick, String memberBirth,
-			String memberGender, String memberPhone, String memberEmail, String memberImgName, String memberImgRename,
-			String memberImgPath, Date memberSignUpDate, String memberLevel, String memberPoint, String socialCode,
-			String socialType, String memberStatus, String mateStatus, int mateReportCount, Date mateRestartDate) {
-		super();
-		this.memberId = memberId;
-		this.memberPwd = memberPwd;
-		this.memberName = memberName;
-		this.memberNick = memberNick;
-		this.memberBirth = memberBirth;
-		this.memberGender = memberGender;
-		this.memberPhone = memberPhone;
-		this.memberEmail = memberEmail;
-		this.memberImgName = memberImgName;
-		this.memberImgRename = memberImgRename;
-		this.memberImgPath = memberImgPath;
-		this.memberSignUpDate = memberSignUpDate;
-		this.memberLevel = memberLevel;
-		this.memberPoint = memberPoint;
-		this.socialCode = socialCode;
-		this.socialType = socialType;
-		this.memberStatus = memberStatus;
-		this.mateStatus = mateStatus;
-		this.mateReportCount = mateReportCount;
-		this.mateRestartDate = mateRestartDate;
+				+ socialCode + ", socialType=" + socialType + ", memberYn=" + memberYn + ", mateStatus=" + mateStatus
+				+ ", mateReportCount=" + mateReportCount + ", mateRestartDate=" + mateRestartDate + ", memberType="
+				+ memberType + "]";
 	}
 
 	public String getMemberId() {
@@ -192,12 +167,12 @@ public class Member {
 		this.socialType = socialType;
 	}
 
-	public String getMemberStatus() {
-		return memberStatus;
+	public String getMemberYn() {
+		return memberYn;
 	}
 
-	public void setMemberStatus(String memberStatus) {
-		this.memberStatus = memberStatus;
+	public void setMemberYn(String memberYn) {
+		this.memberYn = memberYn;
 	}
 
 	public String getMateStatus() {
@@ -223,7 +198,43 @@ public class Member {
 	public void setMateRestartDate(Date mateRestartDate) {
 		this.mateRestartDate = mateRestartDate;
 	}
-	
+
+	public String getMemberType() {
+		return memberType;
+	}
+
+	public void setMemberType(String memberType) {
+		this.memberType = memberType;
+	}
+
+	public Member(String memberId, String memberPwd, String memberName, String memberNick, String memberBirth,
+			String memberGender, String memberPhone, String memberEmail, String memberImgName, String memberImgRename,
+			String memberImgPath, Date memberSignUpDate, String memberLevel, String memberPoint, String socialCode,
+			String socialType, String memberYn, String mateStatus, int mateReportCount, Date mateRestartDate,
+			String memberType) {
+		super();
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+		this.memberName = memberName;
+		this.memberNick = memberNick;
+		this.memberBirth = memberBirth;
+		this.memberGender = memberGender;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+		this.memberImgName = memberImgName;
+		this.memberImgRename = memberImgRename;
+		this.memberImgPath = memberImgPath;
+		this.memberSignUpDate = memberSignUpDate;
+		this.memberLevel = memberLevel;
+		this.memberPoint = memberPoint;
+		this.socialCode = socialCode;
+		this.socialType = socialType;
+		this.memberYn = memberYn;
+		this.mateStatus = mateStatus;
+		this.mateReportCount = mateReportCount;
+		this.mateRestartDate = mateRestartDate;
+		this.memberType = memberType;
+	}
 	
 	
 	

@@ -21,13 +21,13 @@
             <div id="container">
                 <h1 id="login-title">로 그 인</h1>
                 <c:if test="${sessionScope.loginUser eq null }">
-	                <form action="/member/login.yh" method="post">
+	                <form action="/member/login.yh" method="POST">
 		                <div class="login-input">
 		                    <div class="login-input-wrap">
 		                        <input type="text" class="input-box" name="memberId" placeholder="아이디를 입력해주세요">
 		                    </div>
 		                    <div class="login-input-wrap">
-		                        <input type="password" class="input-box" name="password" placeholder="비밀번호를 입력해주세요">
+		                        <input type="password" class="input-box" name="memberPwd" placeholder="비밀번호를 입력해주세요">
 		                    </div>
 		                    <button type="submit" id="longin-btn">로그인</button>
 		                </div>
@@ -45,7 +45,7 @@
 		                    <div class="member-navi-btn">｜</div>
 		                    <a href="#"><div class="member-navi-btn">비밀번호 찾기</div></a>
 		                    <div class="member-navi-btn">｜</div>
-		                    <a href="#"><div class="member-navi-btn">회원가입</div></a>
+		                    <a href="/member/joinView.yh"><div class="member-navi-btn">회원가입</div></a>
 		                </div>
 	                
             </div>
