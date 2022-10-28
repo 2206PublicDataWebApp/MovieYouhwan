@@ -31,4 +31,36 @@ public class AdminNoticeServiceImpl implements AdminNoticeService{
 		return nList;
 	}
 
+	@Override
+	public int deleteFaqList(String deleteNo) {
+		int result=aNoticeStore.deleteNoticeList(session, deleteNo);
+		return result;
+	}
+
+	@Override
+	public Notice printPrevNotice(int noticeNo) {
+		Notice nOne=aNoticeStore.selectPrevNotice(session, noticeNo);
+		return nOne;
+	}
+
+	@Override
+	public Notice printNextNotice(int noticeNo) {
+		Notice nOne=aNoticeStore.selectNextNotice(session, noticeNo);
+		return nOne;
+	}
+
+	@Override
+	public Notice printOneNotice(int noticeNo) {
+		Notice nOne=aNoticeStore.selectNotice(session, noticeNo);
+		return nOne;
+	}
+
+	@Override
+	public int deleteFaq(int noticeNo) {
+		int result=aNoticeStore.deleteNotice(session, noticeNo);
+		return result;
+	}
+	
+	
+
 }

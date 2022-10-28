@@ -108,10 +108,27 @@ function deleteFaq() {
 
   // form 태그와 그 안에 input 태그를 만들어서 body에 붙이고 submit하기
   if (check.length != 0) {
-    let checkDeleteForm = $('<form></form>').attr('action', '/admin/faqDelete.yh').attr('method', 'post').attr('id', 'checkDeleteForm');
+    let checkDeleteForm = $('<form></form>').attr('action', '/admin/faqDelete.yh').attr('method', 'post').attr('id', 'faqCheckDeleteForm');
     checkDeleteForm.append($('<input/>').attr('type', 'hidden').attr('name', 'checkDeleteNo').attr('value', check));
     $('body').append(checkDeleteForm);
-    $('#checkDeleteForm').submit();
+    $('#faqCheckDeleteForm').submit();
   }
-  console.log(check);
+}
+
+// notice checkbox 선택 삭제
+function deleteNotice() {
+  let check = '';
+  // 선택된 checkbox들의 value값(=faqNo) 모으기
+  $('.notice-check:checked').each(function (index, item) {
+    check += $(item).val();
+    check += ',';
+  });
+
+  // form 태그와 그 안에 input 태그를 만들어서 body에 붙이고 submit하기
+  if (check.length != 0) {
+    let checkDeleteForm = $('<form></form>').attr('action', '/admin/noticeDeleteCheck.yh').attr('method', 'post').attr('id', 'noticeCheckDeleteForm');
+    checkDeleteForm.append($('<input/>').attr('type', 'hidden').attr('name', 'checkDeleteNo').attr('value', check));
+    $('body').append(checkDeleteForm);
+    $('#noticeCheckDeleteForm').submit();
+  }
 }

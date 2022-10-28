@@ -15,8 +15,27 @@
 		INSERT INTO NOTICE_TBL VALUES(NOTICE_SEQ.NEXTVAL, #{adminId}, #{noticeTitle}, #{noticeContent}, DEFAULT)
 	</insert>
 	
+	<delete id="deleteNoticeList">
+		DELETE FROM NOTICE_TBL WHERE NOTICE_NO IN (${deleteNo})
+	</delete>
+	
+	<delete id="deleteNotice">
+		DELETE FROM NOTICE_TBL WHERE NOTICE_NO=#{noticeNo}
+	</delete>
 	
 	<select id="selectNoticeList" resultMap="noticeResultMap">
 		SELECT * FROM NOTICE_TBL ORDER BY NOTICE_NO DESC
+	</select>
+	
+	<select id="selectNotice" resultMap="noticeResultMap">
+		SELECT * FROM NOTICE_TBL WHERE NOTICE_NO=#{noticeNo}
+	</select>
+	
+	<select id="selectPrevNotice" resultMap="noticeResultMap">
+		SELECT * FROM NOTICE_TBL WHERE NOTICE_NO=(SELECT PREV_NO FROM (SELECT NOTICE_NO, LAG(NOTICE_NO, 1, -1) OVER (ORDER BY NOTICE_NO DESC) AS PREV_NO FROM NOTICE_TBL) N WHERE NOTICE_NO=#{noticeNo} )
+	</select>
+	
+	<select id="selectNextNotice" resultMap="noticeResultMap">
+		SELECT * FROM NOTICE_TBL WHERE NOTICE_NO=(SELECT PREV_NO FROM (SELECT NOTICE_NO, LEAD(NOTICE_NO, 1, -1) OVER (ORDER BY NOTICE_NO DESC) AS PREV_NO FROM NOTICE_TBL) N WHERE NOTICE_NO=#{noticeNo})
 	</select>
 </mapper>

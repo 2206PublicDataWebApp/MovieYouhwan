@@ -22,6 +22,34 @@ public class AdminNoticeStoreLogic implements AdminNoticeStore{
 		List<Notice> nList=session.selectList("NoticeMapper.selectNoticeList");
 		return nList;
 	}
-	
 
+	@Override
+	public int deleteNoticeList(SqlSessionTemplate session, String deleteNo) {
+		int result=session.delete("NoticeMapper.deleteNoticeList", deleteNo);
+		return result;
+	}
+
+	@Override
+	public Notice selectPrevNotice(SqlSessionTemplate session, int noticeNo) {
+		Notice nOne=session.selectOne("NoticeMapper.selectPrevNotice", noticeNo);
+		return nOne;
+	}
+
+	@Override
+	public Notice selectNextNotice(SqlSessionTemplate session, int noticeNo) {
+		Notice nOne=session.selectOne("NoticeMapper.selectNextNotice", noticeNo);
+		return nOne;
+	}
+
+	@Override
+	public Notice selectNotice(SqlSessionTemplate session, int noticeNo) {
+		Notice nOne=session.selectOne("NoticeMapper.selectNotice", noticeNo);
+		return nOne;
+	}
+
+	@Override
+	public int deleteNotice(SqlSessionTemplate session, int noticeNo) {
+		int result=session.delete("NoticeMapper.deleteNotice", noticeNo);
+		return result;
+	}
 }

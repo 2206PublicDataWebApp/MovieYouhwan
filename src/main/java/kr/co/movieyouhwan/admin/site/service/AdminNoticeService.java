@@ -10,4 +10,14 @@ public interface AdminNoticeService {
 
 	List<Notice> printNoticeList();
 
+	int deleteFaqList(String deleteNo);
+
+	Notice printPrevNotice(int noticeNo);
+
+	Notice printNextNotice(int noticeNo);
+
+	Notice printOneNotice(int noticeNo);
+
+	int deleteFaq(int noticeNo);
+
 }
