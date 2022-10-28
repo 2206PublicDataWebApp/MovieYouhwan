@@ -36,16 +36,16 @@ public class AdminStoreController {
 
   @RequestMapping(value = "/admin/store/register.yh", method = RequestMethod.POST)
   public ModelAndView adminStoreRegister(HttpServletRequest request, @ModelAttribute Product product,
-      @RequestParam("productImg") MultipartFile productImg, ModelAndView mv) {
+      @RequestParam("isNewType") String isNewType, @RequestParam("productImg") MultipartFile productImg,
+      ModelAndView mv) {
     try {
-
       String productImgName = productImg.getOriginalFilename();
       if (!productImgName.equals("")) {
         String root = request.getSession().getServletContext().getRealPath("resources");
         String savePath = root + "/images/storeProduct";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String productImgRename = sdf.format(new Date(System.currentTimeMillis())) + "."
-            + productImgName.substring(productImgName.lastIndexOf(".") + 1);
+        String productImgRename = sdf.format(new Date(System.currentTimeMillis()))
+            + productImgName.substring(productImgName.lastIndexOf("."));
         File file = new File(savePath);
         if (!file.exists()) {
           file.mkdir();
@@ -56,9 +56,19 @@ public class AdminStoreController {
         product.setProductImgRename(productImgRename);
         product.setProductImgPath(productImgPath);
       }
+      System.out.println(isNewType); // value check
+//      if (isNewType == null) {
+      int result = aStoreService.registerProduct(product);
+      if (result > 0) {
+        mv.setViewName("redirect:/admin/store/manage.yh");
+      }
+//      } else {
+//      } 
 
-    } catch (Exception e) {
+    } catch (
 
+    Exception e) {
+      e.printStackTrace();
     }
     return mv;
   }

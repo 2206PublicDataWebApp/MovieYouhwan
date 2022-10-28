@@ -6,7 +6,7 @@ public class Product {
   private String productType; // 상품유형
   private int productPrice; // 상품가격
   private String productDesc; // 상품구성
-  private int productOrder; // 상품
+  private int productOrder; // 상품 배치 순서
   private String productImgName; // 상품 사진명
   private String productImgRename; // 상품 사진 저장명
   private String productImgPath; // 상품 사진 저장경로

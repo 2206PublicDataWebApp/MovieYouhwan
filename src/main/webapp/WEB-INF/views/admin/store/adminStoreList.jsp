@@ -27,8 +27,8 @@
         <li class="store-tab-item"><a href="#">스낵</a></li>
       </ul>
       <div id="store-links">
-        <button class="btn-store-list btn-store-mng" id="btn-store-register">등록</button>
-        <button class="btn-store-list btn-store-mng" id="btn-store-reorder">재배치</button>
+        <button type="button" class="btn-store-list btn-store-mng" id="btn-store-register">등록</button>
+        <button type="button" class="btn-store-list btn-store-mng" id="btn-store-reorder">재배치</button>
       </div>
     </div>
     <div id="store-main">

@@ -3,4 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="StoreMapper">
+
+	<insert id="insertProduct">
+		INSERT INTO PRODUCT_TBL
+		VALUES(SEQ_PRODUCT_NO.NEXTVAL, #{productName}, #{productType},
+		#{productPrice}, #{productDesc}, SEQ_PRODUCT_ORDER.NEXTVAL, #{productImgName},
+		#{productImgRename}, #{productImgPath} )
+	</insert>
 </mapper>
