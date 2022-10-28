@@ -12,5 +12,8 @@ public interface UserMemberStore {
 	// 로그인
 	public Member selectLoginMember(SqlSessionTemplate session, Member member);
 	
+	// 아이디 중복 체크
+	public int checkDupId(SqlSessionTemplate session, String memberId);
+	
 	
 }

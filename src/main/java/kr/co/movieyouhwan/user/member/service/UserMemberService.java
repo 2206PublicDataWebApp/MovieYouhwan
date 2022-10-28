@@ -8,4 +8,7 @@ public interface UserMemberService {
 	
 	// 회원가입
 	public int registerMember(Member member);
+	
+	// 아이디 중복 체크 checkIdDuplicate
+	public int checkDupId(String memberId);
 }

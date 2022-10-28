@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,11 +40,20 @@ public class UserMemberController {
 			ModelAndView mv) {
 		uMemberService.registerMember(member);
 		mv.setViewName("redirect:/member/loginSuccess.yh");
+		
 		return mv;
 	}
 	
 	/**
-	 * 로그인
+	 * 로그인 화면
+	 * @return
+	 */
+	@RequestMapping(value = "/member/loginView.yh", method = RequestMethod.GET)
+	public String memberLoginView() {
+		return "/user/member/memberLogin";
+	}
+	/**
+	 * 로그인 기능
 	 * 구현 중
 	 * method=RequestMethod.POST로 변경할 것
 	 * @return
@@ -54,6 +64,9 @@ public class UserMemberController {
 			,ModelAndView mv
 			,HttpServletRequest request) {
 		try {
+			// 회원구분 설정하기
+			member.setMemberType("1");
+			//member.setMemberYn("Y");
 			Member loginUser = uMemberService.loginMember(member);
 			if(loginUser != null) {
 				HttpSession session = request.getSession();
@@ -74,12 +87,26 @@ public class UserMemberController {
 	
 	/**
 	 * 로그인 후 이동할 페이지
-	 * 안됨 아직.
-	 * 
 	 */
 	@RequestMapping(value = "/member/loginSuccess.yh", method = RequestMethod.GET)
 	public String memberJoinSuccess() {
 		return "/user/member/joinSuccess";
 	}
+	
+	/**
+	 * 아이디 중복 체크
+	 * @param memberId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/member/idSearch.yh", method = RequestMethod.GET)
+	public String duplicateIdCheck(@RequestParam("memberId") String memberId) {
+		// 데이터가 있으면 객체 or 1 or true
+		// 데이터가 없으면  null or 0 or false
+		int result = uMemberService.checkDupId(memberId);
+		return String.valueOf(result);
+	}
+	
+	
 }
 

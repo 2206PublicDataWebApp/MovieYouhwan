@@ -1,5 +1,11 @@
 package kr.co.movieyouhwan.admin.member.store;
 
-public class AdminMemberStore {
+import org.mybatis.spring.SqlSessionTemplate;
+
+import kr.co.movieyouhwan.user.member.domain.Member;
+
+public interface AdminMemberStore {
+
+	public Member selectAdminLoginMember(SqlSessionTemplate session, Member member);
 
 }

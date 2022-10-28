@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/common.css" />
+<link rel="stylesheet" href="/resources/css/header.css" />
+<link rel="stylesheet" href="/resources/css/footer.css" />
 <link rel="stylesheet" href="/resources/css/myPage.css" />
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 <script src="/resources/js/jquery-3.6.1.min.js"></script>
@@ -13,6 +15,7 @@
 <title>무비유환 - 마이페이지</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <div id="user-wrapper">
 <div id="back-yellow"></div>
     <div id="mypage-form">
@@ -74,3 +77,6 @@
         <button class="myMenu-end">문의내역</button>
     </div>
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+</body>
+</html>

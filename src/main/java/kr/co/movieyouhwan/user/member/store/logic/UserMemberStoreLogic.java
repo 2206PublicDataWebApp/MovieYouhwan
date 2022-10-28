@@ -26,11 +26,22 @@ public class UserMemberStoreLogic implements UserMemberStore {
 		int result = session.insert("MemberMapper.insertMember", member);
 		return result;
 	}
-
+	/**
+	 * 로그인 
+	 */
 	@Override
 	public Member selectLoginMember(SqlSessionTemplate session, Member member) {
 		Member mOne = session.selectOne("MemberMapper.selectLoginOne", member);
 		return mOne;
+	}
+	
+	/**
+	 * 아이디 중복 체크
+	 */
+	@Override
+	public int checkDupId(SqlSessionTemplate session, String memberId) {
+		int result = session.insert("MembmerMapper.checkIdDuplicate", memberId);
+		return result;
 	}
 }
 

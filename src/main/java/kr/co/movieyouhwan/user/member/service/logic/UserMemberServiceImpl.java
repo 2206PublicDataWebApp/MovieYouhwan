@@ -23,12 +23,23 @@ public class UserMemberServiceImpl implements UserMemberService {
 		return result;
 		
 	}
-
+	/**
+	 * 로그인
+	 */
 	@Override
 	public Member loginMember(Member member) {
-		Member mOne 
-		= uMemberStore.selectLoginMember(session, member);
+		Member mOne = uMemberStore.selectLoginMember(session, member);
 		return mOne;
+	}
+	
+	
+	/**
+	 * 아이디 중복 체크
+	 */
+	@Override
+	public int checkDupId(String memberId) {
+		int result = uMemberStore.checkDupId(session, memberId);
+		return result;
 	}
 	
 }
