@@ -62,18 +62,15 @@
 		</div>
 		<div class="detail-moviecontent">
 			<h4 id="video-text">영화 영상</h4>
-			<video class="detail-video" src="/resources/images/movieLodeVideo/${mvList[0].movieVideoRename }" controls></video>
-			<video class="detail-video" src="/resources/images/movieLodeVideo/${mvList[1].movieVideoRename }" controls></video>
-			<video class="detail-lastvideo" src="/resources/images/movieLodeVideo/${mvList[2].movieVideoRename }" controls></video>
+			<c:forEach items="${mvList }" var="movieVideo" varStatus="i">
+				<video class="detail-video" src="/resources/images/movieLodeVideo/${movieVideo.movieVideoRename }" controls></video>
+			</c:forEach>
 		</div>
 		<div class="detail-movieimg">
 			<h4 id="video-text">영화 사진</h4>
-			<img src="/resources/images/movieLodeImg/${miList[1].movieImgRename }" width="490px">
-			<img src="/resources/images/movieLodeImg/${miList[2].movieImgRename }" width="490px">
-			<img src="/resources/images/movieLodeImg/${miList[3].movieImgRename }" width="490px">
-			<img src="/resources/images/movieLodeImg/${miList[4].movieImgRename }" width="490px">
-			<img src="/resources/images/movieLodeImg/${miList[5].movieImgRename }" width="490px">
-			<img src="/resources/images/movieLodeImg/${miList[5].movieImgRename }" width="490px">
+			<c:forEach items="${miList }" var="movieImg" varStatus="i">
+				<img src="/resources/images/movieLodeImg/${movieImg.movieImgRename }" width="490px">
+			</c:forEach>
 		</div>
 	</div>
 </body>

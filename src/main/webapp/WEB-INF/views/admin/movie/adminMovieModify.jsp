@@ -18,6 +18,7 @@
 	<div id="movie-wrapper">
 		<br><br><h3>영화 수정</h3><br><br>
 		<form action="/admin/adminMovieUpdate.yh" method="post" enctype="multipart/form-data">
+			<input type="hidden" value="${movie.movieNo }" name="movieNo">
 			<div id="title-wrap">
 				<span class="title">영화 제목</span>
 				<input type="text" id="title-input" class="input" name="movieTitle" value="${movie.movieTitle }" spellcheck="false" autocomplete="off"><br>
@@ -72,15 +73,17 @@
 			</div>
 			<div id="movieimg-modify">
 				<p id="moviemodify-imgtext">사진</p>
-				<button type="button" id="moviemodify-imgadd">추가</button>
-				<button type="button" id="imgmodify-button">삭제</button>
+				<button type="button" id="moviemodify-imgadd" onclick="addOneImg()">추가</button>
+				<button type="button" id="imgmodify-button" onclick="removieOneImg()">삭제</button>
 				<div id="imgmodify-filewrap">
 					<c:forEach items="${miList }" var="movieImg" varStatus="i">
-						<div id="imgmodify-listwrap">						
+						<input type="hidden" name="movieImgNo" value="${movieImg.movieImgNo }">				
+						<input type="hidden" name="movieImgRename" value="${movieImg.movieImgRename }">				
+						<div class="imgmodify-listwrap">		
+							<input id="imgmodify-loadname${i.count }" value="${movieImg.movieImgName }">
+							<label for="imgadd-file${i.count}">파일찾기</label>
+							<input type="file" id="imgadd-file${i.count}" class="upload-file" name="reloadImgFile"><br>
 						</div>
-						<input id="imgmodify-loadname" value="${movieImg.movieImgName }">
-						<label for="imgadd-file${i.count}">파일찾기</label>
-						<input type="file" id="imgadd-file${i.count}" class="upload-file" name="reloadFile"><br>
 					</c:forEach>
 				</div>
 			</div>

@@ -60,8 +60,33 @@ function removeMovieData() {
 	}
 }
 
-function removeOriginImg() {
-	var divTag = $("#imglist-wrap");
-	$(divTag).children('p:last').remove();
-	$(divTag).children('i:last').remove();
+function removieOneImg() {
+	var divTag = $("#imgmodify-filewrap");
+	if($(divTag).children('div').length > 1) {
+		$(divTag).children('div:last').remove();
+	}
+}
+
+$(function() {
+	let imgNo = 1;
+	$("#imgadd-file"+num).on('change', function() {
+		var videoName = $("#imgadd-file"+num).val();
+		$("#imgmodify-loadname"+num).val(videoName);
+		imgNo++;
+	});
+})
+
+let imgAdd = 1;
+function addOneImg() {
+	var number = 2;
+	var divTag = $("#imgmodify-filewrap");
+	$(divTag).append("<div class='imgmodify-listwrap'><input id='imgmodify-addname"+ imgAdd +"' value='첨부파일' placeholder='첨부파일'><label for='imgmodify-addfile"+imgAdd+"'>파일찾기</label><input type='file' id='imgmodify-addfile"+imgAdd+"' class='upload-file' name='uploadVideoFile'></div>");
+	number = number + 1;
+	bindChange(imgAdd++);	
+}
+function bindChange(imgAdd) {
+	$(document).on("change", "#imgmodify-addfile"+ imgAdd, function() {
+		var imgName = $("#imgmodify-addfile"+imgAdd).val();
+		$("#imgmodify-addname"+imgAdd).val(imgName);
+	});
 }

@@ -102,5 +102,19 @@ public class AdminMovieServiceImpl implements AdminMovieService{
 		int result = aMovieStore.updateMovieData(session, movie);
 		return result;
 	}
+	
+	// 영화 수정 (사진수정)
+	@Override
+	public int modifyMoiveImg(MovieImg movieImg) {
+		int result = aMovieStore.updateMovieImgData(session, movieImg);
+		return result;
+	}
+
+	// 영화 수정 (사진삭제)
+	@Override
+	public int removeMovieImg(Integer movieImgNo) {
+		int result = aMovieStore.deleteMovieImg(session, movieImgNo);
+		return result;
+	}
 
 }

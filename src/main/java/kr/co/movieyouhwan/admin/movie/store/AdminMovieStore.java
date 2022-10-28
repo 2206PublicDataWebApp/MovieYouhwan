@@ -33,4 +33,8 @@ public interface AdminMovieStore {
 	public int deleteOneMovieVideo(SqlSessionTemplate session, int movieNo);
 	// 영화 수정
 	public int updateMovieData(SqlSessionTemplate session, Movie movie);
+	// 영화 수정 (사진수정)
+	public int updateMovieImgData(SqlSessionTemplate session, MovieImg movieImg);
+	// 영화 수정 (사진삭제)
+	public int deleteMovieImg(SqlSessionTemplate session, Integer movieImgNo);
 }

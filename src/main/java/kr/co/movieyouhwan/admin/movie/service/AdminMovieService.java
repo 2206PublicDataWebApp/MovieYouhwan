@@ -31,4 +31,8 @@ public interface AdminMovieService {
 	public int removeOneMovieVideo(int movieNo);
 	// 영화 수정
 	public int modifyMovieData(Movie movie);
+	// 영화 수정 (사진수정)
+	public int modifyMoiveImg(MovieImg movieImg);
+	// 영화 수정 (사진삭제)
+	public int removeMovieImg(Integer movieImgNo);
 }

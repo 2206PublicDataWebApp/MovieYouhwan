@@ -6,10 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>무비유환 : 영화관 리스트(관리자)</title>
-<link href="/resources/css/common.css" rel="stylesheet">
+<link href="/resources/css/common.css" rel="stylesheet"/>
+<link href="/resources/css/header.css" rel="stylesheet"/>
 <link href="/resources/css/cinema.css" rel="stylesheet">
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
 	<div class="widecinema-wrapper">
 		<div id="cinemalist-top">
 			<h3 id="cinemalist-text">영화관 관리</h3>

@@ -96,4 +96,20 @@ public class AdminMovieStoreLogic implements AdminMovieStore {
 		int result = session.update("MovieMapper.updateOneMovie", movie);
 		return result;
 	}
+
+	// 영화 수정 (사진수정)
+	@Override
+	public int updateMovieImgData(SqlSessionTemplate session, MovieImg movieImg) {
+		int result = session.update("MovieMapper.updateOneMovieImg", movieImg);
+		return 0;
+	}
+	
+	// 영화 수정 (사진삭제)
+	@Override
+	public int deleteMovieImg(SqlSessionTemplate session, Integer movieImgNo) {
+		int result = session.delete("MovieMapper.deleteMovieImg", movieImgNo);
+		return result;
+	}
+
+
 }
