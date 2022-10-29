@@ -1,3 +1,10 @@
+const insertBtn = $('.date-input');
+const registerModal = $('#add-movie-time');
+
+insertBtn.click(function() {
+	registerModal.css('display', 'block');
+});
+
 $(function() {
 	$("#img-file").on('change', function() {
 		var imgName = $("#img-file").val();

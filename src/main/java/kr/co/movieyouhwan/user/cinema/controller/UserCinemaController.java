@@ -37,21 +37,33 @@ public class UserCinemaController {
 	}
 	
 	/**
-	 * 영화관 상세 화면
+	 * 영화관 정보 화면
 	 * @param mv
 	 * @param cinemaNo
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value="/user/cinemaDetail.yh", method=RequestMethod.GET)
-	public ModelAndView userCinemaDetailView(
+	@RequestMapping(value="/user/cinemaInformation.yh", method=RequestMethod.GET)
+	public ModelAndView userCinemaInformationView(
 			ModelAndView mv,
 			@RequestParam("cinemaNo") Integer cinemaNo,
 			HttpSession session) {
 		Cinema cinema = aCinemaService.printOneCinema(cinemaNo);
 		session.setAttribute("cinemaNo", cinema.getCinemaNo());
 		mv.addObject("cinema", cinema);
-		mv.setViewName("/user/cinema/userCinemaDetail");
+		mv.setViewName("/user/cinema/userCinemaInformation");
+		return mv;
+	}
+	
+	@RequestMapping(value="/user/cinemaMovie.yh", method=RequestMethod.GET)
+	public ModelAndView userCinemaMovieView(
+			ModelAndView mv,
+			@RequestParam("cinemaNo") Integer cinemaNo,
+			HttpSession session) {
+		mv.setViewName("/user/cinema/userCinemaMovie");
+		Cinema cinema = aCinemaService.printOneCinema(cinemaNo);
+		session.setAttribute("cinemaNo", cinema.getCinemaNo());
+		mv.addObject("cinema", cinema);
 		return mv;
 	}
 }

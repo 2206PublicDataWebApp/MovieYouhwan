@@ -65,6 +65,7 @@ public class AdminTheaterController {
 	@RequestMapping(value="/admin/adminTheaterDetail.yh", method=RequestMethod.GET)
 	public ModelAndView adminTheaterDetailView(
 			ModelAndView mv,
+			@ModelAttribute Cinema cinema,
 			@RequestParam("theaterNo") Integer theaterNo,
 			@RequestParam("cinemaName") String cinemaName,
 			HttpSession session) {
