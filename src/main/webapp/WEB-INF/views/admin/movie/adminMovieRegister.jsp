@@ -54,15 +54,15 @@
 			</div>
 			<div class="date-wrap">
 				<span class="title">개봉 예정일</span>
-				<input type="date" class="date-input" name="movieStartday"><br>
+				<input type="date" class="date-register" name="movieStartday"><br>
 			</div>
 			<div class="date-wrap">
 				<span class="title">예매 시작일</span>
-				<input type="date" class="date-input" name="movieTicketingday"><br>
+				<input type="date" class="date-register" name="movieTicketingday"><br>
 			</div>
 			<div class="date-wrap">
 				<span class="title">상영 종료일</span>
-				<input type="date" class="date-input" name="movieEndday"><br>
+				<input type="date" class="date-register" name="movieEndday"><br>
 			</div>
 			<div id="story-wrap">
 				<p id="story-title" class="title">간편줄거리</p>
@@ -87,7 +87,9 @@
 				<input type="button" value="추가" id="video-add" class="add-button" onclick="addvideofile()">
 			</div>
 			<br><br><br>
-			<input type="submit" value="등록" id="movieregister-button">
+			<div id="movieregister-submit">
+				<input type="submit" value="등록" id="movieregister-button">
+			</div>
 		</form>
 	</div>
 	<jsp:include page="../../common/footer.jsp"></jsp:include>

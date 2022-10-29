@@ -20,15 +20,24 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.movieyouhwan.admin.cinema.service.AdminCinemaService;
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.admin.movie.domain.MovieImg;
 import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
 import kr.co.movieyouhwan.admin.movie.service.AdminMovieService;
+import kr.co.movieyouhwan.admin.theater.domain.Theater;
+import kr.co.movieyouhwan.admin.theater.service.AdminTheaterService;
+import kr.co.movieyouhwan.user.cinema.domain.Cinema;
 
 @Controller
 public class AdminMovieController {
 	@Autowired
 	private AdminMovieService aMovieService;
+	@Autowired
+	private AdminCinemaService aCinemaService;
+	@Autowired
+	private AdminTheaterService aTheaterService;
+	
 	/**
 	 * 영화 등록 화면
 	 * @return
@@ -277,5 +286,31 @@ public class AdminMovieController {
 			session.removeAttribute("movieNo");
 		}
 		return "redirect:/admin/adminMovieList.yh";
+	}
+	
+	/**
+	 * 상영 영화 관리
+	 * @param mv
+	 * @param cinema
+	 * @param Theater
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminMovieTime.yh", method=RequestMethod.GET)
+	public ModelAndView adminMovieOpen(
+			ModelAndView mv,
+			@RequestParam("cinemaNo") Integer cinemaNo,
+			@RequestParam("theaterNo") Integer theaterNo) {
+		Cinema cinema = aCinemaService.printOneCinema(cinemaNo);
+		Theater theater = aTheaterService.printOneTheater(theaterNo);
+		List<Cinema> cList = aCinemaService.printAllCinema();
+		List<Theater> tList = aTheaterService.printAllTheater();
+		List<Movie> mList = aMovieService.printAllMovie();
+		mv.addObject("cinema", cinema);
+		mv.addObject("theater", theater);
+		mv.addObject("cList", cList);
+		mv.addObject("tList", tList);
+		mv.addObject("mList", mList);
+		mv.setViewName("/admin/movie/adminMovieTime");
+		return mv;
 	}
 }
