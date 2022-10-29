@@ -70,13 +70,16 @@
 
 .id-ok { 
     color : green;
-    display : none;
-    font-size : 12px;
+    font-size : 10px;
+    display: flex;
     top : 12px;
+    /* display : none;
+    font-size : 12px;
+    top : 12px; */
     /* rigth : 10px; */
 }
 .id-error {
-    /* color : red; */
+    color : red; 
     font-size : 10px;
     display: flex;
     top : 12px;
