@@ -60,6 +60,12 @@ public class AdminNoticeServiceImpl implements AdminNoticeService{
 		int result=aNoticeStore.deleteNotice(session, noticeNo);
 		return result;
 	}
+
+	@Override
+	public int modifyNotice(Notice notice) {
+		int result=aNoticeStore.updateNotice(session, notice);
+		return result;
+	}
 	
 	
 

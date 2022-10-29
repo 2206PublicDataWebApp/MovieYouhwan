@@ -20,4 +20,6 @@ public interface AdminNoticeService {
 
 	int deleteFaq(int noticeNo);
 
+	int modifyNotice(Notice notice);
+
 }

@@ -52,4 +52,10 @@ public class AdminNoticeStoreLogic implements AdminNoticeStore{
 		int result=session.delete("NoticeMapper.deleteNotice", noticeNo);
 		return result;
 	}
+
+	@Override
+	public int updateNotice(SqlSessionTemplate session, Notice notice) {
+		int result=session.update("NoticeMapper.updateNotice", notice);
+		return result;
+	}
 }
