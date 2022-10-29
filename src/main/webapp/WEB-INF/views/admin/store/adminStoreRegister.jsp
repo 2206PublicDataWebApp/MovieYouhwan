@@ -5,11 +5,12 @@
     <h3 class="modal-title">상품 등록</h3>
     <hr />
     <form action="/admin/store/register.yh" method="post" class="modal-form" enctype="multipart/form-data">
-      <input type="hidden" name="isNewType" class="hidden">
+      <!-- <input type="hidden" name="isNewType" class="hidden"> -->
       <table width="500px" height="150px">
         <tr>
           <td rowspan="4" width="30%" class="modal-img-area">
-            <label for="register-img"><i class="fa-solid fa-file-image fa-lg"></i></label><input type="file" name="productImg" class="product-img" id="register-img" accept="image/png, image/jpeg" required />
+            <label for="product-img-register"><i class="fa-solid fa-file-image fa-lg" id="img-icon"></i><img class="img-preview"></label>
+            <input type="file" name="productImg" class="product-img" id="product-img-register" accept="image/png, image/jpeg" required />
           </td>
           <th width="20%">유형</th>
           <td width="50%">

@@ -7,13 +7,15 @@
       <table width="500px" height="150px">
         <tr>
           <td rowspan="4" width="30%" class="modal-img-area">
-            <label for="register-img">origin img</label><input type="file" class="product-img" value="" accept="image/png, image/jpeg" required />
+            <label for="product-img-modify"><img src="" alt="origin img" /></label><input type="file" class="product-img" id="product-img-modify" value="" accept="image/png, image/jpeg" required />
           </td>
           <th width="20%">구분</th>
           <td width="50%">
             <select name="productType" class="modal-product-type product-type-select" required>
               <!-- <%-- TODO: Bring values and contents from DB --%> -->
-              <%-- <option value="combo">콤보</option> --%>
+              <%--
+              <option value="combo">콤보</option>
+              --%>
             </select>
             <button type="button" class="btn-to-input"><i class="fa-solid fa-plus"></i></button>
             <input type="text" class="modal-product-type product-type-input hidden" placeholder="상품 옵션을 입력해주세요." />

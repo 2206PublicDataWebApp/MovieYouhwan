@@ -39,6 +39,7 @@
 		<typeAlias type="kr.co.movieyouhwan.user.qna.domain.Qna" alias="Qna"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.Cart" alias="Cart"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.Product" alias="Product"/>
+		<typeAlias type="kr.co.movieyouhwan.user.store.domain.ProductType" alias="ProductType"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreBuy" alias="StoreBuy"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreCancel" alias="StoreCancel"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StorePay" alias="StorePay"/>

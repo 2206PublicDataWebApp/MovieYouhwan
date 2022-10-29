@@ -3,6 +3,7 @@ package kr.co.movieyouhwan.admin.store.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.movieyouhwan.admin.store.service.AdminStoreService;
 import kr.co.movieyouhwan.user.store.domain.Product;
+import kr.co.movieyouhwan.user.store.domain.ProductType;
 
 @Controller
 public class AdminStoreController {
@@ -25,8 +27,15 @@ public class AdminStoreController {
   AdminStoreService aStoreService;
 
   @RequestMapping(value = "/admin/store/manage.yh")
-  public String adminStoreList() {
-    return "admin/store/adminStoreList";
+  public ModelAndView adminStoreList(HttpServletRequest request, ModelAndView mv) {
+    List<Product> productList = aStoreService.printProductList();
+    List<ProductType> productTypeList = aStoreService.printProductTypeList();
+    System.out.println(productList.toString()); // vc
+    System.out.println(productTypeList.toString()); // vc
+    mv.addObject("productList", productList);
+    mv.addObject("productTypeList", productTypeList);
+    mv.setViewName("admin/store/adminStoreList");
+    return mv;
   }
 
   @RequestMapping(value = "/admin/store/reorderView.yh")
@@ -36,8 +45,7 @@ public class AdminStoreController {
 
   @RequestMapping(value = "/admin/store/register.yh", method = RequestMethod.POST)
   public ModelAndView adminStoreRegister(HttpServletRequest request, @ModelAttribute Product product,
-      @RequestParam("isNewType") String isNewType, @RequestParam("productImg") MultipartFile productImg,
-      ModelAndView mv) {
+      @RequestParam("productImg") MultipartFile productImg, ModelAndView mv) {
     try {
       String productImgName = productImg.getOriginalFilename();
       if (!productImgName.equals("")) {
@@ -56,14 +64,10 @@ public class AdminStoreController {
         product.setProductImgRename(productImgRename);
         product.setProductImgPath(productImgPath);
       }
-      System.out.println(isNewType); // value check
-//      if (isNewType == null) {
       int result = aStoreService.registerProduct(product);
       if (result > 0) {
         mv.setViewName("redirect:/admin/store/manage.yh");
       }
-//      } else {
-//      } 
 
     } catch (
 

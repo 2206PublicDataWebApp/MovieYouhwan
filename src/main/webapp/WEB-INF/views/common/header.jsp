@@ -5,7 +5,7 @@
 	<a href="#" class="navbar-toggleBtn show" id="bars"><i class="fa-solid fa-bars show"></i></a>
 	<a href="#" class="navbar-toggleBtn" id="xmark"><i class="fa-solid fa-xmark"></i></a>
 	
-	<div class="member">
+	<!-- <div class="member"> -->
 		<c:if test="${empty loginUser}">
 			<ul id="navbar-links">
 				<li><a href="/member/loginView.yh">로그인</a></li>
@@ -18,7 +18,7 @@
 				<li><a href="/my/myPageMain.yh">마이페이지</a></li>
 			</ul>
 		</c:if>
-	</div>
+	<!-- </div> -->
 	<ul id="navbar-menuList">
 		<li class="navbar-menuItem"><a href="#">영화</a></li>
 		<li class="navbar-menuItem"><a href="/user/cinemaList.yh">영화관 </a></li>
