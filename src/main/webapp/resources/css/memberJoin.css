@@ -67,7 +67,9 @@
     font-weight: 700;
     
 }
-
+span.guide{
+	display : none;
+}
 .id-ok { 
     color : green;
     font-size : 10px;
@@ -80,6 +82,12 @@
 }
 .id-error {
     color : red; 
+    font-size : 10px;
+    display: flex;
+    top : 12px;
+}
+#id_check{
+	color : red; 
     font-size : 10px;
     display: flex;
     top : 12px;

@@ -12,11 +12,11 @@
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="/resources/js/header.js" defer></script>
-    <script src="/resources/js/userMember.js" defer></script>
-
+	<script src="/resources/js/userMember.js" defer></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <title>무비유환 - 회원가입</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
@@ -35,8 +35,9 @@
                                     	        아이디
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
-                                            <div class="id-error" id="id_check">이미 사용중인 ID입니다.</div>
-                                            <div class="id-ok">사용 가능한 ID입니다</span>
+                                            <span class="guide id-error">이미 사용중인 ID입니다.헐~</span>
+                                            <span class="guide id-ok">사용 가능한 ID입니다</span>
+                                            <span class="id_check" id="id_check"></span>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
