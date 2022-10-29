@@ -72,6 +72,7 @@
     <div id="admin-wrapper">
       <form method="post">
         <input type="hidden" name="adminId" value="eunhye0910" />
+        <input type="hidden" name="noticeNo" value="${notice.noticeNo}" />
         <h3><a href="#">공지사항 수정</a></h3>
         <br />
         <hr />
@@ -79,7 +80,7 @@
           <input id="input-title" name="noticeTitle" type="text" value="${notice.noticeTitle}" />
         </div>
         <hr />
-        <div id="input-content-area">${notice.noticeContent}<textarea id="input-content" name="noticeContent" wrap="hard" cols="100"></textarea></div>
+        <div id="input-content-area"><textarea id="input-content" name="noticeContent" wrap="hard" cols="100">${notice.noticeContent}</textarea></div>
         <div id="btn-area">
           <button id="cancel-btn" type="button" onclick="javascript:history.go(-1);">취소</button>
           <button id="register-btn" type="submit" onclick="javascript:form.action='/admin/noticeModify.yh'">수정</button>

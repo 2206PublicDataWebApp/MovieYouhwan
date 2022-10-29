@@ -22,5 +22,7 @@ public interface AdminNoticeStore {
 
 	int deleteNotice(SqlSessionTemplate session, int noticeNo);
 
+	int updateNotice(SqlSessionTemplate session, Notice notice);
+
 	
 }

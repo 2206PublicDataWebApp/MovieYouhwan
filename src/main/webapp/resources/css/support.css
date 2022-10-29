@@ -161,12 +161,14 @@ select {
   text-align: center;
   padding: 10px 0 10px 0;
   border-bottom: 1px solid lightgray;
+  font-size: 16px;
 }
 
 #board-header > .title-col,
 #board-header > .qna-title-col {
   text-align: center;
 }
+
 .check-col {
   width: 5%;
 }

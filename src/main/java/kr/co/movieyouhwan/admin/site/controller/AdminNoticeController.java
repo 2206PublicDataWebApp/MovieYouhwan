@@ -1,5 +1,7 @@
 package kr.co.movieyouhwan.admin.site.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -67,12 +69,37 @@ public class AdminNoticeController {
 	}
 	
 	@RequestMapping(value="/admin/noticeModifyForm.yh", method=RequestMethod.POST)
-	public String adminNoticeModifyForm(@RequestParam("noticeNo") int noticeNo) {
-		
-		return "admin/site/adminNoticeModify";
+	public ModelAndView adminNoticeModifyForm(@RequestParam("noticeNo") int noticeNo,
+			ModelAndView mv) {
+		Notice nOne=aNoticeService.printOneNotice(noticeNo);
+		if(nOne!=null) {
+			mv.addObject("notice", nOne);
+			mv.setViewName("admin/site/adminNoticeModify");
+		}
+		return mv;
 	}
 	
-
+	@RequestMapping(value="/admin/noticeModify.yh", method=RequestMethod.POST)
+	public ModelAndView adminNoticeModify(@ModelAttribute Notice notice,
+			ModelAndView mv) {
+		int result=aNoticeService.modifyNotice(notice);
+		if (result>0) {
+			mv.addObject("noticeNo", notice.getNoticeNo());
+			mv.setViewName("redirect:/admin/NoticeDetail.yh");
+		}
+		return mv;
+	}
 	
-
+//	@RequestMapping(value="/admin/noticeSearch.yh", method=RequestMethod.GET)
+//	public ModelAndView adminNoticeSearch(ModelAndView mv,
+//			@RequestParam("searchValue") String searchValue,
+//			@RequestParam("searcOption") String searchOption) {
+//		try {
+//			List<Notice> nList=aNoticeService.printNoticeListBySearch(searchOption, searchValue);
+//		}catch(Exception e){
+//			
+//		}
+//		return mv;
+//	}
+	
 }

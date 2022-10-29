@@ -16,6 +16,7 @@ import kr.co.movieyouhwan.admin.site.service.AdminBannerService;
 import kr.co.movieyouhwan.admin.site.service.AdminFaqService;
 import kr.co.movieyouhwan.admin.site.service.AdminNoticeService;
 import kr.co.movieyouhwan.admin.site.service.AdminQnaService;
+import kr.co.movieyouhwan.common.page.PageInfo;
 
 
 @Controller
@@ -37,10 +38,22 @@ public class AdminSiteController {
 	 * @return
 	 */
 	@RequestMapping(value="/admin/site/manage.yh")
-	public ModelAndView adminSiteManageView(ModelAndView mv, @RequestParam(value="tabIndex", required=false) Integer tabIndex) {
+	public ModelAndView adminSiteManageView(ModelAndView mv, 
+			@RequestParam(value="tabIndex", required=false) Integer tabIndex,
+			@RequestParam(value="", required=false) Integer page){
 		// 선택될 Tab 메뉴 index 정보 
 		Integer idx=tabIndex==null?0:tabIndex;
 		mv.addObject("tabIndex", idx);
+		
+		// 페이징 처리
+		PageInfo nPageInfo=new PageInfo();
+		nPageInfo.setCurrentPage((page!=null)?page:1);
+//		nPageInfo.setDataCount(aNoticeService.printTotalNoticeCount());
+		nPageInfo.setDataLimit(10);
+		nPageInfo.setPageLimit(5);
+		nPageInfo.setPageCount(((int)((double)nPageInfo.getDataCount()/nPageInfo.getPageLimit()+0.9)-1) * nPageInfo.getPageLimit()+1);
+		nPageInfo.setStartPage(((int)((double)nPageInfo.getCurrentPage()/nPageInfo.getPageLimit()+0.9)-1)*nPageInfo.getPageLimit()+1);
+		
 		// faq List 불러오기
 		List<Faq> fList=aFaqService.printFaqList();
 		
