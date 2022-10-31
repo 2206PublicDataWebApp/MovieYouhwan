@@ -69,6 +69,7 @@
 }
 span.guide{
 	display : none;
+	
 }
 .id-ok { 
     color : green;
@@ -86,11 +87,15 @@ span.guide{
     display: flex;
     top : 12px;
 }
-#id_check{
-	color : red; 
+.fix{
     font-size : 10px;
     display: flex;
     top : 12px;
+}
+.id-check-wrap{
+	/* display : flex;
+	flex-direction: column;
+    align-content: flex-end; */
 }
 #pwd-error{
     color : red;
