@@ -11,4 +11,11 @@ public interface UserMemberService {
 	
 	// 아이디 중복 체크 checkIdDuplicate
 	public int checkDupId(String memberId);
+
+	public Member printOneById(String memberId);
+	
+	// 회원정보 수정
+	public int modifyMember(Member member);
+
+	
 }

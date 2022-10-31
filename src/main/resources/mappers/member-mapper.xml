@@ -63,4 +63,17 @@
 	<select id="checkIdDuplicate" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId} AND MEMBER_YN = 'Y'
 	</select>
+	<!-- 회원정보 수정 -->
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER_TBL
+		    SET MEMBER_IMG_NAME = #{memberImgName}
+		    , MEMBER_IMG_RENAME = #{memberImgRename}
+		    , MEMBER_IMG_PATH = #{memberImgPath}
+		    , MEMBER_PW = #{memberPwd}
+		    , MEMBER_NICK = #{memberNick}
+		    , MEMBER_PHONE = #{memberPhone}
+		    , MEMBER_EMAIL = #{memberEmail}
+		    WHERE MEMBER_ID = #{memberImgRename};
+		
+	</update>
 </mapper>
