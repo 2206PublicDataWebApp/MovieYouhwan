@@ -11,36 +11,44 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/header.css" rel="stylesheet"/>
 <link href="/resources/css/movie.css" rel="stylesheet">
-<script src="/resources/js/jquery-3.6.1.min.js"></script>
-<script src="/resources/js/movie.js"></script>
+<script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+<script src="/resources/js/movie.js" defer></script>
 </head>
 <body>
-<!-- 날짜 set -->
+	<!-- 날짜 set -->
 	<jsp:useBean id="today" class="java.util.Date" />
 	<fmt:formatDate var="oneDayYear" value="${today}" pattern="yyyy"/>
 	<fmt:formatDate var="oneDayMonth" value="${today}" pattern="MM"/>
 	<fmt:formatDate var="oneDayDate" value="${today}" pattern="dd일 (E요일)"/>
+	<fmt:formatDate var="today" value="${today}" pattern="yyyyMMdd"/>
 	
-	<c:set var="oneDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*1)%>"/>
+	<c:set var="oneDate" value="<%=new Date(new Date( ).getTime() + 60*60*24*1000*1)%>"/>
 	<fmt:formatDate var="oneDay" value="${oneDate}" pattern="dd일 (E요일)"/>
+	<fmt:formatDate var="todayOne" value="${oneDate}" pattern="yyyyMMdd"/>
 	
 	<c:set var="twoDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*2)%>"/>
 	<fmt:formatDate var="twoDay" value="${twoDate}" pattern="dd일 (E요일)"/>
+	<fmt:formatDate var="todayTwo" value="${twoDate}" pattern="yyyyMMdd"/>
 	
 	<c:set var="threeDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*3)%>"/>
 	<fmt:formatDate var="threeDay" value="${threeDate}" pattern="dd일 (E요일)"/>
+	<fmt:formatDate var="todayThree" value="${threeDate}" pattern="yyyyMMdd"/>
 	
 	<c:set var="fourDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*4)%>"/>
 	<fmt:formatDate var="fourDay" value="${fourDate}" pattern="dd일 (E요일)"/>
+	<fmt:formatDate var="todayFour" value="${fourDate}" pattern="yyyyMMdd"/>
 	
 	<c:set var="fiveDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*5)%>"/>
 	<fmt:formatDate var="fiveDay" value="${fiveDate}" pattern="dd일 (E요일)"/>
+	<fmt:formatDate var="todayFive" value="${fiveDate}" pattern="yyyyMMdd"/>
 
 	<c:set var="sixDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*6)%>"/>
 	<fmt:formatDate var="sixDay" value="${sixDate}" pattern="dd일 (E요일)"/>
+	<fmt:formatDate var="todaySix" value="${sixDate}" pattern="yyyyMMdd"/>
 	
 	<c:set var="sevenDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*7)%>"/>
 	<fmt:formatDate var="sevenDay" value="${sevenDate}" pattern="dd일 (E요일)"/>
+	<fmt:formatDate var="todaySeven" value="${sevenDate}" pattern="yyyyMMdd"/>
 	
 	<!-- 페이지 시작 -->
 	<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
@@ -90,7 +98,26 @@
 			<p class="date-time">22:00</p>
 		</div>
 		<div>
-			<div id="date-input-wrap1">
+			<!-- 날짜 div -->
+			<c:forEach items=${weeks } var="day"></c:forEach>
+			<div id="${day }" class="date-input-wrap1">
+				<!-- 시간 div -->
+				<div id="${today }1100" class="date-input">
+				
+				</div>
+				<c:forEach begin="1" end="10">
+					<c:forEach items="moviList" var="movie">
+						<c:if test="movie.시간  eq ">
+						<div class="date-input filled-color">${movi }</div>
+						</c:if>						
+						<c:if test="movie.시간  NE ">
+						<div class="date-input"></div>
+						</c:if>
+						
+					</c:forEach>
+				</c:forEach>
+			</div>
+			<div class="date-input-wrap2">
 				<div class="date-input"></div>
 				<div class="date-input"></div>
 				<div class="date-input"></div>
@@ -115,7 +142,7 @@
 				<div class="date-input"></div>
 				<div class="date-input"></div>
 			</div>
-			<div id="date-input-wrap2">
+			<div class="date-input-wrap3">
 				<div class="date-input"></div>
 				<div class="date-input"></div>
 				<div class="date-input"></div>
@@ -140,7 +167,7 @@
 				<div class="date-input"></div>
 				<div class="date-input"></div>
 			</div>
-			<div id="date-input-wrap3">
+			<div class="date-input-wrap4">
 				<div class="date-input"></div>
 				<div class="date-input"></div>
 				<div class="date-input"></div>
@@ -165,7 +192,7 @@
 				<div class="date-input"></div>
 				<div class="date-input"></div>
 			</div>
-			<div id="date-input-wrap4">
+			<div class="date-input-wrap5">
 				<div class="date-input"></div>
 				<div class="date-input"></div>
 				<div class="date-input"></div>
@@ -190,7 +217,7 @@
 				<div class="date-input"></div>
 				<div class="date-input"></div>
 			</div>
-			<div id="date-input-wrap5">
+			<div class="date-input-wrap6">
 				<div class="date-input"></div>
 				<div class="date-input"></div>
 				<div class="date-input"></div>
@@ -215,7 +242,7 @@
 				<div class="date-input"></div>
 				<div class="date-input"></div>
 			</div>
-			<div id="date-input-wrap6">
+			<div class="date-input-wrap7">
 				<div class="date-input"></div>
 				<div class="date-input"></div>
 				<div class="date-input"></div>
@@ -240,32 +267,7 @@
 				<div class="date-input"></div>
 				<div class="date-input"></div>
 			</div>
-			<div id="date-input-wrap7">
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-				<div class="date-input"></div>
-			</div>
-			<div id="date-input-wrap8">
+			<div class="date-input-wrap8">
 				<div class="date-input"></div>
 				<div class="date-input"></div>
 				<div class="date-input"></div>
@@ -293,7 +295,7 @@
 		</div>
 	</div>
 	<div id="add-movie-time">
-		<jsp:include page="addMovieTime.jsp" />
+		<jsp:include page="/WEB-INF/views/admin/movie/addMovieTime.jsp" />
 	</div>
 </body>
 </html>

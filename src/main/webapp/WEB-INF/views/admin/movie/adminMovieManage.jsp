@@ -12,8 +12,14 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
 	<div class="widemovie-wrapper">
-		<div id="manage-buttonlist">
-		
+		<h3>상영 영화 관리</h3><br><br>
+		<div id="movietime-wrap">
+			<input type="hidden" value="${cinema.cinemaNo }" name="cinemaNo">
+			<input type="hidden" value="${theater.theaterNo }" name="theaterNo">
+			<span class="cinema-theater">${cinema.cinemaName }</span>
+			<span class="cinema-theater">${theater.theaterName }</span>
+			<button id="add-movie-button">+</button>
+			${oneday }
 		</div>
 	</div>
 </body>

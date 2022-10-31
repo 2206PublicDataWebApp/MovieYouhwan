@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.admin.movie.domain.MovieImg;
+import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
 import kr.co.movieyouhwan.admin.movie.store.AdminMovieStore;
 
@@ -41,6 +42,13 @@ public class AdminMovieStoreLogic implements AdminMovieStore {
 		return mList;
 	}
 
+	// 현재 상영 영화
+	@Override
+	public List<Movie> selectNowMovie(SqlSessionTemplate session) {
+		List<Movie> mList = session.selectList("MovieMapper.selectNowMovie");
+		return mList;
+	}
+	
 	// 영화 검색
 	@Override
 	public List<Movie> selectSearchMovie(SqlSessionTemplate session, String searchName) {
@@ -111,5 +119,9 @@ public class AdminMovieStoreLogic implements AdminMovieStore {
 		return result;
 	}
 
-
+	@Override
+	public int insertMovieTime(SqlSessionTemplate session, MovieTime movieTime) {
+		int result = session.insert("MovieMapper.insertMovieTime", movieTime);
+		return result;
+	}
 }
