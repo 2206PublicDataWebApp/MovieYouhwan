@@ -1,21 +1,20 @@
 package kr.co.movieyouhwan.admin.movie.domain;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
 
 public class MovieTime {
 	private int movieTimeNo;
 	private int cinemaNo;
 	private int theaterNo;
 	private int movieNo;
-	private Date movieDay;
-	private Time movieStart;
-	private Time movieEnd;
+	private String movieDay;
+	private String movieStart;
+	private String movieEnd;
 	
 	public MovieTime() {}
 
-	public MovieTime(int movieTimeNo, int cinemaNo, int theaterNo, int movieNo, Date movieDay, Time movieStart,
-			Time movieEnd) {
+	public MovieTime(int movieTimeNo, int cinemaNo, int theaterNo, int movieNo, String movieDay, String movieStart,
+			String movieEnd) {
 		super();
 		this.movieTimeNo = movieTimeNo;
 		this.cinemaNo = cinemaNo;
@@ -58,27 +57,27 @@ public class MovieTime {
 		this.movieNo = movieNo;
 	}
 
-	public Date getMovieDay() {
+	public String getMovieDay() {
 		return movieDay;
 	}
 
-	public void setMovieDay(Date movieDay) {
+	public void setMovieDay(String movieDay) {
 		this.movieDay = movieDay;
 	}
 
-	public Time getMovieStart() {
+	public String getMovieStart() {
 		return movieStart;
 	}
 
-	public void setMovieStart(Time movieStart) {
+	public void setMovieStart(String movieStart) {
 		this.movieStart = movieStart;
 	}
 
-	public Time getMovieEnd() {
+	public String getMovieEnd() {
 		return movieEnd;
 	}
 
-	public void setMovieEnd(Time movieEnd) {
+	public void setMovieEnd(String movieEnd) {
 		this.movieEnd = movieEnd;
 	}
 

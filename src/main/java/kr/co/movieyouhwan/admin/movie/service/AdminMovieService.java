@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.admin.movie.domain.MovieImg;
+import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
 
 public interface AdminMovieService {
@@ -35,4 +36,8 @@ public interface AdminMovieService {
 	public int modifyMoiveImg(MovieImg movieImg);
 	// 영화 수정 (사진삭제)
 	public int removeMovieImg(Integer movieImgNo);
+	// 현재 상영 영화 출력
+	public List<Movie> printNowMovie();
+	// 상영 영화 등록
+	public int registerMovieTime(MovieTime movieTime);
 }

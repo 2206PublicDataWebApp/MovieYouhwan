@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.admin.movie.domain.MovieImg;
+import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
 import kr.co.movieyouhwan.admin.movie.service.AdminMovieService;
 import kr.co.movieyouhwan.admin.movie.store.AdminMovieStore;
@@ -47,6 +48,13 @@ public class AdminMovieServiceImpl implements AdminMovieService{
 		return mList;
 	}
 
+	// 현재 상영 영화
+	@Override
+	public List<Movie> printNowMovie() {
+		List<Movie> mList = aMovieStore.selectNowMovie(session);
+		return mList;
+	}
+	
 	// 영화 검색
 	@Override
 	public List<Movie> printSearchMovie(String searchName) {
@@ -117,4 +125,9 @@ public class AdminMovieServiceImpl implements AdminMovieService{
 		return result;
 	}
 
+	@Override
+	public int registerMovieTime(MovieTime movieTime) {
+		int result = aMovieStore.insertMovieTime(session, movieTime);
+		return result;
+	}
 }

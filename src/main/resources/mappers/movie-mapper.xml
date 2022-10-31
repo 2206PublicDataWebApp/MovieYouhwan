@@ -51,6 +51,10 @@
 	<insert id="insertMovieVideo">
 		INSERT INTO MOVIE_VIDEO_TBL VALUES(SEQ_MOVIE_VIDEO_NO.NEXTVAL, SEQ_MOVIE_NO.CURRVAL, #{movieVideoName}, #{movieVideoRename}, #{movieVideoPath})
 	</insert>
+	<!-- 상영 영화 등록(관리자) -->
+	<insert id="insertMovieTime">
+		INSERT INTO MOVIE_TIME_TBL VALUES(SEQ_MOVIE_TIME_NO.NEXTVAL, #{cinemaNo}, #{theaterNo}, #{movieNo}, #{movieDay}, #{movieStart}, #{movieEnd})
+	</insert>
 	<!-- 영화 수정(관리자) -->
 	<update id="updateOneMovie">
 		UPDATE MOVIE_TBL SET MOVIE_TITLE = #{movieTitle}, MOVIE_GENRE = #{movieGenre}, MOVIE_RUNTIME = #{movieRuntime}, MOVIE_DIRECTOR = #{movieDirector}, MOVIE_ACTOR = #{movieActor}, MOVIE_AGE = #{movieAge}, MOVIE_STARTDAY = #{movieStartday}, MOVIE_TICKETINGDAY = #{movieTicketingday}, MOVIE_ENDDAY = #{movieEndday}, MOVIE_CONTENT = #{movieContent} WHERE MOVIE_NO = #{movieNo} 
@@ -78,6 +82,10 @@
 	<!-- 영화 리스트(관리자) -->
 	<select id="selectAllMovie" resultMap="MovieResultMap">
 		SELECT * FROM MOVIE_TBL ORDER BY MOVIE_NO DESC
+	</select>
+	<!-- 현재 상영 영화(관리자) -->
+	<select id="selectNowMovie" resultMap="MovieResultMap">
+		SELECT * FROM MOVIE_TBL WHERE TO_CHAR(MOVIE_ENDDAY, 'yyyyMMdd') >= TO_CHAR(SYSDATE, 'yyyyMMdd')
 	</select>
 	<!-- 영화 검색(관리자) -->
 	<select id="selectSearchMovie" resultMap="MovieResultMap">

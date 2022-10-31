@@ -1,8 +1,20 @@
-const insertBtn = $('.date-input');
+// 등록 jsp
 const registerModal = $('#add-movie-time');
+// 등록 버튼
+const registerBtn = $('.date-input');
+// 취소 버튼
+let cancelBtn = $('#add-movie-off');
 
-insertBtn.click(function() {
+// 등록 버튼 클릭 시 등록 jsp 화면에 띄우기
+registerBtn.click(function () {
 	registerModal.css('display', 'block');
+});
+
+// 취소 버튼 클릭 시 등록 jsp 지우기
+cancelBtn.click(function () {
+	if(registerModal.css('display') == 'block') {
+		registerModal.css('display', 'none');
+	}
 });
 
 $(function() {

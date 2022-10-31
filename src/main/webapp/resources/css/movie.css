@@ -40,12 +40,15 @@ body {
 	margin-left: -300px;
 	margin-top: -200px;
 	padding-top : 40px;
+	padding-bottom : 40px;
 	padding-left : 40px;
 	padding-right : 40px;
 	border-radius: 5px;
 	background-color: #fff;	
 }
-
+.date-input:hover {
+	background-color : #FCF4C1;
+}
 #modal-movie-text {
 	margin-top : 30px;
 }
@@ -53,7 +56,61 @@ body {
 		width : 100%;
 		height : 30px;
 		margin-top : 15px;
+		margin-bottom : 30px;
 	}
+	#choicetime-movie-date {
+		width : 100%;
+		height : 30px;
+		margin-top : 15px;
+		margin-bottom : 30px;
+	}
+	#movie-start-time {
+		float : left;
+		margin-right : 15px;
+	}
+	#movie-end-time {
+		float : right;
+	}
+		#choice-movie-start {
+			margin-bottom : 15px;
+		}
+		#choice-movie-end {
+			margin-bottom : 15px;
+		}
+		#movie-start-choice {
+			width : 125px;
+			height : 30px;
+		}
+		#movie-end-choice {
+			width : 125px;
+			height : 30px;
+		}
+	#add-movie-button {
+		width : 35px;
+		height : 35px;
+		float : right;
+		color : white;
+		background-color : #0F1A3B;
+		border : solid 1px #0F1A3B;
+		border-radius : 50%;
+	}
+		#add-movie-off {
+			width: 100px;
+			height : 30px;
+			color : #0F1A3B;
+			border : solid 1px #0F1A3B;
+			background-color : white;
+		}
+		#add-movie-on {
+			width: 100px;
+			height : 30px;
+			color : white;
+			border : solid 1px #0F1A3B;
+			background-color : #0F1A3B;
+		}
+#add-movie-time {
+	display : none;
+}
 /* adminMovieRegister(관리자) */
 #movieinsert-wrapper {
 	width : 1000px;
@@ -691,7 +748,7 @@ body {
 		#time1100 {
 			margin-top : 20px;
 		}
-	[id^='date-input-wrap'] {
+	[class^='date-input-wrap'] {
 		width : 11.7%;
 		display : flex;
 		flex-direction : column;

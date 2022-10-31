@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.admin.movie.domain.MovieImg;
+import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
 
 public interface AdminMovieStore {
@@ -37,4 +38,7 @@ public interface AdminMovieStore {
 	public int updateMovieImgData(SqlSessionTemplate session, MovieImg movieImg);
 	// 영화 수정 (사진삭제)
 	public int deleteMovieImg(SqlSessionTemplate session, Integer movieImgNo);
+	// 현재 상영 영화
+	public List<Movie> selectNowMovie(SqlSessionTemplate session);
+	public int insertMovieTime(SqlSessionTemplate session, MovieTime movieTime);
 }
