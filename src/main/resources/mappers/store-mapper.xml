@@ -15,14 +15,23 @@
 		<result property="productImgPath" column="PRODUCT_IMG_PATH" />
 	</resultMap>
 	<resultMap type="ProductType" id="productTypeResultMap">
-		<id property="productType" column="PRODUCT_TYPE" />
+		<id property="productTypeNo" column="PRODUCT_TYPE_NO" />
+		<result property="productType" column="PRODUCT_TYPE" />
 	</resultMap>
 	<select id="selectProductList" resultMap="productResultMap">
-		SELECT * FROM PRODUCT_TBL
+		SELECT * FROM
+		PRODUCT_TBL ORDER BY PRODUCT_NO ASC
 	</select>
-	<select id="selectProductTypeList" resultMap="productTypeResultMap">
-		SELECT DISTINCT PRODUCT_TYPE FROM PRODUCT_TYPE_TBL
-		JOIN PRODUCT_TBL USING (PRODUCT_TYPE)
+	<select id="selectProductTypeList"
+		resultMap="productTypeResultMap">
+		SELECT DISTINCT PRODUCT_TYPE_NO, PRODUCT_TYPE FROM
+		PRODUCT_TYPE_TBL
+		JOIN PRODUCT_TBL USING (PRODUCT_TYPE) ORDER BY
+		PRODUCT_TYPE_NO ASC
+	</select>
+	<select id="selectProduct" resultMap="productResultMap">
+		SELECT * FROM PRODUCT_TBL
+		WHERE PRODUCT_NO = #{productNo}
 	</select>
 	<insert id="insertProduct">
 		INSERT INTO PRODUCT_TBL
@@ -30,4 +39,14 @@
 		#{productPrice}, #{productDesc}, SEQ_PRODUCT_ORDER.NEXTVAL,
 		#{productImgName}, #{productImgRename}, #{productImgPath} )
 	</insert>
+	<delete id="deleteProduct">
+		DELETE FROM PRODUCT_TBL WHERE PRODUCT_NO = #{productNo}
+	</delete>
+	<update id="updateProduct">
+		UPDATE PRODUCT_TBL SET
+		PRODUCT_NAME = #{productName}, PRODUCT_TYPE = #{productType},
+		PRODUCT_PRICE = ${productPrice}, PRODUCT_DESC = #{productDesc},
+		PRODUCT_IMG_NAME = #{productImgName}, PRODUCT_IMG_RENAME = #{productImgRename}, PRODUCT_IMG_PATH = #{productImgPath}
+		WHERE PRODUCT_NO = #{productNo}
+	</update>
 </mapper>

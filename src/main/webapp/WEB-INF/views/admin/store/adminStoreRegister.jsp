@@ -9,14 +9,18 @@
       <table width="500px" height="150px">
         <tr>
           <td rowspan="4" width="30%" class="modal-img-area">
-            <label for="product-img-register"><i class="fa-solid fa-file-image fa-lg" id="img-icon"></i><img class="img-preview"></label>
+            <label for="product-img-register"><i class="fa-solid fa-file-image fa-lg" id="img-icon"></i><img class="img-preview" /></label>
             <input type="file" name="productImg" class="product-img" id="product-img-register" accept="image/png, image/jpeg" required />
           </td>
           <th width="20%">유형</th>
           <td width="50%">
             <select name="productType" class="modal-product-type product-type-select" required <c:if test="${empty productTypeList }">disabled</c:if>>
-              <!-- <%-- TODO: Bring values and contents from DB --%> -->
               <c:if test="${empty productTypeList }"><option>없음</option></c:if>
+              <c:if test="${not empty productTypeList }">
+                <c:forEach items="${productTypeList }" var="productType">
+                  <option>${productType.productType }</option>
+                </c:forEach>
+              </c:if>
             </select>
             <button type="button" class="btn-to-input"><i class="fa-solid fa-plus"></i></button>
             <input type="text" class="modal-product-type product-type-input hidden" placeholder="상품 유형을 입력해주세요." />
@@ -37,7 +41,7 @@
         </tr>
       </table>
       <div class="modal-btn-area">
-        <button type="submit" class="modal-btn modal-btn-save">저장</button>
+        <button class="modal-btn modal-btn-save">저장</button>
         <button type="button" class="modal-btn modal-btn-cancel">취소</button>
       </div>
     </form>

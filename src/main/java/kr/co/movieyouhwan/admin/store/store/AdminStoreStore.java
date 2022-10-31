@@ -16,4 +16,10 @@ public interface AdminStoreStore {
   
   List<ProductType> selectProductTypeList(SqlSession session); // 상품 유형 리스트 조회
 
+  int deleteProduct(SqlSession session, Integer productNon); // 상품 삭제
+
+  Product selectProduct(SqlSession session, int productNo); // 상품 조회
+
+  int updateProduct(SqlSession session, Product product); // 상품 수정
+
 }

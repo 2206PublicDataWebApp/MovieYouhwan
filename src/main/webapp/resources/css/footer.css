@@ -1,15 +1,24 @@
 @charset "UTF-8";
 
 #footer-wrapper {
-	margin : 0 auto;
-	margin-top : 60px;
-	height : 120px;
-	background-color : #0F1A3B;
+  margin: 0 auto;
+  margin-top: 60px;
+  height: 120px;
+  background-color: #0f1a3b;
 }
 #footer-inside {
-	width : 1200px;
-	margin : 0 auto;
-	padding-top : 25px;
-	color : #fff;
-	font-size : 12px;
+  width: 1200px;
+  margin: 0 auto;
+  padding-top: 25px;
+  color: #fff;
+  font-size: 12px;
+}
+
+#btn-scroll-top {
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  color: #0f1a3b;
+  background-color: white;
+  border-radius: 50%;
 }

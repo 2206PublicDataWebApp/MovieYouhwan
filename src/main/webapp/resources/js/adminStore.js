@@ -1,96 +1,173 @@
+// 상품 목록 - 상품 가격에 천 단위로 콤마(,) 삽입
+showCommas($('p.product-price'));
+
 const registerBtn = $('#btn-store-register');
 let modifyBtn = $('.btn-store-modify');
 const registerModal = $('#modal-store-register');
 const modifyModal = $('#modal-store-modify');
 let cancelBtn = $('.modal-btn-cancel');
 
-/** 상품 등록 모달창 띄우기 */
+// 상품 등록 - 모달창 출현
 registerBtn.click(function () {
   registerModal.css('display', 'block');
 });
 
-/** 상품 수정 모달창 띄우기 */
+// 상품 수정 - 모달창 출현
 modifyBtn.click(function () {
   modifyModal.css('display', 'block');
+  let productNo = $(this).parent().parent('.product-item').attr('id');
+  let productImgSrc = $(this).parent().siblings('.product-img').attr('src');
+  let productType = $(this).parent().parent().parent().siblings('.product-type').text();
+  let productDetail = $(this).parent().siblings('.product-detail');
+  let productName = productDetail.children('.product-name').text();
+  let productPrice = parseInt(
+    productDetail
+      .children('.product-price')
+      .text()
+      .replace(/[^0-9]/g, '')
+  );
+  let productDesc = productDetail.children('.product-desc').text();
+
+  modifyModal.find('input[name=productNo]').val(productNo);
+  modifyModal.find('.img-preview').attr('src', productImgSrc);
+  modifyModal.find('option').each(function () {
+    if ($(this).text() === productType) {
+      $(this).prop('selected', true);
+    }
+  });
+  modifyModal.find('input[name=productName').val(productName);
+  modifyModal.find('input[name=productPrice').val(productPrice);
+  modifyModal.find('input[name=productDesc').val(productDesc);
 });
 
-let productTypeField = $('.modal-product-type');
-let productTypeBtn = $('button[class^=btn-to]');
-let imgPreview = $('.img-preview');
-let imgIcon = $('#img-icon');
-// let isNewType = $('input[type=hidden]'); // TODO: Delete this later
+let regProductTypeField = registerModal.find('.modal-product-type');
+let regProductTypeBtn = registerModal.find('button[class^=btn-to]');
+let regImgPreview = registerModal.find('.img-preview');
+let regImgIcon = $('#img-icon');
 
-/** 모달창 닫기 */
+let modProductTypeField = modifyModal.find('.modal-product-type');
+let modProductTypeBtn = modifyModal.find('button[class^=btn-to]');
+let modImgPreview = modifyModal.find('.img-preview');
+
+// 상품 등록 - 상품 사진 미리보기
+$('#product-img-register').change(function () {
+  previewImg($(this));
+});
+
+// 상품 등록 - 상품 유형 입력창 전환
+regProductTypeBtn.click(function () {
+  toggleProductType(regProductTypeField, regProductTypeBtn);
+});
+
+// 상품 수정 - 상품 사진 미리보기
+$('#product-img-modify').change(function () {
+  previewImg($(this));
+});
+
+// 상품 수정 - 상품 유형 입력창 전환
+modProductTypeBtn.click(function () {
+  toggleProductType(modProductTypeField, modProductTypeBtn);
+});
+
+// 상품 등록, 수정 - 모달창 닫기
 cancelBtn.click(function () {
-  if (confirm('입력 사항은 저장되지 않습니다. 정말 취소하시겠습니까?')) {
+  if (confirm('변경사항은 저장되지 않습니다. 정말 취소하시겠습니까?')) {
     if (registerModal.css('display') == 'block') {
       registerModal.css('display', 'none');
+      initModal(regProductTypeField, regProductTypeBtn, regImgPreview);
     } else if (modifyModal.css('display') == 'block') {
       modifyModal.css('display', 'none');
+      initModal(modProductTypeField, modProductTypeBtn, modImgPreview);
     }
-    initModal(productTypeField, productTypeBtn);
-    // isNewType.val(''); // TODO: Delete this later
   }
 });
 
-/** 클래스 변경 초기화 */
-function initModal(field, btn) {
-  $('.modal-form').each(function () {
-    this.reset();
-  });
-  field.filter(':even').removeClass('hidden').attr('name', 'productType').prop('required', true);
-  field.filter(':odd').addClass('hidden').removeAttr('name').prop('required', false);
-  btn.filter(':odd').addClass('hidden');
-  btn.filter(':even').removeClass('hidden');
-  imgPreview.attr('src', '');
-  imgIcon.removeClass('hidden');
-}
-
-/** 상품 사진 미리보기 */
-$('#product-img-register').change(function () {
-  if ($(this)[0].files && $(this)[0].files[0]) {
-    let reader = new FileReader();
-    reader.onload = function (e) {
-      imgPreview.attr('src', e.target.result);
-    };
-    reader.readAsDataURL($(this)[0].files[0]);
-    imgIcon.addClass('hidden');
-  } else {
-    imgPreview.attr('src', '');
-  }
+// 상품 재배치 - 드래그앤드롭 순서 변경
+$('.sortable').sortable({
+  // receive: function (event, ui) {
+  //   let order = $(this).sortable('toArray').length;
+  //   console.log(order);
+  // },
+  stop: function (event, ui) {
+    // let data = $(this).sortable('serialize');
+    // console.log(data);
+    // $.ajax({
+    //   data: data,
+    //   type: 'POST',
+    //   url: '/admin/store/save.yh',
+    // });
+  },
 });
 
-/** 상품 등록 시 상품구분 select ~ input 변경 */
-productTypeBtn.click(function () {
-  productTypeField.toggleClass('hidden');
-  productTypeBtn.toggleClass('hidden');
-  // isNewType.toggleClass('hidden'); // TODO: Delete this later
-
-  productTypeField.not('.hidden').attr('name', 'productType').prop('required', true);
-  productTypeField.filter('.hidden').removeAttr('name').prop('required', false);
-
-  $('input.hidden').val('');
-  // isNewType.not('.hidden').val('Y'); // TODO: Delete this later
-});
-
-/** 상품 재배치 페이지로 이동 */
+// 상품 재배치 - 페이지 이동
 $('#btn-store-reorder').click(function () {
-  $(location).attr('href', '/admin/store/reorderView.yh');
+  $(location).attr('href', '/admin/store/reorder.yh');
 });
 
-// 드래그 앤 드롭으로 순서 재배치를 위한 메소드
-$('.sortable').sortable({});
-
-/** 상품 재배치 취소 (Alert) */
+// 상품 재배치 - 취소
 $('#btn-store-cancel').click(function () {
   if (confirm('변경 사항은 저장되지 않습니다. 정말 취소하시겠습니까?')) {
     $(location).attr('href', '/admin/store/manage.yh');
   }
 });
 
-/** 상품 삭제 (Alert) */
-$('.btn-store-delete').click(function () {
+// 상품 삭제
+$('.btn-store-delete').click(function (e) {
+  e.preventDefault();
   if (confirm('정말 삭제하시겠습니까?')) {
-    $(location).attr('replace', '/admin/store/delete.yh');
+    let deleteForm = $('<form></form>');
+    deleteForm.attr('action', '/admin/store/delete.yh');
+    deleteForm.attr('method', 'post');
+
+    let deleteInput = $('<input />');
+    deleteInput.attr('type', 'hidden');
+    deleteInput.attr('name', 'productNo');
+    deleteInput.attr('value', $(this).parent().parent('.product-item').attr('id'));
+
+    deleteInput.appendTo(deleteForm);
+    deleteForm.appendTo('body');
+    deleteForm.submit();
   }
 });
+
+/** 상품 가격에 천 단위로 콤마(,) 삽입 함수 */
+function showCommas(numberStr) {
+  numberStr.each(function () {
+    let productPrice = Number($(this).text());
+    $(this).text(productPrice.toLocaleString() + '원');
+  });
+}
+
+/** 사진 미리보기 함수 */
+function previewImg(img) {
+  if (img[0].files && img[0].files[0]) {
+    let reader = new FileReader();
+    reader.onload = function (e) {
+      img.parent().find('.img-preview').attr('src', e.target.result);
+    };
+    reader.readAsDataURL(img[0].files[0]);
+    regImgIcon.addClass('hidden');
+  }
+}
+
+/** 상품 유형 입력창 전환 함수 */
+function toggleProductType(field, btn) {
+  field.toggleClass('hidden');
+  btn.toggleClass('hidden');
+  field.not('.hidden').attr('name', 'productType').prop('required', true);
+  field.filter('.hidden').removeAttr('name').prop('required', false);
+  $('input.hidden').val('');
+}
+
+/** 모달 초기화 함수 */
+function initModal(field, btn, img) {
+  $('.modal-form').each(function () {
+    this.reset();
+  });
+  field.filter('select').removeClass('hidden').attr('name', 'productType').prop('required', true);
+  field.filter('input').addClass('hidden').removeAttr('name').prop('required', false);
+  btn.filter('select').removeClass('hidden');
+  btn.filter('input').addClass('hidden');
+  img.attr('src', '');
+  regImgIcon.removeClass('hidden');
+}

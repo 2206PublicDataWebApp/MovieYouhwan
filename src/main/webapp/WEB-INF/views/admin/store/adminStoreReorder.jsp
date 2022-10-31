@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,12 +8,14 @@
     <title>무비유환 : 스토어 상품 재배치</title>
     <link rel="stylesheet" href="/resources/css/common.css" />
     <link rel="stylesheet" href="/resources/css/header.css" />
+    <link rel="stylesheet" href="/resources/css/footer.css" />
     <link rel="stylesheet" href="/resources/css/store.css" />
     <link rel="stylesheet" href="/resources/css/jquery-ui.min.css" />
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="/resources/js/jquery-ui.min.js" defer></script>
     <script src="/resources/js/header.js" defer></script>
+    <script src="/resources/js/footer.js" defer></script>
     <script src="/resources/js/adminStore.js" defer></script>
   </head>
   <body>
@@ -21,10 +23,9 @@
     <div id="store-wrapper">
       <div id="store-menu">
         <ul id="store-tab">
-          <li class="store-tab-item"><a href="#">콤보</a></li>
-          <li class="store-tab-item"><a href="#">팝콘</a></li>
-          <li class="store-tab-item"><a href="#">음료</a></li>
-          <li class="store-tab-item"><a href="#">스낵</a></li>
+          <c:forEach items="${productTypeList }" var="productType">
+            <li class="store-tab-item"><a href="#product-type-no${productType.productTypeNo }">${productType.productType }</a></li>
+          </c:forEach>
         </ul>
         <div id="store-links">
           <button class="btn-store-list btn-store-mng" id="btn-store-cancel">취소</button>
@@ -32,55 +33,27 @@
         </div>
       </div>
       <div id="store-main">
-        <%-- #product-per-type 반복 --%>
-        <div class="product-per-type">
-          <%-- .product-type에 동적으로 id 값 주기 --%>
-          <h2 class="product-type">콤보</h2>
-          <ul class="product-list sortable">
-            <%-- .product-item 반복 --%>
-            <li class="product-item">
-              <img src="/resources/images/storeProduct/hotdog.png" alt="${product.productImageRename}" class="product-img" />
-              <div class="product-detail">
-                <p class="product-desc">${product.productDesc}상품 설명</p>
-                <p class="product-name">${product.productName}상품 이름</p>
-                <p class="product-price">${product.productPrice}9,000원</p>
-              </div>
-            </li>
-            <li class="product-item">
-              <img src="/resources/images/storeProduct/hotdog.png" alt="${product.productImageRename}" class="product-img" />
-              <div class="product-detail">
-                <p class="product-desc">${product.productDesc}상품 설명</p>
-                <p class="product-name">${product.productName}상품 이름</p>
-                <p class="product-price">${product.productPrice}9,000원</p>
-              </div>
-            </li>
-            <li class="product-item">
-              <img src="/resources/images/storeProduct/hotdog.png" alt="${product.productImageRename}" class="product-img" />
-              <div class="product-detail">
-                <p class="product-desc">${product.productDesc}상품 설명</p>
-                <p class="product-name">${product.productName}상품 이름</p>
-                <p class="product-price">${product.productPrice}9,000원</p>
-              </div>
-            </li>
-            <li class="product-item">
-              <img src="/resources/images/storeProduct/hotdog.png" alt="${product.productImageRename}" class="product-img" />
-              <div class="product-detail">
-                <p class="product-desc">${product.productDesc}상품 설명</p>
-                <p class="product-name">${product.productName}상품 이름</p>
-                <p class="product-price">${product.productPrice}9,000원</p>
-              </div>
-            </li>
-            <li class="product-item">
-              <img src="/resources/images/storeProduct/hotdog.png" alt="${product.productImageRename}" class="product-img" />
-              <div class="product-detail">
-                <p class="product-desc">${product.productDesc}상품 설명</p>
-                <p class="product-name">${product.productName}상품 이름</p>
-                <p class="product-price">${product.productPrice}9,000원</p>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <c:forEach items="${productTypeList }" var="productType">
+          <div class="product-per-type">
+            <h2 class="product-type" id="product-type-no${productType.productTypeNo }">${productType.productType }</h2>
+            <ul class="product-list sortable">
+              <c:forEach items="${productList }" var="product">
+                <c:if test="${productType.productType eq product.productType }">
+                  <li class="product-item" id="${product.productNo }">
+                    <img src="/resources/images/storeProduct/${product.productImgRename}" alt="" class="product-img" />
+                    <div class="product-detail">
+                      <p class="product-desc">${product.productDesc}</p>
+                      <p class="product-name">${product.productName}</p>
+                      <p class="product-price">${product.productPrice}</p>
+                    </div>
+                  </li>
+                </c:if>
+              </c:forEach>
+            </ul>
+          </div>
+        </c:forEach>
       </div>
     </div>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
   </body>
 </html>

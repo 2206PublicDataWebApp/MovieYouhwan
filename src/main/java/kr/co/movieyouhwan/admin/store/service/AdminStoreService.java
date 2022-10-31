@@ -13,4 +13,10 @@ public interface AdminStoreService {
 
   List<ProductType> printProductTypeList(); // 상품 유형 리스트 불러오기 
 
+  int deleteProduct(Integer productNo); // 상품 삭제
+
+  Product printOneProduct(int productNo); // 상품 불러오기
+
+  int modifyProduct(Product modProduct); // 상품 수정
+
 }

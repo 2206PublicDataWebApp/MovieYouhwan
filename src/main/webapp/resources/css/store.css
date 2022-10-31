@@ -46,7 +46,7 @@
 
 /* storeList, adminStoreList, adminStoreReorder - 상품 목록 */
 .product-type {
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
 .product-list {
@@ -57,10 +57,11 @@
 
 .product-item {
   width: 333px;
-  height: 300px;
+  height: 370px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  background-color: #fff;
 }
 
 .product-item > a {
@@ -69,8 +70,9 @@
 }
 
 .product-img {
+  object-fit: contain;
   max-width: 300px;
-  max-height: 300px;
+  max-height: 220px;
 }
 
 .product-detail {
@@ -79,10 +81,12 @@
 
 .product-detail .product-desc {
   color: gray;
+  font-size: 14px;
 }
 
 .product-detail .product-name {
   font-family: mice-bold;
+  margin: 1px 0;
 }
 
 .store-btn {
