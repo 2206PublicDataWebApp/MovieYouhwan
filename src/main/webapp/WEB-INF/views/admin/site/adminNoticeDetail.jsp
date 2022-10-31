@@ -87,8 +87,8 @@
       <form method="post"> 
         <input type="hidden" name="noticeNo" value="${notice.noticeNo}">
         <div id="btn-area">
-          <button type="submit" class="left-top-dark-btn" onclick="javascript:form.action='/admin/noticeModifyForm.yh'">수정</button>
-          <button type="submit" class="right-top-white-btn" onclick="javascript:form.action='/admin/noticeDeleteOne.yh'">삭제</button>
+          <button type="submit" class="left-top-dark-btn" onclick="form.action='/admin/noticeModifyForm.yh'">수정</button>
+          <button type="submit" class="right-top-white-btn" onclick="form.action='/admin/noticeDeleteOne.yh'">삭제</button>
         </div>
       </form>
       <hr />
@@ -130,7 +130,7 @@
         <hr />
       </div>
       <div class="list-btn-area">
-        <button type="button" class="list-btn" onclick="location.href='/admin/site/manage.yh?tabIndex=2'">목록</button>
+        <button type="button" class="list-btn" onclick="location.href='/admin/site/manage.yh?tabIndex=2&nCurrentPage=${nCurrentPage}'">목록</button>
       </div>
     </div>
   </body>

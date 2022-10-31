@@ -86,8 +86,8 @@
       </div>
 
       <div id="btn-area">
-        <button id="cancel-btn" type="button" onclick="javascript:history.go(-1);">취소</button>
-        <button id="register-btn" type="submit" onclick="javascript:form.action='/admin/faqModify.yh'">수정</button>
+        <button id="cancel-btn" type="button" onclick="history.go(-1);">취소</button>
+        <button id="register-btn" type="submit" onclick="form.action='/admin/faqModify.yh'">수정</button>
       </div>
     </form>
     </div>

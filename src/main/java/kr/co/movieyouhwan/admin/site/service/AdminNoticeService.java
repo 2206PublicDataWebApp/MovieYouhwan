@@ -3,12 +3,13 @@ package kr.co.movieyouhwan.admin.site.service;
 import java.util.List;
 
 import kr.co.movieyouhwan.admin.site.domain.Notice;
+import kr.co.movieyouhwan.common.page.PageInfo;
 
 public interface AdminNoticeService {
 
 	int registerNotice(Notice notice);
 
-	List<Notice> printNoticeList();
+	List<Notice> printNoticeList(PageInfo nPageInfo);
 
 	int deleteFaqList(String deleteNo);
 
@@ -21,5 +22,11 @@ public interface AdminNoticeService {
 	int deleteFaq(int noticeNo);
 
 	int modifyNotice(Notice notice);
+
+	int printTotalNoticeCount();
+
+	int printTotalNoticeCount(String searchOption, String searchValue);
+
+	List<Notice> printNoticeListBySearch(String searchOption, String searchValue, PageInfo nPageInfo);
 
 }

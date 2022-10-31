@@ -89,8 +89,8 @@
         <hr />
         <div id="input-content-area"><textarea id="input-content" name="faqContent" wrap="hard" cols="100"></textarea></div>
         <div id="btn-area">
-          <button id="cancel-btn" type="button" onclick="javascript:history.go(-1);">취소</button>
-          <button id="register-btn" type="submit" onclick="javascript:form.action='/admin/faqRegister.yh'">등록</button>
+          <button id="cancel-btn" type="button" onclick="history.go(-1);">취소</button>
+          <button id="register-btn" type="submit" onclick="form.action='/admin/faqRegister.yh'">등록</button>
         </div>
       </form>
     </div>

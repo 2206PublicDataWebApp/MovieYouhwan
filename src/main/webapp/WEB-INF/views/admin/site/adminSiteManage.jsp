@@ -18,10 +18,10 @@
       <div id="homepage-menu">
         <input type="hidden" id="tabIndex" value="${tabIndex}" />
         <ul id="homepage-tab">
-          <li class="homepage-tab-item" id="homepage-tab-banner"><a class="homepage-tab-border">Q&A</a></li>
-          <li class="homepage-tab-item" id="homepage-tab-faq"><a>FAQ</a></li>
-          <li class="homepage-tab-item" id="homepage-tab-qna"><a>공지사항</a></li>
-          <li class="homepage-tab-item" id="homepage-tab-notice"><a>배너</a></li>
+          <li class="homepage-tab-item" id="homepage-tab-banner"><a href="/admin/site/manage.yh?tabIndex=0">Q&A</a></li>
+          <li class="homepage-tab-item" id="homepage-tab-faq"><a href="/admin/site/manage.yh?tabIndex=1">FAQ</a></li>
+          <li class="homepage-tab-item" id="homepage-tab-qna"><a href="/admin/site/manage.yh?tabIndex=2">공지사항</a></li>
+          <li class="homepage-tab-item" id="homepage-tab-notice"><a href="/admin/site/manage.yh?tabIndex=3">배너</a></li>
         </ul>
       </div>
       <hr />

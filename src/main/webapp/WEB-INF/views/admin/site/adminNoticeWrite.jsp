@@ -66,6 +66,7 @@
       #input-title-area {
         width: 100%;
       }
+
     </style>
   </head>
   <body>
@@ -81,10 +82,14 @@
         <hr />
         <div id="input-content-area"><textarea id="input-content" name="noticeContent" wrap="hard" cols="100"></textarea></div>
         <div id="btn-area">
-          <button id="cancel-btn" type="button" onclick="javascript:history.go(-1);">취소</button>
-          <button id="register-btn" type="submit" onclick="javascript:form.action='/admin/noticeRegister.yh'">등록</button>
+          <button id="cancel-btn" type="button" onclick="history.go(-1);">취소</button>
+          <button id="register-btn" type="submit" onclick="form.action='/admin/noticeRegister.yh'">등록</button>
         </div>
       </form>
+    </div>
+
+    
+
     </div>
   </body>
 </html>
