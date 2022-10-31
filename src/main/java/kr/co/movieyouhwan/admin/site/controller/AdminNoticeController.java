@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.movieyouhwan.admin.site.domain.Notice;
 import kr.co.movieyouhwan.admin.site.service.AdminNoticeService;
+import kr.co.movieyouhwan.common.page.PageInfo;
 
 @Controller
 public class AdminNoticeController {
@@ -33,14 +34,17 @@ public class AdminNoticeController {
 		}
 		return mv;
 	}
-	@RequestMapping(value="/admin/NoticeDetail.yh", method=RequestMethod.GET)
-	public ModelAndView adminNoticeDetailView(ModelAndView mv, @RequestParam("noticeNo") int noticeNo) {
+	
+	@RequestMapping(value="/admin/noticeDetail.yh", method=RequestMethod.GET)
+	public ModelAndView adminNoticeDetailView(ModelAndView mv, @RequestParam("noticeNo") int noticeNo,
+			@RequestParam("nCurrentPage") int nPage) {
 		Notice notice=aNoticeService.printOneNotice(noticeNo);
 		notice.setPrevNotice(aNoticeService.printPrevNotice(notice.getNoticeNo()));
 		notice.setNextNotice(aNoticeService.printNextNotice(notice.getNoticeNo()));
 		
 //		System.out.println(notice.getPrevNotice().getNoticeTitle());
 		mv.addObject("notice", notice);
+		mv.addObject("nCurrentPage", nPage);
 		mv.setViewName("admin/site/adminNoticeDetail");
 		
 		return mv;
@@ -90,16 +94,36 @@ public class AdminNoticeController {
 		return mv;
 	}
 	
-//	@RequestMapping(value="/admin/noticeSearch.yh", method=RequestMethod.GET)
-//	public ModelAndView adminNoticeSearch(ModelAndView mv,
-//			@RequestParam("searchValue") String searchValue,
-//			@RequestParam("searcOption") String searchOption) {
-//		try {
-//			List<Notice> nList=aNoticeService.printNoticeListBySearch(searchOption, searchValue);
-//		}catch(Exception e){
-//			
-//		}
-//		return mv;
-//	}
+	@RequestMapping(value="/admin/noticeSearch.yh", method=RequestMethod.POST)
+	public ModelAndView adminNoticeSearch(ModelAndView mv,
+			@RequestParam("searchValue") String searchValue,
+			@RequestParam("searchOption") String searchOption,
+			@RequestParam(value="nCurrentPage", required=false) Integer nPage) {
+		try {
+			System.out.println(searchValue);
+			int nCurrentPage=(nPage!=null?nPage:1);
+			int totalCountBySearch=aNoticeService.printTotalNoticeCount(searchOption, searchValue);
+			System.out.println(1);
+			PageInfo nPageInfo=new PageInfo(nCurrentPage, totalCountBySearch, 10, 5);
+			System.out.println(2);
+			List<Notice> nList=aNoticeService.printNoticeListBySearch(searchOption, searchValue, nPageInfo);
+			System.out.println(3);
+			if(nList!=null) {
+				mv.addObject("nList", nList);
+				mv.addObject("nPageInfo", nPageInfo);
+				mv.addObject("searchOption", searchOption);
+				mv.addObject("searchValue", searchValue);
+				mv.addObject("tabIndex", 2);
+				mv.setViewName("admin/site/adminSiteManage");
+			}
+			else {
+				System.out.println("nList is null");
+			}
+			
+		}catch(Exception e){
+			System.out.println(e.getLocalizedMessage());
+		}
+		return mv;
+	}
 	
 }

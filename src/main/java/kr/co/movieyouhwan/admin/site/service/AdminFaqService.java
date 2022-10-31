@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.movieyouhwan.admin.site.domain.Faq;
+import kr.co.movieyouhwan.common.page.PageInfo;
 
 public interface AdminFaqService {
 

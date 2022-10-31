@@ -253,6 +253,31 @@ i {
   float: right;
 }
 
+/* Pagination */
+
+.pagination-area {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.pagination {
+  color: black;
+  padding: 50px 0;
+  display: flex;
+  align-items: center;
+}
+
+.pagination a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  /* cursor: default; */
+}
+
 /*  */
 /* 등록, 수정 jsp */
 /*  */

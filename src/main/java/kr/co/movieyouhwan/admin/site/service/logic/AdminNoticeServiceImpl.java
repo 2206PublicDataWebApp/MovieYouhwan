@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.co.movieyouhwan.admin.site.domain.Notice;
 import kr.co.movieyouhwan.admin.site.service.AdminNoticeService;
 import kr.co.movieyouhwan.admin.site.store.AdminNoticeStore;
+import kr.co.movieyouhwan.common.page.PageInfo;
 
 @Service
 public class AdminNoticeServiceImpl implements AdminNoticeService{
@@ -26,8 +27,8 @@ public class AdminNoticeServiceImpl implements AdminNoticeService{
 	}
 
 	@Override
-	public List<Notice> printNoticeList() {
-		List<Notice> nList=aNoticeStore.selectNoticeList(session);
+	public List<Notice> printNoticeList(PageInfo nPageInfo) {
+		List<Notice> nList=aNoticeStore.selectNoticeList(session, nPageInfo);
 		return nList;
 	}
 
@@ -65,6 +66,24 @@ public class AdminNoticeServiceImpl implements AdminNoticeService{
 	public int modifyNotice(Notice notice) {
 		int result=aNoticeStore.updateNotice(session, notice);
 		return result;
+	}
+
+	@Override
+	public int printTotalNoticeCount() {
+		int count=aNoticeStore.selectNoticeTotlaCount(session);
+		return count;
+	}
+
+	@Override
+	public int printTotalNoticeCount(String searchOption, String searchValue) {
+		int count=aNoticeStore.selectNoticeTotlaCount(session, searchOption, searchValue);
+		return count;
+	}
+
+	@Override
+	public List<Notice> printNoticeListBySearch(String searchOption, String searchValue, PageInfo nPageInfo) {
+		List<Notice> nList=aNoticeStore.selectNoticeListBySearch(session, searchOption, searchValue, nPageInfo);
+		return nList;
 	}
 	
 	

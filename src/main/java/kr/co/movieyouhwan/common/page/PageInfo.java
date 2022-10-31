@@ -8,8 +8,24 @@ public class PageInfo {
   private int pageCount; // 총 페이징 넘버 개수
   private int startPage;
   private int endPage;
+  
+  public PageInfo() {
+	super();
+}
+  public PageInfo(int currentPage, int dataCount, int dataLimit, int pageLimit) {
+	  this.currentPage=currentPage;
+	  this.dataCount=dataCount;
+	  this.dataLimit=dataLimit;
+	  this.pageLimit=pageLimit;
+	  this.pageCount=(int) ((double) dataCount / dataLimit + 0.9);
+	  this.startPage=((int) ((double) currentPage / pageLimit + 0.9) - 1) * pageLimit + 1;
+	  this.endPage=this.startPage + this.pageLimit - 1;
+	  if(this.pageCount<this.endPage) {
+		  this.endPage=this.pageCount;
+	  }
+  }
 
-  public int getCurrentPage() {
+public int getCurrentPage() {
     return currentPage;
   }
 
