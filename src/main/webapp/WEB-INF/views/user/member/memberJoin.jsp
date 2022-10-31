@@ -35,9 +35,11 @@
                                     	         아이디
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
-                                            <span class="guide id-error">이미 사용중인 ID입니다.헐</span>
-                                            <span class="guide id-ok">사용 가능한 ID입니다</span>
-                                            <span class="guide id_check" id="id_check"></span>
+                                        <div class="id-check-wrap">
+                                            <span class="fix guide id-error">이미 사용중인 ID입니다.</span>
+                                            <span class="fix guide id-ok">사용 가능한 ID입니다</span>
+                                            <span class="fix id_check" id="id_check"></span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
