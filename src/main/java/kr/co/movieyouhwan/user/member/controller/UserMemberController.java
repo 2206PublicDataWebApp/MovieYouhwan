@@ -28,7 +28,7 @@ public class UserMemberController {
 		return "/user/member/memberJoin";
 	}
 	/**
-	 * 
+	 * 회원가입
 	 * @param member
 	 * @param mv
 	 * @return
@@ -85,6 +85,7 @@ public class UserMemberController {
 		return mv;
 	}
 	
+	
 	/**
 	 * 로그인 후 이동할 페이지
 	 */
@@ -94,19 +95,79 @@ public class UserMemberController {
 	}
 	
 	/**
+	 * 로그아웃
+	 * @param request
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping(value = "/member/logout.yh", method = RequestMethod.GET)
+	public ModelAndView memberLogout(
+			HttpServletRequest request
+			,ModelAndView mv) {
+		HttpSession session = request.getSession();
+		if(session != null) {
+			session.invalidate();
+			mv.setViewName("redirect:/home.yh");
+		}else {
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	/**
 	 * 아이디 중복 체크
 	 * @param memberId
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/member/idSearch.yh", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/idSearch.yh", method= {RequestMethod.GET, RequestMethod.POST})
 	public String duplicateIdCheck(@RequestParam("memberId") String memberId) {
 		// 데이터가 있으면 객체 or 1 or true
 		// 데이터가 없으면  null or 0 or false
+		System.out.println(memberId);
 		int result = uMemberService.checkDupId(memberId);
 		return String.valueOf(result);
 	}
 	
+	
+	/**
+	 * 마이페이지 
+	 * ----- 탑 메뉴(포인트, 메이트)
+	 * ----- 메뉴 탭
+	 * @param request
+	 * @param mv
+	 * @return
+	 */
+	
+	  @RequestMapping(value = "/member/profileModify.yh", method = RequestMethod.GET) 
+	  public ModelAndView showMyPage(
+		  @ModelAttribute Member member
+		  ,ModelAndView mv) { 
+		  try { 
+			int result = uMemberService.modifyMember(member);
+			if(result > 0) {
+				mv.setViewName("redirect:/home.kh");
+			}else {
+				mv.addObject("msg", "회원 정보 수정 실패");
+				mv.setViewName("common/errorPage");
+			}
+		  }catch (Exception e) { 
+			  mv.addObject("msg",e.getMessage()).setViewName("common/errorPage"); 
+			  } 
+		  return mv;
+		  } 
+	  
+		
+	 
+	
+	
+	/**
+	 * 아이디 찾기
+	 * @return
+	 */
+	@RequestMapping(value="/member/findId.yh", method=RequestMethod.GET)
+	public String memberFindId() {
+		return "/user/member/memberFindId";
+	}
 	
 }
 

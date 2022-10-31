@@ -40,7 +40,14 @@ public class UserMemberStoreLogic implements UserMemberStore {
 	 */
 	@Override
 	public int checkDupId(SqlSessionTemplate session, String memberId) {
-		int result = session.insert("MembmerMapper.checkIdDuplicate", memberId);
+		int result = session.selectOne("MemberMapper.checkIdDuplicate", memberId);
+		return result;
+	}
+	
+	// 회원정보 수정
+	@Override
+	public int updateMember(SqlSessionTemplate session, Member member) {
+		int result = session.update("MemberMapper.updateMember", member);
 		return result;
 	}
 }

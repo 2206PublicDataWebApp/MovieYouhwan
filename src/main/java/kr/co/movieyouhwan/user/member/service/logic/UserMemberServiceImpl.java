@@ -41,5 +41,16 @@ public class UserMemberServiceImpl implements UserMemberService {
 		int result = uMemberStore.checkDupId(session, memberId);
 		return result;
 	}
+	// 회원정보 수정
+	@Override
+	public Member printOneById(String memberId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int modifyMember(Member member) {
+		int result = uMemberStore.updateMember(session, member);
+		return result;
+	}
 	
 }

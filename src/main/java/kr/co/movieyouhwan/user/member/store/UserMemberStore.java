@@ -14,6 +14,9 @@ public interface UserMemberStore {
 	
 	// 아이디 중복 체크
 	public int checkDupId(SqlSessionTemplate session, String memberId);
+
+	// 회원정보 수정
+	public int updateMember(SqlSessionTemplate session, Member member);
 	
 	
 }

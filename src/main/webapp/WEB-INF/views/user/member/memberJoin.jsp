@@ -26,18 +26,18 @@
             <div id="container">
                 <div class="membership-form">
                     <h1 id="join_header">회 원 가 입</h1>
-                        <form action="/member/join.yh" method="post" id="usercheck">
+                        <form action="/member/join.yh" method="get" id="usercheck">
                         <div id="join_content">
                             <div class="login-input">
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
                                         <div class="input-name">
-                                    	        아이디
+                                    	         아이디
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
-                                            <span class="guide id-error">이미 사용중인 ID입니다.헐~</span>
+                                            <span class="guide id-error">이미 사용중인 ID입니다.헐</span>
                                             <span class="guide id-ok">사용 가능한 ID입니다</span>
-                                            <span class="id_check" id="id_check"></span>
+                                            <span class="guide id_check" id="id_check"></span>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
@@ -48,10 +48,11 @@
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
                                         <div class="input-name">
-                                            비밀번호
+                                           		 비밀번호
                                             <span class="required-input">&nbsp;⦁</span>
                                         </div>
-                                        <div id="pwd-error">사용조건에 맞는 비밀번호를 입력해주세요</div>
+                                        <div id="pwd-error"></div>
+                                        <!-- 임시 <div id="pwd-error">사용조건에 맞는 비밀번호를 입력해주세요</div> -->
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
@@ -62,10 +63,11 @@
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
                                         <div class="input-name">
-                                            비밀번호
+                                            	비밀번호확인
                                             <span class="required-input">&nbsp;⦁</span>
                                         </div>
-                                        <div id="pwd-error">비밀번호가 일치하지 않습니다</div>
+                                        <div id="pw_check"></div>
+                                        <!-- <div id="pwd-error">비밀번호가 일치하지 않습니다</div> -->
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
@@ -76,7 +78,7 @@
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
                                         <div class="input-name">
-                                            이름
+                                            	이름
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
                                     </div>
@@ -89,7 +91,7 @@
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
                                         <div class="input-name">
-                                            닉네임
+                                            	닉네임
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
                                     </div>
@@ -102,7 +104,7 @@
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
                                         <div class="input-name">
-                                            생년월일
+                   				                           생년월일
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
                                     </div>
@@ -115,16 +117,15 @@
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
                                         <div class="input-name">
-                                            성별
+                                           	성별
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
                                     <div id="input-gender-wrap">
-                                        <!-- css 추가해야함 -->
-                                        <label for="female"><input type="radio" id="memberGender" name="memberGender" value="여" checked/>여</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <label for="male"><input type="radio" id="memberGender" name="memberGender" value="남"/>남</label><br>  
+                                        <label for="female"><input type="radio" name="memberGender" value="여" checked/>여</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="male"><input type="radio" name="memberGender" value="남"/>남</label><br>  
                                     </div>
                                 </div>
                             </div>
@@ -181,11 +182,11 @@
                                         <div id="allAgreeTerms">약관 전체 동의하기</div>
                                     </div>
                                     <div class="agreecheck">
-                                        <input type="checkbox" name="check" id="check" class="check">
+                                        <input type="checkbox" name="check" class="check">
                                         <div Id="checkTerms">[필수] 개인정보 수집 및 이용 동의</div>
                                     </div>
                                     <div class="agreecheck">
-                                        <input type="checkbox" name="check" id="check" class="check">
+                                        <input type="checkbox" name="check" class="check">
                                         <div Id="checkTerms">[필수] 무비유환 이용 약관</div>
                                     </div>
                                 </div>
