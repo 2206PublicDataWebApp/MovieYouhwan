@@ -14,7 +14,7 @@
 		</c:if>
 		<c:if test="${not empty loginUser}">
 			<ul id="navbar-links">
-				<li><a href="/member/logout.yh">로그아웃</a></li>
+				<li><a href="javascript:void(0);" onclick="confirmLogout();">로그아웃</a></li>
 				<li><a href="/my/myPageMain.yh">마이페이지</a></li>
 			</ul>
 		</c:if>

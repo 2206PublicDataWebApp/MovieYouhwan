@@ -1,5 +1,10 @@
 package kr.co.movieyouhwan.user.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
@@ -31,14 +37,36 @@ public class UserMemberController {
 	 * 회원가입
 	 * @param member
 	 * @param mv
+	 * @param uploadFile
+	 * @param request
 	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
 	 */
 	@ResponseBody
 	@RequestMapping(value="/member/join.yh",method = RequestMethod.POST)
 	public ModelAndView memberJoin(
-			@ModelAttribute Member member,
-			ModelAndView mv) {
-		uMemberService.registerMember(member);
+			@ModelAttribute Member member
+			, ModelAndView mv
+			, @RequestParam(value="uploadFile", required = false) MultipartFile uploadFile
+			, HttpServletRequest request) throws IllegalStateException, IOException {
+		String memberProfileName = uploadFile.getOriginalFilename();  // 단일 이미지 등록
+		if (!memberProfileName.equals("")) {
+			String root = request.getSession().getServletContext().getRealPath("resources\\images");
+			String savePath = root + "\\userProfileImg";
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String memberProfileRename = sdf.format(new Date(System.currentTimeMillis())) + "." + memberProfileName.substring(memberProfileName.lastIndexOf(".") + 1);
+			File file = new File(savePath);
+			if(!file.exists()) {
+				file.mkdir();
+			}
+			uploadFile.transferTo(new File(savePath + "\\" + memberProfileRename));
+			String memberProfilePath = savePath + "\\" + memberProfileRename;
+			member.setMemberImgName(memberProfileName);
+			member.setMemberImgRename(memberProfileRename);
+			member.setMemberImgRename(memberProfilePath);
+		}
+		int result = uMemberService.registerMember(member);
 		mv.setViewName("redirect:/member/loginSuccess.yh");
 		
 		return mv;
@@ -53,9 +81,10 @@ public class UserMemberController {
 		return "/user/member/memberLogin";
 	}
 	/**
-	 * 로그인 기능
-	 * 구현 중
-	 * method=RequestMethod.POST로 변경할 것
+	 * 로그인..
+	 * @param member
+	 * @param mv
+	 * @param request
 	 * @return
 	 */
 	@RequestMapping(value="/member/login.yh", method=RequestMethod.POST)
@@ -75,23 +104,23 @@ public class UserMemberController {
 				
 			}else {
 				mv.addObject("msg", "잘못된 입력입니다.");
-				mv.setViewName("common/errorPage");
+				mv.setViewName("redirect:/member/loginError.yh");
 			}
 			
 		} catch (Exception e) {
 			mv.addObject("msg",e.toString());
-			mv.setViewName("common/errorPage");
+			mv.setViewName("user/loginError");
 		}
 		return mv;
 	}
 	
 	
 	/**
-	 * 로그인 후 이동할 페이지
+	 * 로그인 실패시
 	 */
-	@RequestMapping(value = "/member/loginSuccess.yh", method = RequestMethod.GET)
-	public String memberJoinSuccess() {
-		return "/user/member/joinSuccess";
+	@RequestMapping(value = "/member/loginError.yh", method = RequestMethod.GET)
+	public String loginError() {
+		return "/user/member/loginError";
 	}
 	
 	/**
@@ -119,7 +148,7 @@ public class UserMemberController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/member/idSearch.yh", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/member/idSearch.yh", method= RequestMethod.GET)
 	public String duplicateIdCheck(@RequestParam("memberId") String memberId) {
 		// 데이터가 있으면 객체 or 1 or true
 		// 데이터가 없으면  null or 0 or false
@@ -165,9 +194,26 @@ public class UserMemberController {
 	 * @return
 	 */
 	@RequestMapping(value="/member/findId.yh", method=RequestMethod.GET)
-	public String memberFindId() {
-		return "/user/member/memberFindId";
+	public String findId() {
+		return "/user/member/findId";
 	}
+	
+	/**
+	 * 비밀번호 찾기
+	 * @return
+	 */
+	@RequestMapping(value="/member/findPassword.yh", method=RequestMethod.GET)
+	public String findPassword() {
+		return "/user/member/findPassword";
+	}
+	
+	/*
+	 * @RequestMapping(value = "/member/myPoint.yh", method = RequstMethod.GET)
+	 * public ModelAndView pointHistoryView( HttpServletRequest request,
+	 * 
+	 * @RequestParam(value = ""))
+	 */
+	
 	
 }
 

@@ -197,6 +197,9 @@ input[type='radio'] {
     flex-direction: column;
     align-items: center;
 }
+#profile-img{
+    display: none;
+}
 /* 체크박스 */
 .checkAll {
     -webkit-appearance:none;

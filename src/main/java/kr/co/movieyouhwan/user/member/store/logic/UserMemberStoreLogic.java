@@ -1,6 +1,5 @@
 package kr.co.movieyouhwan.user.member.store.logic;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +21,7 @@ public class UserMemberStoreLogic implements UserMemberStore {
 	 * 회원가입
 	 */
 	@Override
-	public int insertUserMember(SqlSession session, Member member) {
+	public int insertUserMember(SqlSessionTemplate session, Member member) {
 		int result = session.insert("MemberMapper.insertMember", member);
 		return result;
 	}
