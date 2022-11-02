@@ -1,0 +1,51 @@
+@font-face {
+  font-family: mice-bold;
+  src: url('../font/MICEGothic\ Bold.ttf');
+}
+
+.mate-start-wrapper {
+  width: 100%;
+  background-image: url('/resources/images/mate/mate_start.jpg');
+  background-size: cover;
+  background-color: black;
+  height: 1500px;
+}
+
+.agree-txt-box {
+  width: 60%;
+  background-color: whitesmoke;
+  opacity: 0.8;
+  border-radius: 20px;
+  padding: 30px 30px;
+  line-height: 1.5em;
+  white-space: pre;
+}
+
+/* @keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 3;
+    transform: none;
+  }
+}
+
+main {
+  animation: fadeIn 0.5s ease-in-out;
+} */
+/* .fade-in-bottom {
+  top: 500px;
+  opacity: 0;
+  max-width: 100%;
+} */
+
+/* .mate-agree {
+  background-image: url('/resources/images/mate/mate_start.jpg');
+  background-size: cover;
+  background-color: black;
+  width: 1200px;
+  height: 1500px;
+} */

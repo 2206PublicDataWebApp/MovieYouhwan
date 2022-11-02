@@ -36,7 +36,7 @@
   <div class="pagination-area">
     <ul class="pagination">
       <c:if test="${nPageInfo.startPage ne 1}">
-        <li><a href="/admin/site/manage.yh?nCurrentPage=${nPageInfo.startPage-1}&tabIndex=2">&laquo;</a></li>
+        <li><a href="/admin/site/manage.yh?nCurrentPage=${nPageInfo.startPage-1}&tabIndex=2&">&laquo;</a></li>
       </c:if>
       <c:forEach var="page" begin="${nPageInfo.startPage }" end="${nPageInfo.endPage }">
         <c:if test="${nPageInfo.currentPage eq page}">
