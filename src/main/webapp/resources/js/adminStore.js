@@ -82,26 +82,50 @@ cancelBtn.click(function () {
   }
 });
 
-// 상품 재배치 - 드래그앤드롭 순서 변경
-$('.sortable').sortable({
-  // receive: function (event, ui) {
-  //   let order = $(this).sortable('toArray').length;
-  //   console.log(order);
-  // },
-  stop: function (event, ui) {
-    // let data = $(this).sortable('serialize');
-    // console.log(data);
-    // $.ajax({
-    //   data: data,
-    //   type: 'POST',
-    //   url: '/admin/store/save.yh',
-    // });
-  },
-});
-
 // 상품 재배치 - 페이지 이동
 $('#btn-store-reorder').click(function () {
   $(location).attr('href', '/admin/store/reorder.yh');
+});
+
+// 상품 재배치 - 드래그앤드롭 순서 변경
+$('.sortable').sortable({
+  error: function (event, ui) {
+    alert('순서 변경 중 에러가 발생하였습니다. 잠시 후 다시 시도해주세요.');
+  },
+});
+
+// 상품 재배치 - 저장
+$('#btn-store-save').click(function () {
+  let productNoList = [];
+
+  $('.product-item').each(function () {
+    productNoList.push($(this).attr('id'));
+  });
+
+  $.ajax({
+    url: '/admin/store/sort.yh',
+    type: 'POST',
+    data: {
+      productNoList: productNoList,
+    },
+    success: function (data) {
+      console.log(productNoList);
+    },
+    error: function (data) {},
+  });
+
+  // let reorderForm = $('<form></form>');
+  // reorderForm.attr('action', '/admin/store/sort.yh');
+  // reorderForm.attr('method', 'POST');
+
+  // let reorderInput = $('<input />');
+  // reorderInput.attr('type', 'hidden');
+  // reorderInput.attr('name', 'order');
+  // reorderInput.attr('value', order);
+
+  // reorderInput.appendTo(reorderForm);
+  // reorderForm.appendTo('body');
+  // reorderForm.submit();
 });
 
 // 상품 재배치 - 취소

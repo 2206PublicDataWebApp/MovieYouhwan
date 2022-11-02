@@ -12,14 +12,16 @@ public interface AdminStoreStore {
 
   int insertProduct(SqlSession session, Product product); // 상품 등록
 
-  List<Product> selectProductList(SqlSession session); // 상품 리스트 조회
-  
-  List<ProductType> selectProductTypeList(SqlSession session); // 상품 유형 리스트 조회
-
   int deleteProduct(SqlSession session, Integer productNon); // 상품 삭제
 
-  Product selectProduct(SqlSession session, int productNo); // 상품 조회
-
   int updateProduct(SqlSession session, Product product); // 상품 수정
+
+  int updateProductOrder(SqlSessionTemplate session, List<Integer> productNoList); // 상품 재배치
+
+  List<Product> selectProductList(SqlSession session); // 상품 리스트 조회
+
+  List<ProductType> selectProductTypeList(SqlSession session); // 상품 유형 리스트 조회
+
+  Product selectProduct(SqlSession session, int productNo); // 상품 조회
 
 }

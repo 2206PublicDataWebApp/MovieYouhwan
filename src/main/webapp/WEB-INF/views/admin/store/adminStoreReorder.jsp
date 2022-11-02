@@ -24,7 +24,7 @@
       <div id="store-menu">
         <ul id="store-tab">
           <c:forEach items="${productTypeList }" var="productType">
-            <li class="store-tab-item"><a href="#product-type-no${productType.productTypeNo }">${productType.productType }</a></li>
+            <li class="store-tab-item"><a href="#productTypeNo${productType.productTypeNo }">${productType.productType }</a></li>
           </c:forEach>
         </ul>
         <div id="store-links">
@@ -35,11 +35,12 @@
       <div id="store-main">
         <c:forEach items="${productTypeList }" var="productType">
           <div class="product-per-type">
-            <h2 class="product-type" id="product-type-no${productType.productTypeNo }">${productType.productType }</h2>
+            <h2 class="product-type" id="productTypeNo${productType.productTypeNo }">${productType.productType }</h2>
             <ul class="product-list sortable">
               <c:forEach items="${productList }" var="product">
                 <c:if test="${productType.productType eq product.productType }">
                   <li class="product-item" id="${product.productNo }">
+                    <input type="hidden" value="${product.productOrder }" />
                     <img src="/resources/images/storeProduct/${product.productImgRename}" alt="" class="product-img" />
                     <div class="product-detail">
                       <p class="product-desc">${product.productDesc}</p>

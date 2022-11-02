@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,6 +9,7 @@
     <title>무비유환 : 스토어</title>
     <link rel="stylesheet" href="/resources/css/common.css" />
     <link rel="stylesheet" href="/resources/css/header.css" />
+    <link rel="stylesheet" href="/resources/css/footer.css" />
     <link rel="stylesheet" href="/resources/css/store.css" />
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
@@ -20,11 +22,9 @@
     <div id="store-wrapper">
       <div id="store-menu">
         <ul id="store-tab">
-          <%-- TODO: Use c:forEach to repeat .store-tab-item, Modify values of href attr --%>
-          <li class="store-tab-item"><a href="#">콤보</a></li>
-          <li class="store-tab-item"><a href="#">팝콘</a></li>
-          <li class="store-tab-item"><a href="#">음료</a></li>
-          <li class="store-tab-item"><a href="#">스낵</a></li>
+          <c:forEach items="${productTypeList }" var="productType">
+            <li class="store-tab-item"><a href="#product-type-no${productType.productTypeNo }">${productType.productType }</a></li>
+          </c:forEach>
         </ul>
         <ul id="store-links">
           <li><a href="/my/myPage.yh">구매내역</a></li>
@@ -34,29 +34,31 @@
         </ul>
       </div>
       <div id="store-main">
-        <%-- TODO: Use c:forEach to repeat #product-per-type--%>
-        <div class="product-per-type">
-          <%-- TODO: Bring value of id of .product-type from DB --%>
-          <h3 class="product-type">콤보</h3>
-          <ul class="product-list">
-            <%-- TODO: Use c:forEach to repeat .product-item --%>
-            <li class="product-item">
-              <a href="/store/detail.yh">
-                <img src="/resources/images/storeProduct/solo_combo.jpg" alt="${product.productImageRename}" class="product-img" />
-              </a >
-              <div class="product-detail">
-                <p class="product-desc">${product.productDesc}</p>
-                <p class="product-name">${product.productName}</p>
-                <p class="product-price">${product.productPrice}</p>
-              </div>
-              <div class="store-btn">
-                <button type="button" class="btn-store-list btn-store-buy">구매</button>
-                <button type="button" class="btn-store-list btn-store-cart"><i class="fa-solid fa-cart-plus"></i></button>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <c:forEach items="${productTypeList }" var="productType">
+          <div class="product-per-type">
+            <h2 class="product-type" id="product-type-no${productType.productTypeNo }">${productType.productType }</h2>
+            <ul class="product-list">
+              <c:forEach items="${productList }" var="product">
+                <c:if test="${productType.productType eq product.productType }">
+                  <li class="product-item" id="${product.productNo }">
+                    <img src="/resources/images/storeProduct/${product.productImgRename}" alt="" class="product-img" />
+                    <div class="product-detail">
+                      <p class="product-desc">${product.productDesc}</p>
+                      <p class="product-name">${product.productName}</p>
+                      <p class="product-price">${product.productPrice}</p>
+                    </div>
+                    <div class="store-btn">
+                      <button type="button" class="btn-store-list btn-store-buy">구매</button>
+                      <button type="button" class="btn-store-list btn-store-cart"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                  </li>
+                </c:if>
+              </c:forEach>
+            </ul>
+          </div>
+        </c:forEach>
       </div>
     </div>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
   </body>
 </html>

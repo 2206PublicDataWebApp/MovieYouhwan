@@ -20,7 +20,7 @@
 	</resultMap>
 	<select id="selectProductList" resultMap="productResultMap">
 		SELECT * FROM
-		PRODUCT_TBL ORDER BY PRODUCT_NO ASC
+		PRODUCT_TBL ORDER BY PRODUCT_ORDER ASC
 	</select>
 	<select id="selectProductTypeList"
 		resultMap="productTypeResultMap">
@@ -36,7 +36,8 @@
 	<insert id="insertProduct">
 		INSERT INTO PRODUCT_TBL
 		VALUES(SEQ_PRODUCT_NO.NEXTVAL, #{productName}, #{productType},
-		#{productPrice}, #{productDesc}, SEQ_PRODUCT_ORDER.NEXTVAL,
+		#{productPrice}, #{productDesc},
+		(SELECT MAX(PRODUCT_ORDER) + 1 FROM PRODUCT_TBL),
 		#{productImgName}, #{productImgRename}, #{productImgPath} )
 	</insert>
 	<delete id="deleteProduct">
@@ -48,5 +49,10 @@
 		PRODUCT_PRICE = ${productPrice}, PRODUCT_DESC = #{productDesc},
 		PRODUCT_IMG_NAME = #{productImgName}, PRODUCT_IMG_RENAME = #{productImgRename}, PRODUCT_IMG_PATH = #{productImgPath}
 		WHERE PRODUCT_NO = #{productNo}
+	</update>
+	<update id="updateProductOrder" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="DECLARE BEGIN" separator=";" close="; END;">
+		UPDATE PRODUCT_TBL SET PRODUCT_ORDER = #{index} WHERE PRODUCT_NO = #{item}
+		</foreach>
 	</update>
 </mapper>

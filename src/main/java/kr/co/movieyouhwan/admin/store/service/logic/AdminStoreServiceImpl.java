@@ -27,6 +27,25 @@ public class AdminStoreServiceImpl implements AdminStoreService {
     return result;
   }
 
+  // 상품 삭제
+  @Override
+  public int deleteProduct(Integer productNo) {
+    int result = aStoreStore.deleteProduct(session, productNo);
+    return result;
+  }
+
+  @Override
+  public int modifyProduct(Product product) {
+    int result = aStoreStore.updateProduct(session, product);
+    return result;
+  }
+
+  @Override
+  public int modifyProductOrder(List<Integer> productNoList) {
+    int result = aStoreStore.updateProductOrder(session, productNoList);
+    return result;
+  }
+
   // 상품 리스트 불러오기
   @Override
   public List<Product> printProductList() {
@@ -41,24 +60,11 @@ public class AdminStoreServiceImpl implements AdminStoreService {
     return pTypeList;
   }
 
-  // 상품 삭제
-  @Override
-  public int deleteProduct(Integer productNo) {
-    int result = aStoreStore.deleteProduct(session, productNo);
-    return result;
-  }
-
   // 상품 불러오기
   @Override
   public Product printOneProduct(int productNo) {
     Product product = aStoreStore.selectProduct(session, productNo);
     return product;
-  }
-
-  @Override
-  public int modifyProduct(Product product) {
-    int result = aStoreStore.updateProduct(session, product);
-    return result;
   }
 
 }

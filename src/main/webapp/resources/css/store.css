@@ -61,6 +61,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  padding: 0 15px 0 15px;
   background-color: #fff;
 }
 
@@ -99,9 +100,6 @@
   height: 35px;
   border: none;
 }
-.btn-store-delete {
-  margin-right: 30px;
-}
 
 /** 사용자 */
 
@@ -120,16 +118,18 @@
   padding: 5px 10px;
 }
 
-/* storeList */
+/* storeList - 버튼 */
 
 .btn-store-list.btn-store-buy {
   color: #fff;
   background-color: #0f1a3b;
+  border: 1px solid #0f1a3b;
 }
 
 .btn-store-list.btn-store-cart {
-  background-color: #e59500;
   color: #fff;
+  background-color: #e59500;
+  border: 1px solid #e59500;
   line-height: 37.5px;
 }
 
@@ -150,7 +150,7 @@
   padding: 3px 0;
 }
 
-/* 상품명 */
+/* storeDetail - 상품명 */
 .gitem-store-detail:nth-child(1) {
   grid-column: 1 / 6;
   grid-row: 1 / 2;
@@ -158,25 +158,25 @@
   padding-bottom: 15px;
 }
 
-/* 상품사진 */
+/* storeDetail - 상품사진 */
 .gitem-store-detail:nth-child(2) {
   grid-row: 2 / 8;
   padding: 3px;
   text-align: center;
 }
 
-/* 상품가격 */
+/* storeDetail - 상품가격 */
 .gitem-store-detail:nth-child(3) {
   grid-column: 2 / 6;
 }
 
-/* 상품구성, 유효기간 */
+/* storeDetail - 상품구성, 유효기간 */
 .gitem-store-detail:nth-child(5),
 .gitem-store-detail:nth-child(7) {
   grid-column: 3 / 6;
 }
 
-/* 상품옵션*/
+/* storeDetail - 상품옵션 */
 .gitem-store-detail:nth-child(8) {
   grid-column: 2 / 4;
 }
@@ -186,7 +186,7 @@
   height: 35px;
 }
 
-/* 상품수량  */
+/* storeDetail - 상품수량 */
 .gitem-store-detail:nth-child(9) {
   grid-column: 4 / 6;
 }
@@ -197,7 +197,7 @@
   padding: 2px;
 }
 
-/* 총상품금액 */
+/* storeDetail - 총 상품금액 */
 .gitem-store-detail:nth-child(10) {
   grid-column: 2 / 5;
   text-align: right;
@@ -208,13 +208,13 @@
   text-align: right;
 }
 
-/* 구매버튼 */
+/* storeDetail - 구매 버튼 */
 .gitem-store-detail:nth-child(12) {
   grid-column: 2 / 4;
   justify-self: start;
 }
 
-/* 장바구니버튼 */
+/* storeDetail - 장바구니 버튼 */
 .gitem-store-detail:nth-child(13) {
   grid-column: 4 / 6;
   justify-self: end;
@@ -465,27 +465,27 @@
 }
 
 .btn-store-list.btn-store-modify {
+  color: #0f1a3b;
   background-color: #fff;
   border: 1.5px solid #0f1a3b;
-  color: #0f1a3b;
   font-family: mice-bold;
 }
 
 .btn-store-list.btn-store-modify:active {
-  background-color: #0f1a3b;
   color: #fff;
+  background-color: #0f1a3b;
 }
 
 .btn-store-list.btn-store-delete {
+  color: #e2202c;
   background-color: #fff;
   border: 1.5px solid #e2202c;
-  color: #e2202c;
   font-family: mice-bold;
 }
 
 .btn-store-list.btn-store-delete:active {
-  background-color: #e2202c;
   color: #fff;
+  background-color: #e2202c;
 }
 
 #modal-store-register {

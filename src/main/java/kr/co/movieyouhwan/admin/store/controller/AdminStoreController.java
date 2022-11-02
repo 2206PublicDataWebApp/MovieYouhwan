@@ -8,7 +8,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +27,7 @@ public class AdminStoreController {
   AdminStoreService aStoreService;
 
   /**
-   * 상품 리스트
+   * 상품 목록 페이지
    * 
    * @param request
    * @param mv
@@ -36,21 +35,67 @@ public class AdminStoreController {
    */
   @RequestMapping(value = "/admin/store/manage.yh")
   public ModelAndView adminStoreList(HttpServletRequest request, ModelAndView mv) {
-    List<Product> productList = aStoreService.printProductList();
-    List<ProductType> productTypeList = aStoreService.printProductTypeList();
-    mv.addObject("productList", productList);
-    mv.addObject("productTypeList", productTypeList);
-    mv.setViewName("admin/store/adminStoreList");
+    try {
+      List<Product> productList = aStoreService.printProductList();
+      List<ProductType> productTypeList = aStoreService.printProductTypeList();
+      if (!productList.isEmpty() && !productTypeList.isEmpty()) {
+        mv.addObject("productList", productList);
+        mv.addObject("productTypeList", productTypeList);
+        mv.setViewName("admin/store/adminStoreList");
+      } else {
+        System.out.println("상품 불러오기 실패");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return mv;
   }
 
+  /**
+   * 상품 재배치 페이지
+   * 
+   * @param request
+   * @param mv
+   * @return
+   */
   @RequestMapping(value = "/admin/store/reorder.yh")
   public ModelAndView adminStoreReorder(HttpServletRequest request, ModelAndView mv) {
-    List<Product> productList = aStoreService.printProductList();
-    List<ProductType> productTypeList = aStoreService.printProductTypeList();
-    mv.addObject("productList", productList);
-    mv.addObject("productTypeList", productTypeList);
-    mv.setViewName("admin/store/adminStoreReorder");
+    try {
+      List<Product> productList = aStoreService.printProductList();
+      List<ProductType> productTypeList = aStoreService.printProductTypeList();
+      if (!productList.isEmpty() && !productTypeList.isEmpty()) {
+        mv.addObject("productList", productList);
+        mv.addObject("productTypeList", productTypeList);
+        mv.setViewName("admin/store/adminStoreReorder");
+      } else {
+        System.out.println("상품 불러오기 실패");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return mv;
+  }
+
+  /**
+   * 상품 재배치
+   * 
+   * @param request
+   * @param productNoList
+   * @return
+   */
+  @RequestMapping(value = "/admin/store/sort.yh", method = RequestMethod.POST)
+  public ModelAndView adminStoreSort(HttpServletRequest request,
+      @RequestParam("productNoList[]") List<Integer> productNoList, ModelAndView mv) {
+    try {
+      int result = aStoreService.modifyProductOrder(productNoList);
+      if (result > 0) {
+        mv.setViewName("redirect:/admin/store/manage.yh");
+      } else {
+        System.out.println("상품 재배치 실패");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return mv;
   }
 
@@ -87,6 +132,8 @@ public class AdminStoreController {
       int result = aStoreService.registerProduct(product);
       if (result > 0) {
         mv.setViewName("redirect:/admin/store/manage.yh");
+      } else {
+        System.out.println("상품 등록 실패");
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -94,6 +141,15 @@ public class AdminStoreController {
     return mv;
   }
 
+  /**
+   * 상품 수정
+   * 
+   * @param request
+   * @param modProduct
+   * @param productImg
+   * @param mv
+   * @return
+   */
   @RequestMapping(value = "/admin/store/modify.yh")
   public ModelAndView adminStoreModify(HttpServletRequest request, @ModelAttribute Product modProduct,
       @RequestParam(value = "productImg", required = false) MultipartFile productImg, ModelAndView mv) {
@@ -123,6 +179,8 @@ public class AdminStoreController {
       int result = aStoreService.modifyProduct(modProduct);
       if (result > 0) {
         mv.setViewName("redirect:/admin/store/manage.yh");
+      } else {
+        System.out.println("상품 수정 실패");
       }
     } catch (Exception e) {
       e.printStackTrace();
