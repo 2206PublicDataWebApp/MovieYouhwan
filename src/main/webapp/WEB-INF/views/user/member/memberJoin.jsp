@@ -26,7 +26,7 @@
             <div id="container">
                 <div class="membership-form">
                     <h1 id="join_header">회 원 가 입</h1>
-                        <form action="/member/join.yh" method="get" id="usercheck">
+                        <form action="/member/join.yh" method="post" id="usercheck" enctype="multipart/form-data">
                         <div id="join_content">
                             <div class="login-input">
                                 <div class="input-name-wrap">
@@ -36,14 +36,13 @@
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
                                         <div class="id-check-wrap">
-                                            <span class="fix guide id-error">이미 사용중인 ID입니다.</span>
-                                            <span class="fix guide id-ok">사용 가능한 ID입니다</span>
-                                            <span class="fix id_check" id="id_check"></span>
+                                            
+                                            <span class="id_check" id="id_check"></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="text" id="memberId" name="memberId" placeholder="영소문자, 숫자 6 ~ 12자리" maxlength="12" class="login-input_input">
+                                    <input type="text" id="memberId" name="memberId" placeholder="영소문자, 숫자 6 ~ 12자리" maxlength="12" class="login-input_input" required>
                                 </div>
                             </div>
                             <div class="login-input">
@@ -53,12 +52,12 @@
                                            		 비밀번호
                                             <span class="required-input">&nbsp;⦁</span>
                                         </div>
-                                        <div id="pwd-error"></div>
+                                        <div id="pw-check"></div>
                                         <!-- 임시 <div id="pwd-error">사용조건에 맞는 비밀번호를 입력해주세요</div> -->
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="password" id="memberPwd" name="memberPwd" placeholder="영문, 숫자, 특수문자 조합 8~20자리" maxlength="20" class="login-input_input"/>
+                                    <input type="password" id="memberPwd" name="memberPwd" placeholder="영문, 숫자, 특수문자 조합 8~20자리" maxlength="20" class="login-input_input" required>
                                     <div id="pwd-guide">영문 대 소문자, 숫자, 특수기호(!,@,#,$)중 2가지 이상 조합하여 사용</div>
                                 </div>
                                 <!-- 비밀번호 확인 체크 -->
@@ -68,12 +67,12 @@
                                             	비밀번호확인
                                             <span class="required-input">&nbsp;⦁</span>
                                         </div>
-                                        <div id="pw_check"></div>
+                                        <div id="pw2_check"></div>
                                         <!-- <div id="pwd-error">비밀번호가 일치하지 않습니다</div> -->
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="password" id="memberPwd-chk" name="memberPwd-chk" placeholder="비밀번호 재입력" maxlength="20" class="login-input_input"/>
+                                    <input type="password" id="memberPwd-chk" name="memberPwd-chk" placeholder="비밀번호 재입력" maxlength="20" class="login-input_input" required>
                                 </div>
                             </div>
                             <div class="login-input">
@@ -83,36 +82,38 @@
                                             	이름
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
+                                        <div id="name_check"></div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="text" id="memberName" name="memberName" placeholder="실명을 입력해주세요" maxlength="13" class="login-input_input">
+                                    <input type="text" id="memberName" name="memberName" placeholder="실명을 입력해주세요" maxlength="13" class="login-input_input" required>
                                 </div>
                             </div>
                             <div class="login-input">
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
                                         <div class="input-name">
-                                            	닉네임
+                                            닉네임
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="text" id="memberNick" name="memberNick" placeholder="닉네임을 입력해주세요" maxlength="10" class="login-input_input">
+                                    <input type="text" id="memberNick" name="memberNick" placeholder="닉네임을 입력해주세요" maxlength="10" class="login-input_input" >
                                 </div>
                             </div>
                             <div class="login-input">
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
                                         <div class="input-name">
-                   				                           생년월일
+                   				            생년월일
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
+                                        <div id="birth_check"></div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="text" id="memberBirth" name="memberBirth" placeholder="생년월일 ex)19910116" maxlength="8" class="login-input_input">
+                                    <input type="text" id="memberBirth" name="memberBirth" placeholder="생년월일 ex)19910116" maxlength="8" class="login-input_input" required>
                                 </div>
                             </div>
                             <div class="login-input">
@@ -131,7 +132,7 @@
                                     </div>
                                 </div>
                             </div>
-			<!-- 주소 필요없어서 뺐음. -->
+
                             <div class="login-input">
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
@@ -139,12 +140,13 @@
                                   	          휴대폰 번호
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
+                                        <div id="phone_check"></div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
                                     <div class="input-button">
-                                        <input type="text" id="memberPhone" name="memberPhone" placeholder="- 없이 입력 (01020221020)" maxlength="11" class="login-input_input"/>
-                                        <input type="button" id="phone-confirm" name="phone-confirm" onclick="" value="인증하기"> 
+                                        <input type="text" id="memberPhone" name="memberPhone" placeholder="- 없이 입력 7~8 자리 (01020221020)" maxlength="11" class="login-input_input" required>
+                                        <input type="button" id="phone-confirm" name="phone-confirm" onclick="" value="인증하기" required> 
                                     </div>
                                 </div>
                             </div>
@@ -155,10 +157,11 @@
                                  	          이메일
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
+                                        <div id="email_check"></div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="text" id="memberEmail" name="memberEmail" placeholder="movieyoohwan@mail.com" maxlength="30" class="login-input_input">
+                                    <input type="text" id="memberEmail" name="memberEmail" placeholder="movieyoohwan@mail.com" maxlength="30" class="login-input_input" required>
                                 </div>
                             </div>
                             <div class="login-input">
@@ -174,21 +177,21 @@
                                         <div id="profile-img-form">
                                             <i class="fa-solid fa-user fa-2x"></i>
                                             <label for="profile-img" id="img-update-btn">사진등록</label>
-                                            <input type="file" id="profile-img" name="memberImgName" style= display:none;>
+                                            <input type="file" id="profile-img" name="uploadFile">
                                         </div>
                                     </div>
                                 </div>
                                 <div id="membershipAgreement">
                                     <div id="agreeAllCheck">
-                                        <input type="checkbox" name="Allcheck" id="Allcheck" class="checkAll">
+                                        <input type="checkbox" name="Allcheck" id="Allcheck" class="checkAll"  required>
                                         <div id="allAgreeTerms">약관 전체 동의하기</div>
                                     </div>
                                     <div class="agreecheck">
-                                        <input type="checkbox" name="check" class="check">
+                                        <input type="checkbox" name="check" class="check" required>
                                         <div Id="checkTerms">[필수] 개인정보 수집 및 이용 동의</div>
                                     </div>
                                     <div class="agreecheck">
-                                        <input type="checkbox" name="check" class="check">
+                                        <input type="checkbox" name="check" class="check" required>
                                         <div Id="checkTerms">[필수] 무비유환 이용 약관</div>
                                     </div>
                                 </div>
