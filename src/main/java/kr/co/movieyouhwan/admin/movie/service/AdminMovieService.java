@@ -40,4 +40,6 @@ public interface AdminMovieService {
 	public List<Movie> printNowMovie();
 	// 상영 영화 등록
 	public int registerMovieTime(MovieTime movieTime);
+	// 상영 영화 목록 출력
+	public List<MovieTime> printAllMovieTime(Integer theaterNo);
 }

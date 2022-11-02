@@ -32,12 +32,23 @@
 		<result property="movieImgRename" column="MOVIE_IMG_RENAME" />
 		<result property="movieImgPath" column="MOVIE_IMG_PATH" />
 	</resultMap>
-		<resultMap type="MovieVideo" id="MovieVideoResultMap">
+	<resultMap type="MovieVideo" id="MovieVideoResultMap">
 		<id property="movieVideoNo" column="MOVIE_VIDEO_NO" />
 		<result property="movieNo" column="MOVIE_NO" />
 		<result property="movieVideoName" column="MOVIE_VIDEO_NAME" />
 		<result property="movieVideoRename" column="MOVIE_VIDEO_RENAME" />
 		<result property="movieVideoPath" column="MOVIE_VIDEO_PATH" />
+	</resultMap>
+	<resultMap type="MovieTime" id="MovieTimeResultMap">
+		<id property="movieTimeNo" column="MOVIE_TIME_NO" />
+		<result property="cinemaNo" column="CINEMA_NO" />
+		<result property="theaterNo" column="THEATER_NO" />
+		<result property="movieNo" column="MOVIE_NO" />
+		<result property="movieDay" column="MOVIE_DAY" />
+		<result property="movieStart" column="MOVIE_START" />
+		<result property="movieEnd" column="MOVIE_END" />
+		<result property="movieSeat" column="MOVIE_SEAT" />
+		<result property="movieName" column="MOVIE_NAME" />
 	</resultMap>
 	<!-- 영화 등록(관리자) -->
 	<insert id="insertMovie">
@@ -53,7 +64,7 @@
 	</insert>
 	<!-- 상영 영화 등록(관리자) -->
 	<insert id="insertMovieTime">
-		INSERT INTO MOVIE_TIME_TBL VALUES(SEQ_MOVIE_TIME_NO.NEXTVAL, #{cinemaNo}, #{theaterNo}, #{movieNo}, #{movieDay}, #{movieStart}, #{movieEnd})
+		INSERT INTO MOVIE_TIME_TBL VALUES(SEQ_MOVIE_TIME_NO.NEXTVAL, #{cinemaNo}, #{theaterNo}, #{movieNo}, #{movieDay}, #{movieStart}, #{movieEnd}, #{movieSeat})
 	</insert>
 	<!-- 영화 수정(관리자) -->
 	<update id="updateOneMovie">
@@ -103,5 +114,11 @@
 	<!-- 영화 상세 영상(관리자) -->
 	<select id="selectAllMovieVideo" resultMap="MovieVideoResultMap">
 		SELECT * FROM MOVIE_VIDEO_TBL WHERE MOVIE_NO = #{movieNo} ORDER BY MOVIE_VIDEO_NO
+	</select>
+	<!-- 상영 영화 관리 출력(관리자) -->
+	<select id="selectAllMovieTime" resultMap="MovieTimeResultMap">
+		SELECT MOVIE_TITLE AS MOVIE_NAME, MOVIE_DAY, MOVIE_START, MOVIE_END FROM
+		(SELECT * FROM MOVIE_TIME_TBL WHERE THEATER_NO = #{theaterNo}) MTT
+		JOIN MOVIE_TBL MT ON MTT.MOVIE_NO = MT.MOVIE_NO
 	</select>
 </mapper>

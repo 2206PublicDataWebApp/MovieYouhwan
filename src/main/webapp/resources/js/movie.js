@@ -1,7 +1,7 @@
 // 등록 jsp
 const registerModal = $('#add-movie-time');
 // 등록 버튼
-const registerBtn = $('.date-input');
+const registerBtn = $('#add-movie-button');
 // 취소 버튼
 let cancelBtn = $('#add-movie-off');
 

@@ -82,6 +82,13 @@ public class AdminMovieServiceImpl implements AdminMovieService{
 		List<MovieVideo> mvList = aMovieStore.selectOneMovieVideo(session, movieNo);
 		return mvList;
 	}
+	
+	// 현재 상영 영화 출력
+	@Override
+	public List<MovieTime> printAllMovieTime(Integer theaterNo) {
+		List<MovieTime> mtList = aMovieStore.selectAllMovieTime(session, theaterNo); 
+		return mtList;
+	}
 
 	// 영화 삭제
 	@Override
@@ -125,6 +132,7 @@ public class AdminMovieServiceImpl implements AdminMovieService{
 		return result;
 	}
 
+	// 현재 상영 영화 관리 등록
 	@Override
 	public int registerMovieTime(MovieTime movieTime) {
 		int result = aMovieStore.insertMovieTime(session, movieTime);
