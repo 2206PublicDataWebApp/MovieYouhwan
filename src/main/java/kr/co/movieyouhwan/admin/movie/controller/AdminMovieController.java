@@ -4,15 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.movieyouhwan.admin.cinema.service.AdminCinemaService;
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
+import kr.co.movieyouhwan.admin.movie.domain.MovieDay;
 import kr.co.movieyouhwan.admin.movie.domain.MovieImg;
 import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
@@ -293,14 +291,14 @@ public class AdminMovieController {
 	}
 	
 	/**
-	 * 상영 영화 관리 화면
+	 * 상영 영화 등록 화면
 	 * @param mv
-	 * @param cinema
-	 * @param Theater
+	 * @param cinemaNo
+	 * @param theaterNo
 	 * @return
 	 */
-	@RequestMapping(value="/admin/adminMovieTime.yh", method=RequestMethod.GET)
-	public ModelAndView adminMovieOpenView(
+	@RequestMapping(value="/admin/adminMovieManage.yh", method=RequestMethod.GET)
+	public ModelAndView adminMovieManageView(
 			ModelAndView mv,
 			@RequestParam("cinemaNo") Integer cinemaNo,
 			@RequestParam("theaterNo") Integer theaterNo) {
@@ -309,12 +307,15 @@ public class AdminMovieController {
 		List<Cinema> cList = aCinemaService.printAllCinema();
 		List<Theater> tList = aTheaterService.printAllTheater();
 		List<Movie> mList = aMovieService.printNowMovie();
+		List<MovieTime> mtList = aMovieService.printAllMovieTime(theaterNo);
 		mv.addObject("cinema", cinema);
 		mv.addObject("theater", theater);
 		mv.addObject("cList", cList);
 		mv.addObject("tList", tList);
 		mv.addObject("mList", mList);
-		mv.setViewName("/admin/movie/adminMovieTime");
+		mv.addObject("mtList", mtList);
+		mv.addObject("movieDay", new MovieDay());
+		mv.setViewName("/admin/movie/adminMovieManage");
 		return mv;
 	}
 	
@@ -337,35 +338,7 @@ public class AdminMovieController {
 			@RequestParam("cinemaNo") Integer cinemaNo,
 			@RequestParam("theaterNo") Integer theaterNo) {
 		int result = aMovieService.registerMovieTime(movieTime);
-		mv.setViewName("redirect:/admin/adminMovieTime.yh?cinemaNo="+cinemaNo+"&theaterNo="+theaterNo);
-		return mv;
-	}
-	
-	@RequestMapping(value="/admin/adminMovieManage.yh", method=RequestMethod.GET)
-	public ModelAndView adminMovieManageView(
-			ModelAndView mv,
-			@RequestParam("cinemaNo") Integer cinemaNo,
-			@RequestParam("theaterNo") Integer theaterNo) {
-		Cinema cinema = aCinemaService.printOneCinema(cinemaNo);
-		Theater theater = aTheaterService.printOneTheater(theaterNo);
-		List<Cinema> cList = aCinemaService.printAllCinema();
-		List<Theater> tList = aTheaterService.printAllTheater();
-		List<Movie> mList = aMovieService.printNowMovie();
-		
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar today = new GregorianCalendar();
-		today.add(Calendar.DATE, 0);
-		String oneday = format.format(today.getTime());
-		System.out.print(oneday);
-		
-		
-		mv.addObject("cinema", cinema);
-		mv.addObject("theater", theater);
-		mv.addObject("cList", cList);
-		mv.addObject("tList", tList);
-		mv.addObject("mList", mList);
-		mv.addObject("oneday", oneday);
-		mv.setViewName("/admin/movie/adminMovieManage");
+		mv.setViewName("redirect:/admin/adminMovieManage.yh?cinemaNo="+cinemaNo+"&theaterNo="+theaterNo);
 		return mv;
 	}
 }

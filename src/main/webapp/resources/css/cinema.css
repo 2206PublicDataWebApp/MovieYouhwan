@@ -459,19 +459,10 @@
 		white-space: pre;
 		line-height: 1.8em;
 	}
-#now-year {
-	width : 75px;
-	height : 32px;
-	margin-bottom : 5px;
-	font-size : 16px;
-	text-align : center;
-	line-height : 32px;
-	border : solid 1px #0F1A3B;
-	border-radius : 15px;
+/* cinemaMovie */
+.tmday-button {
+	width : 120px;
+	height : 40px;
+	margin-top : 20px;
+	background-color : #fff;
 }
-	.date-button {
-		width : 13%;
-		height : 40px;
-		font-size : 16px;
-		border : solid 1px #0F1A3B;
-	}

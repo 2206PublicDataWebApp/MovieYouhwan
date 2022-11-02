@@ -17,6 +17,7 @@
 		<typeAlias type="kr.co.movieyouhwan.admin.movie.domain.Movie" alias="Movie"/>
 		<typeAlias type="kr.co.movieyouhwan.admin.movie.domain.MovieImg" alias="MovieImg"/>
 		<typeAlias type="kr.co.movieyouhwan.admin.movie.domain.MovieVideo" alias="MovieVideo"/>
+		<typeAlias type="kr.co.movieyouhwan.admin.movie.domain.MovieTime" alias="MovieTime"/>
 		<typeAlias type="kr.co.movieyouhwan.admin.sales.domain.Sales" alias="Sales"/>
 		<typeAlias type="kr.co.movieyouhwan.admin.theater.domain.Theater" alias="Theater"/>
 		<typeAlias type="kr.co.movieyouhwan.admin.theater.domain.TheaterSchedule" alias="TheaterSchedule"/>

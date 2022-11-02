@@ -76,6 +76,13 @@ public class AdminMovieStoreLogic implements AdminMovieStore {
 		List<MovieVideo> mvList = session.selectList("MovieMapper.selectAllMovieVideo", movieNo);
 		return mvList;
 	}
+	
+	// 현재 상영 영화 출력
+	@Override
+	public List<MovieTime> selectAllMovieTime(SqlSessionTemplate session, Integer theaterNo) {
+		List<MovieTime> mtList = session.selectList("MovieMapper.selectAllMovieTime", theaterNo);
+		return mtList;
+	}
 
 	// 영화 삭제
 	@Override
@@ -109,7 +116,7 @@ public class AdminMovieStoreLogic implements AdminMovieStore {
 	@Override
 	public int updateMovieImgData(SqlSessionTemplate session, MovieImg movieImg) {
 		int result = session.update("MovieMapper.updateOneMovieImg", movieImg);
-		return 0;
+		return result;
 	}
 	
 	// 영화 수정 (사진삭제)
@@ -118,7 +125,8 @@ public class AdminMovieStoreLogic implements AdminMovieStore {
 		int result = session.delete("MovieMapper.deleteMovieImg", movieImgNo);
 		return result;
 	}
-
+	
+	// 현재 상영 영화 등록
 	@Override
 	public int insertMovieTime(SqlSessionTemplate session, MovieTime movieTime) {
 		int result = session.insert("MovieMapper.insertMovieTime", movieTime);

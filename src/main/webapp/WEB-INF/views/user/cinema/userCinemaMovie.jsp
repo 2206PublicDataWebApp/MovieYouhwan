@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="java.util.Date" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,35 +11,9 @@
 <link href="/resources/css/cinema.css" rel="stylesheet" />
 </head>
 <body>
-	<!-- 날짜 set -->
-	<jsp:useBean id="today" class="java.util.Date" />
-	<fmt:formatDate var="oneDayYear" value="${today}" pattern="yyyy"/>
-	<fmt:formatDate var="oneDayMonth" value="${today}" pattern="MM"/>
-	<fmt:formatDate var="oneDayDate" value="${today}" pattern="dd E"/>
-	
-	<c:set var="oneDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*1)%>"/>
-	<fmt:formatDate var="oneDay" value="${oneDate}" pattern="dd E"/>
-	
-	<c:set var="twoDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*2)%>"/>
-	<fmt:formatDate var="twoDay" value="${twoDate}" pattern="dd E"/>
-	
-	<c:set var="threeDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*3)%>"/>
-	<fmt:formatDate var="threeDay" value="${threeDate}" pattern="dd E"/>
-	
-	<c:set var="fourDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*4)%>"/>
-	<fmt:formatDate var="fourDay" value="${fourDate}" pattern="dd E"/>
-	
-	<c:set var="fiveDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*5)%>"/>
-	<fmt:formatDate var="fiveDay" value="${fiveDate}" pattern="dd E"/>
-
-	<c:set var="sixDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*6)%>"/>
-	<fmt:formatDate var="sixDay" value="${sixDate}" pattern="dd E"/>
-	
-	<c:set var="sevenDate" value="<%=new Date(new Date().getTime() + 60*60*24*1000*7)%>"/>
-	<fmt:formatDate var="sevenDay" value="${sevenDate}" pattern="dd E"/>
-	
 	<!-- 페이지 시작 -->
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	<input type="hidden" value="${cinema.cinemaNo }" name="cinemaNo">
     <div class="cinemaImg-wrapper">
 	    <img class="cinemaImg" src="/resources/images/cinemaLodeImg/${cinema.cinemaImgRename }"/>
     </div>
@@ -62,22 +34,15 @@
 			<button class="cinema-on" onclick="location.href='/user/cinemaMovie.yh?cinemaNo=${cinema.cinemaNo}'">전체 상영 영화</button>
 	   	</div>
 	   	<!-- 날짜 -->
-	   	<div>
-	   		<div id="now-year">
-		   		<c:out value="${oneDayYear}" />
-	   		</div>
-	   		<hr>
-	   		<div>
-	   			<button class="date-button"><c:out value="${oneDayDate}" /></button>
-	   			<button class="date-button"><c:out value="${twoDay}" /></button>
-	   			<button class="date-button"><c:out value="${threeDay}" /></button>
-	   			<button class="date-button"><c:out value="${fourDay}" /></button>
-	   			<button class="date-button"><c:out value="${fiveDay}" /></button>
-	   			<button class="date-button"><c:out value="${sixDay}" /></button>
-	   			<button class="date-button"><c:out value="${sevenDay}" /></button>
-	   		</div>
-	   		<c:out value="${oneDayMonth}" />
-	   	</div>
+	   	<div class="year-month">${movieDay.thisYear }년 ${movieDay.thisMonth }월</div>
+		<c:forEach items="${movieDay.tmdayList }" var="tmday">
+			<button type="button" class="tmday-button">${tmday }</button>
+		</c:forEach>
+		<!-- 영화 선택 -->
+		${mtList }
+		<c:forEach items="${mtList }" var="movieTime">
+		</c:forEach>
+		<hr/>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>

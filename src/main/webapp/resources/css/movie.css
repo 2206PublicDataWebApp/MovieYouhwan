@@ -108,6 +108,17 @@ body {
 			border : solid 1px #0F1A3B;
 			background-color : #0F1A3B;
 		}
+	#time-wrapper {
+		margin-top : -1815px;
+		margin-left : 20px;
+	}
+		.time-wrap {
+			margin-bottom : 62px;
+		}
+#movie-insert-button {
+	margin-top : 30px;
+	float : right;
+}
 #add-movie-time {
 	display : none;
 }
@@ -716,11 +727,6 @@ body {
 #now-year {
 	margin-bottom : 20px;
 }
-	.date-empty {
-		width : 6%;
-		font-size : 15px;
-		background-color : white;
-	}
 	.date-today {
 		width : 11.6%;
 		margin-top : 20px;
@@ -748,11 +754,9 @@ body {
 		#time1100 {
 			margin-top : 20px;
 		}
-	[class^='date-input-wrap'] {
-		width : 11.7%;
-		display : flex;
-		flex-direction : column;
-		float : left;
+	.week-list {
+		padding-bottom: 10px;
+		text-align: center;
 	}
 		.date-input {
 			width : 100%;
@@ -760,6 +764,20 @@ body {
 			border : solid 1px;
 			margin-top : -1px;
 		}
+#date-wrapper {
+	margin-top : 40px;
+	display: flex;
+}
+.day-ones{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 12%;
+}
+	.year-month {
+		width : 8%;
+		float : left;
+	}
 #movietime-add {
 	width : 40px;
 	height : 40px;

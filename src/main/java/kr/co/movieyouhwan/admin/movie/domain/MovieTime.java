@@ -1,7 +1,5 @@
 package kr.co.movieyouhwan.admin.movie.domain;
 
-import java.util.Date;
-
 public class MovieTime {
 	private int movieTimeNo;
 	private int cinemaNo;
@@ -10,11 +8,13 @@ public class MovieTime {
 	private String movieDay;
 	private String movieStart;
 	private String movieEnd;
+	private int movieSeat;
+	private String movieName;
 	
 	public MovieTime() {}
 
 	public MovieTime(int movieTimeNo, int cinemaNo, int theaterNo, int movieNo, String movieDay, String movieStart,
-			String movieEnd) {
+			String movieEnd, int movieSeat, String movieName) {
 		super();
 		this.movieTimeNo = movieTimeNo;
 		this.cinemaNo = cinemaNo;
@@ -23,6 +23,8 @@ public class MovieTime {
 		this.movieDay = movieDay;
 		this.movieStart = movieStart;
 		this.movieEnd = movieEnd;
+		this.movieSeat = movieSeat;
+		this.movieName = movieName;
 	}
 
 	public int getMovieTimeNo() {
@@ -81,10 +83,26 @@ public class MovieTime {
 		this.movieEnd = movieEnd;
 	}
 
+	public int getMovieSeat() {
+		return movieSeat;
+	}
+
+	public void setMovieSeat(int movieSeat) {
+		this.movieSeat = movieSeat;
+	}
+
+	public String getMovieName() {
+		return movieName;
+	}
+
+	public void setMovieName(String movieName) {
+		this.movieName = movieName;
+	}
+
 	@Override
 	public String toString() {
 		return "MovieTime [movieTimeNo=" + movieTimeNo + ", cinemaNo=" + cinemaNo + ", theaterNo=" + theaterNo
 				+ ", movieNo=" + movieNo + ", movieDay=" + movieDay + ", movieStart=" + movieStart + ", movieEnd="
-				+ movieEnd + "]";
+				+ movieEnd + ", movieSeat=" + movieSeat + ", movieName=" + movieName + "]";
 	}
 }
