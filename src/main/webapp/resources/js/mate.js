@@ -11,3 +11,7 @@ $(window).scroll(function () {
     }
   });
 });
+
+$('.match-toggle-switch').click(function () {
+  $(this).toggleClass('active');
+});

@@ -38,7 +38,6 @@ $('.homepage-tab-item>a').click(function () {
   // 1. 탭메뉴 아래 선 border-bottom
   $(this).toggleClass('homepage-tab-border');
   $(this).parent().siblings().children().removeClass('homepage-tab-border');
-  let idx = $(this).index('.homepage-tab-item>a');
   $('.page').eq(idx).removeClass('no-show');
   $('.page').eq(idx).siblings('.page').addClass('no-show');
 
@@ -48,14 +47,12 @@ $('.homepage-tab-item>a').click(function () {
   // 3. 선택됐던 checkbox들 선택 해제
   $('input:checkbox').prop('checked', false);
 
-  // 4. 검색 후에 list 다른 탭 이동 시 list 다시 불러오기 + 검색 초기화
-  $.ajax({
-    type: 'post',
-    url: '/admin/site/manage.yh',
-    data:
-  })
-  
-
+  // // 4. 검색 후에 list 다른 탭 이동 시 list 다시 불러오기 + 검색 초기화
+  // $.ajax({
+  //   type: 'post',
+  //   url: '/admin/site/manage.yh',
+  //   data:
+  // })
 });
 
 // check box 개별로 모두 선택하면 전체 선택 checkbox도 선택되게 함

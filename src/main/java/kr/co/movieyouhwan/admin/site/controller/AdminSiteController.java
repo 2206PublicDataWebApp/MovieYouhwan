@@ -70,6 +70,7 @@ public class AdminSiteController {
 		mv.addObject("fList", fList);
 		
 		mv.setViewName("admin/site/adminSiteManage");
+		
 		return mv;
 	}
 }
