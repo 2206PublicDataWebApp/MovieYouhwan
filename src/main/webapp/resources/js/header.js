@@ -10,22 +10,11 @@ toggleBtn.click(function () {
   menuItem.toggleClass('active');
 });
 
-// var logInOut = function(){
 
-// 	var logoutBtn = document.getElementById('logoutBtn');
-
-// 	if(logoutBtn != null){
-//     logoutBtn.onclick = function(){
-// 		if( confirm("정말 로그아웃 하시겠습니까?")){
-// 		alert("로그아웃되었습니다");
-// 		location.href = '/member/logout.yh';
-// 		}
-// 	}
-// 	}
-// }
 
 function confirmLogout() {
-  if(confirm("정말 로그아웃 하시겠습니까?") ) {
-      location.href = '/member/logout.yh';
+  if(confirm("정말 로그아웃 하시겠습니까?")) {
+    alert("로그아웃되었습니다");
+    location.href = "/member/logout.yh";
   }
 }

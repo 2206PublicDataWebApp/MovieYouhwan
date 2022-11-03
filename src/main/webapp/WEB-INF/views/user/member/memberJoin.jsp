@@ -12,6 +12,7 @@
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="/resources/js/header.js" defer></script>
+    <script src="/resources/js/footer.js" defer></script>
 	<script src="/resources/js/userMember.js" defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -36,8 +37,7 @@
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
                                         <div class="id-check-wrap">
-                                            
-                                            <span class="id_check" id="id_check"></span>
+                                            <span class="validation id_check" id="id_check"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -52,8 +52,7 @@
                                            		 비밀번호
                                             <span class="required-input">&nbsp;⦁</span>
                                         </div>
-                                        <div id="pw-check"></div>
-                                        <!-- 임시 <div id="pwd-error">사용조건에 맞는 비밀번호를 입력해주세요</div> -->
+                                        <div class="validation" id="pw-check"></div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
@@ -67,7 +66,7 @@
                                             	비밀번호확인
                                             <span class="required-input">&nbsp;⦁</span>
                                         </div>
-                                        <div id="pw2_check"></div>
+                                        <div class="validation" id="pw2_check"></div>
                                         <!-- <div id="pwd-error">비밀번호가 일치하지 않습니다</div> -->
                                     </div>
                                 </div>
@@ -82,7 +81,7 @@
                                             	이름
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
-                                        <div id="name_check"></div>
+                                        <div class="validation" id="name_check"></div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
@@ -109,11 +108,11 @@
                    				            생년월일
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
-                                        <div id="birth_check"></div>
+                                        <div class="validation" id="birth_check"></div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="text" id="memberBirth" name="memberBirth" placeholder="생년월일 ex)19910116" maxlength="8" class="login-input_input" required>
+                                    <input type="text" id="memberBirth" name="memberBirth" placeholder="생년월일 ex)20120101" maxlength="8" class="login-input_input" required>
                                 </div>
                             </div>
                             <div class="login-input">
@@ -140,13 +139,13 @@
                                   	          휴대폰 번호
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
-                                        <div id="phone_check"></div>
+                                        <div class="validation" id="phone_check"></div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
                                     <div class="input-button">
                                         <input type="text" id="memberPhone" name="memberPhone" placeholder="- 없이 입력 7~8 자리 (01020221020)" maxlength="11" class="login-input_input" required>
-                                        <input type="button" id="phone-confirm" name="phone-confirm" onclick="" value="인증하기" required> 
+                                        <input type="button" class="phone-confirm" name="phone-confirm" onclick="" value="인증하기" required> 
                                     </div>
                                 </div>
                             </div>
@@ -157,11 +156,17 @@
                                  	          이메일
                                             <span class="required-input">&nbsp;⦁ </span>
                                         </div>
-                                        <div id="email_check"></div>
+                                        <div class="validation" id="email_check"></div>
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="text" id="memberEmail" name="memberEmail" placeholder="movieyoohwan@mail.com" maxlength="30" class="login-input_input" required>
+                                    <div class="input-button">
+                                        <input type="text" id="memberEmail" name="memberEmail" placeholder="movieyoohwan@mail.com" maxlength="30" class="login-input_input" required>
+                                        <input type="button" id="email-confirm-btn" class="email-confirm" name="email-confirm" value="인증하기"> 
+                                    </div>
+                                    
+                                    <input type="text" placeholder="인증번호 6자리" maxlength="6" class="login-input_input mail-check-input" required>
+                                    <div class="validation" id="email_check2"></div>
                                 </div>
                             </div>
                             <div class="login-input">

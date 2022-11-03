@@ -5,12 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/point.css" />
-<script src="/resources/js/jquery-3.6.1.min.js"></script>
-<script src="/resources/js/header.js.js" defer></script>
 <link rel="stylesheet" href="/resources/css/myPage.css" />
 <link rel="stylesheet" href="/resources/css/common.css" />
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/footer.css" />
+<link rel="stylesheet" href="/resources/css/common.css" />
+<link rel="stylesheet" href="/resources/css/header.css" />
+<link rel="stylesheet" href="/resources/css/footer.css" />
+<script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+    <script src="/resources/js/header.js" defer></script>
+    <script src="/resources/js/footer.js" defer></script>
 <title>무비유환 - 나의 포인트</title>
 </head>
 <body>

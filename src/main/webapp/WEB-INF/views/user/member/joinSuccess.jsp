@@ -8,7 +8,10 @@
 <link rel="stylesheet" href="/resources/css/joinSuccess.css" />
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/footer.css" />
-<script src="/resources/js/header.js" defer></script>
+<script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+    <script src="/resources/js/header.js" defer></script>
+    <script src="/resources/js/footer.js" defer></script>
+
 <title>무비유환 - 회원가입완료</title>
 </head>
 <body>
