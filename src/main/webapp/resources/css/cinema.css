@@ -459,10 +459,28 @@
 		white-space: pre;
 		line-height: 1.8em;
 	}
-/* cinemaMovie */
+/* cinemaMovie(사용자) */
+.cinema-movie-year-month {
+	margin-bottom : 20px;
+}
 .tmday-button {
 	width : 120px;
 	height : 40px;
+	font-size : 15px;
 	margin-top : 20px;
 	background-color : #fff;
+}
+.one-cinema-movie {
+	width : 180px;
+	height : 80px;
+	padding-top : 20px;
+	padding-left : 20px;
+	border : solid 1px #0F1A3B;
+	border-radius : 15px;
+}
+.chocie-movie-listwrap {
+}
+.choice-movielist-text {
+	margin-top : -20px;
+	font-size : 18px;
 }

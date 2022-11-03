@@ -16,7 +16,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<!-- 영화 예매 (영화관, 영화, 상영관 선택) 페이지 시작 -->
 	<div class="widemovie-wrapper">
-		<div></div>
+		<div>01<br>상영시간</div>
 	</div>
 </body>
 </html>

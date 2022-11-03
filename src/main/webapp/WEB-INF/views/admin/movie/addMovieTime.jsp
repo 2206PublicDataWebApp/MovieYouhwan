@@ -38,6 +38,7 @@
 <form action="/admin/insertMovieTheater.yh" method="post">
 	<input type="hidden" name="cinemaNo" value="${cinema.cinemaNo }">
 	<input type="hidden" name="theaterNo" value="${theater.theaterNo }">
+	<input type="hidden" value="${(theater.theaterSeatoneRow * theater.theaterSeatoneColumn) + (theater.theaterSeattwoRow * theater.theaterSeattwoColumn) + (theater.theaterSeatthreeRow * theater.theaterSeatthreeColumn) }" name="movieTicket">
 	<input type="hidden" value="${(theater.theaterSeatoneRow * theater.theaterSeatoneColumn) + (theater.theaterSeattwoRow * theater.theaterSeattwoColumn) + (theater.theaterSeatthreeRow * theater.theaterSeatthreeColumn) }" name="movieSeat">
 	<div class="modal-wrapper">
 		<div class="modal-movie">

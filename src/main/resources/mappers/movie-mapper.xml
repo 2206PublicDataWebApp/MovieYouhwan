@@ -47,8 +47,10 @@
 		<result property="movieDay" column="MOVIE_DAY" />
 		<result property="movieStart" column="MOVIE_START" />
 		<result property="movieEnd" column="MOVIE_END" />
+		<result property="movieTicket" column="MOVIE_TICKET" />
 		<result property="movieSeat" column="MOVIE_SEAT" />
 		<result property="movieName" column="MOVIE_NAME" />
+		<result property="theaterName" column="THEATER_NAME" />
 	</resultMap>
 	<!-- 영화 등록(관리자) -->
 	<insert id="insertMovie">
@@ -64,7 +66,7 @@
 	</insert>
 	<!-- 상영 영화 등록(관리자) -->
 	<insert id="insertMovieTime">
-		INSERT INTO MOVIE_TIME_TBL VALUES(SEQ_MOVIE_TIME_NO.NEXTVAL, #{cinemaNo}, #{theaterNo}, #{movieNo}, #{movieDay}, #{movieStart}, #{movieEnd}, #{movieSeat})
+		INSERT INTO MOVIE_TIME_TBL VALUES(SEQ_MOVIE_TIME_NO.NEXTVAL, #{cinemaNo}, #{theaterNo}, #{movieNo}, #{movieDay}, #{movieStart}, #{movieEnd}, #{movieTicket}, #{movieSeat})
 	</insert>
 	<!-- 영화 수정(관리자) -->
 	<update id="updateOneMovie">
@@ -120,5 +122,16 @@
 		SELECT MOVIE_TITLE AS MOVIE_NAME, MOVIE_DAY, MOVIE_START, MOVIE_END FROM
 		(SELECT * FROM MOVIE_TIME_TBL WHERE THEATER_NO = #{theaterNo}) MTT
 		JOIN MOVIE_TBL MT ON MTT.MOVIE_NO = MT.MOVIE_NO
+	</select>
+	<select id="selectAllCinemaMovie" resultMap="MovieTimeResultMap">
+		SELECT THEATER_NAME AS THEATER_NAME, MOVIE_NO, MOVIE_DAY, MOVIE_START, MOVIE_END, MOVIE_TICKET, MOVIE_SEAT FROM
+		(SELECT * FROM MOVIE_TIME_TBL WHERE CINEMA_NO = #{cinemaNo}) MTT
+		JOIN THEATER_TBL TT ON MTT.THEATER_NO = TT.THEATER_NO
+	</select>
+	
+	<select id="selectCinemaMovieByDate" resultMap="MovieTimeResultMap" >
+		SELECT THEATER_NAME AS THEATER_NAME, MOVIE_NO, MOVIE_DAY, MOVIE_START, MOVIE_END, MOVIE_TICKET, MOVIE_SEAT FROM
+		(SELECT * FROM MOVIE_TIME_TBL WHERE CINEMA_NO = #{cinemaNo} AND MOVIE_DAY=#{movieDay}) MTT
+		JOIN THEATER_TBL TT ON MTT.THEATER_NO = TT.THEATER_NO
 	</select>
 </mapper>
