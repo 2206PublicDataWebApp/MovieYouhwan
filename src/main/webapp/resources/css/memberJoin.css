@@ -2,7 +2,7 @@
     margin: 0 auto 130px;
     padding: 0 100px;
     width: 800px;
-    height: 1200px;
+    height: 1300px;
     /* background-color: rgb(244, 244, 244); */
     box-sizing: border-box;
     
@@ -159,7 +159,7 @@ input[type='radio'] {
     background-color: #0F1A3B;
     color: #ffffff;
 }
-#phone-confirm{
+.phone-confirm, .email-confirm{
     border: 0px solid #0F1A3B;
     margin-left: 10px;
     background-color: #0F1A3B;
@@ -167,6 +167,9 @@ input[type='radio'] {
     display: flex;
     width: 100px;
     justify-content: center;
+}
+.mail-check-input{
+    margin-top: 10px;
 }
 #profile-info{
     margin-top: 3px;
@@ -273,4 +276,7 @@ input[type='radio'] {
     font-weight: bold;
     
     
+}
+.validation{
+    font-size: 8pt;
 }

@@ -1,4 +1,4 @@
-
+// ++++++++++++++++++++회원가입++++++++++++++++++++
 //모든 공백 체크 정규식
 var empJ = /\s/g;
 //아이디 정규식
@@ -8,7 +8,8 @@ var pwJ = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*[!@#$])).{8,20}$/;
 // 이름 정규식
 var nameJ = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
 // 이메일 검사 정규식
-var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+var mailJ = /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
+
 // 휴대폰 번호 정규식
 var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 var birthJ = false;
@@ -99,8 +100,8 @@ $('form').on('submit', function () {
       return false;
    }
    // 이메일 정규식
-   if (mailJ.test($('#memberEmali').val())) {
-      console.log("mail : " + phoneJ.test($('#memberEmali').val()));
+   if (mailJ.test($('#memberEmail').val())) {
+      console.log("mail : " + phoneJ.test($('#memberEmail').val()));
       inval_Arr[4] = true;
    } else {
       inval_Arr[4] = false;
@@ -118,26 +119,26 @@ $('form').on('submit', function () {
    }
 
    //전체 유효성 검사
-   var validAll = true;
-   for (var i = 0; i < inval_Arr.length; i++) {
-      if (inval_Arr[i] == false) {
-         validAll = false;
-      }
-   }
-   if (validAll == true) { // 유효성 모두 통과
-      alert('무비유환 가족이 되어주셔서 감사합니다.');
-   } else {
-      alert('정보를 다시 확인하세요.')
-   }
+//    var validAll = true;
+//    for (var i = 0; i < inval_Arr.length; i++) {
+//       if (inval_Arr[i] == false) {
+//          validAll = false;
+//       }
+//    }
+//    if (validAll == true) { // 유효성 모두 통과
+//       alert('무비유환 가족이 되어주셔서 감사합니다.');
+//    } else {
+//       alert('정보를 다시 확인하세요.')
+//    }
 });
 
 $('#memberPwd').blur(function () {
    if (pwJ.test($('#memberPwd').val())) {
       console.log('true');
-      $('#pw_check').text('');
+      $('#pw-check').text('');
    } else {
       console.log('false');
-      $('#pw_check').text('4~12자의 숫자 , 문자로만 사용 가능합니다.');
+      $('#pw_check').text('영문, 숫자, 특수문자 조합 8~20자리');
       $('#pw_check').css('color', 'red');
    }
 });
@@ -237,3 +238,43 @@ $('#memberPhone').blur(function () {
       $('#phone_check').css('color', 'red');
    }
 });
+
+$('#email-confirm-btn').click(function() {
+   const email = $('#memberEmail').val(); // 이메일 주소값 얻어오기
+   console.log('입력받은 이메일 : ' + email); // 이메일 오는지 확인
+   const checkInput = $('.mail-check-input') // 인증번호 입력하는곳 
+
+   $.ajax({
+      type : 'get',
+      url : '/member/emailAuth.yh',
+      data : { "email" : email },
+      success : function (data) {
+         console.log("data : " +  data);
+         checkInput.attr('disabled',false);
+         code = data;
+         alert('인증번호가 전송되었습니다.')
+      },
+      error : function(data){
+         alert('메일 발송을 실패했습니다.')
+      }
+   }); // end ajax
+}); // end send eamil
+
+
+// 인증번호 비교 
+// blur -> focus가 벗어나는 경우 발생
+$('.mail-check-input').blur(function () {
+   const inputCode = $(this).val();
+   const $resultMsg = $('#email_check2');
+   
+   if(inputCode === code){
+      $resultMsg.html('인증번호가 일치합니다.');
+      $resultMsg.css('color','#6DAF00');
+      $('#email-confirm-btn').attr('disabled',true);
+      $('#memberEmail').attr('readonly',true);
+   }else{
+      $resultMsg.html('인증번호 불일치. 다시 확인해주세요!');
+      $resultMsg.css('color','red');
+   }
+});
+// ++++++++++++++++++++회원가입++++++++++++++++++++

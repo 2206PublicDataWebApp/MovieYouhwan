@@ -4,7 +4,6 @@
 <nav id="navbar">
 	<a href="#" class="navbar-toggleBtn show" id="bars"><i class="fa-solid fa-bars show"></i></a>
 	<a href="#" class="navbar-toggleBtn" id="xmark"><i class="fa-solid fa-xmark"></i></a>
-	
 	<!-- <div class="member"> -->
 		<c:if test="${empty loginUser}">
 			<ul id="navbar-links">
@@ -12,8 +11,15 @@
 				<li><a href="/member/joinView.yh">회원가입</a></li>
 			</ul>
 		</c:if>
-		<c:if test="${not empty loginUser}">
+		
+		<c:if test="${not empty member}">
 			<ul id="navbar-links">
+				<li>
+					<div class="defaultImg">
+						<c:if test="${empty member.memberImgRename}"></c:if>
+						<c:if test="${not empty member.memberImgRename}"><img src="/resources/images/userProfileImg/${member.memberImgRename}"></c:if>
+					</div>
+				</li>
 				<li><a href="javascript:void(0);" onclick="confirmLogout();">로그아웃</a></li>
 				<li><a href="/my/myPageMain.yh">마이페이지</a></li>
 			</ul>

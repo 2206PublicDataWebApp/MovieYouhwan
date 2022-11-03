@@ -5,12 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/resources/css/common.css" />
 <link rel="stylesheet" href="/resources/css/memberLogin.css" />
+<link rel="stylesheet" href="/resources/css/common.css" />
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/footer.css" />
-<script src="/resources/js/jquery-3.6.1.min.js"></script>
-<script src="/resources/js/header.js" defer></script>
+<script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+    <script src="/resources/js/header.js" defer></script>
+    <script src="/resources/js/footer.js" defer></script>
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 <title>무비유환 - 로그인</title>
 </head>

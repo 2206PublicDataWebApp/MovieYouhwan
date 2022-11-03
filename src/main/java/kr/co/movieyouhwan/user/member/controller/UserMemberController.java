@@ -4,11 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +28,9 @@ import kr.co.movieyouhwan.user.member.service.UserMemberService;
 public class UserMemberController {
 	@Autowired
 	private UserMemberService uMemberService;
+	@Autowired
+	private JavaMailSenderImpl mailSender;
+	
 	/**
 	 * 회원가입 화면
 	 * 구현 중
@@ -64,7 +71,7 @@ public class UserMemberController {
 			String memberProfilePath = savePath + "\\" + memberProfileRename;
 			member.setMemberImgName(memberProfileName);
 			member.setMemberImgRename(memberProfileRename);
-			member.setMemberImgRename(memberProfilePath);
+			member.setMemberImgPath(memberProfilePath);
 		}
 		int result = uMemberService.registerMember(member);
 		mv.setViewName("redirect:/member/loginSuccess.yh");
@@ -72,6 +79,13 @@ public class UserMemberController {
 		return mv;
 	}
 	
+	/**
+	 * 회원가입 성공	
+	 */
+	@RequestMapping(value = "/member/loginSuccess.yh", method = RequestMethod.GET)
+	public String joinSuccess() {
+		return "/user/member/joinSuccess";
+	}
 	/**
 	 * 로그인 화면
 	 * @return
@@ -166,7 +180,6 @@ public class UserMemberController {
 	 * @param mv
 	 * @return
 	 */
-	
 	  @RequestMapping(value = "/member/profileModify.yh", method = RequestMethod.GET) 
 	  public ModelAndView showMyPage(
 		  @ModelAttribute Member member
@@ -214,6 +227,36 @@ public class UserMemberController {
 	 * @RequestParam(value = ""))
 	 */
 	
+	
+	@ResponseBody
+	@RequestMapping(value = "/member/emailAuth.yh", method=RequestMethod.GET)
+	public String joinEmailAuth(String email) {
+		Random random = new Random();
+		int authNumber = random.nextInt(888888)+111111;	// 난수 
+		// 이메일 보낼 양식
+		String setFrom = "movieyouhwan@gmail.com";	// 보낸이 메일 주소
+		String toMail = email;
+		String title = "MovieYouHwan 회원가입 인증 번호입니다.";	// 제목
+		String content = // 메일 내용 
+				"<h1>무비유환을 방문해주셔서 감사합니다.</h1>" +
+				"<br>"+
+				"인증번호는 " + authNumber + "입니다." + 
+				"<br>"+
+				"해당 인증번호를 인증번호 확인란에 입력해주세요.";
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+			helper.setFrom(setFrom);
+			helper.setTo(toMail);
+			helper.setSubject(title);
+			// true 전달 > html 형식으로 전송 , 작성하지 않으면 단순 텍스트로 전달.
+			helper.setText(content,true);
+			mailSender.send(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Integer.toString(authNumber);
+	}
 	
 }
 
