@@ -2,8 +2,8 @@ package kr.co.movieyouhwan.user.store.domain;
 
 public class ProductType {
 
-  private int productTypeNo;
-  private String productType;
+  private int productTypeNo; // 상품 유형 번호
+  private String productType; // 상품 유형
 
   public int getProductTypeNo() {
     return productTypeNo;

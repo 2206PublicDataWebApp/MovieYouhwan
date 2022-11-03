@@ -113,19 +113,6 @@ $('#btn-store-save').click(function () {
     },
     error: function (data) {},
   });
-
-  // let reorderForm = $('<form></form>');
-  // reorderForm.attr('action', '/admin/store/sort.yh');
-  // reorderForm.attr('method', 'POST');
-
-  // let reorderInput = $('<input />');
-  // reorderInput.attr('type', 'hidden');
-  // reorderInput.attr('name', 'order');
-  // reorderInput.attr('value', order);
-
-  // reorderInput.appendTo(reorderForm);
-  // reorderForm.appendTo('body');
-  // reorderForm.submit();
 });
 
 // 상품 재배치 - 취소
@@ -154,7 +141,10 @@ $('.btn-store-delete').click(function (e) {
   }
 });
 
-/** 상품 가격에 천 단위로 콤마(,) 삽입 함수 */
+/**
+ * 상품 가격에 천 단위로 콤마(,) 삽입
+ * @param {*} numberStr
+ */
 function showCommas(numberStr) {
   numberStr.each(function () {
     let productPrice = Number($(this).text());
@@ -162,7 +152,10 @@ function showCommas(numberStr) {
   });
 }
 
-/** 사진 미리보기 함수 */
+/**
+ * 사진 미리보기
+ * @param {*} img
+ */
 function previewImg(img) {
   if (img[0].files && img[0].files[0]) {
     let reader = new FileReader();
@@ -174,7 +167,11 @@ function previewImg(img) {
   }
 }
 
-/** 상품 유형 입력창 전환 함수 */
+/**
+ * 상품 유형 입력창 전환
+ * @param {*} field
+ * @param {*} btn
+ */
 function toggleProductType(field, btn) {
   field.toggleClass('hidden');
   btn.toggleClass('hidden');
@@ -183,7 +180,12 @@ function toggleProductType(field, btn) {
   $('input.hidden').val('');
 }
 
-/** 모달 초기화 함수 */
+/**
+ * 모달 초기화
+ * @param {*} field
+ * @param {*} btn
+ * @param {*} img
+ */
 function initModal(field, btn, img) {
   $('.modal-form').each(function () {
     this.reset();

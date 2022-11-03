@@ -1,11 +1,11 @@
 package kr.co.movieyouhwan.user.store.domain;
 
 public class Product {
-  private int productNo; // 상품번호
+  private int productNo; // 상품 번호
   private String productName; // 상품명
-  private String productType; // 상품유형
-  private int productPrice; // 상품가격
-  private String productDesc; // 상품구성
+  private String productType; // 상품 유형
+  private int productPrice; // 상품 가격
+  private String productDesc; // 상품 구성
   private int productOrder; // 상품 배치 순서
   private String productImgName; // 상품 사진명
   private String productImgRename; // 상품 사진 저장명

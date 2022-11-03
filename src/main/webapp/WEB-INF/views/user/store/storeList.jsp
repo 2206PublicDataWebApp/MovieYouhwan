@@ -14,6 +14,7 @@
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="/resources/js/header.js" defer></script>
+    <script src="/resources/js/footer.js" defer></script>
     <script src="/resources/js/userStore.js" defer></script>
   </head>
   <body>
