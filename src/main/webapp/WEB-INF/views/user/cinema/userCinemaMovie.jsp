@@ -8,7 +8,12 @@
 <title>무비유환 : 전체 상영 영화</title>
 <link href="/resources/css/common.css" rel="stylesheet" />
 <link href="/resources/css/header.css" rel="stylesheet" />
+<link href="/resources/css/footer.css" rel="stylesheet" />
 <link href="/resources/css/cinema.css" rel="stylesheet" />
+<script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+<script src="/resources/js/header.js" defer></script>
+<script src="/resources/js/footer.js" defer></script>
+<script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 </head>
 <body>
 	<!-- 페이지 시작 -->
@@ -34,16 +39,77 @@
 			<button class="cinema-on" onclick="location.href='/user/cinemaMovie.yh?cinemaNo=${cinema.cinemaNo}'">전체 상영 영화</button>
 	   	</div>
 	   	<!-- 날짜 -->
-	   	<div class="year-month">${movieDay.thisYear }년 ${movieDay.thisMonth }월</div>
-		<c:forEach items="${movieDay.tmdayList }" var="tmday">
-			<button type="button" class="tmday-button">${tmday }</button>
-		</c:forEach>
+	   	<div class="cinema-movie-year-month">
+		   	<div class="year-month">${movieDay.thisYear }년 ${movieDay.thisMonth }월</div>
+			<c:forEach items="${movieDay.tmdayList }" var="tmday" varStatus="i">
+				<button type="button" class="tmday-button" onclick="getMovieList(${cinema.cinemaNo}, '${movieDay.dayList[i.index] }');">${tmday }</button>
+			</c:forEach>
+			<hr/>
+	   	</div>
+	   	<div id="choice-movie-listwrap">
 		<!-- 영화 선택 -->
-		${mtList }
-		<c:forEach items="${mtList }" var="movieTime">
-		</c:forEach>
-		<hr/>
+			<c:forEach items="${mList }" var="movie">
+			
+				<div class="chocie-movie-listwrap">
+					<c:if test="${movie.movieAge eq '전체' }">
+						<img src="/resources/images/movie/전체.jpg" width="30px" height="30px" />
+					</c:if>
+					<c:if test="${movie.movieAge eq '만12세' }">
+						<img src="/resources/images/movie/12.jpg" width="30px" height="30px" />
+					</c:if>
+					<c:if test="${movie.movieAge eq '만15세' }">
+						<img src="/resources/images/movie/15.jpg" width="30px" height="30px" />
+					</c:if>
+					<c:if test="${movie.movieAge eq '청불' }">
+						<img src="/resources/images/movie/청불.jpg" width="30px" height="30px" />
+					</c:if>
+					<span class="choice-movielist-text">${movie.movieTitle }</span>
+					${mtList }
+					<c:forEach items="${mtList }" var="movieTime">
+						<c:if test="${movie.movieNo eq movieTime.movieNo }">
+<%-- 							<c:forEach items="${movieDay.dayList }" var="movieDate"> --%>
+<%-- 							moveDate: ${movieDate }<br> --%>
+<%-- 							movieDay: ${movieTime.movieDay } --%>
+<%-- 							<c:if test="${movieTime.movieDay eq movieDate} "> --%>
+								<div class="one-cinema-movie">
+									<p>${movieTime.theaterName} ${movieTime.movieSeat }석 / ${movieTime.movieSeat }석</p>
+									<p>${movieTime.movieStart } ~ ${movieTime.movieEnd }</p>
+								</div>
+							</c:if>
+<%-- 							</c:forEach> --%>
+<%-- 						</c:if> --%>
+					</c:forEach>
+				</div>
+			</c:forEach>
+		</div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+    <script>
+    	function getMovieList(cinemaNo, movieDay) {
+    		console.log("click");
+    		$.ajax({
+    			url : "/user/cinemaMovieDay.yh",
+    			data : {
+    				"cinemaNo" : cinemaNo,
+    				"movieDay" : movieDay
+    			},
+    			type : "post",
+    			success : function(result) {
+    				alert("성공!");
+    				console.log(result);
+//     				$("#choice-movie-listwrap").html('');
+//     				var str = '';
+//     				for(var i in result) {
+//     					str += '<div class="chocie-movie-listwrap">'
+//     					str += '<span class="choice-movielist-text">'+result[i]+'</span>'
+//     				}
+//     				var movieListByDate='';
+    			},
+    			error : function() {
+    				alert("실패!");
+    			}
+    		});
+    	}
+    </script>
 </body>
 </html>

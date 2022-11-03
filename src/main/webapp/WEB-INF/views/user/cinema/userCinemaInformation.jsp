@@ -7,9 +7,11 @@
 <title>무비유환 : 영화관 정보</title>
 <link href="/resources/css/common.css" rel="stylesheet" />
 <link href="/resources/css/header.css" rel="stylesheet" />
+<link href="/resources/css/footer.css" rel="stylesheet" />
 <link href="/resources/css/cinema.css" rel="stylesheet" />
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
 <script src="/resources/js/header.js" defer></script>
+<script src="/resources/js/footer.js" defer></script>
 <script src="/resources/js/cinema.js" defer></script>
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 </head>
@@ -36,7 +38,7 @@
     	<!-- 영화관 탭 (영화관 정보, 전체 상영 영화) -->
 	   	<div id="movie-menu">
 	   		<button class="cinema-on" onclick="location.href='/user/cinemaInformation.yh?cinemaNo=${cinema.cinemaNo}'">영화관 정보</button>
-			<button class="cinema-off" onclick="location.href='/user/cinemaMovie.yh?cinemaNo=${cinema.cinemaNo}'">전체 상영 영화</button>
+			<button class="cinema-off" onclick="goTodayAllMovie();">전체 상영 영화</button>
 	   	</div>
 	   	<!-- 영화관 정보 -->
 	   	<div>
@@ -61,5 +63,14 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     <!-- 지도 API 스크립트 -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=819945560b3247fda289e8c72db15a3c&libraries=services"></script>
+    <script>
+    	function goTodayAllMovie() {
+    		const cinemaNo = ${cinema.cinemaNo }
+//     		let date = new Date();
+//     		let movieDay = date.getISOString();
+//     		console.log(date);
+    		location.href='/user/cinemaMovie.yh?cinemaNo='+cinemaNo+'&movieDay=2022-11-03';
+    	}
+    </script>
 </body>
 </html>

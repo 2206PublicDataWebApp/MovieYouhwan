@@ -8,13 +8,15 @@ public class MovieTime {
 	private String movieDay;
 	private String movieStart;
 	private String movieEnd;
+	private int movieTicket;
 	private int movieSeat;
+	private String theaterName;
 	private String movieName;
 	
 	public MovieTime() {}
 
 	public MovieTime(int movieTimeNo, int cinemaNo, int theaterNo, int movieNo, String movieDay, String movieStart,
-			String movieEnd, int movieSeat, String movieName) {
+			String movieEnd, int movieTicket, int movieSeat, String theaterName, String movieName) {
 		super();
 		this.movieTimeNo = movieTimeNo;
 		this.cinemaNo = cinemaNo;
@@ -23,7 +25,9 @@ public class MovieTime {
 		this.movieDay = movieDay;
 		this.movieStart = movieStart;
 		this.movieEnd = movieEnd;
+		this.movieTicket = movieTicket;
 		this.movieSeat = movieSeat;
+		this.theaterName = theaterName;
 		this.movieName = movieName;
 	}
 
@@ -83,12 +87,28 @@ public class MovieTime {
 		this.movieEnd = movieEnd;
 	}
 
+	public int getMovieTicket() {
+		return movieTicket;
+	}
+
+	public void setMovieTicket(int movieTicket) {
+		this.movieTicket = movieTicket;
+	}
+
 	public int getMovieSeat() {
 		return movieSeat;
 	}
 
 	public void setMovieSeat(int movieSeat) {
 		this.movieSeat = movieSeat;
+	}
+
+	public String getTheaterName() {
+		return theaterName;
+	}
+
+	public void setTheaterName(String theaterName) {
+		this.theaterName = theaterName;
 	}
 
 	public String getMovieName() {
@@ -103,6 +123,7 @@ public class MovieTime {
 	public String toString() {
 		return "MovieTime [movieTimeNo=" + movieTimeNo + ", cinemaNo=" + cinemaNo + ", theaterNo=" + theaterNo
 				+ ", movieNo=" + movieNo + ", movieDay=" + movieDay + ", movieStart=" + movieStart + ", movieEnd="
-				+ movieEnd + ", movieSeat=" + movieSeat + ", movieName=" + movieName + "]";
+				+ movieEnd + ", movieTicket=" + movieTicket + ", movieSeat=" + movieSeat + ", theaterName="
+				+ theaterName + ", movieName=" + movieName + "]";
 	}
 }
