@@ -18,7 +18,9 @@
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     <div class="mate-start-wrapper">
-      <div class="agreement-area fade-in-bottom">dd</div>
+      <div class="agreement-area">
+        <div class="agree-txt-box">으녜</div>
+      </div>
     </div>
   </body>
 </html>

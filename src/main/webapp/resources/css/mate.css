@@ -3,16 +3,28 @@
   src: url('../font/MICEGothic\ Bold.ttf');
 }
 
+button,
+a:hover {
+  cursor: pointer;
+}
+
+a {
+  color: black;
+}
+
+/* Mate Start Page */
+
 .mate-start-wrapper {
   width: 100%;
   background-image: url('/resources/images/mate/mate_start.jpg');
   background-size: cover;
   background-color: black;
   height: 1500px;
+  padding-top : 500px;
 }
-
 .agree-txt-box {
   width: 60%;
+  margin : 0 auto;
   background-color: whitesmoke;
   opacity: 0.8;
   border-radius: 20px;
@@ -49,3 +61,310 @@ main {
   width: 1200px;
   height: 1500px;
 } */
+
+/* Mate List Page */
+
+.mate-count-bar {
+  margin-top: 10px;
+  width: 100%;
+  height: 30px;
+  background-color: #dedede;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.mate-count-bar .mate-count {
+  margin-top: 10px;
+  width: 72%;
+  height: 30px;
+  padding: 0;
+  text-align: center;
+  background-color: #0f1a3b;
+  color: #111;
+}
+
+#back-navy {
+  width: 100%;
+  height: 415px;
+  background-color: #0f1a3b;
+  opacity: 0.9;
+  position: relative;
+}
+
+#mymate-wrap {
+  position: absolute;
+  top: 200px;
+  width: 100%;
+  z-index: 1;
+  background-color: none;
+}
+
+#mymate-form {
+  position: relative;
+  padding: 20px 30px;
+  overflow: hidden;
+  width: 820px;
+  height: 410px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  margin: 0 auto;
+  box-shadow: 5px 5px 5px -1px rgb(199, 199, 199);
+}
+
+.point-mate {
+  height: 98px;
+  align-items: center;
+}
+
+.my-point-wrap {
+  align-items: center;
+}
+
+.matching-btn {
+  color: whitesmoke;
+  width: 200px;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+/* Matching On/Off Toggle Button */
+.matching-toggle-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  width: 160px;
+  bottom: 34px;
+  right: 30px;
+}
+
+.match-toggle-switch {
+  width: 4rem;
+  height: 2rem;
+  display: block;
+  position: relative;
+  border-radius: 2rem;
+  background-color: #fff;
+  border: solid 1.5px #0f1a3b;
+  cursor: pointer;
+}
+
+.match-toggle-switch .match-toggle-btn {
+  width: 1.7rem;
+  height: 1.7rem;
+  position: absolute;
+  top: 50%;
+  left: 0.1rem;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: #0f1a3b;
+}
+
+.match-toggle-switch.active {
+  background: #0f1a3b;
+}
+
+.match-toggle-switch.active .match-toggle-btn {
+  left: calc(100% - 1.8rem);
+  background: #fff;
+}
+
+.match-toggle-swtich,
+.match-toggle-btn {
+  transition: all 0.2s ease-in;
+}
+
+.mate-wrapper {
+  width: 1000px;
+  margin: 200px auto;
+}
+
+.mate-title {
+  font-size: 22px;
+  padding: 0 0 20px 10px;
+  border-bottom: 1px solid lightgray;
+}
+
+.mate-list-row {
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px;
+  font-size: 16px;
+  border-bottom: 1px solid lightgray;
+  align-items: center;
+}
+
+.match-date-col {
+  width: 15%;
+  text-align: center;
+}
+
+.mate-profile-col {
+  width: 30%;
+  text-align: center;
+}
+
+.mate-location-col {
+  width: 12.5%;
+  text-align: center;
+}
+
+.mate-genre-col {
+  width: 12.5%;
+  text-align: center;
+}
+
+.chat-btn-col {
+  width: 15%;
+  text-align: right;
+}
+
+.delete-btn-col {
+  width: 15%;
+  text-align: center;
+}
+
+.btn {
+  color: whitesmoke;
+  width: 100px;
+  height: 35px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.yellow {
+  background-color: #e59500;
+}
+
+.navy {
+  background-color: #0f1a3b;
+}
+
+/* mateOption.jsp 메이트 옵션 선택 뷰 */
+.mate-option-wrapper {
+  width: 500px;
+  margin: 50px auto;
+}
+
+.option-title {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #0f1a3b;
+  font-family: mice-bold;
+}
+
+.option-sex {
+  margin-bottom: 30px;
+}
+
+.option-age {
+  margin-bottom: 30px;
+}
+
+.option-location {
+  margin-bottom: 30px;
+}
+
+.option-genre {
+  margin-bottom: 30px;
+}
+
+.box-top {
+  display: flex;
+  height: 60px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border: 2px solid #0f1a3b;
+  background-color: #fcf4c1;
+  padding-left: 20px;
+  font-size: 15px;
+  align-items: center;
+}
+
+.box-under {
+  display: flex;
+  height: 60px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border: 2px solid #0f1a3b;
+  border-top: none;
+  padding-left: 20px;
+  font-size: 15px;
+  align-items: center;
+}
+
+.next-btn {
+  color: whitesmoke;
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: #0f1a3b;
+  float: right;
+  padding-left: 5px;
+}
+
+/* mateComplete (사용자) */
+#mate-text {
+	height : 50px;
+	margin-top : 30px;
+	line-height : 50px;
+	border-top : solid 1px #0f1a3b;
+	border-bottom : solid 1px #0f1a3b;
+}
+#mate-data {
+	height : 60px;
+	line-height : 60px;
+	border-bottom : solid 1px #0f1a3b;
+}
+	.matecomplete-userimage {
+		width : 40px;
+		height : 40px;
+		margin-top : 10px;
+		float : left;
+		background-color : #e59500;
+		border : solid 1px #e59500;
+		border-radius : 50%;
+	}
+	.matecomplete-profile {
+		width : 40%;
+		padding-left : 20px;
+		float : left;
+		text-align : center;
+	}
+	.matecomplete-grade {
+		width : 30%;
+		float : left;
+		text-align : center;
+	}
+	.matecomplete-chatting {
+		width : 30%;
+		float : left;
+		text-align : center;
+	}
+	.go-chatting {
+		width : 100px;
+		height : 30px;
+		color : white;
+		background-color : #e59500;
+		border : solid 1px  #e59500;
+		border-radius : 10px;
+	}
+#matecomplete-button {
+	width : 100%;
+	display : flex;
+	margin-top : 30px;
+	justify-content : center;
+}
+	.matecomplete-button {
+		width : 100px;
+		height : 30px;
+		margin-left : 10px;
+		margin-right : 10px;
+		color : white;
+		background-color : #0f1a3b;
+		border : solid 1px #0f1a3b;
+		border-radius : 10px;
+		float : left;
+	}
