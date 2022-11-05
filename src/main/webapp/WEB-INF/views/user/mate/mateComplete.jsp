@@ -1,44 +1,41 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="EUC-KR">
-<title>╧╚╨Яю╞х╞ : ╦ед╙ ©о╥А</title>
-<link rel="stylesheet" href="/resources/css/common.css" />
-<link rel="stylesheet" href="/resources/css/header.css" />
-<link rel="stylesheet" href="/resources/css/mate.css" />
-<script src="/resources/js/jquery-3.6.1.min.js" defer></script>
-<script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
-<script src="/resources/js/header.js" defer></script>
-<script src="/resources/js/mate.js" defer></script>
-</head>
-<body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-	<div class="mate-option-wrapper">
-		<h3>╦ед╙ ©о╥А!</h3>
-		<!-- ╦ед╙ ©о╥А ╩С╢э ©╣©╙ -->
-		<div id="mate-text">
-			<div class="matecomplete-profile">╦чюлф╝ га╥нгй</div>
-			<div class="matecomplete-grade">╦чюлф╝ фР╟║</div>
-		</div>
-		<!-- ╦ед╙ ©о╥А ╣╔юлем ╥н╣Е ©╣©╙ -->
-		<div id="mate-data">
-			<div class="matecomplete-profile">
-				<!-- ╩ГаЬ div : matecomplete-userimage -->
-				<div class="matecomplete-userimage"></div>
-				ц╤╪Ж *(20╢К, Ё╡╪╨)
-			</div>
-			<div class="matecomplete-grade">3.6</div>
-			<div class="matecomplete-chatting">
-				<button class="go-chatting">ц╓фцго╠Б</button>
-			</div>
-		</div>
-		<!-- ╧Жф╟ ©╣©╙ -->
-		<div id="matecomplete-button">
-			<button class="matecomplete-button">╢ы╫ц╦ед╙</button>
-			<button class="matecomplete-button">╦ед╙╦Я╥о</button>
-		</div>
-	</div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>К╛╢К╧└Л°═М≥≤ : К╖╓Л╧╜ Л≥└Кё▄</title>
+    <link rel="stylesheet" href="/resources/css/common.css" />
+    <link rel="stylesheet" href="/resources/css/header.css" />
+    <link rel="stylesheet" href="/resources/css/mate.css" />
+    <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+    <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
+    <script src="/resources/js/header.js" defer></script>
+    <script src="/resources/js/mate.js" defer></script>
+  </head>
+  <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+    <div class="mate-option-wrapper">
+      <h3>К╖╓Л╧╜ Л≥└Кё▄!</h3>
+      <div id="mate-text">
+        <div class="matecomplete-profile">К╘■Л²╢М┼╦ М■└К║°М∙└</div>
+        <div class="matecomplete-grade">М▐┴Й╟─</div>
+      </div>
+      <div id="mate-data">
+        <div class="matecomplete-profile">
+          <!-- matecomplete-userimage div : matecomplete-userimage -->
+          <div class="matecomplete-userimage"></div>
+        </div>
+        <div class="matecomplete-grade">3.6</div>
+        <div class="matecomplete-chatting">
+          <button class="go-chatting">Л╠└М▄┘М∙≤Й╦╟</button>
+        </div>
+      </div>
+      <div id="matecomplete-button">
+        <button class="matecomplete-button">К╘■Л²╢М┼╦ К╙╘К║²</button>
+        <button class="matecomplete-button">К▀╓Л▀° К╖╓Л╧╜</button>
+      </div>
+    </div>
+  </body>
 </html>
