@@ -10,7 +10,7 @@
 <link href="/resources/css/header.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
 <link href="/resources/css/cinema.css" rel="stylesheet" />
-<script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="/resources/js/header.js" defer></script>
 <script src="/resources/js/footer.js" defer></script>
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
@@ -42,42 +42,23 @@
 	   	<div class="cinema-movie-year-month">
 		   	<div class="year-month">${movieDay.thisYear }년 ${movieDay.thisMonth }월</div>
 			<c:forEach items="${movieDay.tmdayList }" var="tmday" varStatus="i">
-				<button type="button" class="tmday-button" onclick="getMovieList(${cinema.cinemaNo}, '${movieDay.dayList[i.index] }');">${tmday }</button>
+				<button type="button" class="tmday-button" onclick="getMovieList(${cinema.cinemaNo}, ${i.index });">${tmday }</button>
 			</c:forEach>
 			<hr/>
 	   	</div>
-	   	<div id="choice-movie-listwrap">
 		<!-- 영화 선택 -->
+<div id="choice-movie-listwrap">
+			<!-- 일별 현재 상영 영화 리스트 -->
 			<c:forEach items="${mList }" var="movie">
-			
-				<div class="chocie-movie-listwrap">
-					<c:if test="${movie.movieAge eq '전체' }">
-						<img src="/resources/images/movie/전체.jpg" width="30px" height="30px" />
-					</c:if>
-					<c:if test="${movie.movieAge eq '만12세' }">
-						<img src="/resources/images/movie/12.jpg" width="30px" height="30px" />
-					</c:if>
-					<c:if test="${movie.movieAge eq '만15세' }">
-						<img src="/resources/images/movie/15.jpg" width="30px" height="30px" />
-					</c:if>
-					<c:if test="${movie.movieAge eq '청불' }">
-						<img src="/resources/images/movie/청불.jpg" width="30px" height="30px" />
-					</c:if>
-					<span class="choice-movielist-text">${movie.movieTitle }</span>
-					${mtList }
-					<c:forEach items="${mtList }" var="movieTime">
-						<c:if test="${movie.movieNo eq movieTime.movieNo }">
-<%-- 							<c:forEach items="${movieDay.dayList }" var="movieDate"> --%>
-<%-- 							moveDate: ${movieDate }<br> --%>
-<%-- 							movieDay: ${movieTime.movieDay } --%>
-<%-- 							<c:if test="${movieTime.movieDay eq movieDate} "> --%>
-								<div class="one-cinema-movie">
-									<p>${movieTime.theaterName} ${movieTime.movieSeat }석 / ${movieTime.movieSeat }석</p>
-									<p>${movieTime.movieStart } ~ ${movieTime.movieEnd }</p>
-								</div>
-							</c:if>
-<%-- 							</c:forEach> --%>
-<%-- 						</c:if> --%>
+				<div>
+					<p>${movie.movieTitle }</p>
+					<c:forEach items="${cmList }" var="cinemaMovie">
+						<c:if test="${movie.movieNo eq cinemaMovie.movieNo }">
+							<div class="choice-movie-list">
+								<p>${cinemaMovie.theaterName } ${cinemaMovie.movieTicket } / ${cinemaMovie.movieSeat }</p>
+								<p>${cinemaMovie.movieStart } ~ ${cinemaMovie.movieEnd }</p>
+							</div>
+						</c:if>
 					</c:forEach>
 				</div>
 			</c:forEach>
@@ -85,28 +66,24 @@
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     <script>
-    	function getMovieList(cinemaNo, movieDay) {
-    		console.log("click");
+    	function getMovieList(cinemaNo, dayIndex) {
     		$.ajax({
+    			type : "post",
     			url : "/user/cinemaMovieDay.yh",
     			data : {
     				"cinemaNo" : cinemaNo,
-    				"movieDay" : movieDay
+    				"dayIndex" : dayIndex
     			},
-    			type : "post",
     			success : function(result) {
     				alert("성공!");
-    				console.log(result);
-//     				$("#choice-movie-listwrap").html('');
-//     				var str = '';
-//     				for(var i in result) {
-//     					str += '<div class="chocie-movie-listwrap">'
-//     					str += '<span class="choice-movielist-text">'+result[i]+'</span>'
-//     				}
-//     				var movieListByDate='';
+    				$("#choice-movie-listwrap").html('');
+    				var list = $("#choice-movie-listwrap");
+    				list.append("<c:forEach items='${mList }' var='movie'><div><p>${movie.movieTitle }</p><c:forEach items='${cmList }' var='cinemaMovie'>${cinemaMovie.movieDay}</c:forEach></div></c:forEach>");
     			},
     			error : function() {
     				alert("실패!");
+    				console.log(cinemaNo);
+    				console.log(dayIndex);
     			}
     		});
     	}

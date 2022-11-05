@@ -63,6 +63,11 @@ public class MovieDay {
 		String tmday = tmdate.format(date.getTime());
 		return tmday;
 	}
+	
+	// 무비DAY 객체를 하나 만들었을때 오늘부터 1주일 날짜를 가지고 있는 객체 생성 MDAY.GETMOVICEDAY INDEX 오늘날짜 0 1 2 3 4 5 6 7 
+	public String getMovieDay(int index) {
+		return dayList.get(index);
+	}
 
 	public String getThisYear() {
 		return thisYear;

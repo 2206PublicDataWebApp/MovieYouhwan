@@ -1,6 +1,5 @@
 package kr.co.movieyouhwan.user.cinema.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 
 import kr.co.movieyouhwan.admin.cinema.service.AdminCinemaService;
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
@@ -25,6 +23,8 @@ import kr.co.movieyouhwan.admin.movie.domain.MovieDay;
 import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.admin.movie.service.AdminMovieService;
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
+import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
+import kr.co.movieyouhwan.user.cinema.service.UserCinemaService;
 import kr.co.movieyouhwan.user.movie.service.UserMovieService;
 
 @Controller
@@ -35,6 +35,8 @@ public class UserCinemaController {
 	private AdminMovieService aMovieService;
 	@Autowired
 	private UserMovieService uMovieService;
+	@Autowired
+	private UserCinemaService uCinemaService;
 	
 	/**
 	 * 영화관 리스트
@@ -83,15 +85,18 @@ public class UserCinemaController {
 			ModelAndView mv,
 			@RequestParam("cinemaNo") Integer cinemaNo,
 			HttpSession session) {
+		// 한개의 영화관 띄우기
 		Cinema cinema = aCinemaService.printOneCinema(cinemaNo);
-		List<Movie> mList = aMovieService.printNowMovie();
-		List<MovieTime> mtList = uMovieService.printAllCinemaMovie(cinemaNo);
+		// 일별 영화 출력 (중복 제외)
+		List<Movie> mList = uCinemaService.printMovieNowOne(new MovieDay().getMovieDay(0));
+		// 일별 영화 정보 출력
+		List<CinemaMovie> cmList = uCinemaService.printCinemaMovieByDay(cinemaNo, new MovieDay().getMovieDay(0)); // -> printCinemaMovieByDate
 		session.setAttribute("cinemaNo", cinema.getCinemaNo());
 		// 영화관 1개
 		mv.addObject("cinema", cinema);
-		// 영화 전체
+		// 일별 영화 정보 출력
 		mv.addObject("mList", mList);
-		mv.addObject("mtList", mtList);
+		mv.addObject("cmList", cmList);
 		// 날짜 vo
 		mv.addObject("movieDay", new MovieDay());
 		mv.setViewName("/user/cinema/userCinemaMovie");
@@ -106,24 +111,27 @@ public class UserCinemaController {
 	@ResponseBody
 	@RequestMapping(value="/user/cinemaMovieDay.yh", produces="application/json;charset=utf-8", method=RequestMethod.POST)
 	public String cinemaMovieDayChoice(
-			@RequestParam("cinemaNo") Integer cinemaNo
-			,@RequestParam("movieDay") String movieDay) {
-		System.out.println(movieDay);
-		List<Movie> mList = aMovieService.printNowMovie();
-		List<MovieTime> mtList = uMovieService.printCinemaMovieByDate(cinemaNo, movieDay);
+			@RequestParam("cinemaNo") Integer cinemaNo,
+			@RequestParam(value="movieDay", required=false) String movieDay,
+			@RequestParam(value="dayIndex", required=false) Integer dayIndex,
+			HttpSession session) {
+		dayIndex = dayIndex == null ? 0 : dayIndex;
+		// 한개의 영화관 띄우기
+		Cinema cinema = aCinemaService.printOneCinema(cinemaNo);
+		// 일별 영화 출력 (중복 제외)
+		List<Movie> mList = uCinemaService.printMovieNowOne(new MovieDay().getMovieDay(dayIndex));
+		// 일별 영화 정보 출력
+		List<CinemaMovie> cmList = uCinemaService.printCinemaMovieByDay(cinemaNo, new MovieDay().getMovieDay(dayIndex)); // -> printCinemaMovieByDate
+		session.setAttribute("cinemaNo", cinema.getCinemaNo());
 		
-//		mv.addObject(mList);
-//		System.out.println(mtList.toString());
-//		mv.addObject(mtList);
-//		mv.setViewName("user/cinema/userCinemaMovie");
 		Gson gson = new Gson();
-
 		JSONObject object=new JSONObject();
 		JSONArray jsonArray = new JSONArray();
+		object.put("cinema", gson.toJson(cinema));
 		object.put("mList", gson.toJson(mList));
-		object.put("mtList", gson.toJson(mtList));
+		object.put("cmList", gson.toJson(cmList));
 		jsonArray.add(object);
-		System.out.println(jsonArray.toJSONString());
+		System.out.print(object);
 		return jsonArray.toJSONString();
 	}
 }

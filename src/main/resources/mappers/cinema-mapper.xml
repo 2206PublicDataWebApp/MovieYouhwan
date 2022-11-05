@@ -18,6 +18,17 @@
 		<result property="cinemaImgPath" column="CINEMA_IMG_PATH"/>
 		<result property="cinemaStatus" column="CINEMA_STATUS"/>
 	</resultMap>
+	<resultMap type="CinemaMovie" id="CinemaMovieResultMap">
+		<result property="movieNo" column="MOVIE_NO" />
+		<result property="movieTitle" column="MOVIE_TITLE"/>
+		<result property="movieAge" column="MOVIE_AGE" />
+		<result property="theaterName" column="THEATER_NAME"/>
+		<result property="movieDay" column="MOVIE_DAY"/>
+		<result property="movieStart" column="MOVIE_START"/>
+		<result property="movieEnd" column="MOVIE_END"/>
+		<result property="movieTicket" column="MOVIE_TICKET"/>
+		<result property="movieSeat" column="MOVIE_SEAT"/>  
+	</resultMap>
 	<!-- 영화관 등록(관리자) -->
 	<insert id="insertCinema">
 		INSERT INTO CINEMA_TBL VALUES(SEQ_CINEMA_NO.NEXTVAL, #{cinemaName}, #{cinemaArea}, #{cinemaAddress1}, #{cinemaAddress2}, #{cinemaTel}, #{cinemaContent}, #{cinemaPark}, #{cinemaPublic}, #{cinemaImgName}, #{cinemaImgRename}, #{cinemaImgPath}, DEFAULT)
@@ -37,5 +48,20 @@
 	<!-- 영화관 상세(관리자) -->
 	<select id="selectOneCinema" resultMap="CinemaResultMap">
 		SELECT * FROM CINEMA_TBL WHERE CINEMA_NO = #{cinemaNo} AND CINEMA_STATUS = 'Y'
+	</select>
+	<!-- 영화관 영화 조회(사용자) -->
+	<select id="selectAllCinemaMovie" resultMap="CinemaMovieResultMap">
+		SELECT MT.MOVIE_TITLE, MT.MOVIE_AGE, TT.THEATER_NAME, MTT.MOVIE_NO, MTT.MOVIE_DAY, MTT.MOVIE_START, MTT.MOVIE_END, MTT.MOVIE_TICKET, MTT.MOVIE_SEAT
+		FROM MOVIE_TBL MT, THEATER_TBL TT, MOVIE_TIME_TBL MTT
+		WHERE MT.MOVIE_NO = MTT.MOVIE_NO
+		AND TT.THEATER_NO = MTT.THEATER_NO
+		AND MTT.MOVIE_DAY = #{movieDay}
+		ORDER BY MOVIE_START
+	</select>
+	<select id="selectMovieNowOne" resultMap="CinemaMovieResultMap">
+		SELECT DISTINCT MT.MOVIE_NO, MT.MOVIE_TITLE
+		FROM MOVIE_TBL MT, MOVIE_TIME_TBL MTT 
+		WHERE MT.MOVIE_NO = MTT.MOVIE_NO
+		AND  MTT.MOVIE_DAY = #{movieDay}
 	</select>
 </mapper>
