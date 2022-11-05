@@ -42,7 +42,7 @@
 	<!-- 사용자 로그인 -->
 	<select id="selectLoginOne" resultMap="memberResultMap">
 		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_NICK, MEMBER_BIRTH, MEMBER_GENDER
-        , MEMBER_PHONE, MEMBER_EMAIL, MEMBER_IMG_PATH, MEMBER_SIGNUP_DATE
+        , MEMBER_PHONE, MEMBER_EMAIL, MEMBER_IMG_RENAME, MEMBER_IMG_PATH, MEMBER_SIGNUP_DATE
         , MEMBER_LEVEL, MEMBER_POINT, SOCIAL_CODE, SOCIAL_TYPE, MEMBER_YN
         , MATE_STATUS, MATE_REPORT_COUNT, MATE_RESTART_DATE, MEMBER_TYPE
         FROM MEMBER_TBL
@@ -74,6 +74,11 @@
 		    , MEMBER_PHONE = #{memberPhone}
 		    , MEMBER_EMAIL = #{memberEmail}
 		    WHERE MEMBER_ID = #{memberImgRename};
-		
 	</update>
+	
+	<!-- 마이페이지 -->
+	<select id="selectOneById" resultMap="memberResultMap">
+		SELECT * FROM MEMBER_TBL
+		WHERE MEMBER_ID = #{memberId} AND MEMBER_YN = 'Y'
+	</select>
 </mapper>

@@ -1,20 +1,46 @@
 package kr.co.movieyouhwan.user.myPage.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.myPage.service.UserMyService;
 
 @Controller
 public class UserMyController {
+	@Autowired UserMyService uMyService;
+	
 	/**
-	 * 마이페이지 상단
-	 * 기능 구현 전
+	 * 마이페이지 
+	 * ----- 탑 메뉴(포인트, 메이트)
+	 * ----- 메뉴 탭
+	 * @param request
+	 * @param mv
 	 * @return
 	 */
-	@RequestMapping(value="/my/myPageMain.yh", method=RequestMethod.GET)
-	public String myPage() {
-		return"/user/mypage/myPageMain";
+	@RequestMapping(value = "/my/myPageMain.yh", method = RequestMethod.GET)
+	public ModelAndView showMyPage(HttpServletRequest request, ModelAndView mv) {
+		try {
+			HttpSession session = request.getSession();
+			Member member = (Member)session.getAttribute("loginUser");
+			String memberId = member.getMemberId();
+			Member uMyOne = uMyService.printOneById(memberId);
+			mv.addObject("member", uMyOne);
+			mv.setViewName("user/mypage/myPageMain");
+			System.out.println("ddd");
+			System.out.println(uMyOne.getMemberId());
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/errorPage");
+		}
+		return mv;
 	}
+		
 	/**
 	 * 마이페이지 상단
 	 * 기능 구현 전
