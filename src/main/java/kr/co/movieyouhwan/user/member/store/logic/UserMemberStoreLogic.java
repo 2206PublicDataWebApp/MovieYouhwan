@@ -54,5 +54,3 @@ public class UserMemberStoreLogic implements UserMemberStore {
 
 
 }
-
-	
