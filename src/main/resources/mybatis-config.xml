@@ -24,6 +24,7 @@
 		<typeAlias type="kr.co.movieyouhwan.common.error.Error" alias="Error"/>
 		<typeAlias type="kr.co.movieyouhwan.common.page.PageInfo" alias="PageInfo"/>
 		<typeAlias type="kr.co.movieyouhwan.user.cinema.domain.Cinema" alias="Cinema"/>
+		<typeAlias type="kr.co.movieyouhwan.user.cinema.domain.CinemaMovie" alias="CinemaMovie"/>
 		<typeAlias type="kr.co.movieyouhwan.user.cinema.domain.CinemaFavorite" alias="CinemaFavorite"/>
 		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.Match" alias="Match"/>
 		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.MatchOption" alias="MatchOption"/>

@@ -470,17 +470,12 @@
 	margin-top : 20px;
 	background-color : #fff;
 }
-.one-cinema-movie {
+.choice-movie-list {
 	width : 180px;
 	height : 80px;
 	padding-top : 20px;
 	padding-left : 20px;
+	margin-bottom : 20px;
 	border : solid 1px #0F1A3B;
 	border-radius : 15px;
-}
-.chocie-movie-listwrap {
-}
-.choice-movielist-text {
-	margin-top : -20px;
-	font-size : 18px;
 }
