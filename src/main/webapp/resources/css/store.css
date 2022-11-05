@@ -161,8 +161,15 @@
 /* storeDetail - 상품사진 */
 .gitem-store-detail:nth-child(2) {
   grid-row: 2 / 8;
+  object-fit: contain;
+  max-width: 300px;
+  max-height: 300px;
   padding: 3px;
   text-align: center;
+}
+
+.gitem-store-detail:nth-child(2) img {
+  object-fit: contain;
 }
 
 /* storeDetail - 상품가격 */

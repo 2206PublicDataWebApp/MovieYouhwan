@@ -48,22 +48,22 @@ public class AdminStoreServiceImpl implements AdminStoreService {
 
   // 상품 리스트 불러오기
   @Override
-  public List<Product> printProductList() {
-    List<Product> pList = aStoreStore.selectProductList(session);
-    return pList;
+  public List<Product> printAllProductList() {
+    List<Product> productList = aStoreStore.selectAllProductList(session);
+    return productList;
   }
 
   // 상품 유형 리스트 불러오기
   @Override
-  public List<ProductType> printProductTypeList() {
-    List<ProductType> pTypeList = aStoreStore.selectProductTypeList(session);
-    return pTypeList;
+  public List<ProductType> printAllProductTypeList() {
+    List<ProductType> productTypeList = aStoreStore.selectAllProductTypeList(session);
+    return productTypeList;
   }
 
   // 상품 불러오기
   @Override
   public Product printOneProduct(int productNo) {
-    Product product = aStoreStore.selectProduct(session, productNo);
+    Product product = aStoreStore.selectOneProduct(session, productNo);
     return product;
   }
 

@@ -18,10 +18,10 @@ public interface AdminStoreStore {
 
   int updateProductOrder(SqlSessionTemplate session, List<Integer> productNoList); // 상품 재배치
 
-  List<Product> selectProductList(SqlSession session); // 상품 리스트 조회
+  List<Product> selectAllProductList(SqlSession session); // 상품 리스트 조회
 
-  List<ProductType> selectProductTypeList(SqlSession session); // 상품 유형 리스트 조회
+  List<ProductType> selectAllProductTypeList(SqlSession session); // 상품 유형 리스트 조회
 
-  Product selectProduct(SqlSession session, int productNo); // 상품 조회
+  Product selectOneProduct(SqlSession session, int productNo); // 상품 조회
 
 }

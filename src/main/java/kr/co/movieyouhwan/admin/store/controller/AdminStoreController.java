@@ -36,8 +36,8 @@ public class AdminStoreController {
   @RequestMapping(value = "/admin/store/manage.yh")
   public ModelAndView adminStoreList(HttpServletRequest request, ModelAndView mv) {
     try {
-      List<Product> productList = aStoreService.printProductList();
-      List<ProductType> productTypeList = aStoreService.printProductTypeList();
+      List<Product> productList = aStoreService.printAllProductList();
+      List<ProductType> productTypeList = aStoreService.printAllProductTypeList();
       if (!productList.isEmpty() && !productTypeList.isEmpty()) {
         mv.addObject("productList", productList);
         mv.addObject("productTypeList", productTypeList);
@@ -61,8 +61,8 @@ public class AdminStoreController {
   @RequestMapping(value = "/admin/store/reorder.yh")
   public ModelAndView adminStoreReorder(HttpServletRequest request, ModelAndView mv) {
     try {
-      List<Product> productList = aStoreService.printProductList();
-      List<ProductType> productTypeList = aStoreService.printProductTypeList();
+      List<Product> productList = aStoreService.printAllProductList();
+      List<ProductType> productTypeList = aStoreService.printAllProductTypeList();
       if (!productList.isEmpty() && !productTypeList.isEmpty()) {
         mv.addObject("productList", productList);
         mv.addObject("productTypeList", productTypeList);
@@ -77,7 +77,7 @@ public class AdminStoreController {
   }
 
   /**
-   * 상품 재배치
+   * 상품 재배치 저장
    * 
    * @param request
    * @param productNoList
@@ -150,7 +150,7 @@ public class AdminStoreController {
    * @param mv
    * @return
    */
-  @RequestMapping(value = "/admin/store/modify.yh")
+  @RequestMapping(value = "/admin/store/modify.yh", method = RequestMethod.POST)
   public ModelAndView adminStoreModify(HttpServletRequest request, @ModelAttribute Product modProduct,
       @RequestParam(value = "productImg", required = false) MultipartFile productImg, ModelAndView mv) {
     try {
@@ -196,7 +196,7 @@ public class AdminStoreController {
    * @param mv
    * @return
    */
-  @RequestMapping(value = "/admin/store/delete.yh")
+  @RequestMapping(value = "/admin/store/delete.yh", method = RequestMethod.POST)
   public ModelAndView adminStoreDelete(HttpServletRequest request, @RequestParam("productNo") Integer productNo,
       ModelAndView mv) {
     try {

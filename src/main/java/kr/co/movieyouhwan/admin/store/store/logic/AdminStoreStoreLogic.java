@@ -43,21 +43,21 @@ public class AdminStoreStoreLogic implements AdminStoreStore {
 
   // 상품 리스트 조회
   @Override
-  public List<Product> selectProductList(SqlSession session) {
-    List<Product> pList = session.selectList("StoreMapper.selectProductList");
-    return pList;
+  public List<Product> selectAllProductList(SqlSession session) {
+    List<Product> productList = session.selectList("StoreMapper.selectProductList");
+    return productList;
   }
 
   // 상품 유형 리스트 조회
   @Override
-  public List<ProductType> selectProductTypeList(SqlSession session) {
-    List<ProductType> pTypeList = session.selectList("StoreMapper.selectProductTypeList");
-    return pTypeList;
+  public List<ProductType> selectAllProductTypeList(SqlSession session) {
+    List<ProductType> productTypeList = session.selectList("StoreMapper.selectProductTypeList");
+    return productTypeList;
   }
 
   // 상품 조회
   @Override
-  public Product selectProduct(SqlSession session, int productNo) {
+  public Product selectOneProduct(SqlSession session, int productNo) {
     Product product = session.selectOne("StoreMapper.selectProduct", productNo);
     return product;
   }

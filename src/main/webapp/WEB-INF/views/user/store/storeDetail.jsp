@@ -35,17 +35,18 @@
           </li>
         </ul>
       </div>
-      <form action="" type="method">
+      <form action="" method="post">
+      	<input type="hidden" name="productNo" value="${product.productNo }">
         <div id="grid-store-detail">
-          <div class="gitem-store-detail"><h3>${product.productName }혼영콤보</h3></div>
-          <div class="gitem-store-detail"><img src="" alt="상품사진" /></div>
-          <div class="gitem-store-detail">${product.productPrice }10,000원</div>
+          <div class="gitem-store-detail"><h3>${product.productName }</h3></div>
+          <div class="gitem-store-detail"><img src="/resources/images/storeProduct/${product.productImgRename }" alt="상품사진" /></div>
+          <div class="gitem-store-detail">${product.productPrice }</div>
           <div class="gitem-store-detail">상품구성</div>
           <div class="gitem-store-detail">${product.productDesc }</div>
           <div class="gitem-store-detail">유효기간</div>
           <div class="gitem-store-detail">구매일로부터 6개월 이내</div>
           <div class="gitem-store-detail">
-            <select name="productOption" id="">
+            <select name="productOption" id="" disabled>
               <option value="original">오리지널</option>
             </select>
           </div>

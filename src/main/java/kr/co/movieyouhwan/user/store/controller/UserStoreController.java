@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,8 +35,8 @@ public class UserStoreController {
   @RequestMapping(value = "/store/list.yh")
   public ModelAndView storeList(HttpServletRequest request, ModelAndView mv) {
     try {
-      List<Product> productList = uStoreService.printProductList();
-      List<ProductType> productTypeList = uStoreService.printProductTypeList();
+      List<Product> productList = uStoreService.printAllProductList();
+      List<ProductType> productTypeList = uStoreService.printAllProductTypeList();
       if (!productList.isEmpty() && !productTypeList.isEmpty()) {
         mv.addObject("productList", productList);
         mv.addObject("productTypeList", productTypeList);
@@ -57,7 +58,7 @@ public class UserStoreController {
    * @return
    */
   @ResponseBody
-  @RequestMapping(value = "/store/addToCart.yh")
+  @RequestMapping(value = "/store/addToCart.yh", method = RequestMethod.POST)
   public String storeAddToCart(HttpServletRequest request, @ModelAttribute Cart cart) {
     try {
       HttpSession session = request.getSession();
@@ -78,28 +79,46 @@ public class UserStoreController {
     return "";
   }
 
-  // 스토어 상품 상세 View
+  /**
+   * 상품 상세 페이지
+   * 
+   * @param productNo
+   * @param mv
+   * @return
+   */
   @RequestMapping(value = "/store/detail.yh")
-  public ModelAndView storeDetail(ModelAndView mv) {
-    mv.setViewName("user/store/storeDetail");
+  public ModelAndView storeDetail(int productNo, ModelAndView mv) {
+    try {
+      Product product = uStoreService.printOneProduct(productNo);
+      product.toString(); // vc
+      mv.addObject("product", product);
+      mv.setViewName("user/store/storeDetail");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return mv;
   }
 
-  // 장바구니 페이지
+  /**
+   * 장바구니 페이지
+   * 
+   * @param request
+   * @param mv
+   * @return
+   */
   @RequestMapping(value = "/store/cart.yh")
   public ModelAndView storeCartView(HttpServletRequest request, ModelAndView mv) {
     try {
       HttpSession session = request.getSession();
       Member member = (Member) session.getAttribute("loginUser");
       if (member != null) {
-        List<Cart> cartList = uStoreService.printCartList(member.getMemberId());
+        List<Cart> cartList = uStoreService.printMyCartList(member.getMemberId());
         mv.addObject("cartList", cartList);
         mv.setViewName("user/store/storeCart");
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
-
     return mv;
   }
 

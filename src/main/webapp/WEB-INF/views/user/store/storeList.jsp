@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -42,7 +41,9 @@
               <c:forEach items="${productList }" var="product">
                 <c:if test="${productType.productType eq product.productType }">
                   <li class="product-item" id="${product.productNo }">
-                    <img src="/resources/images/storeProduct/${product.productImgRename}" alt="" class="product-img" />
+                    <a href="/store/detail.yh?productNo=${product.productNo}">
+                      <img src="/resources/images/storeProduct/${product.productImgRename}" alt="" class="product-img" />
+                    </a>
                     <div class="product-detail">
                       <p class="product-desc">${product.productDesc}</p>
                       <p class="product-name">${product.productName}</p>

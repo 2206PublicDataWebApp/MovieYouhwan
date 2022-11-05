@@ -16,21 +16,21 @@ public class UserStoreStoreLogic implements UserStoreStore {
 
   // 상품 리스트 불러오기
   @Override
-  public List<Product> selectProductList(SqlSession session) {
+  public List<Product> selectAllProductList(SqlSession session) {
     List<Product> pList = session.selectList("StoreMapper.selectProductList");
     return pList;
   }
 
   // 상품 유형 리스트 불러오기
   @Override
-  public List<ProductType> selectProductTypeList(SqlSession session) {
+  public List<ProductType> selectAllProductTypeList(SqlSession session) {
     List<ProductType> pTypeList = session.selectList("StoreMapper.selectProductTypeList");
     return pTypeList;
   }
 
   // 장바구니에 같은 상품 있는지 체크
   @Override
-  public int selectCountProductInCart(SqlSessionTemplate session, Cart cart) {
+  public int selectCountProductInCart(SqlSession session, Cart cart) {
     int count = session.selectOne("StoreMapper.selectCountProductInCart", cart);
     return count;
   }
@@ -44,9 +44,23 @@ public class UserStoreStoreLogic implements UserStoreStore {
 
   // 장바구니에 있는 상품을 담으면 해당 상품 수량 변경
   @Override
-  public int updateProductCountInCart(SqlSessionTemplate session, Cart cart) {
+  public int updateProductCountInCart(SqlSession session, Cart cart) {
     int result = session.update("StoreMapper.updateProductCountInCart", cart);
     return result;
+  }
+
+  // 상품 상세 조회
+  @Override
+  public Product selectOneProduct(SqlSession session, int productNo) {
+     Product product = session.selectOne("StoreMapper.selectOneProduct", productNo);
+    return product;
+  }
+
+  // 장바구니 조회
+  @Override
+  public List<Cart> selectMyCartList(SqlSession session, String memberId) {
+    List<Cart> cartList = session.selectList("StoreMapper.selectMyCartList", memberId);
+    return cartList;
   }
 
 }

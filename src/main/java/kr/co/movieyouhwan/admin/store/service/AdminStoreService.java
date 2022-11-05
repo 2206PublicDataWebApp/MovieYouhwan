@@ -15,9 +15,9 @@ public interface AdminStoreService {
 
   int modifyProductOrder(List<Integer> productNoList); // 상품 재배치
 
-  List<Product> printProductList(); // 상품 리스트 불러오기
+  List<Product> printAllProductList(); // 상품 리스트 불러오기
 
-  List<ProductType> printProductTypeList(); // 상품 유형 리스트 불러오기
+  List<ProductType> printAllProductTypeList(); // 상품 유형 리스트 불러오기
 
   Product printOneProduct(int productNo); // 상품 불러오기
 }

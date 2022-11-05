@@ -22,15 +22,15 @@ public class UserStoreServiceImpl implements UserStoreService {
 
   // 상품 목록 불러오기
   @Override
-  public List<Product> printProductList() {
-    List<Product> pList = uStoreStore.selectProductList(session);
+  public List<Product> printAllProductList() {
+    List<Product> pList = uStoreStore.selectAllProductList(session);
     return pList;
   }
 
   // 상품 유형 리스트 불러오기
   @Override
-  public List<ProductType> printProductTypeList() {
-    List<ProductType> pTypeList = uStoreStore.selectProductTypeList(session);
+  public List<ProductType> printAllProductTypeList() {
+    List<ProductType> pTypeList = uStoreStore.selectAllProductTypeList(session);
     return pTypeList;
   }
 
@@ -55,11 +55,18 @@ public class UserStoreServiceImpl implements UserStoreService {
     return result;
   }
 
+  // 상품 상세 조회
+  @Override
+  public Product printOneProduct(int productNo) {
+    Product product = uStoreStore.selectOneProduct(session, productNo);
+    return product;
+  }
+
   // 장바구니 조회
   @Override
-  public List<Cart> printCartList(String memberId) {
-    // TODO Auto-generated method stub
-    return null;
+  public List<Cart> printMyCartList(String memberId) {
+    List<Cart> cartList = uStoreStore.selectMyCartList(session, memberId);
+    return cartList;
   }
 
 }

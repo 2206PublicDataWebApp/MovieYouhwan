@@ -44,6 +44,7 @@
           </div>
         </div>
       </div>
+      <!-- TODO: PRODUCT_STATUS = 'N'이면 구매 못함 -->
       <div id="store-cart-list">
         <div id="ghead-cart-list">
           <div><input type="checkbox" /></div>

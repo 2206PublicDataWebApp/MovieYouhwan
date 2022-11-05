@@ -84,4 +84,12 @@
 		SELECT COUNT(CART_NO) FROM CART_TBL
 		WHERE MEMBER_ID = #{memberId} AND PRODUCT_NO = #{productNo}
 	</select>
+	<select id="selectOneProduct" resultMap="productResultMap">
+		SELECT * FROM PRODUCT_TBL
+		WHERE PRODUCT_NO = #{productNo}
+	</select>
+	<select id="selectMyCartList" resultMap="cartResultMap">
+		SELECT * FROM CART_TBL
+		WHERE MEMBER_ID = #{memberId}
+	</select>
 </mapper>

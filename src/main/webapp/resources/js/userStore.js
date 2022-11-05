@@ -3,6 +3,9 @@ $('.btn-store-buy').click(function () {
   $(location).attr('href', '/store/payView.yh');
 });
 
+// 상품 목록 - 상품 상세 페이지로 이동
+$('');
+
 // 상품 목록 - 장바구니에 상품 담기
 $('.btn-store-list.btn-store-cart').click(function () {
   let productNo = $(this).parent().parent().attr('id');
@@ -53,8 +56,6 @@ function addProductToCart(productNo, productName, productTypeNo, productType, pr
         $(location).attr('href', '/store/cart.yh');
       }
     },
-    error: function () {
-      alert('안 됨 ㅅㄱ');
-    },
+    error: function () {},
   });
 }
