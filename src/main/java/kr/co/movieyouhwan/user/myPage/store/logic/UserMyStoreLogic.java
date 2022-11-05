@@ -7,12 +7,8 @@ import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.myPage.store.UserMyStore;
 @Repository
 public class UserMyStoreLogic implements UserMyStore{
-	private SqlSessionTemplate session;
-	public UserMyStoreLogic() {}
 	
-	public void setSqlSession(SqlSessionTemplate session) {
-		this.session = session;
-	}
+
 	/**
 	 * 마이페이지
 	 */
