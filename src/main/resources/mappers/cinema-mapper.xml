@@ -49,7 +49,14 @@
 	<select id="selectOneCinema" resultMap="CinemaResultMap">
 		SELECT * FROM CINEMA_TBL WHERE CINEMA_NO = #{cinemaNo} AND CINEMA_STATUS = 'Y'
 	</select>
-	<!-- 영화관 영화 조회(사용자) -->
+	<!-- 영화관 영화 조회 (사용자) -->
+	<select id="selectMovieNowOne" resultMap="CinemaMovieResultMap">
+		SELECT DISTINCT MT.MOVIE_NO, MT.MOVIE_TITLE
+		FROM MOVIE_TBL MT, MOVIE_TIME_TBL MTT 
+		WHERE MT.MOVIE_NO = MTT.MOVIE_NO
+		AND  MTT.MOVIE_DAY = #{movieDay}
+	</select>
+	<!-- 영화관 영화 정보 조회(사용자) -->
 	<select id="selectAllCinemaMovie" resultMap="CinemaMovieResultMap">
 		SELECT MT.MOVIE_TITLE, MT.MOVIE_AGE, TT.THEATER_NAME, MTT.MOVIE_NO, MTT.MOVIE_DAY, MTT.MOVIE_START, MTT.MOVIE_END, MTT.MOVIE_TICKET, MTT.MOVIE_SEAT
 		FROM MOVIE_TBL MT, THEATER_TBL TT, MOVIE_TIME_TBL MTT
@@ -57,11 +64,5 @@
 		AND TT.THEATER_NO = MTT.THEATER_NO
 		AND MTT.MOVIE_DAY = #{movieDay}
 		ORDER BY MOVIE_START
-	</select>
-	<select id="selectMovieNowOne" resultMap="CinemaMovieResultMap">
-		SELECT DISTINCT MT.MOVIE_NO, MT.MOVIE_TITLE
-		FROM MOVIE_TBL MT, MOVIE_TIME_TBL MTT 
-		WHERE MT.MOVIE_NO = MTT.MOVIE_NO
-		AND  MTT.MOVIE_DAY = #{movieDay}
 	</select>
 </mapper>

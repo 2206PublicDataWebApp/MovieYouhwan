@@ -47,7 +47,7 @@
 			<hr/>
 	   	</div>
 		<!-- 영화 선택 -->
-<div id="choice-movie-listwrap">
+		<div id="choice-movie-listwrap">
 			<!-- 일별 현재 상영 영화 리스트 -->
 			<c:forEach items="${mList }" var="movie">
 				<div>
@@ -75,15 +75,15 @@
     				"dayIndex" : dayIndex
     			},
     			success : function(result) {
-    				alert("성공!");
+    				alert("성공");
     				$("#choice-movie-listwrap").html('');
     				var list = $("#choice-movie-listwrap");
-    				list.append("<c:forEach items='${mList }' var='movie'><div><p>${movie.movieTitle }</p><c:forEach items='${cmList }' var='cinemaMovie'>${cinemaMovie.movieDay}</c:forEach></div></c:forEach>");
+    				list.append("<c:forEach items='${mList }' var='movie'><div><p>${movie.movieTitle }</p>");
+    				list.append("<c:forEach items='${cmList }' var='cinemaMovie'>${cinemaMovie.movieDay}</c:forEach>");
+    				list.append("</div></c:forEach>");
     			},
     			error : function() {
     				alert("실패!");
-    				console.log(cinemaNo);
-    				console.log(dayIndex);
     			}
     		});
     	}

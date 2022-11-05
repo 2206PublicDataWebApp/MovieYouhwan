@@ -131,7 +131,6 @@ public class UserCinemaController {
 		object.put("mList", gson.toJson(mList));
 		object.put("cmList", gson.toJson(cmList));
 		jsonArray.add(object);
-		System.out.print(object);
 		return jsonArray.toJSONString();
 	}
 }
