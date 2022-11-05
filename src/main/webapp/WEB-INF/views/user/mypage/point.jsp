@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +10,7 @@
 <link rel="stylesheet" href="/resources/css/common.css" />
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/footer.css" />
-<link rel="stylesheet" href="/resources/css/common.css" />
-<link rel="stylesheet" href="/resources/css/header.css" />
-<link rel="stylesheet" href="/resources/css/footer.css" />
+<script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="/resources/js/header.js" defer></script>
     <script src="/resources/js/footer.js" defer></script>
@@ -60,14 +59,14 @@
         </tbody>
     </table>
     <div id="paging">
-     <ul id="paging-wrap">
-         <li><a href="#">＜</a></li>
-         <li><a href="#">1</a></li>
-         <!-- <li><a href="#">2</a></li>
-         <li><a href="#">3</a></li>
-         <li><a href="#">4</a></li>
-         <li><a href="#">5</a></li> -->
-         <li><a href="#">＞</a></li>
+     <ul class="paging-wrap">
+         <li class="pagingNo"><a href="#">＜</a></li>
+         <li class="pagingNo"><a href="#">1</a></li>
+         <!-- <li class="pagingNo"><a href="#">2</a></li>
+         <li class="pagingNo"><a href="#">3</a></li>
+         <li class="pagingNo"><a href="#">4</a></li>
+         <li class="pagingNo"><a href="#">5</a></li> -->
+         <li class="pagingNo"><a href="#">＞</a></li>
      </ul>
 	</div>
 </div>

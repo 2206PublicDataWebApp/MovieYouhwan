@@ -172,33 +172,7 @@ public class UserMemberController {
 	}
 	
 	
-	/**
-	 * 마이페이지 
-	 * ----- 탑 메뉴(포인트, 메이트)
-	 * ----- 메뉴 탭
-	 * @param request
-	 * @param mv
-	 * @return
-	 */
-	  @RequestMapping(value = "/member/profileModify.yh", method = RequestMethod.GET) 
-	  public ModelAndView showMyPage(
-		  @ModelAttribute Member member
-		  ,ModelAndView mv) { 
-		  try { 
-			int result = uMemberService.modifyMember(member);
-			if(result > 0) {
-				mv.setViewName("redirect:/home.kh");
-			}else {
-				mv.addObject("msg", "회원 정보 수정 실패");
-				mv.setViewName("common/errorPage");
-			}
-		  }catch (Exception e) { 
-			  mv.addObject("msg",e.getMessage()).setViewName("common/errorPage"); 
-			  } 
-		  return mv;
-		  } 
-	  
-		
+
 	 
 	
 	
@@ -227,7 +201,11 @@ public class UserMemberController {
 	 * @RequestParam(value = ""))
 	 */
 	
-	
+	/**
+	 * 이메일 인증
+	 * @param email
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/member/emailAuth.yh", method=RequestMethod.GET)
 	public String joinEmailAuth(String email) {

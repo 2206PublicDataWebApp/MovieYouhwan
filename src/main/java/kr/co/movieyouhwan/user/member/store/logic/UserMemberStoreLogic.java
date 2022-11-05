@@ -43,12 +43,16 @@ public class UserMemberStoreLogic implements UserMemberStore {
 		return result;
 	}
 	
-	// 회원정보 수정
+	/**
+	 * 회원정보 수정
+	 */
 	@Override
 	public int updateMember(SqlSessionTemplate session, Member member) {
 		int result = session.update("MemberMapper.updateMember", member);
 		return result;
 	}
+
+
 }
 
 	

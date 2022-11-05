@@ -16,6 +16,6 @@ public interface UserMemberStore {
 
 	// 회원정보 수정
 	public int updateMember(SqlSessionTemplate session, Member member);
-	
+
 	
 }

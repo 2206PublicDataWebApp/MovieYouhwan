@@ -11,8 +11,24 @@
   border-bottom: 1px solid #ccc;
   background-color: #fff;
   z-index: 10;
+  
 }
-
+.profileImg{
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+.fa-sharp{
+  font-size: 15pt;
+  border-radius: 100%;
+  color: #f0c808;
+  margin-right: 10px;
+  margin-top: 8px;
+}
+ul{
+  line-height: 40px;
+}
 #navbar-links {
   display: flex;
   justify-content: center;
@@ -32,6 +48,7 @@
   justify-content: center;
   align-items: flex-end;
   padding-top: 5px;
+  margin-top: 20px;
 }
 
 #navbar-logo {
@@ -125,13 +142,4 @@
   border-bottom: none;
   background-color: #0f1a3b;
   color: #fff;
-}
-.defaultImg{
-  width: 30px;
-  height: 30px;
-  background: url('https://www.freeiconspng.com/uploads/profile-icon-9.png') 50% 50% / cover no-repeat;
-}
-
-ul{
-  line-height: 30px;
 }

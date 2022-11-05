@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 <nav id="navbar">
 	<a href="#" class="navbar-toggleBtn show" id="bars"><i class="fa-solid fa-bars show"></i></a>
 	<a href="#" class="navbar-toggleBtn" id="xmark"><i class="fa-solid fa-xmark"></i></a>
@@ -12,12 +13,12 @@
 			</ul>
 		</c:if>
 		
-		<c:if test="${not empty member}">
+		<c:if test="${not empty loginUser}">
 			<ul id="navbar-links">
 				<li>
 					<div class="defaultImg">
-						<c:if test="${empty member.memberImgRename}"></c:if>
-						<c:if test="${not empty member.memberImgRename}"><img src="/resources/images/userProfileImg/${member.memberImgRename}"></c:if>
+						<c:if test="${empty loginUser.memberImgRename}"><i id="headerIcon" class="fa-sharp fa-solid fa-user"></i></c:if>
+						<c:if test="${not empty loginUser.memberImgRename}"><img class="profileImg" src="/resources/images/userProfileImg/${loginUser.memberImgRename}"></c:if>
 					</div>
 				</li>
 				<li><a href="javascript:void(0);" onclick="confirmLogout();">로그아웃</a></li>
