@@ -45,8 +45,8 @@ public class MateController {
 	 * 메이트 매칭완료
 	 * @return
 	 */
-	@RequestMapping(value="mate/CompleteOption.yh", method=RequestMethod.GET)
-	public String mateCompleteOptionView() {
+	@RequestMapping(value="/mate/Complete.yh", method=RequestMethod.GET)
+	public String mateCompleteView() {
 		return "user/mate/mateComplete";
 	}
 }

@@ -20,11 +20,12 @@ a {
   background-size: cover;
   background-color: black;
   height: 1500px;
-  padding-top : 500px;
+  padding-top: 500px;
 }
+
 .agree-txt-box {
   width: 60%;
-  margin : 0 auto;
+  margin: 0 auto;
   background-color: whitesmoke;
   opacity: 0.8;
   border-radius: 20px;
@@ -307,64 +308,64 @@ main {
 
 /* mateComplete (사용자) */
 #mate-text {
-	height : 50px;
-	margin-top : 30px;
-	line-height : 50px;
-	border-top : solid 1px #0f1a3b;
-	border-bottom : solid 1px #0f1a3b;
+  height: 50px;
+  margin-top: 30px;
+  line-height: 50px;
+  border-top: solid 1px #0f1a3b;
+  border-bottom: solid 1px #0f1a3b;
 }
 #mate-data {
-	height : 60px;
-	line-height : 60px;
-	border-bottom : solid 1px #0f1a3b;
+  height: 60px;
+  line-height: 60px;
+  border-bottom: solid 1px #0f1a3b;
 }
-	.matecomplete-userimage {
-		width : 40px;
-		height : 40px;
-		margin-top : 10px;
-		float : left;
-		background-color : #e59500;
-		border : solid 1px #e59500;
-		border-radius : 50%;
-	}
-	.matecomplete-profile {
-		width : 40%;
-		padding-left : 20px;
-		float : left;
-		text-align : center;
-	}
-	.matecomplete-grade {
-		width : 30%;
-		float : left;
-		text-align : center;
-	}
-	.matecomplete-chatting {
-		width : 30%;
-		float : left;
-		text-align : center;
-	}
-	.go-chatting {
-		width : 100px;
-		height : 30px;
-		color : white;
-		background-color : #e59500;
-		border : solid 1px  #e59500;
-		border-radius : 10px;
-	}
+.matecomplete-userimage {
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
+  float: left;
+  background-color: #e59500;
+  border: solid 1px #e59500;
+  border-radius: 50%;
+}
+.matecomplete-profile {
+  width: 40%;
+  padding-left: 20px;
+  float: left;
+  text-align: center;
+}
+.matecomplete-grade {
+  width: 30%;
+  float: left;
+  text-align: center;
+}
+.matecomplete-chatting {
+  width: 30%;
+  float: left;
+  text-align: center;
+}
+.go-chatting {
+  width: 100px;
+  height: 30px;
+  color: white;
+  background-color: #e59500;
+  border: solid 1px #e59500;
+  border-radius: 10px;
+}
 #matecomplete-button {
-	width : 100%;
-	display : flex;
-	margin-top : 30px;
-	justify-content : center;
+  width: 100%;
+  display: flex;
+  margin-top: 30px;
+  justify-content: center;
 }
-	.matecomplete-button {
-		width : 100px;
-		height : 30px;
-		margin-left : 10px;
-		margin-right : 10px;
-		color : white;
-		background-color : #0f1a3b;
-		border : solid 1px #0f1a3b;
-		border-radius : 10px;
-		float : left;
-	}
+.matecomplete-button {
+  width: 100px;
+  height: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: white;
+  background-color: #0f1a3b;
+  border: solid 1px #0f1a3b;
+  border-radius: 10px;
+  float: left;
+}
