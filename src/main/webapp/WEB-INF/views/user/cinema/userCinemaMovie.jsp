@@ -53,12 +53,12 @@
 				<div>
 					<p>${movie.movieTitle }</p>
 					<c:forEach items="${cmList }" var="cinemaMovie">
-						<c:if test="${movie.movieNo eq cinemaMovie.movieNo }">
+						<c:if test="${movie.movieNo eq cinemaMovie.movieNo}">
 							<div class="choice-movie-list">
 								<p>${cinemaMovie.theaterName } ${cinemaMovie.movieTicket } / ${cinemaMovie.movieSeat }</p>
 								<p>${cinemaMovie.movieStart } ~ ${cinemaMovie.movieEnd }</p>
 							</div>
-						</c:if>
+							</c:if>
 					</c:forEach>
 				</div>
 			</c:forEach>
@@ -74,13 +74,26 @@
     				"cinemaNo" : cinemaNo,
     				"dayIndex" : dayIndex
     			},
+    			dataType : "json",
     			success : function(result) {
-    				alert("성공");
-    				$("#choice-movie-listwrap").html('');
-    				var list = $("#choice-movie-listwrap");
-    				list.append("<c:forEach items='${mList }' var='movie'><div><p>${movie.movieTitle }</p>");
-    				list.append("<c:forEach items='${cmList }' var='cinemaMovie'>${cinemaMovie.movieDay}</c:forEach>");
-    				list.append("</div></c:forEach>");
+    				const obj = JSON.parse(result.cmList);
+	    			for(var i in obj) {
+	    				var movieTitle = obj[i].movieTitle;
+	    				var theaterName = obj[i].theaterName;
+	    				var movieTicket = obj[i].movieTicket;
+	    				var movieSeat = obj[i].movieSeat;
+	    				var movieStart = obj[i].movieStart;
+	    				var movieEnd = obj[i].movieEnd;
+	    				
+	    			}
+	    
+	    		var html = $("#choice-movie-listwrap").html('');
+		    	var str = '';
+		    	for(var i in obj) {
+			    	str += '<div class="choice-movie-list"><p>' + obj[i].theaterName + ' ' + obj[i].movieTicket + ' '+ obj[i].movieSeat +'</p>';
+			    	str += '<p>'+ obj[i].movieStart +' '+ obj[i].movieEnd +'</div>';
+		    	}
+	    		html.append(str);
     			},
     			error : function() {
     				alert("실패!");

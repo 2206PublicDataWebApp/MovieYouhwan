@@ -306,7 +306,7 @@ public class AdminMovieController {
 		Theater theater = aTheaterService.printOneTheater(theaterNo);
 		List<Cinema> cList = aCinemaService.printAllCinema();
 		List<Theater> tList = aTheaterService.printAllTheater();
-		List<Movie> mList = aMovieService.printNowMovie();
+		List<Movie> mList = aMovieService.printNowMovie(cinemaNo);
 		List<MovieTime> mtList = aMovieService.printAllMovieTime(theaterNo);
 		mv.addObject("cinema", cinema);
 		mv.addObject("theater", theater);

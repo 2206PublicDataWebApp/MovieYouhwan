@@ -13,7 +13,12 @@ body {
 .widemovie-wrapper {
 	width : 1400px;
 	margin : 0 auto;
-	margin-top : 20px;
+	margin-top : 80px;
+}
+.ticket-movie-wrapper {
+	width : 1100px;
+	margin : 0 auto;
+	margin-top : 90px;
 }
 .movie-wrapper {
 	width : 1000px;
@@ -774,7 +779,7 @@ body {
 	justify-content: space-between;
 	width: 12%;
 }
-	.year-month {
+	.ayear-month {
 		width : 8%;
 		float : left;
 	}
@@ -788,7 +793,7 @@ body {
 	border : solid 1px #0F1A3B;
 	border-radius : 50%;
 }
-/* movieList(사용자) */
+/* movieListAll(사용자) */
 #movielist-searchwrap {
 	text-align : center;
 	margin-bottom : 50px;
@@ -807,3 +812,140 @@ body {
 		background-color : #0F1A3B;
 		border : solid 1px #0F1A3B;
 	}
+.movielist-tab {
+	display : flex;
+}
+	.movielist-tab-on {
+		width : 25%;
+		height : 40px;
+		text-align : center;
+		line-height : 40px;
+		color : white;
+		border : solid 1px #0F1A3B;
+		background-color : #0F1A3B;
+	}
+	.movielist-tab-off {
+		width : 25%;
+		height : 40px;
+		text-align : center;
+		line-height : 40px;
+		color : #0F1A3B;
+		border : solid 1px #0F1A3B;
+		background-color : white;		
+	}
+/* movieTicketTime(사용자) */
+.ticket-choice {
+	width : 100%;
+	height : 160px;
+	color : white;
+	border : solid 2px #F0C808;
+	background-color : #F0C808;
+	border-bottom : none;
+	text-align : center;
+}
+.ticket-text {
+	width : 100%;
+	height : 160px;
+	color : #F0C808;
+	border : solid 2px #F0C808;
+	border-bottom : none;
+	text-align : center;
+}
+.ticket-text-bottom {
+	width : 100%;
+	height : 160px;
+	color : #F0C808;
+	border : solid 2px #F0C808;
+	text-align : center;	
+}
+	.ticket-intext {
+		margin-top : 50px;
+	}
+.ticket-top {
+	display : flex;
+}
+	.ticket-cinema-name {
+		width : 25%;
+		height : 45px;
+		text-align : center;
+		line-height : 40px;
+		color : white;
+		border : solid 1px white;
+		background-color : #0F1A3B;
+	}
+	.ticket-movie-name {
+		width : 28%;
+		height : 45px;
+		text-align : center;
+		line-height : 40px;
+		color : white;
+		border : solid 0.1px white;
+		background-color : #0F1A3B;	
+	}
+	.ticket-theater-choice {
+		width : 50%;
+		height : 45px;
+		text-align : center;
+		line-height : 40px;
+		color : white;
+		border : solid 1px white;
+		background-color : #0F1A3B;	
+	}
+	.wrap-inside {
+		display : flex;
+	}
+		.cinema-name-wrap {
+			width : 25%;
+			height : 595px;
+			color : white;
+			border : solid 1px #0F1A3B;	
+		}
+			.cinema-name-outside {
+				width : 100%;
+				height : 45px;
+				padding-left : 10px;
+				line-height : 45px;
+				border-bottom : solid 1px #0F1A3B;	
+			}
+				.cinema-name-text {
+					color : black;
+				}
+			.movie-name-outside {
+				width : 100%;
+				height : 45px;
+				padding-left : 10px;
+				line-height : 45px;
+				border-bottom : solid 1px #0F1A3B;
+			}
+				.movie-name-text {
+					color : black;
+				}
+				.year-month {
+					width : 100%;
+					margin-top : 10px;
+					margin-left : 10px;
+					font-size : 14px;
+					color : black;
+				}
+					.tmday-button {
+						width : 11.6%;
+						background-color : white;
+						margin-top : 10px;
+						margin-bottom : 10px;
+					}
+		.movie-name-wrap {
+			width : 28%;
+			height : 595px;
+			color : white;
+			border : solid 1px #0F1A3B;			
+		}
+		.theater-choice-wrap {
+			width : 50%;
+			height : 595px;
+			color : white;
+			border : solid 1px #0F1A3B;				
+		}
+.ticket-left {
+	width : 7%;
+	float : left;
+}

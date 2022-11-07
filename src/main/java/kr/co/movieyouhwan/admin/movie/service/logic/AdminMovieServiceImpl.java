@@ -55,6 +55,13 @@ public class AdminMovieServiceImpl implements AdminMovieService{
 		return mList;
 	}
 	
+	// 현재 상영 영화
+	@Override
+	public List<Movie> printNowMovie(Integer cinemaNo) {
+		List<Movie> mList = aMovieStore.selectNowMovie(session);
+		return mList;
+	}
+	
 	// 영화 검색
 	@Override
 	public List<Movie> printSearchMovie(String searchName) {
@@ -137,5 +144,11 @@ public class AdminMovieServiceImpl implements AdminMovieService{
 	public int registerMovieTime(MovieTime movieTime) {
 		int result = aMovieStore.insertMovieTime(session, movieTime);
 		return result;
+	}
+
+	@Override
+	public List<MovieImg> printAllMovieImg() {
+		List<MovieImg> miList = aMovieStore.selectAllMovieImg(session);
+		return miList;
 	}
 }

@@ -15,7 +15,8 @@ import kr.co.movieyouhwan.user.myPage.service.UserMyService;
 
 @Controller
 public class UserMyController {
-	@Autowired UserMyService uMyService;
+	@Autowired 
+	private UserMyService uMyService;
 	
 	/**
 	 * 마이페이지 

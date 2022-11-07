@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>무비유환 : 현재상영영화</title>
 </head>
 <body>
-	<div class="chatting-wrapper">
-		<div></div>
-	</div>
+
 </body>
 </html>

@@ -1,3 +1,5 @@
+// 관리자
+
 // 카카오 주소 찾기 
 function sample4_execDaumPostcode() {
     new daum.Postcode({
@@ -83,3 +85,6 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	})
 })
 
+// 사용자
+
+// 예매 영화관 선택 활성화

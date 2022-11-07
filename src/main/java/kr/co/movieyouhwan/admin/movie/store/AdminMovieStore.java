@@ -40,8 +40,10 @@ public interface AdminMovieStore {
 	public int deleteMovieImg(SqlSessionTemplate session, Integer movieImgNo);
 	// 현재 상영 영화
 	public List<Movie> selectNowMovie(SqlSessionTemplate session);
+	public List<Movie> selectNowMovie(SqlSessionTemplate session, Integer cinemaNo);
 	// 현재 상영 영화 등록
 	public int insertMovieTime(SqlSessionTemplate session, MovieTime movieTime);
 	// 현재 상영 영화 출력
 	public List<MovieTime> selectAllMovieTime(SqlSessionTemplate session, Integer theaterNo);
+	public List<MovieImg> selectAllMovieImg(SqlSessionTemplate session);
 }
