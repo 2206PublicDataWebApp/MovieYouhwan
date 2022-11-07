@@ -17,4 +17,22 @@ public class UserMyStoreLogic implements UserMyStore{
 		Member member = session.selectOne("MemberMapper.selectOneById", memberId);
 		return member;
 	}
+	
+	/**
+	 * 회원정보 수정
+	 */
+	@Override
+	public int updateMember(SqlSessionTemplate session, Member member) {
+		int result = session.update("MemberMapper.updateMember", member);
+		return result;
+	}
+	
+	/**
+	 * 회원정보 수정 / 조회
+	 */
+	@Override
+	public Member selectOneByDetailId(SqlSessionTemplate session, String memberId) {
+		Member member = session.selectOne("MemberMapper.selectOneByDetailId", memberId);
+		return null;
+	}
 }

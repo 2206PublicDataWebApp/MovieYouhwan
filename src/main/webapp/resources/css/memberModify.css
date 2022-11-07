@@ -1,0 +1,255 @@
+.member-modify-wrap{
+    margin: 0 auto;
+    padding: 0 120px;
+    width: 800px;
+    
+    /* background-color: rgb(244, 244, 244); */
+    box-sizing: border-box;
+}
+#modify-title{
+    text-align: center;
+    color: #0F1A3B;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+#modify-contents{
+   margin: 0 auto; 
+}
+#profile-img-wrap{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 1px solid #E59500;
+    border-style :
+    height: 150px;
+    margin-bottom: 60px;
+}
+#profile-left{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: center;
+}
+#profile-title{
+    font-size: 11pt;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #333333;
+}
+#profile-info{
+    font-size: 8pt;
+    color: rgb(73, 73, 73);
+}
+#profile-right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#profile-img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin-right: 10px;
+    background-image: url();
+}
+#img-modify-btn{
+    border: 0.3px solid #0F1A3B;
+    background-color: #ffffff;
+    color: #0F1A3B;
+    font-size: 8pt;
+    width: 80px;
+    height: 15px;
+    text-align: center;
+    line-height: 13px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    padding: 5px 10px 5px 10px;
+    min-height: 25px;
+}
+#img-modify{
+    display: none;
+}
+.content-wrap{
+    margin: 20px 0px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.pass-wrap{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding-left: 25px;
+}
+.line{
+    border: 1px solid #E59500;
+    margin : 10px 0 20px;
+}
+.content-title{
+    font-weight: 600;
+    color: #333333;
+    font-size: 11pt;
+    display: flex;
+    width: 500px;
+   	margin-bottom : 10px;
+}
+.pass-content-title{
+    font-weight: 600;
+    color: #363636;
+    font-size: 10pt;
+    display: flex;
+    width: 600px;
+    
+}
+.modify-btn, .nickBtn{
+    border: 1px solid #0F1A3B;
+    background-color: white;
+    width: 90px;
+    height: 25px;
+    font-size: 8pt;
+    text-align: center;
+}
+.modi-content{
+    display: flex;
+    width: 350px;
+    flex-direction: row;
+}
+.pass-modi-content{
+    display: flex;
+    flex-direction: column;
+}
+.content-stored{
+    width: 400px;
+    font-size: 10pt;
+    color: #888888;
+    font-weight: 400;
+    
+}
+
+#pass-info{
+    color: #888888;
+    font-size: 8pt;
+    margin-left: 140px;
+}
+.input{
+    flex: 1;
+    height: 30px;
+    padding: 4px 5px;
+    border: none;
+    font-weight: 600;
+    color: rgb(51, 51, 51);
+    font-size: 11pt;
+    display: flex;
+    
+}
+
+.input-new{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+.btn-group{
+    margin-top: 10px;
+}
+.n-input{
+    flex: 1 1 0%;
+    height: 15px;
+    padding: 4px 5px;
+    width: 250px;
+    margin: 0;
+    padding: 4px 5px;
+    border: none;
+}
+
+.input-password__wrap{
+    display: flex;
+    width: 200px;
+    border: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    align-items: stretch;
+    justify-content: flex-end;
+    left: 160px;
+}
+
+.btn-group{
+    display: flex;
+    text-align: center;
+    justify-content: flex-end;
+}
+.pass-btn{
+    margin: 10px 5px;
+    border: 1px solid #0F1A3B;
+    width: 60px;
+}
+.cancleBtn{
+    background-color: white;
+    color: #0F1A3B;
+}
+.modiBtn{
+    background-color: #0F1A3B;
+    color: white;
+    font-weight: 400;
+}
+#password-area{
+    display: flex;
+}
+#nickname-area{
+    display: flex;
+}
+.validate{
+    color: rgb(200, 0, 0);
+    font-size: 8pt;
+    left: 370px;
+    
+}
+.change-nick-form{
+    display: flex;
+}
+.nick-input{
+    margin-left: 40px;
+    
+}
+.btn-secession-modify{
+    display: flex;
+    justify-content: center;
+}
+.member-btn{
+    border: 1px solid #0F1A3B;
+    margin: 40px 20px;
+    width: 150px;
+    height: 50px;
+    font-weight: 600;
+}
+.memeber-secession-btn{
+    background-color: #ffffff;
+    color: #0F1A3B;
+}
+.member-modify-btn{
+    background-color: #0F1A3B;
+    color: #ffffff;
+}
+.modify-btn2{
+    border: 1px solid #0F1A3B;
+    background-color: #0F1A3B;
+    color: white;
+    width: 90px;
+    height: 25px;
+    font-size: 8pt;
+    text-align: center;
+}
+/* 이메일 text~수정 버튼까지의 div */
+#change-email-area {
+	width : 560px;
+}
+/* 이메일 수정 input box margin-right 간격 조절하기 */
+#email-modi-input {
+	width : 400px;
+	margin-right : 100px;
+}
+/* input창 수정 */
+#email {
+	width : 200px;
+	padding-left : 5px;
+} 

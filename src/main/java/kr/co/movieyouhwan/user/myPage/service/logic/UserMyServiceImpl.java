@@ -22,6 +22,23 @@ public class UserMyServiceImpl implements UserMyService{
 		Member member = uMyStore.selectOneById(session, memberId);
 		return member;
 	}
+	
+	/**
+	 * 회원정보 수정
+	 */
+	@Override
+	public int modifyMember(Member member) {
+		int result = uMyStore.updateMember(session, member);
+		return result;
+	}
+	/**
+	 *  회원정보 조회 / 수정 페이지
+	 */
+	@Override
+	public Member printOneByDetailId(String memberId) {
+		Member member = uMyStore.selectOneByDetailId(session, memberId);
+		return member;
+	}
 
 	
 

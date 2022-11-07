@@ -20,13 +20,13 @@
             <div id="now-level">Silver</div>
             <div id="editProfile">
                 <i class="fa-solid fa-pencil" id="pen"></i>
-               <a href="#">회원정보수정</a>
+               <a href="/my/editMemberInfo.yh">회원정보수정</a>
             </div>
         </div>
         
         <div id="profile-img">
             <c:if test="${empty loginUser.memberImgRename}"><i class="fa-sharp fa-solid fa-user"></i></c:if>
-            <c:if test="${not empty loginUser.memberImgRename}"><img class="profileImg" id="img-frame" src="/resources/images/userProfileImg/${loginUser.memberImgRename}"></c:if>
+            <c:if test="${not empty loginUser.memberImgRename}"><img class="myprofileImg" id="img-frame" src="/resources/images/userProfileImg/${loginUser.memberImgRename}"></c:if>
             <div id="bangabanga">${loginUser.memberNick} 님 반가워요!</div>
         </div>
         <div id="level-wrap">

@@ -73,12 +73,17 @@
 		    , MEMBER_NICK = #{memberNick}
 		    , MEMBER_PHONE = #{memberPhone}
 		    , MEMBER_EMAIL = #{memberEmail}
-		    WHERE MEMBER_ID = #{memberImgRename};
+		    WHERE MEMBER_ID = #{memberId}
 	</update>
 	
 	<!-- 마이페이지 -->
 	<select id="selectOneById" resultMap="memberResultMap">
 		SELECT * FROM MEMBER_TBL
 		WHERE MEMBER_ID = #{memberId} AND MEMBER_YN = 'Y'
+	</select>
+	<!-- 회원정보 수정 -->
+	<select id="selectOneByDetailId" resultMap="memberResultMap">
+		SELECT * FROM MEMBER_TBL
+		WHERE MEMBER_ID = #{memberId } AND MEMBER_YN = 'Y'
 	</select>
 </mapper>
