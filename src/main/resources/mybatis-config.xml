@@ -39,7 +39,6 @@
 		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MovieReviewReport" alias="MovieReviewReport"/>
 		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MovieTicket" alias="MovieTicket"/>
 		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MovieZzim" alias="MovieZzim"/>
-		<typeAlias type="kr.co.movieyouhwan.user.qna.domain.Qna" alias="Qna"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.Cart" alias="Cart"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.Product" alias="Product"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.ProductType" alias="ProductType"/>

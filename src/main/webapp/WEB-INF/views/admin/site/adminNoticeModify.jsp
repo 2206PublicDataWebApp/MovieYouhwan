@@ -73,6 +73,7 @@
       <form method="post">
         <input type="hidden" name="adminId" value="eunhye0910" />
         <input type="hidden" name="noticeNo" value="${notice.noticeNo}" />
+        <input type="hidden" name="nCurrentPage" value="${nCurrentPage}" />
         <h3><a href="#">공지사항 수정</a></h3>
         <br />
         <hr />

@@ -38,14 +38,18 @@ public class AdminNoticeController {
 	@RequestMapping(value="/admin/noticeDetail.yh", method=RequestMethod.GET)
 	public ModelAndView adminNoticeDetailView(ModelAndView mv, @RequestParam("noticeNo") int noticeNo,
 			@RequestParam("nCurrentPage") int nPage) {
-		Notice notice=aNoticeService.printOneNotice(noticeNo);
-		notice.setPrevNotice(aNoticeService.printPrevNotice(notice.getNoticeNo()));
-		notice.setNextNotice(aNoticeService.printNextNotice(notice.getNoticeNo()));
-		
+		try {
+			Notice notice=aNoticeService.printOneNotice(noticeNo);
+			notice.setPrevNotice(aNoticeService.printPrevNotice(notice.getNoticeNo()));
+			notice.setNextNotice(aNoticeService.printNextNotice(notice.getNoticeNo()));
+			
 //		System.out.println(notice.getPrevNotice().getNoticeTitle());
-		mv.addObject("notice", notice);
-		mv.addObject("nCurrentPage", nPage);
-		mv.setViewName("admin/site/adminNoticeDetail");
+			mv.addObject("notice", notice);
+			mv.addObject("nCurrentPage", nPage);
+			mv.setViewName("admin/site/adminNoticeDetail");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		return mv;
 	}
@@ -74,10 +78,12 @@ public class AdminNoticeController {
 	
 	@RequestMapping(value="/admin/noticeModifyForm.yh", method=RequestMethod.POST)
 	public ModelAndView adminNoticeModifyForm(@RequestParam("noticeNo") int noticeNo,
+			@RequestParam("nCurrentPage") Integer nCurrentPage,
 			ModelAndView mv) {
 		Notice nOne=aNoticeService.printOneNotice(noticeNo);
 		if(nOne!=null) {
 			mv.addObject("notice", nOne);
+			mv.addObject("nCurrentPage", nCurrentPage);
 			mv.setViewName("admin/site/adminNoticeModify");
 		}
 		return mv;
@@ -85,11 +91,13 @@ public class AdminNoticeController {
 	
 	@RequestMapping(value="/admin/noticeModify.yh", method=RequestMethod.POST)
 	public ModelAndView adminNoticeModify(@ModelAttribute Notice notice,
+			@RequestParam("nCurrentPage") Integer nCurrentPage,
 			ModelAndView mv) {
 		int result=aNoticeService.modifyNotice(notice);
 		if (result>0) {
 			mv.addObject("noticeNo", notice.getNoticeNo());
-			mv.setViewName("redirect:/admin/NoticeDetail.yh");
+			mv.addObject("nCurrentPage", nCurrentPage);
+			mv.setViewName("redirect:/admin/noticeDetail.yh");
 		}
 		return mv;
 	}

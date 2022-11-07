@@ -224,7 +224,7 @@ input:checked {
   width: 80%;
   padding: 20px 40px 20px 30px;
   line-height: 1.5em;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 #faq-title-header {
@@ -276,6 +276,10 @@ i {
   height: 100%;
   padding: 15px;
   /* cursor: default; */
+}
+
+.currentP {
+  font-family: mice-bold;
 }
 
 /*  */
