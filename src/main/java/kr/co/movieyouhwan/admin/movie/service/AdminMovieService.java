@@ -22,6 +22,8 @@ public interface AdminMovieService {
 	public Movie printOneMovie(Integer movieNo);
 	// 영화 상세 (사진)
 	public List<MovieImg> printAllMovieImg(Integer movieNo);
+	// 상영 영화 이미지 전부 출력
+	public List<MovieImg> printAllMovieImg();
 	// 영화 상세 (영상)
 	public List<MovieVideo> printAllMovieVideo(Integer movieNo);
 	// 영화 삭제
@@ -38,6 +40,7 @@ public interface AdminMovieService {
 	public int removeMovieImg(Integer movieImgNo);
 	// 현재 상영 영화 출력
 	public List<Movie> printNowMovie();
+	public List<Movie> printNowMovie(Integer cinemaNo);
 	// 상영 영화 등록
 	public int registerMovieTime(MovieTime movieTime);
 	// 상영 영화 목록 출력

@@ -32,10 +32,6 @@ public class UserCinemaController {
 	@Autowired
 	private AdminCinemaService aCinemaService;
 	@Autowired
-	private AdminMovieService aMovieService;
-	@Autowired
-	private UserMovieService uMovieService;
-	@Autowired
 	private UserCinemaService uCinemaService;
 	
 	/**
@@ -116,21 +112,12 @@ public class UserCinemaController {
 			@RequestParam(value="dayIndex", required=false) Integer dayIndex,
 			HttpSession session) {
 		dayIndex = dayIndex == null ? 0 : dayIndex;
-		// 한개의 영화관 띄우기
-		Cinema cinema = aCinemaService.printOneCinema(cinemaNo);
-		// 일별 영화 출력 (중복 제외)
-		List<Movie> mList = uCinemaService.printMovieNowOne(new MovieDay().getMovieDay(dayIndex));
 		// 일별 영화 정보 출력
 		List<CinemaMovie> cmList = uCinemaService.printCinemaMovieByDay(cinemaNo, new MovieDay().getMovieDay(dayIndex)); // -> printCinemaMovieByDate
-		session.setAttribute("cinemaNo", cinema.getCinemaNo());
 		
 		Gson gson = new Gson();
-		JSONObject object=new JSONObject();
-		JSONArray jsonArray = new JSONArray();
-		object.put("cinema", gson.toJson(cinema));
-		object.put("mList", gson.toJson(mList));
+		JSONObject object = new JSONObject();
 		object.put("cmList", gson.toJson(cmList));
-		jsonArray.add(object);
-		return jsonArray.toJSONString();
+		return object.toJSONString();
 	}
 }

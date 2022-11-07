@@ -26,7 +26,7 @@
 			<button type="button" id="add-movie-button">+</button>
 		</div>
 		<div id="date-wrapper">
-			<div class="year-month">${movieDay.thisYear }년 ${movieDay.thisMonth }월</div>
+			<div class="ayear-month">${movieDay.thisYear }년 ${movieDay.thisMonth }월</div>
 			<c:forEach items="${movieDay.dayList }" var="day">
 			<div class="day-ones">
 				<div id="${day }" class="week-list">${day }</div>

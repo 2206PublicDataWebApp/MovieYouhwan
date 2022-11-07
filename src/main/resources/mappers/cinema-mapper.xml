@@ -43,7 +43,7 @@
 	</delete>
 	<!-- 영화관 리스트(관리자) -->
 	<select id="selectAllCinema" resultMap="CinemaResultMap">
-		SELECT * FROM CINEMA_TBL WHERE CINEMA_STATUS = 'Y' ORDER BY CINEMA_NO DESC
+		SELECT * FROM CINEMA_TBL WHERE CINEMA_STATUS = 'Y' ORDER BY CINEMA_NO
 	</select>
 	<!-- 영화관 상세(관리자) -->
 	<select id="selectOneCinema" resultMap="CinemaResultMap">
@@ -52,9 +52,17 @@
 	<!-- 영화관 영화 조회 (사용자) -->
 	<select id="selectMovieNowOne" resultMap="CinemaMovieResultMap">
 		SELECT DISTINCT MT.MOVIE_NO, MT.MOVIE_TITLE
-		FROM MOVIE_TBL MT, MOVIE_TIME_TBL MTT 
+		FROM MOVIE_TBL MT, CINEMA_TBL CT, MOVIE_TIME_TBL MTT 
 		WHERE MT.MOVIE_NO = MTT.MOVIE_NO
-		AND  MTT.MOVIE_DAY = #{movieDay}
+		AND MTT.MOVIE_DAY = #{movieDay}
+	</select>
+	<!-- 영화관 영화 조회 (사용자) -->
+	<select id="selectNowMovieCinema" resultMap="CinemaMovieResultMap">
+		SELECT DISTINCT MT.MOVIE_NO, MT.MOVIE_TITLE
+		FROM MOVIE_TBL MT, CINEMA_TBL CT, MOVIE_TIME_TBL MTT 
+		WHERE MT.MOVIE_NO = MTT.MOVIE_NO
+		AND MTT.CINEMA_NO = #{cinemaNo}
+		AND MTT.MOVIE_DAY = #{movieDay}
 	</select>
 	<!-- 영화관 영화 정보 조회(사용자) -->
 	<select id="selectAllCinemaMovie" resultMap="CinemaMovieResultMap">
@@ -63,6 +71,7 @@
 		WHERE MT.MOVIE_NO = MTT.MOVIE_NO
 		AND TT.THEATER_NO = MTT.THEATER_NO
 		AND MTT.MOVIE_DAY = #{movieDay}
+		AND MTT.CINEMA_NO = #{cinemaNo}
 		ORDER BY MOVIE_START
 	</select>
 </mapper>
