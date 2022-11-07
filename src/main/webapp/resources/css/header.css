@@ -11,44 +11,53 @@
   border-bottom: 1px solid #ccc;
   background-color: #fff;
   z-index: 10;
-  
-}
-.profileImg{
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
-  margin-right: 10px;
-}
-.fa-sharp{
-  font-size: 15pt;
-  border-radius: 100%;
-  color: #f0c808;
-  margin-right: 10px;
-  margin-top: 8px;
-}
-ul{
-  line-height: 40px;
-}
-#navbar-links {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  top: 10px;
-  right: 0;
-  width: 17%;
-  font-size: 14px;
 }
 
-#navbar-links li {
+.navbar-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 3px;
+  right: 0;
+  width: 17%;
+  font-size: 13px;
+  height: 50px;
+  text-align: center;
+}
+
+.navbar-links li {
   padding: 5px;
+}
+
+#profile-user {
+  justify-content: flex-end;
+  /* padding-right: 5%; */
+  right: 4%;
+  width: 30%;
+}
+
+#profile-user #profile-icon i {
+  color: #f0c808;
+  margin: 0;
+}
+
+#profile-user #profile-img img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+#profile-user #profile-nickname {
+  text-decoration: underline;
+  text-underline-position: under;
 }
 
 #navbar-menuList {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding-top: 5px;
-  margin-top: 20px;
+  padding-top: 10px;
 }
 
 #navbar-logo {
@@ -105,10 +114,13 @@ ul{
     background-color: #fcf4c1;
     font-family: mice-bold;
   }
-  #navbar-links {
+  .navbar-links {
     justify-content: flex-end;
     width: 100%;
-    right: 10px;
+    right: 14px;
+  }
+  #profile-nickname {
+    display: none;
   }
   .show {
     display: block;

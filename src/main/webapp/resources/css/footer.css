@@ -1,13 +1,12 @@
-@charset "UTF-8";
-
 #footer-wrapper {
+  width: 100%;
   margin: 0 auto;
   margin-top: 60px;
   height: 120px;
   background-color: #0f1a3b;
 }
 #footer-inside {
-  width: 1200px;
+  width: 95%;
   margin: 0 auto;
   padding-top: 25px;
   color: #fff;
