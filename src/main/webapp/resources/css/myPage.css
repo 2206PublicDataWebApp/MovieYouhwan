@@ -46,13 +46,14 @@
 }
 #pen{
     font-size: 23px;
-    color: gray;
+    color: #E59500;
     margin-right: 10px;
 }
 #profile-img{
     display: flex;
     align-items: center;
     margin-top: 20px;
+    margin-left: 20px;
     
     
 }
