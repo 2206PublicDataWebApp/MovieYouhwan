@@ -14,15 +14,12 @@
   </head>
   <body>
     <div id="admin-wrapper">
-      <h3><a href='/admin/site/manage.yh?tabIndex=2'>공지사항 관리</a></h3>
+      <h3><a href='/admin/site/manage.yh?tabIndex=2'>공지사항</a></h3>
       <br />
       <hr />
       <form method="post"> 
         <input type="hidden" name="noticeNo" value="${notice.noticeNo}">
-        <input type="hidden" name="nCurrentPage" value="${nCurrentPage}">
         <div id="btn-area">
-          <button type="submit" class="left-top-dark-btn" onclick="form.action='/admin/noticeModifyForm.yh'">수정</button>
-          <button type="submit" class="right-top-white-btn" onclick="form.action='/admin/noticeDeleteOne.yh'">삭제</button>
         </div>
       </form>
       <hr />
@@ -38,7 +35,7 @@
       <hr />
       <div class="prev-next-area">
         <div class="prev-area">
-          <a <c:if test="${!empty notice.prevNotice}">href="/admin/noticeDetail.yh?noticeNo=${notice.prevNotice.noticeNo}"</c:if>>이전글 <i class="arrow fa-solid fa-chevron-up"></i>
+          <a <c:if test="${!empty notice.prevNotice}">href="/support/noticeDetail.yh?noticeNo=${notice.prevNotice.noticeNo}"</c:if>>이전글 <i class="arrow fa-solid fa-chevron-up"></i>
             <c:choose>
               <c:when test="${empty notice.prevNotice}">
                 이전글이 없습니다.
@@ -50,7 +47,7 @@
         </div>
         <hr />
         <div class="next-area">
-          <a <c:if test="${!empty notice.nextNotice}">href="/admin/noticeDetail.yh?noticeNo=${notice.nextNotice.noticeNo}"</c:if>>다음글 <i class="arrow fa-solid fa-chevron-down"></i>
+          <a <c:if test="${!empty notice.nextNotice}">href="/support/noticeDetail.yh?noticeNo=${notice.nextNotice.noticeNo}"</c:if>>다음글 <i class="arrow fa-solid fa-chevron-down"></i>
             <c:choose>
               <c:when test="${empty notice.nextNotice}">
                 다음글이 없습니다.
@@ -64,7 +61,7 @@
         <hr />
       </div>
       <div class="list-btn-area">
-        <button type="button" class="list-btn" onclick="location.href='/admin/site/manage.yh?tabIndex=2&nCurrentPage=${nCurrentPage}'">목록</button>
+        <button type="button" class="list-btn" onclick="location.href='/support.yh?tabIndex=2&nCurrentPage=${nCurrentPage}'">목록</button>
       </div>
     </div>
   </body>

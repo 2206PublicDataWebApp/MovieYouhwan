@@ -19,50 +19,30 @@
     <div class="mate-option-wrapper">
       <div class="option-title">매칭 조건 선택</div>
       <div class="option-sex">
-        <div class="box-top">
-          선호하는 메이트 성별을 선택해주세요.
-        </div>
-        <div class="box-under">
-          <input type="radio" name="sex" value="female">여성
-          <input type="radio" name="sex" value="male">남성
-          <input type="radio" name="sex" value="all">무관
-        </div>
+        <div class="box-top">선호하는 메이트 성별을 선택해주세요.</div>
+        <div class="box-under"><input type="radio" name="sex" value="female" />여성 <input type="radio" name="sex" value="male" />남성 <input type="radio" name="sex" value="all" />무관</div>
       </div>
       <div class="option-age">
-        <div class="box-top">
-          선호하는 메이트 연령대를 선택해주세요.
-        </div>
-        <div class="box-under">
-			<input type="radio" name="age" value="two">20대
-			<input type="radio" name="age" value="three">30대
-			<input type="radio" name="age" value="four">40대
-			<input type="radio" name="age" value="five">50대 이상
-        </div>
+        <div class="box-top">선호하는 메이트 연령대를 선택해주세요.</div>
+        <div class="box-under"><input type="radio" name="age" value="two" />20대 <input type="radio" name="age" value="three" />30대 <input type="radio" name="age" value="four" />40대 <input type="radio" name="age" value="five" />50대 이상</div>
       </div>
 
       <div class="option-location">
-        <div class="box-top">
-          자주 이용하는 지점을 선택해주세요.
-        </div>
-        <div class="box-under">
-
-        </div>
+        <div class="box-top">자주 이용하는 지점을 선택해주세요.</div>
+        <div class="box-under"></div>
       </div>
 
       <div class="option-genre">
-        <div class="box-top">
-          선호하는 장르를 선택해주세요.
-        </div>
-        <div class="box-under">
-        </div>
-      </div class="btn-area">
-        <button class="next-btn">다음
-          <span class="fa-stack fa-xs">
-            <i class="fa-solid fa-angle-right fa-stack-1x"></i>
-            <i class="fa-regular fa-circle fa-stack-2x"></i>
-          </button>
-          </span>
+        <div class="box-top">선호하는 장르를 선택해주세요.</div>
+        <div class="box-under"></div>
       </div>
+      <button class="next-btn">
+        다음
+        <span class="fa-stack fa-xs">
+          <i class="fa-solid fa-angle-right fa-stack-1x"></i>
+          <i class="fa-regular fa-circle fa-stack-2x"></i>
+        </span>
+      </button>
     </div>
   </body>
 </html>
