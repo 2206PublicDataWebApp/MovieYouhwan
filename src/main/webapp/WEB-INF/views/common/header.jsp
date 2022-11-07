@@ -30,14 +30,14 @@
     </ul>
   </c:if>
   <ul id="navbar-menuList">
-    <li class="navbar-menuItem"><a href="#">영화</a></li>
+    <li class="navbar-menuItem"><a href="/movieList.yh">영화</a></li>
     <li class="navbar-menuItem"><a href="/user/cinemaList.yh">영화관 </a></li>
     <li class="navbar-menuItem"><a href="/mate/main.yh">메이트</a></li>
     <li id="navbar-logo">
       <a href="/home.yh"><img src="/resources/images/logo.png" alt="" width="150px" /></a>
     </li>
-    <li class="navbar-menuItem"><a href="#">예매</a></li>
+    <li class="navbar-menuItem"><a href="/movieTicketTime.yh">예매</a></li>
     <li class="navbar-menuItem"><a href="/store/list.yh">스토어</a></li>
-    <li class="navbar-menuItem"><a href="/support/list.yh">고객지원</a></li>
+    <li class="navbar-menuItem"><a href="/support.yh">고객지원</a></li>
   </ul>
 </nav>
