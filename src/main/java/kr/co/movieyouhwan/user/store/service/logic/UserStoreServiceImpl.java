@@ -20,20 +20,6 @@ public class UserStoreServiceImpl implements UserStoreService {
   @Autowired
   UserStoreStore uStoreStore;
 
-  // 상품 목록 불러오기
-  @Override
-  public List<Product> printAllProductList() {
-    List<Product> pList = uStoreStore.selectAllProductList(session);
-    return pList;
-  }
-
-  // 상품 유형 리스트 불러오기
-  @Override
-  public List<ProductType> printAllProductTypeList() {
-    List<ProductType> pTypeList = uStoreStore.selectAllProductTypeList(session);
-    return pTypeList;
-  }
-
   // 장바구니에 같은 상품 있는지 체크
   @Override
   public int checkProductInCart(Cart cart) {
@@ -48,11 +34,39 @@ public class UserStoreServiceImpl implements UserStoreService {
     return result;
   }
 
-  // 장바구니에 있는 상품을 담으면 해당 상품 수량 변경
+  // 장바구니에 있는 상품을 담으면 해당 상품 수량 증가
+  @Override
+  public int increaseProductCountUp(Cart cart) {
+    int result = uStoreStore.updateProductCountUp(session, cart);
+    return result;
+  }
+
+  // 장바구니에서 상품 수량 변경
   @Override
   public int modifyProductCountInCart(Cart cart) {
     int result = uStoreStore.updateProductCountInCart(session, cart);
     return result;
+  }
+
+  // 장바구니에서 상품 삭제
+  @Override
+  public int deleteProductsInCart(List<Integer> cartNoList) {
+    int result = uStoreStore.deleteProductsInCart(session, cartNoList);
+    return result;
+  }
+
+  // 상품 목록 불러오기
+  @Override
+  public List<Product> printAllProductList() {
+    List<Product> pList = uStoreStore.selectAllProductList(session);
+    return pList;
+  }
+
+  // 상품 유형 리스트 불러오기
+  @Override
+  public List<ProductType> printAllProductTypeList() {
+    List<ProductType> pTypeList = uStoreStore.selectAllProductTypeList(session);
+    return pTypeList;
   }
 
   // 상품 상세 조회
@@ -68,5 +82,6 @@ public class UserStoreServiceImpl implements UserStoreService {
     List<Cart> cartList = uStoreStore.selectMyCartList(session, memberId);
     return cartList;
   }
+
 
 }

@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 <nav id="navbar">
   <a href="#" class="navbar-toggleBtn show" id="bars"><i class="fa-solid fa-bars show"></i></a>
   <a href="#" class="navbar-toggleBtn" id="xmark"><i class="fa-solid fa-xmark"></i></a>
@@ -37,7 +36,7 @@
       <a href="/home.yh"><img src="/resources/images/logo.png" alt="" width="150px" /></a>
     </li>
     <li class="navbar-menuItem"><a href="/movieTicketTime.yh">예매</a></li>
-    <li class="navbar-menuItem"><a href="/store/list.yh">스토어</a></li>
+    <li class="navbar-menuItem"><a href="/store.yh">스토어</a></li>
     <li class="navbar-menuItem"><a href="/support.yh">고객지원</a></li>
   </ul>
 </nav>

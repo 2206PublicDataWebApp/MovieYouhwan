@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/resources/css/store.css" />
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+    <script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script src="/resources/js/header.js" defer></script>
     <script src="/resources/js/footer.js" defer></script>
     <script src="/resources/js/userStore.js" defer></script>
@@ -24,18 +25,18 @@
       <div id="store-menu">
         <ul id="store-tab">
           <c:forEach items="${productTypeList }" var="productType">
-            <li class="store-tab-item"><a href="#product-type-no${productType.productTypeNo }">${productType.productType }</a></li>
+            <li class="store-tab-item"><a href="#product-per-type${productType.productTypeNo }">${productType.productType }</a></li>
           </c:forEach>
         </ul>
         <ul id="store-links">
           <li>
-            <a href="/store/cart.yh">장바구니<i class="fa-solid fa-cart-shopping"></i></a>
+            <a id="store-link-cart" href="/store/cart.yh">장바구니<i class="fa-solid fa-cart-shopping"></i></a>
           </li>
         </ul>
       </div>
       <div id="store-main">
         <c:forEach items="${productTypeList }" var="productType">
-          <div class="product-per-type">
+          <div class="product-per-type" id="product-per-type${productType.productTypeNo }">
             <h2 class="product-type" id="product-type-no${productType.productTypeNo }">${productType.productType }</h2>
             <ul class="product-list">
               <c:forEach items="${productList }" var="product">

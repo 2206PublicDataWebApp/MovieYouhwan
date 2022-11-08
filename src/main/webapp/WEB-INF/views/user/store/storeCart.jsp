@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/resources/css/store.css" />
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+    <script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script src="/resources/js/header.js" defer></script>
     <script src="/resources/js/footer.js" defer></script>
     <script src="/resources/js/userStore.js" defer></script>
@@ -57,12 +58,11 @@
         </div>
         <div id="gbody-cart-list">
         <c:forEach items="${cartList }" var="cart">
-          <input type="hidden" class="cart-no" value="${cart.cartNo }">
-          <div><input type="checkbox" class="check-one-product" /></div>
+          <div class="checkbox-area"><input type="checkbox" class="check-one-product cart-no" value="${cart.cartNo }"/></div>
           <div><img src="/resources/images/storeProduct/${cart.productImgRename }" alt="상품사진" /></div>
-          <div>${cart.productName }</div>
+          <div class="cart-product-name">${cart.productName }</div>
           <div class="cart-price">${cart.productPrice }</div>
-          <div>
+          <div class="count-area">
             <input type="number" name="productCount" min="1" max="10" step="1" value="${cart.productCount }" <c:if test="${cart.productStatus eq 'N' }">disabled</c:if> />
             <button class="btn-change-count" <c:if test="${cart.productStatus eq 'N' }">disabled</c:if>>변경</button>
           </div>
@@ -81,9 +81,9 @@
         </div>
         <div id="gbody-cart-price">
           <div id="total-cart-amount" class="cart-price"></div>
-          <div></div>
+          <div><i class="fa-solid fa-plus"></i></div>
           <div id="discount-amount" class="cart-price">0</div>
-          <div></div>
+          <div><i class="fa-solid fa-equals"></i></div>
           <div id="total-pay-amount" class="cart-price"></div>
         </div>
       </div>

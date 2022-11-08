@@ -11,20 +11,26 @@ import kr.co.movieyouhwan.user.store.domain.ProductType;
 
 public interface UserStoreStore {
 
-  // 상품 리스트 불러오기
-  List<Product> selectAllProductList(SqlSession session);
-
-  // 상품 유형 리스트 불러오기
-  List<ProductType> selectAllProductTypeList(SqlSession session);
-
   // 장바구니에 같은 상품 있는지 체크
   int selectCountProductInCart(SqlSession session, Cart cart);
 
   // 장바구니에 새로운 상품 담기
   int insertProductToCart(SqlSession session, Cart cart);
 
-  // 장바구니에 있는 상품을 담으면 해당 상품 수량 변경
+  // 장바구니에 있는 상품을 담으면 해당 상품 수량 증가
+  int updateProductCountUp(SqlSession session, Cart cart);
+  
+  // 장바구니에서 상품 수량 변경
   int updateProductCountInCart(SqlSession session, Cart cart);
+
+  // 장바구니에서 상품 삭제
+  int deleteProductsInCart(SqlSession session, List<Integer> cartNoList);
+
+  // 상품 리스트 불러오기
+  List<Product> selectAllProductList(SqlSession session);
+
+  // 상품 유형 리스트 불러오기
+  List<ProductType> selectAllProductTypeList(SqlSession session);
 
   // 상품 상세 조회
   Product selectOneProduct(SqlSession session, int productNo);
