@@ -10,7 +10,7 @@
 #join_header{
     text-align: center;
     color: #0F1A3B;
-    margin-top: 90px;
+    margin-top: 70px;
 }
 .membership-form{
     box-sizing: border-box;
@@ -22,7 +22,7 @@
     line-height: 21px;
 }
 #join_content{
-    margin: 100px auto;
+    margin: 70px auto;
 }
 .required-input{
     color: #E59500;
@@ -119,11 +119,13 @@ span.guide{
 }
 
 #input-gender-wrap{
-    display: inline;
+    display: flex;
     margin-left:  20px;
     font-size: 10pt;
 }
-
+/* .sex{
+    margin: 10px auto;
+} */
 /* 성별 버튼 */
 input[type='radio'] {
     -webkit-appearance:none;
@@ -133,6 +135,7 @@ input[type='radio'] {
     border-radius:50%;
     outline:none;
     background:#ffbf00;
+
   }
   input[type='radio']:before {
     content:'';
@@ -141,9 +144,11 @@ input[type='radio'] {
     height:60%;
     margin: 20% auto;  
     border-radius:50%;  
+
   }
   input[type='radio']:checked:before {
   	background:#0F1A3B;
+    
   }
 
 .input-button{
@@ -173,7 +178,7 @@ input[type='radio'] {
 }
 #profile-info{
     margin-top: 3px;
-    font-size: 5pt;
+    font-size: 9pt;
     line-height: 120%;
     color: #393939f3;
 }

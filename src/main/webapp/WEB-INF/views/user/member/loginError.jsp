@@ -18,11 +18,17 @@
     <div id="joinSucceseForm">
         <div id="succeseMessage">
             <h2>MovieYouHwan</h2>
-		        존재하지 않는 회원정보입니다.
+		        존재하지 않는 회원정보입니다.<br>
+                아이디와 패스워드를 확인해주세요.
         </div>
-        <a id="main-btn" href="/home.yh">
-		            메인페이지로 이동
-        </a>
+        <div id="j-btn-group">
+            <a class="main-btn-main" href="/home.yh">
+                메인페이지로 이동
+            </a>
+            <a class="main-btn-login" href="/member/loginView.yh">
+                로그인
+            </a>
+        </div>
     </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>

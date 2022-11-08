@@ -21,9 +21,14 @@
             <h2>MovieYouHwan</h2>
 		            회원가입이 완료되었습니다!
         </div>
-        <a id="main-btn" href="/home.yh">
-		            메인페이지로 이동
-        </a>
+        <div id="j-btn-group">
+            <a class="main-btn-main" href="/home.yh">
+                메인페이지로 이동
+            </a>
+            <a class="main-btn-login" href="/member/loginView.yh">
+                로그인
+            </a>
+        </div>
     </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>

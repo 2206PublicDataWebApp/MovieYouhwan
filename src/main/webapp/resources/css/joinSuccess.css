@@ -1,5 +1,5 @@
 #joinSucceseForm{
-    margin: 200px auto;
+    margin: 180px auto;
     padding: 0 100px;
     width: 800px;
     height: 350px;
@@ -15,23 +15,34 @@
 #succeseMessage{
     font-size: 25pt;
     font-weight: 500;
+    line-height: 45px;
     
 }
-#main-btn{
-    margin-top: 50px;
-    width: 50%;
-    height: 50px;
-    background-color: #0F1A3B;
-    border-radius: 0%;
-    color: white;
-    font-weight: 500;
-    line-height: 50px;
+#j-btn-group{
+    display: flex;
 }
-a{
+
+.main-btn-main, .main-btn-login{
+    display: flex;
     text-decoration: none;
     text-align: center;
     vertical-align: middle;
-
+    border: 1px solid #0F1A3B;
+    width: 180px;
+    height: 50px;
+    font-weight: 600;
+    line-height: 50px;
+    margin: 50px 5px;
+    text-align: center;
+    justify-content: center;
+}
+.main-btn-main{
+    background-color: #0F1A3B;
+    color: white;
+}
+.main-btn-login{
+    background-color: white;
+    color: #0F1A3B;
 }
 h2{
 	margin-bottom : 20px;

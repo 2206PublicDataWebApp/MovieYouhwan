@@ -4,9 +4,9 @@ var empJ = /\s/g;
 //아이디 정규식
 var idJ = /^[a-z]+[a-z0-9]{5,19}$/;
 // 비밀번호 정규식
-var pwJ = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*[!@#$])).{8,20}$/;
+var pwJ = /^(?!((?:[a-z]+)|(?:[!@#$]+)|(?:[0-9]+))$)[a-z\d!@#$]{8,20}$/;
 // 이름 정규식
-var nameJ = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
+var nameJ = /^[가-힣]{2,6}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
 // 이메일 검사 정규식
 var mailJ = /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
 
@@ -15,7 +15,7 @@ var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 var birthJ = false;
 var profileJ = /([^\s]+(?=\.(jpg|png))\.\2)/
 
-$("#memberId").blur(function () {
+$("#memberId").keydown(function () {
    if ($('#memberId').val() == '') {
       $('#id_check').text('아이디를 입력하세요.');
       $('#id_check').css('color', 'red');
@@ -32,7 +32,7 @@ $("#memberId").blur(function () {
          data: { "memberId": memberId },
          type: "get",
          success: function (result) {
-            console.log("blur result:" + result);
+            console.log("keydown result:" + result);
             if (result != 0) {
                $('#id_check').text('이미 사용 중인 아이디 입니다.');
                $('#id_check').css('color', 'red');
@@ -132,19 +132,19 @@ $('form').on('submit', function () {
 //    }
 });
 
-$('#memberPwd').blur(function () {
+$('#memberPwd').keydown(function () {
    if (pwJ.test($('#memberPwd').val())) {
       console.log('true');
       $('#pw-check').text('');
    } else {
       console.log('false');
-      $('#pw_check').text('영문, 숫자, 특수문자 조합 8~20자리');
-      $('#pw_check').css('color', 'red');
+      $('#pw-check').text('영문, 숫자, 특수문자 조합 8~20자리');
+      $('#pw-check').css('color', 'red');
    }
 });
 
 //1~2 패스워드 일치 확인
-$('#memberPwd-chk').blur(function () {
+$('#memberPwd-chk').keydown(function () {
    if ($('#memberPwd').val() != $(this).val()) {
       $('#pw2_check').text('비밀번호가 일치하지 않습니다.');
       $('#pw2_check').css('color', 'red');
@@ -154,16 +154,16 @@ $('#memberPwd-chk').blur(function () {
 });
 
 //이름에 특수문자 들어가지 않도록 설정
-$("#memberName").blur(function () {
+$("#memberName").keydown(function () {
    if (nameJ.test($(this).val())) {
       console.log(nameJ.test($(this).val()));
       $("#name_check").text('');
    } else {
-      $('#name_check').text('한글 2~4자 이내로 입력하세요.');
+      $('#name_check').text('한글 2~6자 이내로 입력하세요.');
       $('#name_check').css('color', 'red');
    }
 });
-$("#memberEmail").blur(function () {
+$("#memberEmail").keydown(function () {
    if (mailJ.test($(this).val())) {
       $("#email_check").text('');
    } else {
@@ -177,7 +177,7 @@ $("#memberEmail").blur(function () {
 var birthJ = false;
 
 // 생년월일   birthJ 유효성 검사
-$('#memberBirth').blur(function () {
+$('#memberBirth').keydown(function () {
    var dateStr = $(this).val();
    var year = Number(dateStr.substr(0, 4)); // 입력한 값의 0~4자리까지 (연)
    var month = Number(dateStr.substr(4, 2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
@@ -229,7 +229,7 @@ $('#memberBirth').blur(function () {
 }); //End of method /*
 
 // 휴대전화
-$('#memberPhone').blur(function () {
+$('#memberPhone').keydown(function () {
    if (phoneJ.test($(this).val())) {
       console.log(nameJ.test($(this).val()));
       $("#phone_check").text('');
@@ -263,7 +263,7 @@ $('#email-confirm-btn').click(function() {
 
 // 인증번호 비교 
 // blur -> focus가 벗어나는 경우 발생
-$('.mail-check-input').blur(function () {
+$('.mail-check-input').keydown(function () {
    const inputCode = $(this).val();
    const $resultMsg = $('#email_check2');
    
