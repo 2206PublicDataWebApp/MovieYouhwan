@@ -1,5 +1,18 @@
 package kr.co.movieyouhwan.admin.report.controller;
 
-public class ReportController {
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+@Controller
+public class ReportController {
+	
+	/**
+	 * 리뷰 신고 화면
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminReviewReport.yh", method=RequestMethod.GET)
+	public String adminReviewReportView() {
+		return "/admin/report/adminReviewReport";
+	}
 }

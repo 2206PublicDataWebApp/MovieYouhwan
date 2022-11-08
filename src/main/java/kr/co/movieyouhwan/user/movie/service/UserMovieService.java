@@ -3,11 +3,9 @@ package kr.co.movieyouhwan.user.movie.service;
 import java.util.List;
 
 import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
+import kr.co.movieyouhwan.user.movie.domain.MovieList;
 
 public interface UserMovieService {
-
-	// 영화 예약 화면 (영화관)
-	public List<MovieTime> printAllCinemaMovie(Integer cinemaNo);
-
-	public List<MovieTime> printCinemaMovieByDate(Integer cinemaNo, String movieDay);
+	// 현재 상영 영화 리스트 (영화)
+	public List<MovieList> printAllMovieNow();
 }

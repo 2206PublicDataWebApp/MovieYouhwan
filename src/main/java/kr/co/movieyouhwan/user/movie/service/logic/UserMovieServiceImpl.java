@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
+import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.service.UserMovieService;
 import kr.co.movieyouhwan.user.movie.store.UserMovieStore;
 
@@ -17,15 +18,10 @@ public class UserMovieServiceImpl implements UserMovieService{
 	@Autowired
 	private SqlSessionTemplate session;
 
+	// 현재 상영 영화 리스트 (영화)
 	@Override
-	public List<MovieTime> printAllCinemaMovie(Integer cinemaNo) {
-		List<MovieTime> mtList = uMovieStore.selectAllCinemaMovie(session, cinemaNo);
-		return mtList;
-	}
-
-	@Override
-	public List<MovieTime> printCinemaMovieByDate(Integer cinemaNo, String movieDay) {
-		List<MovieTime> mtList=uMovieStore.selectCinemaMovieByDate(session, cinemaNo, movieDay);
-		return mtList;
+	public List<MovieList> printAllMovieNow() {
+		List<MovieList> mlList = uMovieStore.selectAllMovieNow(session);
+		return mlList;
 	}
 }

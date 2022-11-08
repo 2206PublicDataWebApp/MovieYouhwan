@@ -26,13 +26,11 @@
 		<typeAlias type="kr.co.movieyouhwan.user.cinema.domain.Cinema" alias="Cinema"/>
 		<typeAlias type="kr.co.movieyouhwan.user.cinema.domain.CinemaMovie" alias="CinemaMovie"/>
 		<typeAlias type="kr.co.movieyouhwan.user.cinema.domain.CinemaFavorite" alias="CinemaFavorite"/>
-<!-- 		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.Match" alias="Match"/> -->
-<!-- 		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.MatchOption" alias="MatchOption"/> -->
-<!-- 		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.MateOption" alias="MateOption"/> -->
 		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.MateReport" alias="MateReport"/>
 		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.Survey" alias="Survey"/>
 		<typeAlias type="kr.co.movieyouhwan.user.member.domain.Member" alias="Member"/>
 		<typeAlias type="kr.co.movieyouhwan.user.member.domain.PointHistory" alias="PointHistory"/>
+		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MovieList" alias="MovieList"/>
 		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MovieCancle" alias="MovieCancle"/>
 		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MoviePay" alias="MoviePay"/>
 		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MovieReview" alias="MovieReview"/>
