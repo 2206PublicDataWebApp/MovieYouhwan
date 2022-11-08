@@ -9,7 +9,7 @@
       <table width="500px" height="150px">
         <tr>
           <td rowspan="4" width="30%" class="modal-img-area">
-            <label for="product-img-register"><i class="fa-solid fa-file-image fa-lg" id="img-icon"></i><img class="img-preview" /></label>
+            <label for="product-img-register"><i class="fa-solid fa-image fa-xl" id="img-icon"></i><img class="img-preview" /></label>
             <input type="file" name="productImg" class="product-img" id="product-img-register" accept="image/png, image/jpeg" required />
           </td>
           <th width="20%">유형</th>

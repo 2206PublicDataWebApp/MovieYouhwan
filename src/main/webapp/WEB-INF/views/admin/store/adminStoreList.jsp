@@ -40,7 +40,7 @@
               <c:forEach items="${productList }" var="product">
                 <c:if test="${productType.productType eq product.productType }">
                   <li class="product-item" id="${product.productNo }">
-                    <img src="/resources/images/storeProduct/${product.productImgRename}" alt="" class="product-img" />
+                    <img src="/resources/images/storeProduct/${product.productImgRename}" alt="" class="product-img"/>
                     <div class="product-detail">
                       <p class="product-desc">${product.productDesc}</p>
                       <p class="product-name">${product.productName}</p>

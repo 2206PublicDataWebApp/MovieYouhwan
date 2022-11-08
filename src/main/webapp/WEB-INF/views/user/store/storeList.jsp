@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,7 +19,7 @@
   </head>
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-    <div id="store-banner"><img src="/resources/images/storeBanner1.jpg" alt="배너사진" /></div>
+    <div id="store-banner"><img src="/resources/images/storeBanner03.jpg" alt="배너사진" /></div>
     <div id="store-wrapper">
       <div id="store-menu">
         <ul id="store-tab">
@@ -28,10 +29,7 @@
         </ul>
         <ul id="store-links">
           <li>
-            <a id="link-store-history" href="/my/myPageMain.yh">구매내역</a>
-          </li>
-          <li id="store">
-            <a id="link-store-cart" href="/store/cart.yh">장바구니<i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="/store/cart.yh">장바구니<i class="fa-solid fa-cart-shopping"></i></a>
           </li>
         </ul>
       </div>
@@ -44,7 +42,7 @@
                 <c:if test="${productType.productType eq product.productType }">
                   <li class="product-item" id="${product.productNo }">
                     <a href="/store/detail.yh?productNo=${product.productNo}">
-                      <img src="/resources/images/storeProduct/${product.productImgRename}" alt="" class="product-img" />
+                      <img src="/resources/images/storeProduct/${product.productImgRename}" alt="" class="product-img" id="${product.productImgRename }" />
                     </a>
                     <div class="product-detail">
                       <p class="product-desc">${product.productDesc}</p>

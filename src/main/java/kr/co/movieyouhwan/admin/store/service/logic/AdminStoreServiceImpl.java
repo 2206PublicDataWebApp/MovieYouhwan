@@ -34,16 +34,17 @@ public class AdminStoreServiceImpl implements AdminStoreService {
     return result;
   }
 
+  // 상품 수정
   @Override
   public int modifyProduct(Product product) {
     int result = aStoreStore.updateProduct(session, product);
     return result;
   }
 
+  // 상품 재배치
   @Override
-  public int modifyProductOrder(List<Integer> productNoList) {
-    int result = aStoreStore.updateProductOrder(session, productNoList);
-    return result;
+  public void modifyProductOrder(List<Integer> productNoList) {
+    aStoreStore.updateProductOrder(session, productNoList);
   }
 
   // 상품 리스트 불러오기

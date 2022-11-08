@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -47,36 +49,25 @@
       <!-- TODO: PRODUCT_STATUS = 'N'이면 구매 못함 -->
       <div id="store-cart-list">
         <div id="ghead-cart-list">
-          <div><input type="checkbox" /></div>
+          <div><input type="checkbox" id="check-all-product" /></div>
           <div>상품</div>
-          <div>옵션</div>
           <div>판매금액</div>
           <div>수량</div>
           <div>구매금액</div>
         </div>
         <div id="gbody-cart-list">
-          <div><input type="checkbox" /></div>
-          <div><img src="" alt="상품사진" /></div>
-          <div>핫도그</div>
+        <c:forEach items="${cartList }" var="cart">
+          <input type="hidden" class="cart-no" value="${cart.cartNo }">
+          <div><input type="checkbox" class="check-one-product" /></div>
+          <div><img src="/resources/images/storeProduct/${cart.productImgRename }" alt="상품사진" /></div>
+          <div>${cart.productName }</div>
+          <div class="cart-price">${cart.productPrice }</div>
           <div>
-            <select name="productOption" id="">
-              <option value="">칠리</option>
-              <option value="">치즈</option>
-            </select>
+            <input type="number" name="productCount" min="1" max="10" step="1" value="${cart.productCount }" <c:if test="${cart.productStatus eq 'N' }">disabled</c:if> />
+            <button class="btn-change-count" <c:if test="${cart.productStatus eq 'N' }">disabled</c:if>>변경</button>
           </div>
-          <div>29000</div>
-          <div>
-            <input type="number" name="productCount" min="1" max="10" step="1" value="1" />
-            <button>변경</button>
-          </div>
-          <div>90000</div>
-          <div><input type="checkbox" /></div>
-          <div><img src="" alt="상품사진" /></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+          <div class="cart-price product-price-per-count">${cart.productPrice * cart.productCount }</div>
+          </c:forEach>
         </div>
         <button id="btn-cart-delete">삭제</button>
       </div>
@@ -89,11 +80,11 @@
           <div>총 결제 예정 금액</div>
         </div>
         <div id="gbody-cart-price">
-          <div>21,900 원</div>
+          <div id="total-cart-amount" class="cart-price"></div>
           <div></div>
-          <div>0 원</div>
+          <div id="discount-amount" class="cart-price">0</div>
           <div></div>
-          <div>21,900 원</div>
+          <div id="total-pay-amount" class="cart-price"></div>
         </div>
       </div>
       <div id="cart-btn-area">

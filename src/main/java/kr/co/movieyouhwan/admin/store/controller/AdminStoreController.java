@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -83,20 +84,15 @@ public class AdminStoreController {
    * @param productNoList
    * @return
    */
+  @ResponseBody
   @RequestMapping(value = "/admin/store/sort.yh", method = RequestMethod.POST)
-  public ModelAndView adminStoreSort(HttpServletRequest request,
+  public void adminStoreSort(HttpServletRequest request,
       @RequestParam("productNoList[]") List<Integer> productNoList, ModelAndView mv) {
     try {
-      int result = aStoreService.modifyProductOrder(productNoList);
-      if (result > 0) {
-        mv.setViewName("redirect:/admin/store/manage.yh");
-      } else {
-        System.out.println("상품 재배치 실패");
-      }
+      aStoreService.modifyProductOrder(productNoList);
     } catch (Exception e) {
       e.printStackTrace();
     }
-    return mv;
   }
 
   /**

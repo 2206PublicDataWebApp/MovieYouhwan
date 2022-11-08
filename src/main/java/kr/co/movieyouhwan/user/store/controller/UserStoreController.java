@@ -68,7 +68,6 @@ public class UserStoreController {
         int count = uStoreService.checkProductInCart(cart); // 장바구니에 같은 상품 있는지 체크
         if (count == 0) {
           int result = uStoreService.addNewProductToCart(cart); // 장바구니에 새로운 상품 담기
-
         } else {
           int result = uStoreService.modifyProductCountInCart(cart); // 장바구니에 있는 상품을 담으면 해당 상품 수량 변경
         }
@@ -113,6 +112,7 @@ public class UserStoreController {
       Member member = (Member) session.getAttribute("loginUser");
       if (member != null) {
         List<Cart> cartList = uStoreService.printMyCartList(member.getMemberId());
+        cartList.get(0).toString();
         mv.addObject("cartList", cartList);
         mv.setViewName("user/store/storeCart");
       }

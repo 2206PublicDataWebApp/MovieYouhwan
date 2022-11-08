@@ -18,7 +18,7 @@
   </head>
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-    <div id="store-banner"><img src="" alt="배너사진" /></div>
+    <div id="store-banner"><img src="/resources/images/storeBanner03.jpg" alt="배너사진" /></div>
     <div id="store-wrapper">
       <div id="store-menu">
         <ul id="store-tab">
@@ -29,14 +29,13 @@
           <li class="store-tab-item"><a href="#">스낵</a></li>
         </ul>
         <ul id="store-links">
-          <li><a href="/my/myPage.yh">구매내역</a></li>
           <li>
             <a href="/store/cart.yh">장바구니<i class="fa-solid fa-cart-shopping"></i></a>
           </li>
         </ul>
       </div>
       <form action="" method="post">
-      	<input type="hidden" name="productNo" value="${product.productNo }">
+        <input type="hidden" name="productNo" value="${product.productNo }">
         <div id="grid-store-detail">
           <div class="gitem-store-detail"><h3>${product.productName }</h3></div>
           <div class="gitem-store-detail"><img src="/resources/images/storeProduct/${product.productImgRename }" alt="상품사진" /></div>

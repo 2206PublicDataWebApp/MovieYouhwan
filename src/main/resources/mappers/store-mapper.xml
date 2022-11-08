@@ -25,7 +25,9 @@
 		<result property="productName" column="PRODUCT_NAME" />
 		<result property="productTypeNo" column="PRODUCT_TYPE_NO" />
 		<result property="productType" column="PRODUCT_TYPE" />
-		<result property="productCount" column="PRODUCT_COUNT" />
+		<result property="productPrice" column="PRODUCT_PRICE" />		
+		<result property="productCount" column="PRODUCT_COUNT" />		
+		<result property="productImgRename" column="PRODUCT_IMG_RENAME" />
 		<result property="cartStatus" column="CART_STATUS" />
 	</resultMap>
 	
@@ -38,8 +40,8 @@
 	<!-- 사용자 - 장바구니에 새로운 상품 담기 -->
 	<insert id="insertProductToCart">
 		INSERT INTO CART_TBL
-		VALUES(SEQ_CART_NO.NEXTVAL, #{memberId}, #{productNo}, #{productName},
-		#{productTypeNo}, #{productType}, #{productCount}, DEFAULT)
+		VALUES(SEQ_CART_NO.NEXTVAL, #{memberId}, #{productNo}, #{productName}, #{productTypeNo}, #{productType},
+		#{productPrice}, #{productCount}, #{productImgRename}, DEFAULT)
 	</insert>
 	<!-- 관리자 - 상품 삭제 -->
 	<delete id="deleteProduct">
@@ -84,10 +86,12 @@
 		SELECT COUNT(CART_NO) FROM CART_TBL
 		WHERE MEMBER_ID = #{memberId} AND PRODUCT_NO = #{productNo}
 	</select>
+	<!-- 사용자 - 상품 상세 조회 -->
 	<select id="selectOneProduct" resultMap="productResultMap">
 		SELECT * FROM PRODUCT_TBL
 		WHERE PRODUCT_NO = #{productNo}
 	</select>
+	<!-- 사용자 - 내 장바구니 조회 -->
 	<select id="selectMyCartList" resultMap="cartResultMap">
 		SELECT * FROM CART_TBL
 		WHERE MEMBER_ID = #{memberId}

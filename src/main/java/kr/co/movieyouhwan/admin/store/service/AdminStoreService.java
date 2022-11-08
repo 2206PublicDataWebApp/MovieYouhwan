@@ -13,7 +13,7 @@ public interface AdminStoreService {
 
   int modifyProduct(Product modProduct); // 상품 수정
 
-  int modifyProductOrder(List<Integer> productNoList); // 상품 재배치
+  void modifyProductOrder(List<Integer> productNoList); // 상품 재배치
 
   List<Product> printAllProductList(); // 상품 리스트 불러오기
 

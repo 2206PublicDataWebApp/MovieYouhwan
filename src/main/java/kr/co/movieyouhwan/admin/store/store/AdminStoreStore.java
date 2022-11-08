@@ -16,7 +16,7 @@ public interface AdminStoreStore {
 
   int updateProduct(SqlSession session, Product product); // 상품 수정
 
-  int updateProductOrder(SqlSessionTemplate session, List<Integer> productNoList); // 상품 재배치
+  void updateProductOrder(SqlSession session, List<Integer> productNoList); // 상품 재배치
 
   List<Product> selectAllProductList(SqlSession session); // 상품 리스트 조회
 

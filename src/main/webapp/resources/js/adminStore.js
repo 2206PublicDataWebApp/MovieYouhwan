@@ -109,7 +109,7 @@ $('#btn-store-save').click(function () {
       productNoList: productNoList,
     },
     success: function (data) {
-    	$(location).attr('href', '/admin/store/manage.yh');
+      $(location).attr('href', '/admin/store/manage.yh');
     },
     error: function (data) {},
   });

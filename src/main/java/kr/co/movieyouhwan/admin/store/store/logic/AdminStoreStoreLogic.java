@@ -36,9 +36,8 @@ public class AdminStoreStoreLogic implements AdminStoreStore {
 
   // 상품 재배치
   @Override
-  public int updateProductOrder(SqlSessionTemplate session, List<Integer> productNoList) {
-    int result = session.update("StoreMapper.updateProductOrder", productNoList);
-    return result;
+  public void updateProductOrder(SqlSession session, List<Integer> productNoList) {
+    session.update("StoreMapper.updateProductOrder", productNoList);
   }
 
   // 상품 리스트 조회
