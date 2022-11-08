@@ -27,7 +27,8 @@
 	<select id="selectFaq" resultMap="faqResultMap">
 		SELECT * FROM FAQ_TBL WHERE FAQ_NO=#{faqNo}
 	</select>
+	
 	<select id="selectFaqList" resultMap="faqResultMap">
-		SELECT * FROM FAQ_TBL ORDER BY FAQ_NO DESC	
+		SELECT * FROM FAQ_TBL ORDER BY FAQ_TYPE ASC
 	</select>
 </mapper>

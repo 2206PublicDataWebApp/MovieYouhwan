@@ -9,6 +9,7 @@
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
     <link rel="stylesheet" href="/resources/css/common.css" />
     <link rel="stylesheet" href="/resources/css/support.css" />
+    <link rel="stylesheet" href="/resources/css/header.css" />
     <style>
       @font-face {
         font-family: mice-bold;
@@ -70,6 +71,7 @@
     </style>
   </head>
   <body>
+    <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
     <div id="admin-wrapper">
       <form method="post">
         <input type="hidden" name="adminId" value="eunhye0910" />
@@ -80,7 +82,7 @@
           <input id="input-title" name="noticeTitle" type="text" />
         </div>
         <hr />
-        <div id="input-content-area"><textarea id="input-content" name="noticeContent" wrap="hard" cols="100"></textarea></div>
+        <div id="input-content-area"><textarea id="input-content" name="noticeContent" cols="100"></textarea></div>
         <div id="btn-area">
           <button id="cancel-btn" type="button" onclick="history.go(-1);">취소</button>
           <button id="register-btn" type="submit" onclick="form.action='/admin/noticeRegister.yh'">등록</button>

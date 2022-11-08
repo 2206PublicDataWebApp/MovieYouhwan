@@ -9,6 +9,7 @@
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
     <link rel="stylesheet" href="/resources/css/common.css" />
     <link rel="stylesheet" href="/resources/css/support.css" />
+    <link rel="stylesheet" href="/resources/css/header.css" />
     <style>
       @font-face {
         font-family: mice-bold;
@@ -69,6 +70,7 @@
     </style>
   </head>
   <body>
+    <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
     <div id="admin-wrapper">
       <form method="post">
         <input type="hidden" name="adminId" value="eunhye0910" />
