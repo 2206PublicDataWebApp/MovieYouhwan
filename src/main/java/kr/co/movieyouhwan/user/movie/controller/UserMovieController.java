@@ -18,6 +18,8 @@ import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.admin.movie.service.AdminMovieService;
 import kr.co.movieyouhwan.admin.theater.domain.Theater;
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
+import kr.co.movieyouhwan.user.movie.domain.MovieList;
+import kr.co.movieyouhwan.user.movie.service.UserMovieService;
 
 @Controller
 public class UserMovieController {
@@ -25,21 +27,21 @@ public class UserMovieController {
 	private AdminMovieService aMovieService;
 	@Autowired
 	private AdminCinemaService aCinemaService;
+	@Autowired
+	private UserMovieService uMovieService;
 	
 	/**
-	 * 영화 목록 화면
+	 * 영화 현재 상영 목록 화면
 	 * @param mv
 	 * @param movie
 	 * @return
 	 */
 	@RequestMapping(value="/movieList.yh", method=RequestMethod.GET)
-	public ModelAndView userMovieListView(
+	public ModelAndView userMovieListNowView(
 			ModelAndView mv) {
-		List<Movie> mList = aMovieService.printAllMovie();
-		List<MovieImg> miList = aMovieService.printAllMovieImg();
-		mv.addObject("mList", mList);
-		mv.addObject("miList", miList);
-		mv.setViewName("user/movie/movieListAll");
+		List<MovieList> mlList = uMovieService.printAllMovieNow();
+		mv.addObject("mlList", mlList);
+		mv.setViewName("user/movie/movieListNow");
 		return mv;
 	}
 	

@@ -86,7 +86,7 @@ public class UserCinemaController {
 		// 일별 영화 출력 (중복 제외)
 		List<Movie> mList = uCinemaService.printMovieNowOne(new MovieDay().getMovieDay(0));
 		// 일별 영화 정보 출력
-		List<CinemaMovie> cmList = uCinemaService.printCinemaMovieByDay(cinemaNo, new MovieDay().getMovieDay(0)); // -> printCinemaMovieByDate
+		List<CinemaMovie> cmList = uCinemaService.printCinemaMovieByDay(cinemaNo, new MovieDay().getMovieDay(0));
 		session.setAttribute("cinemaNo", cinema.getCinemaNo());
 		// 영화관 1개
 		mv.addObject("cinema", cinema);

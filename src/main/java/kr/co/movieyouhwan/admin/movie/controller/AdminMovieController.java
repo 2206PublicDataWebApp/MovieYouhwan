@@ -41,6 +41,15 @@ public class AdminMovieController {
 	private AdminTheaterService aTheaterService;
 	
 	/**
+	 * 영화, 영화관 메인 화면
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminMovieCinemaMain.yh", method=RequestMethod.GET)
+	public String adminMovieCinemaView() {
+		return "/admin/movie/adminMovieCinema";
+	}
+	
+	/**
 	 * 영화 등록 화면
 	 * @return
 	 */

@@ -1,30 +1,19 @@
 package kr.co.movieyouhwan.user.movie.store.logic;
-import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
+import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.store.UserMovieStore;
 
 @Repository
 public class UserMovieStoreLogic implements UserMovieStore{
-
+	// 현재 상영 영화 리스트 (영화)
 	@Override
-	public List<MovieTime> selectAllCinemaMovie(SqlSessionTemplate session, Integer cinemaNo) {
-		List<MovieTime> mtList = session.selectList("MovieMapper.selectAllCinemaMovie", cinemaNo);
-		return mtList;
+	public List<MovieList> selectAllMovieNow(SqlSessionTemplate session) {
+		List<MovieList> mlList = session.selectList("MovieMapper.selectAllMovieNow");
+		return mlList;
 	}
-
-	@Override
-	public List<MovieTime> selectCinemaMovieByDate(SqlSessionTemplate session, Integer cinemaNo, String movieDay) {
-		HashMap<String, String> paramMap=new HashMap<>();
-		paramMap.put("cinemaNo", cinemaNo.toString());
-		paramMap.put("movieDay", movieDay);
-		List<MovieTime> mtList=session.selectList("MovieMapper.selectCinemaMovieByDate", paramMap);
-		return mtList;
-	}
-
 
 }

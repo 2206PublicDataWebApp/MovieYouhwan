@@ -5,10 +5,10 @@
 	<ul id="navbar-menuList" class="admin">
 		<li id="navbar-logo" class="admin"><a href="#"> <img src="/resources/images/logo.png" alt="" width="100px" /></a>
 		<li class="navbar-menuItem admin"><a href="/admin/sales/manage.yh">매출관리</a></li>
-		<li class="navbar-menuItem admin"><a href="#">영화관&영화관리</a></li>
+		<li class="navbar-menuItem admin"><a href="/admin/adminMovieCinemaMain.yh">영화관&영화관리</a></li>
 		<li class="navbar-menuItem admin"><a href="/admin/store/manage.yh">스토어관리</a></li>
 		<li class="navbar-menuItem admin"><a href="#">회원관리</a></li>
-		<li class="navbar-menuItem admin"><a href="#">신고관리</a></li>
+		<li class="navbar-menuItem admin"><a href="/admin/adminReviewReport.yh">신고관리</a></li>
 		<li class="navbar-menuItem admin"><a href="/admin/site/manage.yh">사이트관리</a></li>
 	</ul>
 </nav>

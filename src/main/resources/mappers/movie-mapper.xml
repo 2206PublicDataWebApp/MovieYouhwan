@@ -52,6 +52,15 @@
 		<result property="movieName" column="MOVIE_NAME" />
 		<result property="theaterName" column="THEATER_NAME" />
 	</resultMap>
+	<resultMap type="MovieList" id="MovieListResultMap">
+		<id property="movieNo" column="MOVIE_NO"/>
+		<result property="movieTitle" column="MOVIE_TITLE"/>
+		<result property="movieAge" column="MOVIE_AGE"/>
+		<result property="movieStartday" column="MOVIE_STARTDAY"/>
+		<result property="movieImgName" column="MOVIE_IMG_NAME"/>
+		<result property="movieImgRename" column="MOVIE_IMG_RENAME"/>
+		<result property="movieImgPath" column="MOVIE_IMG_PATH"/>
+	</resultMap>
 	<!-- 영화 등록(관리자) -->
 	<insert id="insertMovie">
 		INSERT INTO MOVIE_TBL VALUES(SEQ_MOVIE_NO.NEXTVAL, #{movieTitle}, #{movieGenre}, #{movieRuntime}, #{movieDirector}, #{movieActor}, #{movieAge}, #{movieStartday}, #{movieTicketingday}, #{movieEndday}, #{movieContent}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
@@ -128,10 +137,14 @@
 		(SELECT * FROM MOVIE_TIME_TBL WHERE CINEMA_NO = #{cinemaNo}) MTT
 		JOIN THEATER_TBL TT ON MTT.THEATER_NO = TT.THEATER_NO
 	</select>
-	
 	<select id="selectCinemaMovieByDate" resultMap="MovieTimeResultMap" >
 		SELECT THEATER_NAME AS THEATER_NAME, MOVIE_NO, MOVIE_DAY, MOVIE_START, MOVIE_END, MOVIE_TICKET, MOVIE_SEAT FROM
 		(SELECT * FROM MOVIE_TIME_TBL WHERE CINEMA_NO = #{cinemaNo} AND MOVIE_DAY=#{movieDay}) MTT
 		JOIN THEATER_TBL TT ON MTT.THEATER_NO = TT.THEATER_NO
+	</select>
+	<!-- 현재 상영 영화 리스트 (영화-movieNo없이 이미지 하나만 띄우기)	-->
+	<select id="selectAllMovieNow" resultMap="MovieListResultMap">
+	WITH MOVIES AS (SELECT A.MOVIE_NO, A.MOVIE_TITLE, A.MOVIE_AGE, A.MOVIE_STARTDAY, A.MOVIE_ENDDAY, B.MOVIE_IMG_NAME, B.MOVIE_IMG_RENAME, B.MOVIE_IMG_PATH, ROW_NUMBER() OVER(PARTITION BY A.MOVIE_NO ORDER BY A.MOVIE_NO DESC) AS C_NUM FROM MOVIE_TBL A JOIN MOVIE_IMG_TBL B ON A.MOVIE_NO = B.MOVIE_NO)
+    SELECT * FROM MOVIES WHERE C_NUM = 1 AND MOVIE_ENDDAY >= SYSDATE
 	</select>
 </mapper>

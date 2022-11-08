@@ -9,10 +9,11 @@
 <link href="/resources/css/common.css" rel="stylesheet" />
 <link href="/resources/css/header.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
-<link href="/resources/css/movie.css" rel="stylesheet" />
+<link href="/resources/css/ticket.css" rel="stylesheet" />
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
 <script src="/resources/js/header.js" defer></script>
 <script src="/resources/js/footer.js" defer></script>
+<script src="/resources/js/ticket.js" defer></script>
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -46,9 +47,13 @@
 				</div>
 			</div>
 			<div class="wrap-inside">
+				<!-- 영화관 이름 리스트 -->
 				<div class="cinema-name-wrap">
-					<c:forEach items="${cList }" var="cinema">
-						<p class="cinema-name-text">${cinema.cinemaName }</p>
+					<c:forEach items="${cList }" var="cinema" varStatus="i">
+						<div id="cinema-name-outside${i.count }" class="cinema-name-outside">
+							<label for="cinema-name${i.count }" class="cinema-name-text">${cinema.cinemaName }</label>
+							<input type="radio" id="cinema-name${i.count }" class="cinema-name-radio" name="cinemaName" value="${cinema.cinemaName }" onclick="cinemaNameChoice()"/>
+						</div>
 					</c:forEach>
 				</div>
 				<div class="movie-name-wrap">
