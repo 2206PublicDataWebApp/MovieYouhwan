@@ -18,10 +18,31 @@ public class UserMovieServiceImpl implements UserMovieService{
 	@Autowired
 	private SqlSessionTemplate session;
 
-	// 현재 상영 영화 리스트 (영화)
+	// 전체 상영 영화 리스트
+	@Override
+	public List<MovieList> printAllMovie() {
+		List<MovieList> mlList = uMovieStore.selectAllMovie(session);
+		return mlList;
+	}
+	
+	// 현재 상영 영화 리스트
 	@Override
 	public List<MovieList> printAllMovieNow() {
 		List<MovieList> mlList = uMovieStore.selectAllMovieNow(session);
+		return mlList;
+	}
+
+	// 상영 예정 영화 리스트
+	@Override
+	public List<MovieList> printAllMovieAfter() {
+		List<MovieList> mlList = uMovieStore.selectAllMovieAfter(session);
+		return mlList;
+	}
+
+	// 상영 종료 영화 리스트
+	@Override
+	public List<MovieList> printAllMovieBefore() {
+		List<MovieList> mlList = uMovieStore.selectAllMovieBefore(session);
 		return mlList;
 	}
 }

@@ -20,23 +20,12 @@
 	<jsp:useBean id="now" class="java.util.Date" />
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     <div class="midmovie-wrapper">
-    	<!-- top3 영화 부분 (추후 개발 예정) -->
-    	<div></div>
-    	<!-- 검색 창 -->
-    	<div id="movielist-searchwrap">
-    		<input type="text" id="movielist-search">
-    		<button id="movielist-search-button">검색</button>
-    	</div>
-    	<!-- 영화 분류 -->
-    	<div class="movielist-tab">
-			<div class="movielist-tab-off" onclick="location.href='/movieList.yh'">현재 상영 영화</div>
-			<div class="movielist-tab-off" onclick="location.href='/movieListAfter.yh'">상영 예정 영화</div>
-			<div class="movielist-tab-on" onclick="location.href='/movieListBefore.yh'">상영 종료 영화</div>
-    	</div>
+    	<!-- 영화 검색 내용 -->
+    	<h3 class="search-text">'가나다'에 대한 검색 결과</h3>
     	<!-- 영화 리스트 -->
 	    <div class="movieList-out">
 	    	<c:forEach items="${mlList }" var="movieList">
-	   			<div class="movieList-outside" onclick="location.href='/movieDetail.yh?movieNo=${movieList.movieNo}'">
+	   			<div class="movieList-searchside" onclick="location.href='/movieDetail.yh?movieNo=${movieList.movieNo}'">
 	   				<div class="movie-img-area">
 	   					<img src="/resources/images/movieLodeImg/${movieList.movieImgRename }" width="240px">
 	   				</div>
@@ -60,18 +49,12 @@
 						</div>
 						<!-- 영화 개봉 일자 -->
 						<div class="movie-information-start">
-							<p class="movie-start-day">${movieList.movieStartday } 상영종료&nbsp; | <p>
+							<p class="movie-start-day">${movieList.movieStartday } 개봉&nbsp; | <p>
 						</div>
 						<!-- 관람객 수 (추후 구현 예정) -->
 						<div class="movie-information-see">
 							<p class="movie-see-count">&nbsp;&nbsp;관람객 : 명</p>						
 						</div>
-						<!-- 예매하기 버튼 -->
-						<div class="ticket-button-area">
-							<button type="button" class="ticket-button" onclick="location.href='/movieTicketTime.yh'">예매하기</button>
-						</div>
-						<!-- 옆에 ♡ 아이콘으로 찜하기 만들어주시면 됩니다~ -->
-						<!-- 찜하기 버튼 -->
 	   				</div>
 	   			</div>
 	    	</c:forEach>
