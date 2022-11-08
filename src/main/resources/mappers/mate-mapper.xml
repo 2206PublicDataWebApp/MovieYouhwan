@@ -3,4 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MateMapper">
+	
+	
+	<select id="selectMateStatus" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID=#{memberId} AND MATE_STATUS='Y' 
+	</select>
+	
+	<update id="updateMateStatusY">
+		UPDATE MEMBER_TBL SET MATE_STATUS='Y' WHERE MEMBER_ID=#{memberId}
+	</update>
 </mapper>
