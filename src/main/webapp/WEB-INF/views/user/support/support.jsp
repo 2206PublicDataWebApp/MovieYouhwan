@@ -5,19 +5,21 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
-	<link href="/resources/css/header.css" rel="stylesheet" />
-	<link href="/resources/css/footer.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/resources/css/header.css" />
+    <link rel="stylesheet" href="/resources/css/footer.css" />
     <link rel="stylesheet" href="/resources/css/common.css" />
     <link rel="stylesheet" href="/resources/css/support.css" />
+    <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="/resources/js/adminSiteManage.js" defer></script>
     <title>무비유환 : 고객지원</title>
   </head>
   <body>
-  	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     <div id="admin-wrapper">
-  	<h3>고객지원</h3>
+      <div class="support-title">
+        <h2>고객지원</h2>
+      </div>
       <!-- 메뉴 탭 -->
       <div id="homepage-menu">
         <input type="hidden" id="tabIndex" value="${tabIndex}" />

@@ -11,8 +11,10 @@
     <link rel="stylesheet" href="/resources/css/common.css" />
     <link rel="stylesheet" href="/resources/css/support.css" />
     <link rel="stylesheet" href="/resources/css/noticeDetail.css">
+    <link rel="stylesheet" href="/resources/css/header.css" />
   </head>
   <body>
+    <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
     <div id="admin-wrapper">
       <h3><a href='/admin/site/manage.yh?tabIndex=2'>공지사항 관리</a></h3>
       <br />
@@ -31,14 +33,12 @@
         <div id="notice-create">등록일 : ${notice.noticeCreate}</div>
       </div>
       <hr />
-      <div class="notice-detail-content">
-        ${notice.noticeContent}
-      </div>
+      <div class="notice-detail-content">${notice.noticeContent}</div>
 
       <hr />
       <div class="prev-next-area">
         <div class="prev-area">
-          <a <c:if test="${!empty notice.prevNotice}">href="/admin/noticeDetail.yh?noticeNo=${notice.prevNotice.noticeNo}"</c:if>>이전글 <i class="arrow fa-solid fa-chevron-up"></i>
+          <a <c:if test="${!empty notice.prevNotice}">href="/admin/noticeDetail.yh?noticeNo=${notice.prevNotice.noticeNo}&nCurrentPage=${nCurrentPage}"</c:if>>이전글 <i class="arrow fa-solid fa-chevron-up"></i>
             <c:choose>
               <c:when test="${empty notice.prevNotice}">
                 이전글이 없습니다.
@@ -50,7 +50,7 @@
         </div>
         <hr />
         <div class="next-area">
-          <a <c:if test="${!empty notice.nextNotice}">href="/admin/noticeDetail.yh?noticeNo=${notice.nextNotice.noticeNo}"</c:if>>다음글 <i class="arrow fa-solid fa-chevron-down"></i>
+          <a <c:if test="${!empty notice.nextNotice}">href="/admin/noticeDetail.yh?noticeNo=${notice.nextNotice.noticeNo}&nCurrentPage=${nCurrentPage}"</c:if>>다음글 <i class="arrow fa-solid fa-chevron-down"></i>
             <c:choose>
               <c:when test="${empty notice.nextNotice}">
                 다음글이 없습니다.

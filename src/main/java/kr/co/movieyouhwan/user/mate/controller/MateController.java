@@ -4,6 +4,7 @@ package kr.co.movieyouhwan.user.mate.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.movieyouhwan.admin.cinema.service.AdminCinemaService;
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
+import kr.co.movieyouhwan.user.member.domain.Member;
 
 @Controller
 public class MateController {
@@ -26,8 +28,14 @@ public class MateController {
 	}
 	
 	@RequestMapping(value="/mate/main.yh")
-	public ModelAndView mateListView(ModelAndView mv) {
+	public ModelAndView mateListView(ModelAndView mv, HttpServletRequest request) {
+		HttpSession session=request.getSession();
+		Member member=(Member)session.getAttribute("loginUser");
+		String memberId=member.getMemberId();
 		
+		if(session.getAttribute("loginUser")==null) {
+			mv.setViewName("user/mate/mateAgree");
+		}
 		
 		
 		mv.setViewName("user/mate/mateList");

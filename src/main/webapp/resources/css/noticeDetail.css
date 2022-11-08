@@ -2,12 +2,12 @@
   font-family: mice-bold;
   src: url('../font/MICEGothic\ Bold.ttf');
 }
-
+/* 
 #btn-area {
   padding: 20px 10px 20px 0;
   width: 100%;
   text-align: right;
-}
+} */
 
 .notice-detail-header {
   display: flex;

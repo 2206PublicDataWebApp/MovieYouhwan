@@ -9,7 +9,6 @@
     </select>
     <input class="search-input" type="text" name="searchValue" placeholder="검색어를 입력하세요" />
     <button type="submit" class="search-btn">검색</button>
-    <button type="button" class="left-top-dark-btn" onclick="location.href='/admin/noticeWriteForm.yh'">등록</button>
   </div>
   <hr />
 </form>
