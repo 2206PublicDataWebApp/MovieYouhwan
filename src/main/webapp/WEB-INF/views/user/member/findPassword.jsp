@@ -25,19 +25,19 @@
         <div id="container">
             <h1 id="findIdTitle">비밀번호 찾기</h1>
             <div class="findId-input">
-                <div id="info">
+                <div id="pass-find-info">
                     가입한 아이디를 입력해주세요<br>
                     휴대폰 또는 이메일 인증을 통해 비밀번호를 변경합니다.
                 </div>
                 <div class="input-wrap">
-                    <input type="text" class="input-box" name="memberName" placeholder="아이디">
+                    <input type="text" class="input-box" name="memberName" maxlength="12" placeholder="아이디">
                 </div>
+                <!-- <div class="input-wrap">
+                    <a class="phone-confirm-btn" href="#">휴대폰 인증하기</a>
+                </div> -->
                 <div class="input-wrap">
-                    <a class="confirm-btn email" href="#">이메일 인증하기</a>
-                    <a class="confirm-btn phone" href="#">휴대폰 인증하기</a>
-                </div>
-                <div class="input-wrap">
-                    <input type="text" class="input-box" name="memberPhone" placeholder="휴대폰 번호 (- 제외)">
+                    <input type="text" class="input-box" id="phone-input" name="memberPhone" maxlength="11" placeholder="휴대폰 번호 (- 제외)">
+                    <input type="button" class="phone-confirm-btn" value="인증하기" maxlength="6">
                 </div>
                 <button type="submit" id="find-btn" name="find-btn">아이디찾기</button>
             </div>

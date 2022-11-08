@@ -85,7 +85,7 @@
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="text" id="memberName" name="memberName" placeholder="실명을 입력해주세요" maxlength="13" class="login-input_input" required>
+                                    <input type="text" id="memberName" name="memberName" placeholder="실명을 입력해주세요" maxlength="6" class="login-input_input" required>
                                 </div>
                             </div>
                             <div class="login-input">
@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="text" id="memberNick" name="memberNick" placeholder="닉네임을 입력해주세요" maxlength="10" class="login-input_input" >
+                                    <input type="text" id="memberNick" name="memberNick" placeholder="최대6글자" maxlength="6" class="login-input_input" >
                                 </div>
                             </div>
                             <div class="login-input">
@@ -112,7 +112,7 @@
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="text" id="memberBirth" name="memberBirth" placeholder="생년월일 ex)20120101" maxlength="8" class="login-input_input" required>
+                                    <input type="number" id="memberBirth" name="memberBirth" placeholder="생년월일 ex)20120101" maxlength="8" class="login-input_input" required>
                                 </div>
                             </div>
                             <div class="login-input">
@@ -126,13 +126,13 @@
                                 </div>
                                 <div class="login-input_wrap">
                                     <div id="input-gender-wrap">
-                                        <label for="female"><input type="radio" name="memberGender" value="여" checked/>여</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <label for="male"><input type="radio" name="memberGender" value="남"/>남</label><br>  
+                                        <label for="female"><input type="radio" name="memberGender" value="여" checked/>&nbsp;여</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label for="male"><input type="radio" name="memberGender" value="남"/>&nbsp;남</label><br>  
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="login-input">
+                            <!-- <div class="login-input">
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
                                         <div class="input-name">
@@ -148,7 +148,7 @@
                                         <input type="button" class="phone-confirm" name="phone-confirm" onclick="" value="인증하기" required> 
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="login-input">
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">

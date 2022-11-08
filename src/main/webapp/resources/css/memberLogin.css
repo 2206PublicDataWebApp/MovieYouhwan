@@ -6,7 +6,7 @@ a{
     margin: 0 auto;
     padding: 0 100px;
     width: 800px;
-    height: 1200px;
+    height: 500px;
     /* background-color: rgb(244, 244, 244); */
     box-sizing: border-box;
 }
@@ -24,7 +24,7 @@ a{
 #login-title{
     text-align: center;
     color: #0F1A3B;
-    margin-top: 120px;
+    margin-top: 80px;
     margin-bottom: 70px;
 }
 
@@ -96,7 +96,7 @@ a{
     
 }
 .member-navi-btn{
-    font-size: 10px;
+    font-size: 13px;
     color: rgb(112, 112, 112);
     font-weight: 700;
     margin: 0 10px 0 10px;
