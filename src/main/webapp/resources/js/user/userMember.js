@@ -292,7 +292,7 @@ $('.mail-check-input').keydown(function () {
 });
 
 
-$('#profile-icon').change(function () {
+$('#profile-img').change(function () {
    profilePreview($(this));
  });
 //이미지 미리보기
