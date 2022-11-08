@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/common.css" />
-<link rel="stylesheet" href="/resources/css/joinSuccess.css" />
+<link rel="stylesheet" href="/resources/css/user/member/joinSuccess.css" />
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/footer.css" />
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>

@@ -182,7 +182,7 @@ input[type='radio'] {
     line-height: 120%;
     color: #393939f3;
 }
-.fa-solid fa-user{
+#profile-icon{
     width: 100px;
 }
 #img-update-btn{
@@ -285,3 +285,18 @@ input[type='radio'] {
 .validation{
     font-size: 8pt;
 }
+.profile-img-preview {
+    border-radius: 50%;
+    margin-bottom: 5px;
+    width: 50px;
+    height: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(/resources/images/userProfileImg/user.png);
+    background-size: 50px;
+    background-color: white;
+    object-fit: none;
+    
+    
+  }
+

@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/resources/css/memberModify.css" />
+<link rel="stylesheet" href="/resources/css/user/my/memberModify.css" />
 <link rel="stylesheet" href="/resources/css/common.css" />
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/footer.css" />
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
 <script src="/resources/js/header.js" defer></script>
 <script src="/resources/js/footer.js" defer></script>
-<script src="/resources/js/memberModify.js" defer></script>
+<script src="/resources/js/user/memberModify.js" defer></script>
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 
 

@@ -1,5 +1,7 @@
 package kr.co.movieyouhwan.user.member.service.logic;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,11 +44,21 @@ public class UserMemberServiceImpl implements UserMemberService {
 		return result;
 	}
 	
-	
+	/**
+	 * 회원정보 수정
+	 */
 	@Override
 	public int modifyMember(Member member) {
 		int result = uMemberStore.updateMember(session, member);
 		return result;
+	}
+	/**
+	 * 아이디 찾기
+	 */
+	@Override
+	public List<Member> findId(String memberName, String memberBirth, String memberPhone) {
+		List<Member> uMemberList = uMemberStore.findId(session, memberName, memberBirth, memberPhone);
+		return uMemberList;
 	}
 	
 }

@@ -6,14 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/common.css" />
-<link rel="stylesheet" href="/resources/css/memberJoin.css" />
+<link rel="stylesheet" href="/resources/css/user/member/memberJoin.css" />
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/footer.css" />
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="/resources/js/header.js" defer></script>
     <script src="/resources/js/footer.js" defer></script>
-	<script src="/resources/js/userMember.js" defer></script>
+	<script src="/resources/js/user/userMember.js" defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <title>무비유환 - 회원가입</title>
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="password" id="memberPwd" name="memberPwd" placeholder="영문, 숫자, 특수문자 조합 8~20자리" maxlength="20" class="login-input_input" required>
+                                    <input type="password" id="memberPwd" name="memberPwd" placeholder="비밀번호" maxlength="20" class="login-input_input" required>
                                     <div id="pwd-guide">영문 대 소문자, 숫자, 특수기호(!,@,#,$)중 2가지 이상 조합하여 사용</div>
                                 </div>
                                 <!-- 비밀번호 확인 체크 -->
@@ -112,7 +112,7 @@
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="number" id="memberBirth" name="memberBirth" placeholder="생년월일 ex)20120101" maxlength="8" class="login-input_input" required>
+                                    <input type="number" id="memberBirth" name="memberBirth" placeholder="생년월일 ex) 20120101" maxlength="8" class="login-input_input" required>
                                 </div>
                             </div>
                             <div class="login-input">
@@ -132,7 +132,7 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="login-input">
+                            <div class="login-input">
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
                                         <div class="input-name">
@@ -145,10 +145,10 @@
                                 <div class="login-input_wrap">
                                     <div class="input-button">
                                         <input type="text" id="memberPhone" name="memberPhone" placeholder="- 없이 입력 7~8 자리 (01020221020)" maxlength="11" class="login-input_input" required>
-                                        <input type="button" class="phone-confirm" name="phone-confirm" onclick="" value="인증하기" required> 
+                                        <!-- <input type="button" class="phone-confirm" name="phone-confirm" onclick="" value="인증하기" required>  -->
                                     </div>
                                 </div>
-                            </div> -->
+                            </div> 
                             <div class="login-input">
                                 <div class="input-name-wrap">
                                     <div class="check-wrap">
@@ -165,7 +165,7 @@
                                         <input type="button" id="email-confirm-btn" class="email-confirm" name="email-confirm" value="인증하기"> 
                                     </div>
                                     
-                                    <input type="text" placeholder="인증번호 6자리" maxlength="6" class="login-input_input mail-check-input" required>
+                                    <input type="text" id="emailAuthNo" placeholder="인증번호 6자리" maxlength="6" class="login-input_input mail-check-input" required>
                                     <div class="validation" id="email_check2"></div>
                                 </div>
                             </div>
@@ -180,9 +180,11 @@
                                             </div>
                                         </div>
                                         <div id="profile-img-form">
-                                            <i class="fa-solid fa-user fa-2x"></i>
+                                            
+                                            <!-- <i class="fa-solid fa-user fa-2x" id="profile-icon"></i> -->
+                                            <img class="profile-img-preview">
                                             <label for="profile-img" id="img-update-btn">사진등록</label>
-                                            <input type="file" id="profile-img" name="uploadFile">
+                                            <input type="file" id="profile-img" name="uploadFile" accept="image/png, image/jpeg">
                                         </div>
                                     </div>
                                 </div>
