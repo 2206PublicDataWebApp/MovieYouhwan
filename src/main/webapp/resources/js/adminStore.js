@@ -90,7 +90,7 @@ $('#btn-store-reorder').click(function () {
 // 상품 재배치 - 드래그앤드롭 순서 변경
 $('.sortable').sortable({
   error: function (event, ui) {
-    alert('순서 변경 중 에러가 발생하였습니다. 잠시 후 다시 시도해주세요.');
+    alert('문제가 발생하였습니다. 잠시 후 다시 시도해주세요.');
   },
 });
 
@@ -111,7 +111,9 @@ $('#btn-store-save').click(function () {
     success: function (data) {
       $(location).attr('href', '/admin/store/manage.yh');
     },
-    error: function (data) {},
+    error: function (data) {
+      alert('문제가 발생하였습니다. 잠시 후 다시 시도해주세요.');
+    },
   });
 });
 

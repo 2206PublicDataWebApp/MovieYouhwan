@@ -187,10 +187,57 @@ public class UserStoreController {
     return mv;
   }
 
-  // 스토어 결제 페이지
-  @RequestMapping(value = "/store/pay.yh")
+  /**
+   * 스토어 구매
+   * 
+   * @param request
+   * @param productNo
+   * @param cartNoList
+   * @param mv
+   * @return
+   */
+  @RequestMapping(value = "/store/buy.yh")
+  public ModelAndView storebuy(HttpServletRequest request,
+      @RequestParam(value = "productNo", required = false) Integer productNo,
+      @RequestParam(value = "cartNoList[]", required = false) List<Integer> cartNoList, ModelAndView mv) {
+    try {
+      HttpSession session = request.getSession();
+      Member member = (Member) session.getAttribute("loginUser");
+      if (member != null) {
+        
+        if (productNo != null && cartNoList.isEmpty()) {
+          Product product = uStoreService.printOneProduct(productNo);
+          if (product != null) {
+            System.out.println(product.toString());
+            mv.addObject("product", product);
+          } else {
+            System.out.println("상품 불러오기 실패");
+          }
+        } else if (!cartNoList.isEmpty() && productNo == null) {
+          List<Cart> cartList = uStoreService.printCheckedCartList(cartNoList);
+          if (!cartList.isEmpty()) {
+            System.out.println(cartList.toString());
+            mv.addObject("cartList", cartList);
+          }
+        } else {
+          System.out.println("접근 오류");
+        }
+        mv.setViewName("user/store/storeBuy");
+      } else {
+        mv.setViewName("redirect:/member/loginView.yh");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return mv;
+  }
+
+  // 스토어 결제
+  @RequestMapping(value = "/store/pay.yh", method = RequestMethod.POST)
   public ModelAndView storePay(ModelAndView mv) {
-    mv.setViewName("user/store/storePay");
+
+    mv.addObject("");
+    mv.setViewName("");
     return mv;
   }
 

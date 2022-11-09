@@ -1,13 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>무비유환 : 스토어 장바구니</title>
+    <title>무비유환 : 스토어 결제</title>
     <link rel="stylesheet" href="/resources/css/common.css" />
     <link rel="stylesheet" href="/resources/css/header.css" />
     <link rel="stylesheet" href="/resources/css/footer.css" />
@@ -23,7 +21,7 @@
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     <div id="store-wrapper">
       <div id="store-step-box">
-        <div id="store-step-cart" class="store-each-step">
+        <div class="store-each-step">
           <i class="fa-solid fa-cart-shopping fa-3x"></i>
           <div>
             <p>STEP 01</p>
@@ -31,7 +29,7 @@
           </div>
         </div>
         <i class="fa-solid fa-chevron-right fa-3x"></i>
-        <div class="store-each-step">
+        <div id="store-step-pay" class="store-each-step">
           <i class="fa-regular fa-credit-card fa-3x"></i>
           <div>
             <p>STEP 02</p>
@@ -47,28 +45,22 @@
           </div>
         </div>
       </div>
-      <div id="store-cart-list">
-        <div id="ghead-cart-list">
-          <div><input type="checkbox" id="check-all-product" /></div>
+      <div id="store-buy-list">
+        <div id="store-buy-head">
           <div>상품</div>
           <div>판매금액</div>
           <div>수량</div>
           <div>구매금액</div>
         </div>
-        <div id="gbody-cart-list">
-        <c:forEach items="${cartList }" var="cart">
-          <div class="checkbox-area"><input type="checkbox" class="check-one-product cart-no" value="${cart.cartNo }" <c:if test="${cart.productStatus eq 'N' }">checked disabled</c:if> /></div>
-          <div><img src="/resources/images/storeProduct/${cart.productImgRename }" alt="상품사진" /></div>
-          <div class="cart-product-name">${cart.productName }</div>
-          <div class="cart-price">${cart.productPrice }</div>
-          <div class="count-area">
-            <input type="number" name="productCount" min="1" max="10" step="1" value="${cart.productCount }" <c:if test="${cart.productStatus eq 'N' }">disabled</c:if> />
-            <button class="btn-change-count" <c:if test="${cart.productStatus eq 'N' }">disabled</c:if>>변경</button>
+        <c:forEach items="${cartList}" var="cart">
+          <div class="store-buy-body">
+            <div><img src="/resources/images/storeProduct/${cart.productImgRename }" alt="상품사진" /></div>
+            <div>${cart.productName }</div>
+            <div>${cart.productPrice }</div>
+            <div>${cart.productCount }</div>
+            <div>${cart.productPrice * productCount }</div>
           </div>
-          <div class="cart-price product-price-per-count">${cart.productPrice * cart.productCount }</div>
-          </c:forEach>
-        </div>
-        <button id="btn-cart-delete">삭제</button>
+        </c:forEach>
       </div>
       <div id="store-cart-price">
         <div id="ghead-cart-price">
@@ -86,11 +78,21 @@
           <div id="total-pay-amount" class="cart-price"></div>
         </div>
       </div>
-      <div id="cart-btn-area">
-        <button class="btn-store-cart" id="btn-cart-back">돌아가기</button>
-        <button class="btn-store-cart" id="btn-cart-buy">구매하기</button>
+    </div>
+    <div>
+      <h2>결제수단</h2>
+      <div id="radio-pay-method">
+        <label for="pay-method-card"> <input type="radio" name="pay-method" value="card" id="pay-method-card" />신용카드 </label>
+        <label for="pay-method-trans"><input type="radio" name="pay-method" value="trans" id="pay-method-trans" />계좌이체</label>
+        <label for="pay-method-vbank"><input type="radio" name="pay-method" value="vbank" id="pay-method-vbank" />무통장입금</label>
+        <label for="pay-method-kakaopay"><input type="radio" name="pay-method" value="kakaopay" id="pay-method-kakaopay" />카카오페이</label>
       </div>
+      <div></div>
+    </div>
+    <div id="buy-btn-area">
+      <button class="btn-store-buy" id="btn-buy-prev">이전 단계</button>
+      <button class="btn-store-buy" id="btn-buy-next">결제하기</button>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
   </body>
-</html>
+</html> -->

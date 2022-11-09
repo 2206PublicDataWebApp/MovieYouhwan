@@ -32,10 +32,13 @@ public interface UserStoreStore {
   // 상품 유형 리스트 불러오기
   List<ProductType> selectAllProductTypeList(SqlSession session);
 
-  // 상품 상세 조회
+  // 상품 불러오기
   Product selectOneProduct(SqlSession session, int productNo);
 
-  // 장바구니 조회
+  // 장바구니 리스트 불러오기
   List<Cart> selectMyCartList(SqlSession session, String memberId);
+
+  // 장바구니에서 선택한 상품 불러오기
+  List<Cart> selectCheckedCartList(SqlSession session, List<Integer> cartNoList);
 
 }

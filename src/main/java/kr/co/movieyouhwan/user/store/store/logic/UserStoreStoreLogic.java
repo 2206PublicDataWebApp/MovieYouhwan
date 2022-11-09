@@ -63,17 +63,24 @@ public class UserStoreStoreLogic implements UserStoreStore {
     return pTypeList;
   }
 
-  // 상품 상세 조회
+  // 상품 불러오기
   @Override
   public Product selectOneProduct(SqlSession session, int productNo) {
      Product product = session.selectOne("StoreMapper.selectOneProduct", productNo);
     return product;
   }
 
-  // 장바구니 조회
+  // 장바구니 리스트 불러오기
   @Override
   public List<Cart> selectMyCartList(SqlSession session, String memberId) {
     List<Cart> cartList = session.selectList("StoreMapper.selectMyCartList", memberId);
+    return cartList;
+  }
+
+  // 장바구니에서 선택한 상품 불러오기
+  @Override
+  public List<Cart> selectCheckedCartList(SqlSession session, List<Integer> cartNoList) {
+    List<Cart> cartList = session.selectList("StoreMapper.selectCheckedCartList", cartNoList);
     return cartList;
   }
 

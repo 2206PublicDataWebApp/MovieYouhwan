@@ -69,17 +69,24 @@ public class UserStoreServiceImpl implements UserStoreService {
     return pTypeList;
   }
 
-  // 상품 상세 조회
+  // 상품 불러오기
   @Override
   public Product printOneProduct(int productNo) {
     Product product = uStoreStore.selectOneProduct(session, productNo);
     return product;
   }
 
-  // 장바구니 조회
+  // 장바구니 리스트 불러오기
   @Override
   public List<Cart> printMyCartList(String memberId) {
     List<Cart> cartList = uStoreStore.selectMyCartList(session, memberId);
+    return cartList;
+  }
+
+  // 장바구니에 선택한 상품 불러오기
+  @Override
+  public List<Cart> printCheckedCartList(List<Integer> cartNoList) {
+    List<Cart> cartList = uStoreStore.selectCheckedCartList(session, cartNoList);
     return cartList;
   }
 

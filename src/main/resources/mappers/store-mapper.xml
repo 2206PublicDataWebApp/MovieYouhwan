@@ -28,7 +28,7 @@
 		<result property="productPrice" column="PRODUCT_PRICE" />		
 		<result property="productCount" column="PRODUCT_COUNT" />		
 		<result property="productImgRename" column="PRODUCT_IMG_RENAME" />
-		<result property="cartStatus" column="CART_STATUS" />
+		<result property="productStatus" column="PRODUCT_STATUS" />
 	</resultMap>
 	
 	<!-- 관리자 - 상품 등록 -->
@@ -120,5 +120,13 @@
 	<select id="selectMyCartList" resultMap="cartResultMap">
 		SELECT * FROM CART_TBL
 		WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<!-- 사용자 - 장바구니에서 선택한 상품 불러오기 -->
+	<select id="selectCheckedCartList" resultMap="cartResultMap">
+		SELECT * FROM CART_TBL WHERE CART_NO IN
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+		#{item}
+		</foreach>
 	</select>
 </mapper>

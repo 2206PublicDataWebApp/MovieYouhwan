@@ -18,16 +18,67 @@ showCommas($('.cart-price'));
 // 상품 상세 - 상품 가격에 천 단위로 콤마(,) 삽입
 showCommas($('.detail-price'));
 
-// 상품 목록 - 상품 구매 페이지로 이동
+// TODO: AJAX -> FORM
+// 상품 목록 - 상품 구매
 $('.btn-store-buy').click(function () {
-  if (!$('#profile-user').length) {
+  if ($('#profile-user').length) {
+    let productNo = $(this).parent().parent().attr('id');
+    $.ajax({
+      url: '/store/buy.yh',
+      type: 'POST',
+      data: {
+        productNo: productNo,
+      },
+      success: function () {},
+      error: function () {
+        alert('문제가 발생했습니다. 다시 시도해주세요.');
+        location.reload();
+      },
+    });
+  } else {
     if (confirm('로그인이 필요한 서비스입니다.\n로그인 화면으로 이동하시겠습니까?')) {
       $(this).attr('href', '/member/loginView.yh');
+    }
+  }
+});
+
+// TODO: AJAX -> FORM
+// 장바구니 - 상품 구매
+$('#btn-cart-buy').click(function () {
+  let flag = true;
+  if ($('#profile-user').length) {
+    let cartNoList = [];
+    $('.cart-no:checked').each(function () {
+      if ($(this).is(':disabled')) {
+        let disabledProduct = $(this).parent().next().next().text();
+        alert(disabledProduct + '는 구매 불가능한 상품입니다.\n장바구니에서 삭제한 후 다시 시도해주세요.');
+        flag = false;
+      } else {
+        cartNoList.push($(this).val());
+      }
+    });
+    if (!flag) {
+      return;
+    }
+    alert(cartNoList);
+    if (cartNoList.length > 0) {
+      $.ajax({
+        url: '/store/buy.yh',
+        type: 'POST',
+        data: {
+          cartNoList: cartNoList,
+        },
+        success: function () {},
+        error: function () {
+          alert('문제가 발생했습니다. 다시 시도해주세요.');
+          location.reload();
+        },
+      });
     } else {
-      e.preventDefault();
+      alert('구매할 상품을 선택해주세요.');
     }
   } else {
-    $(location).attr('href', '/store/pay.yh');
+    $(location).attr('href', '/member/loginView.yh');
   }
 });
 
@@ -77,9 +128,9 @@ $('#btn-cart-back, #btn-store-list').click(function () {
 // 장바구니 - 전체 선택 체크박스 체크하면 개별 체크박스 모두 체크
 $('#check-all-product').click(function () {
   if ($(this).is(':checked')) {
-    $('.check-one-product').prop('checked', true);
+    $('.check-one-product').not(':disabled').prop('checked', true);
   } else {
-    $('.check-one-product').prop('checked', false);
+    $('.check-one-product').not(':disabled').prop('checked', false);
   }
 });
 
@@ -120,7 +171,7 @@ $('.btn-change-count').click(function () {
       },
       error: function () {
         alert('문제가 발생했습니다. 다시 시도해주세요.');
-        $(window).prop('location', loation.href);
+        location.reload();
       },
     });
   } else {

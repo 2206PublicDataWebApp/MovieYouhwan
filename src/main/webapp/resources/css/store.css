@@ -87,6 +87,10 @@ input[type='checkbox'] {
   text-align: center;
 }
 
+.sortable {
+  user-select: none;
+}
+
 .product-img {
   object-fit: contain;
   max-width: 300px;

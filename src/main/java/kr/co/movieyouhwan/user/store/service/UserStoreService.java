@@ -30,10 +30,13 @@ public interface UserStoreService {
   // 상품 유형 리스트 불러오기
   List<ProductType> printAllProductTypeList();
 
-  // 상품 상세 조회
+  // 상품 불러오기
   Product printOneProduct(int productNo);
 
-  // 장바구니 조회
+  // 장바구니 리스트 불러오기
   List<Cart> printMyCartList(String memberId);
+
+  // 장바구니에서 선택한 상품 불러오기
+  List<Cart> printCheckedCartList(List<Integer> cartNoList);
 
 }
