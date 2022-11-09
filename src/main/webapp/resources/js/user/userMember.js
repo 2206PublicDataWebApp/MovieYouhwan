@@ -14,6 +14,9 @@ var mailJ = /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
 var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 var birthJ = false;
 var profileJ = /([^\s]+(?=\.(jpg|png))\.\2)/
+var emailAuthuJ = false;
+
+let ImgIcon = $('#profile-icon');
 
 $("#memberId").keydown(function () {
    if ($('#memberId').val() == '') {
@@ -74,7 +77,7 @@ $('form').on('submit', function () {
       return false;
    }
    // 비밀번호가 같은 경우 && 비밀번호 정규식
-   if (($('memberPwd').val() == ($('memberPwd-chk').val()))
+   if (($('#memberPwd').val() == ($('#memberPwd-chk').val()))
       && pwJ.test($('#memberPwd').val())) {
       inval_Arr[1] = true;
    } else {
@@ -82,6 +85,17 @@ $('form').on('submit', function () {
       alert('비밀번호를 확인하세요.');
       return false;
    }
+   //인증번호 체크
+   if (($('#emailAuthNo').val() === code)){
+      inval_Arr[6] = true;
+      console.log('true');
+   }else{
+      inval_Arr[1] = false;
+      alert('인증번호가 불일치합니다. 확인해주세요');   
+      console.log('false');
+      return false;
+      }
+
    // 이름 정규식
    if (nameJ.test($('#memberName').val())) {
       inval_Arr[2] = true;
@@ -119,12 +133,12 @@ $('form').on('submit', function () {
    }
 
    //전체 유효성 검사
-//    var validAll = true;
-//    for (var i = 0; i < inval_Arr.length; i++) {
-//       if (inval_Arr[i] == false) {
-//          validAll = false;
-//       }
-//    }
+   var validAll = true;
+   for (var i = 0; i < inval_Arr.length; i++) {
+      if (inval_Arr[i] == false) {
+         validAll = false;
+      }
+   }
 //    if (validAll == true) { // 유효성 모두 통과
 //       alert('무비유환 가족이 되어주셔서 감사합니다.');
 //    } else {
@@ -243,7 +257,7 @@ $('#email-confirm-btn').click(function() {
    const email = $('#memberEmail').val(); // 이메일 주소값 얻어오기
    console.log('입력받은 이메일 : ' + email); // 이메일 오는지 확인
    const checkInput = $('.mail-check-input') // 인증번호 입력하는곳 
-
+   alert('인증번호가 전송되었습니다.');
    $.ajax({
       type : 'get',
       url : '/member/emailAuth.yh',
@@ -252,7 +266,6 @@ $('#email-confirm-btn').click(function() {
          console.log("data : " +  data);
          checkInput.attr('disabled',false);
          code = data;
-         alert('인증번호가 전송되었습니다.')
       },
       error : function(data){
          alert('메일 발송을 실패했습니다.')
@@ -269,7 +282,7 @@ $('.mail-check-input').keydown(function () {
    
    if(inputCode === code){
       $resultMsg.html('인증번호가 일치합니다.');
-      $resultMsg.css('color','#6DAF00');
+      $resultMsg.css('color','red');
       $('#email-confirm-btn').attr('disabled',true);
       $('#memberEmail').attr('readonly',true);
    }else{
@@ -277,4 +290,30 @@ $('.mail-check-input').keydown(function () {
       $resultMsg.css('color','red');
    }
 });
+
+
+$('#profile-img').change(function () {
+   profilePreview($(this));
+ });
+//이미지 미리보기
+function profilePreview(img){
+   if(img[0].files && img[0].files[0]){
+      let reader = new FileReader();
+      reader.onload = function(e){
+         img.parent().find('.profile-img-preview').attr('src', e.target.result);
+      };
+      reader.readAsDataURL(img[0].files[0]);
+      ImgIcon.addClass('hidden');
+   }
+}
+
+
+//  약관 전체 선택
+$('#Allcheck').change(function () {
+   if ($(this).is(':checked')) {
+     $('.check').prop('checked', true);
+   } else {
+     $('.check').prop('checked', false);
+   }
+ });
 // ++++++++++++++++++++회원가입++++++++++++++++++++

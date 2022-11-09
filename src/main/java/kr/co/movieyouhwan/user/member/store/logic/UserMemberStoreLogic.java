@@ -1,5 +1,8 @@
 package kr.co.movieyouhwan.user.member.store.logic;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -50,6 +53,19 @@ public class UserMemberStoreLogic implements UserMemberStore {
 	public int updateMember(SqlSessionTemplate session, Member member) {
 		int result = session.update("MemberMapper.updateMember", member);
 		return result;
+	}
+	
+	/**
+	 * 아이디 찾기
+	 */
+	@Override
+	public List<Member> findId(SqlSessionTemplate session, String memberName, String memberBirth, String memberPhone) {
+		HashMap<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("memberName", memberName);
+		paramMap.put("memberBirth", memberBirth);
+		paramMap.put("memberPhone", memberPhone);
+		List<Member> uMemberList = session.selectList("MemberMapper.findId", paramMap);
+		return uMemberList;
 	}
 
 

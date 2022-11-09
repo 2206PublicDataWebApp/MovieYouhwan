@@ -1,5 +1,7 @@
 package kr.co.movieyouhwan.user.member.service;
 
+import java.util.List;
+
 import kr.co.movieyouhwan.user.member.domain.Member;
 
 public interface UserMemberService {
@@ -14,6 +16,9 @@ public interface UserMemberService {
 
 	// 회원정보 수정
 	public int modifyMember(Member member);
+
+	// 아이디 찾기
+	public List<Member> findId(String memberName, String memberBirth, String memberPhone);
 
 	
 }

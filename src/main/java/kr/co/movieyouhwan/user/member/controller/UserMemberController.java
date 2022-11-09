@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -58,6 +59,7 @@ public class UserMemberController {
 			, @RequestParam(value="uploadFile", required = false) MultipartFile uploadFile
 			, HttpServletRequest request) throws IllegalStateException, IOException {
 		String memberProfileName = uploadFile.getOriginalFilename();  // 단일 이미지 등록
+		
 		if (!memberProfileName.equals("")) {
 			String root = request.getSession().getServletContext().getRealPath("resources\\images");
 			String savePath = root + "\\userProfileImg";
@@ -171,18 +173,59 @@ public class UserMemberController {
 		return String.valueOf(result);
 	}
 	
-	
 
-	 
-	
-	
 	/**
-	 * 아이디 찾기
+	 * 아이디 찾기 폼
 	 * @return
 	 */
-	@RequestMapping(value="/member/findId.yh", method=RequestMethod.GET)
-	public String findId() {
-		return "/user/member/findId";
+	@RequestMapping(value="/member/findIdForm.yh", method=RequestMethod.GET)
+	public String findIdView() throws Exception {
+		return "/user/member/findIdForm";
+	}
+	/**
+	 * 아이디 찾기
+	 * @param request
+	 * @param mv
+	 * @param memberName
+	 * @param memberBirth
+	 * @param memberPhone
+	 * @return
+	 */
+	@RequestMapping(value = "/member/findId.yh", method=RequestMethod.GET)
+	public ModelAndView findId(
+			HttpServletRequest request
+			, ModelAndView mv
+			, @RequestParam("memberName")String memberName
+			, @RequestParam("memberBirth")String memberBirth
+			, @RequestParam("memberPhone")String memberPhone) {
+		try {
+			List<Member> uMemberList = uMemberService.findId(memberName, memberBirth, memberPhone);
+			if(!uMemberList.isEmpty()) {
+				mv.addObject("uMemberList",uMemberList);	
+				//mv.addObject("check", 1);
+			}else {
+				mv.addObject("msg", "잘못된 입력입니다.");
+				//mv.addObject("check", 2);
+				//mv.setViewName("redirect:/member/findIdError.yh");
+				//mv.setViewName("/user/member/findId");
+				mv.setViewName("common/errorPage");
+			}
+			
+			mv.addObject("uMemberList", uMemberList);
+			mv.setViewName("/user/member/findId");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return mv;
+	}
+	
+	/**
+	 * 로그인 실패시
+	 */
+	@RequestMapping(value = "/member/findIdError.yh", method = RequestMethod.GET)
+	public String findIdError() {
+		return "/user/member/findIdError";
 	}
 	
 	/**
@@ -216,11 +259,12 @@ public class UserMemberController {
 		String toMail = email;
 		String title = "MovieYouHwan 회원가입 인증 번호입니다.";	// 제목
 		String content = // 메일 내용 
-				"<h1>무비유환을 방문해주셔서 감사합니다.</h1>" +
-				"<br>"+
-				"인증번호는 " + authNumber + "입니다." + 
-				"<br>"+
-				"해당 인증번호를 인증번호 확인란에 입력해주세요.";
+				"<hr><br>"+
+				"<h1>MovieYouHwan을 방문해주셔서 감사합니다.</h1>" +
+				"<h3>아래 인증번호를 인증번호 확인란에 입력해주세요.</h3>"+
+				"<h3>인증번호는   [  " + authNumber + "  ]   입니다.</h3>"+
+				"<br><hr>";
+				
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 
-<link rel="stylesheet" href="/resources/css/myPage.css" />
+<link rel="stylesheet" href="/resources/css/user/my/myPage.css" />
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
 
@@ -24,8 +24,8 @@
             </div>
         </div>
         
-        <div id="profile-img">
-            <c:if test="${empty loginUser.memberImgRename}"><i class="fa-sharp fa-solid fa-user"></i></c:if>
+        <div id="profile-img-bangga">
+            <c:if test="${empty loginUser.memberImgRename}"><i id="user-icon" class="fa-sharp fa-solid fa-user"></i></c:if>
             <c:if test="${not empty loginUser.memberImgRename}"><img class="myprofileImg" id="img-frame" src="/resources/images/userProfileImg/${loginUser.memberImgRename}"></c:if>
             <div id="bangabanga">${loginUser.memberNick} 님 반가워요!</div>
         </div>
