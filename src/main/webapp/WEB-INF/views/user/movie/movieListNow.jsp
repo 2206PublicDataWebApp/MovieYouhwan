@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
@@ -20,24 +19,26 @@
 <body>
 	<jsp:useBean id="now" class="java.util.Date" />
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-    <div class="widemovie-wrapper">
+    <div class="midmovie-wrapper">
     	<!-- top3 영화 부분 (추후 개발 예정) -->
     	<div></div>
     	<!-- 검색 창 -->
-    	<div id="movielist-searchwrap">
-    		<input type="text" id="movielist-search">
-    		<button id="movielist-search-button">검색</button>
-    	</div>
+    	<form action="">
+	    	<div id="movielist-searchwrap">
+	    		<input type="search" id="movielist-search" placeholder="영화 제목 또는 배우로 검색해보세요." name="searchName" value="${searchName }">
+	    		<button type="submit" id="movielist-search-button">검색</button>
+	    	</div>
+    	</form>
     	<!-- 영화 분류 -->
     	<div class="movielist-tab">
-			<div class="movielist-tab-on">현재 상영 영화</div>
-			<div class="movielist-tab-off">상영 예정 영화</div>
-			<div class="movielist-tab-off">상영 종료 영화</div>
+			<div class="movielist-tab-on" onclick="location.href='/movieList.yh'">현재 상영 영화</div>
+			<div class="movielist-tab-off" onclick="location.href='/movieListAfter.yh'">상영 예정 영화</div>
+			<div class="movielist-tab-off" onclick="location.href='/movieListBefore.yh'">상영 종료 영화</div>
     	</div>
     	<!-- 영화 리스트 -->
 	    <div class="movieList-out">
 	    	<c:forEach items="${mlList }" var="movieList">
-	   			<div class="movieList-outside">
+	   			<div class="movieList-outside" onclick="location.href='/movieDetail.yh?movieNo=${movieList.movieNo}'">
 	   				<div class="movie-img-area">
 	   					<img src="/resources/images/movieLodeImg/${movieList.movieImgRename }" width="240px">
 	   				</div>
@@ -61,7 +62,7 @@
 						</div>
 						<!-- 영화 개봉 일자 -->
 						<div class="movie-information-start">
-							<p class="movie-start-day">${movieList.movieStartday }&nbsp; | <p>
+							<p class="movie-start-day">${movieList.movieStartday } 개봉&nbsp; | <p>
 						</div>
 						<!-- 관람객 수 (추후 구현 예정) -->
 						<div class="movie-information-see">
@@ -78,5 +79,6 @@
 	    	</c:forEach>
 	   	</div>
     </div>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

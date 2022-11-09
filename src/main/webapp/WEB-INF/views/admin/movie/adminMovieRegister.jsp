@@ -25,10 +25,12 @@
 				<div class="input">
 					<input type="checkbox" class="type-input" name="movieGenre" value="드라마">드라마
 					<input type="checkbox" class="type-input" name="movieGenre" value="코미디">코미디
+					<input type="checkbox" class="type-input" name="movieGenre" value="로맨스">로맨스
 					<input type="checkbox" class="type-input" name="movieGenre" value="액션">액션
 					<input type="checkbox" class="type-input" name="movieGenre" value="범죄">범죄
 					<input type="checkbox" class="type-input" name="movieGenre" value="공포">공포
-					<input type="checkbox" class="type-input" name="movieGenre" value="스릴러">스릴러<br>
+					<input type="checkbox" class="type-input" name="movieGenre" value="스릴러">스릴러
+					<input type="checkbox" class="type-input" name="movieGenre" value="애니메이션">애니메이션<br>
 				</div>
 			</div>
 			<div id="runtime-wrap">
