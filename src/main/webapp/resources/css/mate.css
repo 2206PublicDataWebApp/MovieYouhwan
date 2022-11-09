@@ -19,49 +19,144 @@ a {
   background-image: url('/resources/images/mate/mate_start.jpg');
   background-size: cover;
   background-color: black;
-  height: 1500px;
-  padding-top: 500px;
+  height: 2000px;
 }
 
-.agree-txt-box {
-  width: 60%;
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#header-first {
+  opacity: 0;
+  padding: 60px 0 0 80px;
+  font-size: 50px;
+  color: whitesmoke;
+  line-height: 1.5em;
+  animation-name: fadein;
+  animation-iteration-count: 1;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#header-second {
+  opacity: 0;
+  padding: 0 0 0 80px;
+  font-size: 50px;
+  color: whitesmoke;
+  line-height: 1.5em;
+  animation-name: fadein;
+  animation-iteration-count: 1;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@keyframes motion {
+  0% {
+    padding-top: 0px;
+  } /* 처음 위치 */
+  100% {
+    padding-top: 10px;
+  } /* 마지막 위치 */
+}
+
+.slide-icon-area {
+  /* display: block; */
+  width: 100%;
+  position: absolute;
+  top: 88%;
+  /* padding: 150px; */
+  text-align: center;
+  z-index: 5;
+  cursor: pointer;
+  animation: motion 0.5s /* 속도 */ linear 0s /* 처음부터 끝까지 일정 속도로 진행 */ infinite alternate; /* 무한 반복 */
+}
+
+.slide-icon {
+  color: whitesmoke;
+  opacity: 0;
+  animation-name: fadein;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 약관동의 박스 */
+#agreement-area {
+  position: absolute;
+  top: 120%;
+  width: 100%;
+  padding-top: 120px;
+  text-align: center;
+}
+
+#agree-txt-box {
+  text-align: left;
+  width: 1000px;
   margin: 0 auto;
   background-color: whitesmoke;
   opacity: 0.8;
-  border-radius: 20px;
-  padding: 30px 30px;
-  line-height: 1.5em;
-  white-space: pre;
+  border-radius: 10px;
+  padding: 30px;
+  line-height: 2rem;
 }
 
-/* @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 3;
-    transform: none;
-  }
+.agreement-content {
+  white-space: pre-wrap;
 }
 
-main {
-  animation: fadeIn 0.5s ease-in-out;
-} */
-/* .fade-in-bottom {
-  top: 500px;
-  opacity: 0;
-  max-width: 100%;
-} */
+#mate-agree-btn {
+  width: 200px;
+  height: 50px;
+  background-color: #e59500;
+  color: white;
+  font-size: 20px;
+  margin: 50px auto;
+  border-radius: 5px;
+  font-family: mice-bold;
+  letter-spacing: 1.5px;
+}
 
-/* .mate-agree {
-  background-image: url('/resources/images/mate/mate_start.jpg');
-  background-size: cover;
-  background-color: black;
-  width: 1200px;
-  height: 1500px;
-} */
+.mate-agree-hr {
+  margin: 10px 0;
+  border: none;
+  height: 1px;
+  background-color: lightgray;
+}
+
+.agree-checkbox {
+  accent-color: #e59500;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.mate-agree-check {
+  display: flex;
+  align-items: center;
+}
 
 /* Mate List Page */
 
@@ -177,6 +272,7 @@ main {
 }
 
 .mate-wrapper {
+  position: relative;
   width: 1000px;
   margin: 200px auto;
 }

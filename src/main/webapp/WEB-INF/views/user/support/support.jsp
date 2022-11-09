@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/resources/css/support.css" />
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+    <script src="/resources//js/header.js" defer></script>
+    <script src="/resources/js/footer.js" defer></script>
     <script src="/resources/js/adminSiteManage.js" defer></script>
     <title>무비유환 : 고객지원</title>
   </head>
