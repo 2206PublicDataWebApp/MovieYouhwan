@@ -28,6 +28,8 @@
 		<typeAlias type="kr.co.movieyouhwan.user.cinema.domain.CinemaFavorite" alias="CinemaFavorite"/>
 		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.MateReport" alias="MateReport"/>
 		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.Survey" alias="Survey"/>
+		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.CinemaOption" alias="CinemaOption"/>
+		<typeAlias type="kr.co.movieyouhwan.user.mate.domain.GenreOption" alias="GenreOption"/>
 		<typeAlias type="kr.co.movieyouhwan.user.member.domain.Member" alias="Member"/>
 		<typeAlias type="kr.co.movieyouhwan.user.member.domain.PointHistory" alias="PointHistory"/>
 		<typeAlias type="kr.co.movieyouhwan.user.movie.domain.MovieList" alias="MovieList"/>

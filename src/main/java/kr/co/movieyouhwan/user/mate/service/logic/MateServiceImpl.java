@@ -1,9 +1,13 @@
 package kr.co.movieyouhwan.user.mate.service.logic;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.movieyouhwan.user.mate.domain.CinemaOption;
+import kr.co.movieyouhwan.user.mate.domain.GenreOption;
 import kr.co.movieyouhwan.user.mate.service.MateService;
 import kr.co.movieyouhwan.user.mate.store.MateStore;
 
@@ -26,6 +30,18 @@ public class MateServiceImpl implements MateService{
 	public int modifyMateStatusY(String memberId) {
 		int result=mStore.updateMateStatusY(session, memberId);
 		return result;
+	}
+
+	@Override
+	public List<CinemaOption> printCinemaOption() {
+		List<CinemaOption> cinemaOptionList=mStore.selectCinemaOption(session);
+		return cinemaOptionList;
+	}
+
+	@Override
+	public List<GenreOption> printGenreOption() {
+		List<GenreOption> genreOptionList=mStore.selectGenreOption(session);
+		return genreOptionList;
 	}
 
 }

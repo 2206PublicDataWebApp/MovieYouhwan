@@ -15,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.movieyouhwan.admin.cinema.service.AdminCinemaService;
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
+import kr.co.movieyouhwan.user.mate.domain.CinemaOption;
+import kr.co.movieyouhwan.user.mate.domain.GenreOption;
+import kr.co.movieyouhwan.user.mate.domain.Survey;
 import kr.co.movieyouhwan.user.mate.service.MateService;
 import kr.co.movieyouhwan.user.member.domain.Member;
 
@@ -85,9 +88,42 @@ public class MateController {
 	//method=RequestMethod.POST , HttpServletRequest request
 	
 	@RequestMapping(value="/mate/selectOption.yh")
-	public String mateSelectOptionView() {
-		return "user/mate/mateOption";
+	public ModelAndView mateSelectOptionView(ModelAndView mv,
+			HttpServletRequest request) {
+		HttpSession session=request.getSession();
+		if((Member)session.getAttribute("loginUser")==null) {
+			mv.setViewName("redirect:/member/loginView.yh");
+		}
+		List<CinemaOption> cinemaOptionList=mService.printCinemaOption();
+		List<GenreOption> genreOptionList=mService.printGenreOption();
+		if(cinemaOptionList!=null && genreOptionList!=null) {
+			mv.addObject("cinemaOptionList", cinemaOptionList);
+			mv.addObject("genreOptionList", genreOptionList);
+			System.out.println(genreOptionList.toString());
+		}
+		mv.setViewName("user/mate/mateOption");
+		return mv;
 	}
+	
+	@RequestMapping(value="/mate/selectOption.complete.yh", method=RequestMethod.POST)
+	public ModelAndView selectOptionComplete(ModelAndView mv, HttpServletRequest request,
+			@RequestParam("gender") String gender,
+			@RequestParam("age") String age,
+			@RequestParam("cinemaName") String cinemaName,
+			@RequestParam("genreList") List<String> genreList) {
+		
+		Survey survey=new Survey();
+		survey.setGender(gender);
+		survey.setAge(age);
+		survey.setCinemaName(cinemaName);
+		
+		System.out.println(gender);
+		System.out.println(age);
+		System.out.println(cinemaName);
+		System.out.println(genreList.toString());
+		return mv;
+	}
+	
 	
 	/**
 	 * 메이트 매칭완료

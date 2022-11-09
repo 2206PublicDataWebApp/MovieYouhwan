@@ -12,4 +12,29 @@
 	<update id="updateMateStatusY">
 		UPDATE MEMBER_TBL SET MATE_STATUS='Y' WHERE MEMBER_ID=#{memberId}
 	</update>
+	
+	
+	
+	<!-- mate option resultMap -->
+	<resultMap type="CinemaOption" id="cinemaOptionResultMap">
+		<id property="cinemaNo" column="CINEMA_NO"></id>
+		<result property="cinemaName" column="CINEMA_NAME"/>
+	</resultMap>
+	
+	<resultMap type="GenreOption" id="genreOptionResultMap">
+		<id property="genreNo" column="GENRE_NO"/>
+		<result property="genre" column="GENRE"/>
+	</resultMap>
+	
+	<!-- 자주찾는 영화관 옵션 목록 불러오기 -->
+	<select id="selectCinemaOption" resultMap="cinemaOptionResultMap">
+		SELECT * FROM CINEMA_OPTION_VIEW ORDER BY CINEMA_NAME ASC
+	</select>
+	
+	<!-- 선호장르 옵션 목록 불러오기 -->
+	<select id="selectGenreOption" resultMap="genreOptionResultMap">
+		SELECT * FROM GENRE_OPTION_TBL ORDER BY GENRE ASC
+	</select>
+	
+	
 </mapper>
