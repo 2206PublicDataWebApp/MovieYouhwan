@@ -22,5 +22,10 @@ public interface UserMemberStore {
 	// 아이디 찾기
 	public List<Member> findId(SqlSessionTemplate session, String memberName, String memberBirth, String memberPhone);
 
+	//패스워드 찾기
+	public List<Member> findPassword(SqlSessionTemplate session, String memberId, String memberPhone);
+
+	
+
 	
 }

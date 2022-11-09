@@ -119,13 +119,11 @@ public class UserMemberController {
 				mv.setViewName("redirect:/home.yh");
 				
 			}else {
-				mv.addObject("msg", "잘못된 입력입니다.");
-				mv.setViewName("redirect:/member/loginError.yh");
+				mv.addObject("msg", "잘못된 입력입니다.").setViewName("redirect:/member/loginError.yh");
 			}
 			
 		} catch (Exception e) {
-			mv.addObject("msg",e.toString());
-			mv.setViewName("user/loginError");
+			mv.addObject("msg",e.toString()).setViewName("user/member/loginError");
 		}
 		return mv;
 	}
@@ -175,7 +173,7 @@ public class UserMemberController {
 	
 
 	/**
-	 * 아이디 찾기 폼
+	 * 아이디 찾기 뷰
 	 * @return
 	 */
 	@RequestMapping(value="/member/findIdForm.yh", method=RequestMethod.GET)
@@ -191,7 +189,7 @@ public class UserMemberController {
 	 * @param memberPhone
 	 * @return
 	 */
-	@RequestMapping(value = "/member/findId.yh", method=RequestMethod.GET)
+	@RequestMapping(value = "/member/findId.yh", method=RequestMethod.POST)
 	public ModelAndView findId(
 			HttpServletRequest request
 			, ModelAndView mv
@@ -203,16 +201,15 @@ public class UserMemberController {
 			if(!uMemberList.isEmpty()) {
 				mv.addObject("uMemberList",uMemberList);	
 				//mv.addObject("check", 1);
+				System.out.println(uMemberList);
 			}else {
 				mv.addObject("msg", "잘못된 입력입니다.");
 				//mv.addObject("check", 2);
-				//mv.setViewName("redirect:/member/findIdError.yh");
-				//mv.setViewName("/user/member/findId");
-				mv.setViewName("common/errorPage");
+				mv.setViewName("redirect:/member/findError.yh");
+				
 			}
 			
-			mv.addObject("uMemberList", uMemberList);
-			mv.setViewName("/user/member/findId");
+			mv.addObject("uMemberList", uMemberList).setViewName("/user/member/findId");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -221,20 +218,39 @@ public class UserMemberController {
 	}
 	
 	/**
-	 * 로그인 실패시
+	 * 패스워드 찾기 뷰
+	 * @return
+	 * @throws Exception
 	 */
-	@RequestMapping(value = "/member/findIdError.yh", method = RequestMethod.GET)
-	public String findIdError() {
-		return "/user/member/findIdError";
+	@RequestMapping(value = "/member/findPassForm.yh", method = RequestMethod.GET)
+	public String findPassView() throws Exception {
+		return "/user/member/findPasswordForm";
+		
 	}
 	
 	/**
 	 * 비밀번호 찾기
 	 * @return
 	 */
-	@RequestMapping(value="/member/findPassword.yh", method=RequestMethod.GET)
-	public String findPassword() {
-		return "/user/member/findPassword";
+	@RequestMapping(value="/member/findPassword.yh", method=RequestMethod.POST)
+	public ModelAndView findPassword(
+			HttpServletRequest request
+			, ModelAndView mv
+			, @RequestParam("memberId")String memberId
+			, @RequestParam("memberPhone")String memberPhone) {
+		try {
+			List<Member> mList = uMemberService.findPassword(memberId, memberPhone);
+			if(!mList.isEmpty()) {
+				mv.addObject("mList", mList);
+				mv.setViewName("/user/member/passModify");
+			}else {
+				mv.setViewName("/user/member/findError");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.setViewName("/user/member/findError");
+		}
+		return mv;
 	}
 	
 	/*
@@ -243,6 +259,18 @@ public class UserMemberController {
 	 * 
 	 * @RequestParam(value = ""))
 	 */
+	
+
+	
+	/**
+	 * 아이디 / 패스워드 찾기 실패 뷰
+	 */
+	@RequestMapping(value = "/member/findError.yh", method = RequestMethod.GET)
+	public String findError() {
+		return "/user/member/findError";
+	}
+	
+	
 	
 	/**
 	 * 이메일 인증
@@ -280,5 +308,14 @@ public class UserMemberController {
 		return Integer.toString(authNumber);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/phoneCheck", method = RequestMethod.GET)
+	public String sendMessage(@RequestParam("memberPhone")String memberPhone) {
+		int randomNumber = (int)((Math.random()*(9999 - 1000 + 1)) + 1000);	
+		
+		uMemberService.certifiedPhoneNumber(memberPhone,randomNumber);
+		
+		return Integer.toString(randomNumber);
+	}
 }
 
