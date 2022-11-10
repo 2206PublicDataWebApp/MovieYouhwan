@@ -55,14 +55,7 @@
 		FROM MOVIE_TBL MT, CINEMA_TBL CT, MOVIE_TIME_TBL MTT 
 		WHERE MT.MOVIE_NO = MTT.MOVIE_NO
 		AND MTT.MOVIE_DAY = #{movieDay}
-	</select>
-	<!-- 영화관 영화 조회 (사용자) -->
-	<select id="selectNowMovieCinema" resultMap="CinemaMovieResultMap">
-		SELECT DISTINCT MT.MOVIE_NO, MT.MOVIE_TITLE
-		FROM MOVIE_TBL MT, CINEMA_TBL CT, MOVIE_TIME_TBL MTT 
-		WHERE MT.MOVIE_NO = MTT.MOVIE_NO
 		AND MTT.CINEMA_NO = #{cinemaNo}
-		AND MTT.MOVIE_DAY = #{movieDay}
 	</select>
 	<!-- 영화관 영화 정보 조회(사용자) -->
 	<select id="selectAllCinemaMovie" resultMap="CinemaMovieResultMap">

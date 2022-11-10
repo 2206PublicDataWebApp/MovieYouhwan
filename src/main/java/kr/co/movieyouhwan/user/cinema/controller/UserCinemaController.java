@@ -83,8 +83,8 @@ public class UserCinemaController {
 			HttpSession session) {
 		// 한개의 영화관 띄우기
 		Cinema cinema = aCinemaService.printOneCinema(cinemaNo);
-		// 일별 영화 출력 (중복 제외)
-		List<Movie> mList = uCinemaService.printMovieNowOne(new MovieDay().getMovieDay(0));
+		// 영화관, 일별 영화 출력 (중복 제외)
+		List<Movie> mList = uCinemaService.printMovieNowOne(cinemaNo, new MovieDay().getMovieDay(0));
 		// 일별 영화 정보 출력
 		List<CinemaMovie> cmList = uCinemaService.printCinemaMovieByDay(cinemaNo, new MovieDay().getMovieDay(0));
 		session.setAttribute("cinemaNo", cinema.getCinemaNo());
@@ -100,10 +100,14 @@ public class UserCinemaController {
 	}
 	
 	/**
-	 * userCinemaMovie AJAX
+	 * 영화관 별 영화 출력 AJAX
 	 * @param cinemaNo
+	 * @param movieDay
+	 * @param dayIndex
+	 * @param session
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping(value="/user/cinemaMovieDay.yh", produces="application/json;charset=utf-8", method=RequestMethod.POST)
 	public String cinemaMovieDayChoice(
@@ -112,12 +116,17 @@ public class UserCinemaController {
 			@RequestParam(value="dayIndex", required=false) Integer dayIndex,
 			HttpSession session) {
 		dayIndex = dayIndex == null ? 0 : dayIndex;
+		// 영화관, 일별 영화 출력 (중복 제외)
+		List<Movie> mList = uCinemaService.printMovieNowOne(cinemaNo, new MovieDay().getMovieDay(dayIndex));
 		// 일별 영화 정보 출력
 		List<CinemaMovie> cmList = uCinemaService.printCinemaMovieByDay(cinemaNo, new MovieDay().getMovieDay(dayIndex)); // -> printCinemaMovieByDate
-		
+		System.out.print(dayIndex);
 		Gson gson = new Gson();
 		JSONObject object = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		object.put("mList", gson.toJson(mList));
 		object.put("cmList", gson.toJson(cmList));
-		return object.toJSONString();
+		jsonArray.add(object);
+		return jsonArray.toJSONString();
 	}
 }

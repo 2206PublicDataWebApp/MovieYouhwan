@@ -17,8 +17,8 @@ public class PageInfo {
 	  this.dataCount=dataCount;
 	  this.dataLimit=dataLimit;
 	  this.pageLimit=pageLimit;
-	  this.pageCount=(int) ((double) dataCount / dataLimit + 0.9);
-	  this.startPage=((int) ((double) currentPage / pageLimit + 0.9) - 1) * pageLimit + 1;
+	  this.pageCount=(int) ((double) dataCount / dataLimit + 0.95);
+	  this.startPage=((int) ((double) currentPage / pageLimit + 0.95) - 1) * pageLimit + 1;
 	  this.endPage=this.startPage + this.pageLimit - 1;
 	  if(this.pageCount<this.endPage) {
 		  this.endPage=this.pageCount;

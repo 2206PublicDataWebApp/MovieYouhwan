@@ -6,15 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>무비유환 : 영화관 상세(관리자)</title>
-<link href="../../../resources/css/common.css" rel="stylesheet">
-<link href="../resources/css/cinema.css" rel="stylesheet">
+<link href="/resources/css/common.css" rel="stylesheet">
+<link href="/resources/css/header.css" rel="stylesheet"/>
+<link href="/resources/css/cinema.css" rel="stylesheet">
 <script src="/resources/js/jquery-3.6.1.min.js"></script>
 <script src="/resources/js/cinema.js"></script>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
+	<!-- 영화관 상세 페이지 -->
 	<div class="cinema-wrapper">
-		<br><br><br>
-		<h3>영화관 상세</h3><br><br>
+		<br><br><h3>영화관 상세</h3><br><br>
 		<table>
 			<tr>
 				<td class="cinema-detailtitle">지점명</td>
