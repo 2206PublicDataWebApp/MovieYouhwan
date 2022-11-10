@@ -4,15 +4,54 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MateMapper">
 	
+	<resultMap type="Survey" id="surveyResultMap">
+		<id property="surveyNo" column="SURVEY_NO"/>
+		<result property="gender" column="GENDER"/>
+		<result property="age" column="AGE"/>
+		<result property="cinemaName" column="CINEMA_NAME"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="updateDate" column="UPDATE_DATE"/>
+		<result property="deleteDate" column="DELETE_DATE"/>
+	</resultMap>
 	
-	<select id="selectMateStatus" resultType="_int">
-		SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID=#{memberId} AND MATE_STATUS='Y' 
-	</select>
+	<insert id="insertSurvey">
+		INSERT INTO SURVEY_TBL VALUES(SEQ_SURVEY_NO.NEXTVAL, #{gender}, #{age}, #{cinemaName}, #{memberId}, DEFAULT, NULL, NULL)
+	</insert>
+	
+	
 	
 	<update id="updateMateStatusY">
 		UPDATE MEMBER_TBL SET MATE_STATUS='Y' WHERE MEMBER_ID=#{memberId}
 	</update>
 	
+	<select id="selectMateStatus" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID=#{memberId} AND MATE_STATUS='Y' 
+	</select>
+	
+	<select id="selectSurveyNo" resultType="_int">
+		SELECT SURVEY_NO FROM SURVEY_TBL WHERE MEMBER_ID=#{memberId}
+	</select>
+	
+	
+	
+	
+	
+	
+	<resultMap type="SurveyGenre" id="surveyGenreResultMap">
+		<id property="surveyGenreNo" column="SURVEY_GENRE_NO"/>
+		<result property="gerne" column="GENRE"/>
+		<result property="surveyNo" column="SURVEY_NO"/>
+	</resultMap>
+	
+	<insert id="insertSurveyGenre" parameterType="java.util.HashMap" >
+		INSERT INTO SURVEY_GENRE_TBL(SURVEY_GENRE_NO, GENRE, SURVEY_NO) SELECT SEQ_SURVEY_GENRE_NO.NEXTVAL AS SURVEY_GENRE_NO, A.* FROM
+		(
+		<foreach collection="genreList" item="genre" separator="UNION ALL">
+			SELECT #{genre} AS GENRE, #{surveyNo} AS SURVEY_NO FROM DUAL
+		</foreach>
+		)A
+	</insert>
 	
 	
 	<!-- mate option resultMap -->

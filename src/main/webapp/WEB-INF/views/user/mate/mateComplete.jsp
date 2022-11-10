@@ -12,7 +12,7 @@
     <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/header.js" defer></script>
-    <script src="/resources/js/mate.js" defer></script>
+    <script type="module" src="/resources/js/mate.js" defer></script>
   </head>
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
@@ -24,6 +24,7 @@
       </div>
       <div id="mate-data">
         <div class="matecomplete-profile">
+          철수
           <!-- matecomplete-userimage div : matecomplete-userimage -->
           <div class="matecomplete-userimage"></div>
         </div>

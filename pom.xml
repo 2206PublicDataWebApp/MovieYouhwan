@@ -22,12 +22,13 @@
 		</repository>
 	</repositories>
 	
+	
 	<dependencies>
-		<!-- 문자 인증관련 라이브러리 -->
+		<!-- data faker -->
 		<dependency>
-			<groupId>net.nurigo</groupId>
-		    <artifactId>javaSDK</artifactId>
-		    <version>2.2</version>
+    		<groupId>net.datafaker</groupId>
+    		<artifactId>datafaker</artifactId>
+    		<version>1.6.0</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
 		<dependency>

@@ -1,15 +1,3 @@
-// $().scroll(function () {
-//   console.log('scroll');
-//   $('image').each(function (i) {
-//     var bottom_of_element = $(this).offset().top + $(this).outerHeight() / 3;
-//     var bottom_of_window = $(window).scrollTop() + $(window).height();
-
-//     if (bottom_of_window > bottom_of_element) {
-//       $(this).animate({ opacity: '0.8' }, 700);
-//     }
-//   });
-// });
-
 $('.match-toggle-switch').click(function () {
   $(this).toggleClass('active');
 });
@@ -18,7 +6,6 @@ $('.match-toggle-switch').click(function () {
 function mateStart(id) {
   let mateCheckBox = $('.agree-checkbox');
   let checkedMateCheckBox = $('[class=agree-checkbox]:checked');
-
   if (mateCheckBox.length == checkedMateCheckBox.length) {
     let formTag = $('<form></form>');
     formTag.attr('action', '/mate/modifyMstatusY.yh').attr('method', 'post');

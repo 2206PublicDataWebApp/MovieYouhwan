@@ -7,8 +7,7 @@ public class Survey {
 	private Integer surveyNo;
 	private String gender;
 	private String age;
-	private String CinemaName;
-	private List<String> genre;
+	private String cinemaName;
 	private String memberId;
 	private Date createDate;
 	private Date updateDate;
@@ -32,16 +31,10 @@ public class Survey {
 		this.age = age;
 	}
 	public String getCinemaName() {
-		return CinemaName;
+		return cinemaName;
 	}
 	public void setCinemaName(String cinemaName) {
-		CinemaName = cinemaName;
-	}
-	public List<String> getGenre() {
-		return genre;
-	}
-	public void setGenre(List<String> genre) {
-		this.genre = genre;
+		this.cinemaName = cinemaName;
 	}
 	public String getMemberId() {
 		return memberId;
@@ -69,9 +62,9 @@ public class Survey {
 	}
 	@Override
 	public String toString() {
-		return "Survey [surveyNo=" + surveyNo + ", gender=" + gender + ", age=" + age + ", CinemaName=" + CinemaName
-				+ ", genre=" + genre + ", memberId=" + memberId + ", createDate=" + createDate + ", updateDate="
-				+ updateDate + ", deleteDate=" + deleteDate + "]";
+		return "Survey [surveyNo=" + surveyNo + ", gender=" + gender + ", age=" + age + ", cinemaName=" + cinemaName
+				+ ", memberId=" + memberId + ", createDate=" + createDate + ", updateDate=" + updateDate
+				+ ", deleteDate=" + deleteDate + "]";
 	}
 	
 	

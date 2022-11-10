@@ -8,7 +8,6 @@
 
     <link rel="stylesheet" href="/resources/css/common.css" />
     <link rel="stylesheet" href="/resources/css/header.css" />
-    <link rel="stylesheet" href="/resources/css/myPage.css" />
     <link rel="stylesheet" href="/resources/css/mate.css" />
     <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.movieyouhwan.user.mate.domain.CinemaOption;
 import kr.co.movieyouhwan.user.mate.domain.GenreOption;
+import kr.co.movieyouhwan.user.mate.domain.Survey;
 import kr.co.movieyouhwan.user.mate.service.MateService;
 import kr.co.movieyouhwan.user.mate.store.MateStore;
 
@@ -42,6 +43,24 @@ public class MateServiceImpl implements MateService{
 	public List<GenreOption> printGenreOption() {
 		List<GenreOption> genreOptionList=mStore.selectGenreOption(session);
 		return genreOptionList;
+	}
+
+	@Override
+	public int registerSurvey(Survey survey) {
+		int result=mStore.insertSurvey(session, survey);
+		return result;
+	}
+
+	@Override
+	public int printSurveyNo(String memberId) {
+		int surveyNo=mStore.selectSurveyNo(session, memberId);
+		return surveyNo;
+	}
+
+	@Override
+	public int registerSurveyGenre(Integer surveyNo, List<String> genreList) {
+		int result=mStore.insertSurveyGenre(session,surveyNo,genreList);
+		return result;
 	}
 
 }
