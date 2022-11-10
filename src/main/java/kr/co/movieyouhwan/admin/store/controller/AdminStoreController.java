@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,12 +20,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.movieyouhwan.admin.store.service.AdminStoreService;
+import kr.co.movieyouhwan.user.store.controller.UserStoreController;
 import kr.co.movieyouhwan.user.store.domain.Product;
 import kr.co.movieyouhwan.user.store.domain.ProductType;
 
 @Controller
 public class AdminStoreController {
 
+  // 메소드: info, debug, warning, error, critical => sysout 대체
+  private static final Logger logger = LoggerFactory.getLogger(AdminStoreController.class);
+  
+  private static final Logger LOGGER = LoggerFactory.getLogger(UserStoreController.class);
+  
   @Autowired
   AdminStoreService aStoreService;
 
@@ -44,7 +52,8 @@ public class AdminStoreController {
         mv.addObject("productTypeList", productTypeList);
         mv.setViewName("admin/store/adminStoreList");
       } else {
-        System.out.println("상품 불러오기 실패");
+        logger.debug(productList.toString());
+        logger.debug(productTypeList.toString());
       }
     } catch (Exception e) {
       e.printStackTrace();

@@ -66,8 +66,8 @@
         </table>
         <p>* 오프라인 매점에서 주문번호를 제시하여 상품으로 교환 가능합니다.</p>
         <div>
-          <button class="btn-store-complete" id="btn-store-history">결제내역</button>
-          <button class="btn-store-complete" id="btn-store-list">상품 더보기</button>
+          <button class="btn-store-complete" id="btn-to-history">결제내역</button>
+          <button class="btn-store-complete" id="btn-to-store">상품 더보기</button>
         </div>
       </div>
     </div>

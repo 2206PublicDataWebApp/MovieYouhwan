@@ -88,7 +88,8 @@
 	
 	<!-- 공통 - 상품 목록 조회 -->
 	<select id="selectProductList" resultMap="productResultMap">
-		SELECT * FROM PRODUCT_TBL
+		SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_TYPE, PRODUCT_PRICE, PRODUCT_DESC, PRODUCT_IMG_RENAME
+		FROM PRODUCT_TBL
 		ORDER BY PRODUCT_ORDER ASC
 	</select>
 	
@@ -98,9 +99,10 @@
 		JOIN PRODUCT_TBL USING (PRODUCT_TYPE) ORDER BY PRODUCT_TYPE_NO ASC
 	</select>
 	
-	<!-- 공통 - 상품 조회 -->
-	<select id="selectProduct" resultMap="productResultMap">
-		SELECT * FROM PRODUCT_TBL
+	<!-- 공통 - 상품 상세 조회 -->
+	<select id="selectOneProduct" resultMap="productResultMap">
+		SELECT *
+		FROM PRODUCT_TBL
 		WHERE PRODUCT_NO = #{productNo}
 	</select>
 	
@@ -110,19 +112,14 @@
 		WHERE MEMBER_ID = #{memberId} AND PRODUCT_NO = #{productNo}
 	</select>
 	
-	<!-- 사용자 - 상품 상세 조회 -->
-	<select id="selectOneProduct" resultMap="productResultMap">
-		SELECT * FROM PRODUCT_TBL
-		WHERE PRODUCT_NO = #{productNo}
-	</select>
-	
 	<!-- 사용자 - 장바구니 조회 -->
 	<select id="selectMyCartList" resultMap="cartResultMap">
-		SELECT * FROM CART_TBL
+		SELECT CART_NO, MEMBER_ID, PRODUCT_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_COUNT, PRODUCT_IMG_RENAME, PRODUCT_STATUS
+		FROM CART_TBL
 		WHERE MEMBER_ID = #{memberId}
 	</select>
 	
-	<!-- 사용자 - 장바구니에서 선택한 상품 불러오기 -->
+	<!-- 사용자 - 장바구니에서 선택한 상품 조회 -->
 	<select id="selectCheckedCartList" resultMap="cartResultMap">
 		SELECT * FROM CART_TBL WHERE CART_NO IN
 		<foreach collection="list" item="item" open="(" close=")" separator=",">

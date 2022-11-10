@@ -1,7 +1,7 @@
 let IMP = window.IMP;
 IMP.init('imp53374831');
 
-function requestKgpay(payMethod, productName, totalAmount, memberName, memberPhone) {
+export function requestKgpay(payMethod, productName, totalAmount, memberName, memberPhone) {
   IMP.request_pay(
     {
       pg: 'inicis',
@@ -19,7 +19,7 @@ function requestKgpay(payMethod, productName, totalAmount, memberName, memberPho
         $(location).attr('href', '결제 후 url');
 
         $.ajax({
-          url: '',
+          url: '/store/pay.yh',
           method: 'POST',
           data: {
             imp_uid: rsp.imp_uid,
@@ -34,7 +34,7 @@ function requestKgpay(payMethod, productName, totalAmount, memberName, memberPho
   );
 }
 
-function requestKakaopay() {
+export function requestKakaopay() {
   IMP.request_pay(
     {
       pg: 'kakaopay',

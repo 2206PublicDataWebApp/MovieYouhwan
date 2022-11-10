@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -42,7 +41,7 @@
               <c:forEach items="${productList }" var="product">
                 <c:if test="${productType.productType eq product.productType }">
                   <li class="product-item" id="${product.productNo }">
-                    <a href="/store/detail.yh?productNo=${product.productNo}">
+                    <a href="/store/detail.yh?productTypeNo=${productType.productTypeNo }&productNo=${product.productNo}">
                       <img src="/resources/images/storeProduct/${product.productImgRename}" alt="" class="product-img" id="${product.productImgRename }" />
                     </a>
                     <div class="product-detail">
@@ -51,8 +50,8 @@
                       <p class="product-price">${product.productPrice}</p>
                     </div>
                     <div class="store-btn">
-                      <button type="button" class="btn-store-list btn-store-buy">구매</button>
-                      <button type="button" class="btn-store-list btn-store-cart"><i class="fa-solid fa-cart-plus"></i></button>
+                      <button type="button" class="btn-store-list btn-buy-product">구매</button>
+                      <button type="button" class="btn-store-list btn-add-cart"><i class="fa-solid fa-cart-plus"></i></button>
                     </div>
                   </li>
                 </c:if>

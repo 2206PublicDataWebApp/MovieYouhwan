@@ -23,10 +23,10 @@
     <div id="store-wrapper">
       <div id="store-menu">
         <ul id="store-tab">
-          <li class="store-tab-item"><a href="#">콤보</a></li>
-          <li class="store-tab-item"><a href="#">팝콘</a></li>
-          <li class="store-tab-item"><a href="#">음료</a></li>
-          <li class="store-tab-item"><a href="#">스낵</a></li>
+          <li class="store-tab-item"><a href="">콤보</a></li>
+          <li class="store-tab-item"><a href="">팝콘</a></li>
+          <li class="store-tab-item"><a href="">음료</a></li>
+          <li class="store-tab-item"><a href="">스낵</a></li>
         </ul>
         <ul id="store-links">
           <li>
@@ -34,21 +34,18 @@
           </li>
         </ul>
       </div>
-      <form action="" method="post">
-        <input type="hidden" name="productNo" value="${product.productNo }">
+      <form action="/store/buy.yh" method="post">
+        <input type="hidden" name="productNo" value="${product.productNo }" id="product-no">
+        <input type="hidden" name="productTypeNo" value="${productTypeNo }" id="product-type-no">
+        <input type="hidden" name="productType" value="${product.productType }" id="product-type">
         <div id="grid-store-detail">
-          <div class="gitem-store-detail"><h2>${product.productName }</h2></div>
-          <div class="gitem-store-detail"><img src="/resources/images/storeProduct/${product.productImgRename }" alt="상품사진" /></div>
+          <div class="gitem-store-detail"><h2 id="product-name">${product.productName }</h2></div>
+          <div class="gitem-store-detail"><img src="/resources/images/storeProduct/${product.productImgRename }" alt="상품사진" class="detail-product-img" id="${product.productImgRename }" /></div>
           <div class="gitem-store-detail detail-price">${product.productPrice }</div>
           <div class="gitem-store-detail">상품구성</div>
           <div class="gitem-store-detail">${product.productDesc }</div>
           <div class="gitem-store-detail">유효기간</div>
           <div class="gitem-store-detail">구매일로부터 6개월 이내</div>
-          <%-- <div class="gitem-store-detail">
-            <select name="productOption" id="" disabled>
-              <option value="original">오리지널</option>
-            </select>
-          </div> --%>
           <div class="gitem-store-detail">상품수량</div>
           <div class="gitem-store-detail">
             <input type="number" name="productCount" id="detail-product-count" min="1" max="10" step="1" value="1" />
@@ -59,7 +56,7 @@
             <button class="btn-detail" id="btn-detail-buy">구매</button>
           </div>
           <div class="gitem-store-detail">
-            <button class="btn-detail" id="btn-detail-cart"><i class="fa-solid fa-cart-plus"></i></button>
+            <button type="button" class="btn-detail" id="btn-detail-cart"><i class="fa-solid fa-cart-plus"></i></button>
           </div>
         </div>
       </form>
