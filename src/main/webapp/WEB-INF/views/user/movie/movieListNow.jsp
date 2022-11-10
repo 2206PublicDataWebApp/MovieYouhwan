@@ -23,23 +23,23 @@
     	<!-- top3 영화 부분 (추후 개발 예정) -->
     	<div></div>
     	<!-- 검색 창 -->
-    	<form action="">
+    	<form action="/movieListSearch.yh" method="post">
 	    	<div id="movielist-searchwrap">
-	    		<input type="search" id="movielist-search" placeholder="영화 제목 또는 배우로 검색해보세요." name="searchName" value="${searchName }">
+	    		<input type="search" id="movielist-search" placeholder="영화 제목으로 검색해보세요." name="searchName" value="${searchName }">
 	    		<button type="submit" id="movielist-search-button">검색</button>
 	    	</div>
     	</form>
     	<!-- 영화 분류 -->
     	<div class="movielist-tab">
-			<div class="movielist-tab-on" onclick="location.href='/movieList.yh'">현재 상영 영화</div>
-			<div class="movielist-tab-off" onclick="location.href='/movieListAfter.yh'">상영 예정 영화</div>
-			<div class="movielist-tab-off" onclick="location.href='/movieListBefore.yh'">상영 종료 영화</div>
+			<div class="movielist-tab-on" onclick="location.href='/movieList.yh?currentPage=${pageInfo.currentPage}'">현재 상영 영화</div>
+			<div class="movielist-tab-off" onclick="location.href='/movieListAfter.yh?currentPage=${pageInfo.currentPage}'">상영 예정 영화</div>
+			<div class="movielist-tab-off" onclick="location.href='/movieListBefore.yh?currentPage=${pageInfo.currentPage}'">상영 종료 영화</div>
     	</div>
     	<!-- 영화 리스트 -->
 	    <div class="movieList-out">
 	    	<c:forEach items="${mlList }" var="movieList">
-	   			<div class="movieList-outside" onclick="location.href='/movieDetail.yh?movieNo=${movieList.movieNo}'">
-	   				<div class="movie-img-area">
+	   			<div class="movieList-outside">
+	   				<div class="movie-img-area" onclick="location.href='/movieDetail.yh?movieNo=${movieList.movieNo}'">
 	   					<img src="/resources/images/movieLodeImg/${movieList.movieImgRename }" width="240px">
 	   				</div>
 	   				<div class="movie-information-area">
@@ -77,6 +77,25 @@
 	   				</div>
 	   			</div>
 	    	</c:forEach>
+	   	</div>
+	   	<!-- 페이징 처리 -->
+	   	<div class="page-count-wrap">
+	   		<ul class="page-count">
+	   			<c:if test="${pageInfo.startPage ne 1 }">
+	   				<li><a href="/movieList.yh?currentPage=${pageInfo.startPage-1 }">&laquo;</a></li>
+	   			</c:if>
+	   			<c:forEach var="page" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+	   				<c:if test="${pageInfo.currentPage eq page}">
+	   					<li><a class="currentP" href="#">${page }</a></li>
+	   				</c:if>
+	   				<c:if test="${pageInfo.currentPage ne page }">
+	   					<li><a href="movieList.yh?currentPage=${page }">${page }</a></li>
+	   				</c:if>
+	   				<c:if test="${pageInfo.endPage ne pageInfo.pageCount }">
+	   					<li><a href="movieList.yh?currentPage=${pageInfo.endPage+1 }">&raquo;</a></li>
+	   				</c:if>
+	   			</c:forEach>
+	   		</ul>
 	   	</div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

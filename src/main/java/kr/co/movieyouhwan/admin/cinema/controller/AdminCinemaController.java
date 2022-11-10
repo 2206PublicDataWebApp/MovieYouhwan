@@ -37,19 +37,19 @@ public class AdminCinemaController {
 	 */
 	@RequestMapping(value="/admin/adminCinemaRegister.yh", method=RequestMethod.GET)
 	public String cinemaRegisterView() {
+		// 화면 출력
 		return "/admin/cinema/adminCinemaRegister";
 	}
 	
 	/**
-	 * 영화관 등록
+	 * 영화관 등록 기능
 	 * @param mv
 	 * @param cinema
 	 * @param uploadFile
-	 * @param multipartRequest
 	 * @param request
 	 * @return
-	 * @throws IOException 
-	 * @throws IllegalStateException 
+	 * @throws IllegalStateException
+	 * @throws IOException
 	 */
 	@RequestMapping(value="/admin/adminCinemaInsert.yh", method=RequestMethod.POST)
 	public ModelAndView cinemaRegister(
@@ -57,7 +57,8 @@ public class AdminCinemaController {
 			@ModelAttribute Cinema cinema,
 			@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile,
 			HttpServletRequest request) throws IllegalStateException, IOException {
-		String cinemaFileName = uploadFile.getOriginalFilename(); // 단일 이미지 등록
+		// 단일 이미지 등록
+		String cinemaFileName = uploadFile.getOriginalFilename();
 		if(!cinemaFileName.equals("")) {
 			String root = request.getSession().getServletContext().getRealPath("resources\\images");
 			String savePath = root + "\\cinemaLodeImg";
@@ -73,42 +74,9 @@ public class AdminCinemaController {
 			cinema.setCinemaImgRename(cinemaFileRename);
 			cinema.setCinemaImgPath(cinemaFilePath);
 		}
+		// 영화관 등록
 		int result = aCinemaService.registerCinema(cinema);
 		mv.setViewName("redirect:/admin/adminCinemaList.yh");
-		return mv;
-	}
-	
-	/**
-	 * 영화관 목록 화면
-	 * @return
-	 */
-	@RequestMapping(value="/admin/adminCinemaList.yh", method=RequestMethod.GET)
-	public ModelAndView adminCinemaListView(
-			ModelAndView mv,
-			@ModelAttribute Cinema cinema,
-			@ModelAttribute Theater theater) {
-		List<Cinema> cList = aCinemaService.printAllCinema();
-		List<Theater> tList = aTheaterService.printAllTheater();
-		mv.addObject("cList", cList);
-		mv.addObject("tList", tList);
-		mv.setViewName("admin/cinema/adminCinemaList");
-		return mv;
-	}
-	
-	/**
-	 * 영화관 상세 화면
-	 * @param mv
-	 * @return
-	 */
-	@RequestMapping(value="/admin/adminCinemaDetail.yh", method=RequestMethod.GET)
-	public ModelAndView adminCinemaDetailView(
-			ModelAndView mv,
-			@RequestParam("cinemaNo") Integer cinemaNo,
-			HttpSession session) {
-		Cinema cinema = aCinemaService.printOneCinema(cinemaNo);
-		session.setAttribute("cinemaNo", cinema.getCinemaNo());
-		mv.addObject("cinema", cinema);
-		mv.setViewName("/admin/cinema/adminCinemaDetail");
 		return mv;
 	}
 	
@@ -173,7 +141,7 @@ public class AdminCinemaController {
 	}
 	
 	/**
-	 * 영화관 삭제
+	 * 영화관 삭제 기능
 	 * @param model
 	 * @param session
 	 * @return
@@ -188,5 +156,45 @@ public class AdminCinemaController {
 			session.removeAttribute("cinemaNo");
 		}
 		return "redirect:/admin/adminCinemaList.yh";
+	}
+
+	/**
+	 * 영화관 목록 화면
+	 * @param mv
+	 * @param cinema
+	 * @param theater
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminCinemaList.yh", method=RequestMethod.GET)
+	public ModelAndView adminCinemaListView(
+			ModelAndView mv,
+			@ModelAttribute Cinema cinema,
+			@ModelAttribute Theater theater) {
+		// 영화관 리스트 (전체)
+		List<Cinema> cList = aCinemaService.printAllCinema();
+		// 상영관 리스트 (전체)
+		List<Theater> tList = aTheaterService.printAllTheater();
+		// 화면 출력
+		mv.addObject("cList", cList);
+		mv.addObject("tList", tList);
+		mv.setViewName("admin/cinema/adminCinemaList");
+		return mv;
+	}
+
+	/**
+	 * 영화관 상세 화면
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping(value="/admin/adminCinemaDetail.yh", method=RequestMethod.GET)
+	public ModelAndView adminCinemaDetailView(
+			ModelAndView mv,
+			@RequestParam("cinemaNo") Integer cinemaNo,
+			HttpSession session) {
+		Cinema cinema = aCinemaService.printOneCinema(cinemaNo);
+		session.setAttribute("cinemaNo", cinema.getCinemaNo());
+		mv.addObject("cinema", cinema);
+		mv.setViewName("/admin/cinema/adminCinemaDetail");
+		return mv;
 	}
 }

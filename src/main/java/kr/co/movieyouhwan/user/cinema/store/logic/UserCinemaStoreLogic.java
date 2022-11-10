@@ -12,6 +12,16 @@ import kr.co.movieyouhwan.user.cinema.store.UserCinemaStore;
 
 @Repository
 public class UserCinemaStoreLogic implements UserCinemaStore{
+	
+	// 영화관 별 오늘 날짜 현재 상영 영화 중복 없이 출력
+	@Override
+	public List<Movie> selectMovieNowOne(SqlSessionTemplate session, Integer cinemaNo, String movieDay) {
+		HashMap<String, String> movieMap = new HashMap<>();
+		movieMap.put("cinemaNo", cinemaNo.toString());
+		movieMap.put("movieDay", movieDay);
+		List<Movie> mList = session.selectList("CinemaMapper.selectMovieNowOne", movieMap);
+		return mList;
+	}
 
 	// 영화관 상영 영화 조회
 	@Override
@@ -21,11 +31,5 @@ public class UserCinemaStoreLogic implements UserCinemaStore{
 		cinemaMovieMap.put("movieDay", movieDay);
 		List<CinemaMovie> cmList = session.selectList("CinemaMapper.selectAllCinemaMovie", cinemaMovieMap);
 		return cmList;
-	}
-
-	@Override
-	public List<Movie> selectMovieNowOne(SqlSessionTemplate session, String movieDay) {
-		List<Movie> mList = session.selectList("CinemaMapper.selectMovieNowOne", movieDay);
-		return mList;
 	}
 }

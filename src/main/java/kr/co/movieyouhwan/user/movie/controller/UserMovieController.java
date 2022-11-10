@@ -16,10 +16,9 @@ import kr.co.movieyouhwan.admin.cinema.service.AdminCinemaService;
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.admin.movie.domain.MovieDay;
 import kr.co.movieyouhwan.admin.movie.domain.MovieImg;
-import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
 import kr.co.movieyouhwan.admin.movie.service.AdminMovieService;
-import kr.co.movieyouhwan.admin.theater.domain.Theater;
+import kr.co.movieyouhwan.common.page.PageInfo;
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.service.UserMovieService;
@@ -40,8 +39,15 @@ public class UserMovieController {
 	 */
 	@RequestMapping(value="/movieList.yh", method=RequestMethod.GET)
 	public ModelAndView userMovieListNowView(
-			ModelAndView mv) {
+			ModelAndView mv,
+			@RequestParam(value="currentPage", required=false) Integer currentPage) {
+		// 페이징 처리
+		int page = (currentPage != null ? currentPage : 1);
+		PageInfo pageInfo = new PageInfo(page, uMovieService.printNowMovieCount(), 12, 5);
+		// 현재 상영 영화 리스트 가져오기
 		List<MovieList> mlList = uMovieService.printAllMovieNow();
+		// 화면 출력
+		mv.addObject("pageInfo", pageInfo);
 		mv.addObject("mlList", mlList);
 		mv.setViewName("user/movie/movieListNow");
 		return mv;
@@ -54,8 +60,15 @@ public class UserMovieController {
 	 */
 	@RequestMapping(value="/movieListAfter.yh", method=RequestMethod.GET)
 	public ModelAndView userMovieListAfterView(
-			ModelAndView mv) {
+			ModelAndView mv,
+			@RequestParam(value="currentPage", required=false) Integer currentPage) {
+		// 페이징 처리
+		int page = (currentPage != null ? currentPage : 1);
+		PageInfo pageInfo = new PageInfo(page, uMovieService.printAfterMovieCount(), 12, 5);
+		// 상영 예정 영화 리스트 가져오기
 		List<MovieList> mlList = uMovieService.printAllMovieAfter();
+		// 화면 출력
+		mv.addObject("pageInfo", pageInfo);
 		mv.addObject("mlList", mlList);
 		mv.setViewName("user/movie/movieListAfter");
 		return mv;
@@ -68,8 +81,15 @@ public class UserMovieController {
 	 */
 	@RequestMapping(value="/movieListBefore.yh", method=RequestMethod.GET)
 	public ModelAndView userMovieListBeforeView(
-			ModelAndView mv) {
+			ModelAndView mv,
+			@RequestParam(value="currentPage", required=false) Integer currentPage) {
+		// 페이징 처리
+		int page = (currentPage != null ? currentPage : 1);
+		PageInfo pageInfo = new PageInfo(page, uMovieService.printBeforeMovieCount(), 12, 5);
+		// 상영 종료 영화 목록 리스트 가져오기
 		List<MovieList> mlList = uMovieService.printAllMovieBefore();
+		// 화면 출력
+		mv.addObject("pageInfo", pageInfo);
 		mv.addObject("mlList", mlList);
 		mv.setViewName("user/movie/movieListBefore");
 		return mv;
@@ -82,9 +102,17 @@ public class UserMovieController {
 	 */
 	@RequestMapping(value="/movieSearchList.yh", method=RequestMethod.GET)
 	public ModelAndView userMovieSearchListView(
-			ModelAndView mv) {
-		List<MovieList> mlList = uMovieService.printAllMovie();
-		mv.addObject("mlList", mlList);
+			ModelAndView mv,
+			@RequestParam("searchName") String searchName) {
+		// 영화 검색 완료 리스트 불러오기
+		List<MovieList> mlList = uMovieService.printSearchMovie(searchName);
+		// 화면출력
+		if(!mlList.isEmpty()) {
+			mv.addObject("mlList", mlList);
+		}else {
+			mv.addObject("mlList", null);
+		}
+		mv.addObject("searchName", searchName);
 		mv.setViewName("user/movie/movieSearchList");
 		return mv;
 	}
@@ -98,13 +126,19 @@ public class UserMovieController {
 	@RequestMapping(value="/movieListSearch.yh", method=RequestMethod.POST)
 	public ModelAndView userMovieSearchList(
 			ModelAndView mv,
+			@ModelAttribute Movie movie,
 			@RequestParam("searchName") String searchName) {
-//		List<Movie> mList = uMovieService.printSearchMovie(searchName);
-//		if(!mList.isEmpty()) {
-//			mv.addObject("mList", mList);
-//		}else {
-//			mv.addObject("mList", null);
-//		}
+		// searchValue가 null이면 "" 로 처리
+ 		// String search = (searchValue != null ? searchValue : "");
+		// 영화 검색 완료 리스트 불러오기
+		List<MovieList> mlList = uMovieService.printSearchMovie(searchName);
+		System.out.print(searchName);
+		// 화면출력
+		if(!mlList.isEmpty()) {
+			mv.addObject("mlList", mlList);
+		}else {
+			mv.addObject("mlList", null);
+		}
 		mv.addObject("searchName", searchName);
 		mv.setViewName("redirect:/movieSearchList.yh");
 		return mv;

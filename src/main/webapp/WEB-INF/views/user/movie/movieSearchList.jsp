@@ -20,8 +20,15 @@
 	<jsp:useBean id="now" class="java.util.Date" />
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     <div class="midmovie-wrapper">
+        <!-- 검색 창 -->
+    	<form action="/movieListSearch.yh" method="post">
+	    	<div id="movielist-searchwrap">
+	    		<input type="search" id="movielist-search" placeholder="영화 제목으로 검색해보세요." name="searchName" value="${searchName }">
+	    		<button type="submit" id="movielist-search-button">검색</button>
+	    	</div>
+    	</form>
     	<!-- 영화 검색 내용 -->
-    	<h3 class="search-text">'가나다'에 대한 검색 결과</h3>
+    	<h3 class="search-text">'${searchName }' 에 대한 검색 결과</h3>
     	<!-- 영화 리스트 -->
 	    <div class="movieList-out">
 	    	<c:forEach items="${mlList }" var="movieList">
@@ -58,6 +65,9 @@
 	   				</div>
 	   			</div>
 	    	</c:forEach>
+	   	</div>
+	   	<div>
+	   		<button type="button" id="go-nowlist" onclick="location.href='/movieList.yh'">영화목록</button>
 	   	</div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
