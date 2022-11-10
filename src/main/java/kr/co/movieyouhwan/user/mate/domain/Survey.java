@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Survey {
 	private Integer surveyNo;
-	private Integer genderNo;
-	private Integer ageNo;
-	private Integer cinemaNo;
-	private List<Integer> genreNo;
+	private String gender;
+	private String age;
+	private String CinemaName;
+	private List<String> genre;
 	private String memberId;
 	private Date createDate;
 	private Date updateDate;
@@ -19,29 +19,29 @@ public class Survey {
 	public void setSurveyNo(Integer surveyNo) {
 		this.surveyNo = surveyNo;
 	}
-	public Integer getGenderNo() {
-		return genderNo;
+	public String getGender() {
+		return gender;
 	}
-	public void setGenderNo(Integer genderNo) {
-		this.genderNo = genderNo;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
-	public Integer getAgeNo() {
-		return ageNo;
+	public String getAge() {
+		return age;
 	}
-	public void setAgeNo(Integer ageNo) {
-		this.ageNo = ageNo;
+	public void setAge(String age) {
+		this.age = age;
 	}
-	public Integer getCinemaNo() {
-		return cinemaNo;
+	public String getCinemaName() {
+		return CinemaName;
 	}
-	public void setCinemaNo(Integer cinemaNo) {
-		this.cinemaNo = cinemaNo;
+	public void setCinemaName(String cinemaName) {
+		CinemaName = cinemaName;
 	}
-	public List<Integer> getGenreNo() {
-		return genreNo;
+	public List<String> getGenre() {
+		return genre;
 	}
-	public void setGenreNo(List<Integer> genreNo) {
-		this.genreNo = genreNo;
+	public void setGenre(List<String> genre) {
+		this.genre = genre;
 	}
 	public String getMemberId() {
 		return memberId;
@@ -69,10 +69,13 @@ public class Survey {
 	}
 	@Override
 	public String toString() {
-		return "Survey [surveyNo=" + surveyNo + ", genderNo=" + genderNo + ", ageNo=" + ageNo + ", cinemaNo=" + cinemaNo
-				+ ", genreNo=" + genreNo + ", memberId=" + memberId + ", createDate=" + createDate + ", updateDate="
+		return "Survey [surveyNo=" + surveyNo + ", gender=" + gender + ", age=" + age + ", CinemaName=" + CinemaName
+				+ ", genre=" + genre + ", memberId=" + memberId + ", createDate=" + createDate + ", updateDate="
 				+ updateDate + ", deleteDate=" + deleteDate + "]";
 	}
+	
+	
+	
 	
 	
 }

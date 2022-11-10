@@ -346,7 +346,7 @@ a {
 
 .option-title {
   margin-bottom: 20px;
-  font-size: 18px;
+  font-size: 22px;
   color: #0f1a3b;
   font-family: mice-bold;
 }
@@ -372,23 +372,47 @@ a {
   height: 60px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  border: 2px solid #0f1a3b;
+  border: 1px solid black;
   background-color: #fcf4c1;
   padding-left: 20px;
-  font-size: 15px;
+  font-size: 18px;
   align-items: center;
 }
 
 .box-under {
   display: flex;
-  height: 60px;
+  padding-left: 20px;
+  height: 70px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  border: 2px solid #0f1a3b;
+  border: 1px solid black;
   border-top: none;
-  padding-left: 20px;
-  font-size: 15px;
+  font-size: 18px;
   align-items: center;
+  flex-wrap: wrap;
+  align-content: space-evenly;
+}
+
+.box-genre {
+  height: 100px;
+}
+
+.mate-label {
+  margin-right: 15px;
+}
+
+.mate-option-radio {
+  margin-right: 5px;
+  width: 15px;
+  height: 15px;
+  accent-color: #0f1a3b;
+}
+
+.select-cinema-option {
+  width: 200px;
+  font-size: 18px;
+  height: 30px;
+  border-radius: 5px;
 }
 
 .next-btn {
@@ -413,7 +437,7 @@ a {
 #mate-data {
   height: 60px;
   line-height: 60px;
-  border-bottom: solid 1px #0f1a3b;
+  border-bottom: solid 1px hsl(225, 59%, 15%);
 }
 .matecomplete-userimage {
   width: 40px;
