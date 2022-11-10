@@ -199,4 +199,11 @@
 		WHERE C_NUM = 1
 		AND MOVIE_TITLE LIKE '%' || #{searchValue} || '%'
 	</select>
+	<!-- 영화 예매 - 영화관 별 상영 영화 -->
+	<select id="selectAllMovieCinema" resultMap="MovieResultMap">
+		SELECT DISTINCT MT.MOVIE_TITLE, MT.MOVIE_ENDDAY, MTT.CINEMA_NO
+		FROM MOVIE_TBL MT, MOVIE_TIME_TBL MTT
+		WHERE MTT.CINEMA_NO = #{cinemaNo}
+		AND MT.MOVIE_NO = MTT.MOVIE_NO
+	</select>
 </mapper>

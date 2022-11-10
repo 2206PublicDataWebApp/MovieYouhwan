@@ -4,13 +4,18 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import kr.co.movieyouhwan.admin.cinema.service.AdminCinemaService;
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
@@ -177,13 +182,30 @@ public class UserMovieController {
 	 */
 	@RequestMapping(value="/movieTicketTime.yh", method=RequestMethod.GET)
 	public ModelAndView movieTicketTimeView(
-			ModelAndView mv) {
+			ModelAndView mv,
+			@RequestParam(value="cinemaNo", required=false) Integer cinemaNo) {
+		cinemaNo = cinemaNo == null ? 13 : cinemaNo;
 		List<Cinema> cList = aCinemaService.printAllCinema();
-		List<Movie> mList = aMovieService.printNowMovie();
+		List<Movie> mList = uMovieService.printAllMovieCinema(cinemaNo);
 		mv.addObject("cList", cList);
 		mv.addObject("mList", mList);
 		mv.addObject("movieDay", new MovieDay());
 		mv.setViewName("user/movie/movieTicketTime");
 		return mv;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping(value="/movieTicketTimeCinema.yh", produces="application/json;charset=utf-8", method=RequestMethod.POST)
+	public String movieTicketTimeCinemaChoice(
+			@RequestParam(value="cinemaNo", required=false) Integer cinemaNo,
+			HttpSession session) {
+		cinemaNo = cinemaNo == null ? 13 : cinemaNo;
+		// 영화관별 상영 영화 출력
+		List<Movie> mList = uMovieService.printAllMovieCinema(cinemaNo);
+		Gson gson = new Gson();
+		JSONObject object = new JSONObject();
+		object.put("mList", gson.toJson(mList));
+		return object.toJSONString();
 	}
 }

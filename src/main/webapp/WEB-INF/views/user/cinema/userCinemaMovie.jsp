@@ -78,17 +78,6 @@
     			success : function(result) {
 					const movie = JSON.parse(result[0].mList);
     				const obj = JSON.parse(result[0].cmList);
-//     				for(var m in movie) {
-//     					var movieTitle = movie[m].movieTitle;
-//     				}
-// 	    			for(var i in obj) {
-// 	    				var movieTitle = obj[i].movieTitle;
-// 	    				var theaterName = obj[i].theaterName;
-// 	    				var movieTicket = obj[i].movieTicket;
-// 	    				var movieSeat = obj[i].movieSeat;
-// 	    				var movieStart = obj[i].movieStart;
-// 	    				var movieEnd = obj[i].movieEnd;
-// 	    			}
 	    			var listWrap = $('#choice-movie-listwrap').html('');
 	    			for(var m in movie) {
 	    				var movieItemTag = $('<div></div>');
@@ -114,19 +103,6 @@
 	    					listWrap.append(movieItemTag);
 	    				}
 	    			}
-// 		    		var html = $("#choice-movie-listwrap").html('');
-// 			    	var str = '';
-// 			    	for(var m in movie) {
-// 			    		str += '<p>'+ movie[m].movieTitle +'</p>';
-// 				    	for(var i in obj) {
-// 				    		if (movie[m].movieNo == obj[i].movieNo) {
-// 						    	str += '<div class="choice-movie-list"><p>' + obj[i].theaterName + ' ' + obj[i].movieTicket + ' / '+ obj[i].movieSeat +'</p>';
-// 						    	str += '<p>'+ obj[i].movieStart +' ~ '+ obj[i].movieEnd +'</div>';
-// 				    		}else {
-// 				    		}
-// 				    	}
-// 			    	}
-// 		    		html.append(str);
     			},
     			error : function() {
     				alert("실패!");

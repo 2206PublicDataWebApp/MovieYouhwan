@@ -63,6 +63,12 @@
 			</div>	
 		</div>
 		<hr>
+		<!-- 정보, 리뷰 구분 탭 -->
+		<div>
+			<button id="movie-information-tab">영화 정보</button>
+			<button id="movie-review-tab">영화 리뷰</button>
+		</div>
+		<!-- 하단 영역 시작 -->
 		<div class="detail-moviecontent">
 			<h4 id="content-text">간편 줄거리</h4>
 			<p id="content-detail">${movie.movieContent }</p>

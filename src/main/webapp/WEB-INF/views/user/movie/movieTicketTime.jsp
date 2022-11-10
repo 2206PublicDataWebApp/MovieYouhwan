@@ -35,6 +35,7 @@
 			</div>
 		</div>
 		<div class="ticket-right">
+			<!-- 상단 영화관 이름, 영화 이름, 선택 일자 노출 부분 -->
 			<div class="ticket-top">
 				<div class="ticket-cinema-name">
 					<p>무비유환 강남점</p>
@@ -52,17 +53,19 @@
 					<c:forEach items="${cList }" var="cinema" varStatus="i">
 						<div id="cinema-name-outside${i.count }" class="cinema-name-outside">
 							<label for="cinema-name${i.count }" class="cinema-name-text">${cinema.cinemaName }</label>
-							<input type="radio" id="cinema-name${i.count }" class="cinema-name-radio" name="cinemaName" value="${cinema.cinemaName }" onclick="cinemaNameChoice()"/>
+							<input type="radio" id="cinema-name${i.count }" class="cinema-name-radio" name="cinemaName" value="${cinema.cinemaName }" onclick="cinemaNameChoice(${cinema.cinemaNo})"/>
 						</div>
 					</c:forEach>
 				</div>
+				<!-- 영화 제목 리스트 -->
 				<div class="movie-name-wrap">
 					<c:forEach items="${mList }" var="movie">
 						<div class="movie-name-outside">
-							<p class="movie-name-text">${movie.movieTitle }</p>
+							<p class="movie-name-text" onclick="ticketMovieday()">${movie.movieTitle }</p>
 						</div>
 					</c:forEach>
 				</div>
+				<!-- 영화 선택 리스트 -->
 				<div class="theater-choice-wrap">
 				   	<div class="cinema-movie-year-month">
 					   	<div class="year-month">${movieDay.thisYear }년 ${movieDay.thisMonth }월</div>

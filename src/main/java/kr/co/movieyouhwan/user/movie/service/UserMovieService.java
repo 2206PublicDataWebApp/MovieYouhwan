@@ -22,4 +22,6 @@ public interface UserMovieService {
 	public List<MovieList> printAllMovie();
 	// 영화 검색 기능
 	public List<MovieList> printSearchMovie(String searchName);
+	// 영화관별 상영 영화 출력
+	public List<Movie> printAllMovieCinema(Integer cinemaNo);
 }

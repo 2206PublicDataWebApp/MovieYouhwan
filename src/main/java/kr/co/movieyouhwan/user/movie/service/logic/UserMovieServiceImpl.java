@@ -74,4 +74,11 @@ public class UserMovieServiceImpl implements UserMovieService{
 		List<MovieList> mlList = uMovieStore.selectSearchMovie(session, searchName);
 		return mlList;
 	}
+
+	// 영화관별 상영 영화 출력
+	@Override
+	public List<Movie> printAllMovieCinema(Integer cinemaNo) {
+		List<Movie> mList = uMovieStore.selectAllMovieCinema(session, cinemaNo);
+		return mList;
+	}
 }

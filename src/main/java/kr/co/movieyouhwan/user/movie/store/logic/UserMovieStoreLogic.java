@@ -65,4 +65,11 @@ public class UserMovieStoreLogic implements UserMovieStore{
 		List<MovieList> mlList = session.selectList("MovieMapper.selectSearchMovieList", searchName);
 		return mlList;
 	}
+
+	// 영화관별 상영 영화 출력
+	@Override
+	public List<Movie> selectAllMovieCinema(SqlSessionTemplate session, Integer cinemaNo) {
+		List<Movie> mList = session.selectList("MovieMapper.selectAllMovieCinema", cinemaNo);
+		return mList;
+	}
 }

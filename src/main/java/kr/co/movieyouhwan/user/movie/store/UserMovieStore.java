@@ -25,4 +25,6 @@ public interface UserMovieStore {
 	public List<MovieList> selectAllMovie(SqlSessionTemplate session);
 	// 영화 검색 기능
 	public List<MovieList> selectSearchMovie(SqlSessionTemplate session, String searchName);
+	// 영화관별 상영 영화 출력
+	public List<Movie> selectAllMovieCinema(SqlSessionTemplate session, Integer cinemaNo);
 }

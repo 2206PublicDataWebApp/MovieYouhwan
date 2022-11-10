@@ -120,7 +120,6 @@ public class UserCinemaController {
 		List<Movie> mList = uCinemaService.printMovieNowOne(cinemaNo, new MovieDay().getMovieDay(dayIndex));
 		// 일별 영화 정보 출력
 		List<CinemaMovie> cmList = uCinemaService.printCinemaMovieByDay(cinemaNo, new MovieDay().getMovieDay(dayIndex)); // -> printCinemaMovieByDate
-		System.out.print(dayIndex);
 		Gson gson = new Gson();
 		JSONObject object = new JSONObject();
 		JSONArray jsonArray = new JSONArray();
