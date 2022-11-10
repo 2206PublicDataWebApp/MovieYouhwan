@@ -42,9 +42,9 @@
 		                    </div>
 		                </div>
 		                <div class="member-navi">
-		                    <a href="/member/findId.yh"><div class="member-navi-btn">아이디 찾기</div></a>
+		                    <a href="/member/findIdForm.yh"><div class="member-navi-btn">아이디 찾기</div></a>
 		                    <div class="member-navi-btn">｜</div>
-		                    <a href="/member/findPassword.yh"><div class="member-navi-btn">비밀번호 찾기</div></a>
+		                    <a href="/member/findPassForm.yh"><div class="member-navi-btn">비밀번호 찾기</div></a>
 		                    <div class="member-navi-btn">｜</div>
 		                    <a href="/member/joinView.yh"><div class="member-navi-btn">회원가입</div></a>
 		                </div>

@@ -51,15 +51,22 @@
 		AND MEMBER_YN = 'Y'
         AND MEMBER_TYPE = #{memberType}
 	</select>
+	
 	<!-- 아이디 찾기 -->
 	<select id="findId" resultMap="memberResultMap">
 		SELECT * FROM MEMBER_TBL
-		WHERE
-		MEMBER_NAME = #{memberName}
+		WHERE MEMBER_NAME = #{memberName}
 		AND MEMBER_PHONE = #{memberPhone}
 		AND MEMBER_BIRTH = #{memberBirth}
-		
 	</select>
+	
+	<!-- 비밀번호 찾기 (회원 정보 조회) -->
+	<select id="findPassword" resultMap="memberResultMap">
+		SELECT * FROM MEMBER_TBL
+		WHERE MEMBER_ID = #{memberId}
+		AND MEMBER_PHONE = #{memberPhone}
+	</select>
+	
 	<!-- 관리자 로그인 -->
 	<select id="selectAdminLogin" resultMap="memberResultMap">
 		SELECT MEMBER_ID FROM MEMBER_TBL
@@ -68,10 +75,12 @@
 		AND MEMBER_YN = 'Y'
         AND MEMBER_TYPE = #{memberType}
 	</select>
+	
 	<!-- 아이디 중복체크 -->
 	<select id="checkIdDuplicate" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId} AND MEMBER_YN = 'Y'
 	</select>
+	
 	<!-- 회원정보 수정 -->
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER_TBL
@@ -90,9 +99,11 @@
 		SELECT * FROM MEMBER_TBL
 		WHERE MEMBER_ID = #{memberId} AND MEMBER_YN = 'Y'
 	</select>
-	<!-- 회원정보 수정 -->
+	
+	<!-- 회원정보 조회 -->
 	<select id="selectOneByDetailId" resultMap="memberResultMap">
 		SELECT * FROM MEMBER_TBL
 		WHERE MEMBER_ID = #{memberId } AND MEMBER_YN = 'Y'
 	</select>
+	
 </mapper>

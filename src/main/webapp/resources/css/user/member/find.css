@@ -1,17 +1,17 @@
 #findIdForm{
-    margin: 0 auto;
+    margin: 100px auto 200px;
     padding: 0 100px;
     width: 800px;
     height: 500px;
     /* background-color: rgb(244, 244, 244); */
     box-sizing: border-box;
 }
-#findIdTitle{
+
+#findPassTitle{
     text-align: center;
     color: #0F1A3B;
-    margin-top: 100px;
-    margin-bottom: 70px;
-
+    margin: 40px;
+    font-size: 20pt;
 }
 #pass-find-info{
     margin-bottom: 15px;
@@ -82,4 +82,75 @@
     justify-content: center;
     font-weight: bold;
     border-radius: 4px;
+}
+
+
+/* findID */
+#findIdTitle{
+    text-align: center;
+    color: #0F1A3B;
+    margin-bottom: 40px;
+    font-size: 20pt;
+}
+#findInfo{
+    font-size: 15pt;
+    line-height: 25px;
+    margin: 20px 0;
+    color: #0F1A3B;
+}
+#joinSucceseForm{
+    margin: 150px auto 250px;
+    padding: 0 100px;
+    width: 800px;
+    height: 350px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 800;
+    color: #323232e3;
+    text-align: center;
+
+}
+#succeseMessage{
+    font-size: 25pt;
+    font-weight: 500;
+    line-height: 45px;
+    
+}
+#j-btn-group{
+    display: flex;
+}
+
+.main-btn-main, .main-btn-login{
+    display: flex;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #0F1A3B;
+    width: 180px;
+    height: 50px;
+    font-weight: 600;
+    line-height: 50px;
+    margin: 50px 5px;
+    text-align: center;
+    justify-content: center;
+}
+.main-btn-main{
+    background-color: #0F1A3B;
+    color: white;
+}
+.main-btn-login{
+    background-color: white;
+    color: #0F1A3B;
+}
+#findResult{
+    font-size: 15pt;
+    margin: 15px;
+    font-weight: 800;
+    
+}
+#signDate{
+    font-size: 12pt;
+    color: #0F1A3B;
 }

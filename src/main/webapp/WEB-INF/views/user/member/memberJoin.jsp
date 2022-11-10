@@ -144,7 +144,7 @@
                                 </div>
                                 <div class="login-input_wrap">
                                     <div class="input-button">
-                                        <input type="text" id="memberPhone" name="memberPhone" placeholder="- 없이 입력 7~8 자리 (01020221020)" maxlength="11" class="login-input_input" required>
+                                        <input type="text" id="memberPhone" name="memberPhone" placeholder="- 없이 입력 11자리 (01020221020)" maxlength="11" class="login-input_input" required>
                                         <!-- <input type="button" class="phone-confirm" name="phone-confirm" onclick="" value="인증하기" required>  -->
                                     </div>
                                 </div>
