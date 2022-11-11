@@ -84,5 +84,4 @@ public class UserStoreStoreLogic implements UserStoreStore {
     return cartList;
   }
 
-
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,229 +25,238 @@ import kr.co.movieyouhwan.user.store.service.UserStoreService;
 @Controller
 public class UserStoreController {
 
-  @Autowired
-  UserStoreService uStoreService;
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserStoreController.class);
 
-  /**
-   * 장바구니에 상품 담기
-   * 
-   * @param request
-   * @param cart
-   * @return
-   */
-  @ResponseBody
-  @RequestMapping(value = "/store/cart/addProduct.yh", method = RequestMethod.POST)
-  public String cartAddProduct(HttpServletRequest request, @ModelAttribute Cart cart) {
-    try {
-      HttpSession session = request.getSession();
-      Member member = (Member) session.getAttribute("loginUser");
-      if (member != null) {
-        cart.setMemberId(member.getMemberId());
-        int count = uStoreService.checkProductInCart(cart); // 장바구니에 같은 상품 있는지 체크
-        if (count == 0) {
-          int result = uStoreService.addNewProductToCart(cart); // 장바구니에 새로운 상품 담기
-          if (result < 1) {
-            System.out.println("장바구니에 새로운 상품 담기 실패");
-          }
-        } else {
-          int result = uStoreService.increaseProductCountUp(cart); // 장바구니에 있는 상품을 담으면 해당 상품 수량 증가
-          if (result < 1) {
-            System.out.println("장바구니에 있는 상품 수량 변경 실패");
-          }
-        }
-      } else {
-        return "/member/loginView.yh";
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return "";
-  }
+	@Autowired
+	UserStoreService uStoreService;
 
-  /**
-   * 장바구니에서 상품 수량 변경
-   * 
-   * @param request
-   * @param cart
-   * @return
-   */
-  @ResponseBody
-  @RequestMapping(value = "/store/cart/modifyProductCount.yh", method = RequestMethod.POST)
-  public String cartModifyProductCount(HttpServletRequest request, @ModelAttribute Cart cart) {
-    try {
-      HttpSession session = request.getSession();
-      Member member = (Member) session.getAttribute("loginUser");
-      if (member != null) {
-        cart.setMemberId(member.getMemberId());
-        int result = uStoreService.modifyProductCountInCart(cart);
-        if (result < 1) {
-          System.out.println("장바구니에 있는 상품 수량 변경 실패");
-        }
-      } else {
-        return "/member/loginView.yh";
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return "";
-  }
+	/**
+	 * 장바구니에 상품 담기
+	 * 
+	 * @param request
+	 * @param cart
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/store/cart/addProduct.yh", method = RequestMethod.POST)
+	public String cartAddProduct(HttpServletRequest request, @ModelAttribute Cart cart) {
+		try {
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("loginUser");
+			if (member != null) {
+				cart.setMemberId(member.getMemberId());
+				int count = uStoreService.checkProductInCart(cart); // 장바구니에 같은 상품 있는지 체크
+				if (count == 0) {
+					int result = uStoreService.addNewProductToCart(cart); // 장바구니에 새로운 상품 담기
+					if (result < 1) {
+						LOGGER.info("장바구니에 새로운 상품 담기 실패");
+					}
+				} else {
+					int result = uStoreService.increaseProductCountUp(cart); // 장바구니에 있는 상품을 담으면 해당 상품 수량 증가
+					if (result < 1) {
+						LOGGER.info("장바구니에 있는 상품 수량 변경 실패");
+					}
+				}
+			} else {
+				return "/member/loginView.yh";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
 
-  /**
-   * 장바구니에서 상품 삭제
-   * 
-   * @param request
-   * @param cartNoList
-   * @param mv
-   * @return
-   */
-  @ResponseBody
-  @RequestMapping(value = "/store/cart/deleteProducts.yh", method = RequestMethod.POST)
-  public String cartDeleteProducts(HttpServletRequest request, @RequestParam("cartNoList[]") List<Integer> cartNoList) {
-    try {
-      HttpSession session = request.getSession();
-      Member member = (Member) session.getAttribute("loginUser");
-      if (member != null) {
-        int result = uStoreService.deleteProductsInCart(cartNoList);
-        if (result < 1) {
-          return "";
-        }
-      } else {
-        return "/member/loginView.yh";
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return "/store/cart.yh";
-  }
+	/**
+	 * 장바구니에서 상품 수량 변경
+	 * 
+	 * @param request
+	 * @param cart
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/store/cart/modifyProductCount.yh", method = RequestMethod.POST)
+	public String cartModifyProductCount(HttpServletRequest request, @ModelAttribute Cart cart) {
+		try {
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("loginUser");
+			if (member != null) {
+				cart.setMemberId(member.getMemberId());
+				int result = uStoreService.modifyProductCountInCart(cart);
+				if (result < 1) {
+					LOGGER.info("장바구니에 있는 상품 수량 변경 실패");
+				}
+			} else {
+				return "/member/loginView.yh";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
 
-  /**
-   * 스토어 페이지
-   * 
-   * @param request
-   * @param mv
-   * @return
-   */
-  @RequestMapping(value = "/store.yh")
-  public ModelAndView storeList(HttpServletRequest request, ModelAndView mv) {
-    try {
-      List<Product> productList = uStoreService.printAllProductList();
-      List<ProductType> productTypeList = uStoreService.printAllProductTypeList();
-      if (!productList.isEmpty() && !productTypeList.isEmpty()) {
-        mv.addObject("productList", productList);
-        mv.addObject("productTypeList", productTypeList);
-        mv.setViewName("user/store/storeList");
-      } else {
-        System.out.println("상품 리스트 불러오기 실패");
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return mv;
-  }
+	/**
+	 * 장바구니에서 상품 삭제
+	 * 
+	 * @param request
+	 * @param cartNoList
+	 * @param mv
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/store/cart/deleteProducts.yh", method = RequestMethod.POST)
+	public String cartDeleteProducts(HttpServletRequest request,
+			@RequestParam("cartNoList[]") List<Integer> cartNoList) {
+		try {
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("loginUser");
+			if (member != null) {
+				int result = uStoreService.deleteProductsInCart(cartNoList);
+				if (result < 1) {
+					return "";
+				}
+			} else {
+				return "/member/loginView.yh";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/store/cart.yh";
+	}
 
-  /**
-   * 상품 상세 페이지
-   * 
-   * @param productNo
-   * @param mv
-   * @return
-   */
-  @RequestMapping(value = "/store/detail.yh")
-  public ModelAndView storeDetail(int productNo, ModelAndView mv) {
-    try {
-      Product product = uStoreService.printOneProduct(productNo);
-      mv.addObject("product", product);
-      mv.setViewName("user/store/storeDetail");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return mv;
-  }
+	/**
+	 * 스토어 페이지
+	 * 
+	 * @param request
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping(value = "/store.yh")
+	public ModelAndView storeList(HttpServletRequest request, ModelAndView mv) {
+		try {
+			List<Product> productList = uStoreService.printAllProductList();
+			List<ProductType> productTypeList = uStoreService.printAllProductTypeList();
+			if (!productList.isEmpty() && !productTypeList.isEmpty()) {
+				mv.addObject("productList", productList);
+				mv.addObject("productTypeList", productTypeList);
+				mv.setViewName("user/store/storeList");
+			} else {
+				LOGGER.info("상품 리스트 불러오기 실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
 
-  /**
-   * 장바구니 페이지
-   * 
-   * @param request
-   * @param mv
-   * @return
-   */
-  @RequestMapping(value = "/store/cart.yh")
-  public ModelAndView storeCart(HttpServletRequest request, ModelAndView mv) {
-    try {
-      HttpSession session = request.getSession();
-      Member member = (Member) session.getAttribute("loginUser");
-      if (member != null) {
-        List<Cart> cartList = uStoreService.printMyCartList(member.getMemberId());
-        mv.addObject("cartList", cartList);
-        mv.setViewName("user/store/storeCart");
-      } else {
-        mv.setViewName("redirect:/member/loginView.yh");
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return mv;
-  }
+	/**
+	 * 상품 상세 페이지
+	 * 
+	 * @param productNo
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping(value = "/store/detail.yh")
+	public ModelAndView storeDetail(int productTypeNo, int productNo, ModelAndView mv) {
+		try {
+			Product product = uStoreService.printOneProduct(productNo);
+			mv.addObject("productTypeNo", productTypeNo);
+			mv.addObject("product", product);
+			mv.setViewName("user/store/storeDetail");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
+	/**
+	 * 장바구니 페이지
+	 * 
+	 * @param request
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping(value = "/store/cart.yh")
+	public ModelAndView storeCart(HttpServletRequest request, ModelAndView mv) {
+		try {
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("loginUser");
+			if (member != null) {
+				List<Cart> cartList = uStoreService.printMyCartList(member.getMemberId());
+				if (!cartList.isEmpty()) {
+					mv.addObject("cartList", cartList);
+				}
+				mv.setViewName("user/store/storeCart");
+			} else {
+				mv.setViewName("redirect:/member/loginView.yh");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
 
-  /**
-   * 스토어 구매
-   * 
-   * @param request
-   * @param productNo
-   * @param cartNoList
-   * @param mv
-   * @return
-   */
-  @RequestMapping(value = "/store/buy.yh")
-  public ModelAndView storebuy(HttpServletRequest request,
-      @RequestParam(value = "productNo", required = false) Integer productNo,
-      @RequestParam(value = "cartNoList[]", required = false) List<Integer> cartNoList, ModelAndView mv) {
-    try {
-      HttpSession session = request.getSession();
-      Member member = (Member) session.getAttribute("loginUser");
-      if (member != null) {
-        
-        if (productNo != null && cartNoList.isEmpty()) {
-          Product product = uStoreService.printOneProduct(productNo);
-          if (product != null) {
-            System.out.println(product.toString());
-            mv.addObject("product", product);
-          } else {
-            System.out.println("상품 불러오기 실패");
-          }
-        } else if (!cartNoList.isEmpty() && productNo == null) {
-          List<Cart> cartList = uStoreService.printCheckedCartList(cartNoList);
-          if (!cartList.isEmpty()) {
-            System.out.println(cartList.toString());
-            mv.addObject("cartList", cartList);
-          }
-        } else {
-          System.out.println("접근 오류");
-        }
-        mv.setViewName("user/store/storeBuy");
-      } else {
-        mv.setViewName("redirect:/member/loginView.yh");
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return mv;
-  }
+	/**
+	 * 스토어 구매
+	 * 
+	 * @param request
+	 * @param productNo
+	 * @param cartNoList
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping(value = "/store/buy.yh", method = RequestMethod.POST)
+	public ModelAndView storeBuy(HttpServletRequest request,
+			@RequestParam(value = "productNo", required = false) Integer productNo,
+			@RequestParam(value = "productCount", required = false) Integer productCount,
+			@RequestParam(value = "cartNoList[]", required = false) List<Integer> cartNoList, ModelAndView mv) {
+		try {
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("loginUser");
+			if (member != null) {
+				if (productNo != null && cartNoList == null) {
+					Product product = uStoreService.printOneProduct(productNo);
+					if (product != null) {
+						mv.addObject("product", product);
+						if (productCount != null) {
+							mv.addObject("productCount", productCount);
+						} else {
+							mv.addObject("productCount", 1);
+						}
+					} else {
+						LOGGER.info("상품 불러오기 실패");
+					}
+				} else if (cartNoList != null && productNo == null) {
+					List<Cart> cartList = uStoreService.printCheckedCartList(cartNoList);
+					if (!cartList.isEmpty()) {
+						mv.addObject("cartList", cartList);
+					} else {
+						LOGGER.info("장바구니 불러오기 실패");
+					}
+				} else {
+					LOGGER.info("접근 오류");
+				}
+				mv.setViewName("user/store/storeBuy");
+			} else {
+				mv.setViewName("redirect:/member/loginView.yh");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
 
-  // 스토어 결제
-  @RequestMapping(value = "/store/pay.yh", method = RequestMethod.POST)
-  public ModelAndView storePay(ModelAndView mv) {
+	// 스토어 결제
+	@RequestMapping(value = "/store/pay.yh", method = RequestMethod.POST)
+	public ModelAndView storePay(ModelAndView mv) {
 
-    mv.addObject("");
-    mv.setViewName("");
-    return mv;
-  }
+		return mv;
+	}
 
-  // 스토어 결제 완료 페이지
-  @RequestMapping(value = "/store/pay/complete.yh")
-  public ModelAndView storeComplete(ModelAndView mv) {
-    mv.setViewName("user/store/storeComplete");
-    return mv;
-  }
+	// 스토어 결제 완료 페이지
+	@RequestMapping(value = "/store/pay/complete.yh")
+	public ModelAndView storeComplete(ModelAndView mv) {
+		mv.setViewName("user/store/storeComplete");
+		return mv;
+	}
 
 }

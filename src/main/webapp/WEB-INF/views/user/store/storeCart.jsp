@@ -55,20 +55,26 @@
           <div>수량</div>
           <div>구매금액</div>
         </div>
-        <div id="gbody-cart-list">
-        <c:forEach items="${cartList }" var="cart">
-          <div class="checkbox-area"><input type="checkbox" class="check-one-product cart-no" value="${cart.cartNo }" <c:if test="${cart.productStatus eq 'N' }">checked disabled</c:if> /></div>
-          <div><img src="/resources/images/storeProduct/${cart.productImgRename }" alt="상품사진" /></div>
-          <div class="cart-product-name">${cart.productName }</div>
-          <div class="cart-price">${cart.productPrice }</div>
-          <div class="count-area">
-            <input type="number" name="productCount" min="1" max="10" step="1" value="${cart.productCount }" <c:if test="${cart.productStatus eq 'N' }">disabled</c:if> />
-            <button class="btn-change-count" <c:if test="${cart.productStatus eq 'N' }">disabled</c:if>>변경</button>
+        <c:if test="${cartList ne null }">
+          <div id="gbody-cart-list">
+            <c:forEach items="${cartList }" var="cart">
+              <div class="checkbox-area"><input type="checkbox" class="check-one-product cart-no" value="${cart.cartNo }" <c:if test="${cart.productStatus eq 'N' }">checked disabled</c:if> /></div>
+              <div><img src="/resources/images/storeProduct/${cart.productImgRename }" alt="상품사진" /></div>
+              <div class="cart-product-name">${cart.productName }</div>
+              <div class="cart-price">${cart.productPrice }</div>
+              <div class="count-area">
+                <input type="number" name="productCount" min="1" max="10" step="1" value="${cart.productCount }" <c:if test="${cart.productStatus eq 'N' }">disabled</c:if> />
+                <button class="btn-change-count" <c:if test="${cart.productStatus eq 'N' }">disabled</c:if>>변경</button>
+              </div>
+              <div class="cart-price product-price-per-count">${cart.productPrice * cart.productCount }</div>
+            </c:forEach>
           </div>
-          <div class="cart-price product-price-per-count">${cart.productPrice * cart.productCount }</div>
-          </c:forEach>
-        </div>
-        <button id="btn-cart-delete">삭제</button>
+          <button id="btn-cart-delete">삭제</button>
+        </c:if>
+        <c:if test="${cartList eq null }">
+          <div id="msg-cart-empty">장바구니에 상품이 없습니다.</div>
+        </c:if>
+        
       </div>
       <div id="store-cart-price">
         <div id="ghead-cart-price">
