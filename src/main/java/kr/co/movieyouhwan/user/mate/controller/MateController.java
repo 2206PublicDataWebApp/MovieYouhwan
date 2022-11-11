@@ -1,7 +1,9 @@
 package kr.co.movieyouhwan.user.mate.controller;
 
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,24 +15,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.movieyouhwan.admin.cinema.service.AdminCinemaService;
-import kr.co.movieyouhwan.user.cinema.domain.Cinema;
 import kr.co.movieyouhwan.user.mate.domain.CinemaOption;
 import kr.co.movieyouhwan.user.mate.domain.GenreOption;
 import kr.co.movieyouhwan.user.mate.domain.Survey;
 import kr.co.movieyouhwan.user.mate.service.MateService;
 import kr.co.movieyouhwan.user.member.domain.Member;
+import net.datafaker.Faker;
 
 @Controller
 public class MateController {
-	@Autowired
-	private AdminCinemaService aCinemaService;
 	
 	@Autowired
 	private MateService mService;
 	
 	@RequestMapping(value="/mate/startMate.yh")
 	public String startMate() {
+		Faker faker=new Faker(new Locale("ko"));
+		Faker faker_us=new Faker();
+		String name=faker.name().name();
+		name=name.replace(" ", "");
+		System.out.println(name);
+		String id=faker.expression("#{regexify '[a-z]{1}[a-z0-9]{5,11}'}");
+		System.out.println(id+" length :"+id.length());
+		String birth=faker.expression("#{regexify '(19[6-9][0-9]|200[0-3])(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9])'}");
+		System.out.println(birth);
+		String gender=faker.expression("#{options.option '여','남'}");
+		System.out.println(gender);
+		String phone=faker.expression("#{regexify '010[0-9]{8}'}");
+		System.out.println(phone);
+		String email=faker_us.internet().emailAddress();
+		System.out.println(email);
+		
+		
+		
 		return "user/mate/mateAgree";
 	}
 	
@@ -112,10 +129,24 @@ public class MateController {
 			@RequestParam("cinemaName") String cinemaName,
 			@RequestParam("genreList") List<String> genreList) {
 		
-		Survey survey=new Survey();
-		survey.setGender(gender);
-		survey.setAge(age);
-		survey.setCinemaName(cinemaName);
+		HttpSession session=request.getSession();
+		Member member=(Member)session.getAttribute("loginUser");
+		if(member!=null) {
+			String memberId=member.getMemberId();
+			Survey survey=new Survey(); 
+			survey.setGender(gender);
+			survey.setAge(age);
+			survey.setCinemaName(cinemaName);
+			survey.setMemberId(memberId);
+			int result=mService.registerSurvey(survey);
+			if (result>0) {
+				Integer surveyNo=mService.printSurveyNo(memberId);
+				if(surveyNo>0) {
+					result=mService.registerSurveyGenre(surveyNo, genreList);
+				}
+			}
+		}
+		
 		
 		System.out.println(gender);
 		System.out.println(age);
@@ -132,5 +163,11 @@ public class MateController {
 	@RequestMapping(value="/mate/Complete.yh", method=RequestMethod.GET)
 	public String mateCompleteView() {
 		return "user/mate/mateComplete";
+	}
+	
+	public void makeFakeData() {
+		Faker faker=new Faker();
+		String name=faker.name().fullName();
+		System.out.println(name);
 	}
 }

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import kr.co.movieyouhwan.user.mate.domain.CinemaOption;
 import kr.co.movieyouhwan.user.mate.domain.GenreOption;
+import kr.co.movieyouhwan.user.mate.domain.Survey;
 
 public interface MateStore {
 
@@ -16,5 +17,11 @@ public interface MateStore {
 	List<CinemaOption> selectCinemaOption(SqlSessionTemplate session);
 
 	List<GenreOption> selectGenreOption(SqlSessionTemplate session);
+
+	int insertSurvey(SqlSessionTemplate session, Survey survey);
+
+	int selectSurveyNo(SqlSessionTemplate session, String memberId);
+
+	int insertSurveyGenre(SqlSessionTemplate session, Integer surveyNo, List<String> genreList);
 
 }
