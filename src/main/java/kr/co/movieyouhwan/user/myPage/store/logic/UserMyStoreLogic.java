@@ -1,9 +1,12 @@
 package kr.co.movieyouhwan.user.myPage.store.logic;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.myPage.domain.Zzim;
 import kr.co.movieyouhwan.user.myPage.store.UserMyStore;
 @Repository
 public class UserMyStoreLogic implements UserMyStore{
@@ -35,4 +38,24 @@ public class UserMyStoreLogic implements UserMyStore{
 		Member member = session.selectOne("MemberMapper.selectOneByDetailId", memberId);
 		return null;
 	}
+	
+	/**
+	 * 영화찜 페이징
+	 */
+	@Override
+	public int selectPrintZzimCount(SqlSessionTemplate session) {
+		int count = session.selectOne("MemberMapper.selectZzimCount");
+		return count;
+	}
+	
+	/**
+	 * 영화찜 목록
+	 */
+	@Override
+	public List<Zzim> selectAllZzimMovie(SqlSessionTemplate session) {
+		List<Zzim> uZzimList = session.selectList("MemberMapper.selectAllZzimMovie");
+		return uZzimList;
+	}
+	
+
 }

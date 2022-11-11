@@ -45,7 +45,7 @@
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreBuy" alias="StoreBuy"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreCancel" alias="StoreCancel"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StorePay" alias="StorePay"/>
-		<typeAlias type="kr.co.movieyouhwan.user.myPage.domain.My" alias="My"/>
+		<typeAlias type="kr.co.movieyouhwan.user.myPage.domain.Zzim" alias="Zzim"/>
 	</typeAliases>
 	
 	<mappers>

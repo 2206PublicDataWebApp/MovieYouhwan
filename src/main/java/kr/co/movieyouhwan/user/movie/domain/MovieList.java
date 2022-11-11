@@ -11,7 +11,7 @@ public class MovieList {
 	private String movieImgName;
 	private String movieImgRename;
 	private String movieImgPath;
-	
+	private String memberId;
 	public MovieList() {}
 
 	public MovieList(int movieNo, String movieTitle, String movieAge, Date movieStartday, Date movieEndday,
@@ -89,6 +89,15 @@ public class MovieList {
 
 	public void setMovieImgPath(String movieImgPath) {
 		this.movieImgPath = movieImgPath;
+	}
+
+	
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	@Override
