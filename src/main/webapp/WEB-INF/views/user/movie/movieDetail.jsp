@@ -40,14 +40,16 @@
 				</c:if>
 				<img src="/resources/images/movie/15.jpg" width="30px" >
 			</div>
-			<!-- 영화 리뷰 작성 후 영화 평균 평점 추가해주시면 됩니다 ~ -->
+			<!-- 영화 리뷰 작성 후 영화 평균 평점 추가해주시면 됩니다 ~ (to.은혜) -->
 			<!-- 영화 평점 영역 -->
-			<div>
-				<p>관람객 평점 : </p>
-			</div>
-			<!-- 누적 관객수 (추후 구현 예정)  -->
-			<div>
-				<p>누적 관객수 : 명</p>
+			<div class="grade-see-wrapper">
+				<div class="grade-wrap">
+					<p>관람객 평점 : </p>
+				</div>
+				<!-- 누적 관객수 (추후 구현 예정)  -->
+				<div>
+					<p>누적 관객수 : 명</p>
+				</div>
 			</div>
 			<hr>
 			<div id="movie-information">
@@ -59,20 +61,25 @@
 				<p class="detail-actor">배우 : ${movie.movieActor }</p>
 			</div>
 			<div id="detail-button">
-				<button class="go-movieList" onclick="javascript:history.go(-1);">목록</button>
+				<button class="go-movieList" onclick="location.href='/movieTicketTime.yh'">예매하기</button>
+				<button class="go-movieList" onclick="javascript:history.go(-1);">목록으로</button>
+				<!-- 영화 찜하기 기능 추가해주시면됩니다. (to.은선언니) -->
 			</div>	
 		</div>
-		<hr>
 		<!-- 정보, 리뷰 구분 탭 -->
-		<div>
-			<button id="movie-information-tab">영화 정보</button>
-			<button id="movie-review-tab">영화 리뷰</button>
+		<div class="movie-tab-wrapper">
+			<button class="movie-tab-on" onclick="/movieDetail.yh?movieNo=${movieNo}">영화 정보</button>
+			<button class="movie-tab-off">영화 리뷰</button>
 		</div>
 		<!-- 하단 영역 시작 -->
+		<!-- 줄거리 영역 -->
 		<div class="detail-moviecontent">
 			<h4 id="content-text">간편 줄거리</h4>
 			<p id="content-detail">${movie.movieContent }</p>
 		</div>
+		<!-- 통계(도표) 기능 추가 -->
+		
+		<!-- 영화 영상 영역 -->
 		<div class="detail-moviecontent">
 			<h4 id="video-text">영화 영상</h4>
 			<c:forEach items="${mvList }" var="movieVideo" varStatus="i">

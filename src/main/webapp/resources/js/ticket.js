@@ -20,10 +20,13 @@ function cinemaNameChoice(cinemaNo) {
 			const movie = JSON.parse(result.mList);
 			var listWrap = $('.movie-name-wrap').html('');
 			for(var m in movie) {
+				var movieTitle = movie[m].movieTitle;
 				var movieBoxTag = $('<div class="movie-name-outside"></div>');
-				var movieTitleTag = $('<p class="title-text" onclick="ticketMovieday()"></p>');
-				movieTitleTag.text(movie[m].movieTitle);
+				var movieLabelTag = $('<label for="ticket-name'+m+'" class="title-text">' + movieTitle + '</label>')
+				var movieTitleTag = $('<input type="radio" id="ticket-name'+m+'" name="movieTitle" value="" onclick="ticketMovieday()"/>');
+				$('input[name=movieTitle]').attr('value', movieTitle);
 				
+				movieBoxTag.append(movieLabelTag);
 				movieBoxTag.append(movieTitleTag);
 				listWrap.append(movieBoxTag);
 			}
@@ -35,5 +38,8 @@ function cinemaNameChoice(cinemaNo) {
 }
 
 function ticketMovieday() {
-	alert("성공!");
+	var movieTitleVal = $('input[name="movieTitle"]:checked').val();
+	var divTag = $('.ticket-movie-name');
+	$(divTag).children('p').remove();
+	$(divTag).append('<p>' + movieTitleVal + '</p>');
 }

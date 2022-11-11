@@ -909,3 +909,31 @@
 	background-color :#0F1A3B;
 	border : solid 1px #0F1A3B;
 }
+
+/* movieDetail */
+.grade-see-wrapper {
+	margin-top : 25px;
+	margin-bottom : 25px;
+}
+	.grade-wrap {
+		float : left;
+		margin-right : 80px;
+	}
+.movie-tab-wrapper {
+	display : flex;
+	margin-top : 30px;
+}
+.movie-tab-on {
+	width : 50%;
+	height : 40px;
+	color: white;
+	background-color :#0F1A3B;
+	border : solid 1px #0F1A3B;
+}
+.movie-tab-off {
+	width : 50%;
+	height : 40px;
+	color: #0F1A3B;
+	background-color :white;
+	border : solid 1px #0F1A3B;
+}

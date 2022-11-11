@@ -59,9 +59,10 @@
 				</div>
 				<!-- 영화 제목 리스트 -->
 				<div class="movie-name-wrap">
-					<c:forEach items="${mList }" var="movie">
+					<c:forEach items="${mList }" var="movie" varStatus="i">
 						<div class="movie-name-outside">
-							<p class="movie-name-text" onclick="ticketMovieday()">${movie.movieTitle }</p>
+							<label for="ticket-name${i.count }" class="cinema-name-text">${movie.movieTitle }</label>
+							<input type="radio" id="ticket-name${i.count }" class="" name="movieTitle" value="${movie.movieNo }" />
 						</div>
 					</c:forEach>
 				</div>
