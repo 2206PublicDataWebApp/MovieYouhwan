@@ -1,5 +1,7 @@
 package kr.co.movieyouhwan.user.myPage.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.movieyouhwan.common.page.PageInfo;
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.myPage.domain.Zzim;
 import kr.co.movieyouhwan.user.myPage.service.UserMyService;
 
 @Controller
@@ -43,15 +48,16 @@ public class UserMyController {
 		return mv;
 	}
 		
-	/**
-	 * 마이페이지 상단
-	 * 기능 구현 전
-	 * @return
-	 */
-	@RequestMapping(value="/my/myPage.yh", method=RequestMethod.GET)
-	public String myPageView() {
-		return"/user/mypage/myPage";
-	}
+//	/**
+//	 * 마이페이지 상단
+//	 * 기능 구현 전
+//	 * @return
+//	 */
+//	@RequestMapping(value="/my/myPage.yh", method=RequestMethod.GET)
+//	public String myPageView() {
+//		return"/user/mypage/myPage";
+//	}
+	
 	/**
 	 * 관람내역 
 	 * 기능 구현 전
@@ -61,13 +67,36 @@ public class UserMyController {
 	public String movieHistory() {
 		return"/user/mypage/movieHistory";
 	}
+	
 	/**
-	 * 찜한 영화
+	 * 찜
+	 */
+//	@ResponseBody
+//	@RequestMapping(value = "/my/insertZzim.yh",method = RequestMethod.POST)
+//	public int insertZzim(
+//			HttpServletRequest request
+//			, @ModelAttribute Zzim zzim) throws Exception{
+//		int zzimNo = Integer.parseInt(request.getParameter("zzimNo"));
+//
+//	}
+	
+	/**
+	 * 찜한 영화 목록
 	 * @return
 	 */
 	@RequestMapping(value="/my/zzim.yh", method=RequestMethod.GET)
-	public String movieZzim() {
-		return"/user/mypage/zzim";
+	public ModelAndView movieZzim(
+			ModelAndView mv
+			, @RequestParam(value = "currentPage", required = false) Integer currentPage
+			, @ModelAttribute Member member) {
+		// 페이징 처리
+		int page = (currentPage != null ? currentPage : 1);
+		PageInfo pageInfo = new PageInfo(page, uMyService.printZzimCount(), 12, 5);
+		List<Zzim> uZzimList = uMyService.printAllZzimMovie();
+		mv.addObject("pageInfo", pageInfo);
+		mv.addObject("uZzimList", uZzimList);
+		mv.setViewName("/user/mypage/zzim");
+		return mv;
 	}
 	/**
 	 * 포인트 조회

@@ -26,7 +26,13 @@
 		<result property="mateRestartDate" column="MATE_RESTART_DATE"/>
 		<result property="memberType" column="MEMBER_TYPE"/>
 	</resultMap>
-	
+	<resultMap type="Zzim" id="zzimResultMap">
+		<id property="zzimNo" column="ZZIM_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="movieNo" column="MOVIE_NO"/>
+		<result property="zzimDate" column="ZZIM_DATE"/>
+	</resultMap>
+
 	
 	<!-- 회원가입 -->
 	<insert id="insertMember">
@@ -105,5 +111,16 @@
 		SELECT * FROM MEMBER_TBL
 		WHERE MEMBER_ID = #{memberId } AND MEMBER_YN = 'Y'
 	</select>
+	
+	
+	<!-- 영화 좋아요  구현 전-->
+	<insert id="createMovieZzim">
+		INSERT INTO ZZIM_TBL (ZZIM_NO, MEMBER_ID, MOVIE_NO, ZZIM_DATE)
+		VALUES (#{zzimNo}, #{MEMBER_ID}, #{movieNo}, SYSDATE)
+	</insert>
+	
+	
+	
+	
 	
 </mapper>

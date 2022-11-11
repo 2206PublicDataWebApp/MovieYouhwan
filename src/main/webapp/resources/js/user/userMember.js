@@ -282,7 +282,7 @@ $('.mail-check-input').keydown(function () {
    
    if(inputCode === code){
       $resultMsg.html('인증번호가 일치합니다.');
-      $resultMsg.css('color','red');
+      $resultMsg.css('color','green');
       $('#email-confirm-btn').attr('disabled',true);
       $('#memberEmail').attr('readonly',true);
    }else{

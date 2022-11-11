@@ -72,7 +72,7 @@
         <button class="myMenu-start">예매내역</button>
         <button class="myMenu">구매내역</button>
         <button class="myMenu">메이트 매칭내역</button>
-        <button class="myMenu">찜한 영화</button>
+        <button class="myMenu" onclick="location.href='/my/zzim.yh'">찜한 영화</button>
         <button class="myMenu-end">문의내역</button>
     </div>
 </div>

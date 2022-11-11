@@ -1,10 +1,13 @@
 package kr.co.movieyouhwan.user.myPage.service.logic;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.myPage.domain.Zzim;
 import kr.co.movieyouhwan.user.myPage.service.UserMyService;
 import kr.co.movieyouhwan.user.myPage.store.UserMyStore;
 @Service
@@ -39,6 +42,24 @@ public class UserMyServiceImpl implements UserMyService{
 		Member member = uMyStore.selectOneByDetailId(session, memberId);
 		return member;
 	}
+	
+	/**
+	 * 영화 찜 페이징 
+	 */
+	@Override
+	public int printZzimCount() {
+		int count = uMyStore.selectPrintZzimCount(session);
+		return count;
+	}
+	/**
+	 * 영화 찜 목록
+	 */
+	@Override
+	public List<Zzim> printAllZzimMovie() {
+		List<Zzim> uZzimList = uMyStore.selectAllZzimMovie(session);
+		return uZzimList;
+	}
+
 
 	
 
