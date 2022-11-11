@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/resources/css/point.css" />
+<link rel="stylesheet" href="/resources/css/user/my/point.css" />
 <link rel="stylesheet" href="/resources/css/myPage.css" />
 <link rel="stylesheet" href="/resources/css/common.css" />
 <link rel="stylesheet" href="/resources/css/header.css" />

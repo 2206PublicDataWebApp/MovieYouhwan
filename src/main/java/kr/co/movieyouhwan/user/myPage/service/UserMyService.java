@@ -20,7 +20,7 @@ public interface UserMyService {
 	public int printZzimCount();
 
 	// 영화 찜 목록
-	public List<Zzim> printAllZzimMovie();
+	public List<Zzim> printAllZzimMovie(String memberId);
 
 
 

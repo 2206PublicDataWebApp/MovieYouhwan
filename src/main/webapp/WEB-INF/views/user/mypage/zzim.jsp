@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,34 +23,56 @@
 <div id="inner-wrap">
     <c:if test="${!empty uZzimList}">
         <div id="conut-wrap">
-            <span id="movie-History">내가 찜한 영화 <span id="movie-count">3</span>건</span>
+            <span id="movie-History">내가 찜한 영화 <span id="movie-count">카운트</span>건</span>
         </div>
         <div class="movie-detail-info">
             <div class="content">
+                <c:forEach items="${uZzimList}" var="zzim" varStatus="i">
+<!-- 이멀전씨 이멀전씨 -->
                 <div class="content-img">
-                    <img class="movie-poster" src="https://img.megabox.co.kr/SharedImg/2022/09/29/OZgzOHC1T6Jg2ZCJW0gzCrzOGUjJAbiP_420.jpg">
+                    <c:if test="${zzim.movieImgName eq '대표이미지.jpg'}">
+                        <img class="movie-poster" src="/resources/images/movieLodeImg/${zzim.movieImgName}">
+                    </c:if>
                 </div>
+<!-- 이멀전씨 이멀전씨 -->
                 <div class="info-wrap-1">
-                    <div class="movie-name">정직한 후보 2<img class="film-rating" src="https://upload.wikimedia.org/wikipedia/commons/0/04/KMRB_B.png?20151112023543"></div>
-                    <div class="mv-info-1">
-                        <div class="detail-wrap">
-                            <div class="info-title">개봉일</div>
-                            <div class="info-details">2022-09-28</div>
-                        </div>
-                        <div class="detail-wrap">
-                            <div class="info-title">감독</div>
-                            <div class="info-details">장유정</div>
-                        </div>
-                        <div class="detail-wrap">
-                            <div class="info-title">출연</div>
-                            <div class="info-details">라미란, 김무열, 윤경호, 박진주, 윤두준</div>
-                        </div>
-                        <div class="detail-wrap">
-                            <div class="info-title">관람객</div>
-                            <div class="info-details">51,584명</div>
+                    <div class="movie-name">
+                        ${zzim.movieTitle}
+                        <c:if test="${zzim.movieAge eq '전체' }">
+								<img class="film-rating" src="/resources/images/movie/전체.jpg"/>
+							</c:if>
+							<c:if test="${zzim.movieAge eq '만12세' }">
+								<img class="film-rating" src="/resources/images/movie/12.jpg"/>
+							</c:if>
+							<c:if test="${zzim.movieAge eq '만15세' }">
+								<img class="film-rating" src="/resources/images/movie/15.jpg"/>
+							</c:if>
+							<c:if test="${zzim.movieAge eq '청불' }">
+								<img class="film-rating" src="/resources/images/movie/청불.jpg"/>
+							</c:if>
+                    </div>
+                        <div class="mv-info-1">
+                            <div class="detail-wrap">
+                                <div class="info-title">개봉일</div>
+                                <div class="info-details">
+                                    <fmt:formatDate value="${zzim.movieStartDay}" pattern="yyyy-MM-dd"/>
+                                </div>
+                            </div>
+                            <div class="detail-wrap">
+                                <div class="info-title">감독</div>
+                                <div class="info-details">${zzim.movieDirector}</div>
+                            </div>
+                            <div class="detail-wrap">
+                                <div class="info-title">출연</div>
+                                <div class="info-details">${zzim.movieActor}</div>
+                            </div>
+                            <div class="detail-wrap">
+                                <div class="info-title">관람객</div>
+                                <div class="info-details">${zzim.movieSee}명</div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </c:forEach>
                 <div class="info-wrap-2">
                     <button class="ticketing-btn">예매하기</button>
                     <a href="#"><i class="fa-solid fa-heart" class="heart-btn"></i></a>
