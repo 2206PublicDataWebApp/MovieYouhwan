@@ -5,6 +5,8 @@ import java.util.List;
 import kr.co.movieyouhwan.user.mate.domain.CinemaOption;
 import kr.co.movieyouhwan.user.mate.domain.GenreOption;
 import kr.co.movieyouhwan.user.mate.domain.Survey;
+import kr.co.movieyouhwan.user.mate.domain.SurveyGenre;
+import kr.co.movieyouhwan.user.member.domain.Member;
 
 public interface MateService {
 
@@ -21,6 +23,12 @@ public interface MateService {
 	int printSurveyNo(String memberId);
 
 	int registerSurveyGenre(Integer surveyNo, List<String> genreList);
+
+	int registerDummyMember(List<Member> dummyMemberList);
+
+	int registerDummySurvey(List<Survey> dummySurveyList);
+
+	int registerDummySurveyGenreList(List<SurveyGenre> dummySurveyGenreList);
 	
 	
 }

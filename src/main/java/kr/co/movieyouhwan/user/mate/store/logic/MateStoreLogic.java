@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 import kr.co.movieyouhwan.user.mate.domain.CinemaOption;
 import kr.co.movieyouhwan.user.mate.domain.GenreOption;
 import kr.co.movieyouhwan.user.mate.domain.Survey;
+import kr.co.movieyouhwan.user.mate.domain.SurveyGenre;
 import kr.co.movieyouhwan.user.mate.store.MateStore;
+import kr.co.movieyouhwan.user.member.domain.Member;
 
 @Repository
 public class MateStoreLogic implements MateStore {
@@ -57,6 +59,24 @@ public class MateStoreLogic implements MateStore {
 		param.put("surveyNo", surveyNo);
 		
 		int result=session.insert("MateMapper.insertSurveyGenre", param);
+		return result;
+	}
+
+	@Override
+	public int insertDummyMember(SqlSessionTemplate session, List<Member> dummyMemberList) {
+		int result=session.insert("MateMapper.insertMemberList", dummyMemberList);
+		return result;
+	}
+
+	@Override
+	public int insertDummySurvey(SqlSessionTemplate session, List<Survey> dummySurveyList) {
+		int result=session.insert("MateMapper.insertSurveyList", dummySurveyList);
+		return result;
+	}
+
+	@Override
+	public int insertDummySurveyGenre(SqlSessionTemplate session, List<SurveyGenre> dummySurveyGenreList) {
+		int result=session.insert("MateMapper.insertSurveyGenreList", dummySurveyGenreList);
 		return result;
 	}
 
