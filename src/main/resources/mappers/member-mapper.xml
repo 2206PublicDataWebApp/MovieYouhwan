@@ -31,6 +31,14 @@
 		<result property="memberId" column="MEMBER_ID"/>
 		<result property="movieNo" column="MOVIE_NO"/>
 		<result property="zzimDate" column="ZZIM_DATE"/>
+		<result property="movieImgName" column="MOVIE_IMG_NAME"/>
+		<result property="movieImgReName" column="MOVIE_IMG_RENAME"/>
+		<result property="movieTitle" column="MOVIE_TITLE"/>
+		<result property="movieAge" column="MOVIE_AGE"/>
+		<result property="movieStartDay" column="MOVIE_STARTDAY"/>
+		<result property="movieDirector" column="MOVIE_DIRECTOR"/>
+		<result property="movieActor" column="MOVIE_ACTOR"/>
+		<result property="movieSee" column="MOVIE_SEE"/>
 	</resultMap>
 
 	
@@ -119,8 +127,27 @@
 		VALUES (#{zzimNo}, #{MEMBER_ID}, #{movieNo}, SYSDATE)
 	</insert>
 	
+		
+	<!-- 영화 찜 목록 -->
+	<select id="selectAllZzimMovie" resultMap="zzimResultMap">
+	SELECT 
+	    z.ZZIM_NO, z.MEMBER_ID, z.MOVIE_NO, z.ZZIM_DATE, 
+	    mi.MOVIE_IMG_NAME, mi.MOVIE_IMG_RENAME, 
+	    mo.MOVIE_TITLE, mo.MOVIE_AGE, mo.MOVIE_STARTDAY, 
+	    mo.MOVIE_DIRECTOR, mo.MOVIE_ACTOR, mo.MOVIE_SEE
+	    FROM ZZIM_TBL z 
+	    JOIN MOVIE_TBL mo 
+	    ON z.MOVIE_NO = mo.MOVIE_NO
+	    JOIN MOVIE_IMG_TBL mi
+	    ON mo.MOVIE_NO = mi.MOVIE_NO
+	    WHERE z.MEMBER_ID = #{memberId} AND MOVIE_IMG_NAME = '대표이미지.jpg'
+	</select>
 	
-	
-	
+	<!-- 영화찜 목록 페이징 -->
+	<select id="selectZzimCount" resultType="_int">
+		SELECT COUNT(*) FROM ZZIM_TBL
+		WHERE ZZIM_DATE 
+		<![CDATA[<=]]> SYSDATE
+	</select>
 	
 </mapper>

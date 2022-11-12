@@ -24,7 +24,7 @@ public interface UserMyStore {
 	public int selectPrintZzimCount(SqlSessionTemplate session);
 
 	// 영화 찜 목록
-	public List<Zzim> selectAllZzimMovie(SqlSessionTemplate session);
+	public List<Zzim> selectAllZzimMovie(SqlSessionTemplate session, String memberId);
 
 
 	

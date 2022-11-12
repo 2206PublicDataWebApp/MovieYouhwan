@@ -52,8 +52,8 @@ public class UserMyStoreLogic implements UserMyStore{
 	 * 영화찜 목록
 	 */
 	@Override
-	public List<Zzim> selectAllZzimMovie(SqlSessionTemplate session) {
-		List<Zzim> uZzimList = session.selectList("MemberMapper.selectAllZzimMovie");
+	public List<Zzim> selectAllZzimMovie(SqlSessionTemplate session, String memberId) {
+		List<Zzim> uZzimList = session.selectList("MemberMapper.selectAllZzimMovie", memberId);
 		return uZzimList;
 	}
 	

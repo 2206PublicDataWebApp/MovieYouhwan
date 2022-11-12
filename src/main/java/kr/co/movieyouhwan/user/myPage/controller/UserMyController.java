@@ -87,15 +87,20 @@ public class UserMyController {
 	@RequestMapping(value="/my/zzim.yh", method=RequestMethod.GET)
 	public ModelAndView movieZzim(
 			ModelAndView mv
+			, HttpServletRequest request
 			, @RequestParam(value = "currentPage", required = false) Integer currentPage
-			, @ModelAttribute Member member) {
+			, @ModelAttribute Member member
+			, @ModelAttribute Zzim zzim) {
+		HttpSession session = request.getSession();
+		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
 		// 페이징 처리
 		int page = (currentPage != null ? currentPage : 1);
 		PageInfo pageInfo = new PageInfo(page, uMyService.printZzimCount(), 12, 5);
-		List<Zzim> uZzimList = uMyService.printAllZzimMovie();
+		List<Zzim> uZzimList = uMyService.printAllZzimMovie(memberId);
 		mv.addObject("pageInfo", pageInfo);
 		mv.addObject("uZzimList", uZzimList);
 		mv.setViewName("/user/mypage/zzim");
+		
 		return mv;
 	}
 	/**

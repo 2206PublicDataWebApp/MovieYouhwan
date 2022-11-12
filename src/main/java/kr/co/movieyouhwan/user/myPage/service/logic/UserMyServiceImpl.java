@@ -55,8 +55,8 @@ public class UserMyServiceImpl implements UserMyService{
 	 * 영화 찜 목록
 	 */
 	@Override
-	public List<Zzim> printAllZzimMovie() {
-		List<Zzim> uZzimList = uMyStore.selectAllZzimMovie(session);
+	public List<Zzim> printAllZzimMovie(String memberId) {
+		List<Zzim> uZzimList = uMyStore.selectAllZzimMovie(session, memberId);
 		return uZzimList;
 	}
 
