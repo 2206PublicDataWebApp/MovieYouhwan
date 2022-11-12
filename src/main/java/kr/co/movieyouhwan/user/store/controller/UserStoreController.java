@@ -52,6 +52,8 @@ public class UserStoreController {
 						LOGGER.info("장바구니에 새로운 상품 담기 실패");
 					}
 				} else {
+					int productCount = uStoreService.checkProductCount(cart.getCartNo());
+					cart.setProductCount(productCount + cart.getProductCount() > 10 ? 10 : cart.getProductCount());
 					int result = uStoreService.increaseProductCountUp(cart); // 장바구니에 있는 상품을 담으면 해당 상품 수량 증가
 					if (result < 1) {
 						LOGGER.info("장바구니에 있는 상품 수량 변경 실패");
@@ -167,7 +169,7 @@ public class UserStoreController {
 		}
 		return mv;
 	}
-	
+
 	/**
 	 * 장바구니 페이지
 	 * 
@@ -196,7 +198,7 @@ public class UserStoreController {
 	}
 
 	/**
-	 * 스토어 구매
+	 * 상품 목록/상세에서 구매
 	 * 
 	 * @param request
 	 * @param productNo
@@ -205,37 +207,24 @@ public class UserStoreController {
 	 * @return
 	 */
 	@RequestMapping(value = "/store/buy.yh", method = RequestMethod.POST)
-	public ModelAndView storeBuy(HttpServletRequest request,
-			@RequestParam(value = "productNo", required = false) Integer productNo,
-			@RequestParam(value = "productCount", required = false) Integer productCount,
-			@RequestParam(value = "cartNoList[]", required = false) List<Integer> cartNoList, ModelAndView mv) {
+	public ModelAndView storeBuyOne(HttpServletRequest request, @RequestParam(value = "productNo") Integer productNo,
+			@RequestParam(value = "productCount", required = false) Integer productCount, ModelAndView mv) {
 		try {
 			HttpSession session = request.getSession();
 			Member member = (Member) session.getAttribute("loginUser");
 			if (member != null) {
-				if (productNo != null && cartNoList == null) {
-					Product product = uStoreService.printOneProduct(productNo);
-					if (product != null) {
-						mv.addObject("product", product);
-						if (productCount != null) {
-							mv.addObject("productCount", productCount);
-						} else {
-							mv.addObject("productCount", 1);
-						}
+				Product product = uStoreService.printOneProduct(productNo);
+				if (product != null) {
+					mv.addObject("product", product);
+					if (productCount != null) {
+						mv.addObject("productCount", productCount);
 					} else {
-						LOGGER.info("상품 불러오기 실패");
-					}
-				} else if (cartNoList != null && productNo == null) {
-					List<Cart> cartList = uStoreService.printCheckedCartList(cartNoList);
-					if (!cartList.isEmpty()) {
-						mv.addObject("cartList", cartList);
-					} else {
-						LOGGER.info("장바구니 불러오기 실패");
+						mv.addObject("productCount", 1);
 					}
 				} else {
-					LOGGER.info("접근 오류");
+					LOGGER.info("상품 불러오기 실패");
 				}
-				mv.setViewName("user/store/storeBuy");
+				mv.setViewName("user/store/storeBuyOne");
 			} else {
 				mv.setViewName("redirect:/member/loginView.yh");
 			}
@@ -245,10 +234,45 @@ public class UserStoreController {
 		return mv;
 	}
 
-	// 스토어 결제
-	@RequestMapping(value = "/store/pay.yh", method = RequestMethod.POST)
-	public ModelAndView storePay(ModelAndView mv) {
+	/**
+	 * 장바구니에서 상품 구매
+	 * @param request
+	 * @param cartNoList
+	 * @return
+	 */
+	@RequestMapping(value = "/store/cart/buy.yh", method = RequestMethod.POST)
+	public ModelAndView storeBuyMany(HttpServletRequest request,
+			@RequestParam(value = "cartNo") int[] cartNoArray, ModelAndView mv) {
+		try {
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("loginUser");
+			if (member != null) {
+				List<Cart> cartList = uStoreService.printCheckedCartList(cartNoArray);
+				if (!cartList.isEmpty()) {
+					mv.addObject("cartList", cartList);
+					mv.setViewName("/user/store/storeBuyMany");
+				} else {
+					LOGGER.info("장바구니 불러오기 실패");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
 
+	// 스토어 결제
+	@ResponseBody
+	@RequestMapping(value = "/store/pay.yh", method = RequestMethod.POST)
+	public ModelAndView storePay(HttpServletRequest request, ModelAndView mv) {
+		try {
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("loginUser");
+			if (member != null) {
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mv;
 	}
 

@@ -112,6 +112,11 @@
 		WHERE MEMBER_ID = #{memberId} AND PRODUCT_NO = #{productNo}
 	</select>
 	
+	<select id="selectProductCount" resultType="_int">
+		SELECT PRODUCT_COUNT FROM CART_TBL
+		WHERE CART_NO = #{cartNo}
+	</select>
+	
 	<!-- 사용자 - 장바구니 조회 -->
 	<select id="selectMyCartList" resultMap="cartResultMap">
 		SELECT CART_NO, MEMBER_ID, PRODUCT_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_COUNT, PRODUCT_IMG_RENAME, PRODUCT_STATUS
@@ -122,7 +127,7 @@
 	<!-- 사용자 - 장바구니에서 선택한 상품 조회 -->
 	<select id="selectCheckedCartList" resultMap="cartResultMap">
 		SELECT * FROM CART_TBL WHERE CART_NO IN
-		<foreach collection="list" item="item" open="(" close=")" separator=",">
+		<foreach collection="array" item="item" open="(" close=")" separator=",">
 		#{item}
 		</foreach>
 	</select>

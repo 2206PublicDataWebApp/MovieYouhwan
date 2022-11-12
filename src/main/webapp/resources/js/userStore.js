@@ -1,5 +1,3 @@
-// import * as pay from './requestPay.js';
-
 // 상품 목록 - 상품 가격에 천 단위로 콤마(,) 삽입
 showCommas($('p.product-price'));
 
@@ -32,45 +30,6 @@ $('.btn-buy-product').click(function () {
     if (confirm('로그인이 필요한 서비스입니다.\n로그인 화면으로 이동하시겠습니까?')) {
       $(location).attr('href', '/member/loginView.yh');
     }
-  }
-});
-
-// TODO: ajax -> 동적 form (근데 form 태그로도 list 보낼 수 있었나?)
-// 장바구니 - 상품 구매
-$('#btn-cart-buy').click(function () {
-  let flag = true;
-  if ($('#profile-user').length) {
-    let cartNoList = [];
-    $('.cart-no:checked').each(function () {
-      if ($(this).is(':disabled')) {
-        let disabledProduct = $(this).parent().next().next().text();
-        alert(disabledProduct + '는 구매 불가능한 상품입니다.\n장바구니에서 삭제한 후 다시 시도해주세요.');
-        flag = false;
-      } else {
-        cartNoList.push($(this).val());
-      }
-    });
-    if (!flag) {
-      return;
-    }
-    if (cartNoList.length > 0) {
-      $.ajax({
-        url: '/store/buy.yh',
-        type: 'POST',
-        data: {
-          cartNoList: cartNoList,
-        },
-        success: function () {},
-        error: function () {
-          alert('문제가 발생했습니다. 다시 시도해주세요.');
-          location.reload();
-        },
-      });
-    } else {
-      alert('구매할 상품을 선택해주세요.');
-    }
-  } else {
-    $(location).attr('href', '/member/loginView.yh');
   }
 });
 
@@ -154,40 +113,40 @@ $('.check-one-product').click(function () {
       checkedCount++;
     }
   });
-  if (checkBoxCount == checkedCount) {
+  if (checkBoxCount === checkedCount) {
     $('#check-all-product').prop('checked', true);
   } else {
     $('#check-all-product').prop('checked', false);
   }
 });
 
-// 장바구니 - 상품 수량 변경
+// 장바구니 - 상품 구매 전 체크
+$('#btn-cart-buy').click(function (e) {
+  if ($('#profile-user').length) {
+    if ($('.cart-no:checked').length) {
+      $('.cart-no:checked').each(function () {
+        if ($(this).is(':disabled')) {
+          let disabledProduct = $(this).parent().next().next().text();
+          alert(disabledProduct + '는 구매 불가능한 상품입니다.\n장바구니에서 삭제한 후 다시 시도해주세요.');
+          e.preventDefault();
+        }
+        let changeBtn = $(this).parent().next().next().next().next().children('button');
+        changeProductCountInCart(changeBtn);
+      });
+    } else {
+      alert('구매할 상품을 선택해주세요.');
+      e.preventDefault();
+    }
+  } else {
+    e.preventDefault();
+    $(location).attr('href', '/member/loginView.yh');
+  }
+});
+
+// 장바구니 - 변경 버튼 클릭 시 상품 수량 변경
 $('.btn-change-count').click(function () {
   if ($('#profile-user').length) {
-    let cartNo = $(this).parent().prev().prev().prev().prev().children('input[type=checkbox]').val();
-    let productCount = $(this).siblings('input[type=number]').val();
-    let productPrice = $(this).parent().prev();
-    let productPricePerCount = $(this).parent().next();
-    $.ajax({
-      url: '/store/cart/modifyProductCount.yh',
-      type: 'POST',
-      data: {
-        cartNo: cartNo,
-        productCount: productCount,
-      },
-      success: function (url) {
-        if (url != '') {
-          $(location).attr('href', '/member/loginView.yh');
-        } else {
-          productPricePerCount.text(strToNum(productPrice.text()) * productCount);
-          showCommas(productPricePerCount);
-        }
-      },
-      error: function () {
-        alert('문제가 발생했습니다. 다시 시도해주세요.');
-        location.reload();
-      },
-    });
+    changeProductCountInCart($(this));
   } else {
     $(location).attr('href', '/member/loginView.yh');
   }
@@ -208,8 +167,7 @@ $('#btn-cart-delete').click(function () {
           cartNoList: cartNoList,
         },
         success: function (url) {
-          if (url == '') {
-            console.log(url);
+          if (url === '') {
             alert('문제가 발생했습니다. 다시 시도해주세요.');
             location.reload();
           } else {
@@ -232,18 +190,6 @@ $('#btn-cart-delete').click(function () {
 // 상품 구매 - 이전 단계로 이동
 $('#btn-buy-prev').click(function () {
   history.back();
-});
-
-// 상품 구매 - 결제하기
-$('#btn-buy-pay').click(function () {
-  console.log('pay!!!!');
-  let payMethod = $('.pay-method').filter(':checked').val();
-  let productName = $('#product-name').text();
-  let totalAmount = strToNum($('#total-pay-amount').text());
-  let memberName = '최현지';
-  let memberPhone = '010-1111-2222';
-
-  requestKgpay(payMethod, productName, totalAmount, memberName, memberPhone);
 });
 
 /**
@@ -287,12 +233,44 @@ function addProductToCart(productNo, productName, productTypeNo, productType, pr
       productImgRename: productImgRename,
     },
     success: function (url) {
-      if (url == '') {
+      if (url === '') {
         if (confirm('장바구니에 상품을 담았습니다.\n장바구니로 이동하시겠습니까?')) {
           $(location).attr('href', '/store/cart.yh');
         }
       } else {
         $(location).attr('href', url);
+      }
+    },
+    error: function () {
+      alert('문제가 발생했습니다. 다시 시도해주세요.');
+      location.reload();
+    },
+  });
+}
+
+// FIXME: 총 상품 금액 부분도 변경
+/**
+ * 장바구니 상품 수량 변경
+ * @param {*} btn
+ */
+function changeProductCountInCart(btn) {
+  let cartNo = btn.parent().prev().prev().prev().prev().children('input[type=checkbox]').val();
+  let productCount = btn.siblings('input[type=number]').val();
+  let productPrice = btn.parent().prev();
+  let productPricePerCount = btn.parent().next();
+  $.ajax({
+    url: '/store/cart/modifyProductCount.yh',
+    type: 'POST',
+    data: {
+      cartNo: cartNo,
+      productCount: productCount,
+    },
+    success: function (url) {
+      if (url != '') {
+        $(location).attr('href', '/member/loginView.yh');
+      } else {
+        productPricePerCount.text(strToNum(productPrice.text()) * productCount);
+        showCommas(productPricePerCount);
       }
     },
     error: function () {
@@ -322,45 +300,106 @@ function buyProduct(name, value) {
   buyForm.submit();
 }
 
-let IMP = window.IMP;
 IMP.init('imp53374831');
 
+// 상품 구매 - 결제하기
+$('#btn-buy-pay').click(function () {
+  if ($('#profile-user').length) {
+    let payMethod = $('.pay-method').filter(':checked').val();
+    if (payMethod) {
+      let pg = payMethod === 'kakaopay' ? 'kakaopay' : 'html5_inicis';
+      let productName;
+      if ($('.product-name').length > 1) {
+        productName = $('.product-name').eq(0).text() + ' 외 ' + ($('.product-name').length - 1);
+      } else {
+        productName = $('.product-name').text();
+      }
+      let totalAmount = strToNum($('#total-pay-amount').text());
+
+      // FIXME: Use AJAX to get memberName, memberPhone, memberEmail from session.loginUser
+      let memberName = '최현지'; // FIXME:
+      let memberPhone = '010-1111-2222'; // FIXME:
+      let memberEmail = 'i0hyeon@naver.com'; // FIXME:
+      requestPay(pg, payMethod, productName, totalAmount, memberName, memberPhone, memberEmail);
+    } else {
+      alert('결제수단을 선택해주세요.');
+    }
+  } else {
+    $(location).attr('href', '/member/loginView.yh');
+  }
+});
+
 /**
- * 일반 결제
+ * 일반 결제, 카카오페이 결제
  * @param {*} payMethod
  * @param {*} productName
  * @param {*} totalAmount
  * @param {*} memberName
  * @param {*} memberPhone
  */
-function requestKgpay(payMethod, productName, totalAmount, memberName, memberPhone) {
+function requestPay(pg, payMethod, productName, totalAmount, memberName, memberPhone, memberEmail) {
   IMP.request_pay(
     {
-      pg: 'inicis',
+      pg: pg,
       pay_method: payMethod, // card(신용카드), trans(실시간계좌이체), vbank(가상계좌)
       merchant_uid: 'store_' + new Date().getTime(),
       name: productName,
       amount: totalAmount,
       buyer_name: memberName,
       buyer_tel: memberPhone,
-      m_redirect_url: '/store/pay/complete.yh',
+      buyer_email: memberEmail,
     },
     function (rsp) {
+      // 결제 성공 시
       if (rsp.success) {
-        let msg = '결제가 완료되었습니다.';
-        $(location).attr('href', '결제 후 url');
-
+        // 결제 검증
         $.ajax({
-          url: '/store/pay.yh',
+          url: '/pay/verify.yh',
           method: 'POST',
           data: {
             imp_uid: rsp.imp_uid,
             merchant_uid: rsp.merchant_uid,
           },
-        });
+          // TODO: Find out what they are
+          // beforeSend: function (xhr) {
+          //   xhr.setRequestHeader(header, token);
+          // },
+        })
+          .done(function (result) {
+            if (rsp.paid_amount === result.response.amount) {
+              alert('결제가 완료되었습니다.');
+              // 결제내역 추가
+              $.ajax({
+                url: '/store/pay.yh',
+                method: 'POST',
+                data: {
+                  productName: result.response.name,
+                  totalAmount: result.response.amount,
+                  payDate: paid_at,
+                  imp_uid: rsp.imp_uid,
+                },
+                // TODO: Find out what they are
+                // beforeSend: function (xhr) {
+                //   xhr.setRequestHeader(header, token);
+                // },
+              })
+                .done(function () {
+                  $(location).attr('href', '/store/pay/complete.yh');
+                })
+                .fail(function (error) {
+                  alert(JSON.stringify(error));
+                });
+            } else {
+              alert('[결제내역 저장 실패] ' + rsp.error_msg);
+            }
+          })
+          .fail(function (error) {
+            alert(JSON.stringify(error));
+            alert('[결제 이상]' + rsp.error_msg);
+          });
       } else {
-        let msg = '결제가 실패하였습니다.';
-        rsp.error_msg;
+        alert('[결제 실패] ' + rsp.error_msg);
+        $(location).attr('href', '/store.yh');
       }
     }
   );
