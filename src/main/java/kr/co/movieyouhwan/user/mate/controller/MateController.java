@@ -1,9 +1,13 @@
 package kr.co.movieyouhwan.user.mate.controller;
 
-
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.movieyouhwan.user.mate.domain.CinemaOption;
 import kr.co.movieyouhwan.user.mate.domain.GenreOption;
 import kr.co.movieyouhwan.user.mate.domain.Survey;
+import kr.co.movieyouhwan.user.mate.domain.SurveyGenre;
 import kr.co.movieyouhwan.user.mate.service.MateService;
 import kr.co.movieyouhwan.user.member.domain.Member;
 import net.datafaker.Faker;
@@ -28,26 +33,84 @@ public class MateController {
 	@Autowired
 	private MateService mService;
 	
-	@RequestMapping(value="/mate/startMate.yh")
-	public String startMate() {
+	private static final ArrayList<String> GENRE_NAMES=new ArrayList<>(Arrays.asList("공포","액션","로맨스","범죄","SF","스릴러","판타지","코미디"));
+	
+	/**
+	 * FAKE DATA 생성
+	 * @throws ParseException
+	 */
+	@RequestMapping(value="/member/dummydata.yh")
+	public void dataFaker() throws ParseException {
 		Faker faker=new Faker(new Locale("ko"));
 		Faker faker_us=new Faker();
-		String name=faker.name().name();
-		name=name.replace(" ", "");
-		System.out.println(name);
-		String id=faker.expression("#{regexify '[a-z]{1}[a-z0-9]{5,11}'}");
-		System.out.println(id+" length :"+id.length());
-		String birth=faker.expression("#{regexify '(19[6-9][0-9]|200[0-3])(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9])'}");
-		System.out.println(birth);
-		String gender=faker.expression("#{options.option '여','남'}");
-		System.out.println(gender);
-		String phone=faker.expression("#{regexify '010[0-9]{8}'}");
-		System.out.println(phone);
-		String email=faker_us.internet().emailAddress();
-		System.out.println(email);
+		List<Member> dummyMemberList=new ArrayList<>();
+		List<Survey> dummySurveyList=new ArrayList<>();
+		List<SurveyGenre> dummySurveyGenreList=new ArrayList<>();
+		SimpleDateFormat formatter=new SimpleDateFormat("yy/MM/dd");
+		List<CinemaOption> cinemaOptionList=mService.printCinemaOption();
+		for(int i=0; i<10; i++) {
+			
+			// id와 password 같음
+			String id=faker.expression("#{regexify '[a-z]{1}[a-z0-9]{5,11}'}");
+			// name과 nickname 같음
+			String name=faker.name().name().replace(" ", "");
+			String birth=faker.date().birthday(20, 60, "YYYYMMdd");
+			String gender=faker.expression("#{options.option '여','남'}");
+			String phone=faker.expression("#{regexify '010[0-9]{8}'}");
+			String email=faker_us.internet().emailAddress();
+			Date signupDate=formatter.parse(faker.date().past(100, TimeUnit.DAYS, "YY/MM/dd"));
+			String level=faker.expression("#{options.option '0','1','2','3','4'}");
+			
+			Member member=new Member();
+			member.setMemberId(id);
+			member.setMemberPwd(id);
+			member.setMemberName(name);
+			member.setMemberNick(name);
+			member.setMemberBirth(birth);
+			member.setMemberGender(gender);
+			member.setMemberPhone(phone);
+			member.setMemberEmail(email);
+			member.setMemberSignUpDate(signupDate);
+			member.setMemberLevel(level);
+			
+			dummyMemberList.add(member);
+			
+			// survey 
+			Survey survey=new Survey();
+			String genderOption=faker.expression("#{options.option '여성','남성', '무관'}");
+			String age=faker.expression("#{options.option '20대', '30대', '40대' '50대 이상'}");
+			
+			survey.setSurveyNo(i);
+			survey.setAge(age);
+			survey.setGender(genderOption);
+			survey.setCinemaName(cinemaOptionList.get(i%cinemaOptionList.size()).getCinemaName());
+			survey.setMemberId(id);
+			
+			ArrayList<String> genres=(ArrayList<String>) GENRE_NAMES.clone();
+			
+			for(int j=3*i; j<3*i+3; j++) {
+				SurveyGenre surveyGenre=new SurveyGenre();
+				surveyGenre.setSurveyGenreNo(j);
+				int genreIdx=faker.random().nextInt(genres.size());
+				surveyGenre.setGenre(genres.get(genreIdx));
+				genres.remove(genreIdx);
+				surveyGenre.setSurveyNo(i);
+				dummySurveyGenreList.add(surveyGenre);
+			}
+			dummySurveyList.add(survey);
+		}
 		
+		int result_member=mService.registerDummyMember(dummyMemberList);
+		int result_survey=mService.registerDummySurvey(dummySurveyList);
+		int result_survey_genre=mService.registerDummySurveyGenreList(dummySurveyGenreList);
 		
-		
+		System.out.println("멤버 dummy insert 결과 : "+result_member);
+		System.out.println("서베이 dummy insert 결과 : "+result_survey);
+		System.out.println("서베이 장르 dummy insert 결과 : "+result_survey_genre);
+	}
+	
+	@RequestMapping(value="/mate/startMate.yh")
+	public String startMate() {
 		return "user/mate/mateAgree";
 	}
 	
@@ -96,11 +159,9 @@ public class MateController {
 				
 				// 에러처리 해야함
 			}
-				
 		}
 		return mv;
 	}
-	
 	
 	//method=RequestMethod.POST , HttpServletRequest request
 	
@@ -143,15 +204,13 @@ public class MateController {
 				Integer surveyNo=mService.printSurveyNo(memberId);
 				if(surveyNo>0) {
 					result=mService.registerSurveyGenre(surveyNo, genreList);
+					System.out.println(result);
+					if(result>0) {
+						
+					}
 				}
 			}
 		}
-		
-		
-		System.out.println(gender);
-		System.out.println(age);
-		System.out.println(cinemaName);
-		System.out.println(genreList.toString());
 		return mv;
 	}
 	

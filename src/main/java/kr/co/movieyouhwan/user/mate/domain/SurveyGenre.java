@@ -2,7 +2,7 @@ package kr.co.movieyouhwan.user.mate.domain;
 
 public class SurveyGenre {
 	private Integer surveyGenreNo;
-	private String gerne;
+	private String genre;
 	private Integer surveyNo;
 	public Integer getSurveyGenreNo() {
 		return surveyGenreNo;
@@ -10,11 +10,11 @@ public class SurveyGenre {
 	public void setSurveyGenreNo(Integer surveyGenreNo) {
 		this.surveyGenreNo = surveyGenreNo;
 	}
-	public String getGerne() {
-		return gerne;
+	public String getGenre() {
+		return genre;
 	}
-	public void setGerne(String gerne) {
-		this.gerne = gerne;
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 	public Integer getSurveyNo() {
 		return surveyNo;
@@ -24,9 +24,12 @@ public class SurveyGenre {
 	}
 	@Override
 	public String toString() {
-		return "SurveyGenre [surveyGenreNo=" + surveyGenreNo + ", gerne=" + gerne + ", surveyNo=" + surveyNo + "]";
+		return "SurveyGenre [surveyGenreNo=" + surveyGenreNo + ", genre=" + genre + ", surveyNo=" + surveyNo + "]";
 	}
-
+	
+	
+	
+	
 	
 	
 }
