@@ -19,6 +19,7 @@ public class Zzim {
 	
 	
 	
+	
 //	들어갈 데이터 모두 적어주기 mapper도 동일
 	public Zzim() {}
 

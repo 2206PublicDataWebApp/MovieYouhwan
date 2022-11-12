@@ -3,6 +3,7 @@ package kr.co.movieyouhwan.user.myPage.store.logic;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
@@ -11,6 +12,8 @@ import kr.co.movieyouhwan.user.myPage.store.UserMyStore;
 @Repository
 public class UserMyStoreLogic implements UserMyStore{
 	
+	@Autowired
+	private SqlSessionTemplate session;
 
 	/**
 	 * 마이페이지
@@ -56,6 +59,7 @@ public class UserMyStoreLogic implements UserMyStore{
 		List<Zzim> uZzimList = session.selectList("MemberMapper.selectAllZzimMovie", memberId);
 		return uZzimList;
 	}
-	
+
+
 
 }

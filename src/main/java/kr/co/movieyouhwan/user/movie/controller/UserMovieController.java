@@ -41,6 +41,7 @@ public class UserMovieController {
 	@Autowired
 	private UserCinemaService uCinemaService;
 	
+	
 	/**
 	 * 현재 상영 영화 목록 화면
 	 * @param mv
