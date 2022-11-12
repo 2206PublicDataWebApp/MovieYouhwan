@@ -131,3 +131,8 @@
 .title-text {
 	color : black;
 }
+.title-radio-button {
+	float : right;
+	margin-top : 15px;
+	margin-right : 10px;
+}

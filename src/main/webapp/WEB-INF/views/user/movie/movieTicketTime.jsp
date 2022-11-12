@@ -38,13 +38,13 @@
 			<!-- 상단 영화관 이름, 영화 이름, 선택 일자 노출 부분 -->
 			<div class="ticket-top">
 				<div class="ticket-cinema-name">
-					<p>무비유환 강남점</p>
+					<p>영화관</p>
 				</div>
 				<div class="ticket-movie-name">
-					<p>공조2</p>
+					<p>영화</p>
 				</div>
 				<div class="ticket-theater-choice">
-					<p>2022-11-06</p>
+					<p>날짜</p>
 				</div>
 			</div>
 			<div class="wrap-inside">
@@ -62,7 +62,7 @@
 					<c:forEach items="${mList }" var="movie" varStatus="i">
 						<div class="movie-name-outside">
 							<label for="ticket-name${i.count }" class="cinema-name-text">${movie.movieTitle }</label>
-							<input type="radio" id="ticket-name${i.count }" class="" name="movieTitle" value="${movie.movieNo }" />
+							<input type="radio" id="ticket-name${i.count }" class="title-radio-button" name="movieTitle" value="${movie.movieNo }" />
 						</div>
 					</c:forEach>
 				</div>
@@ -71,7 +71,7 @@
 				   	<div class="cinema-movie-year-month">
 					   	<div class="year-month">${movieDay.thisYear }년 ${movieDay.thisMonth }월</div>
 						<c:forEach items="${movieDay.tmdayList }" var="tmday" varStatus="i">
-							<button type="button" class="tmday-button">${tmday }</button>
+							<button type="button" class="tmday-button" value="${movieDay.dayList[i.count-1] }" onclick="ticketMovieday(${movieDay.dayList[i.count-1]})">${tmday }</button>
 						</c:forEach>
 						<hr/>
 	   				</div>

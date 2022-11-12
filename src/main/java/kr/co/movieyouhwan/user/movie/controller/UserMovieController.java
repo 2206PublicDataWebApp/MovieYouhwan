@@ -25,6 +25,8 @@ import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
 import kr.co.movieyouhwan.admin.movie.service.AdminMovieService;
 import kr.co.movieyouhwan.common.page.PageInfo;
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
+import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
+import kr.co.movieyouhwan.user.cinema.service.UserCinemaService;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.service.UserMovieService;
 
@@ -36,6 +38,8 @@ public class UserMovieController {
 	private AdminCinemaService aCinemaService;
 	@Autowired
 	private UserMovieService uMovieService;
+	@Autowired
+	private UserCinemaService uCinemaService;
 	
 	/**
 	 * 현재 상영 영화 목록 화면
@@ -194,6 +198,12 @@ public class UserMovieController {
 		return mv;
 	}
 	
+	/**
+	 * 영화 예매 - 영화관, 영화 선택 AJAX
+	 * @param cinemaNo
+	 * @param session
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping(value="/movieTicketTimeCinema.yh", produces="application/json;charset=utf-8", method=RequestMethod.POST)
@@ -207,5 +217,30 @@ public class UserMovieController {
 		JSONObject object = new JSONObject();
 		object.put("mList", gson.toJson(mList));
 		return object.toJSONString();
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping(value="/movieTicketTimeMovie.yh", produces="application/json;charset=utf-8", method=RequestMethod.POST)
+	public String movieTicketTimeChoice(
+			@RequestParam(value="cinemaNo", required=false) Integer cinemaNo,
+			@RequestParam(value="movieNo", required=false) Integer movieNo,
+			@RequestParam(value="movieTitle", required=false) String movieTitle,
+			@RequestParam(value="movieDay", required=false) String movieDay,
+			@RequestParam(value="dayIndex", required=false) Integer dayIndex,
+			HttpSession session) {
+		dayIndex = dayIndex == null ? 0 : dayIndex;
+		// 영화관, 일별 영화 출력 (중복 제외)
+		List<Movie> mList = uCinemaService.printMovieNowOne(cinemaNo, new MovieDay().getMovieDay(dayIndex));
+		// 영화관, 영화, 일별 상영 영화 출력 (중복 포함)
+		List<CinemaMovie> cmList = uCinemaService.printCinemaMovieByDay(cinemaNo, new MovieDay().getMovieDay(dayIndex));
+		Gson gson = new Gson();
+		JSONObject object = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		object.put("mList", gson.toJson(mList));
+		object.put("cmList", gson.toJson(cmList));
+		jsonArray.add(object);
+		return jsonArray.toJSONString();
 	}
 }
