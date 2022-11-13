@@ -32,4 +32,12 @@ public interface MateStore {
 
 	int insertDummySurveyGenre(SqlSessionTemplate session, List<SurveyGenre> dummySurveyGenreList);
 
+	Survey selectSurveyByMemberId(SqlSessionTemplate session, String memberId);
+
+	List<Survey> selectOtherSurveyList(SqlSessionTemplate session, String memberId);
+
+	List<SurveyGenre> selectOtherSurveyGenreList(SqlSessionTemplate session, List<Survey> firstFilteredSurvey);
+
+	List<SurveyGenre> selectSurveyGenreBySurveyNo(SqlSessionTemplate session, Integer surveyNo);
+
 }

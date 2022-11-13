@@ -83,4 +83,28 @@ public class MateServiceImpl implements MateService{
 		return result;
 	}
 
+	@Override
+	public Survey getSurveyByMemberId(String memberId) {
+		Survey survey=mStore.selectSurveyByMemberId(session, memberId);
+		return survey;
+	}
+
+	@Override
+	public List<Survey> getOtherSurveyList(String memberId) {
+		List<Survey> otherSurveyList=mStore.selectOtherSurveyList(session, memberId);
+		return otherSurveyList;
+	}
+
+	@Override
+	public List<SurveyGenre> getFilteredSurveyGenreList(List<Survey> firstFilteredSurvey) {
+		List<SurveyGenre> otherSurveyGenreList=mStore.selectOtherSurveyGenreList(session, firstFilteredSurvey);
+		return otherSurveyGenreList;
+	}
+
+	@Override
+	public List<SurveyGenre> getGenreListBySurveyNo(Integer surveyNo) {
+		List<SurveyGenre> requesterGenreList=mStore.selectSurveyGenreBySurveyNo(session, surveyNo);
+		return requesterGenreList;
+	}
+
 }

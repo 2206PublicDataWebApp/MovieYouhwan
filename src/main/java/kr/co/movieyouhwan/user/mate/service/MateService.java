@@ -29,6 +29,14 @@ public interface MateService {
 	int registerDummySurvey(List<Survey> dummySurveyList);
 
 	int registerDummySurveyGenreList(List<SurveyGenre> dummySurveyGenreList);
-	
+
+	Survey getSurveyByMemberId(String memberId);
+
+	List<Survey> getOtherSurveyList(String memberId);
+
+	List<SurveyGenre> getFilteredSurveyGenreList(List<Survey> firstFilteredSurvey);
+
+	List<SurveyGenre> getGenreListBySurveyNo(Integer surveyNo);
+
 	
 }

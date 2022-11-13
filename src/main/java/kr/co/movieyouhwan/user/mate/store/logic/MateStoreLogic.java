@@ -80,4 +80,28 @@ public class MateStoreLogic implements MateStore {
 		return result;
 	}
 
+	@Override
+	public Survey selectSurveyByMemberId(SqlSessionTemplate session, String memberId) {
+		Survey survey=session.selectOne("MateMapper.selectSurveyByMemberId", memberId);
+		return survey;
+	}
+
+	@Override
+	public List<Survey> selectOtherSurveyList(SqlSessionTemplate session, String memberId) {
+		List<Survey> otherSurveyList=session.selectList("MateMapper.selectOtherSurveyList", memberId);
+		return otherSurveyList;
+	}
+
+	@Override
+	public List<SurveyGenre> selectOtherSurveyGenreList(SqlSessionTemplate session, List<Survey> firstFilteredSurvey) {
+		List<SurveyGenre> otherSurveyGenreList=session.selectList("MateMapper.selectOtherSurveyGenreList", firstFilteredSurvey);
+		return otherSurveyGenreList;
+	}
+
+	@Override
+	public List<SurveyGenre> selectSurveyGenreBySurveyNo(SqlSessionTemplate session, Integer surveyNo) {
+		List<SurveyGenre> requesterGenreList=session.selectList("MateMapper.selectSurveyGenreListBySurveyNo", surveyNo);
+		return requesterGenreList;
+	}
+
 }
