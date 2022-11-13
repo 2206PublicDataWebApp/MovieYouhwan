@@ -27,6 +27,8 @@ public interface UserMyStore {
 	public List<Zzim> selectAllZzimMovie(SqlSessionTemplate session, String memberId);
 
 
+
+
 	
 
 }

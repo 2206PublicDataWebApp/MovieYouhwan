@@ -23,14 +23,14 @@ public class UserMyController {
 	@Autowired 
 	private UserMyService uMyService;
 	
-	/**
-	 * 마이페이지 
-	 * ----- 탑 메뉴(포인트, 메이트)
-	 * ----- 메뉴 탭
-	 * @param request
-	 * @param mv
-	 * @return
-	 */
+/**
+ * 마이페이지 
+ * ----- 탑 메뉴(포인트, 메이트)
+ * ----- 메뉴 탭
+ * @param request
+ * @param mv
+ * @return
+ */
 	@RequestMapping(value = "/my/myPageMain.yh", method = RequestMethod.GET)
 	public ModelAndView showMyPage(HttpServletRequest request, ModelAndView mv) {
 		try {
@@ -48,15 +48,6 @@ public class UserMyController {
 		return mv;
 	}
 		
-//	/**
-//	 * 마이페이지 상단
-//	 * 기능 구현 전
-//	 * @return
-//	 */
-//	@RequestMapping(value="/my/myPage.yh", method=RequestMethod.GET)
-//	public String myPageView() {
-//		return"/user/mypage/myPage";
-//	}
 	
 	/**
 	 * 관람내역 
@@ -68,22 +59,16 @@ public class UserMyController {
 		return"/user/mypage/movieHistory";
 	}
 	
-	/**
-	 * 찜
-	 */
-//	@ResponseBody
-//	@RequestMapping(value = "/my/insertZzim.yh",method = RequestMethod.POST)
-//	public int insertZzim(
-//			HttpServletRequest request
-//			, @ModelAttribute Zzim zzim) throws Exception{
-//		int zzimNo = Integer.parseInt(request.getParameter("zzimNo"));
-//
-//	}
-	
-	/**
-	 * 찜한 영화 목록
-	 * @return
-	 */
+/**
+ * 찜한 영화 목록
+ * 
+ * @param mv
+ * @param request
+ * @param currentPage
+ * @param member
+ * @param zzim
+ * @return
+ */
 	@RequestMapping(value="/my/zzim.yh", method=RequestMethod.GET)
 	public ModelAndView movieZzim(
 			ModelAndView mv
@@ -112,7 +97,7 @@ public class UserMyController {
 		return"/user/mypage/point";
 	}
 	/**
-	 * 회원정보 수정 화면
+	 *  회원정보 수정 화면
 	 * @param request
 	 * @param mv
 	 * @return

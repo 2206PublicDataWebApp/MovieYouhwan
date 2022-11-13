@@ -937,3 +937,33 @@
 	background-color :white;
 	border : solid 1px #0F1A3B;
 }
+#ticketBtn-zzim{
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+	
+}
+.heart-click{
+	margin-top: 20px;
+	margin-left: 20px;
+	padding: 0;
+	
+}
+.heart-notlogin, .emptyHeart, .fullHeart{
+	color: red;
+	margin-top: 20px;
+	margin-left: 20px;
+	padding: 0;
+}
+.heartCount{
+	line-height: 18px;
+	margin-top: 17px;
+	margin-left: 5px;
+	font-size: 9pt;
+}
+#heartWrap{
+	display: flex;
+    align-items: center;
+}

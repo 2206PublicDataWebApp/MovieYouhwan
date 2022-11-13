@@ -39,6 +39,8 @@
 		<result property="movieDirector" column="MOVIE_DIRECTOR"/>
 		<result property="movieActor" column="MOVIE_ACTOR"/>
 		<result property="movieSee" column="MOVIE_SEE"/>
+		<result property="movieZzim" column="MOVIE_ZZIM"/>
+		<result property="zzimNo" column="ZZIM_NO"/>
 	</resultMap>
 
 	
@@ -120,14 +122,6 @@
 		WHERE MEMBER_ID = #{memberId } AND MEMBER_YN = 'Y'
 	</select>
 	
-	
-	<!-- 영화 좋아요  구현 전-->
-	<insert id="createMovieZzim">
-		INSERT INTO ZZIM_TBL (ZZIM_NO, MEMBER_ID, MOVIE_NO, ZZIM_DATE)
-		VALUES (#{zzimNo}, #{MEMBER_ID}, #{movieNo}, SYSDATE)
-	</insert>
-	
-		
 	<!-- 영화 찜 목록 -->
 	<select id="selectAllZzimMovie" resultMap="zzimResultMap">
 	SELECT 
@@ -148,6 +142,39 @@
 		SELECT COUNT(*) FROM ZZIM_TBL
 		WHERE ZZIM_DATE 
 		<![CDATA[<=]]> SYSDATE
+	</select>
+	
+	<!-- 찜 추가 -->
+	<insert id="movieListZzimSave" parameterType="Zzim">
+		INSERT INTO ZZIM_TBL (ZZIM_NO, MEMBER_ID, MOVIE_NO, ZZIM_DATE)
+		VALUES (SEQ_ZZIM_NO.NEXTVAL, #{memberId}, #{movieNo}, SYSDATE)
+	</insert>
+	<update id="movieListZzimUp" parameterType="MovieList">
+		UPDATE MOVIE_TBL SET MOVIE_ZZIM = MOVIE_ZZIM + 1
+		WHERE MOVIE_NO = #{movieNo}
+	</update>
+	
+	<!-- 찜 삭제 -->
+	<delete id="movieListZzimRemove" parameterType="Zzim">
+		DELETE FROM ZZIM_TBL
+		WHERE MOVIE_NO = #{movieNo} AND MEMBER_ID = #{memberId}
+	</delete>
+	<update id="movieListZzimDown" parameterType="MovieList">
+		UPDATE MOVIE_TBL SET MOVIE_ZZIM = MOVIE_ZZIM - 1
+		WHERE MOVIE_NO = #{movieNo}
+	</update>
+	
+	<!-- 찜 추가 / 삭제시 갯수 가져오기 -->
+	<select id="movieListZzimCount" parameterType="MovieList" resultType="MovieList">
+		SELECT MOVIE_ZZIM
+		FROM MOVIE_TBL
+		WHERE MOVIE_NO = #{movieNo}
+	</select>
+	
+	<!-- 최현지 : 결제를 위한 회원 이름, 휴대폰 번호, 이메일 조회 -->
+	<select id="selectBuyerInfo">
+		SELECT MEMBER_NAME, MEMBER_PHONE, MEMBER_EMAIL FROM MEMBER_TBL
+		WHERE MEMBER_ID = #{memberId}
 	</select>
 	
 </mapper>

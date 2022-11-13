@@ -25,16 +25,16 @@
         <div id="conut-wrap">
             <span id="movie-History">내가 찜한 영화 <span id="movie-count">카운트</span>건</span>
         </div>
+        <c:forEach items="${uZzimList}" var="zzim" varStatus="i">
         <div class="movie-detail-info">
+            
             <div class="content">
-                <c:forEach items="${uZzimList}" var="zzim" varStatus="i">
-<!-- 이멀전씨 이멀전씨 -->
+                
                 <div class="content-img">
                     <c:if test="${zzim.movieImgName eq '대표이미지.jpg'}">
-                        <img class="movie-poster" src="/resources/images/movieLodeImg/${zzim.movieImgName}">
+                        <img class="movie-poster" src="/resources/images/movieLodeImg/${zzim.movieImgReName}">
                     </c:if>
                 </div>
-<!-- 이멀전씨 이멀전씨 -->
                 <div class="info-wrap-1">
                     <div class="movie-name">
                         ${zzim.movieTitle}
@@ -72,23 +72,36 @@
                             </div>
                         </div>
                     </div>
-                </c:forEach>
+                
                 <div class="info-wrap-2">
-                    <button class="ticketing-btn">예매하기</button>
+                    
+                    <a href="/movieDetail.yh?movieNo=${zzim.movieNo}"class="ticketing-btn" >예매하기</a>
                     <a href="#"><i class="fa-solid fa-heart" class="heart-btn"></i></a>
                 </div>
             </div>
         </div>
+        </c:forEach>
         <div class="padding"></div>
         <div id="paging">
             <ul id="paging-wrap">
-                <li><a href="#">＜</a></li>
-                <li><a href="#">1</a></li>
-                <!-- <li><a href="#">2</a></li>
+                <c:if test="${pageInfo.startPage ne 1 }"><li><a href="/my/zzim.yh?currentPage=${pageInfo.startPage-1 }"></a></li></c:if>
+                <c:forEach var="page" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+	   				<c:if test="${pageInfo.currentPage eq page}">
+	   					<li><a class="currentP" href="#">${page }</a></li>
+	   				</c:if>
+	   				<c:if test="${pageInfo.currentPage ne page }">
+	   					<li><a href="/my/zzim.yh?currentPage=${page }">${page }</a></li>
+	   				</c:if>
+	   				<c:if test="${pageInfo.endPage ne pageInfo.pageCount }">
+	   					<li><a href="/my/zzim.yh?currentPage=${pageInfo.endPage+1 }">&raquo;</a></li>
+	   				</c:if>
+	   			</c:forEach>
+                <!-- <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
                 <li><a href="#">3</a></li>
                 <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li> -->
-                <li><a href="#">＞</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">＞</a></li> -->
             </ul>
         </div>
     </c:if>
