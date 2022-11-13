@@ -11,9 +11,32 @@
 		<result property="age" column="AGE"/>
 		<result property="cinemaName" column="CINEMA_NAME"/>
 		<result property="memberId" column="MEMBER_ID"/>
+		<result property="memberBirth" column="MEMBER_BIRTH"/>
+		<result property="memberGender" column="MEMBER_GENDER"/>
+		<result property="matchingActive" column="MATCHING_ACTIVE"/>
 		<result property="createDate" column="CREATE_DATE"/>
 		<result property="updateDate" column="UPDATE_DATE"/>
 		<result property="deleteDate" column="DELETE_DATE"/>
+	</resultMap>
+	
+	<!-- SurveyGenre -->
+	<resultMap type="SurveyGenre" id="surveyGenreResultMap">
+		<id property="surveyGenreNo" column="SURVEY_GENRE_NO"/>
+		<result property="genre" column="GENRE"/>
+		<result property="surveyNo" column="SURVEY_NO"/>
+	</resultMap>
+	
+	<!-- mate option resultMap -->
+	<!-- Cinema -->
+	<resultMap type="CinemaOption" id="cinemaOptionResultMap">
+		<id property="cinemaNo" column="CINEMA_NO"></id>
+		<result property="cinemaName" column="CINEMA_NAME"/>
+	</resultMap>
+	
+	<!-- Genre -->
+	<resultMap type="GenreOption" id="genreOptionResultMap">
+		<id property="genreNo" column="GENRE_NO"/>
+		<result property="genre" column="GENRE"/>
 	</resultMap>
 	
 	<!-- 더미 멤버 리스트 insert -->
@@ -28,7 +51,7 @@
 	<insert id="insertSurveyList" parameterType="java.util.List">
 		INSERT ALL
 		<foreach collection="list" item="survey">
-			INTO SURVEY_TBL VALUES(#{survey.surveyNo}, #{survey.gender}, #{survey.age}, #{survey.cinemaName}, #{survey.memberId}, DEFAULT, NULL, NULL)
+			INTO SURVEY_TBL VALUES(#{survey.surveyNo}, #{survey.gender}, #{survey.age}, #{survey.cinemaName}, #{survey.memberId}, #{survey.memberBirth}, #{survey.memberGender}, DEFAULT, DEFAULT, NULL, NULL)
 		</foreach>
 		SELECT * FROM DUAL
 	</insert>
@@ -43,7 +66,7 @@
 	
 	
 	<insert id="insertSurvey">
-		INSERT INTO SURVEY_TBL VALUES(SEQ_SURVEY_NO.NEXTVAL, #{gender}, #{age}, #{cinemaName}, #{memberId}, DEFAULT, NULL, NULL)
+		INSERT INTO SURVEY_TBL VALUES(SEQ_SURVEY_NO.NEXTVAL, #{gender}, #{age}, #{cinemaName}, #{memberId}, #{memberBirth}, #{memberGender}, DEFAULT, DEFAULT, NULL, NULL)
 	</insert>
 	
 	<update id="updateMateStatusY">
@@ -58,17 +81,28 @@
 		SELECT SURVEY_NO FROM SURVEY_TBL WHERE MEMBER_ID=#{memberId}
 	</select>
 	
+	<select id="selectSurveyByMemberId" resultMap="surveyResultMap">
+		SELECT * FROM SURVEY_TBL WHERE MEMBER_ID=#{memberId}
+	</select>
 	
+	<select id="selectOtherSurveyList" resultMap="surveyResultMap">
+		SELECT * FROM SURVEY_TBL WHERE MATCHING_ACTIVE='Y' AND NOT MEMBER_ID=#{memberId} ORDER BY SURVEY_NO ASC
+	</select>
 	
+	<!-- 성별, 나이, 지점명으로 필터링한 surveyNo 기준으로 SurveyGenre를 select -->
+	<select id="selectOtherSurveyGenreList" resultMap="surveyGenreResultMap" parameterType="java.util.List">
+		SELECT * FROM SURVEY_GENRE_TBL WHERE SURVEY_NO IN
+		<foreach collection="list" item="survey" open="(" close=")" separator=",">
+			#{survey.surveyNo}
+		</foreach>
+		ORDER BY SURVEY_NO ASC, GENRE ASC
+	</select>
 	
+	<select id="selectSurveyGenreListBySurveyNo" resultMap="surveyGenreResultMap">
+		SELECT * FROM SURVEY_GENRE_TBL WHERE SURVEY_NO=#{surveyNo} ORDER BY GENRE ASC
+	</select>
 	
-	<!-- SurveyGenre -->
-	<resultMap type="SurveyGenre" id="surveyGenreResultMap">
-		<id property="surveyGenreNo" column="SURVEY_GENRE_NO"/>
-		<result property="gerne" column="GENRE"/>
-		<result property="surveyNo" column="SURVEY_NO"/>
-	</resultMap>
-	
+	<!-- 사용자가 선택한 장르 옵션 -->
 	<insert id="insertSurveyGenre" parameterType="java.util.HashMap" >
 		INSERT INTO SURVEY_GENRE_TBL(SURVEY_GENRE_NO, GENRE, SURVEY_NO) SELECT SEQ_SURVEY_GENRE_NO.NEXTVAL AS SURVEY_GENRE_NO, A.* FROM
 		(
@@ -77,20 +111,6 @@
 		</foreach>
 		)A
 	</insert>
-	
-	
-	<!-- mate option resultMap -->
-	<!-- Cinema -->
-	<resultMap type="CinemaOption" id="cinemaOptionResultMap">
-		<id property="cinemaNo" column="CINEMA_NO"></id>
-		<result property="cinemaName" column="CINEMA_NAME"/>
-	</resultMap>
-	
-	<!-- Genre -->
-	<resultMap type="GenreOption" id="genreOptionResultMap">
-		<id property="genreNo" column="GENRE_NO"/>
-		<result property="genre" column="GENRE"/>
-	</resultMap>
 	
 	<!-- 자주찾는 영화관 옵션 목록 불러오기 -->
 	<select id="selectCinemaOption" resultMap="cinemaOptionResultMap">

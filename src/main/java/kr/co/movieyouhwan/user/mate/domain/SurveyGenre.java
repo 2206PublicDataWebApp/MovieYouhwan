@@ -4,6 +4,8 @@ public class SurveyGenre {
 	private Integer surveyGenreNo;
 	private String genre;
 	private Integer surveyNo;
+	
+	
 	public Integer getSurveyGenreNo() {
 		return surveyGenreNo;
 	}
