@@ -60,24 +60,27 @@ public class UserMemberServiceImpl implements UserMemberService {
 		List<Member> uMemberList = uMemberStore.findId(session, memberName, memberBirth, memberPhone);
 		return uMemberList;
 	}
-	@Override
-	public List<Member> findPassword(String memberId, String memberPhone) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	
+	
+//	@Override
+//	public int findPassword(String memberId, String memberEmail) {
+//		int result = uMemberStore.findPassword(session, memberId, memberEmail);
+//		//////////////////////////////////////////////////////////////////////////
+//		//////////////이메일인
+//		/////////////////////////////////////////////////////////////
+//        return result;
+//	}
+	
+	
+	
 	@Override
 	public void certifiedPhoneNumber(String memberPhone, int randomNumber) {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	/**
-	 * 패스워드 찾기
-	 */
-//	@Override
-//	public List<Member> findPassword(String memberId, String memberPhone) {
-//		List<Member> mList = uMemberStore.findPassword(session, memberId, memberPhone);
-//		return mList;
+
 //	}
 //	@Override
 //	public void certifiedPhoneNumber(String memberPhone, int randomNumber) {

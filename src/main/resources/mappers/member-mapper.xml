@@ -172,8 +172,8 @@
 	</select>
 	
 	<!-- 최현지 : 결제를 위한 회원 이름, 휴대폰 번호, 이메일 조회 -->
-	<select id="selectBuyerInfo">
-		SELECT MEMBER_NAME, MEMBER_PHONE, MEMBER_EMAIL FROM MEMBER_TBL
+	<select id="selectBuyerInfo" resultMap="memberResultMap">
+		SELECT MEMBER_NAME, MEMBER_PHONE, MEMBER_EMAIL FROM MEMBER_T.BL
 		WHERE MEMBER_ID = #{memberId}
 	</select>
 	

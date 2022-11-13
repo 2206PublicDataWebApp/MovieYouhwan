@@ -23,7 +23,7 @@ public interface UserMemberStore {
 	public List<Member> findId(SqlSessionTemplate session, String memberName, String memberBirth, String memberPhone);
 
 	//패스워드 찾기
-	public List<Member> findPassword(SqlSessionTemplate session, String memberId, String memberPhone);
+//	public List<Member> findPassword(SqlSessionTemplate session, String memberId, String memberPhone);
 
 	
 

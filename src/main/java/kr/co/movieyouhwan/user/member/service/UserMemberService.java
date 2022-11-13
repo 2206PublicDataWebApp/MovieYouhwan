@@ -21,7 +21,7 @@ public interface UserMemberService {
 	public List<Member> findId(String memberName, String memberBirth, String memberPhone);
 
 	// 패스워드 찾기
-	public List<Member> findPassword(String memberId, String memberPhone);
+//	public int findPassword(String memberId, String memberPhone);
 
 	// 휴대폰 인증
 	public void certifiedPhoneNumber(String memberPhone, int randomNumber);
