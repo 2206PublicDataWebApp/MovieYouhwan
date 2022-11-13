@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.store.domain.Cart;
 import kr.co.movieyouhwan.user.store.domain.Product;
 import kr.co.movieyouhwan.user.store.domain.ProductType;
@@ -95,6 +96,13 @@ public class UserStoreServiceImpl implements UserStoreService {
 	public int checkProductCount(int cartNo) {
 		int productCount = uStoreStore.selectProductCount(session, cartNo);
 		return productCount;
+	}
+
+	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
+	@Override
+	public Member printBuyerInfo(String memberId) {
+		Member buyerInfo = uStoreStore.selectBuyerInfo(session, memberId);
+		return buyerInfo;
 	}
 
 }

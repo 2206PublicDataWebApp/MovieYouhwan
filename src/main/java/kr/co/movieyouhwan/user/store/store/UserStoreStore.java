@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.store.domain.Cart;
 import kr.co.movieyouhwan.user.store.domain.Product;
 import kr.co.movieyouhwan.user.store.domain.ProductType;
@@ -43,5 +44,8 @@ public interface UserStoreStore {
 
 	// 장바구니 상품 수량 체크
 	int selectProductCount(SqlSession session, int cartNo);
+
+	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
+	Member selectBuyerInfo(SqlSession session, String memberId);
 
 }

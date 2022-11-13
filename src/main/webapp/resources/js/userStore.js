@@ -2,15 +2,7 @@
 showCommas($('p.product-price'));
 
 // 장바구니, 상품 구매 - 총 상품 금액 및 총 결제 예정 금액 계산
-let totalCartAmount = 0;
-let totalPayAmount = 0;
-let discountAmount = $('#discount-amount').text();
-$('.product-price-per-count').each(function () {
-  totalCartAmount += parseInt($(this).text());
-});
-totalPayAmount = totalCartAmount - discountAmount;
-$('#total-cart-amount').text(totalCartAmount);
-$('#total-pay-amount').text(totalPayAmount);
+showTotalAmount();
 
 // 장바구니 - 상품 가격에 천 단위로 콤마(,) 삽입
 showCommas($('.cart-price'));
@@ -198,7 +190,7 @@ $('#btn-buy-prev').click(function () {
  */
 function showCommas(num) {
   num.each(function () {
-    let price = Number($(this).text());
+    let price = strToNum($(this).text());
     $(this).text(price.toLocaleString() + '원');
   });
 }
@@ -270,7 +262,8 @@ function changeProductCountInCart(btn) {
         $(location).attr('href', '/member/loginView.yh');
       } else {
         productPricePerCount.text(strToNum(productPrice.text()) * productCount);
-        showCommas(productPricePerCount);
+        showTotalAmount();
+        showCommas($('.cart-price'));
       }
     },
     error: function () {
@@ -278,6 +271,22 @@ function changeProductCountInCart(btn) {
       location.reload();
     },
   });
+}
+
+/**
+ * 총 상품 금액 및 총 결제 예정 금액 계산
+ */
+function showTotalAmount() {
+  let totalCartAmount = 0;
+  let totalPayAmount = 0;
+  let discountAmount = strToNum($('#discount-amount').text());
+  $('.product-price-per-count').each(function () {
+    totalCartAmount += strToNum($(this).text());
+  });
+  totalPayAmount = totalCartAmount - discountAmount;
+  console.log(typeof totalCartAmount, typeof discountAmount);
+  $('#total-cart-amount').text(totalCartAmount);
+  $('#total-pay-amount').text(totalPayAmount);
 }
 
 /**
@@ -315,12 +324,19 @@ $('#btn-buy-pay').click(function () {
         productName = $('.product-name').text();
       }
       let totalAmount = strToNum($('#total-pay-amount').text());
-
-      // FIXME: Use AJAX to get memberName, memberPhone, memberEmail from session.loginUser
-      let memberName = '최현지'; // FIXME:
-      let memberPhone = '010-1111-2222'; // FIXME:
-      let memberEmail = 'i0hyeon@naver.com'; // FIXME:
-      requestPay(pg, payMethod, productName, totalAmount, memberName, memberPhone, memberEmail);
+      $.ajax({
+        url: '/store/pay/buyer.yh',
+        type: 'POST',
+        success: function (member) {
+          let memberName = member.memberName;
+          let memberPhone = member.memberPhone;
+          let memberEmail = member.memberEmail;
+          requestPay(pg, payMethod, productName, totalAmount, memberName, memberPhone, memberEmail);
+        },
+        error: function (error) {
+          alert(JSON.stringify(error));
+        },
+      });
     } else {
       alert('결제수단을 선택해주세요.');
     }

@@ -2,6 +2,7 @@ package kr.co.movieyouhwan.user.store.service;
 
 import java.util.List;
 
+import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.store.domain.Cart;
 import kr.co.movieyouhwan.user.store.domain.Cart;
 import kr.co.movieyouhwan.user.store.domain.Product;
@@ -41,5 +42,8 @@ public interface UserStoreService {
 
 	// 장바구니 상품 수량 체크
 	int checkProductCount(int cartNo);
+
+	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
+	Member printBuyerInfo(String memberId);
 
 }

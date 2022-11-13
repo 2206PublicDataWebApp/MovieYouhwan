@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.JsonObject;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.store.domain.Cart;
@@ -236,13 +239,14 @@ public class UserStoreController {
 
 	/**
 	 * 장바구니에서 상품 구매
+	 * 
 	 * @param request
 	 * @param cartNoList
 	 * @return
 	 */
 	@RequestMapping(value = "/store/cart/buy.yh", method = RequestMethod.POST)
-	public ModelAndView storeBuyMany(HttpServletRequest request,
-			@RequestParam(value = "cartNo") int[] cartNoArray, ModelAndView mv) {
+	public ModelAndView storeBuyMany(HttpServletRequest request, @RequestParam(value = "cartNo") int[] cartNoArray,
+			ModelAndView mv) {
 		try {
 			HttpSession session = request.getSession();
 			Member member = (Member) session.getAttribute("loginUser");
@@ -259,6 +263,25 @@ public class UserStoreController {
 			e.printStackTrace();
 		}
 		return mv;
+	}
+
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping(value = "/store/pay/buyer.yh", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
+	public String storePayBuyer(HttpServletRequest request) {
+		JSONObject jsonObj = new JSONObject(); // JSON 객체 생성 == { } 생성 완료
+		try {
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("loginUser");
+			Member buyerInfo = uStoreService.printBuyerInfo(member.getMemberId());
+			LOGGER.info(buyerInfo.toString());
+			jsonObj.put("memberName", buyerInfo.getMemberName());
+			jsonObj.put("memberPhone", buyerInfo.getMemberPhone());
+			jsonObj.put("memberEmail", buyerInfo.getMemberEmail());
+;		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonObj.toString();
 	}
 
 	// 스토어 결제
@@ -280,6 +303,13 @@ public class UserStoreController {
 	@RequestMapping(value = "/store/pay/complete.yh")
 	public ModelAndView storeComplete(ModelAndView mv) {
 		mv.setViewName("user/store/storeComplete");
+		return mv;
+	}
+	
+	// 스토어 구매내역 페이지
+	@RequestMapping(value="/mypage/store/history.yh")
+	public ModelAndView mypageStoreHistory(HttpServletRequest request, ModelAndView mv) {
+		mv.setViewName("user/mypage/storeHistory");
 		return mv;
 	}
 

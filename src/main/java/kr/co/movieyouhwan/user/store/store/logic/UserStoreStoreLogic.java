@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.store.domain.Cart;
 import kr.co.movieyouhwan.user.store.domain.Product;
 import kr.co.movieyouhwan.user.store.domain.ProductType;
@@ -89,6 +90,13 @@ public class UserStoreStoreLogic implements UserStoreStore {
 	public int selectProductCount(SqlSession session, int cartNo) {
 		int productCount = session.selectOne("StoreMapper.selectProductCount", cartNo);
 		return productCount;
+	}
+
+	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
+	@Override
+	public Member selectBuyerInfo(SqlSession session, String memberId) {
+		Member buyerInfo = session.selectOne("MemberMapper.selectBuyerInfo", memberId);
+		return buyerInfo;
 	}
 
 }
