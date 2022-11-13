@@ -63,8 +63,6 @@
 			var startIndex=$('#'+timeStartId).index('.${movieTime.movieDay}');
 			var endIndex=$('#'+timeEndId).index('.${movieTime.movieDay}');
 			var name = '${movieTime.movieName }';
-			console.log("s:"+startIndex);
-			console.log("e:"+endIndex);
 			
 			for(var i=startIndex; i<endIndex; i++){
 				$('.${movieTime.movieDay}').eq(i).text(name);

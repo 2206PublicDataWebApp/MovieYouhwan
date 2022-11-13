@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class MovieList {
 	private int movieNo;
+	private int theaterNo;
 	private String movieTitle;
 	private String movieAge;
 	private Date movieStartday;
@@ -12,12 +13,23 @@ public class MovieList {
 	private String movieImgRename;
 	private String movieImgPath;
 	private String memberId;
+	private String theaterName;
+	private String movieDay;
+	private String movieStart;
+	private String movieEnd;
+	private int movieTicket;
+	private int movieSeat;
+	private int movieZzim;
+	
 	public MovieList() {}
 
-	public MovieList(int movieNo, String movieTitle, String movieAge, Date movieStartday, Date movieEndday,
-			String movieImgName, String movieImgRename, String movieImgPath) {
+	public MovieList(int movieNo, int theaterNo, String movieTitle, String movieAge, Date movieStartday,
+			Date movieEndday, String movieImgName, String movieImgRename, String movieImgPath, String memberId,
+			String theaterName, String movieDay, String movieStart, String movieEnd, int movieTicket, int movieSeat,
+			int movieZzim) {
 		super();
 		this.movieNo = movieNo;
+		this.theaterNo = theaterNo;
 		this.movieTitle = movieTitle;
 		this.movieAge = movieAge;
 		this.movieStartday = movieStartday;
@@ -25,6 +37,14 @@ public class MovieList {
 		this.movieImgName = movieImgName;
 		this.movieImgRename = movieImgRename;
 		this.movieImgPath = movieImgPath;
+		this.memberId = memberId;
+		this.theaterName = theaterName;
+		this.movieDay = movieDay;
+		this.movieStart = movieStart;
+		this.movieEnd = movieEnd;
+		this.movieTicket = movieTicket;
+		this.movieSeat = movieSeat;
+		this.movieZzim = movieZzim;
 	}
 
 	public int getMovieNo() {
@@ -33,6 +53,14 @@ public class MovieList {
 
 	public void setMovieNo(int movieNo) {
 		this.movieNo = movieNo;
+	}
+
+	public int getTheaterNo() {
+		return theaterNo;
+	}
+
+	public void setTheaterNo(int theaterNo) {
+		this.theaterNo = theaterNo;
 	}
 
 	public String getMovieTitle() {
@@ -91,7 +119,6 @@ public class MovieList {
 		this.movieImgPath = movieImgPath;
 	}
 
-	
 	public String getMemberId() {
 		return memberId;
 	}
@@ -100,10 +127,69 @@ public class MovieList {
 		this.memberId = memberId;
 	}
 
+	public String getTheaterName() {
+		return theaterName;
+	}
+
+	public void setTheaterName(String theaterName) {
+		this.theaterName = theaterName;
+	}
+
+	public String getMovieDay() {
+		return movieDay;
+	}
+
+	public void setMovieDay(String movieDay) {
+		this.movieDay = movieDay;
+	}
+
+	public String getMovieStart() {
+		return movieStart;
+	}
+
+	public void setMovieStart(String movieStart) {
+		this.movieStart = movieStart;
+	}
+
+	public String getMovieEnd() {
+		return movieEnd;
+	}
+
+	public void setMovieEnd(String movieEnd) {
+		this.movieEnd = movieEnd;
+	}
+
+	public int getMovieTicket() {
+		return movieTicket;
+	}
+
+	public void setMovieTicket(int movieTicket) {
+		this.movieTicket = movieTicket;
+	}
+
+	public int getMovieSeat() {
+		return movieSeat;
+	}
+
+	public void setMovieSeat(int movieSeat) {
+		this.movieSeat = movieSeat;
+	}
+
+	public int getMovieZzim() {
+		return movieZzim;
+	}
+
+	public void setMovieZzim(int movieZzim) {
+		this.movieZzim = movieZzim;
+	}
+
 	@Override
 	public String toString() {
-		return "MovieList [movieNo=" + movieNo + ", movieTitle=" + movieTitle + ", movieAge=" + movieAge
-				+ ", movieStartday=" + movieStartday + ", movieEndday=" + movieEndday + ", movieImgName=" + movieImgName
-				+ ", movieImgRename=" + movieImgRename + ", movieImgPath=" + movieImgPath + "]";
+		return "MovieList [movieNo=" + movieNo + ", theaterNo=" + theaterNo + ", movieTitle=" + movieTitle
+				+ ", movieAge=" + movieAge + ", movieStartday=" + movieStartday + ", movieEndday=" + movieEndday
+				+ ", movieImgName=" + movieImgName + ", movieImgRename=" + movieImgRename + ", movieImgPath="
+				+ movieImgPath + ", memberId=" + memberId + ", theaterName=" + theaterName + ", movieDay=" + movieDay
+				+ ", movieStart=" + movieStart + ", movieEnd=" + movieEnd + ", movieTicket=" + movieTicket
+				+ ", movieSeat=" + movieSeat + ", movieZzim=" + movieZzim + "]";
 	}
 }

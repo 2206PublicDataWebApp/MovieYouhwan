@@ -1,5 +1,6 @@
 package kr.co.movieyouhwan.user.movie.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -23,6 +24,8 @@ import kr.co.movieyouhwan.admin.movie.domain.MovieDay;
 import kr.co.movieyouhwan.admin.movie.domain.MovieImg;
 import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
 import kr.co.movieyouhwan.admin.movie.service.AdminMovieService;
+import kr.co.movieyouhwan.admin.theater.domain.Theater;
+import kr.co.movieyouhwan.admin.theater.service.AdminTheaterService;
 import kr.co.movieyouhwan.common.page.PageInfo;
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
@@ -37,9 +40,9 @@ public class UserMovieController {
 	@Autowired
 	private AdminCinemaService aCinemaService;
 	@Autowired
-	private UserMovieService uMovieService;
+	private AdminTheaterService aTheaterService;
 	@Autowired
-	private UserCinemaService uCinemaService;
+	private UserMovieService uMovieService;
 	
 	/**
 	 * 현재 상영 영화 목록 화면
@@ -141,7 +144,6 @@ public class UserMovieController {
  		// String search = (searchValue != null ? searchValue : "");
 		// 영화 검색 완료 리스트 불러오기
 		List<MovieList> mlList = uMovieService.printSearchMovie(searchName);
-		System.out.print(searchName);
 		// 화면출력
 		if(!mlList.isEmpty()) {
 			mv.addObject("mlList", mlList);
@@ -208,8 +210,7 @@ public class UserMovieController {
 	@ResponseBody
 	@RequestMapping(value="/movieTicketTimeCinema.yh", produces="application/json;charset=utf-8", method=RequestMethod.POST)
 	public String movieTicketTimeCinemaChoice(
-			@RequestParam(value="cinemaNo", required=false) Integer cinemaNo,
-			HttpSession session) {
+			@RequestParam(value="cinemaNo", required=false) Integer cinemaNo) {
 		cinemaNo = cinemaNo == null ? 13 : cinemaNo;
 		// 영화관별 상영 영화 출력
 		List<Movie> mList = uMovieService.printAllMovieCinema(cinemaNo);
@@ -219,11 +220,22 @@ public class UserMovieController {
 		return object.toJSONString();
 	}
 	
-	
+	/**
+	 * 영화 예매 - 영화관, 영화, 상영 영화 선택 AJAX
+	 * @param movie
+	 * @param cinemaNo
+	 * @param movieNo
+	 * @param movieTitle
+	 * @param movieDay
+	 * @param dayIndex
+	 * @param session
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping(value="/movieTicketTimeMovie.yh", produces="application/json;charset=utf-8", method=RequestMethod.POST)
 	public String movieTicketTimeChoice(
+			@ModelAttribute Movie movie,
 			@RequestParam(value="cinemaNo", required=false) Integer cinemaNo,
 			@RequestParam(value="movieNo", required=false) Integer movieNo,
 			@RequestParam(value="movieTitle", required=false) String movieTitle,
@@ -231,16 +243,80 @@ public class UserMovieController {
 			@RequestParam(value="dayIndex", required=false) Integer dayIndex,
 			HttpSession session) {
 		dayIndex = dayIndex == null ? 0 : dayIndex;
+		// 영화관 이름 출력
+		Cinema cinema = aCinemaService.printOneCinema(cinemaNo);
 		// 영화관, 일별 영화 출력 (중복 제외)
-		List<Movie> mList = uCinemaService.printMovieNowOne(cinemaNo, new MovieDay().getMovieDay(dayIndex));
+		List<Movie> mList = uMovieService.printTicketMovieOne(cinemaNo, movieNo, new MovieDay().getMovieDay(dayIndex));
 		// 영화관, 영화, 일별 상영 영화 출력 (중복 포함)
-		List<CinemaMovie> cmList = uCinemaService.printCinemaMovieByDay(cinemaNo, new MovieDay().getMovieDay(dayIndex));
+		List<CinemaMovie> cmList = uMovieService.printTicketMovieByDay(cinemaNo, movieNo, new MovieDay().getMovieDay(dayIndex));
+		// 영화별 영화 이미지 출력
+		List<MovieImg> miList = aMovieService.printAllMovieImg(movieNo);
 		Gson gson = new Gson();
 		JSONObject object = new JSONObject();
 		JSONArray jsonArray = new JSONArray();
+		object.put("cinema", gson.toJson(cinema));
 		object.put("mList", gson.toJson(mList));
 		object.put("cmList", gson.toJson(cmList));
+		object.put("miList", gson.toJson(miList));
 		jsonArray.add(object);
 		return jsonArray.toJSONString();
+	}
+	
+	/**
+	 * 상영 좌석 선택
+	 * @param mv
+	 * @param cinemaNo
+	 * @param movieNo
+	 * @param theaterNo
+	 * @param movieImgRename
+	 * @param cinemaName
+	 * @param movieTitle
+	 * @param movieDay
+	 * @param movieStart
+	 * @param movieEnd
+	 * @param theaterName
+	 * @param movieTicket
+	 * @param movieSeat
+	 * @return
+	 */
+	@RequestMapping(value="/movieTicketSeat.yh", method=RequestMethod.POST)
+	public ModelAndView movieTicketSeat(
+			ModelAndView mv,
+			@RequestParam("cinemaNo") Integer cinemaNo,
+			@RequestParam("movieNo") Integer movieNo,
+			@RequestParam("theaterNo") Integer theaterNo,
+			@RequestParam("movieImgRename") String movieImgRename,
+			@RequestParam("cinemaName") String cinemaName,
+			@RequestParam("movieTitle") String movieTitle,
+			@RequestParam("movieDay") String movieDay,
+			@RequestParam("movieStart") String movieStart,
+			@RequestParam("movieEnd") String movieEnd,
+			@RequestParam("theaterName") String theaterName,
+			@RequestParam("movieTicket") Integer movieTicket,
+			@RequestParam("movieSeat") Integer movieSeat) {
+		// 상영관 정보 가져오기
+		Theater theater = aTheaterService.printOneTheater(theaterNo);
+		// 알파벳 리스트
+		List<String> aToZ = new ArrayList<String>();
+		for(int i = 65; i < 91; i++) {
+		  aToZ.add(String.valueOf((char)i));
+		}
+		// 화면 출력
+		mv.addObject("cinemaNo", cinemaNo);
+		mv.addObject("movieNo", movieNo);
+		mv.addObject("theaterNo", theaterNo);
+		mv.addObject("movieImgRename", movieImgRename);
+		mv.addObject("cinemaName", cinemaName);
+		mv.addObject("movieTitle", movieTitle);
+		mv.addObject("movieDay", movieDay);
+		mv.addObject("movieStart", movieStart);
+		mv.addObject("movieEnd", movieEnd);
+		mv.addObject("theaterName", theaterName);
+		mv.addObject("movieTicket", movieTicket);
+		mv.addObject("movieSeat", movieSeat);
+		mv.addObject("theater", theater);
+		mv.addObject("abcd", aToZ);
+		mv.setViewName("user/movie/movieTicketSeat");
+		return mv;
 	}
 }

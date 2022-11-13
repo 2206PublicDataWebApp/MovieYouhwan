@@ -21,8 +21,8 @@
 			<div class="input">${cinemaName }</div>
 		</div>
 		<div id="detail-namewrap">
-			<span class="title">상영관명</span>
-			<p class="input">${theater.theaterName }</p>
+			<div id="cinema-title">상영관명</div>
+			<div class="input">${theater.theaterName }</div>
 		</div>
 		<div id="seat-title">상영관 좌석</div>
 		<div class="detail-seatwrap">
@@ -37,7 +37,6 @@
 			<span class="title">세번째</span>
 			<p class="input">${theater.theaterSeatthreeRow } x ${theater.theaterSeatthreeColumn }
 		</div>
-		
 		<div id="showseat-wrap">
 			<div class="show-seat">
 				<c:forEach begin="1" end="${theater.theaterSeatoneColumn }">

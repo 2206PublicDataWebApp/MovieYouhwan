@@ -31,7 +31,7 @@
 			</div>
 			<div id="plus-address">
 				<p id="address-title" class="title">주소</p>
-				<input type="button" id="address-button" class="input" onclick="sample4_execDaumPostcode()" value="검색">
+				<input type="button" id="address-rbutton" class="input" onclick="sample4_execDaumPostcode()" value="검색">
 				<input type="text" id="sample4_roadAddress" class="input" name="cinemaAddress1" placeholder="도로명주소" autocomplete="off"><br>
 			</div>
 			<div id="detail-address">
@@ -68,6 +68,5 @@
 			</div>
 		</form>
 	</div>
-	<jsp:include page="../../common/footer.jsp"></jsp:include>
 </body>
 </html>
