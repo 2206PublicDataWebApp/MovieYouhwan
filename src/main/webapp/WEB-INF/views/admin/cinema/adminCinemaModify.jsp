@@ -6,13 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>무비유환 : 영화관 수정(관리자)</title>
-<link href="../../../resources/css/common.css" rel="stylesheet">
-<link href="../resources/css/cinema.css" rel="stylesheet">
+<link href="/resources/css/common.css" rel="stylesheet">
+<link href="/resources/css/header.css" rel="stylesheet"/>
+<link href="/resources/css/cinema.css" rel="stylesheet">
 <script src="/resources/js/jquery-3.6.1.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/resources/js/cinema.js" defer></script>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
 	<div class="cinema-wrapper">
 		<br><br><h3>영화관 수정</h3><br><br>
 		<form action="/admin/adminCinemaUpdate.yh" method="post" enctype="multipart/form-data">
@@ -20,7 +22,7 @@
 			<div class="modifycinema-wrap">
 				<div class="first">지점명</div>
 				<div class="second">
-					<input type="text" id="title-input" name="cinemaName" value="${cinema.cinemaName }" spellcheck="false" autocomplete="off">
+					<input type="text" id="modify-title-input" name="cinemaName" value="${cinema.cinemaName }" spellcheck="false" autocomplete="off">
 				</div>
 			</div>
 			<div class="modifycinema-wrap">
@@ -34,7 +36,7 @@
 			<div class="modifyaddress-wrap">
 				<div class="first">주소</div>
 				<div class="second">
-					<input type="text" id="sample4_roadAddress" name="cinemaAddress1" value="${cinema.cinemaAddress1 }" placeholder="도로명주소" autocomplete="off">
+					<input type="text" id="sample4_roadAddress" class="detail-address-input" name="cinemaAddress1" value="${cinema.cinemaAddress1 }" placeholder="도로명주소" autocomplete="off">
 					<input type="button" id="address-button" onclick="sample4_execDaumPostcode()" value="검색">
 				</div>
 			</div>
@@ -49,13 +51,13 @@
 			<div class="modifycinema-wrap">
 				<div class="first">전화번호</div>
 				<div class="second">
-					<input type="text" id="title-input" name="cinemaTel" value="${cinema.cinemaTel }">
+					<input type="text" id="modify-title-input" name="cinemaTel" value="${cinema.cinemaTel }">
 				</div>
 			</div>
 			<div class="modifycinema-wrap">
 				<div class="first">한줄소개</div>
 				<div class="second">
-					<input type="text" id="title-input" name="cinemaContent" value="${cinema.cinemaContent }">
+					<input type="text" id="modify-title-input" name="cinemaContent" value="${cinema.cinemaContent }">
 				</div>
 			</div>
 			<div class="modifycinema-wrap">

@@ -1,10 +1,12 @@
 package kr.co.movieyouhwan.user.movie.store.logic;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
+import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.store.UserMovieStore;
 
@@ -71,5 +73,27 @@ public class UserMovieStoreLogic implements UserMovieStore{
 	public List<Movie> selectAllMovieCinema(SqlSessionTemplate session, Integer cinemaNo) {
 		List<Movie> mList = session.selectList("MovieMapper.selectAllMovieCinema", cinemaNo);
 		return mList;
+	}
+
+	// 예매 현재 상영 영화 출력
+	@Override
+	public List<Movie> selectTicketMovieOne(SqlSessionTemplate session, Integer cinemaNo, Integer movieNo, String movieDay) {
+		HashMap<String, String> ticketMovieMap = new HashMap<>();
+		ticketMovieMap.put("cinemaNo", cinemaNo.toString());
+		ticketMovieMap.put("movieNo", movieNo.toString());
+		ticketMovieMap.put("movieDay", movieDay);
+		List<Movie> mList = session.selectList("MovieMapper.selectTicketMovieOne", ticketMovieMap);
+		return mList;
+	}
+
+	// 예매 현재 상영 영화 정보 출력
+	@Override
+	public List<CinemaMovie> selectTicketMovieByDay(SqlSessionTemplate session, Integer cinemaNo, Integer movieNo, String movieDay) {
+		HashMap<String, String> ticketMovieMap = new HashMap<>();
+		ticketMovieMap.put("cinemaNo", cinemaNo.toString());
+		ticketMovieMap.put("movieNo", movieNo.toString());
+		ticketMovieMap.put("movieDay", movieDay);
+		List<CinemaMovie> cmList = session.selectList("MovieMapper.selectTicketMovieByDay", ticketMovieMap);
+		return cmList;
 	}
 }

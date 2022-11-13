@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .theater-wrapper {
-	width : 600px;
+	width : 500px;
 	margin : 0 auto;
 }
 .widetheater-wrapper {
@@ -12,27 +12,30 @@
 /* adminTheaterRegister(관리자) */
 .title {
 	flaot : left;
+	line-height : 30px;
 	color : #0F1A3B;
 }
 .input {
 	float : right;
 }
 #cinema-wrap {
-	width : 255px;
-	margin-bottom : 25px;
+	width : 265px;
+	margin-bottom : 30px;
 }
 	#cinema-input {
-		width : 170px;
-		height : 25px;
+		width : 220px;
+		padding-left : 8px;
+		height : 30px;
 		border : solid 1px #0F1A3B;
 	}
 #name-wrap {
-	width : 300px;
-	margin-bottom : 25px;
+	width : 380px;
+	margin-bottom : 30px;
 }
 	#name-input {
-		width : 150px;
-		height : 25px;
+		width : 220px;
+		height : 30px;
+		padding-left : 8px;
 		border : solid 1px #0F1A3B;
 	}
 #seat-wrap {
@@ -47,20 +50,24 @@
 		background-color : #0F1A3B;
 	}
 .seat-choice {
-	width : 283px;
-	margin-bottom : 12px;
+	width : 350px;
+	margin-bottom : 25px;
 }
 	.seat-text {
 		float : right;
+		margin-top : 5px;
 		margin-left : 5px;
 		margin-right : 5px;
 	}
 	.seat-input {
 		float : right;
-		width : 50px;
-		height : 25px;
+		width : 80px;
+		height : 30px;
 		margin-left : 5px;
 		margin-right : 5px;
+		padding-left : 5px;
+		text-align : center;
+		font-size : 15px;
 		border : solid 1px #0F1A3B;
 	}
 #theater-button {
@@ -74,25 +81,36 @@
 /* adminTheaterDetail(관리자) */
 #detail-cinemawrap {
 	display : flex;
-	margin-bottom : 30px;
+	border-top : solid 1px gray;
+	border-bottom : solid 1px #e2e2e2;
+	padding-top : 18px;
+	padding-bottom : 18px;
+	padding-left : 10px;
 }
 #cinema-title {
 	margin-right : 132px;
 }
 #detail-namewrap {
-	width : 200px;
+	display : flex;
+	padding-top : 18px;
+	padding-bottom : 18px;
+	padding-left : 10px;
+	border-bottom : solid 1px #e2e2e2;
 	margin-bottom : 30px;
 }
 .detail-seatwrap {
 	width : 213px;
+	padding-left : 10px;
 	margin-bottom : 10px;
 }
 #seat-title {
 	color : #0F1A3B;
+	padding-left :10px;
 	margin-bottom : 15px;
 }
 #showseat-wrap {
 	height : 280px;
+	padding-left : 10px;
 	margin-bottom : 50px;
 }
 .show-seat {
@@ -108,7 +126,7 @@
 	}
 #theater-detailbutton {
 	height : 30px;
-	margin-bottom : 50px;
+	margin-bottom : 80px;
 }
 .detail-button {
 	width : 100px;

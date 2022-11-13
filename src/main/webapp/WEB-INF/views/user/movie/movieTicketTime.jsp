@@ -18,6 +18,8 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	<input type="hidden" name="movieNo" value="${movie.movieNo }"/>
+	<input type="hidden" name="cinemaNo" value="${cinema.cinemaNo }"/>
 	<!-- 영화 예매 (영화관, 영화, 상영관 선택) 페이지 시작 -->
 	<div class="ticket-movie-wrapper">
 		<div class="ticket-left">
@@ -74,10 +76,16 @@
 							<button type="button" class="tmday-button" value="${movieDay.dayList[i.count-1] }" onclick="ticketMovieday(${movieDay.dayList[i.count-1]})">${tmday }</button>
 						</c:forEach>
 						<hr/>
+						<div class="ticket-movie-time">
+							<p class="font-black">영화관와 영화를 선택해주세요.</p>
+						</div>
 	   				</div>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div id="movie-choice-done">
+		<jsp:include page="movieChoiceDone.jsp" />
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>

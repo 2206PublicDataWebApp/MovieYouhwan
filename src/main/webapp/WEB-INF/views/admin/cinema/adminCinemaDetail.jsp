@@ -14,43 +14,44 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
+	<div class="admin-cinema-wrapper">
 	<!-- 영화관 상세 페이지 -->
-	<div class="cinema-wrapper">
 		<br><br><h3>영화관 상세</h3><br><br>
-		<table>
+		<table class="cinema-detail-table">
 			<tr>
-				<td class="cinema-detailtitle">지점명</td>
-				<td>${cinema.cinemaName }</td>
+				<td class="cinema-detail-top">지점명</td>
+				<td class="cinema-detail-first">${cinema.cinemaName }</td>
 			</tr>
 			<tr>
 				<td class="cinema-detailtitle">지역</td>
-				<td>${cinema.cinemaArea }</td>
+				<td class="cinema-detail-text">${cinema.cinemaArea }</td>
 			</tr>
 			<tr>
 				<td class="cinema-detailtitle">주소</td>
-				<td>${cinema.cinemaAddress1 }, ${cinema.cinemaAddress2 }</td>
+				<td class="cinema-detail-text">${cinema.cinemaAddress1 }, ${cinema.cinemaAddress2 }</td>
 			</tr>
 			<tr>
 				<td class="cinema-detailtitle">전화번호</td>
-				<td>${cinema.cinemaTel }</td>
+				<td class="cinema-detail-text">${cinema.cinemaTel }</td>
 			</tr>
 			<tr>
 				<td class="cinema-detailtitle">한줄소개</td>
-				<td>${cinema.cinemaContent }</td>
+				<td class="cinema-detail-text">${cinema.cinemaContent }</td>
 			</tr>
 			<tr>
 				<td class="cinema-detailtitle">주차정보</td>
-				<td><pre>${cinema.cinemaPark }</pre></td>
+				<td class="cinema-detail-text"><pre>${cinema.cinemaPark }</pre></td>
 			</tr>
 			<tr>
 				<td class="cinema-detailtitle">대중교통</td>
-				<td><pre>${cinema.cinemaPublic }</pre></td>
+				<td class="cinema-detail-text"><pre>${cinema.cinemaPublic }</pre></td>
 			</tr>
 			<tr>
-				<td>이미지</td>
-				<td><img src="../resources/images/cinemaLodeImg/${cinema.cinemaImgRename }" width="500px" height="250px"></td>
+				<td class="cinema-detail-img">이미지</td>
+				<td><img src="../resources/images/cinemaLodeImg/${cinema.cinemaImgRename }" width="500px" height="250px" class="cinema-detail-image"></td>
 			</tr>
 		</table>
+		<hr class="hr-css">
 		<div id="cinemadetail-buttonwrap">
 			<button id="cdupdate-button" class="cinemadetail-button" onclick="location.href='/admin/adminCinemaModify.yh?cinemaNo=${cinema.cinemaNo}'">수정하기</button>
 			<button id="cddelete-button" class="cinemadetail-button" onclick="cinemaDataRemove();">삭제하기</button>

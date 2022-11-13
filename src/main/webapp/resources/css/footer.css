@@ -1,8 +1,9 @@
 #footer-wrapper {
 	width: 100%;
 	margin: 0 auto;
-	margin-top: 60px;
+	margin-top: 100px;
 	height: 120px;
+	position : relative;
 	background-color: #0f1a3b;
 }
 #footer-inside {
@@ -20,4 +21,5 @@
   color: #0f1a3b;
   background-color: white;
   border-radius: 50%;
+  z-index : 10;
 }

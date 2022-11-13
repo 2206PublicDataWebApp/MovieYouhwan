@@ -5,6 +5,10 @@
 	margin : 0 auto;
 }
 .cinema-wrapper {
+	width : 550px;
+	margin : 0 auto;	
+}
+.admin-cinema-wrapper {
 	width : 680px;
 	margin : 0 auto;	
 }
@@ -18,86 +22,96 @@
 .title {
 	flaot : left;
 	color : #0F1A3B;
+	line-height : 30px;
 }
 .input {
 	float : right;
 }
 #title-wrap {
-	width : 430px;
-	margin-bottom : 25px;
+	width : 550px;
+	margin-bottom : 40px;
 }
 	#title-input {
-		width : 300px;
-		height : 25px;
+		width : 388px;
+		height : 30px;
+		font-size : 14px;
+		padding-left : 8px;
 		border : solid 1px #0F1A3B;
 	}
 #area-wrap {
-	width : 310px;
-	margin-bottom : 25px;
+	width : 342px;
+	margin-bottom : 20px;
 }
 	.area-input {
 		margin-left : 15px;
 		margin-right : 5px;
 	}
-#plus-address {
-	width : 495px;
-	margin-bottom : 10px;
-}
 #detail-address {
-	width : 430px;
-	margin-bottom : 55px;
+	margin-bottom : 70px;
 }
 	#address-title {
 		display : inline;
 	}
 	#sample4_roadAddress {
-		width : 300px;
-		height : 25px;
+		width : 303px;
+		height : 30px;
+		padding-left : 8px;
+		font-size : 14px;
 		border : solid 1px #0F1A3B;
 	}
 	#sample4_detailAddress {
-		width : 300px;
-		height : 25px;
+		width : 388px;
+		height : 30px;
+		margin-top : 5px;
+		padding-left : 8px;
+		font-size : 14px;
 		border : solid 1px #0F1A3B;		
 	}
 	#address-button {
-		width : 55px;
-		height : 25px;
+		width : 80px;
+		height : 29px;
 		color : white;
 		background-color : #0F1A3B;	
-		margin-left : 10px;
+	}
+	#address-rbutton {
+		width : 80px;
+		height : 30px;
+		vartical-line : middle;
+		margin-left : 5px;
+		color : white;
+		background-color : #0F1A3B;		
 	}
 #tel-wrap {
-	width : 430px;
 	margin-bottom : 25px;
 }
 	#tel-input {
-		width : 300px;
-		height : 25px;
+		width : 388px;
+		height : 30px;
+		padding-left : 8px;
 		border : solid 1px #0F1A3B;
 	}
 #one-wrap {
-	width : 430px;
 	margin-bottom : 25px;
 }
 	#one-input {
-		width : 300px;
-		height : 25px;
+		width : 388px;
+		height : 30px;
 		border : solid 1px #0F1A3B;
 	}
 .ride-wrap {
-	width : 530px;
-	margin-bottom : 90px;	
+	margin-bottom : 70px;	
 }
 	.ride-input {
-		width : 400px;
-		height : 80px;
+		width : 388px;
+		height : 70px;
+		padding-left : 8px;
+		padding-top : 8px;
+		line-height : 25px;
 		float : right;
 		resize : none;
 		border : solid 1px #0F1A3B;
 	}
 #imgfile-wrap {
-	width : 515px;
 	margin-bottom : 25px;
 }
 .file-wrap {
@@ -108,11 +122,11 @@
 }	
 .file-wrap #imgload-name {
 	display : inline-block;
-	height : 25px;
+	height : 30px;
 	padding : 0 10px;
 	vertical-align : middle;
 	border : solid 1px #0F1A3B;
-	width : 300px;
+	width : 304px;
 	color : #0F1A3B;
 }
 #file-wrap #imgload-name {
@@ -131,24 +145,24 @@
 	vertical-align : middle;
 	background-color : #0F1A3B;
 	cursor : pointer;
-	width : 70px;
-	height : 25px;
+	width : 80px;
+	height : 30px;
+	line-height : 20px;
 	text-align : center;
 	font-size : 12px;
-	margin-left : 10px;
 }
 #file-wrap label {
+	line-height : 20px;
 	display : inline-block;
 	color : #fff;
 	padding : 5px 5px 5px 5px;
 	vertical-align : middle;
 	background-color : #0F1A3B;
 	cursor : pointer;
-	width : 70px;
-	height : 25px;
+	width : 80px;
+	height : 30px;
 	text-align : center;
 	font-size : 12px;
-	margin-left : 10px;
 }
 .file-wrap input[type="file"] {
 	position : absolute;
@@ -168,12 +182,12 @@
 }
 .button-list {
 	float : right;
-	margin-bottom : 100px;
 }
 .go-list {
 	width : 100px;
 	height : 30px;
 	margin-right : 10px;
+	margin-bottom : 80px;
 	color : #0F1A3B;
 	border : solid 1px #0F1A3B;
 	background-color : white;
@@ -183,22 +197,29 @@
 	height : 30px;
 	background-color : #0F1A3B;
 	border : solid 1px #0F1A3B;
+	margin-bottom : 80px;
 	color : white;
 }
 
 /* adminCinemaList(관리자) */
+button {
+	cursor : pointer;
+}
 #cinemalist-top {
-	margin-bottom : 60px;
+	height : 30px;
+	margin-top : 15px;
+	margin-bottom : 40px;
 	display : flex;
 }
 	#cinemalist-text {
-		margin-top : 10px;
 		margin-right : 890px;
+		line-height : 30px;
 	}
 	.cinemalist-button {
 		width : 100px;
-		height : 40px;
+		height : 30px;
 		color : white;
+		font-size : 13px;
 		margin-left : 10px;
 		border : solid 1px #0F1A3B;
 		background-color : #0F1A3B;
@@ -206,6 +227,7 @@
 	}
 .cinemalist-title {
 	display : flex;
+	cursor : pointer;
 }
 	.list-area {
 		width : 120px;
@@ -243,14 +265,45 @@
 		background-color : #0F1A3B;
 	}
 /* adminCinemaDetail(관리자) */
+.cinema-detail-table {
+	border-spacing: 0px;
+}
 .cinema-detailtitle {
 	width : 180px;
 	height : 60px;
+	padding-left : 10px;
+	border-bottom : solid 1px #e2e2e2;
 }
+	.cinema-detail-top {
+	width : 180px;
+	height : 60px;
+	padding-left : 10px;
+	border-top : solid 1px gray;
+	border-bottom : solid 1px #e2e2e2;
+	}
+	.cinema-detail-first {
+		border-top : solid 1px gray;
+		border-bottom : solid 1px #e2e2e2;
+	}
+	.cinema-detail-text {
+		border-bottom : solid 1px #e2e2e2;
+		line-height: 200%;
+	}
+	.hr-css {
+		color : gray;
+	}
+	.cinema-detail-img {
+		padding-left : 10px;
+	}
+	.cinema-detail-image {
+		margin-top : 10px;
+		padding-bottom : 5px;
+		margin-bottom : 0px;
+	}
 #cinemadetail-buttonwrap {
 	display : flex;
 	margin-top : 50px;
-	padding-bottom : 100px;
+	padding-bottom : 80px;
 	float : right;
 }
 	.cinemadetail-button {
@@ -276,7 +329,7 @@
 	}
 /* adminCinemaModify(관리자) */
 .modifycinema-wrap {
-	width : 800px;
+	width : 400px;
 	display : flex;
 	margin-bottom : 40px;
 }
@@ -290,12 +343,19 @@
 	}
 .first {
 	width : 20%;
-	margin-top : 10px;
+	line-height : 30px;
 }
 .second {
 	width : 80%;
-	margin-top : 10px;
+	line-height : 30px;
 }
+	#modify-title-input {
+		width : 388px;
+		height : 30px;
+		font-size : 14px;
+		padding-left : 8px;
+		border : solid 1px #0F1A3B;
+	}
 	#area-modify {
 		margin-right : 10px;
 	}
@@ -303,15 +363,19 @@
 		margin-right : 10px;
 		margin-left : 15px;
 	}
-	.ride-modify {
+	.detail-address-input {
 		width : 400px;
-		height : 80px;
+		height : 30px;
+	}
+	.ride-modify {
+		width : 388px;
+		height : 70px;
+		padding-left : 8px;
+		padding-top : 8px;
+		font-size : 14px;
+		line-height : 25px;
 		resize : none;
 		border : solid 1px #0F1A3B;
-	}
-	#imgmodify-wrap {
-		width : 545px;
-		margin-bottom : 25px;
 	}
 	#imgmodify-wrap #imgmodify-name {
 		display : inline-block;
@@ -328,17 +392,17 @@
 	}
 	#modifyadd-wrap #modifyadd-name {
 		display : inline-block;
-		height : 25px;
+		height : 30px;
 		padding : 0 10px;
 		margin-right : 5px;
 		vertical-align : middle;
 		border : solid 1px #0F1A3B;
-		width : 300px;
+		width : 295px;
+		font-size : 14px;
 		color : #0F1A3B;
 	}
 #modify-buttonarea {
 	margin-top : 30px;
-	margin-bottom : 50px;
 	float : right;
 }
 .modify-button {
@@ -347,11 +411,13 @@
 }
 	#modify-list {
 		color : #0F1A3B;
+		margin-bottom : 80px;
 		border : solid 1px #0F1A3B;
 		background-color : white;
 	}
 	#modify-done {
 		color : white;
+		margin-bottom : 80px;
 		border : solid 1px #0F1A3B;
 		background-color : #0F1A3B;
 	}
