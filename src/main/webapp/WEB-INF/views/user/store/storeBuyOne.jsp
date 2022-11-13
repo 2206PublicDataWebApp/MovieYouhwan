@@ -16,6 +16,7 @@
     <script src="/resources/js/header.js" defer></script>
     <script src="/resources/js/footer.js" defer></script>
     <script src="/resources/js/userStore.js" defer></script>
+    <script src="/resources/js/requestPay.js" defer></script>
   </head>
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
@@ -57,7 +58,7 @@
             <div><img src="/resources/images/storeProduct/${product.productImgRename }" alt="상품사진" /></div>
             <div class="product-name">${product.productName }</div>
             <div class="buy-price">${product.productPrice }</div>
-            <div>${productCount }개</div>
+            <div class="product-count">${productCount }개</div>
             <div class="buy-price product-price-per-count">${product.productPrice * productCount}</div>
           </div>
         </div>

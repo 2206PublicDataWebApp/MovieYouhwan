@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,9 +27,10 @@ public class IamportController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/pay/verify.yh")
+	@RequestMapping(value = "/pay/verify.yh", method = RequestMethod.POST)
 	public IamportResponse<Payment> paymentByImpUid(Model model, Locale locale, HttpSession session,
-			@RequestParam(value = "imp_uid") String imp_uid) throws IamportResponseException, IOException {
+			@RequestParam("imp_uid") String imp_uid)
+			throws IamportResponseException, IOException {
 		return api.paymentByImpUid(imp_uid);
 	}
 

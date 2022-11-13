@@ -30,6 +30,15 @@
 		<result property="productImgRename" column="PRODUCT_IMG_RENAME" />
 		<result property="productStatus" column="PRODUCT_STATUS" />
 	</resultMap>
+	<resultMap type="StoreOrder" id="storeOrderResultMap">
+		<id property="orderNo" column="ORDER_NO" />
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="productName" column="PRODUCT_NAME" />
+		<result property="payAmount" column="PAY_AMOUNT" />
+		<result property="payDate" column="PAY_DATE" />
+		<result property="expiryDate" column="EXPIRY_DATE" />		
+		<result property="availability" column="AVAILABILITY" />		
+	</resultMap>
 	
 	<!-- 관리자 - 상품 등록 -->
 	<insert id="insertProduct">
@@ -43,6 +52,10 @@
 		INSERT INTO CART_TBL
 		VALUES(SEQ_CART_NO.NEXTVAL, #{memberId}, #{productNo}, #{productName}, #{productTypeNo}, #{productType},
 		#{productPrice}, #{productCount}, #{productImgRename}, DEFAULT)
+	</insert>
+	
+	<insert id="insertOrder">
+	TO_DATE( '1970-01-01', 'YYYY-MM-DD' ) + NUMTODSINTERVAL( 1650321073, 'SECOND' )
 	</insert>
 	
 	<!-- 사용자 - 장바구니에 있는 상품을 담으면 해당 상품 수량 증가 -->
