@@ -581,6 +581,7 @@
 		margin-bottom : 25px;
 	}
 	#detail-button {
+		display: flex;
 	}
 		.change-button {
 			width : 100px;
@@ -944,7 +945,7 @@
     justify-content: space-between;
 }
 	
-}
+
 .heart-click{
 	margin-top: 20px;
 	margin-left: 20px;

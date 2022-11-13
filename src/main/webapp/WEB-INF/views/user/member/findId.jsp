@@ -13,7 +13,7 @@
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="/resources/js/header.js" defer></script>
     <script src="/resources/js/footer.js" defer></script>
-<title>무비유환 - 아이디 찾기 실패</title>
+<title>무비유환 - 아이디 찾기 결과</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
