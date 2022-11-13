@@ -16,6 +16,7 @@
     <script src="/resources/js/header.js" defer></script>
     <script src="/resources/js/footer.js" defer></script>
     <script src="/resources/js/userStore.js" defer></script>
+    <script src="/resources/js/requestPay.js" defer></script>
   </head>
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
@@ -54,11 +55,11 @@
         </div>
         <div id="store-buy-body">
           <c:forEach items="${cartList}" var="cart">
-            <div class="buy-product">
+            <div class="buy-product" data-value="${cart.cartNo }">
               <div><img src="/resources/images/storeProduct/${cart.productImgRename }" alt="상품사진" /></div>
               <div class="product-name">${cart.productName }</div>
               <div class="buy-price">${cart.productPrice }</div>
-              <div>${cart.productCount }개</div>
+              <div class="product-count">${cart.productCount }개</div>
               <div class="buy-price product-price-per-count">${cart.productPrice *cart.productCount }</div>
             </div>
           </c:forEach>

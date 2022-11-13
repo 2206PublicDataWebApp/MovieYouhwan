@@ -1,5 +1,7 @@
 package kr.co.movieyouhwan.user.store.controller;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonObject;
-
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.store.domain.Cart;
 import kr.co.movieyouhwan.user.store.domain.Product;
 import kr.co.movieyouhwan.user.store.domain.ProductType;
+import kr.co.movieyouhwan.user.store.domain.StoreOrder;
 import kr.co.movieyouhwan.user.store.service.UserStoreService;
 
 @Controller
@@ -201,7 +202,7 @@ public class UserStoreController {
 	}
 
 	/**
-	 * 상품 목록/상세에서 구매
+	 * 상품 목록/상세에서 상품 구매
 	 * 
 	 * @param request
 	 * @param productNo
@@ -210,7 +211,7 @@ public class UserStoreController {
 	 * @return
 	 */
 	@RequestMapping(value = "/store/buy.yh", method = RequestMethod.POST)
-	public ModelAndView storeBuyOne(HttpServletRequest request, @RequestParam(value = "productNo") Integer productNo,
+	public ModelAndView storeBuyOne(HttpServletRequest request, @RequestParam("productNo") Integer productNo,
 			@RequestParam(value = "productCount", required = false) Integer productCount, ModelAndView mv) {
 		try {
 			HttpSession session = request.getSession();
@@ -245,7 +246,7 @@ public class UserStoreController {
 	 * @return
 	 */
 	@RequestMapping(value = "/store/cart/buy.yh", method = RequestMethod.POST)
-	public ModelAndView storeBuyMany(HttpServletRequest request, @RequestParam(value = "cartNo") int[] cartNoArray,
+	public ModelAndView storeBuyMany(HttpServletRequest request, @RequestParam("cartNo") int[] cartNoArray,
 			ModelAndView mv) {
 		try {
 			HttpSession session = request.getSession();
@@ -258,6 +259,8 @@ public class UserStoreController {
 				} else {
 					LOGGER.info("장바구니 불러오기 실패");
 				}
+			} else {
+				mv.setViewName("redirect:/member/loginView.yh");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -265,6 +268,12 @@ public class UserStoreController {
 		return mv;
 	}
 
+	/**
+	 * 스토어 구매자 정보 가져오기
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping(value = "/store/pay/buyer.yh", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
@@ -278,7 +287,8 @@ public class UserStoreController {
 			jsonObj.put("memberName", buyerInfo.getMemberName());
 			jsonObj.put("memberPhone", buyerInfo.getMemberPhone());
 			jsonObj.put("memberEmail", buyerInfo.getMemberEmail());
-;		} catch (Exception e) {
+			;
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return jsonObj.toString();
@@ -287,27 +297,51 @@ public class UserStoreController {
 	// 스토어 결제
 	@ResponseBody
 	@RequestMapping(value = "/store/pay.yh", method = RequestMethod.POST)
-	public ModelAndView storePay(HttpServletRequest request, ModelAndView mv) {
+	public String storePay(HttpServletRequest request,
+			@ModelAttribute StoreOrder storeOrder,
+			@RequestParam("paid_at") long paid_at,
+			@RequestParam("productNameList[]") List<String> productNameList,
+			@RequestParam("productCountList[]") List<Integer> productCountList,
+			@RequestParam("status") String status) {
 		try {
-			HttpSession session = request.getSession();
-			Member member = (Member) session.getAttribute("loginUser");
-			if (member != null) {
-			}
+			storeOrder.setPayDate(new Date(paid_at));
+			
+			// UNIX Timestamp + 6개월 => expiryDate
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(paid_at);
+//			cal.setTime(storeOrder.getPayDate());
+			cal.add(Calendar.MONTH, 6);
+			storeOrder.setExpiryDate(new Date(cal.getTime().getTime()));
+			
+			System.out.println(storeOrder.getPayDate() + " ~ " + storeOrder.getExpiryDate());
+			
+//			long timeStamp = Long.parseLong(paid_at);
+//			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+//			Date date = new Date();
+//			date.setTime(timeStamp);
+//			storeOrder.setPayDate(sdf.format(date));
+			
+//			LOGGER.info(storeOrder.toString());
+			System.out.println(paid_at);
+//			LOGGER.info(productNameList.toString());
+//			LOGGER.info(productCountList.toString());
+//			LOGGER.info(status);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return mv;
+		return "/store/pay.yh에서 왔다";
 	}
 
+	// TODO: 스토어 구매/결제 DB 저장 후
 	// 스토어 결제 완료 페이지
 	@RequestMapping(value = "/store/pay/complete.yh")
 	public ModelAndView storeComplete(ModelAndView mv) {
 		mv.setViewName("user/store/storeComplete");
 		return mv;
 	}
-	
+
 	// 스토어 구매내역 페이지
-	@RequestMapping(value="/mypage/store/history.yh")
+	@RequestMapping(value = "/mypage/store/history.yh")
 	public ModelAndView mypageStoreHistory(HttpServletRequest request, ModelAndView mv) {
 		mv.setViewName("user/mypage/storeHistory");
 		return mv;
