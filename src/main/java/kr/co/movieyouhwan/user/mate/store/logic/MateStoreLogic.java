@@ -104,4 +104,10 @@ public class MateStoreLogic implements MateStore {
 		return requesterGenreList;
 	}
 
+	@Override
+	public Member selectMemberInfo(SqlSessionTemplate session, String memberId) {
+		Member member=session.selectOne("MemberMapper.selectOneByDetailId", memberId);
+		return member;
+	}
+
 }

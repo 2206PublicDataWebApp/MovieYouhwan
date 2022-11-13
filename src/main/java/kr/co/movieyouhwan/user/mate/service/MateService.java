@@ -38,5 +38,7 @@ public interface MateService {
 
 	List<SurveyGenre> getGenreListBySurveyNo(Integer surveyNo);
 
+	Member printUserInfo(String memberId);
+
 	
 }

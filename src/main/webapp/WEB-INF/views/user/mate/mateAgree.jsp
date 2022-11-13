@@ -47,9 +47,13 @@
 </pre
           >
           <hr class="mate-agree-hr" />
-          <div class="mate-agree-check"><input class="agree-checkbox" type="checkbox" name="mateAgreeCheck" value="mateAgreeCheck" />개인정보 수집 및 이용 동의</div>
+          <div class="mate-agree-check">
+            <label><input class="agree-checkbox" type="checkbox" name="mateAgreeCheck" value="mateAgreeCheck" />개인정보 수집 및 이용 동의</label>
+          </div>
           <hr class="mate-agree-hr" />
-          <div class="mate-agree-check"><input class="agree-checkbox" type="checkbox" name="mateAgreeCheck" value="mateAgreeCheck" />영화 메이트 이용약관 동의</div>
+          <div class="mate-agree-check">
+            <label><input class="agree-checkbox" type="checkbox" name="mateAgreeCheck" value="mateAgreeCheck" />영화 메이트 이용약관 동의</label>
+          </div>
         </div>
         <button id="mate-agree-btn" onclick="mateStart('${loginUser.memberId}');">시작하기</button>
       </div>

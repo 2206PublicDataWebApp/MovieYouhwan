@@ -61,6 +61,7 @@
             <span>MATCHING</span>
             <label for="toggle" class="match-toggle-switch">
               <span class="match-toggle-btn"></span>
+              <input id="isMatchingActive" type="hidden" name="matchingActive" value="${survey.matchingActive}">
             </label>
           </div>
         </div>
