@@ -32,7 +32,6 @@ import kr.co.movieyouhwan.admin.theater.service.AdminTheaterService;
 import kr.co.movieyouhwan.common.page.PageInfo;
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
-import kr.co.movieyouhwan.user.cinema.service.UserCinemaService;
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
@@ -56,13 +55,34 @@ public class UserMovieController {
 	 */
 	@RequestMapping(value="/movieList.yh", method=RequestMethod.GET)
 	public ModelAndView userMovieListNowView(
+			HttpServletRequest request,
 			ModelAndView mv,
 			@RequestParam(value="currentPage", required=false) Integer currentPage) {
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginUser");
+		
 		// 페이징 처리
 		int page = (currentPage != null ? currentPage : 1);
 		PageInfo pageInfo = new PageInfo(page, uMovieService.printNowMovieCount(), 12, 5);
 		// 현재 상영 영화 리스트 가져오기
 		List<MovieList> mlList = uMovieService.printAllMovieNow();
+		if(member!=null) {
+			String memberId=member.getMemberId();
+			List<Integer> myZzimMovieList = uMovieService.printMyZzimMovieList(memberId);
+			if(myZzimMovieList == null) {
+				System.out.println("null");
+			}else {
+				System.out.println(myZzimMovieList.toString());
+			}
+			
+			for(int i = 0 ; i < mlList.size(); i++) {
+				if(myZzimMovieList.contains(mlList.get(i).getMovieNo())) {
+					mlList.get(i).setZzimYn("Y");
+				}else {
+					mlList.get(i).setZzimYn("N");
+				}
+			}
+		}
 		// 화면 출력
 		mv.addObject("pageInfo", pageInfo);
 		mv.addObject("mlList", mlList);

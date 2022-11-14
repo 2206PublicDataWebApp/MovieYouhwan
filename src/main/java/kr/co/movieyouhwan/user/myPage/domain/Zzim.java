@@ -18,9 +18,6 @@ public class Zzim {
 	private int movieZzim;
 	
 	
-	
-	
-	
 //	들어갈 데이터 모두 적어주기 mapper도 동일
 	public Zzim() {}
 

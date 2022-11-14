@@ -5,7 +5,6 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
-import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
@@ -35,4 +34,6 @@ public interface UserMovieStore {
 	public List<CinemaMovie> selectTicketMovieByDay(SqlSessionTemplate session, Integer cinemaNo, Integer movieNo, String movieDay);
 	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
 	public Member selectBuyerInfo(SqlSessionTemplate session, String memberId);
+	// 마이 찜 여부
+	public List<Integer> selectMyZzimMovieList(SqlSessionTemplate session, String memberId);
 }

@@ -24,6 +24,7 @@
 		<result property="threeAgeCount" column="THREE_AGE_COUNT" />
 		<result property="fourAgeCount" column="FOUR_AGE_COUNT" />
 		<result property="fiveAgeCount" column="FIVE_AGE_COUNT" />
+		
 	</resultMap>
 	<resultMap type="MovieImg" id="MovieImgResultMap">
 		<id property="movieImgNo" column="MOVIE_IMG_NO" />
@@ -68,7 +69,6 @@
 		<result property="movieTicket" column="MOVIE_TICKET" />
 		<result property="movieSeat" column="MOVIE_SEAT" />
 		<result property="movieZzim" column="MOVIE_ZZIM"/>
-		<result property="zzimNo" column="ZZIM_NO"/>
 	</resultMap>
 	<!-- 영화 등록(관리자) -->
 	<insert id="insertMovie">

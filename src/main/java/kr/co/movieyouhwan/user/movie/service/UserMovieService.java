@@ -32,4 +32,6 @@ public interface UserMovieService {
 	public List<CinemaMovie> printTicketMovieByDay(Integer cinemaNo, Integer movieNo, String movieDay);
 	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
 	public Member printBuyerInfo(String memberId);
+	// 마이찜여부
+	public List<Integer> printMyZzimMovieList(String memberId);
 }
