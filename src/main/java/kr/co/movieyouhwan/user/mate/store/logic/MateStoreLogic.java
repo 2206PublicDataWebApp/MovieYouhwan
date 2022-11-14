@@ -110,4 +110,22 @@ public class MateStoreLogic implements MateStore {
 		return member;
 	}
 
+	@Override
+	public int insertMatching(SqlSessionTemplate session, String requesterId, String respondentId) {
+		HashMap<String, String> param=new HashMap<>();
+		param.put("requesterId", requesterId);
+		param.put("respondentId", respondentId);
+		int result=session.insert("MateMapper.insertMatching", param);
+		return result;
+	}
+
+	@Override
+	public int selectExistMatching(SqlSessionTemplate session, String requesterId, String respondentId) {
+		HashMap<String, String> param=new HashMap<>();
+		param.put("requesterId", requesterId);
+		param.put("respondentId", respondentId);
+		int result=session.selectOne("MateMapper.selectExistMatching", param);
+		return result;
+	}
+
 }

@@ -12,7 +12,7 @@
     <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
     <script src="/resources/js/header.js" defer></script>
-    <script type="module" src="/resources/js/mate.js" defer></script>
+    <script src="/resources/js/mate.js" defer></script>
   </head>
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
@@ -26,7 +26,6 @@
           <div class="match-grade-col">매칭 점수</div>
           <div class="chat-btn-col"></div>
         </div>
-
         <c:if test="${!empty matchList}">
           <c:forEach items="${matchList}" var="matchInfo">
             <div class="mate-list-row">
@@ -42,9 +41,13 @@
               <div class="mate-location-col">${matchInfo.cinemaName}</div>
               <div class="match-genre-col">${matchInfo.genre}</div>
               <div class="match-grade-col">${matchInfo.matchingGrade}</div>
-              <div class="mate-genre-col"><button class="btn yellow">채팅하기</button></div>
+              <div class="mate-genre-col"><button class="btn yellow" onclick="chatting('${memberId}','${matchInfo.memberId}', '${matchInfo.memberNick}');">신청</button></div>
             </div>
           </c:forEach>
+          <div class="match-btn-area">
+            <button class="rematch-btn" onclick="location.href='/mate/matching.yh'">다시 매칭</button>
+            <button class="list-btn" onclick="location.href='/mate/main.yh'">돌아가기</button>
+          </div>
         </c:if>
       </div>
     </div>

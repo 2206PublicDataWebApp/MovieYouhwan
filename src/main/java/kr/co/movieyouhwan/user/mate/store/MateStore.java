@@ -42,4 +42,8 @@ public interface MateStore {
 
 	Member selectMemberInfo(SqlSessionTemplate session, String memberId);
 
+	int insertMatching(SqlSessionTemplate session, String requesterId, String respondentId);
+
+	int selectExistMatching(SqlSessionTemplate session, String requesterId, String respondentId);
+
 }

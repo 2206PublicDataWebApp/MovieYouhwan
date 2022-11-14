@@ -541,7 +541,7 @@ a {
   padding-left: 5px;
 }
 
-/* mateComplete (사용자) */
+/* mateComplete 매칭 완료 뷰*/
 .match-profile-col {
   width: 25%;
   text-align: center;
@@ -566,6 +566,29 @@ a {
 .match-genre-col {
   width: 30%;
   text-align: center;
+}
+
+.match-btn-area {
+  margin-top: 80px;
+  text-align: center;
+}
+.rematch-btn {
+  width: 150px;
+  height: 35px;
+  background-color: #e59500;
+  color: whitesmoke;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.list-btn {
+  width: 150px;
+  height: 35px;
+  background-color: #0f1a3b;
+  color: whitesmoke;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
 #mate-text {
