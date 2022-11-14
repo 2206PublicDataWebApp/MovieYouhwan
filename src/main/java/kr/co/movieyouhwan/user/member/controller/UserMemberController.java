@@ -256,7 +256,6 @@ public class UserMemberController {
 //		return mv;
 //	}
 //	
-	@RequestMapping
 	/*
 	 * @RequestMapping(value = "/member/myPoint.yh", method = RequstMethod.GET)
 	 * public ModelAndView pointHistoryView( HttpServletRequest request,
