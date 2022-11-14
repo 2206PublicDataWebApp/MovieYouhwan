@@ -64,17 +64,23 @@
 	<!-- 사용자 - 주문 정보 저장 -->
 	<insert id="insertStoreOrder">
 		INSERT INTO STORE_ORDER_TBL
-		VALUES(#{orderNo}, #{memberId}, #{productName}, #{payAmount}, #{payDate}, #{expiryDate}, #{availability})
+		VALUES(#{orderNo}||LPAD(SEQ_ORDER_NO.NEXTVAL, 4, 0), #{memberId}, #{productName}, #{payAmount}, #{payDate}, #{expiryDate}, #{availability})
 	</insert>
 	
 	<!-- 사용자 - 주문 상세 정보 저장 (상품 목록, 상품 상세) -->
-	<insert id="insertStoreOrderDetail">
+	<insert id="insertOneStoreOrderDetail">
 		INSERT INTO STORE_ORDER_DETAIL_TBL
-		VALUES(#{)
+		VALUES(#{orderNo}, #{productName}, #{productCount})
 	</insert>
 	
 	<!-- 사용자 - 주문 상세 정보 저장 (장바구니) -->
-	<insert id="insertStoreOrderDetailFromCart">
+	<insert id="insertManyStoreOrderDetail">
+		INSERT ALL
+		<foreach collection="list" item="item">
+			INTO STORE_ORDER_DETAIL_TBL
+			VALUES(#{item.orderNo}, #{item.productName}, #{item.productCount})
+		</foreach>
+		SELECT * FROM DUAL
 	</insert>
 
 	<!-- 사용자 - 장바구니에 있는 상품을 담으면 해당 상품 수량 증가 -->
@@ -131,8 +137,7 @@
 	</select>
 
 	<!-- 공통 - 상품 유형 목록 조회 -->
-	<select id="selectProductTypeList"
-		resultMap="productTypeResultMap">
+	<select id="selectProductTypeList" resultMap="productTypeResultMap">
 		SELECT DISTINCT PRODUCT_TYPE_NO, PRODUCT_TYPE
 		FROM PRODUCT_TYPE_TBL
 		JOIN PRODUCT_TBL USING (PRODUCT_TYPE)
@@ -172,5 +177,33 @@
 		<foreach collection="array" item="item" open="(" close=")" separator=",">
 			#{item}
 		</foreach>
+	</select>
+	
+	<!-- 사용자 - 주문번호 조회 -->
+	<select id="selectStoreOrderNo" resultType="string">
+		SELECT ORDER_NO
+		FROM STORE_ORDER_TBL
+		WHERE MEMBER_ID = #{memberId} AND ORDER_NO LIKE #{orderNo}||'%'
+	</select>
+	
+	<!-- 사용자 - 스토어 구매내역 조회 (1건) -->
+	<select id="selectStoreOrder" resultMap="storeOrderResultMap">
+		SELECT *
+		FROM STORE_ORDER_TBL
+		WHERE ORDER_NO = #{orderNo}
+	</select>
+	
+	<!-- 사용자 - 스토어 구매내역 조회 (N건) -->
+	<select id="selectStoreOrderList" resultMap="storeOrderResultMap">
+		SELECT ORDER_NO, PRODUCT_NAME, PAY_DATE, EXPIRY_DATE, PAY_AMOUNT, AVAILABILITY
+		FROM STORE_ORDER_TBL
+		WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<!-- 사용자 - 스토어 구매내역 상세 조회 -->
+	<select id="selectStoreOrderDetailList" resultMap="storeOrderDetailResultMap">
+		SELECT *
+		FROM STORE_ORDER_DETAIL_TBL
+		WHERE ORDER_NO = #{orderNo}
 	</select>
 </mapper>

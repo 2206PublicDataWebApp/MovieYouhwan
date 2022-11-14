@@ -3,6 +3,7 @@ package kr.co.movieyouhwan.user.store.store;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.store.domain.Cart;
@@ -18,15 +19,15 @@ public interface UserStoreStore {
 
 	// 장바구니에 새로운 상품 담기
 	int insertProductToCart(SqlSession session, Cart cart);
-	
+
 	// 주문 정보 저장
 	int insertStoreOrder(SqlSession session, StoreOrder storeOrder);
 
-	// 주문 상세 정보 등록 (상품 목록, 상품 상세)
-	int insertStoreOrderDetail(SqlSession session, StoreOrderDetail orderDetail);
+	// 주문 상세 정보 등록 (1건)
+	int insertOneStoreOrderDetail(SqlSession session, StoreOrderDetail orderDetail);
 
-	// 주문 상세 정보 등록 (장바구니)
-	int registerStoreOrderDetailFromCart(SqlSession session, List<StoreOrderDetail> productsWithCount);
+	// 주문 상세 정보 등록 (N건)
+	int insertManyStoreOrderDetail(SqlSession session, List<StoreOrderDetail> orderDetailList);
 
 	// 장바구니에 있는 상품을 담으면 해당 상품 수량 증가
 	int updateProductCountUp(SqlSession session, Cart cart);
@@ -58,6 +59,16 @@ public interface UserStoreStore {
 	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
 	Member selectBuyerInfo(SqlSession session, String memberId);
 
+	// 스토어 주문번호 불러오기
+	String selectStoreOrderNo(SqlSession session, StoreOrder order);
 
+	// 스토어 구매내역 불러오기
+	StoreOrder selectStoreOrder(SqlSession session, String orderNo);
+
+	// 스토어 구매내역 리스트 불러오기
+	List<StoreOrder> selectStoreOrderList(SqlSession session, String memberId);
+
+	// 스토어 구매내역 상세 리스트 불러오기
+	List<StoreOrderDetail> selectStoreOrderDetailList(SqlSession session, String orderNo);
 
 }
