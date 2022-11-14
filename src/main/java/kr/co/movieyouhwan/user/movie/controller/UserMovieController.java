@@ -3,6 +3,7 @@ package kr.co.movieyouhwan.user.movie.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -30,6 +31,7 @@ import kr.co.movieyouhwan.common.page.PageInfo;
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.cinema.service.UserCinemaService;
+import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.service.UserMovieService;
 
@@ -43,7 +45,6 @@ public class UserMovieController {
 	private AdminTheaterService aTheaterService;
 	@Autowired
 	private UserMovieService uMovieService;
-	
 	
 	/**
 	 * 현재 상영 영화 목록 화면
@@ -190,6 +191,7 @@ public class UserMovieController {
 	@RequestMapping(value="/movieTicketTime.yh", method=RequestMethod.GET)
 	public ModelAndView movieTicketTimeView(
 			ModelAndView mv,
+			HttpServletRequest request,
 			@RequestParam(value="cinemaNo", required=false) Integer cinemaNo) {
 		cinemaNo = cinemaNo == null ? 13 : cinemaNo;
 		List<Cinema> cList = aCinemaService.printAllCinema();
@@ -283,6 +285,7 @@ public class UserMovieController {
 	@RequestMapping(value="/movieTicketSeat.yh", method=RequestMethod.POST)
 	public ModelAndView movieTicketSeat(
 			ModelAndView mv,
+			@ModelAttribute Movie movie,
 			@RequestParam("cinemaNo") Integer cinemaNo,
 			@RequestParam("movieNo") Integer movieNo,
 			@RequestParam("theaterNo") Integer theaterNo,
@@ -294,7 +297,9 @@ public class UserMovieController {
 			@RequestParam("movieEnd") String movieEnd,
 			@RequestParam("theaterName") String theaterName,
 			@RequestParam("movieTicket") Integer movieTicket,
-			@RequestParam("movieSeat") Integer movieSeat) {
+			@RequestParam("movieSeat") Integer movieSeat,
+			HttpServletRequest request,
+			HttpSession session) {
 		// 상영관 정보 가져오기
 		Theater theater = aTheaterService.printOneTheater(theaterNo);
 		// 알파벳 리스트
@@ -318,6 +323,131 @@ public class UserMovieController {
 		mv.addObject("theater", theater);
 		mv.addObject("abcd", aToZ);
 		mv.setViewName("user/movie/movieTicketSeat");
+		return mv;
+	}
+	
+	/**
+	 * 영화 예매 결제 화면
+	 * @param mv
+	 * @param request
+	 * @param cinemaNo
+	 * @param movieNo
+	 * @param theaterNo
+	 * @param movieImgRename
+	 * @param cinemaName
+	 * @param movieTitle
+	 * @param movieDay
+	 * @param movieStart
+	 * @param movieEnd
+	 * @param theaterName
+	 * @param movieTicket
+	 * @param movieSeat
+	 * @param seatChoice
+	 * @param adultCount
+	 * @param teenagerCount
+	 * @param adultPay
+	 * @param teenagerPay
+	 * @return
+	 */
+	@RequestMapping(value="/movieTicketPay.yh", method=RequestMethod.POST)
+	public ModelAndView movieTicketPay(
+			ModelAndView mv,
+			HttpServletRequest request,
+			@RequestParam("cinemaNo") Integer cinemaNo,
+			@RequestParam("movieNo") Integer movieNo,
+			@RequestParam("theaterNo") Integer theaterNo,
+			@RequestParam("movieImgRename") String movieImgRename,
+			@RequestParam("cinemaName") String cinemaName,
+			@RequestParam("movieTitle") String movieTitle,
+			@RequestParam("movieDay") String movieDay,
+			@RequestParam("movieStart") String movieStart,
+			@RequestParam("movieEnd") String movieEnd,
+			@RequestParam("theaterName") String theaterName,
+			@RequestParam("movieTicket") Integer movieTicket,
+			@RequestParam("movieSeat") Integer movieSeat,
+			@RequestParam("seatChoice") String seatChoice,
+			@RequestParam("adultCount") Integer adultCount,
+			@RequestParam("teenagerCount") Integer teenagerCount,
+			@RequestParam("adultPay") Integer adultPay,
+			@RequestParam("teenagerPay") Integer teenagerPay) {
+		// 사용자 정보 가져오기
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginUser");
+		String userNick = member.getMemberNick();
+		String userPoint = member.getMemberPoint();
+		String userBirth = member.getMemberBirth();
+		String userGender = member.getMemberGender();
+		// 화면 출력
+		mv.addObject("cinemaNo", cinemaNo);
+		mv.addObject("movieNo", movieNo);
+		mv.addObject("theaterNo", theaterNo);
+		mv.addObject("movieImgRename", movieImgRename);
+		mv.addObject("cinemaName", cinemaName);
+		mv.addObject("movieTitle", movieTitle);
+		mv.addObject("movieDay", movieDay);
+		mv.addObject("movieStart", movieStart);
+		mv.addObject("movieEnd", movieEnd);
+		mv.addObject("theaterName", theaterName);
+		mv.addObject("movieTicket", movieTicket);
+		mv.addObject("movieSeat", movieSeat);
+		mv.addObject("seatChoice", seatChoice);
+		mv.addObject("userNick", userNick);
+		mv.addObject("userPoint", userPoint);
+		mv.addObject("userBirth", userBirth);
+		mv.addObject("userGender", userGender);
+		mv.addObject("adultCount", adultCount);
+		mv.addObject("teenagerCount", teenagerCount);
+		mv.addObject("adultPay", adultPay);
+		mv.addObject("teenagerPay", teenagerPay);
+		mv.setViewName("user/movie/movieTicketPay");
+		return mv;
+	}
+	
+	/**
+	 * 결제 AJAX
+	 * @param request
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping(value = "/ticket/pay/buyer.yh", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
+	public String moviePayBuyer(
+			HttpServletRequest request) {
+		JSONObject jsonObj = new JSONObject();
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginUser");
+		Member buyerInfo = uMovieService.printBuyerInfo(member.getMemberId());
+		jsonObj.put("memberName", buyerInfo.getMemberName());
+		jsonObj.put("memberPhone", buyerInfo.getMemberPhone());
+		jsonObj.put("memberEmail", buyerInfo.getMemberEmail());
+		return jsonObj.toString();
+	}
+	
+	/**
+	 * 영화 예매 결제 기능
+	 * @param mv
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/movie/pay.yh", method=RequestMethod.POST)
+	public ModelAndView moviePay(
+			ModelAndView mv,
+			HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginUser");
+		return mv;
+	}
+	
+	/**
+	 * 영화 예매 성공 화면
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping(value="/movieTicketComplete.yh", method=RequestMethod.POST)
+	public ModelAndView movieComplete(
+			ModelAndView mv) {
+		mv.setViewName("user/movie/movieTicketComplete");
 		return mv;
 	}
 }
