@@ -9,7 +9,6 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/header.css" rel="stylesheet"/>
 <link href="/resources/css/movie.css" rel="stylesheet">
-<!-- <script src="/resources/js/jquery-3.6.1.min.js" defer></script> -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="/resources/js/movie.js" defer></script>
 </head>

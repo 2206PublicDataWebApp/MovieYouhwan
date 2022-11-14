@@ -16,7 +16,6 @@ public class MovieTicket {
 	private String personType; // 성인 여부 - 성인 or 청소년
 	private String personCount; // 관람 인원
 	private String choiceSeat; // 좌석 번호
-	private String impUid; // 아임포트
 	private int moviePay; // 결제 금액
 	private String payMethod; // 결제 수단
 	private int addPoint; // 적립 포인트
@@ -29,8 +28,8 @@ public class MovieTicket {
 
 	public MovieTicket(String ticketNo, String memberId, String memberBirth, String memberGender, int cinemaNo,
 			int theaterNo, int movieNo, String cinemaName, String theaterName, String movieName, String personType,
-			String personCount, String choiceSeat, String impUid, int moviePay, String payMethod, int addPoint,
-			Date payDate, String movieDay, String movieStart, String ticketStatus) {
+			String personCount, String choiceSeat, int moviePay, String payMethod, int addPoint, Date payDate,
+			String movieDay, String movieStart, String ticketStatus) {
 		super();
 		this.ticketNo = ticketNo;
 		this.memberId = memberId;
@@ -45,7 +44,6 @@ public class MovieTicket {
 		this.personType = personType;
 		this.personCount = personCount;
 		this.choiceSeat = choiceSeat;
-		this.impUid = impUid;
 		this.moviePay = moviePay;
 		this.payMethod = payMethod;
 		this.addPoint = addPoint;
@@ -159,14 +157,6 @@ public class MovieTicket {
 		this.choiceSeat = choiceSeat;
 	}
 
-	public String getImpUid() {
-		return impUid;
-	}
-
-	public void setImpUid(String impUid) {
-		this.impUid = impUid;
-	}
-
 	public int getMoviePay() {
 		return moviePay;
 	}
@@ -229,8 +219,8 @@ public class MovieTicket {
 				+ ", memberGender=" + memberGender + ", cinemaNo=" + cinemaNo + ", theaterNo=" + theaterNo
 				+ ", movieNo=" + movieNo + ", cinemaName=" + cinemaName + ", theaterName=" + theaterName
 				+ ", movieName=" + movieName + ", personType=" + personType + ", personCount=" + personCount
-				+ ", choiceSeat=" + choiceSeat + ", impUid=" + impUid + ", moviePay=" + moviePay + ", payMethod="
-				+ payMethod + ", addPoint=" + addPoint + ", payDate=" + payDate + ", movieDay=" + movieDay
-				+ ", movieStart=" + movieStart + ", ticketStatus=" + ticketStatus + "]";
+				+ ", choiceSeat=" + choiceSeat + ", moviePay=" + moviePay + ", payMethod=" + payMethod + ", addPoint="
+				+ addPoint + ", payDate=" + payDate + ", movieDay=" + movieDay + ", movieStart=" + movieStart
+				+ ", ticketStatus=" + ticketStatus + "]";
 	}
 }

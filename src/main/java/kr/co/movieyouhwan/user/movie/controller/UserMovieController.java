@@ -1,5 +1,6 @@
 package kr.co.movieyouhwan.user.movie.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +35,7 @@ import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.cinema.service.UserCinemaService;
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
+import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 import kr.co.movieyouhwan.user.movie.service.UserMovieService;
 
 @Controller
@@ -404,13 +407,13 @@ public class UserMovieController {
 	}
 	
 	/**
-	 * 결제 AJAX
+	 * 영화 예매자 정보 가져오기
 	 * @param request
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	@ResponseBody
-	@RequestMapping(value = "/ticket/pay/buyer.yh", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
+	@RequestMapping(value = "/movie/pay/buyer.yh", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
 	public String moviePayBuyer(
 			HttpServletRequest request) {
 		JSONObject jsonObj = new JSONObject();
@@ -424,30 +427,30 @@ public class UserMovieController {
 	}
 	
 	/**
-	 * 영화 예매 결제 기능
-	 * @param mv
+	 * 영화 결제
 	 * @param request
+	 * @param movieTicket
+	 * @param paid_at
+	 * @param status
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/movie/pay.yh", method=RequestMethod.POST)
-	public ModelAndView moviePay(
-			ModelAndView mv,
-			HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		Member member = (Member)session.getAttribute("loginUser");
-		return mv;
+	@RequestMapping(value="/movie/pay.yh", method = RequestMethod.POST)
+	public String moviePay(
+			HttpServletRequest request,
+			@ModelAttribute MovieTicket movieTicket,
+			@RequestParam("paid_at") long paid_at,
+			@RequestParam("status") String status) {
+		movieTicket.setPayDate(new Date(paid_at));
+		return "";
 	}
 	
-	/**
-	 * 영화 예매 성공 화면
-	 * @param mv
-	 * @return
-	 */
-	@RequestMapping(value="/movieTicketComplete.yh", method=RequestMethod.POST)
-	public ModelAndView movieComplete(
-			ModelAndView mv) {
-		mv.setViewName("user/movie/movieTicketComplete");
-		return mv;
+	@ResponseBody
+	@RequestMapping(value="/movieTicketComplete.yh", method=RequestMethod.GET)
+	public String movieComplete(
+			Model model,
+			@RequestParam("movieName") String movieName) {
+		model.addAttribute("movieName", movieName);
+		return "user/movie/movieTicketComplete";
 	}
 }

@@ -10,6 +10,10 @@
 	margin : 0 auto;
 	margin-top : 80px;
 }
+.admin-movie-wrap {
+	width : 1400px;
+	margin : 0 auto;
+}
 .midmovie-wrapper {
 	width : 1200px;
 	margin : 0 auto;
@@ -46,6 +50,77 @@
 	border-radius: 5px;
 	background-color: #fff;	
 }
+
+/* adminMovieCinema.jsp (관리자-영화관&영화관리 첫화면) */
+#cmbutton-area {
+	width : 100%;
+	height : 50px;
+	text-align : right;
+}
+	.cmbutton {
+		width : 100px;
+		height : 30px;
+		margin-right : 20px;
+		color : white;
+		line-height : 30px;
+		background-color : #0F1A3B;
+	}
+#amovie-wrap {
+	display : flex;
+	width : 100%;	
+	height : 530px:
+}
+	#movie-cinema-rank {
+		width : 40%;
+		height : 530px;
+		border : solid 1px black;
+	}
+	#movie-cinema-list {
+		width : 60%;
+		height : 530px;
+	}
+		#amovie-list {
+			width: 95%;
+			height : 47%;
+			margin : 0 auto;
+			margin-bottom : 33px;
+			border : solid 1px #0F1A3B;
+			border-radius : 15px;
+		}
+			#amovie-top {
+				width : 100%;
+				height : 15%;
+				display : flex;
+				padding-right : 30px;
+			}
+		#acinema-list {
+			width: 95%;
+			height : 47%;
+			margin : 0 auto;
+			border : solid 1px #0F1A3B;
+			border-radius : 15px;
+		}
+			#acinema-top {
+				width : 100%;
+				height : 15%;
+				display : flex;
+				border : solid 1px black;			
+			}
+				.show-text {
+					line-height : 35px;
+					margin-left : 15px;
+				}
+				.show-button {
+					width : 100px;
+					height : 30px;
+					margin-top : 2px;
+					margin-left : 600px;
+					float : right;
+					color : white;
+					background-color : #0F1A3B;
+					border : solid 1px #0F1A3B;
+				}
+
 .date-input:hover {
 	background-color : #FCF4C1;
 }

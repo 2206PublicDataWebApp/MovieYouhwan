@@ -22,3 +22,10 @@ $('#mate-tab').click(function (e) {
     $(this).attr('href', '/member/loginView.yh');
   }
 });
+
+$('#ticket-tab').click(function (e) {
+  if (!$('#profile-user').length) {
+    alert('로그인이 필요한 서비스입니다.');
+    $(this).attr('href', '/member/loginView.yh');
+  }
+});

@@ -17,5 +17,22 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	<div class="ticket-movie-wrapper">
+		<div class="ticket-left">
+			<div class="ticket-text">
+				<p class="ticket-intext">01<br><br>상영시간</p>
+			</div>
+			<div class="ticket-choice">
+				<p class="ticket-intext">02<br><br>인원,좌석</p>
+			</div>
+			<div class="ticket-text">
+				<p class="ticket-intext">03<br><br>결제</p>
+			</div>
+			<div class="ticket-text-bottom">
+				<p class="ticket-intext">04<br><br>예매완료</p>
+			</div>
+		</div>
+	</div>
+	<p>${movieName }</p>
 </body>
 </html>
