@@ -2,15 +2,15 @@ if ($('#isMatchingActive').val() == 'Y') {
   $('.match-toggle.switch').toggleClass('active');
 }
 
-$('.match-toggle-switch').click(function () {
-  $(this).toggleClass('active');
-  if ($(this).hasClass('active')) {
-    $('#isMatchingActive').val() ='Y'
-  }
-  else {
-    $('#isMatchingActive').val() ='N'
-  }
-});
+//$('.match-toggle-switch').click(function () {
+//  $(this).toggleClass('active');
+//  if ($(this).hasClass('active')) {
+//    $('#isMatchingActive').val() ='Y';
+//  }
+//  else {
+//    $('#isMatchingActive').val() ='N';
+//  }
+//});
 
 /* 메이트 약관동의 -> 시작하기 버튼 */
 function mateStart(id) {
