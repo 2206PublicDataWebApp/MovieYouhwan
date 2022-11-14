@@ -3,6 +3,7 @@ package kr.co.movieyouhwan.user.store.store.logic;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
@@ -37,17 +38,17 @@ public class UserStoreStoreLogic implements UserStoreStore {
 		return result;
 	}
 
-	// 주문 상세 정보 등록 (상품 목록, 상품 상세)
+	// 주문 상세 정보 등록 (1건)
 	@Override
-	public int insertStoreOrderDetail(SqlSession session, StoreOrderDetail orderDetail) {
-		int result = session.insert("StoreMapper.insertStoreOrderDetail", orderDetail);
+	public int insertOneStoreOrderDetail(SqlSession session, StoreOrderDetail orderDetail) {
+		int result = session.insert("StoreMapper.insertOneStoreOrderDetail", orderDetail);
 		return result;
 	}
 
-	// 주문 상세 정보 등록 (장바구니)
+	// 주문 상세 정보 등록 (N건)
 	@Override
-	public int registerStoreOrderDetailFromCart(SqlSession session, List<StoreOrderDetail> productsWithCount) {
-		int result = session.insert("StoreMapper.insertStoreOrderDetail", productsWithCount);
+	public int insertManyStoreOrderDetail(SqlSession session, List<StoreOrderDetail> orderDetailList) {
+		int result = session.insert("StoreMapper.insertManyStoreOrderDetail", orderDetailList);
 		return result;
 	}
 
@@ -119,6 +120,34 @@ public class UserStoreStoreLogic implements UserStoreStore {
 	public Member selectBuyerInfo(SqlSession session, String memberId) {
 		Member buyerInfo = session.selectOne("MemberMapper.selectBuyerInfo", memberId);
 		return buyerInfo;
+	}
+
+	// 스토어 주문번호 불러오기
+	@Override
+	public String selectStoreOrderNo(SqlSession session, StoreOrder order) {
+		String orderNo = session.selectOne("StoreMapper.selectStoreOrderNo", order);
+		return orderNo;
+	}
+
+	// 스토어 구매내역 불러오기
+	@Override
+	public StoreOrder selectStoreOrder(SqlSession session, String orderNo) {
+		StoreOrder order = session.selectOne("StoreMapper.selectStoreOrder", orderNo);
+		return order;
+	}
+
+	// 스토어 구매내역 리스트 불러오기
+	@Override
+	public List<StoreOrder> selectStoreOrderList(SqlSession session, String memberId) {
+		List<StoreOrder> orderList = session.selectList("StoreMapper.selectStoreOrderList", memberId);
+		return orderList;
+	}
+
+	// 스토어 구매내역 상세 리스트 불러오기
+	@Override
+	public List<StoreOrderDetail> selectStoreOrderDetailList(SqlSession session, String orderNo) {
+		List<StoreOrderDetail> orderDetailList = session.selectList("StoreMapper.selectStoreOrderDetailList", orderNo);
+		return orderDetailList;
 	}
 
 }

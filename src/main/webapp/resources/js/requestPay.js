@@ -69,7 +69,7 @@ function requestPay(pg, payMethod, productName, totalAmount, memberInfo, cartNoL
     {
       pg: pg,
       pay_method: payMethod, // card(신용카드), trans(실시간계좌이체), vbank(가상계좌)
-      merchant_uid: 'store_' + new Date().getTime(),
+      merchant_uid: 'S' + new Date().getTime(),
       name: productName,
       amount: totalAmount,
       buyer_name: memberInfo.memberName,
@@ -105,7 +105,7 @@ function requestPay(pg, payMethod, productName, totalAmount, memberInfo, cartNoL
                   cartNoList: cartNoList, // 장바구니에서 삭제할 상품의 장바구니 번호
                   productNameList: productNameList, // 실제 주문한 상품명 리스트
                   productCountList: productCountList, // 실제 주문한 상품수량 리스트
-                  status: rsp.status, // 결제상태 (ready, paid->사용가능(A), failed)
+                  status: rsp.status, // 결제상태 (ready, paid->사용가능, failed)
                 },
                 // TODO: Find out what they are
                 // beforeSend: function (xhr) {
@@ -113,27 +113,20 @@ function requestPay(pg, payMethod, productName, totalAmount, memberInfo, cartNoL
                 // },
               })
                 // 결제 데이터 삽입 성공
-                .done(function (msg) {
-                  alert(msg); // vs
+                .done(function (orderNo) {
                   // NOTE: 결제 완료 페이지로 이동
-                  $.ajax({
-                    url: '/store/pay/complete.yh',
-                    method: 'POST',
-                    data: {
-                      // FIXME: 결제 완료 페이지로 전송할 데이터 수정
-                      productName: result.response.name,
-                      payAmount: result.response.amount,
-                      payDate: rsp.paid_at,
-                      // NOTE: 여기까지 옴
-                    },
-                  })
-                    .done(function () {
-                      $(location).attr('href', '/store/pay/complete.yh');
-                    })
-                    .fail(function (error) {
-                      alert(JSON.stringify(error)); // NOTE: Wondering what error msg will come out
-                      alert('[페이지 이동 실패] 결제 완료 페이지로 이동할 수 없습니다.');
-                    });
+                  let completeForm = $('<form></form>');
+                  completeForm.attr('action', '/store/pay/complete.yh');
+                  completeForm.attr('method', 'post');
+
+                  let completeInput = $('<input />');
+                  completeInput.attr('type', 'hidden');
+                  completeInput.attr('name', 'orderNo');
+                  completeInput.attr('value', orderNo);
+
+                  completeInput.appendTo(completeForm);
+                  completeForm.appendTo('body');
+                  completeForm.submit();
                 })
                 .fail(function (error) {
                   alert(JSON.stringify(error));
