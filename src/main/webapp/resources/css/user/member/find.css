@@ -47,7 +47,7 @@
     appearance: none;
 
 }
-#phone-input{
+#memberEmail{
     width: 210px;
 }
 #container{
@@ -70,7 +70,7 @@
     font-weight: bold;
     
 }
-.phone-confirm-btn{
+.email-confirm{
     width: 90px;
     height: 45px;
     border: 1px solid #0F1A3B;

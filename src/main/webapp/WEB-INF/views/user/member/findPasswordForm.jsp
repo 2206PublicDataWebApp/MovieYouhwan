@@ -14,6 +14,7 @@
     <script src="/resources/js/header.js" defer></script>
     <script src="/resources/js/footer.js" defer></script>
 	<script src="/resources/js/userMember.js" defer></script>
+    <script src="/resources/js/find.js" defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <title>무비유환 - 비밀번호 변경</title>
@@ -22,22 +23,21 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
  <div id="findIdForm">
-    <form action="/member/findPassword.yh" method="post">
+    <form action="/member/findPassword.yh" method="post" name="pfrm">
         <div id="container">
             <h1 id="findPassTitle">비밀번호 변경</h1>
             
             <div class="findId-input">
                 <div id="pass-find-info">
                     가입한 아이디를 입력해주세요<br>
-                    휴대폰 인증을 통해 비밀번호를 변경합니다.
+                    이메일 인증을 통해 비밀번호를 변경합니다.
                 </div>
                 <div class="input-wrap">${member.memberId}
                     <input type="text" class="input-box" id="id-input" name="memberId" maxlength="12" placeholder="아이디" required>
                 </div>
-                
                 <div class="input-wrap">
-                    <input type="number" class="input-box" id="phone-input" name="memberPhone" maxlength="11" placeholder="휴대폰 번호 (- 제외)" required>
-                    <input type="button" class="phone-confirm-btn" value="인증하기" maxlength="6" >
+                    <input type="email" class="input-box" id="memberEmail" name="memberEmail" placeholder="movieyoohwan@mail.com" maxlength="30" required>
+                    <input type="button" id="email-confirm-btn" class="email-confirm" name="email-confirm" value="인증하기"> 
                 </div>
                 <div class="input-wrap">
                     <input type="number" class="input-box" id="sendSMS" name="sendSMS" placeholder="6자리의 인증번호를 입력하세요" maxlength="6" required>
