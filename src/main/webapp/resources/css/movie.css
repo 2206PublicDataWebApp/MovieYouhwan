@@ -593,7 +593,7 @@
 			border : solid 1px #0F1A3B;
 			background-color : white;
 		}
-		.go-movieList {
+		.go-movieList{
 			width : 100px;
 			height : 30px;
 			margin-top : 28px;
@@ -967,4 +967,7 @@
 #heartWrap{
 	display: flex;
     align-items: center;
+}
+.detail-heart-empty, .detail-heart-full{
+	padding-bottom: 40px;
 }

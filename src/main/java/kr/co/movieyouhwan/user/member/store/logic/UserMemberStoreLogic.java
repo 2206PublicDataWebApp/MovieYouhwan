@@ -68,6 +68,15 @@ public class UserMemberStoreLogic implements UserMemberStore {
 		return uMemberList;
 	}
 
+	@Override
+	public int modifyPassword(SqlSessionTemplate session, String memberId, String memberEmail) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("memberId", memberId);
+		params.put("memberEmail", memberEmail);
+		int result = session.selectOne("memberMapper.modifyPwd",params);
+		return result;
+	}
+
 	/**
 	 * 패스워드 찾기
 	 */

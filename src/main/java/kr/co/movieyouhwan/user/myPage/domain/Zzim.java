@@ -15,6 +15,7 @@ public class Zzim {
 	private String movieDirector;
 	private String movieActor;
 	private int movieSee;
+	private int movieZzim;
 	
 	
 	
