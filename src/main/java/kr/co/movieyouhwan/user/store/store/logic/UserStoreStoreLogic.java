@@ -3,13 +3,14 @@ package kr.co.movieyouhwan.user.store.store.logic;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.store.domain.Cart;
 import kr.co.movieyouhwan.user.store.domain.Product;
 import kr.co.movieyouhwan.user.store.domain.ProductType;
+import kr.co.movieyouhwan.user.store.domain.StoreOrder;
+import kr.co.movieyouhwan.user.store.domain.StoreOrderDetail;
 import kr.co.movieyouhwan.user.store.store.UserStoreStore;
 
 @Repository
@@ -26,6 +27,27 @@ public class UserStoreStoreLogic implements UserStoreStore {
 	@Override
 	public int insertProductToCart(SqlSession session, Cart cart) {
 		int result = session.insert("StoreMapper.insertProductToCart", cart);
+		return result;
+	}
+
+	// 주문 정보 저장
+	@Override
+	public int insertStoreOrder(SqlSession session, StoreOrder storeOrder) {
+		int result = session.insert("StoreMapper.insertStoreOrder", storeOrder);
+		return result;
+	}
+
+	// 주문 상세 정보 등록 (상품 목록, 상품 상세)
+	@Override
+	public int insertStoreOrderDetail(SqlSession session, StoreOrderDetail orderDetail) {
+		int result = session.insert("StoreMapper.insertStoreOrderDetail", orderDetail);
+		return result;
+	}
+
+	// 주문 상세 정보 등록 (장바구니)
+	@Override
+	public int registerStoreOrderDetailFromCart(SqlSession session, List<StoreOrderDetail> productsWithCount) {
+		int result = session.insert("StoreMapper.insertStoreOrderDetail", productsWithCount);
 		return result;
 	}
 

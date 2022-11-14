@@ -9,29 +9,35 @@ $('#btn-buy-pay').click(function () {
     const payMethod = $('.pay-method').filter(':checked').val();
     if (payMethod) {
       const pg = payMethod === 'kakaopay' ? 'kakaopay' : 'html5_inicis';
-      const productNameTag = $('.product-name');
-      let productName;
-      let productNameList = [];
-      let productCountList = [];
-      if (productNameTag.length > 1) {
-        productName = productNameTag.eq(0).text() + ' 외 ' + (productNameTag.length - 1);
-        productNameTag.each(function () {
-          productNameList.push($(this).text());
-          productCountList.push(strToNum($(this).siblings('.product-count').text()));
+      const products = $('.buy-product');
+      let productName; // required
+      let cartNoList = []; // optional
+      let productNameList = []; // optional
+      let productCountList = []; // required
+      if (products.length > 1) {
+        // NOTE: 여러 품목을 구매할 경우 (장바구니)
+        productName = products.find('.product-name').eq(0).text() + ' 외 ' + (products.length - 1);
+        products.each(function () {
+          cartNoList.push($(this).data('value'));
+          productNameList.push($(this).find('.product-name').text());
+          productCountList.push(strToNum($(this).find('.product-count').text()));
         });
       } else {
-        productName = productNameTag.text();
-        productNameList.push(productName);
-        productCountList.push(strToNum($('.product-count').text()));
+        // NOTE: 하나의 품목을 구매할 경우 (상품 목록, 상품 상세, 장바구니)
+        productName = products.find('.product-name').text();
+        if (products.data()) {
+          // ㄴ TODO: data-value 속성 없을 때 오류 나는지 확인
+          cartNoList.push(products.data('value'));
+        }
+        productCountList.push(strToNum(products.find('.product-count').text()));
       }
-      console.log('productNameList: ' + productNameList + '\nproductCountList: ' + productCountList);
       const totalAmount = strToNum($('#total-pay-amount').text());
       // NOTE: 주문자 정보(이름, 휴대폰 번호, 이메일) 가져오기
       $.ajax({
         url: '/store/pay/buyer.yh',
         type: 'POST',
         success: function (memberInfo) {
-          requestPay(pg, payMethod, productName, productNameList, productCountList, totalAmount, memberInfo);
+          requestPay(pg, payMethod, productName, totalAmount, memberInfo, cartNoList, productNameList, productCountList);
         },
         error: function (error) {
           alert(JSON.stringify(error));
@@ -58,7 +64,7 @@ $('#btn-buy-prev').click(function () {
  * @param {*} memberName
  * @param {*} memberPhone
  */
-function requestPay(pg, payMethod, productName, productNameList, productCountList, totalAmount, memberInfo) {
+function requestPay(pg, payMethod, productName, totalAmount, memberInfo, cartNoList, productNameList, productCountList) {
   IMP.request_pay(
     {
       pg: pg,
@@ -71,9 +77,8 @@ function requestPay(pg, payMethod, productName, productNameList, productCountLis
       buyer_email: memberInfo.memberEmail,
     },
     function (rsp) {
-      // 결제 승인 또는 가상계좌 발급 성공
       if (rsp.success) {
-        // NOTE: Must verify the payment
+        // NOTE: 결제 승인 또는 가상계좌 발급 성공 => Must verify the payment
         $.ajax({
           url: '/pay/verify.yh',
           method: 'POST',
@@ -97,6 +102,7 @@ function requestPay(pg, payMethod, productName, productNameList, productCountLis
                   productName: rsp.name, // 주문명
                   payAmount: rsp.paid_amount, // 결제 승인 또는 가상계좌 입금예정 금액
                   paid_at: rsp.paid_at, // 결제승인시각
+                  cartNoList: cartNoList, // 장바구니에서 삭제할 상품의 장바구니 번호
                   productNameList: productNameList, // 실제 주문한 상품명 리스트
                   productCountList: productCountList, // 실제 주문한 상품수량 리스트
                   status: rsp.status, // 결제상태 (ready, paid->사용가능(A), failed)
@@ -108,6 +114,7 @@ function requestPay(pg, payMethod, productName, productNameList, productCountLis
               })
                 // 결제 데이터 삽입 성공
                 .done(function (msg) {
+                  alert(msg); // vs
                   // NOTE: 결제 완료 페이지로 이동
                   $.ajax({
                     url: '/store/pay/complete.yh',

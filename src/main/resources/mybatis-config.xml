@@ -44,6 +44,7 @@
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.Product" alias="Product"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.ProductType" alias="ProductType"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreOrder" alias="StoreOrder"/>
+		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreOrderDetail" alias="StoreOrderDetail"/>
 		<typeAlias type="kr.co.movieyouhwan.user.store.domain.StoreCancel" alias="StoreCancel"/>
 		<typeAlias type="kr.co.movieyouhwan.user.myPage.domain.Zzim" alias="Zzim"/>
 	</typeAliases>

@@ -1,6 +1,5 @@
 package kr.co.movieyouhwan.user.store.domain;
 
-import java.sql.Date;
 import java.util.HashMap;
 
 public class StoreOrder {
@@ -8,9 +7,9 @@ public class StoreOrder {
 	private String memberId; // 주문자 아이디
 	private String productName; // 주문명
 	private int payAmount; // 결제승인금액
-	private Date payDate; // 결제일자
-	private Date expiryDate; // 만료일자
-	private String availability; // 사용상태 (A: 사용가능, E: 기간만료, C:취소완료)
+	private String payDate; // 결제일자
+	private String expiryDate; // 만료일자
+	private String availability; // 사용상태 (사용가능/기간만료/취소완료)
 	private HashMap<String, Integer> productsWithCount; // 실제 결제한 상품과 수량 -> ORDER_DETAIL_TBL
 
 	public String getOrderNo() {
@@ -45,19 +44,19 @@ public class StoreOrder {
 		this.payAmount = payAmount;
 	}
 
-	public Date getPayDate() {
+	public String getPayDate() {
 		return payDate;
 	}
 
-	public void setPayDate(Date payDate) {
+	public void setPayDate(String payDate) {
 		this.payDate = payDate;
 	}
 
-	public Date getExpiryDate() {
+	public String getExpiryDate() {
 		return expiryDate;
 	}
 
-	public void setExpiryDate(Date expiryDate) {
+	public void setExpiryDate(String expiryDate) {
 		this.expiryDate = expiryDate;
 	}
 

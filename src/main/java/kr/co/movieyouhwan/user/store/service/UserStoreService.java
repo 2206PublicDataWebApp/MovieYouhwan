@@ -4,9 +4,10 @@ import java.util.List;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.store.domain.Cart;
-import kr.co.movieyouhwan.user.store.domain.Cart;
 import kr.co.movieyouhwan.user.store.domain.Product;
 import kr.co.movieyouhwan.user.store.domain.ProductType;
+import kr.co.movieyouhwan.user.store.domain.StoreOrder;
+import kr.co.movieyouhwan.user.store.domain.StoreOrderDetail;
 
 public interface UserStoreService {
 
@@ -15,6 +16,15 @@ public interface UserStoreService {
 
 	// 장바구니에 새로운 상품 담기
 	int addNewProductToCart(Cart cart);
+
+	// 주문 정보 등록
+	int registerStoreOrder(StoreOrder storeOrder);
+
+	// 주문 상세 정보 등록 (상품 목록, 상품 상세)
+	int registerStoreOrderDetail(StoreOrderDetail orderDetail);
+
+	// 주문 상세 정보 등록 (장바구니)
+	int registerStoreOrderDetailFromCart(List<StoreOrderDetail> productsWithCount);
 
 	// 장바구니에 있는 상품을 담으면 해당 상품 수량 증가
 	int increaseProductCountUp(Cart cart);

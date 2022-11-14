@@ -10,6 +10,8 @@ import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.store.domain.Cart;
 import kr.co.movieyouhwan.user.store.domain.Product;
 import kr.co.movieyouhwan.user.store.domain.ProductType;
+import kr.co.movieyouhwan.user.store.domain.StoreOrder;
+import kr.co.movieyouhwan.user.store.domain.StoreOrderDetail;
 import kr.co.movieyouhwan.user.store.service.UserStoreService;
 import kr.co.movieyouhwan.user.store.store.UserStoreStore;
 
@@ -32,6 +34,28 @@ public class UserStoreServiceImpl implements UserStoreService {
 	@Override
 	public int addNewProductToCart(Cart cart) {
 		int result = uStoreStore.insertProductToCart(session, cart);
+		return result;
+	}
+
+	// 주문 정보 등록
+	@Override
+	public int registerStoreOrder(StoreOrder storeOrder) {
+		int result = uStoreStore.insertStoreOrder(session, storeOrder);
+		return result;
+	}
+
+	// 주문 상세 정보 등록 (상품 목록, 상품 상세)
+	@Override
+	public int registerStoreOrderDetail(StoreOrderDetail orderDetail) {
+		int result = uStoreStore.insertStoreOrderDetail(session, orderDetail);
+		return result;
+
+	}
+
+	// 주문 상세 정보 등록 (장바구니)
+	@Override
+	public int registerStoreOrderDetailFromCart(List<StoreOrderDetail> productsWithCount) {
+		int result = uStoreStore.registerStoreOrderDetailFromCart(session, productsWithCount);
 		return result;
 	}
 

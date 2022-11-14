@@ -1,6 +1,8 @@
 package kr.co.movieyouhwan.user.store.controller;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -24,6 +26,7 @@ import kr.co.movieyouhwan.user.store.domain.Cart;
 import kr.co.movieyouhwan.user.store.domain.Product;
 import kr.co.movieyouhwan.user.store.domain.ProductType;
 import kr.co.movieyouhwan.user.store.domain.StoreOrder;
+import kr.co.movieyouhwan.user.store.domain.StoreOrderDetail;
 import kr.co.movieyouhwan.user.store.service.UserStoreService;
 
 @Controller
@@ -297,35 +300,62 @@ public class UserStoreController {
 	// 스토어 결제
 	@ResponseBody
 	@RequestMapping(value = "/store/pay.yh", method = RequestMethod.POST)
-	public String storePay(HttpServletRequest request,
-			@ModelAttribute StoreOrder storeOrder,
+	public String storePay(HttpServletRequest request, @ModelAttribute StoreOrder order,
 			@RequestParam("paid_at") long paid_at,
-			@RequestParam("productNameList[]") List<String> productNameList,
-			@RequestParam("productCountList[]") List<Integer> productCountList,
+			@RequestParam(value = "cartNoList[]", required = false) List<Integer> cartNoList,
+			@RequestParam(value = "productNameList[]", required = false) List<String> productNameList,
+			@RequestParam(value = "productCountList[]") List<Integer> productCountList,
 			@RequestParam("status") String status) {
 		try {
-			storeOrder.setPayDate(new Date(paid_at));
-			
-			// UNIX Timestamp + 6개월 => expiryDate
+			// 주문자 아이디 세팅
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("loginUser");
+			order.setMemberId(member.getMemberId());
+
+			// 결제일시 세팅 ( UNIX Timestamp (long) -> DateTime (String) )
+			SimpleDateFormat pSdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			order.setPayDate(pSdf.format(new Date(paid_at * 1000)));
+
+			// 만료일자 세팅 ( 결제일시 + 6개월 )
 			Calendar cal = Calendar.getInstance();
-			cal.setTimeInMillis(paid_at);
-//			cal.setTime(storeOrder.getPayDate());
+			cal.setTime(new Date(paid_at * 1000L));
 			cal.add(Calendar.MONTH, 6);
-			storeOrder.setExpiryDate(new Date(cal.getTime().getTime()));
-			
-			System.out.println(storeOrder.getPayDate() + " ~ " + storeOrder.getExpiryDate());
-			
-//			long timeStamp = Long.parseLong(paid_at);
-//			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-//			Date date = new Date();
-//			date.setTime(timeStamp);
-//			storeOrder.setPayDate(sdf.format(date));
-			
-//			LOGGER.info(storeOrder.toString());
-			System.out.println(paid_at);
-//			LOGGER.info(productNameList.toString());
-//			LOGGER.info(productCountList.toString());
-//			LOGGER.info(status);
+			SimpleDateFormat eSdf = new SimpleDateFormat("yyyy-MM-dd");
+			order.setExpiryDate(eSdf.format(cal.getTime()));
+
+			// value check
+			LOGGER.info("storeOrder(Before): " + order.toString());
+			LOGGER.info(cartNoList == null ? "cartNoList: null" : cartNoList.toString());
+			LOGGER.info(productNameList == null ? "productNameList: null" : productNameList.toString());
+			LOGGER.info(productCountList == null ? "productCountList: null" : productCountList.toString());
+
+			switch (status) {
+			case "paid":
+				order.setAvailability("사용가능");
+				int result = uStoreService.registerStoreOrder(order); // INSERT INTO STORE_ORDER_TBL
+				if (result > 0) {
+					if (cartNoList.isEmpty() || cartNoList == null) {
+						// NOTE: 상품 목록/상세에서 구매하기 버튼 눌렀을 경우 (품목 1개, 수량 1개 또는 N개)
+						StoreOrderDetail orderDetail = new StoreOrderDetail(order.getOrderNo(), order.getProductName(), productCountList.get(0));
+						uStoreService.registerStoreOrderDetail(orderDetail); // INSERT INTO STORE_ORDER_DETAIL_TBL
+					} else {
+						// NOTE: 장바구니에서 구매하기 버튼 눌렀을 경우 (품목 1개 또는 N개, 수량 1개 또는 N개)
+						List<StoreOrderDetail> productsWithCount = new ArrayList<>();
+						for(int i = 0; i < Math.min(cartNoList.size(), cartNoList.size()); i++) {
+							productsWithCount.add(new StoreOrderDetail(order.getOrderNo(), productNameList.get(i), productCountList.get(i)));
+						}
+						uStoreService.registerStoreOrderDetailFromCart(productsWithCount); // INSERT INTO STORE_ORDER_DETAIL_TBL
+						uStoreService.deleteProductsInCart(cartNoList);
+					}
+				}
+				break;
+			case "ready":
+				// TODO: 가상 계좌 입급 대기
+				break;
+			case "failed":
+				// 결제 실패
+				break;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
