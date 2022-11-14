@@ -39,7 +39,7 @@
 		<result property="genre" column="GENRE"/>
 	</resultMap>
 	
-	<!-- 더미 멤버 리스트 insert -->
+	<!-- ==================================================더미데이터 INSERT=================================================== -->
 	<insert id="insertMemberList" parameterType="java.util.List">
 		INSERT ALL
 		<foreach collection="list" item="member">
@@ -51,7 +51,7 @@
 	<insert id="insertSurveyList" parameterType="java.util.List">
 		INSERT ALL
 		<foreach collection="list" item="survey">
-			INTO SURVEY_TBL VALUES(#{survey.surveyNo}, #{survey.gender}, #{survey.age}, #{survey.cinemaName}, #{survey.memberId}, #{survey.memberBirth}, #{survey.memberGender}, DEFAULT, DEFAULT, NULL, NULL)
+			INTO SURVEY_TBL VALUES(#{survey.surveyNo}, #{survey.gender}, #{survey.age}, #{survey.cinemaName}, #{survey.memberId}, #{survey.memberBirth}, #{survey.memberGender}, DEFAULT, DEFAULT, DEFAULT, NULL, NULL)
 		</foreach>
 		SELECT * FROM DUAL
 	</insert>
@@ -63,10 +63,21 @@
 			</foreach>
 			SELECT * FROM DUAL
 	</insert>
+	<!-- ============================================================================================================ -->
 	
 	
 	<insert id="insertSurvey">
-		INSERT INTO SURVEY_TBL VALUES(SEQ_SURVEY_NO.NEXTVAL, #{gender}, #{age}, #{cinemaName}, #{memberId}, #{memberBirth}, #{memberGender}, DEFAULT, DEFAULT, NULL, NULL)
+		INSERT INTO SURVEY_TBL VALUES(SEQ_SURVEY_NO.NEXTVAL, #{gender}, #{age}, #{cinemaName}, #{memberId}, #{memberBirth}, #{memberGender}, DEFAULT, DEFAULT, DEFAULT, NULL, NULL)
+	</insert>
+	
+	<!-- 사용자가 선택한 장르 옵션 -->
+	<insert id="insertSurveyGenre" parameterType="java.util.HashMap" >
+		INSERT INTO SURVEY_GENRE_TBL(SURVEY_GENRE_NO, GENRE, SURVEY_NO) SELECT SEQ_SURVEY_GENRE_NO.NEXTVAL AS SURVEY_GENRE_NO, A.* FROM
+		(
+		<foreach collection="genreList" item="genre" separator="UNION ALL">
+			SELECT #{genre} AS GENRE, #{surveyNo} AS SURVEY_NO FROM DUAL
+		</foreach>
+		)A
 	</insert>
 	
 	<!-- 매칭 테이블에 INSERT -->
@@ -76,6 +87,10 @@
 	
 	<update id="updateMateStatusY">
 		UPDATE MEMBER_TBL SET MATE_STATUS='Y' WHERE MEMBER_ID=#{memberId}
+	</update>
+	
+	<update id="updateMatchingCount">
+		UPDATE SURVEY_TBL SET MATCHING_COUNT=MATCHING_COUNT+1 WHERE MEMBER_ID=#{memberId}
 	</update>
 	
 	<select id="selectMateStatus" resultType="_int">
@@ -107,16 +122,6 @@
 		SELECT * FROM SURVEY_GENRE_TBL WHERE SURVEY_NO=#{surveyNo} ORDER BY GENRE ASC
 	</select>
 	
-	<!-- 사용자가 선택한 장르 옵션 -->
-	<insert id="insertSurveyGenre" parameterType="java.util.HashMap" >
-		INSERT INTO SURVEY_GENRE_TBL(SURVEY_GENRE_NO, GENRE, SURVEY_NO) SELECT SEQ_SURVEY_GENRE_NO.NEXTVAL AS SURVEY_GENRE_NO, A.* FROM
-		(
-		<foreach collection="genreList" item="genre" separator="UNION ALL">
-			SELECT #{genre} AS GENRE, #{surveyNo} AS SURVEY_NO FROM DUAL
-		</foreach>
-		)A
-	</insert>
-	
 	<!-- 자주찾는 영화관 옵션 목록 불러오기 -->
 	<select id="selectCinemaOption" resultMap="cinemaOptionResultMap">
 		SELECT * FROM CINEMA_OPTION_VIEW ORDER BY CINEMA_NAME ASC
@@ -128,11 +133,23 @@
 	</select>
 	
 	<select id="selectExistMatching" resultType="_int">
-		SELECT COUNT(*) FROM MATCHING_TBL WHERE (REQUESTER_ID=#{requesterId} AND RESPONDENT_ID=#{respondentId}) OR (REQUESTER_ID=#{respondentId} AND RESPONDENT_ID=#{requesterId}) 
+		SELECT COUNT(*) FROM MATCHING_TBL WHERE (REQUESTER_ID=#{requesterId} AND RESPONDENT_ID=#{respondentId} AND DELETE_DATE IS NULL) OR (REQUESTER_ID=#{respondentId} AND RESPONDENT_ID=#{requesterId} AND DELETE_DATE IS NULL) 
 	</select>
 	
+	<select id="selectMyMateId" resultType="string">
+		SELECT RESPONDENT_ID FROM MATCHING_TBL WHERE REQUESTER_ID=#{memberId} AND DELETE_DATE IS NULL
+		UNION
+		SELECT REQUESTER_ID FROM MATCHING_TBL WHERE RESPONDENT_ID=#{memberId} AND DELETE_DATE IS NULL
+	</select>
 	
+	<select id="selectMyMateSurveyList" resultMap="surveyResultMap" parameterType="java.util.List">
+		SELECT * FROM SURVEY_TBL WHERE MEMBER_ID IN
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
 	
-	
-	
+	<select id="selectMatchDate" resultType="string" parameterType="java.util.HashMap">
+		SELECT CREATE_DATE FROM MATCHING_TBL WHERE (REQUESTER_ID=#{requesterId} AND RESPONDENT_ID=#{respondentId} AND DELETE_DATE IS NULL) OR (REQUESTER_ID=#{respondentId} AND RESPONDENT_ID=#{requesterId} AND DELETE_DATE IS NULL)
+	</select>
 </mapper>

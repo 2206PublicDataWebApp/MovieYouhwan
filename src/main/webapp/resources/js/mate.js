@@ -1,5 +1,5 @@
 if ($('#isMatchingActive').val() == 'Y') {
-  $('.match-toggle.switch').toggleClass('active');
+  $('.match-toggle-switch').toggleClass('active');
   console.log('메이트 리스트 페이지');
   console.log($('#isMatchingActive').val());
 }

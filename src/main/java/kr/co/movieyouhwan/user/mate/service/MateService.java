@@ -1,5 +1,6 @@
 package kr.co.movieyouhwan.user.mate.service;
 
+import java.util.Date;
 import java.util.List;
 
 import kr.co.movieyouhwan.user.mate.domain.CinemaOption;
@@ -43,6 +44,14 @@ public interface MateService {
 	int registerMatching(String requesterId, String respondentId);
 
 	int checkExistMatching(String requesterId, String respondentId);
+
+	int addMatchingCount(String memberId);
+
+	List<String> printMyMateId(String memberId);
+
+	List<Survey> getMyMateSurveyList(List<String> myMateList);
+
+	String printMatchDate(String requesterId, String respondentId);
 
 	
 }

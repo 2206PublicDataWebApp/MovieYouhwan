@@ -1,5 +1,6 @@
 package kr.co.movieyouhwan.user.mate.service.logic;
 
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -123,6 +124,30 @@ public class MateServiceImpl implements MateService{
 	public int checkExistMatching(String requesterId, String respondentId) {
 		int result=mStore.selectExistMatching(session, requesterId, respondentId);
 		return result;
+	}
+
+	@Override
+	public int addMatchingCount(String memberId) {
+		int result=mStore.updateMatchingCount(session, memberId);
+		return result;
+	}
+
+	@Override
+	public List<String> printMyMateId(String memberId) {
+		List<String> myMateId=mStore.selectMyMateId(session, memberId);
+		return myMateId;
+	}
+
+	@Override
+	public List<Survey> getMyMateSurveyList(List<String> myMateList) {
+		List<Survey> myMateSurveyList=mStore.selectMyMateSurveyList(session, myMateList);
+		return myMateSurveyList;
+	}
+
+	@Override
+	public String printMatchDate(String requesterId, String respondentId) {
+		String matchDate=mStore.selectMatchDate(session, requesterId, respondentId);
+		return matchDate;
 	}
 
 }

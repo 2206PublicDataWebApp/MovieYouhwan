@@ -16,7 +16,7 @@ public class Survey {
 	private Date createDate;
 	private Date updateDate;
 	private Date deleteDate;
-	private int matchingGrade;
+	private int matchingGrade; 
 
 	public Integer getSurveyNo() {
 		return surveyNo;
