@@ -23,8 +23,11 @@ public interface UserMemberService {
 	// 패스워드 찾기
 //	public int findPassword(String memberId, String memberPhone);
 
-	// 휴대폰 인증
-	public void certifiedPhoneNumber(String memberPhone, int randomNumber);
+
+	public Member selectMember(String memberId);
+	
+	// 패스워드 변경
+	public int modifyPassword(String memberId, String memberEmail);
 		
 	
 }

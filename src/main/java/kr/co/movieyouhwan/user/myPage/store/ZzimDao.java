@@ -27,7 +27,8 @@ public class ZzimDao {
 		
 		// ZZIM_TBL에 좋아요 추가 성공하면 갱신되는 하트 갯수를 가져옴
 		if (result == 1) { 
-			movieList = session.selectOne("MemberMapper.movieListZzimCount", movieList);
+			int zzimCount = session.selectOne("MemberMapper.movieListZzimCount", movieList);
+			movieList.setMovieZzim(zzimCount);
 			
 		}
 		return movieList;
@@ -44,7 +45,8 @@ public class ZzimDao {
 		
 		// ZZIM_TBL에 갱신되는 하트 갯수를 가져옴
 		if (result == 1) { 
-			movieList = session.selectOne("MemberMapper.movieListZzimCount", movieList);
+			int zzimCount = session.selectOne("MemberMapper.movieListZzimCount", movieList);
+			movieList.setMovieZzim(zzimCount);
 		}
 		return movieList;
 	}

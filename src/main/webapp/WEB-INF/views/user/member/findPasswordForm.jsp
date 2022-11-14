@@ -23,7 +23,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
  <div id="findIdForm">
-    <form action="/member/findPassword.yh" method="post" name="pfrm">
+    <form action="/member/passAuth.yh" method="post" name="pfrm">
         <div id="container">
             <h1 id="findPassTitle">비밀번호 변경</h1>
             

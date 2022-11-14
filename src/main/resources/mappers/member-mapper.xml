@@ -165,7 +165,7 @@
 	</update>
 	
 	<!-- 찜 추가 / 삭제시 갯수 가져오기 -->
-	<select id="movieListZzimCount" parameterType="MovieList" resultType="MovieList">
+	<select id="movieListZzimCount" parameterType="MovieList" resultType="_int">
 		SELECT MOVIE_ZZIM
 		FROM MOVIE_TBL
 		WHERE MOVIE_NO = #{movieNo}
@@ -173,7 +173,7 @@
 	
 	<!-- 최현지 : 결제를 위한 회원 이름, 휴대폰 번호, 이메일 조회 -->
 	<select id="selectBuyerInfo" resultMap="memberResultMap">
-		SELECT MEMBER_NAME, MEMBER_PHONE, MEMBER_EMAIL FROM MEMBER_T.BL
+		SELECT MEMBER_NAME, MEMBER_PHONE, MEMBER_EMAIL FROM MEMBER_TBL
 		WHERE MEMBER_ID = #{memberId}
 	</select>
 	

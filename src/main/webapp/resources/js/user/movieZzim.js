@@ -20,7 +20,7 @@ $(".heart-click").click(function() {
                 let movieZzim = movieList.movieZzim;
 
                 // 하트수 갱신
-                $('#heartCount'+movieNo).text(movieZzim);
+                $('#heart'+movieNo).text(movieZzim);
 
                 console.log("하트추가 성공");
             },
@@ -49,7 +49,7 @@ $(".heart-click").click(function() {
                 let movieZzim = movieList.movieZzim;
                 //하트수 갱신
 
-                $('#heartCount'+movieNo).text(movieZzim);
+                $('#heart'+movieNo).text(movieZzim);
 
                 console.log("하트삭제 성공");
             },

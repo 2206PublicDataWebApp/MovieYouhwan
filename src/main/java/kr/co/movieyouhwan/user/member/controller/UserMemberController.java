@@ -256,6 +256,7 @@ public class UserMemberController {
 //		return mv;
 //	}
 //	
+
 	/*
 	 * @RequestMapping(value = "/member/myPoint.yh", method = RequstMethod.GET)
 	 * public ModelAndView pointHistoryView( HttpServletRequest request,
@@ -265,6 +266,66 @@ public class UserMemberController {
 	
 
 	
+
+	/**
+	 * 패스워드 찾기
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/member/modifyPassword.yh", method = RequestMethod.POST)
+	public ModelAndView modifyPassword(
+			@ModelAttribute Member member
+			, ModelAndView mv
+			, @RequestParam("memberId") String memberId
+			, @RequestParam("memberEmail") String memberEmail) {
+			try {
+				member.setMemberId(memberId);
+				member.setMemberEmail(memberEmail);
+				int result = uMemberService.modifyPassword(memberId, memberEmail);
+				if(result > 0) {
+					mv.addObject("member", member);
+					mv.setViewName("/user/memeber/passModify");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				mv.setViewName("/user/member/findError");
+			}
+		return mv;
+	}
+	
+	/**
+	 * 비밀번호 찾기 / 이메일 인증
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/member/passEmailAuth.yh", method=RequestMethod.GET)
+	public String passEmailAuth(String email) {
+		Random random = new Random();
+		int authNumber = random.nextInt(888888)+111111;	// 난수 
+		// 이메일 보낼 양식
+		String setFrom = "movieyouhwan@gmail.com";	// 보낸이 메일 주소
+		String toMail = email;
+		String title = "MovieYouHwan 비밀번호 변경 인증 번호입니다.";	// 제목
+		String content = // 메일 내용 
+				"<hr><br>"+
+				"<h1>MovieYouHwan을 방문해주셔서 감사합니다.</h1>" +
+				"<h3>아래 인증번호를 인증번호 확인란에 입력해주세요.</h3>"+
+				"<h3>인증번호는   [  " + authNumber + "  ]   입니다.</h3>"+
+				"<br><hr>";
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+			helper.setFrom(setFrom);
+			helper.setTo(toMail);
+			helper.setSubject(title);
+			// true 전달 > html 형식으로 전송 , 작성하지 않으면 단순 텍스트로 전달.
+			helper.setText(content,true);
+			mailSender.send(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Integer.toString(authNumber);
+	}
 	/**
 	 * 아이디 / 패스워드 찾기 실패 뷰
 	 */
@@ -272,9 +333,6 @@ public class UserMemberController {
 	public String findError() {
 		return "/user/member/findError";
 	}
-	
-				
-	
 	/**
 	 * 이메일 인증
 	 * @param email

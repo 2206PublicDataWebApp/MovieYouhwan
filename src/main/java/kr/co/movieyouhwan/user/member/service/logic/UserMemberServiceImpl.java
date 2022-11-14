@@ -61,23 +61,15 @@ public class UserMemberServiceImpl implements UserMemberService {
 		return uMemberList;
 	}
 	
-	
-	
-//	@Override
-//	public int findPassword(String memberId, String memberEmail) {
-//		int result = uMemberStore.findPassword(session, memberId, memberEmail);
-//		//////////////////////////////////////////////////////////////////////////
-//		//////////////이메일인
-//		/////////////////////////////////////////////////////////////
-//        return result;
-//	}
-	
-	
-	
 	@Override
-	public void certifiedPhoneNumber(String memberPhone, int randomNumber) {
+	public Member selectMember(String memberId) {
 		// TODO Auto-generated method stub
-		
+		return null;
+	}
+	@Override
+	public int modifyPassword(String memberId, String memberEmail) {
+		int result = uMemberStore.modifyPassword(session, memberId, memberEmail);
+		return result;
 	}
 	
 

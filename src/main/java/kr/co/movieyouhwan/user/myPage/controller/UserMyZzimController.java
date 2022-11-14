@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.myPage.domain.Zzim;
 import kr.co.movieyouhwan.user.myPage.store.ZzimDao;
@@ -28,10 +29,11 @@ public class UserMyZzimController {
 			@RequestParam int movieNo
 			, HttpSession session) {
 		Zzim zzim = new Zzim();
+		Member member = (Member)session.getAttribute("loginUser");
 		// 무비 넘버 세팅
 		zzim.setMovieNo(movieNo);
 		// 현재 사용자 아이디
-		zzim.setMemberId((String)session.getAttribute("memberId"));
+		zzim.setMemberId(member.getMemberId());
 		// +1 하트 갯수 담기
 		
 		MovieList movieList = zzimDao.saveZzim(zzim);
@@ -47,7 +49,8 @@ public class UserMyZzimController {
 		zzim.setMovieNo(movieNo);
 		
 		// 찜 누른 사람 nick을 userid로 세팅
-		zzim.setMemberId((String) session.getAttribute("memberId"));
+		Member member = (Member)session.getAttribute("loginUser");
+		zzim.setMemberId(member.getMemberId());
 
 	    // -1된 하트 갯수를 담아오기위함
 		MovieList movieList = zzimDao.revomeZzim(zzim);
