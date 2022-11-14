@@ -32,6 +32,7 @@
       <property name="port" value="587" />
       <property name="username" value="movieyouhwan" />
       <property name="password" value="inmxqqzhhpoytxnh" />
+      <property name="defaultEncoding" value="utf-8" />
       <property name="javaMailProperties">
          <props>
                 <prop key="mail.transport.protocol">smtp</prop>

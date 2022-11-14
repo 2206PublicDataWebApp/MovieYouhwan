@@ -71,14 +71,14 @@ public class UserMemberStoreLogic implements UserMemberStore {
 	/**
 	 * 패스워드 찾기
 	 */
-	@Override
-	public List<Member> findPassword(SqlSessionTemplate session, String memberId, String memberPhone) {
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("memberId", memberId);
-		params.put("memberPhone", memberPhone);
-		List<Member> mList = session.selectList("MemberMapper.findPassword", params);
-		return mList;
-	}
+//	@Override
+//	public int findPassword(SqlSessionTemplate session, String memberId, String memberPhone) {
+//		HashMap<String, String> params = new HashMap<String, String>();
+//		params.put("memberId", memberId);
+//		params.put("memberPhone", memberPhone);
+//		List<Member> mList = session.selectList("MemberMapper.findPassword", params);
+//		return mList;
+//	}
 
 
 }

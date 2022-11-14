@@ -49,13 +49,7 @@
     color: gray;
     margin-right: 10px;
 }
-#profile-img{
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-    
-    
-}
+
 #img-frame{
     border-radius: 50%;
     width: 60px;

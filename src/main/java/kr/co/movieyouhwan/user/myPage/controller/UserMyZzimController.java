@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,7 +23,7 @@ public class UserMyZzimController {
 	 * 빈하트 클릭 시 하트 저장
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/saveZzim")
+	@RequestMapping(value = "/saveZzim", produces="application/json;charset=utf-8", method = RequestMethod.POST)
 	public MovieList saveZzim(
 			@RequestParam int movieNo
 			, HttpSession session) {
@@ -32,12 +33,13 @@ public class UserMyZzimController {
 		// 현재 사용자 아이디
 		zzim.setMemberId((String)session.getAttribute("memberId"));
 		// +1 하트 갯수 담기
+		
 		MovieList movieList = zzimDao.saveZzim(zzim);
 		return movieList;
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/removeZzim")
+	@RequestMapping(value = "/removeZzim", produces="application/json;charset=utf-8", method = RequestMethod.POST)
 	public MovieList removeZzim(@RequestParam int movieNo, HttpSession session) {
 		Zzim zzim = new Zzim();
 		

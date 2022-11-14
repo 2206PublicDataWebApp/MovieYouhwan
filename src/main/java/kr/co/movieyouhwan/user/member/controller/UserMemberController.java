@@ -50,7 +50,7 @@ public class UserMemberController {
 	 * @return
 	 * @throws IllegalStateException
 	 * @throws IOException
-	 */
+	 */		
 	@ResponseBody
 	@RequestMapping(value="/member/join.yh",method = RequestMethod.POST)
 	public ModelAndView memberJoin(
@@ -216,6 +216,7 @@ public class UserMemberController {
 		
 		return mv;
 	}
+
 	
 	/**
 	 * 패스워드 찾기 뷰
@@ -232,27 +233,30 @@ public class UserMemberController {
 	 * 비밀번호 찾기
 	 * @return
 	 */
-	@RequestMapping(value="/member/findPassword.yh", method=RequestMethod.POST)
-	public ModelAndView findPassword(
-			HttpServletRequest request
-			, ModelAndView mv
-			, @RequestParam("memberId")String memberId
-			, @RequestParam("memberPhone")String memberPhone) {
-		try {
-			List<Member> mList = uMemberService.findPassword(memberId, memberPhone);
-			if(!mList.isEmpty()) {
-				mv.addObject("mList", mList);
-				mv.setViewName("/user/member/passModify");
-			}else {
-				mv.setViewName("/user/member/findError");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			mv.setViewName("/user/member/findError");
-		}
-		return mv;
-	}
-	
+//	@RequestMapping(value="/member/findPassword.yh", method=RequestMethod.POST)
+//	public ModelAndView findPassword(
+//			@ModelAttribute Member member
+//			, ModelAndView mv
+//			, @RequestParam("memberId")String memberId
+//			, @RequestParam("memberEmail")String memberEmail) {
+//		try {
+//			member.setMemberId(memberId);
+//			member.setMemberEmail(memberEmail);
+//			int result = uMemberService.findPassword(memberId, memberEmail);
+//			if(result > 0) {
+//				mv.addObject("member", member);
+//				mv.setViewName("/user/member/passModify");
+//			}else {
+//				mv.setViewName("/user/member/findError");
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			mv.setViewName("/user/member/findError");
+//		}
+//		return mv;
+//	}
+//	
+	@RequestMapping
 	/*
 	 * @RequestMapping(value = "/member/myPoint.yh", method = RequstMethod.GET)
 	 * public ModelAndView pointHistoryView( HttpServletRequest request,
@@ -270,7 +274,7 @@ public class UserMemberController {
 		return "/user/member/findError";
 	}
 	
-	
+				
 	
 	/**
 	 * 이메일 인증
@@ -308,14 +312,5 @@ public class UserMemberController {
 		return Integer.toString(authNumber);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/phoneCheck", method = RequestMethod.GET)
-	public String sendMessage(@RequestParam("memberPhone")String memberPhone) {
-		int randomNumber = (int)((Math.random()*(9999 - 1000 + 1)) + 1000);	
-		
-		uMemberService.certifiedPhoneNumber(memberPhone,randomNumber);
-		
-		return Integer.toString(randomNumber);
-	}
 }
 
