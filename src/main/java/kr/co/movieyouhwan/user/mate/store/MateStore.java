@@ -40,4 +40,6 @@ public interface MateStore {
 
 	List<SurveyGenre> selectSurveyGenreBySurveyNo(SqlSessionTemplate session, Integer surveyNo);
 
+	Member selectMemberInfo(SqlSessionTemplate session, String memberId);
+
 }

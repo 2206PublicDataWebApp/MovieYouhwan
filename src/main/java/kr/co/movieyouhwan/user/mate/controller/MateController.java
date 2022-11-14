@@ -1,5 +1,6 @@
 package kr.co.movieyouhwan.user.mate.controller;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -17,13 +19,17 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.movieyouhwan.user.mate.domain.CinemaOption;
 import kr.co.movieyouhwan.user.mate.domain.GenreOption;
+import kr.co.movieyouhwan.user.mate.domain.MatchResult;
 import kr.co.movieyouhwan.user.mate.domain.Survey;
 import kr.co.movieyouhwan.user.mate.domain.SurveyGenre;
 import kr.co.movieyouhwan.user.mate.service.MateService;
@@ -90,7 +96,7 @@ public class MateController {
 			survey.setSurveyNo(i);
 			survey.setAge(age);
 			survey.setGender(genderOption);
-			survey.setCinemaName(cinemaOptionList.get((i) % cinemaOptionList.size()).getCinemaName());
+			survey.setCinemaName(cinemaOptionList.get(faker.random().nextInt(cinemaOptionList.size())).getCinemaName());
 			survey.setMemberId(id);
 			survey.setMemberBirth(birth);
 			survey.setMemberGender(gender);
@@ -187,7 +193,7 @@ public class MateController {
 			System.out.println(genreOptionList.toString());
 		}
 		mv.setViewName("user/mate/mateOption");
-		return mv;
+		return mv;             
 	}
 
 	@RequestMapping(value = "/mate/selectOption.complete.yh", method = RequestMethod.POST)
@@ -195,9 +201,11 @@ public class MateController {
 			@RequestParam("gender") String gender, @RequestParam("age") String age,
 			@RequestParam("cinemaName") String cinemaName, @RequestParam("genreList") List<String> genreList) {
 
+		System.out.println(gender);
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("loginUser");
 		if (member != null) {
+			System.out.println("login member not null");
 			String memberId = member.getMemberId();
 			Survey survey = new Survey();
 			survey.setGender(gender);
@@ -205,38 +213,53 @@ public class MateController {
 			survey.setCinemaName(cinemaName);
 			survey.setMemberId(memberId);
 			survey.setMemberBirth(member.getMemberBirth());
-			survey.setGender(member.getMemberGender());
+			survey.setMemberGender(member.getMemberGender());
 			int result = mService.registerSurvey(survey);
+			System.out.println("register result = "+result);
 			if (result > 0) {
 				Integer surveyNo = mService.printSurveyNo(memberId);
-				if (surveyNo > 0) {
+				if (surveyNo !=null) {
 					result = mService.registerSurveyGenre(surveyNo, genreList);
 					System.out.println(result);
 					if (result > 0) {
-
+						mv.setViewName("redirect:/mate/matching.yh");
 					}
 				}
 			}
 		}
 		return mv;
 	}
-
-	/**
-	 * 메이트 매칭완료
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/mate/Complete.yh", method = RequestMethod.GET)
-	public String mateCompleteView() {
+	
+	@RequestMapping(value="/mate/matchingResult.yh")
+	public String matchingResultView() {
 		return "user/mate/mateComplete";
 	}
-
-	public void makeFakeData() {
-		Faker faker = new Faker();
-		String name = faker.name().fullName();
-		System.out.println(name);
+	
+	
+	/**
+	 * 사용자가 매칭 결과 페이지에서 채팅하기 눌렀을 시 matching 테이블에 insert됨
+	 * @param mv
+	 * @param request
+	 * @param responderId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/mate/matchingComplete.yh", method=RequestMethod.POST)
+	public ModelAndView matchingComplete(ModelAndView mv, HttpServletRequest request,
+			@RequestParam("responderId") String responderId) {
+		
+		
+		return mv;
 	}
 
+	
+
+	/**
+	 * 매칭
+	 * @param mv
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/mate/matching.yh")
 	public ModelAndView mateMatching(ModelAndView mv, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -302,28 +325,23 @@ public class MateController {
 			System.out.println("otherSurveyGenreList: " + otherSurveyGenreList);
 
 			// 매칭 요청자의 선호 장르와 같은 SurveyGenre 필터링
-			List<SurveyGenre> filteredSurveyGenreList = new ArrayList<>();
+			List<SurveyGenre> sameSurveyGenreList = new ArrayList<>();
 			for (i = 0; i < requesterGenreList.size(); i++) {
-				filteredSurveyGenreList.addAll(otherSurveyGenreList.stream()
+				sameSurveyGenreList.addAll(otherSurveyGenreList.stream()
 						.filter(surveyGenre -> requesterGenreList.get(i).getGenre().equals(surveyGenre.getGenre()))
 						.collect(Collectors.toList()));
 			}
+			
+			List<SurveyGenre> filteredSurveyGenreList=sameSurveyGenreList.stream().sorted(Comparator.comparing(SurveyGenre::getSurveyNo)).collect(Collectors.toList());
 
-			for (int k = 0; k < filteredSurveyGenreList.size(); k++) {
-				System.out.println("filteredSurveyGenreList: "+filteredSurveyGenreList.get(k).toString());
-			}
 
 			// 장르 1개가 부합할 때마다 가산되는 점수
 			int genreGrade = 10 / requesterGenreList.size();
-//			System.out.println("grade: "+genreGrade);
 
 			// 필터링 된 Survey에 장르 점수 합산
 			for (i = 0; i < firstFilteredSurvey.size(); i++) {
 				for (int j = 0; j < filteredSurveyGenreList.size(); j++) {
 					if (firstFilteredSurvey.get(i).getSurveyNo() == filteredSurveyGenreList.get(j).getSurveyNo()) {
-						System.out.println("i = " + i + " , j = " + j);
-						System.out.println("first: " + firstFilteredSurvey.get(i).toString());
-						System.out.println("filterd: " + filteredSurveyGenreList.get(j).toString());
 						firstFilteredSurvey.get(i)
 								.setMatchingGrade(firstFilteredSurvey.get(i).getMatchingGrade() + genreGrade);
 						filteredSurveyGenreList.remove(j);
@@ -333,20 +351,88 @@ public class MateController {
 					}
 				}
 			}
+			
 			List<Survey> sortedSurveyList = firstFilteredSurvey.stream()
 					.sorted(Comparator.comparing(Survey::getMatchingGrade).reversed()).collect(Collectors.toList());
 //			firstFilteredSurvey.stream().sorted(Comparator.comparing(Survey::getMatchingGrade));
-			List<Survey> finalMatchList = new ArrayList<>();
+			
+			// 매칭 점수가 60점 이상인 Survey 목록
+			List<Survey> finalMatchList = sortedSurveyList.stream().filter(survey->survey.getMatchingGrade()>=60).collect(Collectors.toList());
 
+			
+			// 60점 이상 중 top3 리스트생성
+			List<Survey> finalTop3Survey=new ArrayList<>();
+			
+			// 60점 이상 리스트가 1개 이상 존재할 때
+			if(finalMatchList.size()>0) {
+				
+				// 60점 이상 리스트가 4개 이상 있을 때
+				if(finalMatchList.size()>3) {
+					List<Survey> tempSurvey=new ArrayList<>();
+					int k=0;
+					for(int j=0; j+k<finalMatchList.size();j++) {
+						if(finalTop3Survey.size()==3) {
+							break;
+						}
+						if(j==0) {
+							tempSurvey.add(finalMatchList.get(j+k));
+						}
+						else {
+							if(finalMatchList.get(j+k).getMatchingGrade()==finalMatchList.get(j+k-1).getMatchingGrade()) {
+								tempSurvey.add(finalMatchList.get(j+k));
+							}
+							else {
+								if(tempSurvey.size()>(3-finalTop3Survey.size())) {
+									Random random=new Random();
+									for(int l=0; l<(3-finalTop3Survey.size());l++){
+										int idx=random.nextInt(tempSurvey.size());
+										finalTop3Survey.add(tempSurvey.get(idx));
+										tempSurvey.remove(idx);
+									}
+								}
+								else {
+									finalTop3Survey.addAll(tempSurvey);
+								}
+								k=j+k;
+								j=-1;
+								tempSurvey.clear();
+							}
+						}
+					}
+				}
+				// 60점 이상 리스트가 3개 이하일 때
+				else {
+					finalTop3Survey.addAll(finalMatchList);
+				}
+			}
 			System.out.println("requester : " + requesterSurvey.toString());
-			System.out.println("=================================================================");
-			for (int k = 0; k < sortedSurveyList.size(); k++) {
-				System.out.println(sortedSurveyList.get(k).toString());
+			for(int j=0; j<finalTop3Survey.size();j++) {
+				System.out.println(finalTop3Survey.get(j).toString());
+			}
+			
+			// TOP3 매칭 정보를 MatchResult 도메인에 담아 리스트로 만듦
+			List<MatchResult> matchList=new ArrayList<>();
+			for(Survey survey:finalTop3Survey) {
+				MatchResult matchResult=new MatchResult();
+				Member matchingMember=mService.printUserInfo(survey.getMemberId());
+				List<String> genreList=(mService.getGenreListBySurveyNo(survey.getSurveyNo())).stream().map(SurveyGenre::getGenre).collect(Collectors.toList());
+				String genre=String.join(", ", genreList);
+				matchResult.setMemberId(survey.getMemberId());
+				matchResult.setMemberImgRename(matchingMember.getMemberImgRename());
+				matchResult.setMemberNick(matchingMember.getMemberNick());
+				matchResult.setMemberGender(survey.getMemberGender());
+				matchResult.setMemberAge(survey.getMemberAge());
+				matchResult.setCinemaName(survey.getCinemaName());
+				matchResult.setGenre(genre);
+				matchResult.setMatchingGrade(survey.getMatchingGrade());
+				
+				matchList.add(matchResult);
 			}
 
-			mv.addObject("MatchResultSurvey", sortedSurveyList.get(0));
-			mv.addObject("mySurvey", requesterSurvey);
-			mv.setViewName("user/mate/mateAgree");
+			                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+			mv.addObject("matchList", matchList);
+			mv.addObject("memberId", memberId);
+			mv.setViewName("user/mate/mateComplete");
 		}
 		return mv;
 	}

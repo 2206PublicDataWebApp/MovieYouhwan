@@ -107,4 +107,10 @@ public class MateServiceImpl implements MateService{
 		return requesterGenreList;
 	}
 
+	@Override
+	public Member printUserInfo(String memberId) {
+		Member member=mStore.selectMemberInfo(session, memberId);
+		return member;
+	}
+
 }

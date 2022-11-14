@@ -16,7 +16,39 @@
   </head>
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-    <div class="mate-option-wrapper">
+    <div class="matching-result-wrapper">
+      <div class="mate-title">매칭 완료</div>
+      <div class="mate-list-table">
+        <div class="mate-list-row">
+          <div class="match-profile-col">메이트 프로필</div>
+          <div class="mate-location-col">자주찾는 지점</div>
+          <div class="match-genre-col">선호 장르</div>
+          <div class="match-grade-col">매칭 점수</div>
+          <div class="chat-btn-col"></div>
+        </div>
+
+        <c:if test="${!empty matchList}">
+          <c:forEach items="${matchList}" var="matchInfo">
+            <div class="mate-list-row">
+              <div class="match-profile-col">
+                <c:if test="${empty matchInfo.memberImgRename}">
+                  <i class="fa-solid fa-user fa-xl"></i>
+                </c:if>
+                <c:if test="${not empty matchInfo.memberImgRename}">
+                  <img src="/resources/images/userProfileImg/${matchInfo.memberImgRename}" />
+                </c:if>
+                ${matchInfo.memberNick}(${matchInfo.memberAge}, ${matchInfo.memberGender})
+              </div>
+              <div class="mate-location-col">${matchInfo.cinemaName}</div>
+              <div class="match-genre-col">${matchInfo.genre}</div>
+              <div class="match-grade-col">${matchInfo.matchingGrade}</div>
+              <div class="mate-genre-col"><button class="btn yellow">채팅하기</button></div>
+            </div>
+          </c:forEach>
+        </c:if>
+      </div>
+    </div>
+    <!-- <div class="mate-option-wrapper">
       <h3>매칭 완료!</h3>
       <div id="mate-text">
         <div class="matecomplete-profile">메이트 프로필</div>
@@ -25,7 +57,6 @@
       <div id="mate-data">
         <div class="matecomplete-profile">
           철수
-          <!-- matecomplete-userimage div : matecomplete-userimage -->
           <div class="matecomplete-userimage"></div>
         </div>
         <div class="matecomplete-grade">3.6</div>
@@ -37,6 +68,6 @@
         <button class="matecomplete-button">메이트 목록</button>
         <button class="matecomplete-button">다시 매칭</button>
       </div>
-    </div>
+    </div> -->
   </body>
 </html>

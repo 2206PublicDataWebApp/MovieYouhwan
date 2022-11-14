@@ -22,15 +22,15 @@
         <div class="option-sex">
           <div class="box-top">선호하는 메이트 성별을 선택해주세요.</div>
           <div class="box-under">
-            <label class="mate-label"><input class="mate-option-radio" type="radio" name="gender" value="여성" />여성 </label>
-            <label class="mate-label"><input class="mate-option-radio" type="radio" name="gender" value="남성" />남성</label>
+            <label class="mate-label"><input class="mate-option-radio" type="radio" name="gender" value="여" />여성 </label>
+            <label class="mate-label"><input class="mate-option-radio" type="radio" name="gender" value="남" />남성</label>
             <label class="mate-label"><input class="mate-option-radio" type="radio" name="gender" value="무관" />무관</label>
           </div>
         </div>
         <div class="option-age">
           <div class="box-top">선호하는 메이트 연령대를 선택해주세요.</div>
           <div class="box-under">
-            <label class="mate-label"><input class="mate-option-radio-first" type="radio" name="age" value="20대" />20대</label>
+            <label class="mate-label"><input class="mate-option-radio" type="radio" name="age" value="20대" />20대</label>
             <label class="mate-label"><input class="mate-option-radio" type="radio" name="age" value="30대" />30대</label>
             <label class="mate-label"><input class="mate-option-radio" type="radio" name="age" value="40대" />40대</label>
             <label class="mate-label"><input class="mate-option-radio" type="radio" name="age" value="50대 이상" />50대 이상</label>
@@ -57,7 +57,7 @@
           </div>
         </div>
         <button type="submit" class="next-btn">
-          다음
+          매칭
           <span class="fa-stack fa-xs">
             <i class="fa-solid fa-angle-right fa-stack-1x"></i>
             <i class="fa-regular fa-circle fa-stack-2x"></i>

@@ -387,6 +387,11 @@ a {
   margin: 200px auto;
 }
 
+.matching-result-wrapper {
+  width: 1000px;
+  margin: 100px auto;
+}
+
 .mate-title {
   font-size: 22px;
   padding: 0 0 20px 10px;
@@ -413,12 +418,12 @@ a {
 }
 
 .mate-location-col {
-  width: 12.5%;
+  width: 15%;
   text-align: center;
 }
 
 .mate-genre-col {
-  width: 12.5%;
+  width: 20%;
   text-align: center;
 }
 
@@ -537,6 +542,32 @@ a {
 }
 
 /* mateComplete (사용자) */
+.match-profile-col {
+  width: 25%;
+  text-align: center;
+}
+
+.match-profile-col i {
+  color: #f0c808;
+  margin-right: 20px;
+}
+
+.match-profile-col img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.match-grade-col {
+  width: 10%;
+  text-align: center;
+}
+
+.match-genre-col {
+  width: 30%;
+  text-align: center;
+}
+
 #mate-text {
   height: 50px;
   margin-top: 30px;
@@ -550,12 +581,15 @@ a {
   border-bottom: solid 1px hsl(225, 59%, 15%);
 }
 .matecomplete-userimage {
-  width: 40px;
+  /* width: 40px;
   height: 40px;
   margin-top: 10px;
   float: left;
   background-color: #e59500;
   border: solid 1px #e59500;
+  border-radius: 50%; */
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
 }
 .matecomplete-profile {
