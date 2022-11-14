@@ -35,7 +35,7 @@
     <li id="navbar-logo">
       <a href="/home.yh"><img src="/resources/images/logo.png" alt="" width="150px" /></a>
     </li>
-    <li class="navbar-menuItem"><a href="/movieTicketTime.yh">예매</a></li>
+    <li class="navbar-menuItem"><a id="ticket-tab" href="/movieTicketTime.yh">예매</a></li>
     <li class="navbar-menuItem"><a href="/store.yh">스토어</a></li>
     <li class="navbar-menuItem"><a href="/support.yh">고객지원</a></li>
   </ul>

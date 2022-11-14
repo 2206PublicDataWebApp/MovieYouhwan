@@ -9,10 +9,12 @@
 <link href="/resources/css/header.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
 <link href="/resources/css/ticket.css" rel="stylesheet" />
-<script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+<script src="/resources/js/jquery-3.6.1.min.js"></script>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="/resources/js/header.js" defer></script>
 <script src="/resources/js/footer.js" defer></script>
 <script src="/resources/js/ticket.js" defer></script>
+<script src="/resources/js/requestPayMovie.js" defer></script>
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 </head>
 <body>

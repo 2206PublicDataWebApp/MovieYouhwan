@@ -54,12 +54,19 @@
 	</resultMap>
 	<resultMap type="MovieList" id="MovieListResultMap">
 		<id property="movieNo" column="MOVIE_NO"/>
+		<result property="theaterNo" column="THEATER_NO"/>
 		<result property="movieTitle" column="MOVIE_TITLE"/>
 		<result property="movieAge" column="MOVIE_AGE"/>
 		<result property="movieStartday" column="MOVIE_STARTDAY"/>
 		<result property="movieImgName" column="MOVIE_IMG_NAME"/>
 		<result property="movieImgRename" column="MOVIE_IMG_RENAME"/>
 		<result property="movieImgPath" column="MOVIE_IMG_PATH"/>
+		<result property="theaterName" column="THEATER_NAME" />
+		<result property="movieDay" column="MOVIE_DAY"/>
+		<result property="movieStart" column="MOVIE_START" />
+		<result property="movieEnd" column="MOVIE_END" />
+		<result property="movieTicket" column="MOVIE_TICKET" />
+		<result property="movieSeat" column="MOVIE_SEAT" />
 		<result property="movieZzim" column="MOVIE_ZZIM"/>
 		<result property="zzimNo" column="ZZIM_NO"/>
 	</resultMap>
@@ -117,7 +124,7 @@
 		WHERE MOVIE_TITLE LIKE '%' || #{searchName} || '%'
 	</select>
 	<!-- 영화 상세(관리자) -->
-	<select id="selectOntMovie" resultMap="MovieResultMap">
+	<select id="selectOneMovie" resultMap="MovieResultMap">
 		SELECT * FROM MOVIE_TBL WHERE MOVIE_NO = #{movieNo}
 	</select>
 	<!-- 영화 상세 사진(관리자) -->
@@ -148,12 +155,11 @@
 	<!-- 현재 상영 영화 리스트 -->
 	<select id="selectAllMovieNow" resultMap="MovieListResultMap">
 		WITH MOVIES 
-      	AS (SELECT A.MOVIE_NO, A.MOVIE_TITLE, A.MOVIE_AGE, A.MOVIE_STARTDAY, A.MOVIE_ENDDAY, A.MOVIE_ZZIM,
-        B.MOVIE_IMG_NAME, B.MOVIE_IMG_RENAME, B.MOVIE_IMG_PATH, ROW_NUMBER() 
-        OVER(PARTITION BY A.MOVIE_NO ORDER BY B.MOVIE_IMG_RENAME)
-      	AS C_NUM FROM MOVIE_TBL A JOIN MOVIE_IMG_TBL B ON A.MOVIE_NO = B.MOVIE_NO)
-       	SELECT * FROM MOVIES 
-       	WHERE C_NUM = 1 AND MOVIE_ENDDAY > SYSDATE AND MOVIE_STARTDAY <![CDATA[<=]]> SYSDATE
+		AS (SELECT A.MOVIE_NO, A.MOVIE_TITLE, A.MOVIE_AGE, A.MOVIE_STARTDAY, A.MOVIE_ENDDAY, A.MOVIE_ZZIM, B.MOVIE_IMG_NAME, B.MOVIE_IMG_RENAME, B.MOVIE_IMG_PATH, ROW_NUMBER() 
+		OVER(PARTITION BY A.MOVIE_NO ORDER BY B.MOVIE_IMG_RENAME)
+		AS C_NUM FROM MOVIE_TBL A JOIN MOVIE_IMG_TBL B ON A.MOVIE_NO = B.MOVIE_NO)
+		SELECT * FROM MOVIES 
+		WHERE C_NUM = 1 AND MOVIE_ENDDAY > SYSDATE AND MOVIE_STARTDAY <![CDATA[<=]]> SYSDATE
 	</select>
 	<!-- 현재 상영 영화 리스트 페이징 처리 -->
 	<select id="selectNowMovieCount" resultType="_int">
@@ -163,10 +169,11 @@
 	<!-- 상영 예정 영화 리스트 -->
 	<select id="selectAllMovieAfter" resultMap="MovieListResultMap">
 		WITH MOVIES 
-		AS (SELECT A.MOVIE_NO, A.MOVIE_TITLE, A.MOVIE_AGE, A.MOVIE_STARTDAY, A.MOVIE_ENDDAY, B.MOVIE_IMG_NAME, B.MOVIE_IMG_RENAME, B.MOVIE_IMG_PATH, ROW_NUMBER() OVER(PARTITION BY A.MOVIE_NO ORDER BY B.MOVIE_IMG_RENAME) 
+		AS (SELECT A.MOVIE_NO, A.MOVIE_TITLE, A.MOVIE_AGE, A.MOVIE_STARTDAY, A.MOVIE_ENDDAY, A.MOVIE_ZZIM, B.MOVIE_IMG_NAME, B.MOVIE_IMG_RENAME, B.MOVIE_IMG_PATH, ROW_NUMBER() 
+		OVER(PARTITION BY A.MOVIE_NO ORDER BY B.MOVIE_IMG_RENAME)
 		AS C_NUM FROM MOVIE_TBL A JOIN MOVIE_IMG_TBL B ON A.MOVIE_NO = B.MOVIE_NO)
-	    SELECT * FROM MOVIES 
-	    WHERE C_NUM = 1 AND MOVIE_ENDDAY >= SYSDATE AND MOVIE_STARTDAY >= SYSDATE
+		SELECT * FROM MOVIES 
+		WHERE C_NUM = 1 AND MOVIE_ENDDAY >= SYSDATE AND MOVIE_STARTDAY >= SYSDATE
 	</select>
 	<!-- 상영 예정 영화 리스트 페이징 처리 -->
 	<select id="selectAfterMovieCount" resultType="_int">
@@ -176,10 +183,11 @@
 	<!-- 상영 종료 영화 리스트 -->
 	<select id="selectAllMovieBefore" resultMap="MovieListResultMap">
 		WITH MOVIES 
-		AS (SELECT A.MOVIE_NO, A.MOVIE_TITLE, A.MOVIE_AGE, A.MOVIE_STARTDAY, A.MOVIE_ENDDAY, B.MOVIE_IMG_NAME, B.MOVIE_IMG_RENAME, B.MOVIE_IMG_PATH, ROW_NUMBER() OVER(PARTITION BY A.MOVIE_NO ORDER BY A.MOVIE_NO) 
+		AS (SELECT A.MOVIE_NO, A.MOVIE_TITLE, A.MOVIE_AGE, A.MOVIE_STARTDAY, A.MOVIE_ENDDAY, A.MOVIE_ZZIM, B.MOVIE_IMG_NAME, B.MOVIE_IMG_RENAME, B.MOVIE_IMG_PATH, ROW_NUMBER() 
+		OVER(PARTITION BY A.MOVIE_NO ORDER BY B.MOVIE_IMG_RENAME)
 		AS C_NUM FROM MOVIE_TBL A JOIN MOVIE_IMG_TBL B ON A.MOVIE_NO = B.MOVIE_NO)
-	    SELECT * FROM MOVIES 
-	    WHERE C_NUM = 1 AND MOVIE_ENDDAY <![CDATA[<=]]> SYSDATE
+		SELECT * FROM MOVIES 
+		WHERE C_NUM = 1 AND MOVIE_ENDDAY <![CDATA[<=]]> SYSDATE
 	</select>
 	<!-- 상영 종료 영화 리스트 페이징 처리 -->
 	<select id="selectBeforeMovieCount" resultType="_int">
@@ -208,6 +216,25 @@
 		SELECT DISTINCT MT.MOVIE_NO, MT.MOVIE_TITLE, MT.MOVIE_ENDDAY
 		FROM MOVIE_TBL MT, MOVIE_TIME_TBL MTT
 		WHERE MTT.CINEMA_NO = #{cinemaNo}
+		AND MTT.MOVIE_DAY = TO_CHAR(SYSDATE,'YYYY-MM-DD')
 		AND MT.MOVIE_NO = MTT.MOVIE_NO
+	</select>
+	<!-- 예매 현재 상영 영화 출력 -->
+	<select id="selectTicketMovieOne" resultMap="MovieListResultMap">
+		SELECT DISTINCT MT.MOVIE_NO, MT.MOVIE_TITLE
+		FROM MOVIE_TBL MT, CINEMA_TBL CT, MOVIE_TIME_TBL MTT 
+		WHERE MT.MOVIE_NO = #{movieNo}
+		AND MTT.MOVIE_DAY = #{movieDay}
+		AND MTT.CINEMA_NO = #{cinemaNo}
+	</select>
+	<!-- 예매 현재 상영 영화 정보 출력 -->
+	<select id="selectTicketMovieByDay" resultMap="MovieListResultMap">
+		SELECT MT.MOVIE_NO, TT.THEATER_NO, MT.MOVIE_TITLE, MT.MOVIE_AGE, TT.THEATER_NAME, MTT.MOVIE_NO, MTT.MOVIE_DAY, MTT.MOVIE_START, MTT.MOVIE_END, MTT.MOVIE_TICKET, MTT.MOVIE_SEAT
+		FROM MOVIE_TBL MT, THEATER_TBL TT, MOVIE_TIME_TBL MTT
+		WHERE MT.MOVIE_NO = MTT.MOVIE_NO
+		AND TT.THEATER_NO = MTT.THEATER_NO
+		AND MTT.MOVIE_DAY = #{movieDay}
+		AND MTT.CINEMA_NO = #{cinemaNo}
+		ORDER BY MOVIE_START
 	</select>
 </mapper>
