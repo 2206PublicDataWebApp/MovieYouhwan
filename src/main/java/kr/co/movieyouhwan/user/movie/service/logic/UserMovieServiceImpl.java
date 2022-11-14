@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
+import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.service.UserMovieService;
 import kr.co.movieyouhwan.user.movie.store.UserMovieStore;
@@ -95,5 +96,12 @@ public class UserMovieServiceImpl implements UserMovieService{
 	public List<CinemaMovie> printTicketMovieByDay(Integer cinemaNo, Integer movieNo, String movieDay) {
 		List<CinemaMovie> cmList = uMovieStore.selectTicketMovieByDay(session, cinemaNo, movieNo, movieDay);
 		return cmList;
+	}
+
+	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
+	@Override
+	public Member printBuyerInfo(String memberId) {
+		Member buyerInfo = uMovieStore.selectBuyerInfo(session, memberId);
+		return buyerInfo;
 	}
 }

@@ -150,19 +150,228 @@ function popUp() {
 
 // 좌석 선택 효과
 let chocieSeat = $('.seat-box');
+let count = 1;
 chocieSeat.click(function() {
+	// (성인) 예매 인원 수
+	var adultCount = $('#adult-input').val();
+	// (청소년) 예매 인원 수
+	var teenagerCount = $('#teenager-input').val();
+	// (성인 + 청소년) 예매 인원 수
+	var addAllCount = parseInt(adultCount) + parseInt(teenagerCount);
+	var hiddenTag = $('#hidden-value');
+	// 선택 인원이 0명일 때
+	if(adultCount == 0 && teenagerCount == 0) {
+		alert("인원수를 선택해주세요");
+	} else if(count <= addAllCount) {
+		// 선택 인원이 1명일 때
+		if(addAllCount == 1) {
+			// 좌석 선택을 했을 때
+			for(i=1; i <= addAllCount; i++) {
+				$(this).css('background-color', 'black');
+				$(this).css('color', 'white');
+				var seatDone = $(this).val();
+				hiddenTag.append('<input type="hidden" value="" name="seatChoice"/>');
+				$('input[name="seatChoice"]').attr('value', seatDone);
+				hiddenTag.append('<input type="hidden" value="" name="adultCount"/>');
+				$('input[name="adultCount"]').attr('value', adultCount);
+				hiddenTag.append('<input type="hidden" value="" name="teenagerCount"/>');
+				$('input[name="teenagerCount"]').attr('value', teenagerCount);
+				// 선택한 버튼을 클릭했을 때
+				$(this).click(function() {
+					$(this).css('background-color', 'white');
+					$(this).css('color', 'black');
+					chocieSeat.not(this).removeAttr("disabled");
+					$("button[id$='1']").each(function(){
+						$("button[id$='1']").attr('disabled', 'disabled');
+					});
+					$("button[id$='3']").each(function(){
+						$("button[id$='3']").attr('disabled', 'disabled');
+					});
+					$("button[id$='5']").each(function(){
+						$("button[id$='5']").attr('disabled', 'disabled');
+					});
+					$("button[id$='7']").each(function(){
+						$("button[id$='7']").attr('disabled', 'disabled');
+					});
+					$("button[id$='9']").each(function(){
+						$("button[id$='9']").attr('disabled', 'disabled');
+					});
+					count--;
+				});
+			}
+			chocieSeat.not(this).attr('disabled', 'disabled');
+			count++;
+		}else if(addAllCount == 2) {
+			for(i=2; i <= addAllCount; i++) {
+				
+			}
+		}
+	}
+});
+
+// 인원수별 좌석 제한
+$('#adult-input').change(function() {
 	var adultCount = $('#adult-input').val();
 	var teenagerCount = $('#teenager-input').val();
 	var addAllCount = parseInt(adultCount) + parseInt(teenagerCount);
-	console.log(addAllCount);
-	if(adultCount == 0 && teenagerCount == 0) {
-		alert("인원수를 선택해주세요");
+	if(addAllCount == 1) {
+		$("button[id$='1']").each(function(){
+			$("button[id$='1']").attr('disabled', 'disabled');
+		});
+		$("button[id$='3']").each(function(){
+			$("button[id$='3']").attr('disabled', 'disabled');
+		});
+		$("button[id$='5']").each(function(){
+			$("button[id$='5']").attr('disabled', 'disabled');
+		});
+		$("button[id$='7']").each(function(){
+			$("button[id$='7']").attr('disabled', 'disabled');
+		});
+		$("button[id$='9']").each(function(){
+			$("button[id$='9']").attr('disabled', 'disabled');
+		});
 	}else {
-		if(addAllCount == 1) {
-			var hol = $([id$='1']);
-			hol.attr('disabled', 'disabled');
-		}
-		$(this).css('background-color', 'yellow');
+		$("button[id$='1']").each(function(){
+			$("button[id$='1']").removeAttr("disabled");
+		});
+		$("button[id$='3']").each(function(){
+			$("button[id$='3']").removeAttr("disabled");
+		});
+		$("button[id$='5']").each(function(){
+			$("button[id$='5']").removeAttr("disabled");
+		});
+		$("button[id$='7']").each(function(){
+			$("button[id$='7']").removeAttr("disabled");
+		});
+		$("button[id$='9']").each(function(){
+			$("button[id$='9']").removeAttr("disabled");
+		});
 	}
-
 });
+
+function payMoney() {
+	// (성인) 예매 인원 수
+	var adultCount = $('#adult-input').val();
+	// (청소년) 예매 인원 수
+	var teenagerCount = $('#teenager-input').val();
+	// (성인) 예매 총 금액
+	var adultPay = parseInt(adultCount) * 15000;
+	// (청소년) 예매 총 금액
+	var teenagerPay = parseInt(teenagerCount) * 10000;
+	// input 태그 추가 div 영역
+	var hiddenTag = $('#hidden-value');
+	// 성인, 청소년 예매 총 금액 전달
+	hiddenTag.append('<input type="hidden" value="" name="adultPay"/>');
+	$('input[name="adultPay"]').attr('value', adultPay);
+	hiddenTag.append('<input type="hidden" value="" name="teenagerPay"/>');
+	$('input[name="teenagerPay"]').attr('value', teenagerPay);
+}
+
+
+
+// movieTicketPay.jsp
+function pointUseAll() {
+	var userPoint = $('#hidden-point').val();
+	$('input[name="userPointUse"]').attr('value', userPoint);
+}
+
+// 포인트 아래 출력
+function savePoint()  {
+	var userPoint = $('#hidden-point').val();
+	const writePoint = document.getElementById('write-point').value;
+	var usePoint = document.getElementById("using-point").value;
+	if(writePoint > userPoint) {
+		alert("보유하신 포인트를 확인해주세요.");
+	} else {
+		document.getElementById("using-point").innerText = '포인트 사용 : '+ writePoint + 'P';
+		const movieMoney = document.getElementById('hidden-movie-money').value;
+		var finalMoney = movieMoney - writePoint;
+		document.getElementById("final-money").innerText = finalMoney;
+	}
+}
+
+// 결제
+$('#btn-movie-pay').click(function() {
+	// pay-method 클래스를 가진 것 중 체크가 되어있는 것의 값을 가져와라
+	let payMethod = $('.pay-method').filter(':checked').val();
+	if(payMethod) {
+		let pg = payMethod === 'kakaopay' ? 'kakaopay' : 'html5_inicis';
+		let movieName = $('#hidden-movie-name').val();
+		let totalAmount = $('#final-money').text();
+		$.ajax({
+			url : '/ticket/pay/buyer.yh',
+			type : 'POST',
+			success : function(member) {
+				let memberName = member.memberName;
+				let memberPhone = member.memberPhone;
+				let memberEmail = member.memberEmail;
+				requestPay(pg, payMethod, movieName, totalAmount, memberName, memberPhone, memberEmail);
+			},
+			error : function(error) {
+				alert(JSON.stringify(error));
+			},
+		});
+	}else {
+		alert('결제 수단을 선택해주세요.');
+	}
+});
+
+IMP.init('imp53374831');
+
+// 일반 결제, 카카오페이 결제
+function requestPay(pg, payMethod, movieName, totalAmount, memberName, memberPhone, memberEmail) {
+	IMP.request_pay({
+		pg : pg,
+		pay_method : payMethod, // card(신용카드), trans(실시간계좌이체), bank(가상계좌)
+		name : movieName,
+		amount : totalAmount,
+		buyer_name : memberName,
+		buyer_tel : memberPhone,
+		buyer_email : memberEmail,
+	},
+	function(rsp) {
+		// 결제 성공
+		if(rsp.success) {
+			$.ajax({
+				url : '/pay/verify.yh',
+				method : 'POST',
+				data : {
+					imp_uid : rsp.imp_uid,
+					merchant_uid : rsp.merchant_uid,
+				},
+			})
+			.done(function(result) {
+				if(rsp.paid_amount === result.response.amount) {
+					alert('결제가 완료되었습니다.');
+					// 결제내역 추가
+					$.ajax({
+						url : '/movie/pay.yh',
+						method : 'POST',
+						data : {
+							movieName : result.response.name,
+							totalAmount : result.response.amount,
+							payDate : paid_at,
+							imp_uid : rsp.imp_uid,
+						},
+					})
+					// 성공 시 영화 결제 성공 페이지
+					.done(function() {
+						$(location).attr('href', '');
+					})
+					.fail(function(error) {
+						alert(JSON.stringify(error));
+					});
+				}else {
+					alert('[결제내역 저장 실패] : ' + rsp.error_msg);
+				}
+			})
+			.fail(function(error) {
+				alert(JSON.stringify(error));
+				alert('[결제 이상]' + rsp.error_msg);
+			});
+		}else {
+			alert('[결제 실패] ' + rsp.error_msg);
+       		$(location).attr('href', '/store.yh');
+		}
+	})
+}

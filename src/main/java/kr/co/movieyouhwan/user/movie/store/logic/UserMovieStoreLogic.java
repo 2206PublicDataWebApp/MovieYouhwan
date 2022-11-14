@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
+import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.store.UserMovieStore;
 
@@ -95,5 +96,12 @@ public class UserMovieStoreLogic implements UserMovieStore{
 		ticketMovieMap.put("movieDay", movieDay);
 		List<CinemaMovie> cmList = session.selectList("MovieMapper.selectTicketMovieByDay", ticketMovieMap);
 		return cmList;
+	}
+	
+	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
+	@Override
+	public Member selectBuyerInfo(SqlSessionTemplate session, String memberId) {
+		Member buyerInfo = session.selectOne("MemberMapper.selectBuyerInfo", memberId);
+		return buyerInfo;
 	}
 }
