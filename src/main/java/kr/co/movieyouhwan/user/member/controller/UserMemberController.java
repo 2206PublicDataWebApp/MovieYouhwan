@@ -50,7 +50,7 @@ public class UserMemberController {
 	 * @return
 	 * @throws IllegalStateException
 	 * @throws IOException
-	 */
+	 */		
 	@ResponseBody
 	@RequestMapping(value="/member/join.yh",method = RequestMethod.POST)
 	public ModelAndView memberJoin(
@@ -256,6 +256,7 @@ public class UserMemberController {
 //		return mv;
 //	}
 //	
+	@RequestMapping
 	/*
 	 * @RequestMapping(value = "/member/myPoint.yh", method = RequstMethod.GET)
 	 * public ModelAndView pointHistoryView( HttpServletRequest request,
