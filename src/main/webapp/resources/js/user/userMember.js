@@ -115,7 +115,7 @@ $('form').on('submit', function () {
    }
    // 이메일 정규식
    if (mailJ.test($('#memberEmail').val())) {
-      console.log("mail : " + mailJ.test($('#memberEmail').val()));
+      console.log("mail : " + phoneJ.test($('#memberEmail').val()));
       inval_Arr[4] = true;
    } else {
       inval_Arr[4] = false;

@@ -154,9 +154,7 @@ a, ul, li{
     list-style: none;
     color: #393939;
 }
-li{
-    margin: 10px;
-}
+
 .delete-btn, .review-btn{
     width: 90px;
     height: 35px;

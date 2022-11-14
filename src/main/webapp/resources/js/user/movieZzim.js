@@ -11,7 +11,7 @@ $(".heart-click").click(function() {
 
         $.ajax({
             type : 'post',
-            url : 'saveZzim',
+            url : '/saveZzim',
             data : { movieNo : movieNo, },
             success : function(movieList) {
                 //페이지 새로고침
@@ -39,7 +39,7 @@ $(".heart-click").click(function() {
         console.log("꽉찬하트 클릭" + movieNo);
 
         $.ajax({
-            url : 'removeZzim',
+            url : '/removeZzim',
             type : 'post',
             data : { movieNo : movieNo, },
             success : function(movieList) {

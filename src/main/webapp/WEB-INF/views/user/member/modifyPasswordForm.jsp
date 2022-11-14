@@ -13,10 +13,10 @@
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="/resources/js/header.js" defer></script>
     <script src="/resources/js/footer.js" defer></script>
-	<script src="/resources/js/userMember.js" defer></script>
-    <script src="/resources/js/find.js" defer></script>
+	<script src="/resources/js/user/userMember.js" defer></script>
+    <script src="/resources/js/user/find.js" defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquer/1/jquery.min.js"></script>
 <title>무비유환 - 비밀번호 변경</title>
 
 </head>
@@ -31,16 +31,18 @@
                 <div id="pass-find-info">
                     가입한 아이디를 입력해주세요<br>
                     이메일 인증을 통해 비밀번호를 변경합니다.
+                    ${member}
                 </div>
-                <div class="input-wrap">${member.memberId}
-                    <input type="text" class="input-box" id="id-input" name="memberId" maxlength="12" placeholder="아이디" required>
+                <div class="input-wrap">
+                    <div id="check"></div>
+                    <input type="text" class="input-box" id="id-input memberId" name="memberId" maxlength="12" placeholder="아이디" required>
                 </div>
                 <div class="input-wrap">
                     <input type="email" class="input-box" id="memberEmail" name="memberEmail" placeholder="movieyoohwan@mail.com" maxlength="30" required>
                     <input type="button" id="email-confirm-btn" class="email-confirm" name="email-confirm" value="인증하기"> 
                 </div>
                 <div class="input-wrap">
-                    <input type="number" class="input-box" id="sendSMS" name="sendSMS" placeholder="6자리의 인증번호를 입력하세요" maxlength="6" required>
+                    <input type="number" class="input-box mail-check-input" id="AuthInput" name="sendSMS" placeholder="6자리의 인증번호를 입력하세요" maxlength="6" required>
                 </div>
                 <input type="hidden" id="phoneDoubleChk"/>
                 <button type="submit" id="find-btn" name="findSubmit">인증완료</button>

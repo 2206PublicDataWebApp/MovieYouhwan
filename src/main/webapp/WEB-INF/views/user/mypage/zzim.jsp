@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/user/my/zzim.css" />
-<link rel="stylesheet" href="/resources/css/myPage.css" />
+<link rel="stylesheet" href="/resources/css/user/my/myPage.css" />
 <link rel="stylesheet" href="/resources/css/common.css" />
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/footer.css" />

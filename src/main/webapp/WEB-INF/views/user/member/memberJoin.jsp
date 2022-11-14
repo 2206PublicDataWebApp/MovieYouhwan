@@ -165,7 +165,7 @@
                                         <input type="button" id="email-confirm-btn" class="email-confirm" name="email-confirm" value="인증하기"> 
                                     </div>
                                     
-                                    <input type="number" id="emailAuthNo" placeholder="인증번호 6자리" maxlength="6" class="login-input_input mail-check-input" required>
+                                    <input type="text" id="emailAuthNo" placeholder="인증번호 6자리" maxlength="6" class="login-input_input mail-check-input" required>
                                     <div class="validation" id="email_check2"></div>
                                 </div>
                             </div>
