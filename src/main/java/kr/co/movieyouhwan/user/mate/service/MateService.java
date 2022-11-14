@@ -40,5 +40,9 @@ public interface MateService {
 
 	Member printUserInfo(String memberId);
 
+	int registerMatching(String requesterId, String respondentId);
+
+	int checkExistMatching(String requesterId, String respondentId);
+
 	
 }

@@ -52,7 +52,7 @@
           <div class="point-mate">
             <div class="my-point-wrap">
               <div class="go-matching-btn-wrap">
-                <button class="yellow matching-btn">매칭하러 가기</button>
+                <button class="yellow matching-btn" onclick="location.href='/mate/matching.yh'">매칭하러 가기</button>
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@
             <span>MATCHING</span>
             <label for="toggle" class="match-toggle-switch">
               <span class="match-toggle-btn"></span>
-              <input id="isMatchingActive" type="hidden" name="matchingActive" value="${survey.matchingActive}">
+              <input id="isMatchingActive" type="hidden" name="matchingActive" value="${survey.matchingActive}" />
             </label>
           </div>
         </div>
@@ -87,9 +87,6 @@
           <div class="chat-btn-col"><button class="btn yellow">채팅</button></div>
           <div class="delete-btn-col"><button class="btn navy">삭제</button></div>
         </div>
-      </div>
-      <div class="match-detail">
-        <div class="detail-header"><div class="match-date-detail"></div>
       </div>
     </div>
   </body>

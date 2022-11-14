@@ -69,6 +69,11 @@
 		INSERT INTO SURVEY_TBL VALUES(SEQ_SURVEY_NO.NEXTVAL, #{gender}, #{age}, #{cinemaName}, #{memberId}, #{memberBirth}, #{memberGender}, DEFAULT, DEFAULT, NULL, NULL)
 	</insert>
 	
+	<!-- 매칭 테이블에 INSERT -->
+	<insert id="insertMatching" parameterType="java.util.HashMap">
+		INSERT INTO MATCHING_TBL VALUES(SEQ_MATCHING_NO.NEXTVAL, #{requesterId}, #{respondentId}, DEFAULT, NULL)
+	</insert>
+	
 	<update id="updateMateStatusY">
 		UPDATE MEMBER_TBL SET MATE_STATUS='Y' WHERE MEMBER_ID=#{memberId}
 	</update>
@@ -120,6 +125,10 @@
 	<!-- 선호장르 옵션 목록 불러오기 -->
 	<select id="selectGenreOption" resultMap="genreOptionResultMap">
 		SELECT * FROM GENRE_OPTION_TBL ORDER BY GENRE ASC
+	</select>
+	
+	<select id="selectExistMatching" resultType="_int">
+		SELECT COUNT(*) FROM MATCHING_TBL WHERE (REQUESTER_ID=#{requesterId} AND RESPONDENT_ID=#{respondentId}) OR (REQUESTER_ID=#{respondentId} AND RESPONDENT_ID=#{requesterId}) 
 	</select>
 	
 	

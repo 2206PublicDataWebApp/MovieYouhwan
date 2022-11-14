@@ -113,4 +113,16 @@ public class MateServiceImpl implements MateService{
 		return member;
 	}
 
+	@Override
+	public int registerMatching(String requesterId, String respondentId) {
+		int result=mStore.insertMatching(session, requesterId, respondentId);
+		return result;
+	}
+
+	@Override
+	public int checkExistMatching(String requesterId, String respondentId) {
+		int result=mStore.selectExistMatching(session, requesterId, respondentId);
+		return result;
+	}
+
 }
