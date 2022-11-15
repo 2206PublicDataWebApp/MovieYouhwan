@@ -55,4 +55,8 @@ public interface MateStore {
 
 	String selectMatchDate(SqlSessionTemplate session, String requesterId, String respondentId);
 
+	int updateToDeleteMatching(SqlSessionTemplate session, String memberId, String mateId);
+
+	int updateMatchingActive(SqlSessionTemplate session, String memberId, String matchingActive);
+
 }

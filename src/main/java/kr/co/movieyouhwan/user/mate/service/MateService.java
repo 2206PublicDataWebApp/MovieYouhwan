@@ -53,5 +53,9 @@ public interface MateService {
 
 	String printMatchDate(String requesterId, String respondentId);
 
+	int updateToDeleteMatching(String memberId, String mateId);
+
+	int modifyMatchingActive(String memberId, String matchingActive);
+
 	
 }

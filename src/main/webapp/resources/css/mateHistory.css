@@ -1,0 +1,34 @@
+.mate-history-wrapper {
+  width: 1150px;
+  height: 1000px;
+  margin: 0 auto;
+}
+
+.mate-history {
+  margin-top: 70px;
+}
+
+.list-row {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 15px 0;
+  border-bottom: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+  align-items: center;
+}
+
+.create-date {
+  width: 30%;
+  text-align: center;
+}
+
+.delete-date {
+  width: 30%;
+  text-align: center;
+}
+
+.mate-profile {
+  width: 40%;
+  text-align: center;
+}

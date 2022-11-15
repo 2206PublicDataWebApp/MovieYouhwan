@@ -13,6 +13,7 @@ public class Survey {
 	private String memberAge; // 자신의 나이
 	private String memberGender; // 자신의 성별
 	private String matchingActive;
+	private int matchingCount;
 	private Date createDate;
 	private Date updateDate;
 	private Date deleteDate;
@@ -129,6 +130,14 @@ public class Survey {
 
 	public void setMatchingGrade(int matchingGrade) {
 		this.matchingGrade = matchingGrade;
+	}
+	
+	public int getMatchingCount() {
+		return matchingCount;
+	}
+
+	public void setMatchingCount(int matchingCount) {
+		this.matchingCount = matchingCount;
 	}
 
 	@Override

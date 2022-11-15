@@ -155,4 +155,22 @@ public class MateStoreLogic implements MateStore {
 		String matchDate=session.selectOne("MateMapper.selectMatchDate", param);
 		return matchDate;
 	}
+
+	@Override
+	public int updateToDeleteMatching(SqlSessionTemplate session, String memberId, String mateId) {
+		HashMap<String, String> param=new HashMap<>();
+		param.put("memberId", memberId);
+		param.put("mateId", mateId);
+		int result=session.update("MateMapper.updateToDeleteMatching", param);
+		return result;
+	}
+
+	@Override
+	public int updateMatchingActive(SqlSessionTemplate session, String memberId, String matchingActive) {
+		HashMap<String, String> param=new HashMap<>();
+		param.put("memberId", memberId);
+		param.put("matchingActive", matchingActive);
+		int result=session.update("MateMapper.updateMatchingActive", param);
+		return result;
+	}
 }

@@ -21,10 +21,10 @@
       <div class="mate-list-table">
         <div class="mate-list-row">
           <div class="match-profile-col">메이트 프로필</div>
-          <div class="mate-location-col">자주찾는 지점</div>
+          <div class="match-location-col">자주찾는 지점</div>
           <div class="match-genre-col">선호 장르</div>
           <div class="match-grade-col">매칭 점수</div>
-          <div class="chat-btn-col"></div>
+          <div class="match-btn-col"></div>
         </div>
         <c:if test="${!empty matchList}">
           <c:forEach items="${matchList}" var="matchInfo">
@@ -38,10 +38,10 @@
                 </c:if>
                 ${matchInfo.memberNick}(${matchInfo.memberAge}, ${matchInfo.memberGender})
               </div>
-              <div class="mate-location-col">${matchInfo.cinemaName}</div>
+              <div class="match-location-col">${matchInfo.cinemaName}</div>
               <div class="match-genre-col">${matchInfo.genre}</div>
               <div class="match-grade-col">${matchInfo.matchingGrade}</div>
-              <div class="mate-genre-col"><button class="btn yellow" onclick="chatting('${memberId}','${matchInfo.memberId}', '${matchInfo.memberNick}');">신청</button></div>
+              <div class="match-btn-col"><button class="btn yellow" onclick="chatting('${memberId}','${matchInfo.memberId}', '${matchInfo.memberNick}');">신청</button></div>
             </div>
           </c:forEach>
           <div class="match-btn-area">
