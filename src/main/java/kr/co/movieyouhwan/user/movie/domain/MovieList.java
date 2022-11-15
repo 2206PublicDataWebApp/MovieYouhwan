@@ -20,34 +20,9 @@ public class MovieList {
 	private int movieSeat;
 	private String memberId;
 	private int movieZzim;
-	private int zzimNo;	// 사용자 찜 여부
+	private String zzimYn;	// 사용자 찜 여부
 	
 	public MovieList() {}
-
-	public MovieList(int movieNo, int theaterNo, String movieTitle, String movieAge, Date movieStartday,
-			Date movieEndday, String movieImgName, String movieImgRename, String movieImgPath, String theaterName,
-			String movieDay, String movieStart, String movieEnd, int movieTicket, int movieSeat, String memberId,
-			int movieZzim, int zzimNo) {
-		super();
-		this.movieNo = movieNo;
-		this.theaterNo = theaterNo;
-		this.movieTitle = movieTitle;
-		this.movieAge = movieAge;
-		this.movieStartday = movieStartday;
-		this.movieEndday = movieEndday;
-		this.movieImgName = movieImgName;
-		this.movieImgRename = movieImgRename;
-		this.movieImgPath = movieImgPath;
-		this.theaterName = theaterName;
-		this.movieDay = movieDay;
-		this.movieStart = movieStart;
-		this.movieEnd = movieEnd;
-		this.movieTicket = movieTicket;
-		this.movieSeat = movieSeat;
-		this.memberId = memberId;
-		this.movieZzim = movieZzim;
-		this.zzimNo = zzimNo;
-	}
 
 	public int getMovieNo() {
 		return movieNo;
@@ -185,12 +160,12 @@ public class MovieList {
 		this.movieZzim = movieZzim;
 	}
 
-	public int getZzimNo() {
-		return zzimNo;
+	public String getZzimYn() {
+		return zzimYn;
 	}
 
-	public void setZzimNo(int zzimNo) {
-		this.zzimNo = zzimNo;
+	public void setZzimYn(String zzimYn) {
+		this.zzimYn = zzimYn;
 	}
 
 	@Override
@@ -200,6 +175,33 @@ public class MovieList {
 				+ ", movieImgName=" + movieImgName + ", movieImgRename=" + movieImgRename + ", movieImgPath="
 				+ movieImgPath + ", theaterName=" + theaterName + ", movieDay=" + movieDay + ", movieStart="
 				+ movieStart + ", movieEnd=" + movieEnd + ", movieTicket=" + movieTicket + ", movieSeat=" + movieSeat
-				+ ", memberId=" + memberId + ", movieZzim=" + movieZzim + ", zzimNo=" + zzimNo + "]";
+				+ ", memberId=" + memberId + ", movieZzim=" + movieZzim + ", zzimYn=" + zzimYn + "]";
 	}
+
+	public MovieList(int movieNo, int theaterNo, String movieTitle, String movieAge, Date movieStartday,
+			Date movieEndday, String movieImgName, String movieImgRename, String movieImgPath, String theaterName,
+			String movieDay, String movieStart, String movieEnd, int movieTicket, int movieSeat, String memberId,
+			int movieZzim, String zzimYn) {
+		super();
+		this.movieNo = movieNo;
+		this.theaterNo = theaterNo;
+		this.movieTitle = movieTitle;
+		this.movieAge = movieAge;
+		this.movieStartday = movieStartday;
+		this.movieEndday = movieEndday;
+		this.movieImgName = movieImgName;
+		this.movieImgRename = movieImgRename;
+		this.movieImgPath = movieImgPath;
+		this.theaterName = theaterName;
+		this.movieDay = movieDay;
+		this.movieStart = movieStart;
+		this.movieEnd = movieEnd;
+		this.movieTicket = movieTicket;
+		this.movieSeat = movieSeat;
+		this.memberId = memberId;
+		this.movieZzim = movieZzim;
+		this.zzimYn = zzimYn;
+	}
+
+	
 }

@@ -225,7 +225,7 @@ public class UserMemberController {
 	 */
 	@RequestMapping(value = "/member/findPassForm.yh", method = RequestMethod.GET)
 	public String findPassView() throws Exception {
-		return "/user/member/findPasswordForm";
+		return "/user/member/modifyPasswordForm";
 		
 	}
 	
@@ -284,7 +284,7 @@ public class UserMemberController {
 				int result = uMemberService.modifyPassword(memberId, memberEmail);
 				if(result > 0) {
 					mv.addObject("member", member);
-					mv.setViewName("/user/memeber/passModify");
+					mv.setViewName("/user/memeber/modifyPasswordAuth");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

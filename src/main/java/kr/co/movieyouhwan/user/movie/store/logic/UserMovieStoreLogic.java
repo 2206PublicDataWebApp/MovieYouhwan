@@ -104,4 +104,11 @@ public class UserMovieStoreLogic implements UserMovieStore{
 		Member buyerInfo = session.selectOne("MemberMapper.selectBuyerInfo", memberId);
 		return buyerInfo;
 	}
+	
+	// 나의 찜 여부
+	@Override
+	public List<Integer> selectMyZzimMovieList(SqlSessionTemplate session, String memberId) {
+		List<Integer> myZzimMovieList = session.selectList("MemberMapper.myZzimList", memberId);
+		return myZzimMovieList;
+	}
 }
