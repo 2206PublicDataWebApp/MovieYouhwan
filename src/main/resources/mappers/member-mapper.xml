@@ -40,7 +40,6 @@
 		<result property="movieActor" column="MOVIE_ACTOR"/>
 		<result property="movieSee" column="MOVIE_SEE"/>
 		<result property="movieZzim" column="MOVIE_ZZIM"/>
-		<result property="zzimNo" column="ZZIM_NO"/>
 	</resultMap>
 
 	

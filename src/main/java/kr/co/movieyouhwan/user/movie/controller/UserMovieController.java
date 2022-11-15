@@ -97,13 +97,33 @@ public class UserMovieController {
 	 */
 	@RequestMapping(value="/movieListAfter.yh", method=RequestMethod.GET)
 	public ModelAndView userMovieListAfterView(
+			HttpServletRequest request,
 			ModelAndView mv,
 			@RequestParam(value="currentPage", required=false) Integer currentPage) {
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginUser");
 		// 페이징 처리
 		int page = (currentPage != null ? currentPage : 1);
 		PageInfo pageInfo = new PageInfo(page, uMovieService.printAfterMovieCount(), 12, 5);
 		// 상영 예정 영화 리스트 가져오기
 		List<MovieList> mlList = uMovieService.printAllMovieAfter();
+		if(member!=null) {
+			String memberId=member.getMemberId();
+			List<Integer> myZzimMovieList = uMovieService.printMyZzimMovieList(memberId);
+			if(myZzimMovieList == null) {
+				System.out.println("null");
+			}else {
+				System.out.println(myZzimMovieList.toString());
+			}
+			
+			for(int i = 0 ; i < mlList.size(); i++) {
+				if(myZzimMovieList.contains(mlList.get(i).getMovieNo())) {
+					mlList.get(i).setZzimYn("Y");
+				}else {
+					mlList.get(i).setZzimYn("N");
+				}
+			}
+		}
 		// 화면 출력
 		mv.addObject("pageInfo", pageInfo);
 		mv.addObject("mlList", mlList);
@@ -118,13 +138,33 @@ public class UserMovieController {
 	 */
 	@RequestMapping(value="/movieListBefore.yh", method=RequestMethod.GET)
 	public ModelAndView userMovieListBeforeView(
+			HttpServletRequest request,
 			ModelAndView mv,
 			@RequestParam(value="currentPage", required=false) Integer currentPage) {
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginUser");
 		// 페이징 처리
 		int page = (currentPage != null ? currentPage : 1);
 		PageInfo pageInfo = new PageInfo(page, uMovieService.printBeforeMovieCount(), 12, 5);
 		// 상영 종료 영화 목록 리스트 가져오기
 		List<MovieList> mlList = uMovieService.printAllMovieBefore();
+		if(member!=null) {
+			String memberId=member.getMemberId();
+			List<Integer> myZzimMovieList = uMovieService.printMyZzimMovieList(memberId);
+			if(myZzimMovieList == null) {
+				System.out.println("null");
+			}else {
+				System.out.println(myZzimMovieList.toString());
+			}
+			
+			for(int i = 0 ; i < mlList.size(); i++) {
+				if(myZzimMovieList.contains(mlList.get(i).getMovieNo())) {
+					mlList.get(i).setZzimYn("Y");
+				}else {
+					mlList.get(i).setZzimYn("N");
+				}
+			}
+		}
 		// 화면 출력
 		mv.addObject("pageInfo", pageInfo);
 		mv.addObject("mlList", mlList);
@@ -189,12 +229,15 @@ public class UserMovieController {
 	 */
 	@RequestMapping(value="/movieDetail.yh", method=RequestMethod.GET)
 	public ModelAndView userMovieDetailView(
+			HttpServletRequest request,
 			ModelAndView mv,
-			@RequestParam("movieNo") Integer movieNo,
-			HttpSession session) {
+			@RequestParam("movieNo") Integer movieNo) {
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginUser");
 		Movie movie = aMovieService.printOneMovie(movieNo);
 		List<MovieImg> miList = aMovieService.printAllMovieImg(movieNo);
 		List<MovieVideo> mvList = aMovieService.printAllMovieVideo(movieNo);
+		// 나의 찜 목록 추가 예정
 		mv.addObject("movie", movie);
 		mv.addObject("miList", miList);
 		mv.addObject("mvList", mvList);

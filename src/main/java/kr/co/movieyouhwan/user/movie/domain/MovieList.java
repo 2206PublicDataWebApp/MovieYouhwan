@@ -20,9 +20,21 @@ public class MovieList {
 	private int movieSeat;
 	private String memberId;
 	private int movieZzim;
+	private int zzimNo;
 	private String zzimYn;	// 사용자 찜 여부
 	
 	public MovieList() {}
+
+	@Override
+	public String toString() {
+		return "MovieList [movieNo=" + movieNo + ", theaterNo=" + theaterNo + ", movieTitle=" + movieTitle
+				+ ", movieAge=" + movieAge + ", movieStartday=" + movieStartday + ", movieEndday=" + movieEndday
+				+ ", movieImgName=" + movieImgName + ", movieImgRename=" + movieImgRename + ", movieImgPath="
+				+ movieImgPath + ", theaterName=" + theaterName + ", movieDay=" + movieDay + ", movieStart="
+				+ movieStart + ", movieEnd=" + movieEnd + ", movieTicket=" + movieTicket + ", movieSeat=" + movieSeat
+				+ ", memberId=" + memberId + ", movieZzim=" + movieZzim + ", zzimNo=" + zzimNo + ", zzimYn=" + zzimYn
+				+ "]";
+	}
 
 	public int getMovieNo() {
 		return movieNo;
@@ -160,6 +172,14 @@ public class MovieList {
 		this.movieZzim = movieZzim;
 	}
 
+	public int getZzimNo() {
+		return zzimNo;
+	}
+
+	public void setZzimNo(int zzimNo) {
+		this.zzimNo = zzimNo;
+	}
+
 	public String getZzimYn() {
 		return zzimYn;
 	}
@@ -168,20 +188,10 @@ public class MovieList {
 		this.zzimYn = zzimYn;
 	}
 
-	@Override
-	public String toString() {
-		return "MovieList [movieNo=" + movieNo + ", theaterNo=" + theaterNo + ", movieTitle=" + movieTitle
-				+ ", movieAge=" + movieAge + ", movieStartday=" + movieStartday + ", movieEndday=" + movieEndday
-				+ ", movieImgName=" + movieImgName + ", movieImgRename=" + movieImgRename + ", movieImgPath="
-				+ movieImgPath + ", theaterName=" + theaterName + ", movieDay=" + movieDay + ", movieStart="
-				+ movieStart + ", movieEnd=" + movieEnd + ", movieTicket=" + movieTicket + ", movieSeat=" + movieSeat
-				+ ", memberId=" + memberId + ", movieZzim=" + movieZzim + ", zzimYn=" + zzimYn + "]";
-	}
-
 	public MovieList(int movieNo, int theaterNo, String movieTitle, String movieAge, Date movieStartday,
 			Date movieEndday, String movieImgName, String movieImgRename, String movieImgPath, String theaterName,
 			String movieDay, String movieStart, String movieEnd, int movieTicket, int movieSeat, String memberId,
-			int movieZzim, String zzimYn) {
+			int movieZzim, int zzimNo, String zzimYn) {
 		super();
 		this.movieNo = movieNo;
 		this.theaterNo = theaterNo;
@@ -200,8 +210,12 @@ public class MovieList {
 		this.movieSeat = movieSeat;
 		this.memberId = memberId;
 		this.movieZzim = movieZzim;
+		this.zzimNo = zzimNo;
 		this.zzimYn = zzimYn;
 	}
+
+	
+
 
 	
 }

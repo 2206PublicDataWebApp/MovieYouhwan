@@ -66,7 +66,7 @@ public class AdminMovieStoreLogic implements AdminMovieStore {
 	// 영화 상세
 	@Override
 	public Movie selectOneMovie(SqlSessionTemplate session, Integer movieNo) {
-		Movie movie = session.selectOne("MovieMapper.selectOntMovie", movieNo);
+		Movie movie = session.selectOne("MovieMapper.selectOneMovie", movieNo);
 		return movie;
 	}
 
@@ -139,7 +139,7 @@ public class AdminMovieStoreLogic implements AdminMovieStore {
 		int result = session.insert("MovieMapper.insertMovieTime", movieTime);
 		return result;
 	}
-
+	
 	@Override
 	public List<MovieImg> selectAllMovieImg(SqlSessionTemplate session) {
 		List<MovieImg> miList = session.selectList("MovieMapper.selectAllMovieImg");
