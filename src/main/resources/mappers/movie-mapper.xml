@@ -70,6 +70,28 @@
 		<result property="movieZzim" column="MOVIE_ZZIM"/>
 		<result property="zzimNo" column="ZZIM_NO"/>
 	</resultMap>
+	<resultMap type="MovieTicket" id="MovieTicketResultMap">
+		<id property="ticketNo" column="TICKET_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="memberBirth" column="MEMBER_BIRTH"/>
+		<result property="memberGender" column="MEMBER_GENDER"/>
+		<result property="cinemaNo" column="CINEMA_NO"/>
+		<result property="theaterNo" column="THEATER_NO"/>
+		<result property="movieNo" column="MOVIE_NO"/>
+		<result property="cinemaName" column="CINEMA_NAME"/>
+		<result property="theaterName" column="THEATER_NAME"/>
+		<result property="movieName" column="MOVIE_NAME"/>
+		<result property="personType" column="PERSON_TYPE"/>
+		<result property="personCount" column="PERSON_COUNT"/>
+		<result property="choiceSeat" column="CHOICE_SEAT"/>
+		<result property="moviePay" column="MOVIE_PAY"/>
+		<result property="payMethod" column="PAY_METHOD"/>
+		<result property="addPoint" column="ADD_POINT"/>
+		<result property="payDate" column="PAY_DATE"/>
+		<result property="movieDay" column="MOVIE_DAY"/>
+		<result property="movieStart" column="MOVIE_START"/>
+		<result property="ticketStatus" column="TICKET_STATUS"/>
+	</resultMap>
 	<!-- 영화 등록(관리자) -->
 	<insert id="insertMovie">
 		INSERT INTO MOVIE_TBL VALUES(SEQ_MOVIE_NO.NEXTVAL, #{movieTitle}, #{movieGenre}, #{movieRuntime}, #{movieDirector}, #{movieActor}, #{movieAge}, #{movieStartday}, #{movieTicketingday}, #{movieEndday}, #{movieContent}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
@@ -237,4 +259,8 @@
 		AND MTT.CINEMA_NO = #{cinemaNo}
 		ORDER BY MOVIE_START
 	</select>
+	<!-- 김미소 : 예매 정보 등록 -->
+	<insert id="insertMovieTicket">
+		INSERT INTO MOVIE_TICKET_TBL VALUES(#{ticketNo}, #{memberId}, #{memberAge}, #{memberGender}, #{cinemaNo}, #{theaterNo}, #{movieNo}, #{cinemaName}, #{theaterName}, #{movieName}, #{adultCount}, #{teenagerCount}, #{choiceSeat}, #{moviePay}, #{payMethod}, #{addPoint}, DEFAULT, #{movieDay}, #{movieStart}, DEFAULT)
+	</insert>
 </mapper>

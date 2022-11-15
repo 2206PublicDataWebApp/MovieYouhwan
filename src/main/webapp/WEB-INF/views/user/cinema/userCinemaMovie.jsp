@@ -51,7 +51,7 @@
 			<!-- 일별 현재 상영 영화 리스트 -->
 			<c:forEach items="${mList }" var="movie">
 				<div>
-					<p>${movie.movieTitle }</p>
+					<p class="cmovie-title">${movie.movieTitle }</p>
 					<c:forEach items="${cmList }" var="cinemaMovie">
 						<c:if test="${movie.movieNo eq cinemaMovie.movieNo}">
 							<div class="choice-movie-list">
@@ -81,7 +81,7 @@
 	    			var listWrap = $('#choice-movie-listwrap').html('');
 	    			for(var m in movie) {
 	    				var movieItemTag = $('<div></div>');
-	    			    var movieTitleTag = $('<div></div>');
+	    			    var movieTitleTag = $('<div class="cmovie-title"></div>');
 		    			movieTitleTag.text(movie[m].movieTitle);
 		    			for(var i in obj) {
 		    				if(movie[m].movieNo == obj[i].movieNo) {

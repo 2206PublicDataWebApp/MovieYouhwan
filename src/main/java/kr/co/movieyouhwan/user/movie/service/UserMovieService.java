@@ -6,6 +6,7 @@ import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
+import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 
 public interface UserMovieService {
 	// 현재 상영 영화 리스트
@@ -32,4 +33,6 @@ public interface UserMovieService {
 	public List<CinemaMovie> printTicketMovieByDay(Integer cinemaNo, Integer movieNo, String movieDay);
 	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
 	public Member printBuyerInfo(String memberId);
+	// 예매 내역 등록
+	public int registerMovieTicket(MovieTicket movieTicket);
 }

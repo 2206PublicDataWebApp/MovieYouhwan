@@ -5,7 +5,7 @@ import java.sql.Date;
 public class MovieTicket {
 	private String ticketNo; // 예매번호
 	private String memberId; // 회원 아이디
-	private String memberBirth; // 회원 생일
+	private int memberAge; // 회원 생일
 	private String memberGender; // 회원 성별
 	private int cinemaNo; // 영화관 번호
 	private int theaterNo; // 상영관 번호
@@ -13,8 +13,8 @@ public class MovieTicket {
 	private String cinemaName; // 영화관 이름
 	private String theaterName; // 상영관 이름
 	private String movieName; // 영화 제목
-	private String personType; // 성인 여부 - 성인 or 청소년
-	private String personCount; // 관람 인원
+	private int adultCount; // 성인 카운트
+	private int teenagerCount; // 청소년 카운트
 	private String choiceSeat; // 좌석 번호
 	private int moviePay; // 결제 금액
 	private String payMethod; // 결제 수단
@@ -26,14 +26,14 @@ public class MovieTicket {
 	
 	public MovieTicket() {}
 
-	public MovieTicket(String ticketNo, String memberId, String memberBirth, String memberGender, int cinemaNo,
-			int theaterNo, int movieNo, String cinemaName, String theaterName, String movieName, String personType,
-			String personCount, String choiceSeat, int moviePay, String payMethod, int addPoint, Date payDate,
+	public MovieTicket(String ticketNo, String memberId, int memberAge, String memberGender, int cinemaNo,
+			int theaterNo, int movieNo, String cinemaName, String theaterName, String movieName, int adultCount,
+			int teenagerCount, String choiceSeat, int moviePay, String payMethod, int addPoint, Date payDate,
 			String movieDay, String movieStart, String ticketStatus) {
 		super();
 		this.ticketNo = ticketNo;
 		this.memberId = memberId;
-		this.memberBirth = memberBirth;
+		this.memberAge = memberAge;
 		this.memberGender = memberGender;
 		this.cinemaNo = cinemaNo;
 		this.theaterNo = theaterNo;
@@ -41,8 +41,8 @@ public class MovieTicket {
 		this.cinemaName = cinemaName;
 		this.theaterName = theaterName;
 		this.movieName = movieName;
-		this.personType = personType;
-		this.personCount = personCount;
+		this.adultCount = adultCount;
+		this.teenagerCount = teenagerCount;
 		this.choiceSeat = choiceSeat;
 		this.moviePay = moviePay;
 		this.payMethod = payMethod;
@@ -69,12 +69,12 @@ public class MovieTicket {
 		this.memberId = memberId;
 	}
 
-	public String getMemberBirth() {
-		return memberBirth;
+	public int getMemberAge() {
+		return memberAge;
 	}
 
-	public void setMemberBirth(String memberBirth) {
-		this.memberBirth = memberBirth;
+	public void setMemberAge(int memberAge) {
+		this.memberAge = memberAge;
 	}
 
 	public String getMemberGender() {
@@ -133,20 +133,20 @@ public class MovieTicket {
 		this.movieName = movieName;
 	}
 
-	public String getPersonType() {
-		return personType;
+	public int getAdultCount() {
+		return adultCount;
 	}
 
-	public void setPersonType(String personType) {
-		this.personType = personType;
+	public void setAdultCount(int adultCount) {
+		this.adultCount = adultCount;
 	}
 
-	public String getPersonCount() {
-		return personCount;
+	public int getTeenagerCount() {
+		return teenagerCount;
 	}
 
-	public void setPersonCount(String personCount) {
-		this.personCount = personCount;
+	public void setTeenagerCount(int teenagerCount) {
+		this.teenagerCount = teenagerCount;
 	}
 
 	public String getChoiceSeat() {
@@ -215,10 +215,10 @@ public class MovieTicket {
 
 	@Override
 	public String toString() {
-		return "MovieTicket [ticketNo=" + ticketNo + ", memberId=" + memberId + ", memberBirth=" + memberBirth
+		return "MovieTicket [ticketNo=" + ticketNo + ", memberId=" + memberId + ", memberAge=" + memberAge
 				+ ", memberGender=" + memberGender + ", cinemaNo=" + cinemaNo + ", theaterNo=" + theaterNo
 				+ ", movieNo=" + movieNo + ", cinemaName=" + cinemaName + ", theaterName=" + theaterName
-				+ ", movieName=" + movieName + ", personType=" + personType + ", personCount=" + personCount
+				+ ", movieName=" + movieName + ", adultCount=" + adultCount + ", teenagerCount=" + teenagerCount
 				+ ", choiceSeat=" + choiceSeat + ", moviePay=" + moviePay + ", payMethod=" + payMethod + ", addPoint="
 				+ addPoint + ", payDate=" + payDate + ", movieDay=" + movieDay + ", movieStart=" + movieStart
 				+ ", ticketStatus=" + ticketStatus + "]";

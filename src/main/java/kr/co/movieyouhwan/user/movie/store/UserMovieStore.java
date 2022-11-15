@@ -9,6 +9,7 @@ import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
+import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 
 public interface UserMovieStore {
 	// 현재 상영 영화 리스트
@@ -35,4 +36,6 @@ public interface UserMovieStore {
 	public List<CinemaMovie> selectTicketMovieByDay(SqlSessionTemplate session, Integer cinemaNo, Integer movieNo, String movieDay);
 	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
 	public Member selectBuyerInfo(SqlSessionTemplate session, String memberId);
+	// 예매 내역 등록
+	public int insertMovieTicket(SqlSessionTemplate session, MovieTicket movieTicket);
 }

@@ -173,7 +173,7 @@
 	
 	<!-- 최현지 : 결제를 위한 회원 이름, 휴대폰 번호, 이메일 조회 -->
 	<select id="selectBuyerInfo" resultMap="memberResultMap">
-		SELECT MEMBER_NAME, MEMBER_PHONE, MEMBER_EMAIL FROM MEMBER_TBL
+		SELECT MEMBER_NAME, MEMBER_PHONE, MEMBER_EMAIL, MEMBER_BIRTH, MEMBER_GENDER FROM MEMBER_TBL
 		WHERE MEMBER_ID = #{memberId}
 	</select>
 	
