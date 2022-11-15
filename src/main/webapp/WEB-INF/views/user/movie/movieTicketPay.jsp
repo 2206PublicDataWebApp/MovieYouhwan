@@ -19,9 +19,23 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-	<input type="hidden" id="hidden-movie-name" value="${movieTitle }" name="movieName" />
+	<input type="hidden" value="${cinemaNo }" name="cinemaNo"/>
+	<input type="hidden" value="${movieNo }" name="movieNo"/>
+	<input type="hidden" value="${theaterNo }" name="theaterNo"/>
+	<input type="hidden" value="${movieImgRename }" name="movieImgRename"/>
+	<input type="hidden" value="${movieTitle }" name="movieName" />
+	<input type="hidden" value="${cinemaName }" name="cinemaName"/>
+	<input type="hidden" value="${theaterName }" name="theaterName"/>
+	<input type="hidden" value="${movieDay }" name="movieDay"/>
+	<input type="hidden" value="${movieStart }" name="movieStart"/>
+	<input type="hidden" value="${movieEnd }" name="movieEnd"/>
+	<input type="hidden" value="${movieTicket }" name="movieTicket"/>
+	<input type="hidden" value="${movieSeat }" name="movieSeat"/>
+	<input type="hidden" value="${seatChoice }" name="seatChoice"/>
 	<input type="hidden" id="hidden-point" value="${userPoint }" name="userPoint"/>
 	<input type="hidden" id="hidden-movie-money" value="${adultPay + teenagerPay }" name="movieMoney"/>
+	<input type="hidden" value="${adultPay }" name="adultPay"/>
+	<input type="hidden" value="${teenagerPay }" name="teenagerPay"/>
 	<div class="ticket-movie-wrapper">
 		<div class="ticket-left">
 			<div class="ticket-text">

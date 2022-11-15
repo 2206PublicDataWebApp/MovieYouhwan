@@ -443,6 +443,7 @@ button {
 	height : 120px;
 	margin : 0 auto;
 	margin-top : 20px;
+	padding-top : 15px;
 }
 	.favorite-cinema {
 		width : 30px;
@@ -537,6 +538,9 @@ button {
 	margin-top : 20px;
 	background-color : #fff;
 }
+	.cmovie-title {
+		margin-bottom : 20px;
+	}
 .choice-movie-list {
 	width : 180px;
 	height : 80px;

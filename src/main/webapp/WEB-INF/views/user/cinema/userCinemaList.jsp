@@ -28,12 +28,6 @@
 					<div class="ucinemalist-inside">
 						<!-- div 선택 시 영화관 상세 페이지(userCinemaInformation.jsp)로 이동 -->
 						<div class="one-cinema" onclick="location.href='/user/cinemaInformation.yh?cinemaNo=${cinema.cinemaNo}'">
-							<!-- 즐겨찾기 추가 영역 -->
-							<!-- 아래 i 태그 코드 지우고 작성하셔도 됩니다 언니! 코드 완성하시고나서 주석 지워주세용 -->
-							<!-- one-cinema 크기 30 30으로 해놨어요. css는 cinema.css 사용하시면 됩니다. -->
-							<div class="favorite-cinema">
-								<i class="fa-regular fa-star"></i>
-							</div>
 							<!-- 영화관 이름 -->
 							<div>
 								${cinema.cinemaName }
@@ -58,12 +52,6 @@
 				<c:if test="${cinema.cinemaArea eq '경기'}">
 					<div class="ucinemalist-inside">
 						<div class="one-cinema" onclick="location.href='/user/cinemaInformation.yh?cinemaNo=${cinema.cinemaNo}'">
-							<!-- 즐겨찾기 추가 영역 -->
-							<!-- 아래 i 태그 코드 지우고 작성하셔도 됩니다 언니! 코드 완성하시고나서 주석 지워주세용 -->
-							<!-- one-cinema 크기 30 30으로 해놨어요. css는 cinema.css 사용하시면 됩니다. -->
-							<div class="favorite-cinema">
-								<i class="fa-regular fa-star"></i>
-							</div>
 							<div>
 								${cinema.cinemaName }
 							</div>
@@ -85,12 +73,6 @@
 				<c:if test="${cinema.cinemaArea eq '인천'}">
 					<div class="ucinemalist-inside">
 						<div class="one-cinema" onclick="location.href='/user/cinemaInformation.yh?cinemaNo=${cinema.cinemaNo}'">
-							<!-- 즐겨찾기 추가 영역 -->
-							<!-- 아래 i 태그 코드 지우고 작성하셔도 됩니다 언니! 코드 완성하시고나서 주석 지워주세용 -->
-							<!-- one-cinema 크기 30 30으로 해놨어요. css는 cinema.css 사용하시면 됩니다. -->
-							<div class="favorite-cinema">
-								<i class="fa-regular fa-star"></i>
-							</div>
 							<div>
 								${cinema.cinemaName }
 							</div>

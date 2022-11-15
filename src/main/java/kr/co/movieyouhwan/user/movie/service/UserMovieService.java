@@ -6,6 +6,7 @@ import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
+import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 
 public interface UserMovieService {
 	// 현재 상영 영화 리스트
@@ -34,4 +35,6 @@ public interface UserMovieService {
 	public Member printBuyerInfo(String memberId);
 	// 마이찜여부
 	public List<Integer> printMyZzimMovieList(String memberId);
+	// 예매 내역 등록
+	public int registerMovieTicket(MovieTicket movieTicket);
 }

@@ -33,6 +33,5 @@
 			</div>
 		</div>
 	</div>
-	<p>${movieName }</p>
 </body>
 </html>

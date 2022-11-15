@@ -10,6 +10,7 @@ import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
+import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 import kr.co.movieyouhwan.user.movie.service.UserMovieService;
 import kr.co.movieyouhwan.user.movie.store.UserMovieStore;
 
@@ -103,11 +104,18 @@ public class UserMovieServiceImpl implements UserMovieService{
 		Member buyerInfo = uMovieStore.selectBuyerInfo(session, memberId);
 		return buyerInfo;
 	}
-	
+
 	// 나의 찜 여부
 	@Override
 	public List<Integer> printMyZzimMovieList(String memberId) {
 		List<Integer> myZzimMovieList = uMovieStore.selectMyZzimMovieList(session, memberId);
 		return myZzimMovieList;
+	}
+
+	// 예매 내역 등록
+	@Override
+	public int registerMovieTicket(MovieTicket movieTicket) {
+		int result = uMovieStore.insertMovieTicket(session, movieTicket);
+		return result;
 	}
 }

@@ -9,6 +9,7 @@ import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
+import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 import kr.co.movieyouhwan.user.movie.store.UserMovieStore;
 
 @Repository
@@ -110,5 +111,12 @@ public class UserMovieStoreLogic implements UserMovieStore{
 	public List<Integer> selectMyZzimMovieList(SqlSessionTemplate session, String memberId) {
 		List<Integer> myZzimMovieList = session.selectList("MemberMapper.myZzimList", memberId);
 		return myZzimMovieList;
+	}
+	
+	// 예매 내역 등록
+	@Override
+	public int insertMovieTicket(SqlSessionTemplate session, MovieTicket movieTicket) {
+		int result = session.insert("MovieMapper.insertMovieTicket", movieTicket);
+		return result;
 	}
 }

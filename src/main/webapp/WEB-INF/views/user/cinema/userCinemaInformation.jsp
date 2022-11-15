@@ -22,7 +22,6 @@
 	    <img class="cinemaImg" src="/resources/images/cinemaLodeImg/${cinema.cinemaImgRename }"/>
     </div>
     <div class="usercinema-wrapper">
-	    <!-- 영화관 이름 우측에 즐겨찾기 추가해주시면 됩니다 ! -->
 	    <!-- 영화관 이름 -->
     	<div class="usercinema-bottom">
 	    	<h3>${cinema.cinemaName }</h3>

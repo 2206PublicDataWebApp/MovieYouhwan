@@ -15,8 +15,8 @@
 	<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
 	<div class="admin-movie-wrap">
 		<div id="cmbutton-area">
-			<button class="cmbutton" onclick="/admin/adminCinemaRegister.yh">영화관 등록</button>
-			<button class="cmbutton" onclick="/admin/adminMovieRegister.yh">영화 등록</button>
+			<button class="cmbutton" onclick="location.href='/admin/adminMovieRegister.yh'">영화 등록</button>
+			<button class="cmbutton" onclick="location.href='/admin/adminCinemaRegister.yh'">영화관 등록</button>
 		</div>
 		<div id="amovie-wrap">
 			<div id="movie-cinema-rank">
@@ -33,7 +33,7 @@
 				<div id="acinema-list">
 					<div id="acinema-top">
 						<p class="show-text">영화관 리스트</p>
-						<button class="show-button" onclick="/admin/adminCinemaList.yh">전체보기</button>	
+						<button class="show-button" onclick="location.href='/admin/adminCinemaList.yh'">전체보기</button>	
 					</div>
 				</div>
 			</div>
