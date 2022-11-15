@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -16,10 +15,10 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +36,7 @@ import net.datafaker.Faker;
 
 @Controller
 public class MateController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(MateController.class);
 
 	@Autowired
 	private MateService mService;
@@ -46,8 +46,6 @@ public class MateController {
 
 	private int i = 0;
 
-	
-	
 	/**
 	 * FAKE DATA 생성
 	 * 
@@ -62,7 +60,7 @@ public class MateController {
 		List<SurveyGenre> dummySurveyGenreList = new ArrayList<>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd");
 		List<CinemaOption> cinemaOptionList = mService.printCinemaOption();
-		int dataCount=500;
+		int dataCount = 500;
 		for (i = 0; i < dataCount; i++) {
 
 			// id와 password 같음
@@ -143,19 +141,21 @@ public class MateController {
 	public ModelAndView mateListView(ModelAndView mv, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("loginUser");
-		if(member!=null) {
+		if (member != null) {
 			String memberId = member.getMemberId();
 			// 메이트 서비스 가입여부 확인
 			int isMate = mService.printMateStatus(memberId);
 			// 가입했으면 mate list 페이지로 이동
 			if (isMate > 0) {
-				List<String> myMateList=mService.printMyMateId(member.getMemberId());
-				member=mService.printUserInfo(memberId);
-				Survey mySurvey=mService.getSurveyByMemberId(memberId);
-				if(myMateList!=null) {
-					List<Survey> myMateSurvey=mService.getMyMateSurveyList(myMateList);
+				List<String> myMateList = mService.printMyMateId(member.getMemberId());
+				LOGGER.info(myMateList.toString());
+				member = mService.printUserInfo(memberId);
+				Survey mySurvey = mService.getSurveyByMemberId(memberId);
+				if (myMateList.size() > 0) {
+					List<Survey> myMateSurvey = mService.getMyMateSurveyList(myMateList);
 					List<MatchResult> matchList = new ArrayList<>();
 					for (Survey survey : myMateSurvey) {
+						System.out.println(survey.toString());
 						MatchResult matchResult = new MatchResult();
 						Member matchingMember = mService.printUserInfo(survey.getMemberId());
 						List<String> genreList = (mService.getGenreListBySurveyNo(survey.getSurveyNo())).stream()
@@ -169,28 +169,25 @@ public class MateController {
 						matchResult.setCinemaName(survey.getCinemaName());
 						matchResult.setGenre(genre);
 						matchResult.setMatchingGrade(survey.getMatchingGrade());
-						String matchDate=mService.printMatchDate(member.getMemberId(), survey.getMemberId());
+						String matchDate = mService.printMatchDate(member.getMemberId(), survey.getMemberId());
 						matchResult.setCreateDate(matchDate);
-						
+
 						matchList.add(matchResult);
 					}
 					mv.addObject("mateInfoList", matchList);
-					mv.addObject("member", member);
-					mv.addObject("mySurvey", mySurvey);
-					
-					//TODO 내 메이트 리스트
-					// 등급, 프로필이미지, 닉네임, 매칭횟수, 매칭 활성여부, 멤버 아이디 넘기기 
-					
+
+					// TODO 내 메이트 리스트
+					// 등급, 프로필이미지, 닉네임, 매칭횟수, 매칭 활성여부, 멤버 아이디 넘기기
+
 					// 내 메이트 리스트 -> matching에서 한 것처럼 matchResult에 담아서 넘기기 O
 					// member : memberId, memberNick, memberImgRename, memberLevel O
 					// survey : memberId, matchingCount, matchingActive O
 					mv.setViewName("user/mate/mateList");
-				}
-				else {
-					mv.addObject("member", member);
-					mv.addObject("mySurvey", mySurvey);
+				} else {
 					mv.setViewName("user/mate/mateList");
 				}
+				mv.addObject("member", member);
+				mv.addObject("mySurvey", mySurvey);
 			}
 			// 아니면 약관 동의 페이지로 이동
 			else {
@@ -319,28 +316,68 @@ public class MateController {
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("loginUser");
 		if (member != null) {
-			int resultCheck=mService.checkExistMatching(requesterId, respondentId);
-			if(resultCheck>0) {
+			int resultCheck = mService.checkExistMatching(requesterId, respondentId);
+			if (resultCheck > 0) {
 				return "0";
-			}
-			else {
+			} else {
 				int result = mService.registerMatching(requesterId, respondentId);
-				if(result>0) {
-					int resultMatchCount=mService.addMatchingCount(member.getMemberId());
-					if(resultMatchCount>0) {
+				if (result > 0) {
+					int resultMatchCount = mService.addMatchingCount(member.getMemberId());
+					if (resultMatchCount > 0) {
 						return "1";
-					}
-					else {
+					} else {
 						return "insertError";
 					}
-				}
-				else {
+				} else {
 					return "insertError";
 				}
 			}
 		} else {
 			return "loginError";
 		}
+	}
+	
+	@RequestMapping(value="/mate/deleteMatching.yh", method=RequestMethod.POST)
+	public ModelAndView deleteMatching(ModelAndView mv, HttpServletRequest request,
+			@RequestParam("mateId") String mateId) {
+		HttpSession session=request.getSession();
+		Member member=(Member)session.getAttribute("loginUser");
+		if(member==null) {
+			mv.setViewName("redirect:/member/loginView.yh");
+			return mv;
+		}
+		else {
+			int result=mService.updateToDeleteMatching(member.getMemberId(), mateId);
+			System.out.println(result);
+			if(result>0) {
+				System.out.println(result);
+				mv.setViewName("redirect:/mate/main.yh");
+			}
+			else {
+				//TODO: 예외처리
+			}
+		}
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/mate/modifyMatchingActive.yh", method=RequestMethod.POST)
+	public String modifyMatchingActive(
+			@RequestParam("matchingActive") String matchingActive,
+			@RequestParam("memberId") String memberId) {
+		int result=mService.modifyMatchingActive(memberId, matchingActive);
+		if(result>0) {
+			return "매칭 상태 변경 성공";
+		}
+		else {
+			return "매칭 상태 변경 실패";
+		}
+	}
+	
+	//TODO : 메이트내역 임시 확인용, 나중에 삭제
+	@RequestMapping(value="/mypage/mateHistory.yh")
+	public String mateHistoryView() {
+		return "user/mypage/mateHistory";
 	}
 
 	/**
@@ -359,7 +396,7 @@ public class MateController {
 			Survey requesterSurvey = mService.getSurveyByMemberId(memberId);
 			if (requesterSurvey != null) {
 				List<Survey> otherSurveyList = mService.getOtherSurveyList(memberId);
-				int grade=30;
+				int grade = 30;
 				for (int i = 0; i < otherSurveyList.size(); i++) {
 					// 연령대 매칭 검사
 					if (requesterSurvey.getAge().equals(otherSurveyList.get(i).getMemberAge())
@@ -377,7 +414,8 @@ public class MateController {
 						// 무관 선택
 						else {
 							if (otherSurveyList.get(i).getGender().equals(requesterSurvey.getMemberGender())) {
-								otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + grade);
+								otherSurveyList.get(i)
+										.setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + grade);
 							}
 						}
 					} else {
@@ -385,7 +423,8 @@ public class MateController {
 						// 선택 무관
 						if (otherSurveyList.get(i).getGender().equals("무관")) {
 							if (requesterSurvey.getGender().equals(otherSurveyList.get(i).getMemberGender())) {
-								otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + grade);
+								otherSurveyList.get(i)
+										.setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + grade);
 							}
 						}
 
@@ -393,7 +432,8 @@ public class MateController {
 						else {
 							if (requesterSurvey.getGender().equals(otherSurveyList.get(i).getMemberGender())
 									&& requesterSurvey.getMemberGender().equals(otherSurveyList.get(i).getGender())) {
-								otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + grade);
+								otherSurveyList.get(i)
+										.setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + grade);
 							}
 						}
 					}
@@ -454,7 +494,7 @@ public class MateController {
 				// 60점 이상 중 top3 리스트생성
 				List<Survey> finalTop3Survey = new ArrayList<>();
 
-				int goalSize=5;
+				int goalSize = 5;
 				// 60점 이상 리스트가 1개 이상 존재할 때
 				if (finalMatchList.size() > 0) {
 
@@ -463,11 +503,22 @@ public class MateController {
 						List<Survey> tempSurvey = new ArrayList<>();
 						int k = 0;
 						for (int j = 0; j + k < finalMatchList.size(); j++) {
+							System.out.println("j = " + j);
+							System.out.println("==================================");
+							System.out.println("MatchingGrade : " + finalMatchList.get(j + k).getMatchingGrade()
+									+ "FinalTop3 size(): " + finalTop3Survey.size());
+							System.out.println("==================================");
 							if (finalTop3Survey.size() == goalSize) {
+								System.out.println("==================================");
+								System.out.println("matching grade : " + finalMatchList.get(j + k).getMatchingGrade());
+								System.out.println("==================================");
 								break;
 							}
 							if (j == 0) {
 								tempSurvey.add(finalMatchList.get(j + k));
+								System.out.println("==================================");
+								System.out.println("tempSurvey.size = " + tempSurvey.size());
+								System.out.println("==================================");
 							} else {
 								if (finalMatchList.get(j + k).getMatchingGrade() == finalMatchList.get(j + k - 1)
 										.getMatchingGrade()) {
@@ -478,7 +529,7 @@ public class MateController {
 									System.out.println("==================================");
 									if (tempSurvey.size() > (goalSize - finalTop3Survey.size())) {
 										Random random = new Random();
-										while (finalTop3Survey.size() != goalSize) {
+										while (finalTop3Survey.size() < goalSize) {
 											System.out.println("finalTop3Survey.size = " + finalTop3Survey.size());
 											int idx = random.nextInt(tempSurvey.size());
 											finalTop3Survey.add(tempSurvey.get(idx));
@@ -491,6 +542,16 @@ public class MateController {
 									j = -1;
 									tempSurvey.clear();
 								}
+							}
+						}
+						// TODO: for문을 빠져 나왔을 때가 break가 아닌 모든 리스트를 돌아서라면
+						// goal - finalSize만큼 temp List에서 random으로 뽑아서 add해주어야함
+						if (finalTop3Survey.size() < goalSize) {
+							Random random = new Random();
+							while (finalTop3Survey.size() < goalSize) {
+								int idx = random.nextInt(tempSurvey.size());
+								finalTop3Survey.add(tempSurvey.get(idx));
+								tempSurvey.remove(idx);
 							}
 						}
 					}
@@ -530,13 +591,11 @@ public class MateController {
 				mv.addObject("matchList", matchList);
 				mv.addObject("memberId", memberId);
 				mv.setViewName("user/mate/mateComplete");
-			}
-			else {
+			} else {
 				mv.setViewName("redirect:/mate/selectOption.yh");
 			}
 
-		} 
-		else {
+		} else {
 			mv.setViewName("redirect:/member/loginView.yh");
 		}
 		return mv;

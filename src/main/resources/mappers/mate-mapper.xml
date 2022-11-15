@@ -14,6 +14,7 @@
 		<result property="memberBirth" column="MEMBER_BIRTH"/>
 		<result property="memberGender" column="MEMBER_GENDER"/>
 		<result property="matchingActive" column="MATCHING_ACTIVE"/>
+		<result property="matchingCount" column="MATCHING_COUNT"/>
 		<result property="createDate" column="CREATE_DATE"/>
 		<result property="updateDate" column="UPDATE_DATE"/>
 		<result property="deleteDate" column="DELETE_DATE"/>
@@ -91,6 +92,14 @@
 	
 	<update id="updateMatchingCount">
 		UPDATE SURVEY_TBL SET MATCHING_COUNT=MATCHING_COUNT+1 WHERE MEMBER_ID=#{memberId}
+	</update>
+	
+	<update id="updateToDeleteMatching" parameterType="java.util.HashMap">
+		UPDATE MATCHING_TBL SET DELETE_DATE=SYSDATE WHERE (REQUESTER_ID=#{memberId} AND RESPONDENT_ID=#{mateId} AND DELETE_DATE IS NULL) OR (REQUESTER_ID=#{mateId} AND RESPONDENT_ID=#{memberId} AND DELETE_DATE IS NULL)
+	</update>
+	
+	<update id="updateMatchingActive" parameterType="java.util.HashMap">
+		UPDATE SURVEY_TBL SET MATCHING_ACTIVE=#{matchingActive} WHERE MEMBER_ID=#{memberId}
 	</update>
 	
 	<select id="selectMateStatus" resultType="_int">

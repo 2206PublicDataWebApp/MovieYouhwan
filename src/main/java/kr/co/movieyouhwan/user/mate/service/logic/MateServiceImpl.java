@@ -150,4 +150,16 @@ public class MateServiceImpl implements MateService{
 		return matchDate;
 	}
 
+	@Override
+	public int updateToDeleteMatching(String memberId, String mateId) {
+		int result=mStore.updateToDeleteMatching(session, memberId, mateId);
+		return result;
+	}
+
+	@Override
+	public int modifyMatchingActive(String memberId, String matchingActive) {
+		int result=mStore.updateMatchingActive(session, memberId, matchingActive);
+		return result;
+	}
+
 }

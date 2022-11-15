@@ -1,9 +1,10 @@
 if ($('#isMatchingActive').val() == 'Y') {
   $('.match-toggle-switch').toggleClass('active');
-  console.log('메이트 리스트 페이지');
-  console.log($('#isMatchingActive').val());
 }
-console.log($('#isMatchingActive').val());
+
+let matchingCount = $('.matching-count').val();
+console.log(matchingCount);
+$('.mate-count').css('width', (matchingCount / 50) * 100 + '%');
 
 $('.match-toggle-switch').click(function () {
   $(this).toggleClass('active');
@@ -12,6 +13,21 @@ $('.match-toggle-switch').click(function () {
   } else {
     $('#isMatchingActive').val('N');
   }
+  $.ajax({
+    url: '/mate/modifyMatchingActive.yh',
+    data: {
+      matchingActive: $('#isMatchingActive').val(),
+      memberId: $('#mate-memberId').val(),
+    },
+    method: 'POST',
+    success: function (msg) {
+      console.log(msg);
+    },
+  });
+});
+
+$('.matching-date').each(function () {
+  $(this).text($(this).text().substr(0, 10));
 });
 
 /* 메이트 약관동의 -> 시작하기 버튼 */
@@ -61,4 +77,15 @@ function chatting(requesterId, respondentId, respondentNickname) {
       alert('매칭 전송 실패');
     },
   });
+}
+
+function deleteMatching(memberId) {
+  console.log(memberId);
+  if (confirm('메이트를 삭제하시겠습니까?')) {
+    let formTag = $('<form></form>').attr('action', '/mate/deleteMatching.yh').attr('method', 'post');
+    let inputTag = $('<input/>').attr('type', 'hidden').attr('name', 'mateId').attr('value', memberId);
+    formTag.append(inputTag);
+    $('body').append(formTag);
+    $(formTag).submit();
+  }
 }
