@@ -656,6 +656,7 @@
 	}
 	#detail-button {
 		display: flex;
+    	justify-content: space-between;
 	}
 		.change-button {
 			width : 100px;
@@ -1013,10 +1014,12 @@
 	border : solid 1px #0F1A3B;
 }
 #ticketBtn-zzim{
-	display: flex;
+    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 40px;
+    margin-right: 20px;	
 }
 	
 
@@ -1045,3 +1048,13 @@
 .detail-heart-empty, .detail-heart-full{
 	padding-bottom: 40px;
 }
+
+
+/* 영화 탭 */
+#cinema-tab {
+	border-bottom: 3px solid #f0c808;	
+}
+#movie-tab {
+	border-bottom: 3px solid #f0c808;
+}
+

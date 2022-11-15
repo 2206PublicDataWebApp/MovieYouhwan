@@ -12,6 +12,7 @@
 <link href="/resources/css/footer.css" rel="stylesheet" />
 <link href="/resources/css/movie.css" rel="stylesheet" />
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+<script src="/resources/js/movie.js" defer></script>
 <script src="/resources/js/header.js" defer></script>
 <script src="/resources/js/footer.js" defer></script>
 <script src="/resources/js/user/movieZzim.js" defer></script>
@@ -62,8 +63,10 @@
 				<p class="detail-actor">배우 : ${movie.movieActor }</p>
 			</div>
 			<div id="detail-button">
-				<button class="go-movieList" onclick="location.href='/movieTicketTime.yh'">예매하기</button>
-				<button class="go-movieList" onclick="javascript:history.go(-1);">목록으로</button>
+				<div id="tiket-list">
+					<button class="go-movieList" onclick="location.href='/movieTicketTime.yh'">예매하기</button>
+					<button class="go-movieList" onclick="javascript:history.go(-1);">목록으로</button>
+				</div>
 				<!-- 영화 찜하기 기능 추가해주시면됩니다. (to.은선언니) -->
 				<div id="ticketBtn-zzim">
 					<!-- 찜하기 버튼 -->

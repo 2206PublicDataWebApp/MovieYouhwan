@@ -17,6 +17,10 @@ cancelBtn.click(function () {
 	}
 });
 
+// 영화 탭
+$('.movie-tab').addClass('tab-selected');
+$('.cinema-tab').addClass('tab-selected');
+
 $(function() {
 	$("#img-file").on('change', function() {
 		var imgName = $("#img-file").val();
