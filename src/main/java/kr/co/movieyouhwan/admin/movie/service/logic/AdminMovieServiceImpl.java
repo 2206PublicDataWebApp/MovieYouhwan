@@ -12,6 +12,7 @@ import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
 import kr.co.movieyouhwan.admin.movie.service.AdminMovieService;
 import kr.co.movieyouhwan.admin.movie.store.AdminMovieStore;
+import kr.co.movieyouhwan.common.page.PageInfo;
 
 @Service
 public class AdminMovieServiceImpl implements AdminMovieService{
@@ -43,8 +44,8 @@ public class AdminMovieServiceImpl implements AdminMovieService{
 	
 	// 영화 목록
 	@Override
-	public List<Movie> printAllMovie() {
-		List<Movie> mList = aMovieStore.selectAllMovie(session);
+	public List<Movie> printAllMovie(PageInfo pageInfo) {
+		List<Movie> mList = aMovieStore.selectAllMovie(session, pageInfo);
 		return mList;
 	}
 
@@ -150,5 +151,12 @@ public class AdminMovieServiceImpl implements AdminMovieService{
 	public List<MovieImg> printAllMovieImg() {
 		List<MovieImg> miList = aMovieStore.selectAllMovieImg(session);
 		return miList;
+	}
+
+	// 영화 리스트 페이징 처리
+	@Override
+	public int printMovieListCount(String searchValue) {
+		int count = aMovieStore.selectMovieListCount(session, searchValue);
+		return count;
 	}
 }

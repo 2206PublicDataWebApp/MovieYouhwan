@@ -138,6 +138,11 @@
 	<select id="selectAllMovie" resultMap="MovieResultMap">
 		SELECT * FROM MOVIE_TBL ORDER BY MOVIE_NO DESC
 	</select>
+	<!-- 영화 리스트 페이징 처리(관리자) -->
+	<select id="selectMovieListCount" resultType="_int">
+		SELECT COUNT(*) FROM MOVIE_TBL
+		WHERE MOVIE_TITLE LIKE '%' || #{searchName} || '%'
+	</select>
 	<!-- 현재 상영 영화(관리자) -->
 	<select id="selectNowMovie" resultMap="MovieResultMap">
 		SELECT * FROM MOVIE_TBL WHERE TO_CHAR(MOVIE_ENDDAY, 'yyyyMMdd') >= TO_CHAR(SYSDATE, 'yyyyMMdd')
@@ -261,7 +266,7 @@
 		AND MTT.CINEMA_NO = #{cinemaNo}
 		ORDER BY MOVIE_START
 	</select>
-	<!-- 김미소 : 예매 정보 등록 -->
+	<!-- 예매 정보 등록 -->
 	<insert id="insertMovieTicket">
 		INSERT INTO MOVIE_TICKET_TBL VALUES(#{ticketNo}, #{memberId}, #{memberAge}, #{memberGender}, #{cinemaNo}, #{theaterNo}, #{movieNo}, #{cinemaName}, #{theaterName}, #{movieName}, #{adultCount}, #{teenagerCount}, #{choiceSeat}, #{moviePay}, #{payMethod}, #{addPoint}, DEFAULT, #{movieDay}, #{movieStart}, DEFAULT)
 	</insert>

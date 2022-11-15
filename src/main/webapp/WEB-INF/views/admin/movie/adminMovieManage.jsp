@@ -22,6 +22,7 @@
 			<input type="hidden" value="${(theater.theaterSeatoneRow * theater.theaterSeatoneColumn) + (theater.theaterSeattwoRow * theater.theaterSeattwoColumn) + (theater.theaterSeatthreeRow * theater.theaterSeatthreeColumn) }" name="movieSeat">
 			<span class="cinema-theater">${cinema.cinemaName }</span>
 			<span class="cinema-theater">${theater.theaterName }</span>
+			<button type="button" id="see-theater" onclick="javascript:history.go(-1);">상영관보기</button>
 			<button type="button" id="add-movie-button">+</button>
 		</div>
 		<div id="date-wrapper">

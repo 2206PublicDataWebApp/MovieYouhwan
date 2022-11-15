@@ -8,6 +8,7 @@ import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.admin.movie.domain.MovieImg;
 import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
+import kr.co.movieyouhwan.common.page.PageInfo;
 
 public interface AdminMovieStore {
 	// 영화 등록
@@ -17,7 +18,7 @@ public interface AdminMovieStore {
 	// 영화 영상 등록
 	public int insertMovieVideo(SqlSessionTemplate session, MovieVideo movieVideo);
 	// 영화 목록
-	public List<Movie> selectAllMovie(SqlSessionTemplate session);
+	public List<Movie> selectAllMovie(SqlSessionTemplate session, PageInfo pageInfo);
 	// 영화 검색 
 	public List<Movie> selectSearchMovie(SqlSessionTemplate session, String searchName);
 	// 영화 상세
@@ -46,4 +47,6 @@ public interface AdminMovieStore {
 	// 현재 상영 영화 출력
 	public List<MovieTime> selectAllMovieTime(SqlSessionTemplate session, Integer theaterNo);
 	public List<MovieImg> selectAllMovieImg(SqlSessionTemplate session);
+	// 영화 리스트 페이징 처리
+	public int selectMovieListCount(SqlSessionTemplate session, String searchValue);
 }

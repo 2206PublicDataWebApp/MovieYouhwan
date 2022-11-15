@@ -6,6 +6,7 @@ import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.admin.movie.domain.MovieImg;
 import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
+import kr.co.movieyouhwan.common.page.PageInfo;
 
 public interface AdminMovieService {
 	// 영화 등록
@@ -15,7 +16,7 @@ public interface AdminMovieService {
 	// 영화 영상 등록
 	public int registerMovieVideo(MovieVideo movieVideo);
 	// 영화 목록
-	public List<Movie> printAllMovie();
+	public List<Movie> printAllMovie(PageInfo pageInfo);
 	// 영화 검색
 	public List<Movie> printSearchMovie(String searchName);
 	// 영화 상세
@@ -45,4 +46,6 @@ public interface AdminMovieService {
 	public int registerMovieTime(MovieTime movieTime);
 	// 상영 영화 목록 출력
 	public List<MovieTime> printAllMovieTime(Integer theaterNo);
+	// 영화 리스트 페이징 처리
+	public int printMovieListCount(String searchValue);
 }

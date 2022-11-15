@@ -1,3 +1,5 @@
+$('.movie-tab').addClass('tab-selected');
+
 // 등록 jsp
 const registerModal = $('#add-movie-time');
 // 등록 버튼
@@ -110,5 +112,31 @@ function bindChange(imgAdd) {
 	$(document).on("change", "#imgmodify-addfile"+ imgAdd, function() {
 		var imgName = $("#imgmodify-addfile"+imgAdd).val();
 		$("#imgmodify-addname"+imgAdd).val(imgName);
+	});
+}
+
+// 상영 영화 관리 페이지
+function handleOnChange(e) {
+	var movieNo = e.value;
+	$.ajax({
+		type : "post",
+		url : "/admin/choiceMovieInformation.yh",
+		data : {
+			"movieNo" : movieNo
+		},
+		dataType : "json",
+		success : function(result) {
+			const movie = JSON.parse(result.movie);
+			var movieStartday = movie.movieStartday;
+			var movieEndday = movie.movieEndday;
+			var movieRuntime = movie.movieRuntime;
+			var addDiv = $('#movie-info');
+			addDiv.append('<p class="add-font"> 상영날짜 : '+ movieStartday +'</p>');
+			addDiv.append('<p class="add-font"> 종영날짜 : '+ movieEndday +'</p>');
+			addDiv.append('<p class="add-font"> 상영시간 : '+ movieRuntime +'</p>');
+		},
+		error : function() {
+			alert("관리자에게 문의해주세요. (02-655-9523)");
+		}
 	});
 }

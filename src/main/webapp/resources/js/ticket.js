@@ -152,65 +152,99 @@ function popUp() {
 let chocieSeat = $('.seat-box');
 let count = 1;
 chocieSeat.click(function() {
+	var selected = $(this);
 	// (성인) 예매 인원 수
 	var adultCount = $('#adult-input').val();
 	// (청소년) 예매 인원 수
 	var teenagerCount = $('#teenager-input').val();
 	// (성인 + 청소년) 예매 인원 수
 	var addAllCount = parseInt(adultCount) + parseInt(teenagerCount);
-	var hiddenTag = $('#hidden-value');
+	// var hiddenTag = $('#hidden-value');
 	// 선택 인원이 0명일 때
 	if(adultCount == 0 && teenagerCount == 0) {
 		alert("인원수를 선택해주세요");
-	} else if(count <= addAllCount) {
-		// 선택 인원이 1명일 때
-		if(addAllCount == 1) {
-			// 좌석 선택을 했을 때
-			for(i=1; i <= addAllCount; i++) {
-				$(this).css('background-color', 'black');
-				$(this).css('color', 'white');
-				var seatDone = $(this).val();
-				hiddenTag.append('<input type="hidden" value="" name="seatChoice"/>');
-				$('input[name="seatChoice"]').attr('value', seatDone);
-				hiddenTag.append('<input type="hidden" value="" name="adultCount"/>');
-				$('input[name="adultCount"]').attr('value', adultCount);
-				hiddenTag.append('<input type="hidden" value="" name="teenagerCount"/>');
-				$('input[name="teenagerCount"]').attr('value', teenagerCount);
-				// 선택한 버튼을 클릭했을 때
-				$(this).click(function() {
-					$(this).css('background-color', 'white');
-					$(this).css('color', 'black');
-					chocieSeat.not(this).removeAttr("disabled");
-					$("button[id$='1']").each(function(){
-						$("button[id$='1']").attr('disabled', 'disabled');
-					});
-					$("button[id$='3']").each(function(){
-						$("button[id$='3']").attr('disabled', 'disabled');
-					});
-					$("button[id$='5']").each(function(){
-						$("button[id$='5']").attr('disabled', 'disabled');
-					});
-					$("button[id$='7']").each(function(){
-						$("button[id$='7']").attr('disabled', 'disabled');
-					});
-					$("button[id$='9']").each(function(){
-						$("button[id$='9']").attr('disabled', 'disabled');
-					});
-					count--;
-				});
+	} else {
+		
+		chocieSeat.each(function(){
+			$(this).not(selected).removeClass('selected-seat');
+			if (selected.hasClass('selected-seat')){
+				$(this).not(selected).prop('disabled', true);
+			} else{
+				$(this).not(selected).prop('disabled', false);
 			}
-			chocieSeat.not(this).attr('disabled', 'disabled');
-			count++;
-		}else if(addAllCount == 2) {
-			for(i=2; i <= addAllCount; i++) {
-				
-			}
-		}
+		});
+		$(this).toggleClass('selected-seat');
 	}
+	// } else if(count <= addAllCount) {
+	// 	// 선택 인원이 1명일 때
+	// 	if(addAllCount == 1) {
+	// 		$('.seat-box').removeClass('selected-seat');
+	// 		$('.seat-box').addClass('not-selected-seat');
+	// 		$(this).removeClass('not-selected-seat');
+	// 		$(this).addClass('selected-seat');
+
+	// 		// 좌석 선택을 했을 때
+	// 		for(i=1; i <= addAllCount; i++) {
+	// 			// $(this).css('background-color', 'black');
+	// 			// $(this).css('color', 'white');
+	// 			var seatDone = $(this).val();
+	// 			hiddenTag.append('<input type="hidden" value="" name="seatChoice"/>');
+	// 			$('input[name="seatChoice"]').attr('value', seatDone);
+	// 			hiddenTag.append('<input type="hidden" value="" name="adultCount"/>');
+	// 			$('input[name="adultCount"]').attr('value', adultCount);
+	// 			hiddenTag.append('<input type="hidden" value="" name="teenagerCount"/>');
+	// 			$('input[name="teenagerCount"]').attr('value', teenagerCount);
+
+	// 			chocieSeat.not(this).removeAttr("disabled");
+	// 			$("button[id$='1']").each(function(){
+	// 				$("button[id$='1']").attr('disabled', 'disabled');
+	// 			});
+	// 			$("button[id$='3']").each(function(){
+	// 				$("button[id$='3']").attr('disabled', 'disabled');
+	// 			});
+	// 			$("button[id$='5']").each(function(){
+	// 				$("button[id$='5']").attr('disabled', 'disabled');
+	// 			});
+	// 			$("button[id$='7']").each(function(){
+	// 				$("button[id$='7']").attr('disabled', 'disabled');
+	// 			});
+	// 			$("button[id$='9']").each(function(){
+	// 				$("button[id$='9']").attr('disabled', 'disabled');
+	// 			});
+	// 			count--;
+	// 		}
+	// 		chocieSeat.not(this).attr('disabled', 'disabled');
+	// 		count++;
+	// 	}else if(addAllCount == 2) {
+	// 		for(i=2; i <= addAllCount; i++) {
+				
+	// 		}
+	// 	}
+	// }
 });
 
+limitSeat();
+
+function limitSeat(addAllCount) {
+	var limitSeatStartNum = addAllCount + 1;
+	switch(limitSeatStartNum){
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+	}
+	var limitSeatList = $('.seat-box').filter(limitSeatStartNum * n);
+	console.log(limitSeatList);
+}
+
 // 인원수별 좌석 제한
-$('#adult-input').change(function() {
+$('#adult-input, #teenager-input').change(function() {
 	var adultCount = $('#adult-input').val();
 	var teenagerCount = $('#teenager-input').val();
 	var addAllCount = parseInt(adultCount) + parseInt(teenagerCount);

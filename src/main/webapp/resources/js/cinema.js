@@ -1,3 +1,5 @@
+$('.cinema-tab').addClass('tab-selected');
+
 // 관리자
 
 // 카카오 주소 찾기 

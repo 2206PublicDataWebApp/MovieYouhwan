@@ -42,7 +42,7 @@
 	   	<div class="cinema-movie-year-month">
 		   	<div class="year-month">${movieDay.thisYear }년 ${movieDay.thisMonth }월</div>
 			<c:forEach items="${movieDay.tmdayList }" var="tmday" varStatus="i">
-				<button type="button" class="tmday-button" onclick="getMovieList(${cinema.cinemaNo}, ${i.index });">${tmday }</button>
+				<button type="button" class="tmday-button filter-not-clicked" onclick="getMovieList(${cinema.cinemaNo}, ${i.index });">${tmday }</button>
 			</c:forEach>
 			<hr/>
 	   	</div>
@@ -51,11 +51,28 @@
 			<!-- 일별 현재 상영 영화 리스트 -->
 			<c:forEach items="${mList }" var="movie">
 				<div>
-					<p class="cmovie-title">${movie.movieTitle }</p>
+					<div id="age-movie-wrap">
+						<c:if test="${movie.movieAge eq '전체' }">
+							<img src="/resources/images/movie/전체.jpg" width="30px" height="30px" />
+						</c:if>
+						<c:if test="${movie.movieAge eq '만12세' }">
+							<img src="/resources/images/movie/12.jpg" width="30px" height="30px" />
+						</c:if>
+						<c:if test="${movie.movieAge eq '만15세' }">
+							<img src="/resources/images/movie/15.jpg" width="30px" height="30px" />
+						</c:if>
+						<c:if test="${movie.movieAge eq '청불' }">
+							<img src="/resources/images/movie/청불.jpg" width="30px" height="30px" />
+						</c:if>
+						<p class="cmovie-title">${movie.movieTitle }</p>
+					</div>
 					<c:forEach items="${cmList }" var="cinemaMovie">
 						<c:if test="${movie.movieNo eq cinemaMovie.movieNo}">
 							<div class="choice-movie-list">
-								<p>${cinemaMovie.theaterName } ${cinemaMovie.movieTicket } / ${cinemaMovie.movieSeat }</p>
+								<div class="cmt-top">
+									<p class="cmt-name">${cinemaMovie.theaterName }</p>
+									<p>${cinemaMovie.movieTicket } / ${cinemaMovie.movieSeat }</p>
+								</div>
 								<p>${cinemaMovie.movieStart } ~ ${cinemaMovie.movieEnd }</p>
 							</div>
 							</c:if>

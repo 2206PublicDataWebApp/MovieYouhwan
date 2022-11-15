@@ -3,6 +3,16 @@
 button {
 	cursor : pointer;
 }
+.selected-seat {
+	color : white;
+	border : solid 1px #0F1A3B;
+	background-color : #0F1A3B;
+}
+.not-selected-seat {
+	background-color : white;
+	color : #0F1A3B;
+	border : solid 1px #0F1A3B;
+}
 
 .ticket-movie-wrapper {
 	width : 1100px;
@@ -347,8 +357,6 @@ button {
 			width : 32px;
 			height : 32px;
 			margin-bottom : 3px;
-			border : solid 1px #0F1A3B;
-			background-color : white;
 		}
 .ticket-seat-button {
 	float : right;

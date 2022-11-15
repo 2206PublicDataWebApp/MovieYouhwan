@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#cinema-tab {
+  border-bottom: 3px solid #f0c808;
+}
+
 .widecinema-wrapper {
 	width : 1200px;
 	margin : 0 auto;
@@ -539,12 +543,24 @@ button {
 	background-color : #fff;
 }
 	.cmovie-title {
+		line-height : 30px;
+		margin-left : 12px;
 		margin-bottom : 20px;
+	}
+	.cmt-name {
+		float : left;
+		margin-right : 15px;
+	}
+		.cmt-top {
+			margin-bottom : 10px;
+		}
+	#age-movie-wrap {
+		display : flex;
 	}
 .choice-movie-list {
 	width : 180px;
 	height : 80px;
-	padding-top : 20px;
+	padding-top : 16px;
 	padding-left : 20px;
 	margin-bottom : 20px;
 	border : solid 1px #0F1A3B;

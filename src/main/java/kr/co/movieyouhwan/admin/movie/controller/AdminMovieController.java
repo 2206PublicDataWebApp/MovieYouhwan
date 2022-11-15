@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import kr.co.movieyouhwan.admin.cinema.service.AdminCinemaService;
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
@@ -29,6 +33,7 @@ import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
 import kr.co.movieyouhwan.admin.movie.service.AdminMovieService;
 import kr.co.movieyouhwan.admin.theater.domain.Theater;
 import kr.co.movieyouhwan.admin.theater.service.AdminTheaterService;
+import kr.co.movieyouhwan.common.page.PageInfo;
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
 
 @Controller
@@ -39,15 +44,6 @@ public class AdminMovieController {
 	private AdminCinemaService aCinemaService;
 	@Autowired
 	private AdminTheaterService aTheaterService;
-	
-	/**
-	 * 영화, 영화관 메인 화면
-	 * @return
-	 */
-	@RequestMapping(value="/admin/adminMovieCinemaMain.yh", method=RequestMethod.GET)
-	public String adminMovieCinemaView() {
-		return "/admin/movie/adminMovieCinema";
-	}
 	
 	/**
 	 * 영화 등록 화면
@@ -137,8 +133,17 @@ public class AdminMovieController {
 	@RequestMapping(value="/admin/adminMovieList.yh", method=RequestMethod.GET)
 	public ModelAndView movieListView(
 			ModelAndView mv,
-			@ModelAttribute Movie movie) {
-		List<Movie> mList = aMovieService.printAllMovie();
+			@ModelAttribute Movie movie,
+			@RequestParam(value="currentPage", required=false) Integer currentPage,
+			@RequestParam(value="searchValue", required=false) String mSearchValue) {
+		// 페이징 처리
+		String searchValue = (mSearchValue != null ? mSearchValue:"");
+		int page = (currentPage != null ? currentPage : 1);
+		PageInfo pageInfo = new PageInfo(page, aMovieService.printMovieListCount(searchValue), 10, 5);
+		// 영화 리스트 출력
+		List<Movie> mList = aMovieService.printAllMovie(pageInfo);
+		// 화면 출력
+		mv.addObject("pageInfo", pageInfo);
 		mv.addObject("mList", mList);
 		mv.setViewName("/admin/movie/adminMovieList");
 		return mv;
@@ -349,5 +354,22 @@ public class AdminMovieController {
 		int result = aMovieService.registerMovieTime(movieTime);
 		mv.setViewName("redirect:/admin/adminMovieManage.yh?cinemaNo="+cinemaNo+"&theaterNo="+theaterNo);
 		return mv;
+	}
+	
+	/**
+	 * 선택 영화 정보 가져오는 AJAX
+	 * @param movieNo
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")	
+	@ResponseBody
+	@RequestMapping(value="/admin/choiceMovieInformation.yh", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
+	public String choiceMovieInformation(
+			@RequestParam(value="movieNo", required=false) Integer movieNo) {
+		Movie movie = aMovieService.printOneMovie(movieNo);
+		Gson gson = new Gson();
+		JSONObject object = new JSONObject();
+		object.put("movie", gson.toJson(movie));
+		return object.toJSONString();
 	}
 }

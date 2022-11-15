@@ -15,7 +15,7 @@
 	<div class="theater-wrapper">
 		<br><br><h3>상영관 등록</h3><br><br>
 		<form action="/admin/adminTheaterInsert.yh" method="post" enctype="multipart/form-data">
-			<div id="cinema-wrap">
+			<div id="theater-wrap">
 				<span class="title">지점명</span>
 				<c:if test="${!empty cList}">
 					<select id="cinema-input" class="input" name="tCinemaNo">
@@ -140,7 +140,10 @@
 					<option value="15">15</option>
 				</select>
 			</div>
-			<input type="submit" id="theater-button" value="상영관 등록">
+			<div id="theater-register-button">
+				<input type="button" id="gotheater-list" value="목록" onclick="location.href='/admin/adminCinemaList.yh'"/>
+				<input type="submit" id="theater-button" value="등록"/>
+			</div>
 		</form>
 	</div>
 </body>

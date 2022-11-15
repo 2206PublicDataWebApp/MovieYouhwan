@@ -18,8 +18,8 @@
 .input {
 	float : right;
 }
-#cinema-wrap {
-	width : 265px;
+#theater-wrap {
+	width : 380px;
 	margin-bottom : 30px;
 }
 	#cinema-input {
@@ -50,7 +50,7 @@
 		background-color : #0F1A3B;
 	}
 .seat-choice {
-	width : 350px;
+	width : 354px;
 	margin-bottom : 25px;
 }
 	.seat-text {
@@ -70,14 +70,24 @@
 		font-size : 15px;
 		border : solid 1px #0F1A3B;
 	}
-#theater-button {
-	width : 100px;
-	height : 30px;
+#theater-register-button {
 	float : right;
-	margin-top : 80px;
-	color : white;
-	background-color : #0F1A3B;
+	margin-top : 60px;
 }
+	#gotheater-list {
+		width : 100px;
+		height : 30px;
+		margin-right : 15px;
+		background-color : white;
+		border : solid 1px #0F1A3B;
+		color : #0F1A3B;
+	}
+	#theater-button {
+		width : 100px;
+		height : 30px;
+		color : white;
+		background-color : #0F1A3B;
+	}
 /* adminTheaterDetail(관리자) */
 #detail-cinemawrap {
 	display : flex;
@@ -90,6 +100,9 @@
 #cinema-title {
 	margin-right : 132px;
 }
+#detail-theater-name {
+	margin-right : 117px;
+}
 #detail-namewrap {
 	display : flex;
 	padding-top : 18px;
@@ -99,7 +112,7 @@
 	margin-bottom : 30px;
 }
 .detail-seatwrap {
-	width : 213px;
+	width : 222px;
 	padding-left : 10px;
 	margin-bottom : 10px;
 }
@@ -151,6 +164,10 @@
 	margin-top : 80px;
 	float : right;
 }
+	#modify-theater-name {
+		width: 265px;
+		margin-bottom : 30px;
+	}
 	#modify-list {
 		width : 100px;
 		height : 30px;

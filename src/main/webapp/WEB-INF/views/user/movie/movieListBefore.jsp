@@ -129,10 +129,10 @@
 	   					<li><a class="currentP" href="#">${page }</a></li>
 	   				</c:if>
 	   				<c:if test="${pageInfo.currentPage ne page }">
-	   					<li><a href="movieList.yh?currentPage=${page }">${page }</a></li>
+	   					<li><a href="/movieList.yh?currentPage=${page }">${page }</a></li>
 	   				</c:if>
 	   				<c:if test="${pageInfo.endPage ne pageInfo.pageCount }">
-	   					<li><a href="movieList.yh?currentPage=${pageInfo.endPage+1 }">&raquo;</a></li>
+	   					<li><a href="/movieList.yh?currentPage=${pageInfo.endPage+1 }">&raquo;</a></li>
 	   				</c:if>
 	   			</c:forEach>
 	   		</ul>

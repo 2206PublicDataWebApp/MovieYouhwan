@@ -1,7 +1,9 @@
 package kr.co.movieyouhwan.admin.movie.store.logic;
 
+import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +12,7 @@ import kr.co.movieyouhwan.admin.movie.domain.MovieImg;
 import kr.co.movieyouhwan.admin.movie.domain.MovieTime;
 import kr.co.movieyouhwan.admin.movie.domain.MovieVideo;
 import kr.co.movieyouhwan.admin.movie.store.AdminMovieStore;
+import kr.co.movieyouhwan.common.page.PageInfo;
 
 @Repository
 public class AdminMovieStoreLogic implements AdminMovieStore {
@@ -37,8 +40,10 @@ public class AdminMovieStoreLogic implements AdminMovieStore {
 
 	// 영화 목록
 	@Override
-	public List<Movie> selectAllMovie(SqlSessionTemplate session) {
-		List<Movie> mList = session.selectList("MovieMapper.selectAllMovie");
+	public List<Movie> selectAllMovie(SqlSessionTemplate session, PageInfo pageInfo) {
+		int offset=(pageInfo.getCurrentPage()-1)*pageInfo.getDataLimit();
+		RowBounds rowBounds=new RowBounds(offset, pageInfo.getDataLimit());
+		List<Movie> mList = session.selectList("MovieMapper.selectAllMovie", pageInfo, rowBounds);
 		return mList;
 	}
 
@@ -144,5 +149,12 @@ public class AdminMovieStoreLogic implements AdminMovieStore {
 	public List<MovieImg> selectAllMovieImg(SqlSessionTemplate session) {
 		List<MovieImg> miList = session.selectList("MovieMapper.selectAllMovieImg");
 		return miList;
+	}
+
+	// 영화 리스트 페이징 처리
+	@Override
+	public int selectMovieListCount(SqlSessionTemplate session, String searchValue) {
+		int count = session.selectOne("MovieMapper.selectMovieListCount", searchValue);
+		return count;
 	}
 }

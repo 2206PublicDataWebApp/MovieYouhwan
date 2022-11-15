@@ -20,7 +20,7 @@
 			<h3 id="movietop-text">영화 관리</h3>
 			<form action="/admin/movieSearch.yh">
 				<div id="movie-searchwrap">
-					<input type="search" id="movie-search" placeholder="영화 제목으로 검색해보세요." name="searchName" value="${searchName }">
+					<input type="search" id="movie-search" placeholder="영화 제목으로 검색해보세요." name="searchName" value="${searchName }" autocomplete="off" />
 					<button type="submit" id="search-button">검색</button>
 				</div>
 			</form>
@@ -30,7 +30,6 @@
 			<div class="list-num">순번</div>
 			<div class="list-title">제목</div>
 			<div class="list-genre">장르</div>
-			<div class="list-director">감독</div>
 			<div class="list-actor">배우</div>
 			<div class="list-runtime">상영 시간</div>
 			<div class="list-age">관람가능 연령</div>
@@ -43,7 +42,6 @@
 					<div class="list-num" onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">${i.count }</div>
 					<div class="list-title" onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">${movie.movieTitle }</div>
 					<div class="list-genre" onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">${movie.movieGenre }</div>
-					<div class="list-director" onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">${movie.movieDirector }</div>
 					<div class="list-actor" onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">${movie.movieActor }</div>
 					<div class="list-runtime" onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">${movie.movieRuntime }분</div>
 					<div class="listimg-age"  onclick="location.href='/admin/adminMovieDetail.yh?movieNo=${movie.movieNo}'">
@@ -76,6 +74,25 @@
 				<hr>
 			</c:forEach>
 		</c:if>
+		<!-- 페이징 처리 -->
+	   	<div class="page-count-wrap">
+	   		<ul class="page-count">
+	   			<c:if test="${pageInfo.startPage ne 1 }">
+	   				<li><a href="/admin/adminMovieList.yh?currentPage=${pageInfo.startPage-1 }">&laquo;</a></li>
+	   			</c:if>
+	   			<c:forEach var="page" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+	   				<c:if test="${pageInfo.currentPage eq page}">
+	   					<li><a class="currentP" href="#">${page }</a></li>
+	   				</c:if>
+	   				<c:if test="${pageInfo.currentPage ne page }">
+	   					<li><a href="/admin/adminMovieList.yh?currentPage=${page }">${page }</a></li>
+	   				</c:if>
+	   				<c:if test="${pageInfo.endPage ne pageInfo.pageCount }">
+	   					<li><a href="/admin/adminMovieList.yh?currentPage=${pageInfo.endPage+1 }">&raquo;</a></li>
+	   				</c:if>
+	   			</c:forEach>
+	   		</ul>
+	   	</div>
 	</div>
 </body>
 </html>

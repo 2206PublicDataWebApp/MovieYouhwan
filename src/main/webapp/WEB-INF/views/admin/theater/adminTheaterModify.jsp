@@ -17,7 +17,7 @@
 		<form action="/admin/adminTheaterUpdate.yh" method="post">
 			<input type="hidden" name="theaterNo" value="${theater.theaterNo }" />
 			<input type="hidden" name="cinemaName" value="${cinemaName }">
-			<div id="cinema-wrap">
+			<div id="modify-theater-name">
 				<span class="title">지점명</span>
 				<span class="input">${cinemaName }</span>
 			</div>
