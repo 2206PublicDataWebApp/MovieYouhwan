@@ -20,11 +20,11 @@ public interface UserStoreService {
 	// 주문 정보 등록
 	int registerStoreOrder(StoreOrder storeOrder);
 
-	// 주문 상세 정보 등록 (상품 목록, 상품 상세)
-	int registerStoreOrderDetail(StoreOrderDetail orderDetail);
+	// 주문 상세 정보 등록 (1건)
+	int registerOneStoreOrderDetail(StoreOrderDetail orderDetail);
 
-	// 주문 상세 정보 등록 (장바구니)
-	int registerStoreOrderDetailFromCart(List<StoreOrderDetail> productsWithCount);
+	// 주문 상세 정보 등록 (N건)
+	int registerManyStoreOrderDetail(List<StoreOrderDetail> orderDetailList);
 
 	// 장바구니에 있는 상품을 담으면 해당 상품 수량 증가
 	int increaseProductCountUp(Cart cart);
@@ -55,5 +55,17 @@ public interface UserStoreService {
 
 	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
 	Member printBuyerInfo(String memberId);
+
+	// 스토어 주문번호 불러오기
+	String printOrderNo(StoreOrder order);
+
+	// 스토어 구매내역 불러오기
+	StoreOrder printStoreOrder(String orderNo);
+
+	// 스토어 구매내역 리스트 불러오기
+	List<StoreOrder> printStoreOrderList(String memberId);
+
+	// 스토어 구매내역 상세 리스트 불러오기
+	List<StoreOrderDetail> printStoreOrderDetailList(String orderNo);
 
 }

@@ -10,7 +10,6 @@ public class StoreOrder {
 	private String payDate; // 결제일자
 	private String expiryDate; // 만료일자
 	private String availability; // 사용상태 (사용가능/기간만료/취소완료)
-	private HashMap<String, Integer> productsWithCount; // 실제 결제한 상품과 수량 -> ORDER_DETAIL_TBL
 
 	public String getOrderNo() {
 		return orderNo;
@@ -68,19 +67,11 @@ public class StoreOrder {
 		this.availability = availability;
 	}
 
-	public HashMap<String, Integer> getProductsWithCount() {
-		return productsWithCount;
-	}
-
-	public void setProductsWithCount(HashMap<String, Integer> productsWithCount) {
-		this.productsWithCount = productsWithCount;
-	}
-
 	@Override
 	public String toString() {
 		return "StoreOrderHistory [orderNo=" + orderNo + ", memberId=" + memberId + ", productName=" + productName
-				+ ", productsWithCount=" + productsWithCount + ", payAmount=" + payAmount + ", payDate=" + payDate
-				+ ", expiryDate=" + expiryDate + ", availability=" + availability + "]";
+				+ " payAmount=" + payAmount + ", payDate=" + payDate + ", expiryDate=" + expiryDate + ", availability="
+				+ availability + "]";
 	}
 
 }

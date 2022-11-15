@@ -44,18 +44,18 @@ public class UserStoreServiceImpl implements UserStoreService {
 		return result;
 	}
 
-	// 주문 상세 정보 등록 (상품 목록, 상품 상세)
+	// 주문 상세 정보 등록 (1건)
 	@Override
-	public int registerStoreOrderDetail(StoreOrderDetail orderDetail) {
-		int result = uStoreStore.insertStoreOrderDetail(session, orderDetail);
+	public int registerOneStoreOrderDetail(StoreOrderDetail orderDetail) {
+		int result = uStoreStore.insertOneStoreOrderDetail(session, orderDetail);
 		return result;
 
 	}
 
-	// 주문 상세 정보 등록 (장바구니)
+	// 주문 상세 정보 등록 (N건)
 	@Override
-	public int registerStoreOrderDetailFromCart(List<StoreOrderDetail> productsWithCount) {
-		int result = uStoreStore.registerStoreOrderDetailFromCart(session, productsWithCount);
+	public int registerManyStoreOrderDetail(List<StoreOrderDetail> orderDetailList) {
+		int result = uStoreStore.insertManyStoreOrderDetail(session, orderDetailList);
 		return result;
 	}
 
@@ -127,6 +127,34 @@ public class UserStoreServiceImpl implements UserStoreService {
 	public Member printBuyerInfo(String memberId) {
 		Member buyerInfo = uStoreStore.selectBuyerInfo(session, memberId);
 		return buyerInfo;
+	}
+
+	// 스토어 주문번호 불러오기
+	@Override
+	public String printOrderNo(StoreOrder order) {
+		String orderNo = uStoreStore.selectStoreOrderNo(session, order);
+		return orderNo;
+	}
+
+	// 스토어 구매내역 불러오기
+	@Override
+	public StoreOrder printStoreOrder(String orderNo) {
+		StoreOrder order = uStoreStore.selectStoreOrder(session, orderNo);
+		return order;
+	}
+
+	// 스토어 구매내역 리스트 불러오기
+	@Override
+	public List<StoreOrder> printStoreOrderList(String memberId) {
+		List<StoreOrder> orderList = uStoreStore.selectStoreOrderList(session, memberId);
+		return orderList;
+	}
+
+	// 스토어 구매내역 상세 리스트 불러오기
+	@Override
+	public List<StoreOrderDetail> printStoreOrderDetailList(String orderNo) {
+		List<StoreOrderDetail> orderDetailList = uStoreStore.selectStoreOrderDetailList(session, orderNo);
+		return orderDetailList;
 	}
 
 }

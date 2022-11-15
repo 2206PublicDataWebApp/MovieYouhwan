@@ -48,20 +48,20 @@
         <div id="msg-store-complete">
           <h3>결제가 완료되었습니다.</h3>
           <br /><br />
-          <p>주문번호: 20221012000001</p>
+          <p>주문번호: ${order.orderNo }</p>
         </div>
         <table id="tbl-store-complete">
           <tr>
             <th>총 상품 금액</th>
-            <td>21,900 원</td>
+            <td class="complete-price">${order.payAmount }</td>
           </tr>
           <tr>
             <th>할인 금액</th>
-            <td>0 원</td>
+            <td class="complete-price">0</td>
           </tr>
           <tr>
             <th>총 결제 금액</th>
-            <td>21,900 원</td>
+            <td class="complete-price">${order.payAmount }</td>
           </tr>
         </table>
         <p>* 오프라인 매점에서 주문번호를 제시하여 상품으로 교환 가능합니다.</p>

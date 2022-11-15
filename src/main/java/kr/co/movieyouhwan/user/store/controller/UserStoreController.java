@@ -297,15 +297,27 @@ public class UserStoreController {
 		return jsonObj.toString();
 	}
 
-	// 스토어 결제
+	/**
+	 * 결제 정보 DB 저장
+	 * @param request
+	 * @param order
+	 * @param paid_at
+	 * @param cartNoList
+	 * @param productNameList
+	 * @param productCountList
+	 * @param status
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/store/pay.yh", method = RequestMethod.POST)
-	public String storePay(HttpServletRequest request, @ModelAttribute StoreOrder order,
+	public String storePay(HttpServletRequest request,
+			@ModelAttribute StoreOrder order,
 			@RequestParam("paid_at") long paid_at,
 			@RequestParam(value = "cartNoList[]", required = false) List<Integer> cartNoList,
 			@RequestParam(value = "productNameList[]", required = false) List<String> productNameList,
-			@RequestParam(value = "productCountList[]") List<Integer> productCountList,
+			@RequestParam("productCountList[]") List<Integer> productCountList,
 			@RequestParam("status") String status) {
+		String orderNo = null;
 		try {
 			// 주문자 아이디 세팅
 			HttpSession session = request.getSession();
@@ -322,35 +334,38 @@ public class UserStoreController {
 			cal.add(Calendar.MONTH, 6);
 			SimpleDateFormat eSdf = new SimpleDateFormat("yyyy-MM-dd");
 			order.setExpiryDate(eSdf.format(cal.getTime()));
-
-			// value check
-			LOGGER.info("storeOrder(Before): " + order.toString());
-			LOGGER.info(cartNoList == null ? "cartNoList: null" : cartNoList.toString());
-			LOGGER.info(productNameList == null ? "productNameList: null" : productNameList.toString());
-			LOGGER.info(productCountList == null ? "productCountList: null" : productCountList.toString());
-
+			
 			switch (status) {
 			case "paid":
 				order.setAvailability("사용가능");
 				int result = uStoreService.registerStoreOrder(order); // INSERT INTO STORE_ORDER_TBL
+				orderNo = uStoreService.printOrderNo(order);
 				if (result > 0) {
-					if (cartNoList.isEmpty() || cartNoList == null) {
-						// NOTE: 상품 목록/상세에서 구매하기 버튼 눌렀을 경우 (품목 1개, 수량 1개 또는 N개)
-						StoreOrderDetail orderDetail = new StoreOrderDetail(order.getOrderNo(), order.getProductName(), productCountList.get(0));
-						uStoreService.registerStoreOrderDetail(orderDetail); // INSERT INTO STORE_ORDER_DETAIL_TBL
+					// TODO: @RequestParam으로 가져온 cartNoList가 비어 있을 경우 null인지 empty인지 궁금
+					if (cartNoList == null) {
+						// NOTE: 상품 목록/상세 -> 구매 (품목 1개)
+						StoreOrderDetail orderDetail = new StoreOrderDetail(orderNo, order.getProductName(), productCountList.get(0));
+						uStoreService.registerOneStoreOrderDetail(orderDetail); // INSERT INTO STORE_ORDER_DETAIL_TBL
 					} else {
-						// NOTE: 장바구니에서 구매하기 버튼 눌렀을 경우 (품목 1개 또는 N개, 수량 1개 또는 N개)
-						List<StoreOrderDetail> productsWithCount = new ArrayList<>();
-						for(int i = 0; i < Math.min(cartNoList.size(), cartNoList.size()); i++) {
-							productsWithCount.add(new StoreOrderDetail(order.getOrderNo(), productNameList.get(i), productCountList.get(i)));
+						// NOTE: 장바구니 -> 구매 (품목 1개 또는 N개)
+						if (cartNoList.size() == 1) {
+							// NOTE: 장바구니 -> 구매 (품목 1개)
+							StoreOrderDetail orderDetail = new StoreOrderDetail(orderNo, order.getProductName(), productCountList.get(0));
+							uStoreService.registerOneStoreOrderDetail(orderDetail); // INSERT INTO STORE_ORDER_DETAIL_TBL
+						} else {
+							// NOTE: 장바구니 -> 구매 (품목 N개)
+							List<StoreOrderDetail> orderDetailList = new ArrayList<>();
+							for (int i = 0; i < cartNoList.size(); i++) {
+								orderDetailList.add(new StoreOrderDetail(orderNo, productNameList.get(i), productCountList.get(i)));
+							}
+							uStoreService.registerManyStoreOrderDetail(orderDetailList); // INSERT INTO STORE_ORDER_DETAIL_TBL
 						}
-						uStoreService.registerStoreOrderDetailFromCart(productsWithCount); // INSERT INTO STORE_ORDER_DETAIL_TBL
 						uStoreService.deleteProductsInCart(cartNoList);
 					}
 				}
 				break;
 			case "ready":
-				// TODO: 가상 계좌 입급 대기
+				// TODO: 가상 계좌 입금 대기
 				break;
 			case "failed":
 				// 결제 실패
@@ -359,22 +374,88 @@ public class UserStoreController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "/store/pay.yh에서 왔다";
+		return orderNo;
 	}
 
-	// TODO: 스토어 구매/결제 DB 저장 후
-	// 스토어 결제 완료 페이지
+	/**
+	 * 결제 완료 페이지
+	 * @param request
+	 * @param orderNo
+	 * @param mv
+	 * @return
+	 */
 	@RequestMapping(value = "/store/pay/complete.yh")
-	public ModelAndView storeComplete(ModelAndView mv) {
-		mv.setViewName("user/store/storeComplete");
+	public ModelAndView storeComplete(HttpServletRequest request, @RequestParam("orderNo") String orderNo, ModelAndView mv) {
+		try {
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("loginUser");
+			if (member != null) {
+				StoreOrder order = uStoreService.printStoreOrder(orderNo);
+				if (order != null) {
+					mv.addObject("order", order);
+				}
+			}
+			mv.setViewName("user/store/storeComplete");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		return mv;
 	}
 
-	// 스토어 구매내역 페이지
+	/**
+	 * 마이페이지 - 스토어 구매내역
+	 * @param request
+	 * @param mv
+	 * @return
+	 */
 	@RequestMapping(value = "/mypage/store/history.yh")
 	public ModelAndView mypageStoreHistory(HttpServletRequest request, ModelAndView mv) {
-		mv.setViewName("user/mypage/storeHistory");
+		try {
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("loginUser");
+			if (member != null) {
+				List<StoreOrder> orderList = uStoreService.printStoreOrderList(member.getMemberId());
+				if (!orderList.isEmpty()) {
+					mv.addObject("orderList", orderList);
+				}
+				mv.setViewName("user/mypage/storeHistory");
+			} else {
+				mv.setViewName("redirect:/member/loginView.yh");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		return mv;
 	}
-
+	
+	/**
+	 * 마이페이지 - 스토어 구매내역 상세
+	 * @param request
+	 * @param orderNo
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping(value="/mypage/store/detail.yh")
+	public ModelAndView mypageStoreDetail(HttpServletRequest request, @RequestParam("orderNo") String orderNo, ModelAndView mv) {
+		try {
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("loginUser");
+			if (member != null) {
+				StoreOrder order = uStoreService.printStoreOrder(orderNo);
+				List<StoreOrderDetail> orderDetailList = uStoreService.printStoreOrderDetailList(orderNo);
+				if (order != null) {
+					mv.addObject("order", order);
+				}
+				if (!orderDetailList.isEmpty()) {
+					mv.addObject("orderDetailList", orderDetailList);
+				}
+				mv.setViewName("user/mypage/storeHistoryDetail");
+			} else {
+				mv.setViewName("redirect:/member/loginView.yh");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
 }
