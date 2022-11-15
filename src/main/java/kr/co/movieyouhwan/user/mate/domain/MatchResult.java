@@ -9,6 +9,7 @@ public class MatchResult {
 	private String cinemaName;
 	private String genre;
 	private int matchingGrade;
+	private String createDate; // 매칭날짜
 	
 	public String getMemberId() {
 		return memberId;
@@ -58,12 +59,21 @@ public class MatchResult {
 	public void setMatchingGrade(int matchingGrade) {
 		this.matchingGrade = matchingGrade;
 	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
 	@Override
 	public String toString() {
 		return "MatchResult [memberId=" + memberId + ", memberImgRename=" + memberImgRename + ", memberNick="
-				+ memberNick + ", memberAge=" + memberAge + ", memberGender=" + memberGender + ", cinemaName="
-				+ cinemaName + ", genre=" + genre + ", matchingGrade=" + matchingGrade + "]";
+				+ memberNick + ", memberGender=" + memberGender + ", memberAge=" + memberAge + ", cinemaName="
+				+ cinemaName + ", genre=" + genre + ", matchingGrade=" + matchingGrade + ", createDate=" + createDate
+				+ "]";
 	}
+	
 	
 	
 	

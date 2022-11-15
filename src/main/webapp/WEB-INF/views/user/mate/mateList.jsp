@@ -22,14 +22,27 @@
       <div id="mymate-wrap">
         <div id="mymate-form">
           <div id="mypage-top">
-            <div id="now-level">${userLevel}</div>
+            <div id="now-level">
+              <c:choose>
+                <c:when test="${member.memberLevel eq 0}">Bronze</c:when>
+                <c:when test="${member.memberLevel eq 1}">Silver</c:when>
+                <c:when test="${member.memberLevel eq 2}">Gold</c:when>
+                <c:when test="${member.memberLevel eq 3}">VIP</c:when>
+                <c:when test="${member.memberLevel eq 4}">VVIP</c:when>
+              </c:choose>
+            </div>
             <div id="editProfile">
               <a href="#"><i class="fa-solid fa-pencil" id="pen"></i>매칭 설정 변경</a>
             </div>
           </div>
           <div id="profile-img">
-            <img src="https://i1.sndcdn.com/avatars-NgpMCLaasqbNAqoH-pdUeDA-t240x240.jpg" id="img-frame" />
-            <div id="bangabanga">${userNickname}님 반가워요!</div>
+            <c:if test="${!empty member.memberImgRename}">
+              <img src="/resources/images/userProfileImg/${matchInfo.memberImgRename}" id="img-frame" />
+            </c:if>
+            <c:if test="${empty member.memberImgRename}">
+              <i class="fa-solid fa-user fa-xl"></i>
+            </c:if>
+            <div id="bangabanga">${member.memberNick}님 반가워요!</div>
           </div>
           <div id="level-wrap">
             <div class="level-name">
@@ -61,7 +74,7 @@
             <span>MATCHING</span>
             <label for="toggle" class="match-toggle-switch">
               <span class="match-toggle-btn"></span>
-              <input id="isMatchingActive" type="hidden" name="matchingActive" value="${survey.matchingActive}" />
+              <input id="isMatchingActive" type="hidden" name="matchingActive" value="${mySurvey.matchingActive}" />
             </label>
           </div>
         </div>
@@ -79,14 +92,24 @@
           <div class="delete-btn-col"></div>
         </div>
 
-        <div class="mate-list-row">
-          <div class="match-date-col">2022.10.13</div>
-          <div class="mate-profile-col"><a>철수(20대, 남성)</a></div>
-          <div class="mate-location-col">홍대</div>
-          <div class="mate-genre-col">액션</div>
-          <div class="chat-btn-col"><button class="btn yellow">채팅</button></div>
-          <div class="delete-btn-col"><button class="btn navy">삭제</button></div>
-        </div>
+        <c:forEach items="${mateInfoList}" var="mateInfo">
+          <div class="mate-list-row">
+            <div class="match-date-col">${mateInfo.createDate}</div>
+            <div class="mate-profile-col">
+              <c:if test="${empty mateInfo.memberImgRename}">
+                <i class="fa-solid fa-user fa-xl"></i>
+              </c:if>
+              <c:if test="${not empty matchInfo.memberImgRename}">
+                <img src="/resources/images/userProfileImg/${mateInfo.memberImgRename}" />
+              </c:if>
+              ${mateInfo.memberNick} (${mateInfo.memberAge}, ${mateInfo.memberGender})
+            </div>
+            <div class="mate-location-col">${mateInfo.cinemaName}</div>
+            <div class="mate-genre-col">${mateInfo.genre}</div>
+            <div class="chat-btn-col"><button class="btn yellow">채팅</button></div>
+            <div class="delete-btn-col"><button class="btn navy">삭제</button></div>
+          </div>
+        </c:forEach>
       </div>
     </div>
   </body>

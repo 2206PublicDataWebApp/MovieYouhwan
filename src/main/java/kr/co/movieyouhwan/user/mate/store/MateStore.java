@@ -1,5 +1,6 @@
 package kr.co.movieyouhwan.user.mate.store;
 
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -45,5 +46,13 @@ public interface MateStore {
 	int insertMatching(SqlSessionTemplate session, String requesterId, String respondentId);
 
 	int selectExistMatching(SqlSessionTemplate session, String requesterId, String respondentId);
+
+	int updateMatchingCount(SqlSessionTemplate session, String memberId);
+
+	List<String> selectMyMateId(SqlSessionTemplate session, String memberId);
+
+	List<Survey> selectMyMateSurveyList(SqlSessionTemplate session, List<String> myMateList);
+
+	String selectMatchDate(SqlSessionTemplate session, String requesterId, String respondentId);
 
 }

@@ -1,5 +1,6 @@
 package kr.co.movieyouhwan.user.mate.store.logic;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -128,4 +129,30 @@ public class MateStoreLogic implements MateStore {
 		return result;
 	}
 
+	@Override
+	public int updateMatchingCount(SqlSessionTemplate session, String memberId) {
+		int result=session.update("MateMapper.updateMatchingCount",memberId);
+		return result;
+	}
+
+	@Override
+	public List<String> selectMyMateId(SqlSessionTemplate session, String memberId) {
+		List<String> myMateId=session.selectList("MateMapper.selectMyMateId", memberId);
+		return myMateId;
+	}
+
+	@Override
+	public List<Survey> selectMyMateSurveyList(SqlSessionTemplate session, List<String> myMateList) {
+		List<Survey> myMateSurveyList=session.selectList("MateMapper.selectMyMateSurveyList", myMateList);
+		return myMateSurveyList;
+	}
+
+	@Override
+	public String selectMatchDate(SqlSessionTemplate session, String requesterId, String respondentId) {
+		HashMap<String, String> param=new HashMap<>();
+		param.put("requesterId", requesterId);
+		param.put("respondentId", respondentId);
+		String matchDate=session.selectOne("MateMapper.selectMatchDate", param);
+		return matchDate;
+	}
 }

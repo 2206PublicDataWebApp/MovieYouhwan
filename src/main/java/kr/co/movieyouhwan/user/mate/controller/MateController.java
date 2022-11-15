@@ -46,6 +46,8 @@ public class MateController {
 
 	private int i = 0;
 
+	
+	
 	/**
 	 * FAKE DATA 생성
 	 * 
@@ -60,7 +62,8 @@ public class MateController {
 		List<SurveyGenre> dummySurveyGenreList = new ArrayList<>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd");
 		List<CinemaOption> cinemaOptionList = mService.printCinemaOption();
-		for (i = 0; i < 200; i++) {
+		int dataCount=500;
+		for (i = 0; i < dataCount; i++) {
 
 			// id와 password 같음
 			String id = faker.expression("#{regexify '[a-z]{1}[a-z0-9]{5,11}'}");
@@ -140,20 +143,63 @@ public class MateController {
 	public ModelAndView mateListView(ModelAndView mv, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("loginUser");
-		String memberId = member.getMemberId();
-
-		// 메이트 서비스 가입여부 확인
-		int isMate = mService.printMateStatus(memberId);
-
-		// 가입했으면 mate list 페이지로 이동
-		if (isMate > 0) {
-			mv.setViewName(memberId);
-			mv.setViewName("user/mate/mateList");
+		if(member!=null) {
+			String memberId = member.getMemberId();
+			// 메이트 서비스 가입여부 확인
+			int isMate = mService.printMateStatus(memberId);
+			// 가입했으면 mate list 페이지로 이동
+			if (isMate > 0) {
+				List<String> myMateList=mService.printMyMateId(member.getMemberId());
+				member=mService.printUserInfo(memberId);
+				Survey mySurvey=mService.getSurveyByMemberId(memberId);
+				if(myMateList!=null) {
+					List<Survey> myMateSurvey=mService.getMyMateSurveyList(myMateList);
+					List<MatchResult> matchList = new ArrayList<>();
+					for (Survey survey : myMateSurvey) {
+						MatchResult matchResult = new MatchResult();
+						Member matchingMember = mService.printUserInfo(survey.getMemberId());
+						List<String> genreList = (mService.getGenreListBySurveyNo(survey.getSurveyNo())).stream()
+								.map(SurveyGenre::getGenre).collect(Collectors.toList());
+						String genre = String.join(", ", genreList);
+						matchResult.setMemberId(survey.getMemberId());
+						matchResult.setMemberImgRename(matchingMember.getMemberImgRename());
+						matchResult.setMemberNick(matchingMember.getMemberNick());
+						matchResult.setMemberGender(survey.getMemberGender());
+						matchResult.setMemberAge(survey.getMemberAge());
+						matchResult.setCinemaName(survey.getCinemaName());
+						matchResult.setGenre(genre);
+						matchResult.setMatchingGrade(survey.getMatchingGrade());
+						String matchDate=mService.printMatchDate(member.getMemberId(), survey.getMemberId());
+						matchResult.setCreateDate(matchDate);
+						
+						matchList.add(matchResult);
+					}
+					mv.addObject("mateInfoList", matchList);
+					mv.addObject("member", member);
+					mv.addObject("mySurvey", mySurvey);
+					
+					//TODO 내 메이트 리스트
+					// 등급, 프로필이미지, 닉네임, 매칭횟수, 매칭 활성여부, 멤버 아이디 넘기기 
+					
+					// 내 메이트 리스트 -> matching에서 한 것처럼 matchResult에 담아서 넘기기 O
+					// member : memberId, memberNick, memberImgRename, memberLevel O
+					// survey : memberId, matchingCount, matchingActive O
+					mv.setViewName("user/mate/mateList");
+				}
+				else {
+					mv.addObject("member", member);
+					mv.addObject("mySurvey", mySurvey);
+					mv.setViewName("user/mate/mateList");
+				}
+			}
+			// 아니면 약관 동의 페이지로 이동
+			else {
+				mv.setViewName("user/mate/mateAgree");
+			}
 		}
-
-		// 아니면 약관 동의 페이지로 이동
+		// 로그인 풀렸으면 로그인 페이지로 이동
 		else {
-			mv.setViewName("user/mate/mateAgree");
+			mv.setViewName("redirect:/member/loginView.yh");
 		}
 		return mv;
 	}
@@ -176,10 +222,9 @@ public class MateController {
 			int result = mService.modifyMateStatusY(memberId);
 			if (result > 0) {
 				mv.setViewName("redirect:/mate/selectOption.yh");
-				// 만약 조건 선택 완료 안하고 다른 페이지로 나가면 메이트 리스트에서 매칭하기를 눌렀을 때 다시 조건 선택부터 하게 해야함
 			} else {
 
-				// 에러처리 해야함
+				// TODO 에러처리 해야함
 			}
 		}
 		return mv;
@@ -281,7 +326,13 @@ public class MateController {
 			else {
 				int result = mService.registerMatching(requesterId, respondentId);
 				if(result>0) {
-					return "1";
+					int resultMatchCount=mService.addMatchingCount(member.getMemberId());
+					if(resultMatchCount>0) {
+						return "1";
+					}
+					else {
+						return "insertError";
+					}
 				}
 				else {
 					return "insertError";
@@ -308,24 +359,25 @@ public class MateController {
 			Survey requesterSurvey = mService.getSurveyByMemberId(memberId);
 			if (requesterSurvey != null) {
 				List<Survey> otherSurveyList = mService.getOtherSurveyList(memberId);
+				int grade=30;
 				for (int i = 0; i < otherSurveyList.size(); i++) {
 					// 연령대 매칭 검사
 					if (requesterSurvey.getAge().equals(otherSurveyList.get(i).getMemberAge())
 							&& requesterSurvey.getMemberAge().equals(otherSurveyList.get(i).getAge())) {
-						otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + 30);
+						otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + grade);
 					}
 
 					// 성별 매칭 검사
 					if (requesterSurvey.getGender().equals("무관")) {
 						// 무관 무관
 						if (otherSurveyList.get(i).getGender().equals("무관")) {
-							otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + 30);
+							otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + grade);
 						}
 
 						// 무관 선택
 						else {
 							if (otherSurveyList.get(i).getGender().equals(requesterSurvey.getMemberGender())) {
-								otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + 30);
+								otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + grade);
 							}
 						}
 					} else {
@@ -333,7 +385,7 @@ public class MateController {
 						// 선택 무관
 						if (otherSurveyList.get(i).getGender().equals("무관")) {
 							if (requesterSurvey.getGender().equals(otherSurveyList.get(i).getMemberGender())) {
-								otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + 30);
+								otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + grade);
 							}
 						}
 
@@ -341,14 +393,14 @@ public class MateController {
 						else {
 							if (requesterSurvey.getGender().equals(otherSurveyList.get(i).getMemberGender())
 									&& requesterSurvey.getMemberGender().equals(otherSurveyList.get(i).getGender())) {
-								otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + 30);
+								otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + grade);
 							}
 						}
 					}
 
 					// 영화관 매칭 검사
 					if (requesterSurvey.getCinemaName().equals(otherSurveyList.get(i).getCinemaName())) {
-						otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + 30);
+						otherSurveyList.get(i).setMatchingGrade(otherSurveyList.get(i).getMatchingGrade() + grade);
 					}
 				}
 
