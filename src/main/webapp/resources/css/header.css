@@ -47,7 +47,7 @@
   height: 30px;
   border-radius: 50%;
 }
-#profile-img{
+#profile-img {
   margin-top: 10px;
 }
 #profile-user #profile-nickname {
@@ -79,7 +79,11 @@
   padding-bottom: 15px;
 }
 
-.navbar-menuItem a:hover {
+.navbar-menuItem > a:hover {
+  border-bottom: 3px solid #f0c808;
+}
+
+.tab-selected {
   border-bottom: 3px solid #f0c808;
 }
 

@@ -21,7 +21,7 @@
     <div id="store-banner"><img src="/resources/images/storeBanner03.jpg" alt="배너사진" /></div>
     <div id="store-wrapper">
       <div id="store-menu">
-        <ul id="store-tab">
+        <ul id="store-tab-list">
           <li class="store-tab-item"><a href="">콤보</a></li>
           <li class="store-tab-item"><a href="">팝콘</a></li>
           <li class="store-tab-item"><a href="">음료</a></li>

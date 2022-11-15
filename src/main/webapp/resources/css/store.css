@@ -14,6 +14,10 @@ input[type='checkbox'] {
   accent-color: #0f1a3b;
 }
 
+#store-tab {
+  border-bottom: 3px solid #f0c808;
+}
+
 /* storeList, storeDetail, adminStoreList, adminStoreReorder - 탭 메뉴 */
 
 #store-menu {
@@ -24,7 +28,7 @@ input[type='checkbox'] {
   border-bottom: 1px solid #ccc;
 }
 
-#store-tab {
+#store-tab-list {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -572,13 +576,13 @@ input[type='checkbox'] {
   /* font-family: mice-bold; */
 }
 
-.btn-store-complete#btn-store-history {
+.btn-store-complete#btn-to-history {
   background-color: #fff;
   border: 1px solid #0f1a3b;
   margin-right: 5px;
 }
 
-.btn-store-complete#btn-store-list {
+.btn-store-complete#btn-to-store {
   margin-left: 5px;
   background-color: #0f1a3b;
   border: 1px solid #0f1a3b;
@@ -757,110 +761,4 @@ input[type='checkbox'] {
 .modal-btn-cancel {
   background-color: #e2e2e2;
   color: #000;
-}
-
-/* storeHistory */
-
-/* storeHistory - 조회 필터 박스 */
-#store-history-wrap {
-  margin: 0 auto;
-  width: 1150px;
-}
-
-#search-box {
-  margin-top: 50px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 25px 0;
-  border: 1px solid gray;
-  border-radius: 3px;
-}
-
-#search-box > div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#search-box > div > div {
-  margin: 0 5px;
-}
-
-#search-by-option select {
-  width: 100px;
-  height: 30px;
-}
-
-#search-by-period button {
-  width: 50px;
-  height: 30px;
-  border: 1px solid #0f1a3b;
-}
-
-#search-by-period button:hover {
-  color: #fff;
-  background-color: #0f1a3b;
-}
-
-#search-by-date input {
-  width: 150px;
-  height: 30px;
-}
-
-#btn-search-by-filter {
-  width: 100px;
-  height: 30px;
-  color: #fff;
-  background-color: #0f1a3b;
-  border: 1px solid #0f1a3b;
-}
-
-/* storeHistory - 구매내역 리스트 */
-#store-history-list {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding-top: 50px;
-}
-
-#store-history-list > h3 {
-  padding-bottom: 15px;
-}
-
-#store-history-list > div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 20px;
-  border-bottom: 1px solid gray;
-}
-
-#store-history-list > div > div {
-  width: 150px;
-  flex-shrink: 0;
-  text-align: center;
-}
-
-.status-available {
-  color: green;
-}
-
-.status-expired {
-  color: #e59500;
-}
-
-.status-canceled {
-  color: red;
-}
-
-.clicked {
-  color: #fff;
-  background-color: #0f1a3b;
-}
-
-.not-clicked {
-  background-color: #fff;
-  color: #0f1a3b;
 }

@@ -418,7 +418,7 @@ public class UserStoreController {
 				if (!orderList.isEmpty()) {
 					mv.addObject("orderList", orderList);
 				}
-				mv.setViewName("user/mypage/storeHistory");
+				mv.setViewName("user/mypage/storeOrderHistory");
 			} else {
 				mv.setViewName("redirect:/member/loginView.yh");
 			}
@@ -449,7 +449,7 @@ public class UserStoreController {
 				if (!orderDetailList.isEmpty()) {
 					mv.addObject("orderDetailList", orderDetailList);
 				}
-				mv.setViewName("user/mypage/storeHistoryDetail");
+				mv.setViewName("user/mypage/storeOrderDetail");
 			} else {
 				mv.setViewName("redirect:/member/loginView.yh");
 			}

@@ -21,7 +21,7 @@
     <div id="store-banner"><img src="/resources/images/storeBanner03.jpg" alt="배너사진" /></div>
     <div id="store-wrapper">
       <div id="store-menu">
-        <ul id="store-tab">
+        <ul id="store-tab-list">
           <c:forEach items="${productTypeList }" var="productType">
             <li class="store-tab-item"><a href="#product-per-type${productType.productTypeNo }">${productType.productType }</a></li>
           </c:forEach>

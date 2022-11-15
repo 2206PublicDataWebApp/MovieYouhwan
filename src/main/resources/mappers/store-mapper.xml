@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="StoreMapper">
+	<!-- PRODUCT_TBL -->
 	<resultMap type="Product" id="productResultMap">
 		<id property="productNo" column="PRODUCT_NO" />
 		<result property="productName" column="PRODUCT_NAME" />
@@ -14,10 +15,12 @@
 		<result property="productImgRename" column="PRODUCT_IMG_RENAME" />
 		<result property="productImgPath" column="PRODUCT_IMG_PATH" />
 	</resultMap>
+	<!-- PRODUCT_TYPE_TBL -->
 	<resultMap type="ProductType" id="productTypeResultMap">
 		<id property="productTypeNo" column="PRODUCT_TYPE_NO" />
 		<result property="productType" column="PRODUCT_TYPE" />
 	</resultMap>
+	<!-- CART_TBL -->
 	<resultMap type="Cart" id="cartResultMap">
 		<id property="cartNo" column="CART_NO" />
 		<result property="memberId" column="MEMBER_ID" />
@@ -30,6 +33,7 @@
 		<result property="productImgRename" column="PRODUCT_IMG_RENAME" />
 		<result property="productStatus" column="PRODUCT_STATUS" />
 	</resultMap>
+	<!-- STORE_ORDER_TBL -->
 	<resultMap type="StoreOrder" id="storeOrderResultMap">
 		<id property="orderNo" column="ORDER_NO" />
 		<result property="memberId" column="MEMBER_ID" />
@@ -39,6 +43,7 @@
 		<result property="expiryDate" column="EXPIRY_DATE" />
 		<result property="availability" column="AVAILABILITY" />
 	</resultMap>
+	<!-- STORE_ORDER_DETAIL_TBL -->
 	<resultMap type="StoreOrderDetail" id="storeOrderDetailResultMap">
 		<id property="orderNo" column="ORDER_NO" />
 		<id property="productName" column="PRODUCT_NAME" />
