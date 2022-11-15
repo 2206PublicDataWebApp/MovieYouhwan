@@ -5,10 +5,13 @@
   src: url('../font/MICEGothic\ Bold.ttf');
 }
 
+#movie-tab {
+  border-bottom: 3px solid #f0c808;
+}
+
 .widemovie-wrapper {
 	width : 1400px;
 	margin : 0 auto;
-	margin-top : 80px;
 }
 .admin-movie-wrap {
 	width : 1400px;
@@ -119,10 +122,6 @@
 					background-color : #0F1A3B;
 					border : solid 1px #0F1A3B;
 				}
-
-.date-input:hover {
-	background-color : #FCF4C1;
-}
 #modal-movie-text {
 	margin-top : 30px;
 }
@@ -130,7 +129,11 @@
 		width : 100%;
 		height : 30px;
 		margin-top : 15px;
-		margin-bottom : 30px;
+		margin-bottom : 5px;
+	}
+	#movie-info {
+		width : 100%;
+		height : 80px;
 	}
 	#choicetime-movie-date {
 		width : 100%;
@@ -164,9 +167,19 @@
 		height : 35px;
 		float : right;
 		color : white;
+		font-size : 20px;
+		line-height : 35px;
 		background-color : #0F1A3B;
 		border : solid 1px #0F1A3B;
 		border-radius : 50%;
+		margin-right : 15px;
+	}
+	#see-theater {
+		width : 100px;
+		height : 30px;
+		background-color : white;
+		border : solid 1px #0F1A3B;
+		color : #0F1A3B;
 	}
 		#add-movie-off {
 			width: 100px;
@@ -515,6 +528,7 @@
 	}
 /* adminMovieList(관리자) */
 #movielist-top {
+	margin-top : 20px;
 	margin-bottom : 60px;
 	display : flex;
 }
@@ -528,6 +542,7 @@
 #movie-search {
 	width : 400px;
 	height : 30px;
+	padding-left : 10px;
 	border : solid 1px #0F1A3B;
 	margin-right : 10px;
 }
@@ -550,29 +565,26 @@
 	display : flex;
 }
 	.list-num {
-		width : 5%;
+		width : 8%;
 		margin-top : 20px;
 		margin-bottom : 20px;
 		text-align : center;
 	}
 	.list-title {
-		width : 14%;
+		width : 18%;
 		margin-top : 20px;
+		margin-left : 20px;
 		margin-bottom : 20px;
 	}
 	.list-genre {
-		width : 10%;
-		margin-top : 20px;
-		margin-bottom : 20px;
-	}
-	.list-director {
-		width : 10%;
+		width : 12%;
 		margin-top : 20px;
 		margin-bottom : 20px;
 	}
 	.list-actor {
-		width : 30%;
+		width : 35%;
 		margin-top : 20px;
+		margin-left : 20px;
 		margin-bottom : 20px;
 	}
 	.list-runtime {
@@ -972,6 +984,8 @@
 }
 	.page-count {
 		text-align : center;
+		display : flex;
+		margin-top : 30px;
 	}
 		.currentP {
 			font-family: mice-bold;
@@ -1044,4 +1058,8 @@
 }
 .detail-heart-empty, .detail-heart-full{
 	padding-bottom: 40px;
+}
+.add-font {
+	font-size : 12px;
+	margin-bottom : 5px;
 }

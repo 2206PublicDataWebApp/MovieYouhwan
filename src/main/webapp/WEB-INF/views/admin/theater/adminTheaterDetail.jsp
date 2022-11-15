@@ -21,7 +21,7 @@
 			<div class="input">${cinemaName }</div>
 		</div>
 		<div id="detail-namewrap">
-			<div id="cinema-title">상영관명</div>
+			<div id="detail-theater-name">상영관명</div>
 			<div class="input">${theater.theaterName }</div>
 		</div>
 		<div id="seat-title">상영관 좌석</div>

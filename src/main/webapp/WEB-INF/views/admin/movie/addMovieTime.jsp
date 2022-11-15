@@ -44,11 +44,13 @@
 		<div class="modal-movie">
 			<h3>영화 등록</h3>
 			<p id="modal-movie-text">영화 선택</p>
-			<select id="choice-addmovie" name="movieNo">
+			<select id="choice-addmovie" name="movieNo" onchange="handleOnChange(this)">
 				<c:forEach items="${mList }" var="movie" varStatus="i">
-					<option value="${movie.movieNo }">${movie.movieTitle} - 상영 종료일 : ${movie.movieEndday }</option>
+					<option value="${movie.movieNo }">${movie.movieTitle}</option>
 				</c:forEach>
 			</select>
+			<!-- AJAX 영화 정보 추가 영역 -->
+			<div id="movie-info"></div>
 			<p>상영 날짜</p>
 			<select id="choicetime-movie-date" name="movieDay"> 
 				<option value="${today }">${oneDayDate }</option>
