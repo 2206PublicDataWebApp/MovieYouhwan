@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 import kr.co.movieyouhwan.user.myPage.domain.Zzim;
 import kr.co.movieyouhwan.user.myPage.service.UserMyService;
 import kr.co.movieyouhwan.user.myPage.store.UserMyStore;
@@ -58,6 +59,25 @@ public class UserMyServiceImpl implements UserMyService{
 	public List<Zzim> printAllZzimMovie(String memberId) {
 		List<Zzim> uZzimList = uMyStore.selectAllZzimMovie(session, memberId);
 		return uZzimList;
+	}
+
+	/**
+	 * 예매내역
+	 */
+	@Override
+	public List<MovieTicket> printAllTicketHistoryMovie(String memberId) {
+		List<MovieTicket> uMovieTicketList = uMyStore.selectAllTiketHistory(session, memberId);
+		return uMovieTicketList;
+	}
+
+	/**
+	 * 나의 찜 카운트
+	 * 
+	 */
+	@Override
+	public Zzim selectMovieZzimCount(Zzim zzimCount) {
+		Zzim myZzimCount = uMyStore.selectMovieZzimCount(zzimCount);
+		return myZzimCount;
 	}
 
 

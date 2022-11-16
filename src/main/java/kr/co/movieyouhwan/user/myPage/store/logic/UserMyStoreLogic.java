@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 import kr.co.movieyouhwan.user.myPage.domain.Zzim;
 import kr.co.movieyouhwan.user.myPage.store.UserMyStore;
 @Repository
@@ -39,7 +40,7 @@ public class UserMyStoreLogic implements UserMyStore{
 	@Override
 	public Member selectOneByDetailId(SqlSessionTemplate session, String memberId) {
 		Member member = session.selectOne("MemberMapper.selectOneByDetailId", memberId);
-		return null;
+		return member;
 	}
 	
 	/**
@@ -58,6 +59,21 @@ public class UserMyStoreLogic implements UserMyStore{
 	public List<Zzim> selectAllZzimMovie(SqlSessionTemplate session, String memberId) {
 		List<Zzim> uZzimList = session.selectList("MemberMapper.selectAllZzimMovie", memberId);
 		return uZzimList;
+	}
+
+	/**
+	 * 예매내역
+	 */
+	@Override
+	public List<MovieTicket> selectAllTiketHistory(SqlSessionTemplate session, String memberId) {
+		List<MovieTicket> uMovieTicketList = session.selectList("MemberMapper.selectAllTicketHistory", memberId);
+		return uMovieTicketList;
+	}
+
+	@Override
+	public Zzim selectMovieZzimCount(Zzim myZzimCount) {
+		Zzim zzimCount = session.selectOne("MemberMapper.selectMovieZzimCount", myZzimCount);
+		return zzimCount;
 	}
 
 

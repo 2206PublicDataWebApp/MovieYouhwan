@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">
-                                    <input type="text" id="memberId" name="memberId" placeholder="영소문자, 숫자 6 ~ 12자리" maxlength="12" class="login-input_input" required>
+                                    <input type="text" id="memberId" name="memberId" placeholder="영소문자, 숫자 6 ~ 12자리" maxlength="12" class="login-input_input" required autocomplete="off">
                                 </div>
                             </div>
                             <div class="login-input">
@@ -67,7 +67,6 @@
                                             <span class="required-input">&nbsp;⦁</span>
                                         </div>
                                         <div class="validation" id="pw2_check"></div>
-                                        <!-- <div id="pwd-error">비밀번호가 일치하지 않습니다</div> -->
                                     </div>
                                 </div>
                                 <div class="login-input_wrap">

@@ -229,70 +229,58 @@ public class UserMemberController {
 		
 	}
 	
-	/**
-	 * 비밀번호 찾기
-	 * @return
-	 */
-//	@RequestMapping(value="/member/findPassword.yh", method=RequestMethod.POST)
-//	public ModelAndView findPassword(
-//			@ModelAttribute Member member
-//			, ModelAndView mv
-//			, @RequestParam("memberId")String memberId
-//			, @RequestParam("memberEmail")String memberEmail) {
-//		try {
-//			member.setMemberId(memberId);
-//			member.setMemberEmail(memberEmail);
-//			int result = uMemberService.findPassword(memberId, memberEmail);
-//			if(result > 0) {
-//				mv.addObject("member", member);
-//				mv.setViewName("/user/member/passModify");
-//			}else {
-//				mv.setViewName("/user/member/findError");
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			mv.setViewName("/user/member/findError");
-//		}
-//		return mv;
-//	}
-//	
 
-	/*
-	 * @RequestMapping(value = "/member/myPoint.yh", method = RequstMethod.GET)
-	 * public ModelAndView pointHistoryView( HttpServletRequest request,
-	 * 
-	 * @RequestParam(value = ""))
-	 */
-	
 
 	
 
 	/**
-	 * 패스워드 찾기
+	 * 패스워드 찾기 - 회원정보 조회
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/member/modifyPassword.yh", method = RequestMethod.POST)
 	public ModelAndView modifyPassword(
-			@ModelAttribute Member member
-			, ModelAndView mv
+				ModelAndView mv
 			, @RequestParam("memberId") String memberId
 			, @RequestParam("memberEmail") String memberEmail) {
-			try {
-				member.setMemberId(memberId);
-				member.setMemberEmail(memberEmail);
-				int result = uMemberService.modifyPassword(memberId, memberEmail);
-				if(result > 0) {
-					mv.addObject("member", member);
-					mv.setViewName("/user/memeber/modifyPasswordAuth");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				mv.setViewName("/user/member/findError");
-			}
+//				List<Member> uMemberList = uMemberService.modifyPassword(memberId, memberEmail);
+			mv.addObject("memberId", memberId);
+			mv.setViewName("/user/member/modifyPasswordAuth");
+//				e.printStackTrace();
+//				mv.setViewName("/user/member/findError");
 		return mv;
 	}
+
+	/**
+	 * 회원 일치, 인증 확인 후 비밀번호 변경 페이지
+	 * @param member
+	 * @param session
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/member/updatePwd.yh", method = RequestMethod.POST)
+	public String passModify(
+			Member member
+			, HttpSession session) throws IllegalStateException, IOException{
+		
+		int result = uMemberService.pwUpdate(member);
+		if(result == 1) {
+			return "/user/member/modifyPassSuccess";
+		}else {
+			return "/user/member/modifyPasswordForm";
+		}
+	}
 	
+	/**
+	 * 패스워드 변경 완료
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/member/modifyPassSuccess.yh", method = RequestMethod.GET)
+	public String pwdModfySuccess() throws Exception {
+		return "/user/member/modifyPassSuccess";
+		
+	}
 	/**
 	 * 비밀번호 찾기 / 이메일 인증
 	 * @return

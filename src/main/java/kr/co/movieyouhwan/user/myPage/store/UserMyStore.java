@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 import kr.co.movieyouhwan.user.myPage.domain.Zzim;
 
 public interface UserMyStore {
@@ -25,6 +26,18 @@ public interface UserMyStore {
 
 	// 영화 찜 목록
 	public List<Zzim> selectAllZzimMovie(SqlSessionTemplate session, String memberId);
+
+	// 예매내역
+	public List<MovieTicket> selectAllTiketHistory(SqlSessionTemplate session, String memberId);
+
+
+	public Zzim selectMovieZzimCount(Zzim myZzimCount);
+
+
+	/**
+	 * 영화찜 목록
+	 */
+	
 
 
 

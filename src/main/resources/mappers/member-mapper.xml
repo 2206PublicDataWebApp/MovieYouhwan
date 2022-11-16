@@ -41,6 +41,30 @@
 		<result property="movieSee" column="MOVIE_SEE"/>
 		<result property="movieZzim" column="MOVIE_ZZIM"/>
 	</resultMap>
+	<resultMap type="MovieTicket" id="MovieTicketResultMap">
+		<id property="ticketNo" column="TICKET_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="memberBirth" column="MEMBER_BIRTH"/>
+		<result property="memberGender" column="MEMBER_GENDER"/>
+		<result property="cinemaNo" column="CINEMA_NO"/>
+		<result property="theaterNo" column="THEATER_NO"/>
+		<result property="movieNo" column="MOVIE_NO"/>
+		<result property="cinemaName" column="CINEMA_NAME"/>
+		<result property="theaterName" column="THEATER_NAME"/>
+		<result property="movieName" column="MOVIE_NAME"/>
+		<result property="personType" column="PERSON_TYPE"/>
+		<result property="personCount" column="PERSON_COUNT"/>
+		<result property="choiceSeat" column="CHOICE_SEAT"/>
+		<result property="moviePay" column="MOVIE_PAY"/>
+		<result property="payMethod" column="PAY_METHOD"/>
+		<result property="addPoint" column="ADD_POINT"/>
+		<result property="payDate" column="PAY_DATE"/>
+		<result property="movieDay" column="MOVIE_DAY"/>
+		<result property="movieStart" column="MOVIE_START"/>
+		<result property="ticketStatus" column="TICKET_STATUS"/>
+		<result property="movieImgName" column="MOVIE_IMG_NAME" />
+		<result property="movieImgRename" column="MOVIE_IMG_RENAME" />
+	</resultMap>
 
 	
 	<!-- 회원가입 -->
@@ -76,12 +100,17 @@
 	</select>
 	
 	<!-- 비밀번호 찾기 (회원 정보 조회) -->
-	<select id="findPassword" resultMap="memberResultMap">
+	<select id="modifyPwd" resultMap="memberResultMap">
 		SELECT * FROM MEMBER_TBL
 		WHERE MEMBER_ID = #{memberId}
 		AND MEMBER_EMAIL = #{memberEmail}
 		AND MEMBER_YN = 'Y'
 	</select>
+	
+	<!-- 비밀번호 변경  -->
+	<update id="updatePassword" parameterType="Member">
+		UPDATE MEMBER_TBL SET MEMBER_PW = #{memberPwd} WHERE MEMBER_ID = #{memberId}
+	</update>
 	
 	<!-- 관리자 로그인 -->
 	<select id="selectAdminLogin" resultMap="memberResultMap">
@@ -136,6 +165,18 @@
 	    ON mo.MOVIE_NO = mi.MOVIE_NO
 	    WHERE z.MEMBER_ID = #{memberId} AND MOVIE_IMG_NAME = '대표이미지.jpg'
 	</select>
+	<!-- 예매내역 -->
+	<select id="selectAllTicketHistory" resultMap="MovieTicketResultMap">
+    SELECT 
+	    mt.TICKET_NO, mt.MOVIE_NAME, mt.CINEMA_NAME, mt.THEATER_NAME
+        , mt.MOVIE_DAY, mt.PAY_DATE, mt.ADULT_COUNT, mt.TEENAGER_COUNT
+        , mt.CHOICE_SEAT, mt.ADD_POINT, mt.MEMBER_ID, mt.MOVIE_NO
+        , mi.MOVIE_IMG_NAME, mi.MOVIE_IMG_RENAME
+        FROM MOVIE_TICKET_TBL mt
+        JOIN MOVIE_IMG_TBL mi
+        ON mt.MOVIE_NO = mi.MOVIE_NO
+        WHERE mt.MEMBER_ID = #{memberId} AND mi.MOVIE_IMG_NAME = '대표이미지.jpg'
+	</select>
 	
 	<!-- 영화찜 목록 페이징 -->
 	<select id="selectZzimCount" resultType="_int">
@@ -149,8 +190,14 @@
 		SELECT MOVIE_NO FROM ZZIM_TBL
 		WHERE MEMBER_ID = #{memberId}
 	</select>
+	
+	<!-- 내가 찜한 무비 갯수 -->
+	<select id="selectMovieZzimCount" resultMap="zzimResultMap">
+		SELECT COUNT (ZZIM_NO) FROM ZZIM_TBL WHERE MEMBER_ID = #{memberId}
+	</select>
+	
 	<!-- 찜 추가 -->
-	<insert id="movieListZzimSave" parameterType="_int">
+	<insert id="movieListZzimSave" parameterType="Zzim">
 		INSERT INTO ZZIM_TBL (ZZIM_NO, MEMBER_ID, MOVIE_NO, ZZIM_DATE)
 		VALUES (SEQ_ZZIM_NO.NEXTVAL, #{memberId}, #{movieNo}, SYSDATE)
 	</insert>
@@ -175,6 +222,7 @@
 		FROM MOVIE_TBL
 		WHERE MOVIE_NO = #{movieNo}
 	</select>
+	
 	
 	<!-- 최현지 : 결제를 위한 회원 이름, 휴대폰 번호, 이메일 조회 -->
 	<select id="selectBuyerInfo" resultMap="memberResultMap">

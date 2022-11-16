@@ -61,30 +61,25 @@ public class UserMemberServiceImpl implements UserMemberService {
 		return uMemberList;
 	}
 	
+
+	
+	// 패스워드 변경, 회원정보 조회
 	@Override
-	public Member selectMember(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public int modifyPassword(String memberId, String memberEmail) {
-		int result = uMemberStore.modifyPassword(session, memberId, memberEmail);
-		return result;
+	public List<Member> modifyPassword(String memberId, String memberEmail) {
+		List<Member> uMemberList = uMemberStore.modifyPassword(session, memberId, memberEmail);
+		return uMemberList;
 	}
 	
+	/**
+	 * 패스워드 재설정
+	 */
+	@Override
+	public int pwUpdate(Member member) {
+		int result = uMemberStore.updatePw(session, member);
+		return result;
+	}
 
-//	}
-//	@Override
-//	public void certifiedPhoneNumber(String memberPhone, int randomNumber) {
-//		String apiKey = "NCSRIFPKA6RUHB6S";
-//		String apiSecret = "ZLR0RL0FFNHCKVPOHWN8NSFK866BWOKF";
-//		Message coolsms = new Message(apiKey, apiSecret);
-//		HashMap<String, String> params = new HashMap<String, String>();
-//		params.put("toTellNumber", memberPhone);    // 수신전화번호
-//	    params.put("fromTellNumer", "01062204048");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
-//	    params.put("type", "SMS");
-//	    params.put("text", "[TEST] 인증번호는" + "["+randomNumber+"]" + "입니다."); // 문자 내용 입력
-//	    params.put("app_version", "test app 1.2"); // application name and version
-//	}
-//	
+	
+
+	
 }
