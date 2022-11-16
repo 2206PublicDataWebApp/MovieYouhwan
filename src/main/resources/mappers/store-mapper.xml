@@ -15,11 +15,13 @@
 		<result property="productImgRename" column="PRODUCT_IMG_RENAME" />
 		<result property="productImgPath" column="PRODUCT_IMG_PATH" />
 	</resultMap>
+	
 	<!-- PRODUCT_TYPE_TBL -->
 	<resultMap type="ProductType" id="productTypeResultMap">
 		<id property="productTypeNo" column="PRODUCT_TYPE_NO" />
 		<result property="productType" column="PRODUCT_TYPE" />
 	</resultMap>
+	
 	<!-- CART_TBL -->
 	<resultMap type="Cart" id="cartResultMap">
 		<id property="cartNo" column="CART_NO" />
@@ -33,6 +35,7 @@
 		<result property="productImgRename" column="PRODUCT_IMG_RENAME" />
 		<result property="productStatus" column="PRODUCT_STATUS" />
 	</resultMap>
+	
 	<!-- STORE_ORDER_TBL -->
 	<resultMap type="StoreOrder" id="storeOrderResultMap">
 		<id property="orderNo" column="ORDER_NO" />
@@ -43,19 +46,32 @@
 		<result property="expiryDate" column="EXPIRY_DATE" />
 		<result property="availability" column="AVAILABILITY" />
 	</resultMap>
+
 	<!-- STORE_ORDER_DETAIL_TBL -->
-	<resultMap type="StoreOrderDetail" id="storeOrderDetailResultMap">
+	<resultMap type="StoreOrderDetail"
+		id="storeOrderDetailResultMap">
 		<id property="orderNo" column="ORDER_NO" />
 		<id property="productName" column="PRODUCT_NAME" />
 		<result property="productCount" column="PRODUCT_COUNT" />
+	</resultMap>
+	
+	<!-- SELECT(BEST_PRODUCT) -->
+	<resultMap type="BestProduct" id="bestProductResultMap">
+		<id property="productNo" column="PRODUCT_NO" />
+		<result property="productName" column="PRODUCT_NAME" />
+		<result property="productTypeNo" column="PRODUCT_TYPE_NO" />
+		<result property="productType" column="PRODUCT_TYPE" />
+		<result property="productPrice" column="PRODUCT_PRICE" />
+		<result property="productImgRename" column="PRODUCT_IMG_RENAME" />
+		<result property="totalCount" column="TOTAL_COUNT" />
+		<result property="rank" column="RANK" />
 	</resultMap>
 
 	<!-- 관리자 - 상품 등록 -->
 	<insert id="insertProduct">
 		INSERT INTO PRODUCT_TBL
 		VALUES(SEQ_PRODUCT_NO.NEXTVAL, #{productName}, #{productType}, #{productPrice}, #{productDesc},
-		(SELECT MAX(PRODUCT_ORDER) + 1 FROM PRODUCT_TBL),
-		#{productImgName}, #{productImgRename}, #{productImgPath})
+		(SELECT MAX(PRODUCT_ORDER) + 1 FROM PRODUCT_TBL), #{productImgName}, #{productImgRename}, #{productImgPath})
 	</insert>
 
 	<!-- 사용자 - 장바구니에 새로운 상품 담기 -->
@@ -69,21 +85,21 @@
 	<!-- 사용자 - 주문 정보 저장 -->
 	<insert id="insertStoreOrder">
 		INSERT INTO STORE_ORDER_TBL
-		VALUES(#{orderNo}||LPAD(SEQ_ORDER_NO.NEXTVAL, 4, 0), #{memberId}, #{productName}, #{payAmount}, #{payDate}, #{expiryDate}, #{availability})
+		VALUES(#{orderNo}||LPAD(SEQ_ORDER_NO.NEXTVAL, 4, 0), #{memberId},
+		#{productName}, #{payAmount}, #{payDate}, #{expiryDate}, #{availability})
 	</insert>
-	
+
 	<!-- 사용자 - 주문 상세 정보 저장 (상품 목록, 상품 상세) -->
 	<insert id="insertOneStoreOrderDetail">
 		INSERT INTO STORE_ORDER_DETAIL_TBL
 		VALUES(#{orderNo}, #{productName}, #{productCount})
 	</insert>
-	
+
 	<!-- 사용자 - 주문 상세 정보 저장 (장바구니) -->
 	<insert id="insertManyStoreOrderDetail">
 		INSERT ALL
 		<foreach collection="list" item="item">
-			INTO STORE_ORDER_DETAIL_TBL
-			VALUES(#{item.orderNo}, #{item.productName}, #{item.productCount})
+			INTO STORE_ORDER_DETAIL_TBL VALUES(#{item.orderNo}, #{item.productName}, #{item.productCount})
 		</foreach>
 		SELECT * FROM DUAL
 	</insert>
@@ -142,10 +158,12 @@
 	</select>
 
 	<!-- 공통 - 상품 유형 목록 조회 -->
-	<select id="selectProductTypeList" resultMap="productTypeResultMap">
+	<select id="selectProductTypeList"
+		resultMap="productTypeResultMap">
 		SELECT DISTINCT PRODUCT_TYPE_NO, PRODUCT_TYPE
 		FROM PRODUCT_TYPE_TBL
-		JOIN PRODUCT_TBL USING (PRODUCT_TYPE)
+		JOIN PRODUCT_TBL
+		USING (PRODUCT_TYPE)
 		ORDER BY PRODUCT_TYPE_NO ASC
 	</select>
 
@@ -163,7 +181,15 @@
 		WHERE MEMBER_ID = #{memberId} AND PRODUCT_NO = #{productNo}
 	</select>
 
-	<select id="selectProductCount" resultType="_int">
+	<!-- 사용자 - 장바구니 번호 조회 -->
+	<select id="selectCartNo" resultType="_int">
+		SELECT CART_NO
+		FROM CART_TBL
+		WHERE MEMBER_ID = #{memberId} AND PRODUCT_NO = #{productNo}
+	</select>
+
+	<!-- 사용자 - 장바구니에 있는 특정 상품 수량 체크 -->
+	<select id="selectProductCountByCartNo" resultType="_int">
 		SELECT PRODUCT_COUNT
 		FROM CART_TBL
 		WHERE CART_NO = #{cartNo}
@@ -171,7 +197,8 @@
 
 	<!-- 사용자 - 장바구니 조회 -->
 	<select id="selectMyCartList" resultMap="cartResultMap">
-		SELECT CART_NO, MEMBER_ID, PRODUCT_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_COUNT, PRODUCT_IMG_RENAME, PRODUCT_STATUS
+		SELECT CART_NO, MEMBER_ID, PRODUCT_NO, PRODUCT_NAME, PRODUCT_PRICE,
+		PRODUCT_COUNT, PRODUCT_IMG_RENAME, PRODUCT_STATUS
 		FROM CART_TBL
 		WHERE MEMBER_ID = #{memberId}
 	</select>
@@ -183,32 +210,74 @@
 			#{item}
 		</foreach>
 	</select>
-	
+
 	<!-- 사용자 - 주문번호 조회 -->
 	<select id="selectStoreOrderNo" resultType="string">
 		SELECT ORDER_NO
 		FROM STORE_ORDER_TBL
 		WHERE MEMBER_ID = #{memberId} AND ORDER_NO LIKE #{orderNo}||'%'
 	</select>
-	
+
 	<!-- 사용자 - 스토어 구매내역 조회 (1건) -->
 	<select id="selectStoreOrder" resultMap="storeOrderResultMap">
 		SELECT *
 		FROM STORE_ORDER_TBL
 		WHERE ORDER_NO = #{orderNo}
 	</select>
-	
-	<!-- 사용자 - 스토어 구매내역 조회 (N건) -->
+
+	<!-- 사용자 - 스토어 구매내역 조회 (N건, 조회 필터 미사용) -->
 	<select id="selectStoreOrderList" resultMap="storeOrderResultMap">
 		SELECT ORDER_NO, PRODUCT_NAME, PAY_DATE, EXPIRY_DATE, PAY_AMOUNT, AVAILABILITY
 		FROM STORE_ORDER_TBL
 		WHERE MEMBER_ID = #{memberId}
 	</select>
-	
+
+	<!-- 사용자 - 스토어 구매내역 조회 (N건, 조회 필터 사용) -->
+	<select id="selectStoreOrderListBySearch" resultMap="storeOrderResultMap" parameterType="java.util.HashMap">
+		SELECT ORDER_NO, PRODUCT_NAME, PAY_DATE, EXPIRY_DATE, PAY_AMOUNT, AVAILABILITY
+		FROM STORE_ORDER_TBL
+		WHERE MEMBER_ID = #{memberId}
+		<!-- <if test="option != null"></if> -->
+		<if test="period != null">
+			AND
+			<if test="period.equals('1주일')">
+				SUBSTR(PAY_DATE, 1, 10) <![CDATA[>]]>
+				TO_CHAR(SYSDATE - 7, 'yyyy-mm-dd')
+			</if>
+			<if test="period.equals('1개월')">
+				SUBSTR(PAY_DATE, 1, 10) <![CDATA[>]]>
+				TO_CHAR(ADD_MONTHS(SYSDATE, -1), 'yyyy-mm-dd')
+			</if>
+			<if test="period.equals('3개월')">
+				SUBSTR(PAY_DATE, 1, 10) <![CDATA[>]]>
+				TO_CHAR(ADD_MONTHS(SYSDATE, -3), 'yyyy-mm-dd')
+			</if>
+		</if>
+		<if test="startDate != null and endDate != null">
+			AND SUBSTR(PAY_DATE, 1, 10) <![CDATA[>]]> #{startDate}
+			AND SUBSTR(PAY_DATE, 1, 10) <![CDATA[<]]> #{endDate}
+		</if>
+	</select>
+
 	<!-- 사용자 - 스토어 구매내역 상세 조회 -->
 	<select id="selectStoreOrderDetailList" resultMap="storeOrderDetailResultMap">
 		SELECT *
 		FROM STORE_ORDER_DETAIL_TBL
 		WHERE ORDER_NO = #{orderNo}
 	</select>
+
+
+	<select id="selectBestProductList" resultMap="bestProductResultMap">
+		SELECT P.PRODUCT_NO, P.PRODUCT_NAME, T.PRODUCT_TYPE_NO, T.PRODUCT_TYPE, P.PRODUCT_PRICE, P.PRODUCT_IMG_RENAME,
+		R.TOTAL_COUNT, R.RANK
+		FROM PRODUCT_TBL P,
+			(SELECT PRODUCT_NAME, SUM(PRODUCT_COUNT) TOTAL_COUNT,
+			RANK() OVER (ORDER BY SUM(PRODUCT_COUNT) DESC) RANK
+			FROM STORE_ORDER_DETAIL_TBL GROUP BY PRODUCT_NAME ORDER BY TOTAL_COUNT DESC) R,
+    		PRODUCT_TYPE_TBL T
+		WHERE P.PRODUCT_NAME = R.PRODUCT_NAME
+			AND P.PRODUCT_TYPE = T.PRODUCT_TYPE
+			AND ROWNUM <![CDATA[<=]]> #{top}
+	</select>
+
 </mapper>

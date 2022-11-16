@@ -77,4 +77,11 @@
 			</where>
 			ORDER BY NOTICE_NO DESC
 	</select>
+	
+	
+	<select id="selectNewNoticeList" resultMap="noticeResultMap">
+		SELECT NOTICE_NO, NOTICE_TITLE
+		FROM (SELECT NOTICE_NO, NOTICE_TITLE FROM NOTICE_TBL ORDER BY NOTICE_NO DESC)
+		WHERE ROWNUM <![CDATA[<=]]> #{top}
+	</select>
 </mapper>

@@ -22,7 +22,7 @@
     <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
     <div id="store-wrapper">
       <div id="store-menu">
-        <ul id="store-tab">
+        <ul id="store-tab-list">
           <c:forEach items="${productTypeList }" var="productType">
             <li class="store-tab-item"><a href="#productTypeNo${productType.productTypeNo }">${productType.productType }</a></li>
           </c:forEach>

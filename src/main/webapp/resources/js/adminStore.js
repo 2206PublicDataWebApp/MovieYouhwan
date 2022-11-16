@@ -1,5 +1,6 @@
-// 상품 목록 - 상품 가격에 천 단위로 콤마(,) 삽입
-showCommas($('p.product-price'));
+//////////////////////////////////////////////////////
+////////////////////// Variable //////////////////////
+//////////////////////////////////////////////////////
 
 const registerBtn = $('#btn-store-register');
 let modifyBtn = $('.btn-store-modify');
@@ -7,13 +8,36 @@ const registerModal = $('#modal-store-register');
 const modifyModal = $('#modal-store-modify');
 let cancelBtn = $('.modal-btn-cancel');
 
+let regProductTypeField = registerModal.find('.modal-product-type');
+let regProductTypeBtn = registerModal.find('button[class^=btn-to]');
+let regImgPreview = registerModal.find('.img-preview');
+let regImgIcon = $('#img-icon');
+
+let modProductTypeField = modifyModal.find('.modal-product-type');
+let modProductTypeBtn = modifyModal.find('button[class^=btn-to]');
+let modImgPreview = modifyModal.find('.img-preview');
+
+//////////////////////////////////////////////////////
+///////////////// Auto Call Function /////////////////
+//////////////////////////////////////////////////////
+
+// 상품 목록 - 상품 가격에 천 단위로 콤마(,) 삽입
+showCommas($('p.product-price'));
+
+//////////////////////////////////////////////////////
+/////////////////// Event Listener ///////////////////
+//////////////////////////////////////////////////////
+
 // 상품 등록 - 모달창 출현
 registerBtn.click(function () {
+  lockScroll();
   registerModal.css('display', 'block');
 });
 
 // 상품 수정 - 모달창 출현
 modifyBtn.click(function () {
+  lockScroll();
+
   modifyModal.css('display', 'block');
   let productNo = $(this).parent().parent('.product-item').attr('id');
   let productImgSrc = $(this).parent().siblings('.product-img').attr('src');
@@ -39,15 +63,6 @@ modifyBtn.click(function () {
   modifyModal.find('input[name=productPrice').val(productPrice);
   modifyModal.find('input[name=productDesc').val(productDesc);
 });
-
-let regProductTypeField = registerModal.find('.modal-product-type');
-let regProductTypeBtn = registerModal.find('button[class^=btn-to]');
-let regImgPreview = registerModal.find('.img-preview');
-let regImgIcon = $('#img-icon');
-
-let modProductTypeField = modifyModal.find('.modal-product-type');
-let modProductTypeBtn = modifyModal.find('button[class^=btn-to]');
-let modImgPreview = modifyModal.find('.img-preview');
 
 // 상품 등록 - 상품 사진 미리보기
 $('#product-img-register').change(function () {
@@ -79,6 +94,7 @@ cancelBtn.click(function () {
       modifyModal.css('display', 'none');
       initModal(modProductTypeField, modProductTypeBtn, modImgPreview);
     }
+    unlockScroll();
   }
 });
 
@@ -143,6 +159,10 @@ $('.btn-store-delete').click(function (e) {
   }
 });
 
+///////////////////////////////////////////////////////
+////////////////////// Function ///////////////////////
+///////////////////////////////////////////////////////
+
 /**
  * 상품 가격에 천 단위로 콤마(,) 삽입
  * @param {*} numberStr
@@ -152,6 +172,26 @@ function showCommas(numberStr) {
     let productPrice = Number($(this).text());
     $(this).text(productPrice.toLocaleString() + '원');
   });
+}
+
+/**
+ * 스크롤 잠금
+ */
+function lockScroll() {
+  $('html, body').scrollTop(0, 0);
+  $('html, body').css({ overflow: 'hidden', height: '100%' });
+  $('html, body').on('scroll touchmove mousewheel', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+}
+
+/**
+ * 스크롤 잠금 해제
+ */
+function unlockScroll() {
+  $('html, body').css({ overflow: 'visible', height: 'auto' });
+  $('html, body').off('scroll touchmove mousewheel');
 }
 
 /**

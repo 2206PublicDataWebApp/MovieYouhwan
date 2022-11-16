@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>무비유환 : 인덱스</title>
+<title>무비유환</title>
 </head>
 <body>
 	<jsp:forward page="/home.yh" />

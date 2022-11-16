@@ -29,4 +29,6 @@ public interface AdminNoticeService {
 
 	List<Notice> printNoticeListBySearch(String searchOption, String searchValue, PageInfo nPageInfo);
 
+	List<Notice> printNewNoticeList(int supportCount);
+
 }

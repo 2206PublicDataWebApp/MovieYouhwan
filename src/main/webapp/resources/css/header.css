@@ -47,9 +47,11 @@
   height: 30px;
   border-radius: 50%;
 }
+
 #profile-img {
   margin-top: 10px;
 }
+
 #profile-user #profile-nickname {
   text-decoration: underline;
   text-underline-position: under;

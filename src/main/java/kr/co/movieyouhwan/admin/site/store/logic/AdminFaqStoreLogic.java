@@ -9,40 +9,44 @@ import kr.co.movieyouhwan.admin.site.domain.Faq;
 import kr.co.movieyouhwan.admin.site.store.AdminFaqStore;
 
 @Repository
-public class AdminFaqStoreLogic implements AdminFaqStore{
+public class AdminFaqStoreLogic implements AdminFaqStore {
 
 	@Override
 	public int insertFaq(SqlSessionTemplate session, Faq faq) {
 		System.out.println(faq.getAdminId());
 		System.out.println(faq.getFaqNo());
-		int result=session.insert("FaqMapper.insertFaq", faq);
+		int result = session.insert("FaqMapper.insertFaq", faq);
 		return result;
 	}
 
 	@Override
 	public List<Faq> selectFaqList(SqlSessionTemplate session) {
-		List<Faq> fList=session.selectList("FaqMapper.selectFaqList");
+		List<Faq> fList = session.selectList("FaqMapper.selectFaqList");
 		return fList;
 	}
 
 	@Override
 	public Faq selectFaq(SqlSessionTemplate session, Integer faqNo) {
-		Faq fOne=session.selectOne("FaqMapper.selectFaq", faqNo);
+		Faq fOne = session.selectOne("FaqMapper.selectFaq", faqNo);
 		return fOne;
 	}
 
 	@Override
 	public int updateFaq(SqlSessionTemplate session, Faq faq) {
-		int result=session.update("FaqMapper.updateFaq", faq);
+		int result = session.update("FaqMapper.updateFaq", faq);
 		return result;
 	}
 
 	@Override
 	public int deleteFaqList(SqlSessionTemplate session, String deleteNo) {
-		int result=session.delete("FaqMapper.deleteFaqList", deleteNo);
+		int result = session.delete("FaqMapper.deleteFaqList", deleteNo);
 		return result;
 	}
-	
+
+	@Override
+	public List<Faq> selectNewFaqList(SqlSessionTemplate session, int top) {
+		List<Faq> faqList = session.selectList("FaqMapper.selectNewFaqList", top);
+		return faqList;
+	}
+
 }
-
-

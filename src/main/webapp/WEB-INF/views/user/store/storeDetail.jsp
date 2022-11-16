@@ -47,7 +47,7 @@
           <div class="gitem-store-detail">구매일로부터 6개월 이내</div>
           <div class="gitem-store-detail">상품수량</div>
           <div class="gitem-store-detail">
-            <input type="number" name="productCount" id="detail-product-count" min="1" max="10" step="1" value="1" />
+            <input type="number" name="productCount" id="detail-product-count" min="1" max="10" step="1" value=1 />
           </div>
           <div class="gitem-store-detail">총 상품 금액</div>
           <div class="gitem-store-detail detail-price">${product.productPrice }</div>

@@ -1,5 +1,6 @@
 package kr.co.movieyouhwan.user.store.service.logic;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.store.domain.BestProduct;
 import kr.co.movieyouhwan.user.store.domain.Cart;
 import kr.co.movieyouhwan.user.store.domain.Product;
 import kr.co.movieyouhwan.user.store.domain.ProductType;
@@ -22,13 +24,6 @@ public class UserStoreServiceImpl implements UserStoreService {
 	SqlSessionTemplate session;
 	@Autowired
 	UserStoreStore uStoreStore;
-
-	// 장바구니에 같은 상품 있는지 체크
-	@Override
-	public int checkProductInCart(Cart cart) {
-		int count = uStoreStore.selectCountProductInCart(session, cart);
-		return count;
-	}
 
 	// 장바구니에 새로운 상품 담기
 	@Override
@@ -80,6 +75,27 @@ public class UserStoreServiceImpl implements UserStoreService {
 		return result;
 	}
 
+	// 장바구니에 같은 상품 있는지 체크
+	@Override
+	public int checkProductInCart(Cart cart) {
+		int count = uStoreStore.selectCountProductInCart(session, cart);
+		return count;
+	}
+
+	// 장바구니 번호 불러오기
+	@Override
+	public int printCartNo(Cart cart) {
+		int cartNo = uStoreStore.selectCartNo(session, cart);
+		return cartNo;
+	}
+
+	// 장바구니 상품 수량 체크
+	@Override
+	public int printProductCountByCartNo(int cartNo) {
+		int productCount = uStoreStore.selectProductCountByCartNo(session, cartNo);
+		return productCount;
+	}
+
 	// 상품 목록 불러오기
 	@Override
 	public List<Product> printAllProductList() {
@@ -115,13 +131,6 @@ public class UserStoreServiceImpl implements UserStoreService {
 		return cartList;
 	}
 
-	// 장바구니 상품 수량 체크
-	@Override
-	public int checkProductCount(int cartNo) {
-		int productCount = uStoreStore.selectProductCount(session, cartNo);
-		return productCount;
-	}
-
 	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
 	@Override
 	public Member printBuyerInfo(String memberId) {
@@ -155,6 +164,20 @@ public class UserStoreServiceImpl implements UserStoreService {
 	public List<StoreOrderDetail> printStoreOrderDetailList(String orderNo) {
 		List<StoreOrderDetail> orderDetailList = uStoreStore.selectStoreOrderDetailList(session, orderNo);
 		return orderDetailList;
+	}
+
+	// 스토어 구매내역 리스트 불러오기 (조회 필터 사용)
+	@Override
+	public List<StoreOrder> printStoreOrderListBySearch(HashMap<String, String> searchMap) {
+		List<StoreOrder> orderList = uStoreStore.selectStoreOrderListBySearch(session, searchMap);
+		return orderList;
+	}
+
+	// 인기 상품 리스트 불러오기
+	@Override
+	public List<BestProduct> printBestProductList(int top) {
+		List<BestProduct> productList = uStoreStore.selectBestProductList(session, top);
+		return productList;
 	}
 
 }

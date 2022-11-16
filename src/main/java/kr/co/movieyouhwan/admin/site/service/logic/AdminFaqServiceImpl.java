@@ -49,4 +49,10 @@ public class AdminFaqServiceImpl implements AdminFaqService{
 		int result=aFaqStore.deleteFaqList(session,deleteNo);
 		return result;
 	}
+
+	@Override
+	public List<Faq> printNewFaqList(int top) {
+		List<Faq> faqList = aFaqStore.selectNewFaqList(session, top);
+		return faqList;
+	}
 }

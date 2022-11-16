@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.myPage.service.UserMyService;
 import kr.co.movieyouhwan.user.store.domain.Cart;
 import kr.co.movieyouhwan.user.store.domain.Product;
 import kr.co.movieyouhwan.user.store.domain.ProductType;
@@ -36,6 +38,9 @@ public class UserStoreController {
 
 	@Autowired
 	UserStoreService uStoreService;
+
+	@Autowired
+	UserMyService uMyService;
 
 	/**
 	 * 장바구니에 상품 담기
@@ -54,16 +59,29 @@ public class UserStoreController {
 				cart.setMemberId(member.getMemberId());
 				int count = uStoreService.checkProductInCart(cart); // 장바구니에 같은 상품 있는지 체크
 				if (count == 0) {
+					// 장바구니에 같은 상품 없는 경우
 					int result = uStoreService.addNewProductToCart(cart); // 장바구니에 새로운 상품 담기
 					if (result < 1) {
 						LOGGER.info("장바구니에 새로운 상품 담기 실패");
 					}
 				} else {
-					int productCount = uStoreService.checkProductCount(cart.getCartNo());
-					cart.setProductCount(productCount + cart.getProductCount() > 10 ? 10 : cart.getProductCount());
-					int result = uStoreService.increaseProductCountUp(cart); // 장바구니에 있는 상품을 담으면 해당 상품 수량 증가
-					if (result < 1) {
-						LOGGER.info("장바구니에 있는 상품 수량 변경 실패");
+					// 장바구니에 같은 상품 있는 경우
+					int cartNo = uStoreService.printCartNo(cart); // 해당 상품 장바구니 번호 조회
+					LOGGER.info("cartNo:" + cartNo);
+					int productCount = uStoreService.printProductCountByCartNo(cartNo); // 장바구니에 있는 해당 상품 현재 수량 조회
+					LOGGER.info("productConut: " + String.valueOf(productCount));
+					LOGGER.info("cart.getProductCount(): " + String.valueOf(cart.getProductCount()));
+					if (productCount + cart.getProductCount() > 10) {
+						// 장바구니에 있는 해당 상품 수량 + 추가하려는 상품 수량이 최대치보다 높은 경우
+						int result = uStoreService.modifyProductCountInCart(cart);
+						if (result < 1) {
+							LOGGER.info("장바구니에 있는 상품 수량 10개 제한 실패");
+						}
+					} else {
+						int result = uStoreService.increaseProductCountUp(cart);
+						if (result < 1) {
+							LOGGER.info("장바구니에 있는 상품 수량 변경 실패");
+						}
 					}
 				}
 			} else {
@@ -165,7 +183,8 @@ public class UserStoreController {
 	 * @return
 	 */
 	@RequestMapping(value = "/store/detail.yh")
-	public ModelAndView storeDetail(int productTypeNo, int productNo, ModelAndView mv) {
+	public ModelAndView storeDetail(@RequestParam("productTypeNo") int productTypeNo,
+			@RequestParam("productNo") int productNo, ModelAndView mv) {
 		try {
 			Product product = uStoreService.printOneProduct(productNo);
 			mv.addObject("productTypeNo", productTypeNo);
@@ -299,6 +318,7 @@ public class UserStoreController {
 
 	/**
 	 * 결제 정보 DB 저장
+	 * 
 	 * @param request
 	 * @param order
 	 * @param paid_at
@@ -310,13 +330,11 @@ public class UserStoreController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/store/pay.yh", method = RequestMethod.POST)
-	public String storePay(HttpServletRequest request,
-			@ModelAttribute StoreOrder order,
+	public String storePay(HttpServletRequest request, @ModelAttribute StoreOrder order,
 			@RequestParam("paid_at") long paid_at,
 			@RequestParam(value = "cartNoList[]", required = false) List<Integer> cartNoList,
 			@RequestParam(value = "productNameList[]", required = false) List<String> productNameList,
-			@RequestParam("productCountList[]") List<Integer> productCountList,
-			@RequestParam("status") String status) {
+			@RequestParam("productCountList[]") List<Integer> productCountList, @RequestParam("status") String status) {
 		String orderNo = null;
 		try {
 			// 주문자 아이디 세팅
@@ -334,7 +352,7 @@ public class UserStoreController {
 			cal.add(Calendar.MONTH, 6);
 			SimpleDateFormat eSdf = new SimpleDateFormat("yyyy-MM-dd");
 			order.setExpiryDate(eSdf.format(cal.getTime()));
-			
+
 			switch (status) {
 			case "paid":
 				order.setAvailability("사용가능");
@@ -344,21 +362,26 @@ public class UserStoreController {
 					// TODO: @RequestParam으로 가져온 cartNoList가 비어 있을 경우 null인지 empty인지 궁금
 					if (cartNoList == null) {
 						// NOTE: 상품 목록/상세 -> 구매 (품목 1개)
-						StoreOrderDetail orderDetail = new StoreOrderDetail(orderNo, order.getProductName(), productCountList.get(0));
+						StoreOrderDetail orderDetail = new StoreOrderDetail(orderNo, order.getProductName(),
+								productCountList.get(0));
 						uStoreService.registerOneStoreOrderDetail(orderDetail); // INSERT INTO STORE_ORDER_DETAIL_TBL
 					} else {
 						// NOTE: 장바구니 -> 구매 (품목 1개 또는 N개)
 						if (cartNoList.size() == 1) {
 							// NOTE: 장바구니 -> 구매 (품목 1개)
-							StoreOrderDetail orderDetail = new StoreOrderDetail(orderNo, order.getProductName(), productCountList.get(0));
-							uStoreService.registerOneStoreOrderDetail(orderDetail); // INSERT INTO STORE_ORDER_DETAIL_TBL
+							StoreOrderDetail orderDetail = new StoreOrderDetail(orderNo, order.getProductName(),
+									productCountList.get(0));
+							uStoreService.registerOneStoreOrderDetail(orderDetail); // INSERT INTO
+																					// STORE_ORDER_DETAIL_TBL
 						} else {
 							// NOTE: 장바구니 -> 구매 (품목 N개)
 							List<StoreOrderDetail> orderDetailList = new ArrayList<>();
 							for (int i = 0; i < cartNoList.size(); i++) {
-								orderDetailList.add(new StoreOrderDetail(orderNo, productNameList.get(i), productCountList.get(i)));
+								orderDetailList.add(
+										new StoreOrderDetail(orderNo, productNameList.get(i), productCountList.get(i)));
 							}
-							uStoreService.registerManyStoreOrderDetail(orderDetailList); // INSERT INTO STORE_ORDER_DETAIL_TBL
+							uStoreService.registerManyStoreOrderDetail(orderDetailList); // INSERT INTO
+																							// STORE_ORDER_DETAIL_TBL
 						}
 						uStoreService.deleteProductsInCart(cartNoList);
 					}
@@ -379,13 +402,15 @@ public class UserStoreController {
 
 	/**
 	 * 결제 완료 페이지
+	 * 
 	 * @param request
 	 * @param orderNo
 	 * @param mv
 	 * @return
 	 */
 	@RequestMapping(value = "/store/pay/complete.yh")
-	public ModelAndView storeComplete(HttpServletRequest request, @RequestParam("orderNo") String orderNo, ModelAndView mv) {
+	public ModelAndView storeComplete(HttpServletRequest request, @RequestParam("orderNo") String orderNo,
+			ModelAndView mv) {
 		try {
 			HttpSession session = request.getSession();
 			Member member = (Member) session.getAttribute("loginUser");
@@ -396,7 +421,7 @@ public class UserStoreController {
 				}
 			}
 			mv.setViewName("user/store/storeComplete");
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mv;
@@ -404,43 +429,77 @@ public class UserStoreController {
 
 	/**
 	 * 마이페이지 - 스토어 구매내역
+	 * 
 	 * @param request
 	 * @param mv
 	 * @return
 	 */
 	@RequestMapping(value = "/mypage/store/history.yh")
-	public ModelAndView mypageStoreHistory(HttpServletRequest request, ModelAndView mv) {
+	public ModelAndView mypageStoreHistory(HttpServletRequest request,
+			@RequestParam(value = "option", required = false) String option,
+			@RequestParam(value = "period", required = false) String period,
+			@RequestParam(value = "startDate", required = false) String startDate,
+			@RequestParam(value = "endDate", required = false) String endDate, ModelAndView mv) {
 		try {
 			HttpSession session = request.getSession();
-			Member member = (Member) session.getAttribute("loginUser");
-			if (member != null) {
-				List<StoreOrder> orderList = uStoreService.printStoreOrderList(member.getMemberId());
-				if (!orderList.isEmpty()) {
+			String memberId = ((Member) session.getAttribute("loginUser")).getMemberId();
+			if (memberId != null) {
+				Member member = uMyService.printOneById(memberId);
+				if (member != null) {
+					mv.addObject("member", member);
+				}
+				if (option == null && period == null && startDate == null && endDate == null) {
+					// 조회 필터 미사용
+					List<StoreOrder> orderList = uStoreService.printStoreOrderList(memberId);
+					if (!orderList.isEmpty()) {
+						mv.addObject("orderList", orderList);
+					}
+				} else {
+					// 조회 필터 사용
+					HashMap<String, String> searchMap = new HashMap<String, String>();
+					searchMap.put("memberId", memberId);
+					if (option != null) {
+						searchMap.put("option", option); // all, pay, cancel
+					}
+					if (period != null) {
+						searchMap.put("period", period); // 1주일, 1개월, 3개월
+					}
+					if (startDate != null && endDate != null) {
+						searchMap.put("startDate", startDate); // 시작 날짜
+						searchMap.put("endDate", endDate); // 종료 날짜
+					}
+					List<StoreOrder> orderList = uStoreService.printStoreOrderListBySearch(searchMap);
 					mv.addObject("orderList", orderList);
 				}
 				mv.setViewName("user/mypage/storeOrderHistory");
 			} else {
 				mv.setViewName("redirect:/member/loginView.yh");
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mv;
 	}
-	
+
 	/**
 	 * 마이페이지 - 스토어 구매내역 상세
+	 * 
 	 * @param request
 	 * @param orderNo
 	 * @param mv
 	 * @return
 	 */
-	@RequestMapping(value="/mypage/store/detail.yh")
-	public ModelAndView mypageStoreDetail(HttpServletRequest request, @RequestParam("orderNo") String orderNo, ModelAndView mv) {
+	@RequestMapping(value = "/mypage/store/detail.yh")
+	public ModelAndView mypageStoreDetail(HttpServletRequest request, @RequestParam("orderNo") String orderNo,
+			ModelAndView mv) {
 		try {
 			HttpSession session = request.getSession();
-			Member member = (Member) session.getAttribute("loginUser");
-			if (member != null) {
+			String memberId = ((Member) session.getAttribute("loginUser")).getMemberId();
+			if (memberId != null) {
+				Member member = uMyService.printOneById(memberId);
+				if (member != null) {
+					mv.addObject("member", member);
+				}
 				StoreOrder order = uStoreService.printStoreOrder(orderNo);
 				List<StoreOrderDetail> orderDetailList = uStoreService.printStoreOrderDetailList(orderNo);
 				if (order != null) {
@@ -453,7 +512,7 @@ public class UserStoreController {
 			} else {
 				mv.setViewName("redirect:/member/loginView.yh");
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mv;

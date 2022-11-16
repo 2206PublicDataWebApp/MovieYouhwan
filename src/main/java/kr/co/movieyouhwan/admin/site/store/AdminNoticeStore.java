@@ -32,5 +32,7 @@ public interface AdminNoticeStore {
 	List<Notice> selectNoticeListBySearch(SqlSessionTemplate session, String searchOption, String searchValue,
 			PageInfo nPageInfo);
 
+	List<Notice> selectNewNoticeList(SqlSessionTemplate session, int top);
+
 	
 }

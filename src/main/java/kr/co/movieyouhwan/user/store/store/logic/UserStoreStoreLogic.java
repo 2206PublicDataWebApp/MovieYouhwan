@@ -1,12 +1,13 @@
 package kr.co.movieyouhwan.user.store.store.logic;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.store.domain.BestProduct;
 import kr.co.movieyouhwan.user.store.domain.Cart;
 import kr.co.movieyouhwan.user.store.domain.Product;
 import kr.co.movieyouhwan.user.store.domain.ProductType;
@@ -16,13 +17,6 @@ import kr.co.movieyouhwan.user.store.store.UserStoreStore;
 
 @Repository
 public class UserStoreStoreLogic implements UserStoreStore {
-
-	// 장바구니에 같은 상품 있는지 체크
-	@Override
-	public int selectCountProductInCart(SqlSession session, Cart cart) {
-		int count = session.selectOne("StoreMapper.selectCountProductInCart", cart);
-		return count;
-	}
 
 	// 장바구니에 새로운 상품 담기
 	@Override
@@ -108,10 +102,24 @@ public class UserStoreStoreLogic implements UserStoreStore {
 		return cartList;
 	}
 
+	// 장바구니에 같은 상품 있는지 체크
+	@Override
+	public int selectCountProductInCart(SqlSession session, Cart cart) {
+		int count = session.selectOne("StoreMapper.selectCountProductInCart", cart);
+		return count;
+	}
+
+	// 장바구니 번호 불러오기
+	@Override
+	public int selectCartNo(SqlSession session, Cart cart) {
+		int cartNo = session.selectOne("StoreMapper.selectCartNo", cart);
+		return cartNo;
+	}
+
 	// 장바구니 상품 수량 체크
 	@Override
-	public int selectProductCount(SqlSession session, int cartNo) {
-		int productCount = session.selectOne("StoreMapper.selectProductCount", cartNo);
+	public int selectProductCountByCartNo(SqlSession session, int cartNo) {
+		int productCount = session.selectOne("StoreMapper.selectProductCountByCartNo", cartNo);
 		return productCount;
 	}
 
@@ -136,10 +144,17 @@ public class UserStoreStoreLogic implements UserStoreStore {
 		return order;
 	}
 
-	// 스토어 구매내역 리스트 불러오기
+	// 스토어 구매내역 리스트 불러오기 (조회 필터 미사용)
 	@Override
 	public List<StoreOrder> selectStoreOrderList(SqlSession session, String memberId) {
 		List<StoreOrder> orderList = session.selectList("StoreMapper.selectStoreOrderList", memberId);
+		return orderList;
+	}
+
+	// 스토어 구매내역 리스트 불러오기 (조회 필터 사용)
+	@Override
+	public List<StoreOrder> selectStoreOrderListBySearch(SqlSession session, HashMap<String, String> searchMap) {
+		List<StoreOrder> orderList = session.selectList("StoreMapper.selectStoreOrderListBySearch", searchMap);
 		return orderList;
 	}
 
@@ -148,6 +163,13 @@ public class UserStoreStoreLogic implements UserStoreStore {
 	public List<StoreOrderDetail> selectStoreOrderDetailList(SqlSession session, String orderNo) {
 		List<StoreOrderDetail> orderDetailList = session.selectList("StoreMapper.selectStoreOrderDetailList", orderNo);
 		return orderDetailList;
+	}
+
+	// 인기 상품 리스트 불러오기
+	@Override
+	public List<BestProduct> selectBestProductList(SqlSession session, int top) {
+		List<BestProduct> productList = session.selectList("StoreMapper.selectBestProductList", top);
+		return productList;
 	}
 
 }

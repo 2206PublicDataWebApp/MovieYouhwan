@@ -23,7 +23,7 @@
       <div id="store-menu">
         <ul id="store-tab-list">
           <c:forEach items="${productTypeList }" var="productType">
-            <li class="store-tab-item"><a href="#product-per-type${productType.productTypeNo }">${productType.productType }</a></li>
+            <li class="store-tab-item" data-value="product-per-type${productType.productTypeNo }"><a>${productType.productType }</a></li>
           </c:forEach>
         </ul>
         <ul id="store-links">

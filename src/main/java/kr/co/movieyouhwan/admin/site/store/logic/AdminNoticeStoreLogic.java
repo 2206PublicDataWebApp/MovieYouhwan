@@ -90,4 +90,10 @@ public class AdminNoticeStoreLogic implements AdminNoticeStore{
 		List<Notice> nList=session.selectList("NoticeMapper.selectNoticeListBySearch", paraMap, rowBounds);
 		return nList;
 	}
+
+	@Override
+	public List<Notice> selectNewNoticeList(SqlSessionTemplate session, int top) {
+		List<Notice> noticeList = session.selectList("NoticeMapper.selectNewNoticeList", top);
+		return noticeList;
+	}
 }

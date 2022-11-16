@@ -1,10 +1,8 @@
 package kr.co.movieyouhwan.admin.site.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.movieyouhwan.admin.site.domain.Faq;
-import kr.co.movieyouhwan.common.page.PageInfo;
 
 public interface AdminFaqService {
 
@@ -17,4 +15,6 @@ public interface AdminFaqService {
 	public int modifyFaq(Faq faq);
 
 	public int deleteFaqList(String deleteNo);
+
+	public List<Faq> printNewFaqList(int top);
 }

@@ -85,6 +85,12 @@ public class AdminNoticeServiceImpl implements AdminNoticeService{
 		List<Notice> nList=aNoticeStore.selectNoticeListBySearch(session, searchOption, searchValue, nPageInfo);
 		return nList;
 	}
+
+	@Override
+	public List<Notice> printNewNoticeList(int top) {
+		List<Notice> noticeList = aNoticeStore.selectNewNoticeList(session, top);
+		return noticeList;
+	}
 	
 	
 

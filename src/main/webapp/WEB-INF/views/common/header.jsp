@@ -37,6 +37,6 @@
     </li>
     <li class="navbar-menuItem"><a id="ticket-tab" href="/movieTicketTime.yh">예매</a></li>
     <li class="navbar-menuItem"><a id="store-tab" href="/store.yh">스토어</a></li>
-    <li class="navbar-menuItem"><a href="/support.yh">고객지원</a></li>
+    <li class="navbar-menuItem"><a id="suppor-tab" href="/support.yh">고객지원</a></li>
   </ul>
 </nav>

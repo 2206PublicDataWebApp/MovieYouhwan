@@ -27,7 +27,7 @@
         <div id="search-by-option">
           <div>조회내용</div>
           <div>
-            <select name="" id="">
+            <select name="searchOption" id="select-search-by-option">
               <option value="all">전체</option>
               <option value="pay">결제내역</option>
               <option value="cancel">취소내역</option>

@@ -8,7 +8,7 @@ let date = new Date();
 ///////////////// Auto Call Function /////////////////
 //////////////////////////////////////////////////////
 
-// 헤더 - 스타일
+// 헤더 - 탭 메뉴 스타일
 $('.store-tab').addClass('tab-selected');
 
 // 상품 목록 - 가격에 천 단위로 콤마(,) 삽입
@@ -29,44 +29,17 @@ showCommas($('.buy-price'));
 // 결제 완료 - 가격에 천 단위로 콤마(,) 삽입
 showCommas($('.complete-price'));
 
-// 구매내역 - 가격에 천 단위로 콤마(,) 삽입
-showCommas($('.order-price'));
-
-// 구매내역, 구매내역 상세 - 결제일자 포맷
-formatDate($('.order-pay-date'));
-
-// 구매내역 - 주문상태별 색상 변경
-setColorByStatus($('.order-availability'));
-
-// TODO: 구매내역 조회 필터 날짜를
-// 스토어 구매내역 - 조회 필터 시작/종료 날짜를 오늘 날짜로 설정
-// setSysdate();
-// $('#start-date').val('2022-10-10');
-
-// /**
-//  * 오늘 날짜 반환
-//  */
-// function setSysdate() {
-//   const yyyy = date.getFullYear();
-//   const mm = date.getMonth() + 1;
-//   const dd = date.getDate();
-//   $('#start-date, #end-date').val(dateToStr(yyyy, mm, dd));
-// }
-
-// /**
-//  * 날짜 표현식 변환
-//  * @param {*} yyyy
-//  * @param {*} mm
-//  * @param {*} dd
-//  * @returns
-//  */
-// function dateToStr(yyyy, mm, dd) {
-//   return yyyy + '-' + mm + '-' + dd;
-// }
-
 //////////////////////////////////////////////////////
 /////////////////// Event Listener ///////////////////
 //////////////////////////////////////////////////////
+
+// 상품 목록 - 탭 메뉴로 스크롤 이동
+$('.store-tab-item').click(function () {
+  let type = $(this).data('value');
+  let target = $('div#' + type).offset().top - 50;
+  console.log(target);
+  $('html, body').animate({ scrollTop: target }, 200);
+});
 
 // 상품 목록 - 상품 구매
 $('.btn-buy-product').click(function () {
@@ -237,37 +210,6 @@ $('#btn-cart-delete').click(function () {
 // 결제완료 - 결제내역 페이지로 이동
 $('#btn-to-history').click(function () {
   $(location).attr('href', '/mypage/store/history.yh');
-});
-
-// 구매내역 - 기간 조회 필터 버튼 클릭 시 색상 변경
-$('.btn-search-by-period').click(function () {
-  $(this).removeClass('filter-not-clicked');
-  $(this).addClass('filter-clicked');
-  $(this).siblings().removeClass('filter-clicked');
-  $(this).siblings().addClass('filter-not-clicked');
-});
-
-// TODO: 결제 취소 구현
-// 구매내역 - 주문 취소
-$('#btn-order-cancel').click(function () {
-  if ($('#profile-user').length) {
-    if (confirm('정말 취소하시겠습니까?')) {
-      let cancelForm = $('<form></form>');
-      cancelForm.attr('action', '/store/order/cancel.yh');
-      cancelForm.attr('method', 'post');
-
-      let cancelInput = $('<input></input>');
-      cancelInput.attr('type', 'hidden');
-      cancelInput.attr('name', 'orderNo');
-      cancelInput.attr('value', $(this).data('value'));
-
-      cancelInput.appendTo(cancelForm);
-      cancelForm.appendTo('body');
-      cancelForm.submit();
-    }
-  } else {
-    $(location).attr('href', '/member/loginView.yh');
-  }
 });
 
 ///////////////////////////////////////////////////////

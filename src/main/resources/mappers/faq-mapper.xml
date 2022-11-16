@@ -23,12 +23,17 @@
 		DELETE FROM FAQ_TBL WHERE FAQ_NO IN (${deleteNo})
 	</delete>
 	
-	
 	<select id="selectFaq" resultMap="faqResultMap">
 		SELECT * FROM FAQ_TBL WHERE FAQ_NO=#{faqNo}
 	</select>
 	
 	<select id="selectFaqList" resultMap="faqResultMap">
 		SELECT * FROM FAQ_TBL ORDER BY FAQ_TYPE ASC
+	</select>
+	
+	<select id="selectNewFaqList" resultMap="faqResultMap">
+		SELECT FAQ_NO, FAQ_TITLE
+		FROM (SELECT FAQ_NO, FAQ_TITLE FROM FAQ_TBL ORDER BY FAQ_NO DESC)
+		WHERE ROWNUM <![CDATA[<=]]> #{top}
 	</select>
 </mapper>
