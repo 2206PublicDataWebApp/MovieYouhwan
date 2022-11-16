@@ -119,4 +119,14 @@ public class UserMovieStoreLogic implements UserMovieStore{
 		int result = session.insert("MovieMapper.insertMovieTicket", movieTicket);
 		return result;
 	}
+
+	// 회원 테이블 포인트 업데이트
+	@Override
+	public int updateMemberPoint(SqlSessionTemplate session, String memberId, Integer userPoint) {
+		HashMap<String, String> memberPointMap = new HashMap<>();
+		memberPointMap.put("memberId", memberId);
+		memberPointMap.put("userPoint", userPoint.toString());
+		int result = session.update("MovieMapper.updateMemberPoint", memberPointMap);
+		return result;
+	}
 }

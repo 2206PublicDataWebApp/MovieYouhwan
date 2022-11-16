@@ -155,8 +155,8 @@ public class AdminMovieServiceImpl implements AdminMovieService{
 
 	// 영화 리스트 페이징 처리
 	@Override
-	public int printMovieListCount(String searchValue) {
-		int count = aMovieStore.selectMovieListCount(session, searchValue);
+	public int printMovieListCount() {
+		int count = aMovieStore.selectMovieListCount(session);
 		return count;
 	}
 }

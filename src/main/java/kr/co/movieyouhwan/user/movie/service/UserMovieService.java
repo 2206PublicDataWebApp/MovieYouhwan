@@ -37,4 +37,6 @@ public interface UserMovieService {
 	public List<Integer> printMyZzimMovieList(String memberId);
 	// 예매 내역 등록
 	public int registerMovieTicket(MovieTicket movieTicket);
+	// 회원 테이블 포인트 업데이트
+	public int modifyMemberPoint(String memberId, Integer userPoint);
 }

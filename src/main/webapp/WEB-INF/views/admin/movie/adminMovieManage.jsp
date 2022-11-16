@@ -66,6 +66,7 @@
 			
 			for(var i=startIndex; i<endIndex; i++){
 				$('.${movieTime.movieDay}').eq(i).text(name);
+				$('.${movieTime.movieDay}').eq(i).css('background-color', '#FCF4C1');
 			}
 		</c:forEach>
 	</script>

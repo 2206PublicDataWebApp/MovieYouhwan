@@ -47,5 +47,5 @@ public interface AdminMovieService {
 	// 상영 영화 목록 출력
 	public List<MovieTime> printAllMovieTime(Integer theaterNo);
 	// 영화 리스트 페이징 처리
-	public int printMovieListCount(String searchValue);
+	public int printMovieListCount();
 }

@@ -6,7 +6,7 @@
 		<div class="modal-ticket">
 			<div id="mticket-top">
 				<p id="mticket-top-text">선택 영화 확인</p>
-					<div id="mticket-wrap">
+				<div id="mticket-wrap">
 					<div id="mticket-img"></div>
 					<div id="mticket-information"></div>
 				</div>

@@ -39,4 +39,6 @@ public interface UserMovieStore {
 	public List<Integer> selectMyZzimMovieList(SqlSessionTemplate session, String memberId);
 	// 예매 내역 등록
 	public int insertMovieTicket(SqlSessionTemplate session, MovieTicket movieTicket);
+	// 회원 테이블 포인트 업데이트
+	public int updateMemberPoint(SqlSessionTemplate session, String memberId, Integer userPoint);
 }

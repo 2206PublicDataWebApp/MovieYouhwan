@@ -24,7 +24,6 @@
 
 /* adminCinemaRegister(관리자) */
 .title {
-	flaot : left;
 	color : #0F1A3B;
 	line-height : 30px;
 }
@@ -533,8 +532,22 @@ button {
 	}
 /* cinemaMovie(사용자) */
 .cinema-movie-year-month {
-	margin-bottom : 20px;
+	margin-bottom : 30px;
 }
+	#choice-movie-listwrap {
+		margin-left : 20px;
+	}
+	.choice-movie-wrap {
+		margin-bottom : 60px;
+	}
+	.filter-not-clicked {
+		border : solid 1px #0F1A3B;
+	}
+	.filter-clicked {
+		color : white;
+		background-color : #0F1A3B;
+		border : solid 1px #0F1A3B;
+	}
 .tmday-button {
 	width : 120px;
 	height : 40px;

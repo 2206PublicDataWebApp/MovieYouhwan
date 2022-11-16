@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#ticket-tab {
+  border-bottom: 3px solid #f0c808;
+}
+
 button {
 	cursor : pointer;
 }
@@ -54,13 +58,27 @@ button {
 }
 
 #time-choice-wrapper {
-	width : 200px;
-	height : 100px;
+	width : 130px;
+	height : 70px;
+	margin-top : 15px;
+	padding-top : 11px;
 	border : solid 1px #0F1A3B;	 
+	border-radius : 15px;
+	text-align : center;
 	cursor : pointer;
+}
+.movie-seat-choice {
+	margin-bottom : 10px;
 }
 
 /* movieTicketTime(사용자) */
+.ticket-movie-time {
+	margin-left : 20px;
+	margin-top : 20px;
+}
+.cmovie-name {
+	margin-bottom : 20px;
+}
 .ticket-choice {
 	width : 100%;
 	height : 160px;
@@ -257,7 +275,8 @@ button {
 		width : 100px;
 		height : 30px;
 		color : white;
-		margin-top : 55px;
+		margin-top : 47px;
+		margin-left : 160px;
 		float : right;
 		border : solid 1px #0F1A3B;	
 		background-color : #0F1A3B;	
@@ -281,12 +300,24 @@ button {
 		}
 		#information-text {
 			float :left;
-			width : 150px;
+			width : 200px;
 			padding-top : 25px;
+		}
+		#choice-reset-button {
+			width : 100px;
+			height : 30px;
+			color : #0F1A3B;
+			border : solid 1px #0F1A3B;
+			background-color : white;
+			margin-top : 55px;
+			margin-left : 45px;
 		}
 			.information-font {
 				color : white;
 				margin-bottom : 10px;
+			}
+			.movie-in-bottom {
+				margin-bottom : 12px;
 			}
 		#adult-count {
 			display : flex;

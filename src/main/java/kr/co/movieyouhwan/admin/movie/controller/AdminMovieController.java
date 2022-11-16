@@ -134,12 +134,10 @@ public class AdminMovieController {
 	public ModelAndView movieListView(
 			ModelAndView mv,
 			@ModelAttribute Movie movie,
-			@RequestParam(value="currentPage", required=false) Integer currentPage,
-			@RequestParam(value="searchValue", required=false) String mSearchValue) {
+			@RequestParam(value="currentPage", required=false) Integer currentPage) {
 		// 페이징 처리
-		String searchValue = (mSearchValue != null ? mSearchValue:"");
 		int page = (currentPage != null ? currentPage : 1);
-		PageInfo pageInfo = new PageInfo(page, aMovieService.printMovieListCount(searchValue), 10, 5);
+		PageInfo pageInfo = new PageInfo(page, aMovieService.printMovieListCount(), 10, 5);
 		// 영화 리스트 출력
 		List<Movie> mList = aMovieService.printAllMovie(pageInfo);
 		// 화면 출력

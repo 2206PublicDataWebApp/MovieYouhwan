@@ -87,6 +87,11 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	})
 })
 
-// 사용자
-
-// 예매 영화관 선택 활성화
+$('.choice-movie-list').click(function () {
+    if (!$('#profile-user').length) {
+      alert('로그인이 필요한 서비스입니다.');
+      $(location).attr('href', '/member/loginView.yh');
+    }else {
+        $(location).attr('href', '/movieTicketTime.yh');
+    }
+  });

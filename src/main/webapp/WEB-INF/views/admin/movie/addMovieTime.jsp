@@ -45,12 +45,17 @@
 			<h3>영화 등록</h3>
 			<p id="modal-movie-text">영화 선택</p>
 			<select id="choice-addmovie" name="movieNo" onchange="handleOnChange(this)">
+					<option>영화를 선택해주세요.</option>
 				<c:forEach items="${mList }" var="movie" varStatus="i">
 					<option value="${movie.movieNo }">${movie.movieTitle}</option>
 				</c:forEach>
 			</select>
 			<!-- AJAX 영화 정보 추가 영역 -->
-			<div id="movie-info"></div>
+			<div id="movie-info">
+				<p class="add-font">상영날짜 : </p>
+				<p class="add-font">종영날짜 : </p>
+				<p class="add-font">상영시간 : </p>
+			</div>
 			<p>상영 날짜</p>
 			<select id="choicetime-movie-date" name="movieDay"> 
 				<option value="${today }">${oneDayDate }</option>
