@@ -9,6 +9,7 @@ import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
+import kr.co.movieyouhwan.user.movie.domain.MovieReview;
 import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 import kr.co.movieyouhwan.user.movie.store.UserMovieStore;
 
@@ -117,6 +118,27 @@ public class UserMovieStoreLogic implements UserMovieStore{
 	@Override
 	public int insertMovieTicket(SqlSessionTemplate session, MovieTicket movieTicket) {
 		int result = session.insert("MovieMapper.insertMovieTicket", movieTicket);
+		return result;
+	}
+
+	@Override
+	public List<MovieReview> selectMovieReview(SqlSessionTemplate session, Integer movieNo) {
+		List<MovieReview> movieReviewList=session.selectList("MovieMapper.selectMovieReview", movieNo);
+		return movieReviewList;
+	}
+
+	@Override
+	public int insertMovieReview(SqlSessionTemplate session, MovieReview review) {
+		int result=session.insert("MovieMapper.insertMovieReview", review);
+		return result;
+	}
+
+	@Override
+	public int selectMovieReviewCount(SqlSessionTemplate session, String memberId, Integer movieNo) {
+		HashMap<String,String> param=new HashMap<>();
+		param.put("memberId", memberId);
+		param.put("movieNo", movieNo.toString());
+		int result=session.selectOne("MovieMapper.selectMovieReviewCount", param);
 		return result;
 	}
 }

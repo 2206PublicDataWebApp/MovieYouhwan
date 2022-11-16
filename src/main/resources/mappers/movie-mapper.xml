@@ -24,8 +24,6 @@
 		<result property="threeAgeCount" column="THREE_AGE_COUNT" />
 		<result property="fourAgeCount" column="FOUR_AGE_COUNT" />
 		<result property="fiveAgeCount" column="FIVE_AGE_COUNT" />
-		<result property="movieZzim" column="MOVIE_ZZIM"/>
-		<result property="zzimNo" column="ZZIM_NO"/>
 	</resultMap>
 	<resultMap type="MovieImg" id="MovieImgResultMap">
 		<id property="movieImgNo" column="MOVIE_IMG_NO" />
@@ -94,6 +92,18 @@
 		<result property="movieStart" column="MOVIE_START"/>
 		<result property="ticketStatus" column="TICKET_STATUS"/>
 	</resultMap>
+	
+	<!-- 영화 리뷰 result Map -->
+	<resultMap type="MovieReview" id="MovieReviewResultMap">
+		<id property="movieReviewNo" column="MOVIE_REVIEW_NO"/>
+		<result property="movieNo" column="MOVIE_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="memberNick" column="MEMBER_NICK"/>
+		<result property="memberImgRename" column="MEMBER_IMG_RENAME"/>
+		<result property="movieRate" column="MOVIE_RATE"/>
+		<result property="movieReview" column="MOVIE_REVIEW"/>
+		<result property="regDate" column="REG_DATE"/>
+	</resultMap>
 	<!-- 영화 등록(관리자) -->
 	<insert id="insertMovie">
 		INSERT INTO MOVIE_TBL VALUES(SEQ_MOVIE_NO.NEXTVAL, #{movieTitle}, #{movieGenre}, #{movieRuntime}, #{movieDirector}, #{movieActor}, #{movieAge}, #{movieStartday}, #{movieTicketingday}, #{movieEndday}, #{movieContent}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
@@ -109,6 +119,10 @@
 	<!-- 상영 영화 등록(관리자) -->
 	<insert id="insertMovieTime">
 		INSERT INTO MOVIE_TIME_TBL VALUES(SEQ_MOVIE_TIME_NO.NEXTVAL, #{cinemaNo}, #{theaterNo}, #{movieNo}, #{movieDay}, #{movieStart}, #{movieEnd}, #{movieTicket}, #{movieSeat})
+	</insert>
+	<!-- 영화 리뷰 등록 -->
+	<insert id="insertMovieReview">
+		INSERT INTO MOVIE_REVIEW_TBL VALUES(SEQ_MOVIE_REVIEW_NO.NEXTVAL, #{movieNo}, #{memberId}, #{movieRate}, #{movieReview}, DEFAULT)
 	</insert>
 	<!-- 영화 수정(관리자) -->
 	<update id="updateOneMovie">
@@ -270,4 +284,14 @@
 	<insert id="insertMovieTicket">
 		INSERT INTO MOVIE_TICKET_TBL VALUES(#{ticketNo}, #{memberId}, #{memberAge}, #{memberGender}, #{cinemaNo}, #{theaterNo}, #{movieNo}, #{cinemaName}, #{theaterName}, #{movieName}, #{adultCount}, #{teenagerCount}, #{choiceSeat}, #{moviePay}, #{payMethod}, #{addPoint}, DEFAULT, #{movieDay}, #{movieStart}, DEFAULT)
 	</insert>
+	
+	<!-- 영화 리뷰 리스트 출력 -->
+	<select id="selectMovieReview" resultMap="MovieReviewResultMap">
+		SELECT MOVIE.*, MEMBER.MEMBER_NICK, MEMBER.MEMBER_IMG_RENAME FROM MOVIE_REVIEW_TBL MOVIE, MEMBER_TBL MEMBER WHERE MOVIE.MEMBER_ID=MEMBER.MEMBER_ID AND MOVIE.MOVIE_NO=#{movieNo} ORDER BY MOVIE_REVIEW_NO DESC
+	</select>
+	
+	<!-- movie 리뷰를 이미 등록했는지 확인 -->
+	<select id="selectMovieReviewCount" resultType="_int">
+		SELECT COUNT(*) FROM MOVIE_REVIEW_TBL WHERE MEMBER_ID=#{memberId} AND MOVIE_NO=#{movieNo}
+	</select>
 </mapper>

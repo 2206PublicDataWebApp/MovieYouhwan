@@ -33,6 +33,7 @@ import kr.co.movieyouhwan.user.cinema.domain.Cinema;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
+import kr.co.movieyouhwan.user.movie.domain.MovieReview;
 import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 import kr.co.movieyouhwan.user.movie.service.UserMovieService;
 
@@ -242,6 +243,71 @@ public class UserMovieController {
 		mv.addObject("mvList", mvList);
 		mv.setViewName("user/movie/movieDetail");
 		return mv;
+	}
+	
+	/**
+	 * 리뷰 리스트 불러오기
+	 * @param mv
+	 * @param movieNo
+	 * @return
+	 */
+	@RequestMapping(value="/movieReview.yh", method=RequestMethod.GET)
+	public ModelAndView movieReview(ModelAndView mv,
+			@RequestParam("movieNo") Integer movieNo) {
+		List<MovieReview> movieReviewList=uMovieService.printMovieReview(movieNo);
+		Movie movie = aMovieService.printOneMovie(movieNo);
+		List<MovieImg> miList = aMovieService.printAllMovieImg(movieNo);
+		List<MovieVideo> mvList = aMovieService.printAllMovieVideo(movieNo);
+		// 나의 찜 목록 추가 예정
+		mv.addObject("movieReviewList", movieReviewList);
+		mv.addObject("movie", movie);
+		mv.addObject("miList", miList);
+		mv.addObject("mvList", mvList);
+		if(movieReviewList.size()!=0) {
+			int movieRateSum=0;
+			for(int i=0; i<movieReviewList.size(); i++) {
+				movieRateSum+=movieReviewList.get(i).getMovieRate();
+			}
+			String movieTotalRate=String.format("%.1f",(double)movieRateSum/movieReviewList.size());
+			mv.addObject("movieTotalRate", movieTotalRate);
+		}else {
+			mv.addObject("movieTotalRate", "-");
+		}
+		mv.setViewName("user/movie/movieReview");
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/movieReview.register.yh", method=RequestMethod.POST)
+	public String registerMovieReview(HttpServletRequest request,
+			@RequestParam("movieReview") String movieReview,
+			@RequestParam("movieRate") Integer movieRate,
+			@RequestParam("movieNo") Integer movieNo) {
+		HttpSession session=request.getSession();
+		Member member=(Member)session.getAttribute("loginUser");
+		if(member==null) {
+			return "loginRequired";
+		}
+		else {
+			int isReviewAlreadyRegistered=uMovieService.checkReviewExist(member.getMemberId(), movieNo);
+			if(isReviewAlreadyRegistered==0) {
+				MovieReview review=new MovieReview();
+				review.setMemberId(member.getMemberId());
+				review.setMovieNo(movieNo);
+				review.setMovieRate(movieRate);
+				review.setMovieReview(movieReview);
+				int result=uMovieService.registerMovieReview(review);
+				if(result>0) {
+					return "success";
+				}
+				else {
+					return "123";
+				}
+			}
+			else {
+				return "fail";
+			}
+		}
 	}
 	
 	/**

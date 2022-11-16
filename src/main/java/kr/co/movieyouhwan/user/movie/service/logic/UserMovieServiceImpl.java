@@ -10,6 +10,7 @@ import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
+import kr.co.movieyouhwan.user.movie.domain.MovieReview;
 import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 import kr.co.movieyouhwan.user.movie.service.UserMovieService;
 import kr.co.movieyouhwan.user.movie.store.UserMovieStore;
@@ -116,6 +117,24 @@ public class UserMovieServiceImpl implements UserMovieService{
 	@Override
 	public int registerMovieTicket(MovieTicket movieTicket) {
 		int result = uMovieStore.insertMovieTicket(session, movieTicket);
+		return result;
+	}
+
+	@Override
+	public List<MovieReview> printMovieReview(Integer movieNo) {
+		List<MovieReview> movieReviewList=uMovieStore.selectMovieReview(session, movieNo);
+		return movieReviewList;
+	}
+
+	@Override
+	public int registerMovieReview(MovieReview review) {
+		int result=uMovieStore.insertMovieReview(session, review);
+		return result;
+	}
+
+	@Override
+	public int checkReviewExist(String memberId, Integer movieNo) {
+		int result=uMovieStore.selectMovieReviewCount(session, memberId, movieNo);
 		return result;
 	}
 }

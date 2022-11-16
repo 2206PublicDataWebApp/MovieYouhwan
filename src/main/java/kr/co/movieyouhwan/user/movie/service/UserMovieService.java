@@ -6,6 +6,7 @@ import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
+import kr.co.movieyouhwan.user.movie.domain.MovieReview;
 import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 
 public interface UserMovieService {
@@ -37,4 +38,7 @@ public interface UserMovieService {
 	public List<Integer> printMyZzimMovieList(String memberId);
 	// 예매 내역 등록
 	public int registerMovieTicket(MovieTicket movieTicket);
+	public List<MovieReview> printMovieReview(Integer movieNo);
+	public int registerMovieReview(MovieReview review);
+	public int checkReviewExist(String memberId, Integer movieNo);
 }
