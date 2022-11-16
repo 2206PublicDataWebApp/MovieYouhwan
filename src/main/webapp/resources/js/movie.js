@@ -116,6 +116,7 @@ function bindChange(imgAdd) {
 }
 
 // 상영 영화 관리 페이지
+// 영화 추가시 상영날짜, 종영날짜, 상영시간 추출 후 출력
 function handleOnChange(e) {
 	var movieNo = e.value;
 	$.ajax({
@@ -130,13 +131,22 @@ function handleOnChange(e) {
 			var movieStartday = movie.movieStartday;
 			var movieEndday = movie.movieEndday;
 			var movieRuntime = movie.movieRuntime;
-			var addDiv = $('#movie-info');
+			var addDiv = $('#movie-info').html('');
 			addDiv.append('<p class="add-font"> 상영날짜 : '+ movieStartday +'</p>');
 			addDiv.append('<p class="add-font"> 종영날짜 : '+ movieEndday +'</p>');
-			addDiv.append('<p class="add-font"> 상영시간 : '+ movieRuntime +'</p>');
+			addDiv.append('<p class="add-font"> 상영시간 : '+ movieRuntime +'분</p>');
 		},
 		error : function() {
 			alert("관리자에게 문의해주세요. (02-655-9523)");
 		}
 	});
 }
+
+$('.ticket-button').click(function () {
+    if (!$('#profile-user').length) {
+      alert('로그인이 필요한 서비스입니다.');
+      $(location).attr('href', '/member/loginView.yh');
+    }else {
+        $(location).attr('href', '/movieTicketTime.yh');
+    }
+  });

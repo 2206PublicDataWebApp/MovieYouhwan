@@ -41,4 +41,6 @@ public interface UserMovieService {
 	public List<MovieReview> printMovieReview(Integer movieNo);
 	public int registerMovieReview(MovieReview review);
 	public int checkReviewExist(String memberId, Integer movieNo);
+	// 회원 테이블 포인트 업데이트
+	public int modifyMemberPoint(String memberId, Integer userPoint);
 }

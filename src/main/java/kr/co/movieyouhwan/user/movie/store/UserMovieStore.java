@@ -43,4 +43,6 @@ public interface UserMovieStore {
 	public List<MovieReview> selectMovieReview(SqlSessionTemplate session, Integer movieNo);
 	public int insertMovieReview(SqlSessionTemplate session, MovieReview review);
 	public int selectMovieReviewCount(SqlSessionTemplate session, String memberId, Integer movieNo);
+	// 회원 테이블 포인트 업데이트
+	public int updateMemberPoint(SqlSessionTemplate session, String memberId, Integer userPoint);
 }

@@ -153,8 +153,8 @@ public class AdminMovieStoreLogic implements AdminMovieStore {
 
 	// 영화 리스트 페이징 처리
 	@Override
-	public int selectMovieListCount(SqlSessionTemplate session, String searchValue) {
-		int count = session.selectOne("MovieMapper.selectMovieListCount", searchValue);
+	public int selectMovieListCount(SqlSessionTemplate session) {
+		int count = session.selectOne("MovieMapper.selectMovieListCount");
 		return count;
 	}
 }

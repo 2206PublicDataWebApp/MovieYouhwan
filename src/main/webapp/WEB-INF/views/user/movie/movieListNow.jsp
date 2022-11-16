@@ -14,6 +14,7 @@
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
 <script src="/resources/js/header.js" defer></script>
 <script src="/resources/js/footer.js" defer></script>
+<script src="/resources/js/movie.js" defer></script>
 <script src="/resources/js/user/movieZzim.js" defer></script>
 
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
@@ -76,7 +77,7 @@
 						<div id="ticketBtn-zzim">
 							<!-- 예매하기 버튼 -->
 							<div class="ticket-button-area">
-								<button type="button" class="ticket-button" onclick="location.href='/movieTicketTime.yh'">예매하기</button>
+								<button type="button" class="ticket-button">예매하기</button>
 							</div>
 							<!-- 옆에 ♡ 아이콘으로 찜하기 만들어주시면 됩니다~ -->
 							<!-- 찜하기 버튼 -->

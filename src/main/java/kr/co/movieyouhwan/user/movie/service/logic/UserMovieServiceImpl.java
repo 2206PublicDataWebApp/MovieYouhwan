@@ -106,6 +106,13 @@ public class UserMovieServiceImpl implements UserMovieService{
 		return buyerInfo;
 	}
 
+	// 회원 테이블 포인트 업데이트 (김미소)
+	@Override
+	public int modifyMemberPoint(String memberId, Integer userPoint) {
+		int result = uMovieStore.updateMemberPoint(session, memberId, userPoint);
+		return result;
+	}
+
 	// 나의 찜 여부
 	@Override
 	public List<Integer> printMyZzimMovieList(String memberId) {

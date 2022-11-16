@@ -32,10 +32,12 @@ import kr.co.movieyouhwan.common.page.PageInfo;
 import kr.co.movieyouhwan.user.cinema.domain.Cinema;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.member.service.UserMemberService;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.domain.MovieReview;
 import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 import kr.co.movieyouhwan.user.movie.service.UserMovieService;
+import kr.co.movieyouhwan.user.myPage.service.UserMyService;
 
 @Controller
 public class UserMovieController {
@@ -47,6 +49,8 @@ public class UserMovieController {
 	private AdminTheaterService aTheaterService;
 	@Autowired
 	private UserMovieService uMovieService;
+	@Autowired
+	private UserMyService uMyService;
 	
 	/**
 	 * 현재 상영 영화 목록 화면
@@ -503,9 +507,10 @@ public class UserMovieController {
 			@RequestParam("teenagerPay") Integer teenagerPay) {
 		// 사용자 정보 가져오기
 		HttpSession session = request.getSession();
-		Member member = (Member)session.getAttribute("loginUser");
+		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+		Member member = uMyService.printOneById(memberId);
 		String userNick = member.getMemberNick();
-		String userPoint = member.getMemberPoint();
+		int userPoint = member.getMemberPoint();
 		String userBirth = member.getMemberBirth();
 		String userGender = member.getMemberGender();
 		// 화면 출력
@@ -611,6 +616,7 @@ public class UserMovieController {
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("loginUser");
 		movieTicket.setMemberId(member.getMemberId());
+		String memberId = member.getMemberId();
 		String memberAge = member.getMemberBirth().substring(0,4);
 		int today = Integer.parseInt("2022");
 		int num = Integer.parseInt("1");
@@ -663,7 +669,8 @@ public class UserMovieController {
 		movieTicket.setChoiceSeat(seatChoice);
 		movieTicket.setMoviePay(payAmount);
 		movieTicket.setPayDate(new Date(paid_at));
-		int result = uMovieService.registerMovieTicket(movieTicket);
+		int result1 = uMovieService.registerMovieTicket(movieTicket);
+		int result2 = uMovieService.modifyMemberPoint(memberId, userPoint);
 		return "";
 	}
 	

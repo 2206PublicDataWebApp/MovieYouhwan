@@ -286,7 +286,6 @@
 	<insert id="insertMovieTicket">
 		INSERT INTO MOVIE_TICKET_TBL VALUES(#{ticketNo}, #{memberId}, #{memberAge}, #{memberGender}, #{cinemaNo}, #{theaterNo}, #{movieNo}, #{cinemaName}, #{theaterName}, #{movieName}, #{adultCount}, #{teenagerCount}, #{choiceSeat}, #{moviePay}, #{payMethod}, #{addPoint}, DEFAULT, #{movieDay}, #{movieStart}, DEFAULT)
 	</insert>
-	
 	<!-- 영화 리뷰 리스트 출력 -->
 	<select id="selectMovieReview" resultMap="MovieReviewResultMap">
 		SELECT MOVIE.*, MEMBER.MEMBER_NICK, MEMBER.MEMBER_IMG_RENAME FROM MOVIE_REVIEW_TBL MOVIE, MEMBER_TBL MEMBER WHERE MOVIE.MEMBER_ID=MEMBER.MEMBER_ID AND MOVIE.MOVIE_NO=#{movieNo} ORDER BY MOVIE_REVIEW_NO DESC
@@ -296,4 +295,8 @@
 	<select id="selectMovieReviewCount" resultType="_int">
 		SELECT COUNT(*) FROM MOVIE_REVIEW_TBL WHERE MEMBER_ID=#{memberId} AND MOVIE_NO=#{movieNo}
 	</select>
+	<!-- 멤버 테이블 포인트 업데이트 -->
+	<update id="updateMemberPoint">
+		UPDATE MEMBER_TBL SET MEMBER_POINT = MEMBER_POINT + #{userPoint} WHERE MEMBER_ID = #{memberId}
+	</update>
 </mapper>

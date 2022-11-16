@@ -73,6 +73,7 @@
 				   	<div class="cinema-movie-year-month">
 					   	<div class="year-month">${movieDay.thisYear }년 ${movieDay.thisMonth }월</div>
 						<c:forEach items="${movieDay.tmdayList }" var="tmday" varStatus="i">
+							<input type="hidden" class="movieday-list" name="movieDay" value="${movieDay.dayList[i.count-1] }" />
 							<button type="button" class="tmday-button" value="${movieDay.dayList[i.count-1] }" onclick="ticketMovieday(${movieDay.dayList[i.count-1]})">${tmday }</button>
 						</c:forEach>
 						<hr/>

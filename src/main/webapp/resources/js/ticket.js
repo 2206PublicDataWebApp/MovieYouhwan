@@ -1,15 +1,17 @@
+$('.movie-tab').addClass('tab-selected');
+
 // movieTicketTime.jsp
 
 // 영화관 - 첫번째 라디오 버튼 checked
-$('input:radio[name=cinemaName]').eq(0).attr("checked", true);
-$('input:radio[name=movieTitle]').eq(0).attr("checked", true);
+// $('input:radio[name=cinemaName]').eq(0).attr("checked", true);
+// $('input:radio[name=movieTitle]').eq(0).attr("checked", true);
 
 // 영화관 선택시 영화관, 날짜 별 상영 영화 
 function cinemaNameChoice(cinemaNo) {
 	var radioVal = $('input[name="cinemaName"]:checked').val();
 	var divTag = $('.ticket-cinema-name');
 	$(divTag).children('p').remove();
-	$(divTag).append('<p>' + radioVal + '</p>');
+	$(divTag).append('<p class="cmovie-name">' + radioVal + '</p>');
 	$.ajax({
 		type : "post",
 		url : "/movieTicketTimeCinema.yh",
@@ -31,6 +33,7 @@ function cinemaNameChoice(cinemaNo) {
 				listWrap.append(movieBoxTag);
 				$('#ticket-name'+m).attr('value', movieNo);
 			}
+
 		},
 		error : function() {
 			alert("관리자에게 문의해주세요. (02-655-9523)");
@@ -74,7 +77,6 @@ function ticketMovieday(movieNo, cinemaNo, movieTitle) {
 					var movieStart = movieTime[mt].movieStart;
 					var movieEnd = movieTime[mt].movieEnd;
 					var movieDay = movieTime[mt].movieDay;
-					console.log(movieTime);
 					var movieDivTag = $('<div id="time-choice-wrapper"></div>');
 					var movieSeatTag = $('<p class="movie-seat-choice">'+ theaterName +' '+ movieTicket + '/' + movieSeat +'</p>');
 					var movieTimeTag = $('<p>'+ movieStart +'~'+ movieEnd+'</p>');
@@ -95,12 +97,11 @@ function ticketMovieday(movieNo, cinemaNo, movieTitle) {
 				var informationArea = $('#mticket-information');
 				informationArea.append('<p class="information-all">'+ cinemaName +'</p>');
 				informationArea.append('<p id="mticket-movie-title" class="information-all">'+ movieTitle +'</p>');
-				informationArea.append('<p>'+ movieDay +'</p>')
-				informationArea.append('<p>'+ movieStart +'</p>');
-				informationArea.append('<p>'+ movieEnd +'</p>');
-				informationArea.append('<p>'+ theaterName +'</p>');
+				informationArea.append('<p class="movie-in-bottom">'+ movieDay +'</p>')
+				informationArea.append('<p class="movie-in-bottom">'+ movieStart +'</p>');
+				informationArea.append('<p class="movie-in-bottom">'+ movieEnd +'</p>');
+				informationArea.append('<p class="movie-in-bottom">'+ theaterName +'</p>');
 				informationArea.append('<p class="information-all">'+ movieTicket +'/'+ movieSeat +'</p>');
-				informationArea.append('<p>선택하신 영화 정보를 확인하신 후 아래 좌석선택 버튼을 눌러주세요.</p>');
 				informationArea.append('<button id="choice-seat-button">좌석선택</button>');
 				// 값 넘겨주기
 				informationArea.append('<input type="hidden" name="cinemaNo" value="" />')
@@ -149,139 +150,58 @@ function popUp() {
 // movieTicketSeat.jsp
 
 // 좌석 선택 효과
+// 페이지 입성 - 모든 좌석 disabled
 let chocieSeat = $('.seat-box');
-let count = 1;
-chocieSeat.click(function() {
-	var selected = $(this);
+chocieSeat.attr('disabled', 'disabled');
+var hiddenTag = $('#hidden-value');
+
+var addAllCount = 0; // 총인원수
+var seatBoxCount = $('.seat-box').length;
+
+// 인원수가 변경될 때 작동
+$('#adult-input, #teenager-input').change(function() {
 	// (성인) 예매 인원 수
 	var adultCount = $('#adult-input').val();
 	// (청소년) 예매 인원 수
 	var teenagerCount = $('#teenager-input').val();
-	// (성인 + 청소년) 예매 인원 수
-	var addAllCount = parseInt(adultCount) + parseInt(teenagerCount);
-	// var hiddenTag = $('#hidden-value');
-	// 선택 인원이 0명일 때
-	if(adultCount == 0 && teenagerCount == 0) {
-		alert("인원수를 선택해주세요");
-	} else {
-		
-		chocieSeat.each(function(){
-			$(this).not(selected).removeClass('selected-seat');
-			if (selected.hasClass('selected-seat')){
-				$(this).not(selected).prop('disabled', true);
-			} else{
-				$(this).not(selected).prop('disabled', false);
-			}
-		});
-		$(this).toggleClass('selected-seat');
+	addAllCount = parseInt(adultCount) + parseInt(teenagerCount);
+	chocieSeat.removeClass('selected-seat');
+	// 함수호출
+	activeSeat(addAllCount);
+	// addAllCount가 0일때 (if문 사용해서 작성하기)
+	if(addAllCount == 0) {
+		chocieSeat.attr('disabled', 'disabled');
+	}else if(addAllCount >= 2) {
+		chocieSeat.removeAttr('disabled');
 	}
-	// } else if(count <= addAllCount) {
-	// 	// 선택 인원이 1명일 때
-	// 	if(addAllCount == 1) {
-	// 		$('.seat-box').removeClass('selected-seat');
-	// 		$('.seat-box').addClass('not-selected-seat');
-	// 		$(this).removeClass('not-selected-seat');
-	// 		$(this).addClass('selected-seat');
-
-	// 		// 좌석 선택을 했을 때
-	// 		for(i=1; i <= addAllCount; i++) {
-	// 			// $(this).css('background-color', 'black');
-	// 			// $(this).css('color', 'white');
-	// 			var seatDone = $(this).val();
-	// 			hiddenTag.append('<input type="hidden" value="" name="seatChoice"/>');
-	// 			$('input[name="seatChoice"]').attr('value', seatDone);
-	// 			hiddenTag.append('<input type="hidden" value="" name="adultCount"/>');
-	// 			$('input[name="adultCount"]').attr('value', adultCount);
-	// 			hiddenTag.append('<input type="hidden" value="" name="teenagerCount"/>');
-	// 			$('input[name="teenagerCount"]').attr('value', teenagerCount);
-
-	// 			chocieSeat.not(this).removeAttr("disabled");
-	// 			$("button[id$='1']").each(function(){
-	// 				$("button[id$='1']").attr('disabled', 'disabled');
-	// 			});
-	// 			$("button[id$='3']").each(function(){
-	// 				$("button[id$='3']").attr('disabled', 'disabled');
-	// 			});
-	// 			$("button[id$='5']").each(function(){
-	// 				$("button[id$='5']").attr('disabled', 'disabled');
-	// 			});
-	// 			$("button[id$='7']").each(function(){
-	// 				$("button[id$='7']").attr('disabled', 'disabled');
-	// 			});
-	// 			$("button[id$='9']").each(function(){
-	// 				$("button[id$='9']").attr('disabled', 'disabled');
-	// 			});
-	// 			count--;
-	// 		}
-	// 		chocieSeat.not(this).attr('disabled', 'disabled');
-	// 		count++;
-	// 	}else if(addAllCount == 2) {
-	// 		for(i=2; i <= addAllCount; i++) {
-				
-	// 		}
-	// 	}
-	// }
 });
 
-limitSeat();
-
-function limitSeat(addAllCount) {
-	var limitSeatStartNum = addAllCount + 1;
-	switch(limitSeatStartNum){
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			break;
-		case 5:
-			break;
+// 좌석을 클릭할 때 작동
+chocieSeat.click(function() {
+	$(this).toggleClass('selected-seat');
+	var selectCount = $('.selected-seat').length;
+	if(addAllCount == selectCount) {
+		chocieSeat.not("[id*=selected-seat]").attr('disabled', 'disabled');
 	}
-	var limitSeatList = $('.seat-box').filter(limitSeatStartNum * n);
-	console.log(limitSeatList);
-}
-
-// 인원수별 좌석 제한
-$('#adult-input, #teenager-input').change(function() {
-	var adultCount = $('#adult-input').val();
-	var teenagerCount = $('#teenager-input').val();
-	var addAllCount = parseInt(adultCount) + parseInt(teenagerCount);
 	if(addAllCount == 1) {
-		$("button[id$='1']").each(function(){
-			$("button[id$='1']").attr('disabled', 'disabled');
-		});
-		$("button[id$='3']").each(function(){
-			$("button[id$='3']").attr('disabled', 'disabled');
-		});
-		$("button[id$='5']").each(function(){
-			$("button[id$='5']").attr('disabled', 'disabled');
-		});
-		$("button[id$='7']").each(function(){
-			$("button[id$='7']").attr('disabled', 'disabled');
-		});
-		$("button[id$='9']").each(function(){
-			$("button[id$='9']").attr('disabled', 'disabled');
-		});
-	}else {
-		$("button[id$='1']").each(function(){
-			$("button[id$='1']").removeAttr("disabled");
-		});
-		$("button[id$='3']").each(function(){
-			$("button[id$='3']").removeAttr("disabled");
-		});
-		$("button[id$='5']").each(function(){
-			$("button[id$='5']").removeAttr("disabled");
-		});
-		$("button[id$='7']").each(function(){
-			$("button[id$='7']").removeAttr("disabled");
-		});
-		$("button[id$='9']").each(function(){
-			$("button[id$='9']").removeAttr("disabled");
-		});
+		if($(this).hasClass('selected-seat')) {
+			chocieSeat.not("[id*=selected-seat]").attr('disabled', 'disabled');
+			$(this).removeAttr('disabled');
+		}else {
+			activeSeat(addAllCount);
+		}
 	}
 });
+
+
+// 예매자 수에 따른 좌석 선택 제한
+function activeSeat(addAllCount) {
+	if(addAllCount = 1) {
+		for(var i = 0; 2*i < seatBoxCount; i++) {
+			$('.seat-box').eq(2*i).removeAttr('disabled');
+		}
+	}
+}
 
 function payMoney() {
 	// (성인) 예매 인원 수
@@ -294,6 +214,17 @@ function payMoney() {
 	var teenagerPay = parseInt(teenagerCount) * 10000;
 	// input 태그 추가 div 영역
 	var hiddenTag = $('#hidden-value');
+	// 선택 좌석 저장
+	let seatListStr='';
+	for(let i=0; i<$('.selected-seat').length;i++){
+		seatListStr+=$('.selected-seat').eq(i).val();
+		if(i!=$('.selected-seat').length-1){
+			seatListStr+=', ';
+		}
+	}
+	hiddenTag.append('<input type="hidden" value="" name="seatChoice"/>');
+	$('input[name="seatChoice"]').attr('value', seatListStr);
+
 	// 성인, 청소년 예매 총 금액 전달
 	hiddenTag.append('<input type="hidden" value="" name="adultPay"/>');
 	$('input[name="adultPay"]').attr('value', adultPay);

@@ -138,7 +138,16 @@ public class UserMovieStoreLogic implements UserMovieStore{
 		HashMap<String,String> param=new HashMap<>();
 		param.put("memberId", memberId);
 		param.put("movieNo", movieNo.toString());
-		int result=session.selectOne("MovieMapper.selectMovieReviewCount", param);
+		int result = session.selectOne("MovieMapper.selectMovieReviewCount", param);
+		return result;
+	}
+	// 회원 테이블 포인트 업데이트
+	@Override
+	public int updateMemberPoint(SqlSessionTemplate session, String memberId, Integer userPoint) {
+		HashMap<String, String> memberPointMap = new HashMap<>();
+		memberPointMap.put("memberId", memberId);
+		memberPointMap.put("userPoint", userPoint.toString());
+		int result = session.update("MovieMapper.updateMemberPoint", memberPointMap);
 		return result;
 	}
 }

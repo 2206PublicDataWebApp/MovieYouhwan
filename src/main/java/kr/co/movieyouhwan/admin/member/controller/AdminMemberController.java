@@ -21,7 +21,7 @@ public class AdminMemberController {
 	 * 로그인 화면
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/adminLoginView.yh", method = RequestMethod.GET)
+	@RequestMapping(value="/admin.yh", method=RequestMethod.GET)
 	public String adminLoginView() {
 		
 		return "/admin/main/adminLogin";

@@ -48,5 +48,5 @@ public interface AdminMovieStore {
 	public List<MovieTime> selectAllMovieTime(SqlSessionTemplate session, Integer theaterNo);
 	public List<MovieImg> selectAllMovieImg(SqlSessionTemplate session);
 	// 영화 리스트 페이징 처리
-	public int selectMovieListCount(SqlSessionTemplate session, String searchValue);
+	public int selectMovieListCount(SqlSessionTemplate session);
 }

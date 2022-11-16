@@ -74,24 +74,24 @@
 			<div id="ticket-seat-area">
 				<div id="showseat-wrap">
 					<div class="show-seat">
-						<c:forEach items="${abcd }" var="j" begin="0" end="${theater.theaterSeatoneColumn }">
-							<c:forEach var="i" begin="1" end="${theater.theaterSeatoneRow }">
+						<c:forEach items="${abcd }" var="j" begin="0" end="${theater.theaterSeatoneColumn - 1}">
+							<c:forEach var="i" begin="1" end="${theater.theaterSeatoneRow}">
 								<button type="button" id="${j}${i}" class="seat-box" name="seatName" value="${j}${i}">${j}${i }</button>
 							</c:forEach>
 							<br>
 						</c:forEach>
 					</div>
 					<div class="show-seat">
-						<c:forEach items="${abcd }" var="j" begin="0" end="${theater.theaterSeattwoColumn }">
-							<c:forEach var="i" begin="${theater.theaterSeatoneRow +1}" end="${theater.theaterSeattwoRow + theater.theaterSeatoneRow +1}">
+						<c:forEach items="${abcd }" var="j" begin="0" end="${theater.theaterSeattwoColumn - 1}">
+							<c:forEach var="i" begin="${theater.theaterSeatoneRow + 1}" end="${theater.theaterSeattwoRow + theater.theaterSeatoneRow }">
 								<button type="button" id="${j}${i}" class="seat-box" name="seatName" value="${j}${i}">${j}${i }</button>
 							</c:forEach>
 							<br>
 						</c:forEach>
 					</div>
 					<div class="show-seat">
-						<c:forEach items="${abcd }" var="j" begin="0" end="${theater.theaterSeatthreeColumn }">
-							<c:forEach var="i" begin="${theater.theaterSeatoneRow + theater.theaterSeattwoRow + 2}" end="${theater.theaterSeatoneRow + theater.theaterSeattwoRow + theater.theaterSeatthreeRow + 2}">
+						<c:forEach items="${abcd }" var="j" begin="0" end="${theater.theaterSeatthreeColumn - 1}">
+							<c:forEach var="i" begin="${theater.theaterSeatoneRow + theater.theaterSeattwoRow + 2}" end="${theater.theaterSeatoneRow + theater.theaterSeattwoRow + theater.theaterSeatthreeRow + 1}">
 								<button type="button" id="${j}${i}" class="seat-box" name="seatName" value="${j}${i}">${j}${i }</button>
 							</c:forEach>
 							<br>

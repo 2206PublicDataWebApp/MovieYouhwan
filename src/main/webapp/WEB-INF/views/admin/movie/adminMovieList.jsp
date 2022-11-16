@@ -78,17 +78,17 @@
 	   	<div class="page-count-wrap">
 	   		<ul class="page-count">
 	   			<c:if test="${pageInfo.startPage ne 1 }">
-	   				<li><a href="/admin/adminMovieList.yh?currentPage=${pageInfo.startPage-1 }">&laquo;</a></li>
+	   				<li class="page-count-left"><a href="/admin/adminMovieList.yh?currentPage=${pageInfo.startPage-1 }">&laquo;</a></li>
 	   			</c:if>
 	   			<c:forEach var="page" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 	   				<c:if test="${pageInfo.currentPage eq page}">
-	   					<li><a class="currentP" href="#">${page }</a></li>
+	   					<li class="page-count-left"><a class="currentP" href="#">${page }</a></li>
 	   				</c:if>
 	   				<c:if test="${pageInfo.currentPage ne page }">
-	   					<li><a href="/admin/adminMovieList.yh?currentPage=${page }">${page }</a></li>
+	   					<li class="page-count-left"><a href="/admin/adminMovieList.yh?currentPage=${page }">${page }</a></li>
 	   				</c:if>
 	   				<c:if test="${pageInfo.endPage ne pageInfo.pageCount }">
-	   					<li><a href="/admin/adminMovieList.yh?currentPage=${pageInfo.endPage+1 }">&raquo;</a></li>
+	   					<li class="page-count-left"><a href="/admin/adminMovieList.yh?currentPage=${pageInfo.endPage+1 }">&raquo;</a></li>
 	   				</c:if>
 	   			</c:forEach>
 	   		</ul>
