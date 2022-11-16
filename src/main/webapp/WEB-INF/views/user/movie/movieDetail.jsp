@@ -112,8 +112,8 @@
 		</div>
 		<!-- 정보, 리뷰 구분 탭 -->
 		<div class="movie-tab-wrapper">
-			<button class="movie-tab-on" onclick="/movieDetail.yh?movieNo=${movieNo}">영화 정보</button>
-			<button class="movie-tab-off">영화 리뷰</button>
+			<button class="movie-tab-on" onclick="location.href='/movieDetail.yh?movieNo=${movie.movieNo}'">영화 정보</button>
+			<button class="movie-tab-off" onclick="location.href='/movieReview.yh?movieNo=${movie.movieNo}'">영화 리뷰</button>
 		</div>
 		<!-- 하단 영역 시작 -->
 		<!-- 줄거리 영역 -->

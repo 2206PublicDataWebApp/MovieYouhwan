@@ -1,0 +1,126 @@
+.rate-area {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.review-title {
+  font-size: 18px;
+  padding: 15px 0;
+}
+
+.select-star {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.review-star {
+  padding: 5px;
+  color: lightgray;
+  cursor: pointer;
+}
+
+.input-content {
+  display: flex;
+  justify-content: center;
+}
+
+#review-input {
+  height: 100px;
+  width: 65%;
+  padding: 10px;
+  resize: none;
+  white-space: pre-wrap;
+}
+
+#review-btn {
+  height: 100px;
+  width: 15%;
+  color: white;
+  background-color: #0f1a3b;
+}
+
+#review-btn:hover {
+  cursor: pointer;
+}
+
+.review-area {
+  margin-top: 50px;
+}
+
+.movie-total-rate {
+  font-size: 20px;
+  padding: 15px 0;
+  border-bottom: solid 1px lightgray;
+}
+
+.review-row {
+  display: flex;
+  border-bottom: 1px solid lightgray;
+  padding: 10px 0;
+}
+
+.review-core-area {
+  width: 80%;
+}
+
+.review-info-area {
+  width: 15%;
+  text-align: right;
+}
+
+.review-profile-img i {
+  margin: 20px;
+  color: #e59500;
+}
+
+.review-profile-img img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.review-nickname {
+  padding: 5px;
+}
+
+.review-rate {
+  padding: 5px;
+}
+
+.review-content {
+  padding: 10px 5px 5px 5px;
+  white-space: pre-wrap;
+}
+
+.selected-star {
+  color: lightgray;
+}
+
+.review-create-date {
+  padding: 5px;
+}
+
+.review-btn-area {
+  margin-top: 30px;
+  padding: 5px;
+}
+
+.review-btn-area a:hover {
+  cursor: pointer;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.on {
+  color: #e59500;
+}
+
+.selected-rate {
+  padding-left: 10px;
+}

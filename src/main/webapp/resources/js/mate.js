@@ -1,7 +1,7 @@
 if ($('#isMatchingActive').val() == 'Y') {
   $('.match-toggle-switch').toggleClass('active');
 }
-
+$('.mate-tab').addClass('tab-selected');
 let matchingCount = $('.matching-count').val();
 console.log(matchingCount);
 $('.mate-count').css('width', (matchingCount / 50) * 100 + '%');

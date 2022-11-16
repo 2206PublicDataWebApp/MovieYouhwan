@@ -12,6 +12,9 @@ a {
   color: black;
 }
 
+#mate-tab {
+  border-bottom: 3px solid #f0c808;
+}
 /* Mate Start Page */
 
 .mate-start-wrapper {
