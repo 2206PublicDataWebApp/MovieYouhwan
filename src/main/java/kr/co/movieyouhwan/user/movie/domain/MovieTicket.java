@@ -23,13 +23,15 @@ public class MovieTicket {
 	private String movieDay; // 영화 상영 일자
 	private String movieStart; // 영화 시작 시간
 	private String ticketStatus; // 예매 상태
+	private String movieImgName;	// 은선 - 예매 내역에서 사용
+	private String movieImgRename;	// 은선 - 예매 내역에서 사용
 	
 	public MovieTicket() {}
 
 	public MovieTicket(String ticketNo, String memberId, int memberAge, String memberGender, int cinemaNo,
 			int theaterNo, int movieNo, String cinemaName, String theaterName, String movieName, int adultCount,
 			int teenagerCount, String choiceSeat, int moviePay, String payMethod, int addPoint, Date payDate,
-			String movieDay, String movieStart, String ticketStatus) {
+			String movieDay, String movieStart, String ticketStatus, String movieImgName, String movieImgRename) {
 		super();
 		this.ticketNo = ticketNo;
 		this.memberId = memberId;
@@ -51,6 +53,8 @@ public class MovieTicket {
 		this.movieDay = movieDay;
 		this.movieStart = movieStart;
 		this.ticketStatus = ticketStatus;
+		this.movieImgName = movieImgName;
+		this.movieImgRename = movieImgRename;
 	}
 
 	public String getTicketNo() {
@@ -213,6 +217,22 @@ public class MovieTicket {
 		this.ticketStatus = ticketStatus;
 	}
 
+	public String getMovieImgName() {
+		return movieImgName;
+	}
+
+	public void setMovieImgName(String movieImgName) {
+		this.movieImgName = movieImgName;
+	}
+
+	public String getMovieImgRename() {
+		return movieImgRename;
+	}
+
+	public void setMovieImgRename(String movieImgRename) {
+		this.movieImgRename = movieImgRename;
+	}
+
 	@Override
 	public String toString() {
 		return "MovieTicket [ticketNo=" + ticketNo + ", memberId=" + memberId + ", memberAge=" + memberAge
@@ -221,6 +241,10 @@ public class MovieTicket {
 				+ ", movieName=" + movieName + ", adultCount=" + adultCount + ", teenagerCount=" + teenagerCount
 				+ ", choiceSeat=" + choiceSeat + ", moviePay=" + moviePay + ", payMethod=" + payMethod + ", addPoint="
 				+ addPoint + ", payDate=" + payDate + ", movieDay=" + movieDay + ", movieStart=" + movieStart
-				+ ", ticketStatus=" + ticketStatus + "]";
+				+ ", ticketStatus=" + ticketStatus + ", movieImgName=" + movieImgName + ", movieImgRename="
+				+ movieImgRename + "]";
 	}
+
+	
+
 }

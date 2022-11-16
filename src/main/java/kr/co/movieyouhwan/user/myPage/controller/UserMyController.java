@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.movieyouhwan.common.page.PageInfo;
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 import kr.co.movieyouhwan.user.myPage.domain.Zzim;
 import kr.co.movieyouhwan.user.myPage.service.UserMyService;
 
@@ -74,6 +75,7 @@ public class UserMyController {
 			ModelAndView mv
 			, HttpServletRequest request
 			, @RequestParam(value = "currentPage", required = false) Integer currentPage
+			, @RequestParam(value = "member", required = false) Integer Member
 			, @ModelAttribute Member member
 			, @ModelAttribute Zzim zzim) {
 		HttpSession session = request.getSession();
@@ -82,12 +84,45 @@ public class UserMyController {
 		int page = (currentPage != null ? currentPage : 1);
 		PageInfo pageInfo = new PageInfo(page, uMyService.printZzimCount(), 12, 5);
 		List<Zzim> uZzimList = uMyService.printAllZzimMovie(memberId);
+		Zzim zzimCount = uMyService.selectMovieZzimCount(zzim);
 		mv.addObject("pageInfo", pageInfo);
 		mv.addObject("uZzimList", uZzimList);
 		mv.setViewName("/user/mypage/zzim");
 		
 		return mv;
 	}
+	
+		/**
+		 * 예매내역 조회
+		 * @param mv
+		 * @param request
+		 * @param currentPage
+		 * @param member
+		 * @param movieTicket
+		 * @return
+		 */
+		@RequestMapping(value="/my/movieTicketHistory.yh", method=RequestMethod.GET)
+		public ModelAndView movieTicketHistory(
+				ModelAndView mv
+				, HttpServletRequest request
+				, @RequestParam(value = "currentPage", required = false) Integer currentPage
+				, @ModelAttribute Member member
+				, @ModelAttribute MovieTicket movieTicket) {
+			HttpSession session = request.getSession();
+			String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+			// 페이징 처리
+			int page = (currentPage != null ? currentPage : 1);
+			PageInfo pageInfo = new PageInfo(page, uMyService.printZzimCount(), 12, 5);
+			List<MovieTicket> uMovieTicketList = uMyService.printAllTicketHistoryMovie(memberId);
+			mv.addObject("pageInfo", pageInfo);
+			mv.addObject("uMovieTicketList", uMovieTicketList);
+			mv.setViewName("/user/mypage/movieTicketHistory");
+			
+			return mv;
+		}
+	
+	
+	
 	/**
 	 * 포인트 조회
 	 * @return

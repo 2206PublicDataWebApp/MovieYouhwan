@@ -25,10 +25,10 @@
 	                <form action="/member/login.yh" method="POST">
 		                <div class="login-input">
 		                    <div class="login-input-wrap">
-		                        <input type="text" class="input-box" name="memberId" placeholder="아이디를 입력해주세요">
+		                        <input type="text" class="input-box" name="memberId" placeholder="아이디를 입력해주세요" maxlength="12" autocomplete="off" required>
 		                    </div>
 		                    <div class="login-input-wrap">
-		                        <input type="password" class="input-box" name="memberPwd" placeholder="비밀번호를 입력해주세요">
+		                        <input type="password" class="input-box" name="memberPwd" placeholder="비밀번호를 입력해주세요" maxlength="20" required>
 		                    </div>
 		                    <button type="submit" id="longin-btn">로그인</button>
 		                </div>

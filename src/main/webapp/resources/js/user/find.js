@@ -28,7 +28,7 @@ $('#email-confirm-btn').click(function() {
     }); // end ajax
  }); // end send eamil
 
- $("#memberId").keydown(function () {
+ $("#memberId").keyup(function () {
    if ($('#memberId').val() == '') {
       $('#check').text('아이디를 입력하세요.');
       $('#check').css('color', 'red');
@@ -37,8 +37,8 @@ $('#email-confirm-btn').click(function() {
       $('#check').css('color', 'red');
    }
 }); 
-   //인증번호 체크
- $("#memberEmail").keydown(function () {
+   // 유효성 검사
+ $("#memberEmail").keyup(function () {
     if (mailJ.test($(this).val())) {
        $("#check").text('');
     } else {
@@ -47,13 +47,14 @@ $('#email-confirm-btn').click(function() {
     }
  });
 
- $('.mail-check-input').keydown(function () {
+
+ $('.mail-check-input').keyup(function () {
     const inputCode = $(this).val();
     const $resultMsg = $('#check');
     
     if(inputCode === code){
        $resultMsg.html('인증번호가 일치합니다.');
-       $resultMsg.css('color','green');
+       $resultMsg.css('color','#3EA155');
        $('#email-confirm-btn').attr('disabled',true);
        $('#memberEmail').attr('readonly',true);
     }else{
@@ -64,4 +65,12 @@ $('#email-confirm-btn').click(function() {
  
 // 유효성 체크
 
-
+//1~2 패스워드 일치 확인
+$('#memberPwd-chk').keyup(function () {
+   if ($('#memberPwd').val() != $(this).val()) {
+      $('#pw_check').text('비밀번호가 일치하지 않습니다.');
+      $('#pw_check').css('color', 'red');
+   } else {
+      $('#pw_check').text('');
+   }
+});

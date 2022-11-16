@@ -20,14 +20,12 @@ public interface UserMemberService {
 	// 아이디 찾기
 	public List<Member> findId(String memberName, String memberBirth, String memberPhone);
 
-	// 패스워드 찾기
-//	public int findPassword(String memberId, String memberPhone);
+	// 패스워드 변경, 회원정보 일치 확인
+	public List<Member> modifyPassword(String memberId, String memberEmail);
 
+	// 패스워드 재설정
+	public int pwUpdate(Member member);
 
-	public Member selectMember(String memberId);
-	
-	// 패스워드 변경
-	public int modifyPassword(String memberId, String memberEmail);
 		
 	
 }

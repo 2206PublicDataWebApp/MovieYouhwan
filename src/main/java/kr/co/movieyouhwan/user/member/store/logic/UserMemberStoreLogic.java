@@ -67,27 +67,26 @@ public class UserMemberStoreLogic implements UserMemberStore {
 		List<Member> uMemberList = session.selectList("MemberMapper.findId", params);
 		return uMemberList;
 	}
-
+	/**
+	 * 패스워드 변경 폼 - 회원정보 일치 확인
+	 */
 	@Override
-	public int modifyPassword(SqlSessionTemplate session, String memberId, String memberEmail) {
+	public List<Member> modifyPassword(SqlSessionTemplate session, String memberId, String memberEmail) {
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("memberId", memberId);
 		params.put("memberEmail", memberEmail);
-		int result = session.selectOne("memberMapper.modifyPwd",params);
+		List<Member> uMemberList = session.selectList("MemberMapper.modifyPwd",params);
+		return uMemberList;
+	}
+	
+	/**
+	 * 패스워드 변경
+	 */
+	@Override
+	public int updatePw(SqlSessionTemplate session, Member member) {
+		int result = session.update("MemberMapper.updatePassword", member);
 		return result;
 	}
-
-	/**
-	 * 패스워드 찾기
-	 */
-//	@Override
-//	public int findPassword(SqlSessionTemplate session, String memberId, String memberPhone) {
-//		HashMap<String, String> params = new HashMap<String, String>();
-//		params.put("memberId", memberId);
-//		params.put("memberPhone", memberPhone);
-//		List<Member> mList = session.selectList("MemberMapper.findPassword", params);
-//		return mList;
-//	}
 
 
 }

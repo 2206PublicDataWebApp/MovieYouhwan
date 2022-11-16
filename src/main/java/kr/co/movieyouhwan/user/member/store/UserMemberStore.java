@@ -22,10 +22,12 @@ public interface UserMemberStore {
 	// 아이디 찾기
 	public List<Member> findId(SqlSessionTemplate session, String memberName, String memberBirth, String memberPhone);
 
-	public int modifyPassword(SqlSessionTemplate session, String memberId, String memberEmail);
+	// 패스워드 변경 - 회원 일치 확인
+	public List<Member> modifyPassword(SqlSessionTemplate session, String memberId, String memberEmail);
 
-	//패스워드 찾기
-//	public List<Member> findPassword(SqlSessionTemplate session, String memberId, String memberPhone);
+	// 패스워드 변경 - 패스워드 업데이트
+	public int updatePw(SqlSessionTemplate session, Member member);
+
 
 	
 
