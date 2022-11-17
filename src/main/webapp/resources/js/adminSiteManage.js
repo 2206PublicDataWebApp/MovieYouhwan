@@ -8,6 +8,8 @@ function init() {
   $('.homepage-tab-item>a').eq(idx).parent().siblings().children().removeClass('homepage-tab-border');
 }
 
+$('.admin-site-tab').addClass('admin-tab-selected');
+
 // faq 답변 아코디언
 $('.answer-title').click(function () {
   let answer = $(this).parent().parent().next('.faq-board-answer');
@@ -51,7 +53,7 @@ $('.homepage-tab-item>a').click(function () {
   // $.ajax({
   //  type: 'post',
   //  url: '/admin/site/manage.yh',
-  //  data: 
+  //  data:
   // })
 });
 

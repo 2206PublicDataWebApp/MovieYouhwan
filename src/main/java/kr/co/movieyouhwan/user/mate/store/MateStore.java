@@ -55,8 +55,14 @@ public interface MateStore {
 
 	String selectMatchDate(SqlSessionTemplate session, String requesterId, String respondentId);
 
+	String selectAllMatchDate(SqlSessionTemplate session, String requesterId, String respondentId);
+
 	int updateToDeleteMatching(SqlSessionTemplate session, String memberId, String mateId);
 
 	int updateMatchingActive(SqlSessionTemplate session, String memberId, String matchingActive);
+
+	List<String> selectAllMateId(SqlSessionTemplate session, String memberId);
+
+	String selectAllEndDate(SqlSessionTemplate session, String requesterId, String respondentId);
 
 }

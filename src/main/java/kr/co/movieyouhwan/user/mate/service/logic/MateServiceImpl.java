@@ -149,6 +149,12 @@ public class MateServiceImpl implements MateService{
 		String matchDate=mStore.selectMatchDate(session, requesterId, respondentId);
 		return matchDate;
 	}
+	
+	@Override
+	public String printAllMatchDate(String requesterId, String respondentId) {
+		String matchDate=mStore.selectAllMatchDate(session, requesterId, respondentId);
+		return matchDate;
+	}
 
 	@Override
 	public int updateToDeleteMatching(String memberId, String mateId) {
@@ -160,6 +166,18 @@ public class MateServiceImpl implements MateService{
 	public int modifyMatchingActive(String memberId, String matchingActive) {
 		int result=mStore.updateMatchingActive(session, memberId, matchingActive);
 		return result;
+	}
+
+	@Override
+	public List<String> printMyAllMateId(String memberId) {
+		List<String> myAllMateList=mStore.selectAllMateId(session, memberId);
+		return myAllMateList;
+	}
+
+	@Override
+	public String printAllEndDate(String requesterId, String respondentId) {
+		String endDate=mStore.selectAllEndDate(session, requesterId, respondentId);
+		return endDate;
 	}
 
 }

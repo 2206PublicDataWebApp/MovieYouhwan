@@ -4,12 +4,13 @@
   <head>
     <meta charset="UTF-8" />
     <title>무비유환 : 영화 상세페이지</title>
+    <link rel="icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
     <link href="/resources/css/common.css" rel="stylesheet" />
     <link href="/resources/css/header.css" rel="stylesheet" />
     <link href="/resources/css/footer.css" rel="stylesheet" />
     <link href="/resources/css/movie.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/resources/css/movieReview.css" />
-    <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+    <link href="/resources/css/movieReview.css" rel="stylesheet" />
+    <script src="/resources/js/jquery-3.6.1.min.js"></script>
     <script src="/resources/js/movie.js" defer></script>
     <script src="/resources/js/header.js" defer></script>
     <script src="/resources/js/footer.js" defer></script>
@@ -154,16 +155,21 @@
               </div>
               <div class="review-content">${movieReview.movieReview}</div>
             </div>
+
             <div class="review-info-area">
               <input id="movieNoInput" type="hidden" name="movieNo" value="${movie.movieNo}" />
               <div class="review-create-date">${movieReview.regDate}</div>
               <div class="review-btn-area">
-                <c:if test="${movieReview.memberId eq loginUser.memberId}"><a>수정</a> <a>삭제</a></c:if>
+                <c:if test="${movieReview.memberId eq loginUser.memberId}"><a id="review-modify-btn">수정</a> <a onclick="deleteReview();">삭제</a></c:if>
               </div>
             </div>
           </div>
         </c:forEach>
       </div>
+    </div>
+
+    <div id="modal-review-modify">
+      <jsp:include page="/WEB-INF/views/user/movie/movieReviewModify.jsp"></jsp:include>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
   </body>

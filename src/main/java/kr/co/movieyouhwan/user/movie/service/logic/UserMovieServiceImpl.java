@@ -144,4 +144,22 @@ public class UserMovieServiceImpl implements UserMovieService{
 		int result=uMovieStore.selectMovieReviewCount(session, memberId, movieNo);
 		return result;
 	}
+
+	@Override
+	public MovieReview printOneMovieReview(String memberId, Integer movieNo) {
+		MovieReview myMovieReview=uMovieStore.selectMovieReview(session, memberId, movieNo);
+		return myMovieReview;
+	}
+
+	@Override
+	public int deleteReview(Integer movieNo, String memberId) {
+		int result=uMovieStore.deleteMovieReview(session, memberId, movieNo);
+		return result;
+	}
+
+	@Override
+	public int modifyReview(MovieReview movieReview) {
+		int result=uMovieStore.updateMovieReview(session, movieReview);
+		return result;
+	}
 }

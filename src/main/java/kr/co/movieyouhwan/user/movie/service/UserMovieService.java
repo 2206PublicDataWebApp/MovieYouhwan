@@ -43,4 +43,8 @@ public interface UserMovieService {
 	public int checkReviewExist(String memberId, Integer movieNo);
 	// 회원 테이블 포인트 업데이트
 	public int modifyMemberPoint(String memberId, Integer userPoint);
+	// 회원의 movieReview 가져오기
+	public MovieReview printOneMovieReview(String memberId, Integer movieNo);
+	public int deleteReview(Integer movieNo, String memberId);
+	public int modifyReview(MovieReview movieReview);
 }

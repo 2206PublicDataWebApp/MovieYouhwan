@@ -132,6 +132,11 @@
 	<update id="updateOneMovieImg">
 		UPDATE MOVIE_IMG_TBL SET MOVIE_IMG_NAME = #{movieImgName}, MOVIE_IMG_RENAME = #{movieImgRename}, MOVIE_IMG_PATH = #{movieImgPath} WHERE MOVIE_IMG_NO = ${movieImgNo}
 	</update>
+	
+	<!-- 양화 리뷰 수정 -->
+	<update id="updateMovieReview">
+		UPDATE MOVIE_REVIEW_TBL SET MOVIE_RATE=#{movieRate}, MOVIE_REVIEW=#{movieReview} WHERE MOVIE_NO=#{movieNo} AND MEMBER_ID=#{memberId}
+	</update>
 	<!-- 영화 삭제(관리자) -->
 	<delete id="deleteOneMovie">
 		DELETE FROM MOVIE_TBL WHERE MOVIE_NO = #{movieNo}
@@ -147,6 +152,11 @@
 	<!-- 영화 영상 삭제(관리자) -->
 	<delete id="deleteOneMovieVideo">
 		DELETE FROM MOVIE_VIDEO_TBL WHERE MOVIE_NO = #{movieNo}
+	</delete>
+	
+	<!-- 영화 리뷰 삭제 -->
+	<delete id="deleteMovieReview" parameterType="java.util.HashMap">
+		DELETE FROM MOVIE_REVIEW_TBL WHERE MEMBER_ID=#{memberId} AND MOVIE_NO=#{movieNo}
 	</delete>
 	<!-- 영화 리스트(관리자) -->
 	<select id="selectAllMovie" resultMap="MovieResultMap">
@@ -294,6 +304,11 @@
 	<!-- movie 리뷰를 이미 등록했는지 확인 -->
 	<select id="selectMovieReviewCount" resultType="_int">
 		SELECT COUNT(*) FROM MOVIE_REVIEW_TBL WHERE MEMBER_ID=#{memberId} AND MOVIE_NO=#{movieNo}
+	</select>
+	
+	<!-- memberID로 한 멤버의 movie Review 가져오기 -->
+	<select id="selectOneMovieReview" resultMap="MovieReviewResultMap">
+		SELECT * FROM MOVIE_REVIEW_TBL WHERE MEMBER_ID=#{memberId} AND MOVIE_NO=#{movieNo}
 	</select>
 	<!-- 멤버 테이블 포인트 업데이트 -->
 	<update id="updateMemberPoint">

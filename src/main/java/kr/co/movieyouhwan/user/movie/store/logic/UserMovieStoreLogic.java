@@ -150,4 +150,28 @@ public class UserMovieStoreLogic implements UserMovieStore{
 		int result = session.update("MovieMapper.updateMemberPoint", memberPointMap);
 		return result;
 	}
+
+	@Override
+	public MovieReview selectMovieReview(SqlSessionTemplate session, String memberId, Integer movieNo) {
+		HashMap<String, String> param = new HashMap<>();
+		param.put("memberId", memberId);
+		param.put("movieNo", movieNo.toString());
+		MovieReview myMovieReview=session.selectOne("MovieMapper.selectOneMovieReview",param);
+		return myMovieReview;
+	}
+
+	@Override
+	public int deleteMovieReview(SqlSessionTemplate session, String memberId, Integer movieNo) {
+		HashMap<String,String> param=new HashMap<>();
+		param.put("memberId", memberId);
+		param.put("movieNo", movieNo.toString());
+		int result=session.delete("MovieMapper.deleteMovieReview", param);
+		return result;
+	}
+
+	@Override
+	public int updateMovieReview(SqlSessionTemplate session, MovieReview movieReview) {
+		int result=session.update("MovieMapper.updateMovieReview", movieReview);
+		return result;
+	}
 }

@@ -30,6 +30,16 @@ $('.matching-date').each(function () {
   $(this).text($(this).text().substr(0, 10));
 });
 
+$('.create-date').each(function () {
+  $(this).text($(this).text().substr(0, 10));
+});
+
+$('.end-date').each(function () {
+  if ($(this).text().length > 10) {
+    $(this).text($(this).text().substr(0, 10));
+  }
+});
+
 /* 메이트 약관동의 -> 시작하기 버튼 */
 function mateStart(id) {
   let mateCheckBox = $('.agree-checkbox');

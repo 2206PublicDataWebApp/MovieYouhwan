@@ -10,6 +10,7 @@ public class MatchResult {
 	private String genre;
 	private int matchingGrade;
 	private String createDate; // 매칭날짜
+	private String deleteDate;
 	
 	public String getMemberId() {
 		return memberId;
@@ -65,6 +66,13 @@ public class MatchResult {
 	}
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
+	}
+	
+	public String getDeleteDate() {
+		return deleteDate;
+	}
+	public void setDeleteDate(String deleteDate) {
+		this.deleteDate = deleteDate;
 	}
 	@Override
 	public String toString() {

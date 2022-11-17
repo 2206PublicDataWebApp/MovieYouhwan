@@ -36,7 +36,7 @@ import net.datafaker.Faker;
 
 @Controller
 public class MateController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MateController.class);
+//	private static final Logger LOGGER = LoggerFactory.getLogger(MateController.class);
 
 	@Autowired
 	private MateService mService;
@@ -148,7 +148,7 @@ public class MateController {
 			// 가입했으면 mate list 페이지로 이동
 			if (isMate > 0) {
 				List<String> myMateList = mService.printMyMateId(member.getMemberId());
-				LOGGER.info(myMateList.toString());
+//				LOGGER.info(myMateList.toString());
 				member = mService.printUserInfo(memberId);
 				Survey mySurvey = mService.getSurveyByMemberId(memberId);
 				if (myMateList.size() > 0) {
@@ -336,48 +336,84 @@ public class MateController {
 			return "loginError";
 		}
 	}
-	
-	@RequestMapping(value="/mate/deleteMatching.yh", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/mate/deleteMatching.yh", method = RequestMethod.POST)
 	public ModelAndView deleteMatching(ModelAndView mv, HttpServletRequest request,
 			@RequestParam("mateId") String mateId) {
-		HttpSession session=request.getSession();
-		Member member=(Member)session.getAttribute("loginUser");
-		if(member==null) {
+		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("loginUser");
+		if (member == null) {
 			mv.setViewName("redirect:/member/loginView.yh");
 			return mv;
-		}
-		else {
-			int result=mService.updateToDeleteMatching(member.getMemberId(), mateId);
+		} else {
+			int result = mService.updateToDeleteMatching(member.getMemberId(), mateId);
 			System.out.println(result);
-			if(result>0) {
+			if (result > 0) {
 				System.out.println(result);
 				mv.setViewName("redirect:/mate/main.yh");
-			}
-			else {
-				//TODO: 예외처리
+			} else {
+				// TODO: 예외처리
 			}
 		}
 		return mv;
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="/mate/modifyMatchingActive.yh", method=RequestMethod.POST)
-	public String modifyMatchingActive(
-			@RequestParam("matchingActive") String matchingActive,
+	@RequestMapping(value = "/mate/modifyMatchingActive.yh", method = RequestMethod.POST)
+	public String modifyMatchingActive(@RequestParam("matchingActive") String matchingActive,
 			@RequestParam("memberId") String memberId) {
-		int result=mService.modifyMatchingActive(memberId, matchingActive);
-		if(result>0) {
+		int result = mService.modifyMatchingActive(memberId, matchingActive);
+		if (result > 0) {
 			return "매칭 상태 변경 성공";
-		}
-		else {
+		} else {
 			return "매칭 상태 변경 실패";
 		}
 	}
-	
-	//TODO : 메이트내역 임시 확인용, 나중에 삭제
-	@RequestMapping(value="/mypage/mateHistory.yh")
-	public String mateHistoryView() {
-		return "user/mypage/mateHistory";
+
+	// TODO : 메이트내역 임시 확인용, 나중에 삭제
+	@RequestMapping(value = "/mypage/mateHistory.yh")
+	public ModelAndView mateHistoryView(ModelAndView mv, HttpServletRequest request) {
+		HttpSession session=request.getSession();
+		Member member=(Member)session.getAttribute("loginUser");
+		if(member!=null) {
+			String memberId=member.getMemberId();
+			member = mService.printUserInfo(memberId);
+			List<String> myAllMateList = mService.printMyAllMateId(member.getMemberId());
+			if (myAllMateList.size() > 0) {
+				List<Survey> myMateSurvey = mService.getMyMateSurveyList(myAllMateList);
+				List<MatchResult> matchList = new ArrayList<>();
+				for (Survey survey : myMateSurvey) {
+					System.out.println(survey.toString());
+					MatchResult matchResult = new MatchResult();
+					Member matchingMember = mService.printUserInfo(survey.getMemberId());
+					List<String> genreList = (mService.getGenreListBySurveyNo(survey.getSurveyNo())).stream()
+							.map(SurveyGenre::getGenre).collect(Collectors.toList());
+					String genre = String.join(", ", genreList);
+					matchResult.setMemberId(survey.getMemberId());
+					matchResult.setMemberImgRename(matchingMember.getMemberImgRename());
+					matchResult.setMemberNick(matchingMember.getMemberNick());
+					matchResult.setMemberGender(survey.getMemberGender());
+					matchResult.setMemberAge(survey.getMemberAge());
+					matchResult.setCinemaName(survey.getCinemaName());
+					matchResult.setGenre(genre);
+					matchResult.setMatchingGrade(survey.getMatchingGrade());
+					String matchDate = mService.printAllMatchDate(member.getMemberId(), survey.getMemberId());
+					matchResult.setCreateDate(matchDate);
+					String endDate = mService.printAllEndDate(member.getMemberId(), survey.getMemberId());
+					matchResult.setDeleteDate(endDate);
+					System.out.println(matchDate);
+					System.out.println(endDate);
+					matchList.add(matchResult);
+				}
+				System.out.println(matchList.toString());
+				mv.addObject("mateList", matchList);
+				mv.addObject("member", member);
+			}
+			mv.setViewName("user/mate/mateHistory");
+		}else {
+			mv.setViewName("redirect:/member/loginView.yh");
+		}
+		return mv;
 	}
 
 	/**
@@ -393,6 +429,7 @@ public class MateController {
 		Member member = (Member) session.getAttribute("loginUser");
 		if (member != null) {
 			String memberId = member.getMemberId();
+			System.out.println(memberId);
 			Survey requesterSurvey = mService.getSurveyByMemberId(memberId);
 			if (requesterSurvey != null) {
 				List<Survey> otherSurveyList = mService.getOtherSurveyList(memberId);
@@ -447,6 +484,9 @@ public class MateController {
 				// A - 성별, 나이, 영화관 점수 합이 0점인 survey 필터링
 				List<Survey> firstFilteredSurvey = otherSurveyList.stream()
 						.filter(survey -> survey.getMatchingGrade() != 0).collect(Collectors.toList());
+				System.out.println("==================================================");
+				System.out.println("firstFilteredSurvey: " + firstFilteredSurvey);
+				System.out.println("==================================================");
 
 				// SurveyNo로 매칭 요청자의 SurveyGenre List 가져오기
 				List<SurveyGenre> requesterGenreList = mService.getGenreListBySurveyNo(requesterSurvey.getSurveyNo());
@@ -469,8 +509,11 @@ public class MateController {
 
 				// 장르 1개가 부합할 때마다 가산되는 점수
 				int genreGrade = 10 / requesterGenreList.size();
+				System.out.println("genreGrade : "+genreGrade);
 
-				// 필터링 된 Survey에 장르 점수 합산
+				
+				System.out.println("firstFilteredSurvey.size() : "+firstFilteredSurvey.size());
+//				 필터링 된 Survey에 장르 점수 합산
 				for (i = 0; i < firstFilteredSurvey.size(); i++) {
 					for (int j = 0; j < filteredSurveyGenreList.size(); j++) {
 						if (firstFilteredSurvey.get(i).getSurveyNo() == filteredSurveyGenreList.get(j).getSurveyNo()) {
@@ -483,6 +526,22 @@ public class MateController {
 						}
 					}
 				}
+				
+				for (int k = 0; k < firstFilteredSurvey.size(); k++) {
+					System.out.println("********** i = "+k);
+					System.out.println("firstFilteredSurvey surveyNo : "+firstFilteredSurvey.get(k).getSurveyNo());
+					for (int j = 0; j < filteredSurveyGenreList.size(); j++) {
+						System.out.println("j = "+j);
+						System.out.println("filteredSurveyGenreList Genre : "+filteredSurveyGenreList.get(j).getGenre()+
+								" filteredSurveyGenreList surveyNo : "+filteredSurveyGenreList.get(j).getSurveyNo());
+						if (firstFilteredSurvey.get(k).getSurveyNo() == filteredSurveyGenreList.get(j).getSurveyNo()) {
+							firstFilteredSurvey.get(k)
+									.setMatchingGrade(firstFilteredSurvey.get(k).getMatchingGrade() + genreGrade);
+							System.out.println("**********점수 합산***********");
+						} 
+					}
+				}
+				System.out.println("filteredSurveyGenreList.size() : "+filteredSurveyGenreList.size());
 
 				List<Survey> sortedSurveyList = firstFilteredSurvey.stream()
 						.sorted(Comparator.comparing(Survey::getMatchingGrade).reversed()).collect(Collectors.toList());
@@ -503,34 +562,23 @@ public class MateController {
 						List<Survey> tempSurvey = new ArrayList<>();
 						int k = 0;
 						for (int j = 0; j + k < finalMatchList.size(); j++) {
-							System.out.println("j = " + j);
-							System.out.println("==================================");
-							System.out.println("MatchingGrade : " + finalMatchList.get(j + k).getMatchingGrade()
-									+ "FinalTop3 size(): " + finalTop3Survey.size());
-							System.out.println("==================================");
+
 							if (finalTop3Survey.size() == goalSize) {
-								System.out.println("==================================");
-								System.out.println("matching grade : " + finalMatchList.get(j + k).getMatchingGrade());
-								System.out.println("==================================");
+
 								break;
 							}
 							if (j == 0) {
 								tempSurvey.add(finalMatchList.get(j + k));
-								System.out.println("==================================");
-								System.out.println("tempSurvey.size = " + tempSurvey.size());
-								System.out.println("==================================");
+
 							} else {
 								if (finalMatchList.get(j + k).getMatchingGrade() == finalMatchList.get(j + k - 1)
 										.getMatchingGrade()) {
 									tempSurvey.add(finalMatchList.get(j + k));
 								} else {
-									System.out.println("==================================");
-									System.out.println("tempSurvey.size = " + tempSurvey.size());
-									System.out.println("==================================");
+
 									if (tempSurvey.size() > (goalSize - finalTop3Survey.size())) {
 										Random random = new Random();
 										while (finalTop3Survey.size() < goalSize) {
-											System.out.println("finalTop3Survey.size = " + finalTop3Survey.size());
 											int idx = random.nextInt(tempSurvey.size());
 											finalTop3Survey.add(tempSurvey.get(idx));
 											tempSurvey.remove(idx);
@@ -559,13 +607,6 @@ public class MateController {
 					else {
 						finalTop3Survey.addAll(finalMatchList);
 					}
-				}
-				System.out.println("requester : " + requesterSurvey.toString());
-				for (int j = 0; j < finalMatchList.size(); j++) {
-					System.out.println(finalMatchList.get(j).toString());
-				}
-				for (int j = 0; j < finalTop3Survey.size(); j++) {
-					System.out.println(finalTop3Survey.get(j).toString());
 				}
 
 				// TOP3 매칭 정보를 MatchResult 도메인에 담아 리스트로 만듦
