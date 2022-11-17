@@ -7,7 +7,7 @@
 		<li class="navbar-menuItem admin"><a href="/admin/adminCinemaList.yh">영화관관리</a></li>
 		<li class="navbar-menuItem admin"><a href="/admin/adminMovieList.yh">영화관리</a></li>
 		<li class="navbar-menuItem admin"><a href="/admin/store/manage.yh">스토어관리</a></li>
-		<li class="navbar-menuItem admin"><a href="#">회원관리</a></li>
+		<li class="navbar-menuItem admin"><a href="/admin/memberList.yh">회원관리</a></li>
 		<li class="navbar-menuItem admin"><a href="/admin/site/manage.yh">사이트관리</a></li>
 	</ul>
 </nav>

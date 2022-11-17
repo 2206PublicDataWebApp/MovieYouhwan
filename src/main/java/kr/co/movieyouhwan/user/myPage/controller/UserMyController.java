@@ -74,19 +74,17 @@ public class UserMyController {
 	public ModelAndView movieZzim(
 			ModelAndView mv
 			, HttpServletRequest request
-			, @RequestParam(value = "currentPage", required = false) Integer currentPage
-			, @RequestParam(value = "member", required = false) Integer Member
-			, @ModelAttribute Member member
-			, @ModelAttribute Zzim zzim) {
+			) {
 		HttpSession session = request.getSession();
 		String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
 		// 페이징 처리
-		int page = (currentPage != null ? currentPage : 1);
-		PageInfo pageInfo = new PageInfo(page, uMyService.printZzimCount(), 12, 5);
+//		int page = (currentPage != null ? currentPage : 1);
+//		PageInfo pageInfo = new PageInfo(page, uMyService.printZzimCount(), 12, 5);
 		List<Zzim> uZzimList = uMyService.printAllZzimMovie(memberId);
-		Zzim zzimCount = uMyService.selectMovieZzimCount(zzim);
-		mv.addObject("pageInfo", pageInfo);
+		int zzimCount = uMyService.selectMovieZzimCount(memberId);
+//		mv.addObject("pageInfo", pageInfo);
 		mv.addObject("uZzimList", uZzimList);
+		mv.addObject("zzimCount", zzimCount);
 		mv.setViewName("/user/mypage/zzim");
 		
 		return mv;

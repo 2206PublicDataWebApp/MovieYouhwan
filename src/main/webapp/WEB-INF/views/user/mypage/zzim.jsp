@@ -21,7 +21,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/user/mypage/myPage.jsp"></jsp:include>
 <div id="inner-wrap">
-    ${zzim}
+    ${zzimCount}
     <c:if test="${!empty uZzimList}">
         <div id="conut-wrap">
             <span id="movie-History">내가 찜한 영화 <span id="movie-count">${zzimCount}</span>건</span>

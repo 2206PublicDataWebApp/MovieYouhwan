@@ -52,7 +52,7 @@
 }
 #movie-count{
     color: #E59500;
-    s
+    
     font-size: 30pt;
     font-weight: bold;
 }
@@ -63,13 +63,14 @@
     border-radius: 10px;
     margin: 100px auto;
     box-sizing: border-box;
+    flex-direction: column;
     
 }
 .content{
     display: flex;
     flex-direction: row;
     align-items: center;
-    position:relative;
+   
     
 }
 .movie-poster{
@@ -79,10 +80,7 @@
     margin-left: 45px;
     
 }
-.info-wrap-1{
-    margin-top: 30px;
-    margin-left: 20px;
-}
+
 .movie-name{
     font-size: 15pt;
     margin: 10px 20px;
@@ -92,40 +90,53 @@
 .detail-wrap{
     display: flex;
     margin: 10px 20px;
-
-    
+}
+.detail-wrap-2 {
+    display: flex;
+    margin: 10px 20px;
+    padding-left: 100px;
+    width: 600px;
 }
 .info-title{
     font-weight: 600;
     color: #585858;
-}
-.info-details{
-    left: 45%;
-    position:absolute;
-    font-weight: 300;
-    color: #585858;
-}
-.info-wrap-2{
-    position:absolute;
-    left: 70%;
-    margin-top: 30px;
-    margin-left: 20px;
-    width: 200px;
-    padding-top: 30px;
-    display: flex;
-}
-.detail-wrap-2{
-    display: flex;
-    margin: 10px 20px;
+    width: 300px;
 }
 .info-title-2{
     font-weight: 600;
     color: #585858;
     
 }
-.info-details-2{
+
+.info-details{
+    left: 45%;
     position:absolute;
-    left: 65%;
+    font-weight: 300;
+    color: #585858;
+}
+.info-wrap-1{
+    margin: 20px 20px;
+    width: 430px;
+    display: flex;
+}
+.info-wrap-2{
+    /* position:absolute;
+    left: 70%; */
+    /* margin-top: 30px; */
+    margin-left: 20px;
+    width: 200px;
+    /* padding-top: 30px; */
+    /* display: flex; */
+}
+.mv-info-2{
+    width: 200px;
+    display: flex;
+}
+
+
+.info-details-2{
+    /* position:absolute;
+    left: 65%; */
     font-weight: 300;
     color: #585858;
 }
@@ -144,7 +155,7 @@
     height: 35px;
     border-style: solid;
     border-width: 1px;
-    font-weight: 800;
+ 
     margin: 5px;
 }
 .delete-btn{
@@ -154,12 +165,13 @@
 .review-btn{
     background-color: #0F1A3B;
     color: white;
+    text-align: center;
+    font-size: 10pt;
+    line-height: 35px;
 }
 .btn{
     display: flex;
-    margin-top: 100px;
-    /* margin-left: 690px; */
-    /* margin-bottom: 700px; */
+    margin-top: 275px;
 }
 
 

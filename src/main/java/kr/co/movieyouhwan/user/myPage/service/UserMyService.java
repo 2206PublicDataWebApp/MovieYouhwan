@@ -27,7 +27,7 @@ public interface UserMyService {
 	public List<MovieTicket> printAllTicketHistoryMovie(String memberId);
 
 	// 나의 찜 카운트
-	public Zzim selectMovieZzimCount(Zzim zzimCount);
+	public int selectMovieZzimCount(String memberId);
 
 
 

@@ -18,7 +18,7 @@ var emailAuthuJ = false;
 
 let ImgIcon = $('#profile-icon');
 
-$("#memberId").keydown(function () {
+$("#memberId").keyup(function () {
    if ($('#memberId').val() == '') {
       $('#id_check').text('아이디를 입력하세요.');
       $('#id_check').css('color', 'red');
@@ -146,7 +146,7 @@ $('form').on('submit', function () {
 //    }
 });
 
-$('#memberPwd').keydown(function () {
+$('#memberPwd').keyup(function () {
    if (pwJ.test($('#memberPwd').val())) {
       console.log('true');
       $('#pw-check').text('');
@@ -158,7 +158,7 @@ $('#memberPwd').keydown(function () {
 });
 
 //1~2 패스워드 일치 확인
-$('#memberPwd-chk').keydown(function () {
+$('#memberPwd-chk').keyup(function () {
    if ($('#memberPwd').val() != $(this).val()) {
       $('#pw2_check').text('비밀번호가 일치하지 않습니다.');
       $('#pw2_check').css('color', 'red');
@@ -168,7 +168,7 @@ $('#memberPwd-chk').keydown(function () {
 });
 
 //이름에 특수문자 들어가지 않도록 설정
-$("#memberName").keydown(function () {
+$("#memberName").keyup(function () {
    if (nameJ.test($(this).val())) {
       console.log(nameJ.test($(this).val()));
       $("#name_check").text('');
@@ -177,7 +177,7 @@ $("#memberName").keydown(function () {
       $('#name_check').css('color', 'red');
    }
 });
-$("#memberEmail").keydown(function () {
+$("#memberEmail").keyup(function () {
    if (mailJ.test($(this).val())) {
       $("#email_check").text('');
    } else {
@@ -191,7 +191,7 @@ $("#memberEmail").keydown(function () {
 var birthJ = false;
 
 // 생년월일   birthJ 유효성 검사
-$('#memberBirth').keydown(function () {
+$('#memberBirth').keyup(function () {
    var dateStr = $(this).val();
    var year = Number(dateStr.substr(0, 4)); // 입력한 값의 0~4자리까지 (연)
    var month = Number(dateStr.substr(4, 2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
@@ -317,3 +317,11 @@ $('#Allcheck').change(function () {
    }
  });
 // ++++++++++++++++++++회원가입++++++++++++++++++++
+
+// 관리자 회원 목록
+$('.admin-member-tab').addClass('admin-tab-selected');
+
+// 예매리스트
+function goReview(){
+location.href="/movieReview.yh?movieNo="+${movieTicket.movieNo};
+   }

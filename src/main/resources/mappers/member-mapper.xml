@@ -66,7 +66,54 @@
 		<result property="movieImgRename" column="MOVIE_IMG_RENAME" />
 	</resultMap>
 
+	<!-- (관리자) 회원 리스트 -->
+	<select id="selectAllMember" resultMap="memberResultMap">
+		SELECT * FROM MEMBER_TBL WHERE MEMBER_YN = 'Y'
+	</select>
 	
+	<!-- (관리자) 전제게시글 수 , 페이징 -->
+	<select id="selectMemberTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER_TBL
+		<where>
+			<if test="searchCondition.toString() == 'id'">
+				MEMBER_ID LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'name'">
+				MEMBER_NAME LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'nick'">
+				MEMBER_NICK LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'all'">
+				MEMBER_ID LIKE '%'||#{searchValue}||'%'
+				OR MEMBER_NAME LIKE '%'||#{searchValue}||'%'
+				OR MEMBER_NICK LIKE '%'||#{searchValue}||'%'
+			</if>
+			AND MEMBER_YN = 'Y'
+		</where>
+	</select>
+	<!-- 게시글 조건 조회 -->
+	<select id="selectOneByValue" resultMap="memberResultMap">
+		SELECT * FROM MEMBER_TBL
+		<where>
+			<if test="searchCondition.toString() == 'id'">
+				MEMBER_ID LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'name'">
+				MEMBER_NAME LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'nick'">
+				MEMBER_NICK LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'all'">
+				MEMBER_ID LIKE '%'||#{searchValue}||'%'
+				OR MEMBER_NAME LIKE '%'||#{searchValue}||'%'
+				OR MEMBER_NICK LIKE '%'||#{searchValue}||'%'
+			</if>
+				AND MEMBER_YN = 'Y'
+				ORDER BY MEMBER_SIGNUP_DATE
+		</where>
+	</select>
 	<!-- 회원가입 -->
 	<insert id="insertMember">
 		INSERT INTO MEMBER_TBL(MEMBER_ID, MEMBER_PW, MEMBER_NAME, 
@@ -192,8 +239,8 @@
 	</select>
 	
 	<!-- 내가 찜한 무비 갯수 -->
-	<select id="selectMovieZzimCount" resultMap="zzimResultMap">
-		SELECT COUNT (ZZIM_NO) FROM ZZIM_TBL WHERE MEMBER_ID = #{memberId}
+	<select id="selectMovieZzimCount" resultType="_int">
+		SELECT COUNT(ZZIM_NO) FROM ZZIM_TBL WHERE MEMBER_ID = #{memberId}
 	</select>
 	
 	<!-- 찜 추가 -->
