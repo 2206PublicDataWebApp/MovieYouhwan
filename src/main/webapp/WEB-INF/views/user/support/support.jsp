@@ -40,6 +40,7 @@
         <jsp:include page="noticeList.jsp" />
       </div>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
   </body>
 </html>

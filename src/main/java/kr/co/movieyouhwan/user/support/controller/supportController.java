@@ -25,11 +25,8 @@ public class supportController {
 	@Autowired
 	private AdminNoticeService aNoticeService;
 
-	private AdminQnaService aQnaService;
-
-	private AdminBannerService aBannerService;
-
 	@RequestMapping(value = "/support.yh", method = RequestMethod.GET)
+	
 	public ModelAndView SupportView(ModelAndView mv,
 			@RequestParam(value = "tabIndex", required = false) Integer tabIndex,
 			@RequestParam(value = "nCurrentPage", required = false) Integer nPage,
@@ -79,6 +76,36 @@ public class supportController {
 		mv.addObject("nCurrentPage", nPage);
 		mv.setViewName("user/support/noticeDetail");
 
+		return mv;
+	}
+	
+	@RequestMapping(value = "/support/noticeSearch.yh", method = RequestMethod.POST)
+	public ModelAndView adminNoticeSearch(ModelAndView mv, @RequestParam("searchValue") String searchValue,
+			@RequestParam("searchOption") String searchOption,
+			@RequestParam(value = "nCurrentPage", required = false) Integer nPage) {
+		try {
+			System.out.println(searchValue);
+			int nCurrentPage = (nPage != null ? nPage : 1);
+			int totalCountBySearch = aNoticeService.printTotalNoticeCount(searchOption, searchValue);
+			System.out.println(1);
+			PageInfo nPageInfo = new PageInfo(nCurrentPage, totalCountBySearch, 10, 5);
+			System.out.println(2);
+			List<Notice> nList = aNoticeService.printNoticeListBySearch(searchOption, searchValue, nPageInfo);
+			System.out.println(3);
+			if (nList != null) {
+				mv.addObject("nList", nList);
+				mv.addObject("nPageInfo", nPageInfo);
+				mv.addObject("searchOption", searchOption);
+				mv.addObject("searchValue", searchValue);
+				mv.addObject("tabIndex", 1);
+				mv.setViewName("user/support/support");
+			} else {
+				System.out.println("nList is null");
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
 		return mv;
 	}
 }

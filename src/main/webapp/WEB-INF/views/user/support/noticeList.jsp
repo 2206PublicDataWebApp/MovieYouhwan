@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-<form method="post" action="/admin/noticeSearch.yh">
+<form method="post" action="/support/noticeSearch.yh">
   <input type="hidden" name="nCurrentPage" value="${nPageInfo.currentPage}" />
   <div id="search-area">
     <select name="searchOption">

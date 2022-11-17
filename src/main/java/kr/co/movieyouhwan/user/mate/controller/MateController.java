@@ -379,6 +379,8 @@ public class MateController {
 			String memberId=member.getMemberId();
 			member = mService.printUserInfo(memberId);
 			List<String> myAllMateList = mService.printMyAllMateId(member.getMemberId());
+			int myMateNumber=mService.printMyMateId(member.getMemberId()).size();
+			mv.addObject("myMateNumber",myMateNumber);
 			if (myAllMateList.size() > 0) {
 				List<Survey> myMateSurvey = mService.getMyMateSurveyList(myAllMateList);
 				List<MatchResult> matchList = new ArrayList<>();

@@ -38,7 +38,7 @@
           </div>
           <div id="mate-profile-img">
             <c:if test="${!empty member.memberImgRename}">
-              <img src="/resources/images/userProfileImg/${matchInfo.memberImgRename}" id="img-frame" />
+              <img src="/resources/images/userProfileImg/${member.memberImgRename}" id="img-frame" />
             </c:if>
             <c:if test="${empty member.memberImgRename}">
               <i class="fa-solid fa-user fa-xl"></i>

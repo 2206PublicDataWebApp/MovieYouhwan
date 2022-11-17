@@ -78,7 +78,7 @@
                 
                 <div class="info-wrap-2">
                     
-                    <a href="/movieDetail.yh?movieNo=${zzim.movieNo}"class="ticketing-btn" >예매하기</a>
+                    <a href="/movieTicketTime.yh"class="ticketing-btn" >예매하기</a>
                     <a href="#"><i class="fa-solid fa-heart" class="heart-btn"></i></a>
                 </div>
             </div>
