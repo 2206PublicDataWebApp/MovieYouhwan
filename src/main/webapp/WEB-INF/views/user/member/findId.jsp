@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="/resources/css/user/member/find.css" />
 <link rel="stylesheet" href="/resources/css/header.css" />
 <link rel="stylesheet" href="/resources/css/footer.css" />
+<link rel="shortcut icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
+<link rel="icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
 <script src="/resources/js/jquery-3.6.1.min.js" defer></script>
     <script src="/resources/js/header.js" defer></script>
     <script src="/resources/js/footer.js" defer></script>

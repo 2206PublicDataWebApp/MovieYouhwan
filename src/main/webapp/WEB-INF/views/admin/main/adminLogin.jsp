@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/adminLogin.css" />
 <link rel="stylesheet" href="/resources/css/common.css" />
+<link rel="shortcut icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
+<link rel="icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
 <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 <script src="/resources/js/jquery-3.6.1.min.js"></script>
 <title>관리자 - 로그인</title>

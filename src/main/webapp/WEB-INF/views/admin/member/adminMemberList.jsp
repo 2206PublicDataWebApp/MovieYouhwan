@@ -10,6 +10,8 @@
 <title>무비유환 : 회원 목록 (관리자)</title>
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/header.css" rel="stylesheet"/>
+<link rel="shortcut icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
+<link rel="icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
 <link href="/resources/css/user/member/adminMemberList.css" rel="stylesheet">
 <script src="/resources/js/user/userMember.js" defer></script>
 </head>
