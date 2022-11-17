@@ -58,7 +58,7 @@
           </div>
         </div>
         <button type="submit" class="next-btn">
-          매칭
+          수정
           <span class="fa-stack fa-xs">
             <i class="fa-solid fa-angle-right fa-stack-1x"></i>
             <i class="fa-regular fa-circle fa-stack-2x"></i>

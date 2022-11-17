@@ -55,7 +55,7 @@
   <div id="menu-wrap">
     <button class="myMenu-start" onclick="location.href='/my/movieTicketHistory.yh'">영화 예매내역</button>
     <button id="tab-store-history" class="myMenu"><a href="/mypage/store/history.yh">스토어 구매내역</a></button>
-    <button class="myMenu">메이트 매칭내역</button>
+    <button class="myMenu" onclick="location.href='/mypage/mateHistory.yh'" style="cursor: pointer">메이트 매칭내역</button>
     <button class="myMenu" onclick="location.href='/my/zzim.yh'">찜한 영화</button>
     <button class="myMenu-end">문의내역</button>
   </div>

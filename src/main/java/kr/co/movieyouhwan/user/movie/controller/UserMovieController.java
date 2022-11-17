@@ -256,8 +256,18 @@ public class UserMovieController {
 	 * @return
 	 */
 	@RequestMapping(value="/movieReview.yh", method=RequestMethod.GET)
-	public ModelAndView movieReview(ModelAndView mv,
+	public ModelAndView movieReview(
+			HttpServletRequest request,
+			ModelAndView mv,
 			@RequestParam("movieNo") Integer movieNo) {
+		HttpSession session=request.getSession();
+		Member member=(Member)session.getAttribute("loginUser");
+		if(member!=null) {
+			MovieReview myMovieReview=uMovieService.printOneMovieReview(member.getMemberId(), movieNo);
+			if(myMovieReview!=null) {
+				mv.addObject("myMovieReview", myMovieReview);
+			}
+		}
 		List<MovieReview> movieReviewList=uMovieService.printMovieReview(movieNo);
 		Movie movie = aMovieService.printOneMovie(movieNo);
 		List<MovieImg> miList = aMovieService.printAllMovieImg(movieNo);
@@ -312,6 +322,44 @@ public class UserMovieController {
 				return "fail";
 			}
 		}
+	}
+	
+	@RequestMapping(value="/movieReview/delete.yh", method=RequestMethod.POST)
+	public String deleteReview(HttpServletRequest request,
+			@RequestParam("movieNo") Integer movieNo) {
+		try {
+			HttpSession session=request.getSession();
+			Member member=(Member)session.getAttribute("loginUser");
+			if(movieNo!=null && member!=null) {
+				int result=uMovieService.deleteReview(movieNo, member.getMemberId());
+				if(result>0) {
+					return "redirect:/movieReview.yh?movieNo="+movieNo;
+				}
+			}
+			else if(member==null) {
+				return "redirect:/member/loginView.yh";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@RequestMapping(value="/movieReview/modify.yh", method=RequestMethod.POST)
+	public String modifyReview(HttpServletRequest request,
+			@ModelAttribute MovieReview movieReview) {
+		HttpSession session=request.getSession();
+		Member member=(Member)session.getAttribute("loginUser");
+		if(movieReview!=null && member!=null) {
+			movieReview.setMemberId(member.getMemberId());
+			int result=uMovieService.modifyReview(movieReview);
+			if(result>0) {
+				return "redirect:/movieReview.yh?movieNo="+movieReview.getMovieNo();
+			}
+		}else {
+			return "redirect:/member/loginView.yh";
+		}
+		return "redirect:/movieReview.yh?movieNo="+movieReview.getMovieNo();
 	}
 	
 	/**

@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <link rel="icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
     <link rel="stylesheet" href="/resources/css/common.css" />
     <link rel="stylesheet" href="/resources/css/header.css" />
     <link rel="stylesheet" href="/resources/css/mate.css" />
@@ -33,7 +33,7 @@
               </c:choose>
             </div>
             <div id="editProfile">
-              <a href="#"><i class="fa-solid fa-pencil" id="pen"></i>매칭 설정 변경</a>
+              <a onclick="alert('현재 구현중인 기능입니다');"><i class="fa-solid fa-pencil" id="pen"></i>매칭 설정 변경</a>
             </div>
           </div>
           <div id="mate-profile-img">

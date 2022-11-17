@@ -155,6 +155,15 @@ public class MateStoreLogic implements MateStore {
 		String matchDate=session.selectOne("MateMapper.selectMatchDate", param);
 		return matchDate;
 	}
+	
+	@Override
+	public String selectAllMatchDate(SqlSessionTemplate session, String requesterId, String respondentId) {
+		HashMap<String, String> param=new HashMap<>();
+		param.put("requesterId", requesterId);
+		param.put("respondentId", respondentId);
+		String matchDate=session.selectOne("MateMapper.selectAllMatchDate", param);
+		return matchDate;
+	}
 
 	@Override
 	public int updateToDeleteMatching(SqlSessionTemplate session, String memberId, String mateId) {
@@ -172,5 +181,20 @@ public class MateStoreLogic implements MateStore {
 		param.put("matchingActive", matchingActive);
 		int result=session.update("MateMapper.updateMatchingActive", param);
 		return result;
+	}
+
+	@Override
+	public List<String> selectAllMateId(SqlSessionTemplate session, String memberId) {
+		List<String> myAllMateList=session.selectList("MateMapper.selectAllMyMateId", memberId);
+		return myAllMateList;
+	}
+
+	@Override
+	public String selectAllEndDate(SqlSessionTemplate session, String requesterId, String respondentId) {
+		HashMap<String, String> param=new HashMap<>();
+		param.put("requesterId", requesterId);
+		param.put("respondentId", respondentId);
+		String endDate=session.selectOne("MateMapper.selectAllEndDate", param);
+		return endDate;
 	}
 }

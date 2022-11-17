@@ -68,4 +68,7 @@ public interface UserMovieStore {
 	 * @return
 	 */
 	public List<MovieChart> selectMovieChartList(SqlSessionTemplate session, int top);
+	public MovieReview selectMovieReview(SqlSessionTemplate session, String memberId, Integer movieNo);
+	public int deleteMovieReview(SqlSessionTemplate session, String memberId, Integer movieNo);
+	public int updateMovieReview(SqlSessionTemplate session, MovieReview movieReview);
 }

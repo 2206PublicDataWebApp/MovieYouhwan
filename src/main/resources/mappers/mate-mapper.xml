@@ -151,6 +151,12 @@
 		SELECT REQUESTER_ID FROM MATCHING_TBL WHERE RESPONDENT_ID=#{memberId} AND DELETE_DATE IS NULL
 	</select>
 	
+	<select id="selectAllMyMateId" resultType="string">
+		SELECT RESPONDENT_ID FROM MATCHING_TBL WHERE REQUESTER_ID=#{memberId}
+		UNION
+		SELECT REQUESTER_ID FROM MATCHING_TBL WHERE RESPONDENT_ID=#{memberId}
+	</select>
+	
 	<select id="selectMyMateSurveyList" resultMap="surveyResultMap" parameterType="java.util.List">
 		SELECT * FROM SURVEY_TBL WHERE MEMBER_ID IN
 		<foreach collection="list" item="item" open="(" close=")" separator=",">
@@ -160,5 +166,13 @@
 	
 	<select id="selectMatchDate" resultType="string" parameterType="java.util.HashMap">
 		SELECT CREATE_DATE FROM MATCHING_TBL WHERE (REQUESTER_ID=#{requesterId} AND RESPONDENT_ID=#{respondentId} AND DELETE_DATE IS NULL) OR (REQUESTER_ID=#{respondentId} AND RESPONDENT_ID=#{requesterId} AND DELETE_DATE IS NULL)
+	</select>
+	
+	<select id="selectAllMatchDate" resultType="string" parameterType="java.util.HashMap">
+		SELECT CREATE_DATE FROM MATCHING_TBL WHERE (REQUESTER_ID=#{requesterId} AND RESPONDENT_ID=#{respondentId}) OR (REQUESTER_ID=#{respondentId} AND RESPONDENT_ID=#{requesterId})
+	</select>
+	
+	<select id="selectAllEndDate" resultType="string" parameterType="java.util.HashMap">
+		SELECT DELETE_DATE FROM MATCHING_TBL WHERE (REQUESTER_ID=#{requesterId} AND RESPONDENT_ID=#{respondentId}) OR (REQUESTER_ID=#{respondentId} AND RESPONDENT_ID=#{requesterId})
 	</select>
 </mapper>

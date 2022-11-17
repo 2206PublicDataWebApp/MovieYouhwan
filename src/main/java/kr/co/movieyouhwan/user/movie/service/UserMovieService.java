@@ -62,4 +62,8 @@ public interface UserMovieService {
 	 * @return
 	 */
 	public List<MovieChart> printMovieChartList(int top);
+	// 회원의 movieReview 가져오기
+	public MovieReview printOneMovieReview(String memberId, Integer movieNo);
+	public int deleteReview(Integer movieNo, String memberId);
+	public int modifyReview(MovieReview movieReview);
 }
