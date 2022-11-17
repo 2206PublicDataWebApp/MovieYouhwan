@@ -71,4 +71,6 @@ public interface UserMovieStore {
 	public MovieReview selectMovieReview(SqlSessionTemplate session, String memberId, Integer movieNo);
 	public int deleteMovieReview(SqlSessionTemplate session, String memberId, Integer movieNo);
 	public int updateMovieReview(SqlSessionTemplate session, MovieReview movieReview);
+	// 날짜별 영화 출력
+	public List<MovieList> selectTicketTimeChoice(SqlSessionTemplate session, Integer cinemaNo, Integer movieNo, String movieDay);
 }

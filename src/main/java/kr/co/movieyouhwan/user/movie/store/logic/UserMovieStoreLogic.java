@@ -200,4 +200,14 @@ public class UserMovieStoreLogic implements UserMovieStore {
 		int result=session.update("MovieMapper.updateMovieReview", movieReview);
 		return result;
 	}
+	// 날짜별 영화 출력
+	@Override
+	public List<MovieList> selectTicketTimeChoice(SqlSessionTemplate session, Integer cinemaNo, Integer movieNo, String movieDay) {
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("cinemaNo", cinemaNo);
+		paramMap.put("movieNo", movieNo);
+		paramMap.put("movieDay", movieDay);
+		List<MovieList> mlList = session.selectList("MovieMapper.selectTicketTimeChocie", paramMap);
+		return mlList;
+	}
 }

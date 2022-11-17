@@ -1,4 +1,5 @@
 $('.movie-tab').addClass('tab-selected');
+$('.admin-movie7-tab').addClass('admin-tab-selected');
 
 // 등록 jsp
 const registerModal = $('#add-movie-time');

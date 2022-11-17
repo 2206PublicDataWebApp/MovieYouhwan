@@ -1,4 +1,5 @@
 $('.cinema-tab').addClass('tab-selected');
+$('.admin-cinema-tab').addClass('admin-tab-selected');
 
 // 관리자
 

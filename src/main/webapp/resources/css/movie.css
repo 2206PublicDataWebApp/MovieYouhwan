@@ -227,48 +227,56 @@
 	}
 		#title-input {
 			width : 300px;
-			height : 25px;
+			height : 30px;
+			padding-left : 10px;
 			border : solid 1px #0F1A3B;
 		}
 	#type-wrap {
 		width : 743px;
 		margin-bottom : 25px;
 	}
+	#modify-type-wrap {
+		width : 815px;
+		margin-bottom : 40px;
+	}
 		.type-input {
 			margin-left : 15px;
 			margin-right : 5px;
 		}
 	#runtime-wrap {
-		width : 280px;
-		margin-bottom : 25px;
+		width : 500px;
+		margin-bottom : 40px;
 	}
 		#runtime-input {
-			width : 150px;
-			height : 25px;
+			width : 300px;
+			height : 30px;
 			border : solid 1px #0F1A3B;
+			padding-left : 10px;
 		}
 	#director-wrap {
-		width : 430px;
-		margin-bottom : 25px;
+		width : 500px;
+		margin-bottom : 40px;
 	}
 		#director-input {
+			padding-left : 10px;
 			width : 300px;
-			height : 25px;
+			height : 30px;
 			border : solid 1px #0F1A3B;
 		}
 	#actor-wrap {
-		width : 430px;
-		margin-bottom : 25px;
+		width : 500px;
+		margin-bottom : 40px;
 	}
 		#actor-input {
 			width : 300px;
-			height : 25px;
+			height : 30px;
+			padding-left : 10px;
 			border : solid 1px #0F1A3B;
 			
 		}
 	#age-wrap {
-		width : 715px;
-		margin-bottom : 25px;
+		width : 783px;
+		margin-bottom : 40px;
 	}
 		.age-input {
 			margin-left : 15px;
@@ -278,7 +286,10 @@
 	.date-wrap {
 		width : 332px;
 		margin-bottom : 25px;
-		
+	}
+	.modify-date-wrap {
+		width : 500px;
+		margin-bottom : 40px;
 	}
 		.date-register {
 			float : right;
@@ -287,15 +298,15 @@
 			border : solid 1px #0F1A3B;
 		}
 	#story-wrap {
-		width : 1000px;
-		margin-bottom : 350px;
+		width : 800px;
+		margin-bottom : 280px;
 	}
 		#story-title {
 			display : inline;
 		}
 		#story-input {
-			width : 867px;
-			height : 350px;
+			width : 600px;
+			height : 250px;
 			resize : none;
 			border : solid 1px #0F1A3B;
 		}
@@ -627,6 +638,13 @@
 		margin-top : 5px;
 		margin-right : 30px;
 	}
+	.movie-modify-title {
+		line-height : 30px;
+	}
+	#modify-title-wrap {
+		width : 500px;
+		margin-bottom : 40px;
+	}
 	#movie-next {
 		width : 80px;
 		height : 30px;
@@ -734,7 +752,7 @@
 }	
 	#imgmodify-filewrap {
 		margin-top : -25px;
-		margin-left : 132px;
+		margin-left : 200px;
 	}
 	.imgmodify-listwrap {
 		margin-bottom : 15px;
@@ -785,8 +803,7 @@
 	border : solid 1px #0F1A3B;	
 }
 #moviemodify-button {
-	margin-top : 100px;
-	margin-bottom : 50px;
+	margin-top : 50px;
 	float : right;
 }
 	#mbutton-back {
@@ -796,6 +813,7 @@
 		color : #0F1A3B;
 		background-color : white;
 		border : solid 1px #0F1A3B;
+		margin-bottom : 100px;
 	}
 	#mbutton-go {
 		width : 100px;
@@ -855,6 +873,12 @@
 			font-size : 14px;
 			line-height : 81px;
 			text-align : center;
+		}
+		.modify-date-input {
+			width : 300px;
+			height : 30px;
+			float : right;
+			border : solid 1px #0F1A3B;
 		}
 #date-wrapper {
 	margin-top : 40px;
@@ -1013,6 +1037,9 @@
 		float : left;
 		margin-right : 80px;
 	}
+	.detail-movieimg {
+		margin-bottom : 100px;
+	}
 .movie-tab-wrapper {
 	display : flex;
 	margin-top : 30px;
@@ -1073,6 +1100,10 @@
 
 
 /* 영화 탭 */
+#movie-tab {
+	border-bottom: 3px solid #f0c808;
+}
+
 #movie-tab {
 	border-bottom: 3px solid #f0c808;
 }

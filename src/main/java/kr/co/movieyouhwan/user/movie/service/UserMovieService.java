@@ -66,4 +66,6 @@ public interface UserMovieService {
 	public MovieReview printOneMovieReview(String memberId, Integer movieNo);
 	public int deleteReview(Integer movieNo, String memberId);
 	public int modifyReview(MovieReview movieReview);
+	// 날짜별 영화 출력
+	public List<MovieList> printTicketTimeChoice(Integer cinemaNo, Integer movieNo, String movieDay);
 }
