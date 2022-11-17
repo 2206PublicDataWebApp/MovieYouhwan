@@ -67,6 +67,8 @@ function unlockScroll() {
   $('html, body').off('scroll touchmove mousewheel');
 }
 function registerMovieReview(loginUser) {
+  var movieNo = $('#movieNoInput').val();
+  console.log(movieNo);
   if (!loginUser) {
     alert('로그인이 필요한 서비스입니다.');
     return;
@@ -74,6 +76,7 @@ function registerMovieReview(loginUser) {
   if ($('.selected-rate').text() == '0') {
     alert('별점을 선택해주세요.');
   } else {
+  console.log($('#movieNoInput').val());
     $.ajax({
       url: '/movieReview.register.yh',
       method: 'post',
@@ -87,7 +90,8 @@ function registerMovieReview(loginUser) {
           alert('이미 리뷰를 등록한 영화입니다.');
         } else if (result == 'success') {
           alert('리뷰가 등록되었습니다.');
-          $(location).attr('href', '/movieReview.yh?movieNo=' + $('#movieNoInput').val());
+          //$(location).attr('href', '/movieReview.yh?movieNo=' + $('#movieNoInput').val());
+          $(location).reload();
         } else if (result == 'loginRequired') {
           alert('로그인이 필요한 서비스입니다.');
           $(location).attr('href', '/member/loginView.yh');
@@ -100,7 +104,7 @@ function registerMovieReview(loginUser) {
 function deleteReview() {
   if (confirm('리뷰를 삭제하시겠습니까?')) {
     let formTag = $('<form></form>').attr('action', '/movieReview/delete.yh').attr('method', 'post');
-    let inputTag = $('<input/>').attr('type', 'hidden').attr('name', 'movieNo').attr('value', $('#movieNNoInput'));
+    let inputTag = $('<input/>').attr('type', 'hidden').attr('name', 'movieNo').attr('value', $('#movieNoInput').val());
     formTag.append(inputTag);
     $('body').append(formTag);
     formTag.submit();

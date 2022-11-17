@@ -11,6 +11,8 @@
 <link href="/resources/css/common.css" rel="stylesheet"/>
 <link href="/resources/css/header.css" rel="stylesheet"/>
 <link href="/resources/css/cinema.css" rel="stylesheet">
+<script src="/resources/js/jquery-3.6.1.min.js"></script>
+<script src="/resources/js/cinema.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>

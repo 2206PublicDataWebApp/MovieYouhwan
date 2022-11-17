@@ -55,7 +55,7 @@
 			<div id="detail-button">
 				<div id="tiket-list">
 					<button class="go-movieList" onclick="location.href='/movieTicketTime.yh'">예매하기</button>
-					<button class="go-movieList" onclick="/movieList.yh">목록으로</button>
+					<button class="go-movieList" onclick="location.href='/movieList.yh'">목록으로</button>
 				</div>
 			</div>	
 		</div>
@@ -76,7 +76,7 @@
         </div>
         <div class="input-content">
           <textarea id="review-input" name="movieReview" placeholder="관람평을 작성해주세요" required></textarea>
-          <button id="review-btn" onclick="registerMovieReview('${loginUser}');">관람평 작성</button>
+          <button id="review-btn" onclick="registerMovieReview('${loginUser.memberId}');">관람평 작성</button>
         </div>
       </div>
       <div class="review-area">
@@ -105,7 +105,6 @@
             </div>
 
             <div class="review-info-area">
-              <input id="movieNoInput" type="hidden" name="movieNo" value="${movie.movieNo}" />
               <div class="review-create-date">${movieReview.regDate}</div>
               <div class="review-btn-area">
                 <c:if test="${movieReview.memberId eq loginUser.memberId}"><a id="review-modify-btn">수정</a> <a onclick="deleteReview();">삭제</a></c:if>
@@ -113,6 +112,7 @@
             </div>
           </div>
         </c:forEach>
+          <input id="movieNoInput" type="hidden" name="movieNo" value="${movie.movieNo}" />
       </div>
     </div>
 

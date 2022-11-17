@@ -13,6 +13,8 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/header.css" rel="stylesheet"/>
 <link href="/resources/css/movie.css" rel="stylesheet">
+<script src="/resources/js/jquery-3.6.1.min.js" defer></script>
+<script src="/resources/js/movie.js" defer></script>
 </head>
 <body>
 	<jsp:useBean id="now" class="java.util.Date" />
