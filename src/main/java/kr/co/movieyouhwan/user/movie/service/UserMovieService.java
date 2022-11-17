@@ -5,6 +5,7 @@ import java.util.List;
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.movie.domain.MovieChart;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.domain.MovieReview;
 import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
@@ -43,4 +44,22 @@ public interface UserMovieService {
 	public int checkReviewExist(String memberId, Integer movieNo);
 	// 회원 테이블 포인트 업데이트
 	public int modifyMemberPoint(String memberId, Integer userPoint);
+	
+	/**
+	 * 배너 동영상 번호 리스트 불러오기
+	 * @return
+	 */
+	public List<Integer> printBannerVideoNoList();
+	/**
+	 * 타겟 배너 동영상 저장명 불러오기
+	 * @param targetVideoNo
+	 * @return
+	 */
+	public String printBannerVideoRenameByVideoNo(int videoNo);
+	/**
+	 * 영화 차트 리스트 불러오기
+	 * @param movieChartCount
+	 * @return
+	 */
+	public List<MovieChart> printMovieChartList(int top);
 }

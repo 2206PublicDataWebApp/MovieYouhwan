@@ -40,7 +40,7 @@ public class AdminFaqController {
 	public ModelAndView adminFaqWrite(ModelAndView mv, @ModelAttribute Faq faq) {
 		int result=aFaqService.registerFaq(faq);
 		if (result>0) {
-			mv.addObject("tabIndex", 1);
+			mv.addObject("tabIndex", 0);
 			mv.setViewName("redirect:/admin/site/manage.yh");
 		}
 		return mv;
@@ -66,7 +66,7 @@ public class AdminFaqController {
 	public ModelAndView adminFaqModify(ModelAndView mv, @ModelAttribute Faq faq) {
 		int result=aFaqService.modifyFaq(faq);
 		if(result>0) {
-			mv.addObject("tabIndex", 1);
+			mv.addObject("tabIndex", 0);
 			mv.setViewName("redirect:/admin/site/manage.yh");
 		}
 		return mv;
@@ -77,7 +77,7 @@ public class AdminFaqController {
 		deleteNo=deleteNo.substring(0, deleteNo.length()-1);
 		int result=aFaqService.deleteFaqList(deleteNo);
 		if(result>0) {
-			mv.addObject("tabIndex", 1);
+			mv.addObject("tabIndex", 0);
 			mv.setViewName("redirect:/admin/site/manage.yh");
 		}
 		return mv;

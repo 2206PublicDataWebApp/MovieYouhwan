@@ -2,6 +2,7 @@
 ///////////////// Auto Call Function /////////////////
 //////////////////////////////////////////////////////
 
+formatDate($('.movie-chart-item .movie-opening-date'));
 showCommas($('.store-best-item .product-price'));
 
 ///////////////////////////////////////////////////////
@@ -26,4 +27,14 @@ function showCommas(numElem) {
  */
 function strToNum(strVal) {
   return parseInt(strVal.replace(/[^0-9]/g, ''));
+}
+
+/**
+ * 날짜 포맷 (yyyy-MM-dd)
+ * @param {*} dateElem
+ */
+function formatDate(dateElem) {
+  dateElem.each(function () {
+    $(this).text($(this).text().substr(0, 10) + ' 개봉');
+  });
 }

@@ -36,18 +36,18 @@
   <div class="pagination-area">
     <ul class="pagination">
       <c:if test="${nPageInfo.startPage ne 1}">
-        <li><a href="/admin/site/manage.yh?nCurrentPage=${nPageInfo.startPage-1}&tabIndex=2&">&laquo;</a></li>
+        <li><a href="/admin/site/manage.yh?nCurrentPage=${nPageInfo.startPage-1}&tabIndex=1&">&laquo;</a></li>
       </c:if>
       <c:forEach var="page" begin="${nPageInfo.startPage }" end="${nPageInfo.endPage }">
         <c:if test="${nPageInfo.currentPage eq page}">
           <li><a class="currentP" href="#">${page }</a></li>
         </c:if>
         <c:if test="${nPageInfo.currentPage ne page}">
-          <li><a href="/admin/site/manage.yh?nCurrentPage=${page}&tabIndex=2">${page}</a></li>
+          <li><a href="/admin/site/manage.yh?nCurrentPage=${page}&tabIndex=1">${page}</a></li>
         </c:if>
       </c:forEach>
       <c:if test="${nPageInfo.endPage ne nPageInfo.pageCount}">
-        <li><a href="/admin/site/manage.yh?nCurrentPage=${nPageInfo.endPage+1}&tabIndex=2">&raquo;</a></li>
+        <li><a href="/admin/site/manage.yh?nCurrentPage=${nPageInfo.endPage+1}&tabIndex=1">&raquo;</a></li>
       </c:if>
     </ul>
   </div>

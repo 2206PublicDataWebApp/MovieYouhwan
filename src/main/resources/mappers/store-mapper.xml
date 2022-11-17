@@ -230,6 +230,7 @@
 		SELECT ORDER_NO, PRODUCT_NAME, PAY_DATE, EXPIRY_DATE, PAY_AMOUNT, AVAILABILITY
 		FROM STORE_ORDER_TBL
 		WHERE MEMBER_ID = #{memberId}
+		ORDER BY PAY_DATE DESC
 	</select>
 
 	<!-- 사용자 - 스토어 구매내역 조회 (N건, 조회 필터 사용) -->
@@ -257,6 +258,7 @@
 			AND SUBSTR(PAY_DATE, 1, 10) <![CDATA[>]]> #{startDate}
 			AND SUBSTR(PAY_DATE, 1, 10) <![CDATA[<]]> #{endDate}
 		</if>
+		ORDER BY PAY_DATE DESC
 	</select>
 
 	<!-- 사용자 - 스토어 구매내역 상세 조회 -->

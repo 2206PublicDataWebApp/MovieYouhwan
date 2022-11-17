@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.movie.domain.MovieChart;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.domain.MovieReview;
 import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
@@ -45,4 +46,26 @@ public interface UserMovieStore {
 	public int selectMovieReviewCount(SqlSessionTemplate session, String memberId, Integer movieNo);
 	// 회원 테이블 포인트 업데이트
 	public int updateMemberPoint(SqlSessionTemplate session, String memberId, Integer userPoint);
+	/**
+	 * 배너 동영상 번호 리스트 불러오기
+	 * @param session
+	 * @return
+	 */
+	public List<Integer> selectBannerVideoNoList(SqlSessionTemplate session);
+	
+	/**
+	 * 타겟 배너 동영상 저장명 불러오기
+	 * @param session
+	 * @param videoNo
+	 * @return
+	 */
+	public String selectBannerVideoRenameByVideoNo(SqlSessionTemplate session, int videoNo);
+	
+	/**
+	 * 영화 차트 리스트 불러오기
+	 * @param session
+	 * @param top
+	 * @return
+	 */
+	public List<MovieChart> selectMovieChartList(SqlSessionTemplate session, int top);
 }

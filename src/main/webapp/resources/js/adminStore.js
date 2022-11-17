@@ -21,6 +21,9 @@ let modImgPreview = modifyModal.find('.img-preview');
 ///////////////// Auto Call Function /////////////////
 //////////////////////////////////////////////////////
 
+// 헤더 - 탭 메뉴 스타일
+$('.admin-store-tab').addClass('admin-tab-selected');
+
 // 상품 목록 - 상품 가격에 천 단위로 콤마(,) 삽입
 showCommas($('p.product-price'));
 
@@ -135,7 +138,7 @@ $('#btn-store-save').click(function () {
 
 // 상품 재배치 - 취소
 $('#btn-store-cancel').click(function () {
-  if (confirm('변경 사항은 저장되지 않습니다. 정말 취소하시겠습니까?')) {
+  if (confirm('변경사항은 저장되지 않습니다. 정말 취소하시겠습니까?')) {
     $(location).attr('href', '/admin/store/manage.yh');
   }
 });

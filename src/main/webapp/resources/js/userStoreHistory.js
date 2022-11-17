@@ -92,18 +92,19 @@ $('#btn-search-by-filter').click(function () {
 $('#btn-order-cancel').click(function () {
   if ($('#profile-user').length) {
     if (confirm('정말 취소하시겠습니까?')) {
-      let cancelForm = $('<form></form>');
-      cancelForm.attr('action', '/store/order/cancel.yh');
-      cancelForm.attr('method', 'post');
+      // let cancelForm = $('<form></form>');
+      // cancelForm.attr('action', '/store/order/cancel.yh');
+      // cancelForm.attr('method', 'post');
 
-      let cancelInput = $('<input />');
-      cancelInput.attr('type', 'hidden');
-      cancelInput.attr('name', 'orderNo');
-      cancelInput.attr('value', $(this).data('value'));
+      // let cancelInput = $('<input />');
+      // cancelInput.attr('type', 'hidden');
+      // cancelInput.attr('name', 'orderNo');
+      // cancelInput.attr('value', $(this).data('value'));
 
-      cancelInput.appendTo(cancelForm);
-      cancelForm.appendTo('body');
-      cancelForm.submit();
+      // cancelInput.appendTo(cancelForm);
+      // cancelForm.appendTo('body');
+      // cancelForm.submit();
+      alert('취소 기능은 현재 구현 중입니다.');
     }
   } else {
     $(location).attr('href', '/member/loginView.yh');

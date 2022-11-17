@@ -16,7 +16,7 @@
   <body>
     <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"></jsp:include>
     <div id="admin-wrapper">
-      <h3><a href='/admin/site/manage.yh?tabIndex=2'>공지사항 관리</a></h3>
+      <h3><a href='/admin/site/manage.yh?tabIndex=1'>공지사항 관리</a></h3>
       <br />
       <hr />
       <form method="post"> 
@@ -64,7 +64,7 @@
         <hr />
       </div>
       <div class="list-btn-area">
-        <button type="button" class="list-btn" onclick="location.href='/admin/site/manage.yh?tabIndex=2&nCurrentPage=${nCurrentPage}'">목록</button>
+        <button type="button" class="list-btn" onclick="location.href='/admin/site/manage.yh?tabIndex=1&nCurrentPage=${nCurrentPage}'">목록</button>
       </div>
     </div>
   </body>

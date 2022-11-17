@@ -53,13 +53,13 @@
 		<result property="theaterName" column="THEATER_NAME" />
 	</resultMap>
 	<resultMap type="MovieList" id="MovieListResultMap">
-		<id property="movieNo" column="MOVIE_NO"/>
-		<result property="theaterNo" column="THEATER_NO"/>
-		<result property="movieTitle" column="MOVIE_TITLE"/>
+		<id property="movieNo" column="MOVIE_NO"/> <!--  -->
+		<result property="theaterNo" column="THEATER_NO"/> 
+		<result property="movieTitle" column="MOVIE_TITLE"/> <!--  -->
 		<result property="movieAge" column="MOVIE_AGE"/>
-		<result property="movieStartday" column="MOVIE_STARTDAY"/>
+		<result property="movieStartday" column="MOVIE_STARTDAY"/> <!--  -->
 		<result property="movieImgName" column="MOVIE_IMG_NAME"/>
-		<result property="movieImgRename" column="MOVIE_IMG_RENAME"/>
+		<result property="movieImgRename" column="MOVIE_IMG_RENAME"/> <!--  -->
 		<result property="movieImgPath" column="MOVIE_IMG_PATH"/>
 		<result property="theaterName" column="THEATER_NAME" />
 		<result property="movieDay" column="MOVIE_DAY"/>
@@ -77,7 +77,7 @@
 		<result property="memberGender" column="MEMBER_GENDER"/>
 		<result property="cinemaNo" column="CINEMA_NO"/>
 		<result property="theaterNo" column="THEATER_NO"/>
-		<result property="movieNo" column="MOVIE_NO"/>
+		<result property="movieNo" column="MOVIE_NO"/> <!--  -->
 		<result property="cinemaName" column="CINEMA_NAME"/>
 		<result property="theaterName" column="THEATER_NAME"/>
 		<result property="movieName" column="MOVIE_NAME"/>
@@ -299,4 +299,44 @@
 	<update id="updateMemberPoint">
 		UPDATE MEMBER_TBL SET MEMBER_POINT = MEMBER_POINT + #{userPoint} WHERE MEMBER_ID = #{memberId}
 	</update>
+	
+	<!-- 배너 동영상 번호 리스트 조회 -->
+	<select id="selectBannerVideoNoList" resultType="_int">
+		SELECT MIN(V.MOVIE_VIDEO_NO) MOVIE_VIDEO_NO
+		FROM MOVIE_VIDEO_TBL V, MOVIE_TBL M
+		WHERE V.MOVIE_NO = M.MOVIE_NO
+		GROUP BY M.MOVIE_NO
+	</select>
+	
+	<!-- 타겟 배너 동영상 저장명 조회 -->
+	<select id="selectBannerVideoRenameByVideoNo" resultType="string">
+		SELECT MOVIE_VIDEO_RENAME
+		FROM MOVIE_VIDEO_TBL
+		WHERE MOVIE_VIDEO_NO = #{videoNo}
+	</select>
+	
+	<!-- 영화 차트 리스트 조회 -->
+	<select id="selectMovieChartList" resultMap="movieChartResultMap">
+		SELECT M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_STARTDAY, M.MOVIE_ENDDAY,
+		I.MOVIE_IMG_RENAME, X.COUNT
+		FROM MOVIE_TBL M,
+		(SELECT MOVIE_NO, MOVIE_IMG_RENAME FROM MOVIE_IMG_TBL WHERE MOVIE_IMG_NAME LIKE '대표이미지'||'%') I,
+		(SELECT MOVIE_NO, COUNT(MOVIE_NO) COUNT FROM MOVIE_TICKET_TBL
+		GROUP BY MOVIE_NO) X
+		WHERE M.MOVIE_NO = X.MOVIE_NO
+		AND X.MOVIE_NO = I.MOVIE_NO
+		AND MOVIE_ENDDAY >= SYSDATE
+		AND ROWNUM <![CDATA[<=]]> ${top}
+		ORDER BY COUNT DESC
+	</select>
+	
+	<!-- 영화 차트 리스트 조회 -->
+	<resultMap type="MovieChart" id="movieChartResultMap">
+		<id property="movieNo" column="MOVIE_NO"/>
+		<result property="movieTitle" column="MOVIE_TITLE"/>
+		<result property="startDay" column="MOVIE_STARTDAY"/>
+		<result property="endDay" column="MOVIE_ENDDAY"/>
+		<result property="movieImgRename" column="MOVIE_IMG_RENAME"/>
+		<result property="count" column="COUNT"/>
+	</resultMap>
 </mapper>

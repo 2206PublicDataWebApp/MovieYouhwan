@@ -19,21 +19,21 @@
               </c:forEach>
             </select>
             <button type="button" class="btn-to-input"><i class="fa-solid fa-plus"></i></button>
-            <input type="text" class="modal-product-type product-type-input hidden" placeholder="상품 유형을 입력해주세요." />
+            <input type="text" class="modal-product-type product-type-input hidden" placeholder="상품 유형을 입력해주세요." autocomplete="off" />
             <button type="button" class="btn-to-select hidden"><i class="fa-solid fa-rotate-left"></i></button>
           </td>
         </tr>
         <tr>
           <th>상품명</th>
-          <td><input type="text" name="productName" value="${product.productName }" class="modal-input" placeholder="상품 이름을 입력해주세요." required /></td>
+          <td><input type="text" name="productName" value="${product.productName }" class="modal-input" placeholder="상품 이름을 입력해주세요." autocomplete="off" required /></td>
         </tr>
         <tr>
           <th>가격</th>
-          <td><input type="number" name="productPrice" value="${product.productName }" class="modal-input" placeholder="상품 가격을 입력해주세요." required /></td>
+          <td><input type="number" name="productPrice" value="${product.productName }" class="modal-input" placeholder="상품 가격을 입력해주세요." autocomplete="off" required /></td>
         </tr>
         <tr>
           <th>구성</th>
-          <td><input type="text" name="productDesc" value="${product.productDesc }" class="modal-input" placeholder="상품 구성을 입력해주세요." required /></td>
+          <td><input type="text" name="productDesc" value="${product.productDesc }" class="modal-input" placeholder="상품 구성을 입력해주세요." autocomplete="off" required /></td>
         </tr>
       </table>
       <div class="modal-btn-area">

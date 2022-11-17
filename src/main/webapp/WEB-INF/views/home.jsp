@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>무비유환</title>
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" crossorigin="use-credentials" /> -->
+    <link rel="shortcut icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
+    <link rel="icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
     <link rel="stylesheet" href="/resources/css/common.css" />
     <link rel="stylesheet" href="/resources/css/header.css" />
     <link rel="stylesheet" href="/resources/css/footer.css" />
@@ -18,21 +24,22 @@
   </head>
   <body>
     <jsp:include page="common/header.jsp"></jsp:include>
-    <div id="main-banner">
-      <video src="/resources/images/cinemaLodeImg/"></video>
+    <div id="main-banner-wrap">
+      <video id="main-banner-video" src="resources/images/movieLodeVideo/${videoRename }" autoplay muted loop></video>
     </div>
     <div id="main-wrap">
       <div id="movie-chart-wrap">
         <h2><a href="/movieList.yh">MOVIE CHART</a></h2>
         <div id="movie-chart-list">
-          <!-- TODO: c:forEach 사용 -->
-          <div class="movie-chart-item">
-            <div class="movie-img">
-              <a href="/movieDetail.yh"><img src="/resources/images/movieLodeImg/202210281010222.jpg" alt="" /></a>
+          <c:forEach items="${movieList }" var="movie">
+            <div class="movie-chart-item">
+              <div class="movie-img">
+                <a href="/movieDetail.yh?movieNo=${movie.movieNo }"><img src="/resources/images/movieLodeImg/${movie.movieImgRename }" alt="" /></a>
+              </div>
+              <div class="movie-title">${movie.movieTitle }</div>
+              <div class="movie-opening-date">${movie.startDay } 개봉</div>
             </div>
-            <div class="movie-title">듄</div>
-            <div class="movie-opening-date">2022-10-11 개봉</div>
-          </div>
+          </c:forEach>
         </div>
       </div>
       <div id="store-best-wrap">

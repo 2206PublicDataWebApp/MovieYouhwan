@@ -3,9 +3,10 @@
   src: url('../font/MICEGothic\ Bold.ttf');
 }
 
-#main-banner {
-  border: 1px solid black;
-  height: 300px;
+#main-banner-wrap video {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
 }
 
 #main-wrap {

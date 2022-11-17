@@ -89,6 +89,13 @@
   border-bottom: 3px solid #f0c808;
 }
 
+.admin-tab-selected {
+  font-family: mice-bold;
+  border-bottom: none;
+  background-color: #0f1a3b;
+  color: #fff;
+}
+
 .navbar-toggleBtn {
   display: none;
   position: absolute;

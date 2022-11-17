@@ -27,8 +27,7 @@
         <input type="hidden" id="tabIndex" value="${tabIndex}" />
         <ul id="homepage-tab">
           <li class="homepage-tab-item" id="homepage-tab-banner"><a href="/support.yh?tabIndex=0">FAQ</a></li>
-          <li class="homepage-tab-item" id="homepage-tab-faq"><a href="/support.yh?tabIndex=1">Q&A</a></li>
-          <li class="homepage-tab-item" id="homepage-tab-qna"><a href="/support.yh?tabIndex=2">공지사항</a></li>
+          <li class="homepage-tab-item" id="homepage-tab-qna"><a href="/support.yh?tabIndex=1">공지사항</a></li>
         </ul>
       </div>
       <hr />
@@ -36,12 +35,9 @@
       <div class="page no-show" id="faq-page">
         <jsp:include page="faqList.jsp" />
       </div>
-      <div class="page" id="qna-page"></div>
       <div class="page no-show" id="notice-page">
         <jsp:include page="noticeList.jsp" />
       </div>
-      <!-- <div class="page no-show" id="banner-page"></div> -->
-    </div>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
   </body>

@@ -1,4 +1,5 @@
 package kr.co.movieyouhwan.user.movie.store.logic;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,20 +9,21 @@ import org.springframework.stereotype.Repository;
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.movie.domain.MovieChart;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.domain.MovieReview;
 import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
 import kr.co.movieyouhwan.user.movie.store.UserMovieStore;
 
 @Repository
-public class UserMovieStoreLogic implements UserMovieStore{
+public class UserMovieStoreLogic implements UserMovieStore {
 	// 현재 상영 영화 리스트
 	@Override
 	public List<MovieList> selectAllMovieNow(SqlSessionTemplate session) {
 		List<MovieList> mlList = session.selectList("MovieMapper.selectAllMovieNow");
 		return mlList;
 	}
-	
+
 	// 현재 상영 영화 리스트 페이징 처리
 	@Override
 	public int selectNowMovieCount(SqlSessionTemplate session) {
@@ -35,7 +37,7 @@ public class UserMovieStoreLogic implements UserMovieStore{
 		List<MovieList> mlList = session.selectList("MovieMapper.selectAllMovieAfter");
 		return mlList;
 	}
-	
+
 	// 상영 예정 영화 리스트 페이징 처리
 	@Override
 	public int selectAfterMovieCount(SqlSessionTemplate session) {
@@ -49,14 +51,14 @@ public class UserMovieStoreLogic implements UserMovieStore{
 		List<MovieList> mlList = session.selectList("MovieMapper.selectAllMovieBefore");
 		return mlList;
 	}
-	
+
 	// 상영 종료 영화 리스트 페이징 처리
 	@Override
 	public int selectBeforeMovieCount(SqlSessionTemplate session) {
 		int count = session.selectOne("MovieMapper.selectBeforeMovieCount");
 		return count;
 	}
-	
+
 	// 영화 검색 완료 리스트
 	@Override
 	public List<MovieList> selectAllMovie(SqlSessionTemplate session) {
@@ -80,7 +82,8 @@ public class UserMovieStoreLogic implements UserMovieStore{
 
 	// 예매 현재 상영 영화 출력
 	@Override
-	public List<Movie> selectTicketMovieOne(SqlSessionTemplate session, Integer cinemaNo, Integer movieNo, String movieDay) {
+	public List<Movie> selectTicketMovieOne(SqlSessionTemplate session, Integer cinemaNo, Integer movieNo,
+			String movieDay) {
 		HashMap<String, String> ticketMovieMap = new HashMap<>();
 		ticketMovieMap.put("cinemaNo", cinemaNo.toString());
 		ticketMovieMap.put("movieNo", movieNo.toString());
@@ -91,7 +94,8 @@ public class UserMovieStoreLogic implements UserMovieStore{
 
 	// 예매 현재 상영 영화 정보 출력
 	@Override
-	public List<CinemaMovie> selectTicketMovieByDay(SqlSessionTemplate session, Integer cinemaNo, Integer movieNo, String movieDay) {
+	public List<CinemaMovie> selectTicketMovieByDay(SqlSessionTemplate session, Integer cinemaNo, Integer movieNo,
+			String movieDay) {
 		HashMap<String, String> ticketMovieMap = new HashMap<>();
 		ticketMovieMap.put("cinemaNo", cinemaNo.toString());
 		ticketMovieMap.put("movieNo", movieNo.toString());
@@ -99,21 +103,21 @@ public class UserMovieStoreLogic implements UserMovieStore{
 		List<CinemaMovie> cmList = session.selectList("MovieMapper.selectTicketMovieByDay", ticketMovieMap);
 		return cmList;
 	}
-	
+
 	// 결제를 위한 회원 이름, 휴대폰 번호, 이메일 불러오기
 	@Override
 	public Member selectBuyerInfo(SqlSessionTemplate session, String memberId) {
 		Member buyerInfo = session.selectOne("MemberMapper.selectBuyerInfo", memberId);
 		return buyerInfo;
 	}
-	
+
 	// 나의 찜 여부
 	@Override
 	public List<Integer> selectMyZzimMovieList(SqlSessionTemplate session, String memberId) {
 		List<Integer> myZzimMovieList = session.selectList("MemberMapper.myZzimList", memberId);
 		return myZzimMovieList;
 	}
-	
+
 	// 예매 내역 등록
 	@Override
 	public int insertMovieTicket(SqlSessionTemplate session, MovieTicket movieTicket) {
@@ -123,24 +127,25 @@ public class UserMovieStoreLogic implements UserMovieStore{
 
 	@Override
 	public List<MovieReview> selectMovieReview(SqlSessionTemplate session, Integer movieNo) {
-		List<MovieReview> movieReviewList=session.selectList("MovieMapper.selectMovieReview", movieNo);
+		List<MovieReview> movieReviewList = session.selectList("MovieMapper.selectMovieReview", movieNo);
 		return movieReviewList;
 	}
 
 	@Override
 	public int insertMovieReview(SqlSessionTemplate session, MovieReview review) {
-		int result=session.insert("MovieMapper.insertMovieReview", review);
+		int result = session.insert("MovieMapper.insertMovieReview", review);
 		return result;
 	}
 
 	@Override
 	public int selectMovieReviewCount(SqlSessionTemplate session, String memberId, Integer movieNo) {
-		HashMap<String,String> param=new HashMap<>();
+		HashMap<String, String> param = new HashMap<>();
 		param.put("memberId", memberId);
 		param.put("movieNo", movieNo.toString());
 		int result = session.selectOne("MovieMapper.selectMovieReviewCount", param);
 		return result;
 	}
+
 	// 회원 테이블 포인트 업데이트
 	@Override
 	public int updateMemberPoint(SqlSessionTemplate session, String memberId, Integer userPoint) {
@@ -150,4 +155,26 @@ public class UserMovieStoreLogic implements UserMovieStore{
 		int result = session.update("MovieMapper.updateMemberPoint", memberPointMap);
 		return result;
 	}
+
+	// 배너 동영상 번호 리스트 불러오기
+	@Override
+	public List<Integer> selectBannerVideoNoList(SqlSessionTemplate session) {
+		List<Integer> videoNoList = session.selectList("MovieMapper.selectBannerVideoNoList");
+		return videoNoList;
+	}
+
+	// 타겟 배너 동영상 저장명 불러오기
+	@Override
+	public String selectBannerVideoRenameByVideoNo(SqlSessionTemplate session, int videoNo) {
+		String videoRename = session.selectOne("MovieMapper.selectBannerVideoRenameByVideoNo", videoNo);
+		return videoRename;
+	}
+
+	// 영화 차트 리스트 불러오기
+	@Override
+	public List<MovieChart> selectMovieChartList(SqlSessionTemplate session, int top) {
+		List<MovieChart> movieList = session.selectList("MovieMapper.selectMovieChartList", top);
+		return movieList;
+	}
+	
 }

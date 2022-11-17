@@ -2,6 +2,7 @@ package kr.co.movieyouhwan;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,7 @@ import kr.co.movieyouhwan.admin.site.domain.Faq;
 import kr.co.movieyouhwan.admin.site.domain.Notice;
 import kr.co.movieyouhwan.admin.site.service.AdminFaqService;
 import kr.co.movieyouhwan.admin.site.service.AdminNoticeService;
-import kr.co.movieyouhwan.user.movie.domain.MovieList;
+import kr.co.movieyouhwan.user.movie.domain.MovieChart;
 import kr.co.movieyouhwan.user.movie.service.UserMovieService;
 import kr.co.movieyouhwan.user.store.domain.BestProduct;
 import kr.co.movieyouhwan.user.store.service.UserStoreService;
@@ -30,33 +31,44 @@ public class HomeController {
 
 	@Autowired
 	UserStoreService uStoreService;
-	
+
 	@Autowired
 	AdminFaqService aFaqService;
-	
+
 	@Autowired
 	AdminNoticeService aNoticeService;
-	
+
 	@Autowired
-	UserMovieService uMovieService; 
+	UserMovieService uMovieService;
 
 	@RequestMapping(value = "/home.yh", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, ModelAndView mv) {
 
-		// TODO: MOVIE CHART 불러오기 => 이대로 Service -> Store -> Mapper만 작성하기!!!!
+		// TODO: RANDOM MOVIE VIDEO 불러오기
+		List<Integer> videoNoList = uMovieService.printBannerVideoNoList();
+		if (!videoNoList.isEmpty()) {
+			Random random = new Random();
+			int targetVideoNo = videoNoList.get(random.nextInt(videoNoList.size()));
+			String targetVideoRename = uMovieService.printBannerVideoRenameByVideoNo(targetVideoNo);
+			if (targetVideoRename != null) {
+				mv.addObject("videoRename", targetVideoRename);
+			}
+		}
+
+		// TODO: MOVIE CHART 불러오기
 		int movieChartCount = 4;
-//		List<MovieList> movieList = uMovieService.printMovieChartList(movieChartCount);
-//		if (!movieChartList.isEmpty()) {
-//			mv.addObject("movieList", movieList);
-//		}
-		
+		List<MovieChart> movieList = uMovieService.printMovieChartList(movieChartCount);
+		if (!movieList.isEmpty()) {
+			mv.addObject("movieList", movieList);
+		}
+
 		// NOTE: STORE BEST 불러오기
 		int bestProductCount = 4;
 		List<BestProduct> productList = uStoreService.printBestProductList(bestProductCount);
 		if (!productList.isEmpty()) {
 			mv.addObject("productList", productList);
 		}
-		
+
 		// NOTE: FAQ & NOTICE 불러오기
 		int supportCount = 5;
 		List<Faq> faqList = aFaqService.printNewFaqList(supportCount);

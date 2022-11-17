@@ -17,7 +17,7 @@
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     <div id="admin-wrapper">
-      <h2 class="support-title"><a href='/admin/site/manage.yh?tabIndex=2'>공지사항</a></h2>
+      <h2 class="support-title"><a href='/admin/site/manage.yh?tabIndex=1'>공지사항</a></h2>
       <form method="post"> 
         <input type="hidden" name="noticeNo" value="${notice.noticeNo}">
         <div id="btn-area">
@@ -60,7 +60,7 @@
         <hr />
       </div>
       <div class="list-btn-area">
-        <button type="button" class="list-btn" onclick="location.href='/support.yh?tabIndex=2&nCurrentPage=${nCurrentPage}'">목록</button>
+        <button type="button" class="list-btn" onclick="location.href='/support.yh?tabIndex=1&nCurrentPage=${nCurrentPage}'">목록</button>
       </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

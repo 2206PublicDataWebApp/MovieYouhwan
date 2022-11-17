@@ -29,7 +29,7 @@ public class AdminNoticeController {
 	public ModelAndView adminNoticeWrite(ModelAndView mv, @ModelAttribute Notice notice) {
 		int result = aNoticeService.registerNotice(notice);
 		if (result > 0) {
-			mv.addObject("tabIndex", 2);
+			mv.addObject("tabIndex", 1);
 			mv.setViewName("redirect:/admin/site/manage.yh");
 		}
 		return mv;
@@ -61,7 +61,7 @@ public class AdminNoticeController {
 //		System.out.println(deleteNo);
 		int result = aNoticeService.deleteFaqList(deleteNo);
 		if (result > 0) {
-			mv.addObject("tabIndex", 2);
+			mv.addObject("tabIndex", 1);
 			mv.setViewName("redirect:/admin/site/manage.yh");
 		}
 		return mv;
@@ -71,7 +71,7 @@ public class AdminNoticeController {
 	public ModelAndView adminNoticeOneDelete(ModelAndView mv, @RequestParam("noticeNo") int noticeNo) {
 		int result = aNoticeService.deleteFaq(noticeNo);
 		if (result > 0) {
-			mv.addObject("tabIndex", 2);
+			mv.addObject("tabIndex", 1);
 			mv.setViewName("redirect:/admin/site/manage.yh");
 		}
 		return mv;
@@ -119,7 +119,7 @@ public class AdminNoticeController {
 				mv.addObject("nPageInfo", nPageInfo);
 				mv.addObject("searchOption", searchOption);
 				mv.addObject("searchValue", searchValue);
-				mv.addObject("tabIndex", 2);
+				mv.addObject("tabIndex", 1);
 				mv.setViewName("admin/site/adminSiteManage");
 			} else {
 				System.out.println("nList is null");

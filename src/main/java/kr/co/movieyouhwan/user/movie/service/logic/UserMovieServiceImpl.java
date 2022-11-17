@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.co.movieyouhwan.admin.movie.domain.Movie;
 import kr.co.movieyouhwan.user.cinema.domain.CinemaMovie;
 import kr.co.movieyouhwan.user.member.domain.Member;
+import kr.co.movieyouhwan.user.movie.domain.MovieChart;
 import kr.co.movieyouhwan.user.movie.domain.MovieList;
 import kr.co.movieyouhwan.user.movie.domain.MovieReview;
 import kr.co.movieyouhwan.user.movie.domain.MovieTicket;
@@ -143,5 +144,26 @@ public class UserMovieServiceImpl implements UserMovieService{
 	public int checkReviewExist(String memberId, Integer movieNo) {
 		int result=uMovieStore.selectMovieReviewCount(session, memberId, movieNo);
 		return result;
+	}
+
+	// 배너 동영상 번호 리스트 불러오기
+	@Override
+	public List<Integer> printBannerVideoNoList() {
+		List<Integer> videoNoList = uMovieStore.selectBannerVideoNoList(session);
+		return videoNoList;
+	}
+
+	// 타겟 배너 동영상 저장명 불러오기
+	@Override
+	public String printBannerVideoRenameByVideoNo(int videoNo) {
+		String videoRename = uMovieStore.selectBannerVideoRenameByVideoNo(session, videoNo);
+		return videoRename;
+	}
+
+	// 영화 차트 리스트 불러오기
+	@Override
+	public List<MovieChart> printMovieChartList(int top) {
+		List<MovieChart> movieList = uMovieStore.selectMovieChartList(session, top);
+		return movieList;
 	}
 }
