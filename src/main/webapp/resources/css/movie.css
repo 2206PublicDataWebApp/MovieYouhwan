@@ -621,6 +621,7 @@
 }
 #movie-textwrap {
 	display : flex;
+	margin-bottom : 20px;
 }
 	#detail-movietitle {
 		margin-top : 5px;
@@ -684,8 +685,7 @@
 		.go-movieList{
 			width : 100px;
 			height : 30px;
-			margin-top : 28px;
-			margin-bottom : 50px;
+			margin-top : 80px;
 			color : white;
 			border : solid 1px #0F1A3B;
 			background-color : #0F1A3B;

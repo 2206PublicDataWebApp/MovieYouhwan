@@ -320,8 +320,3 @@ $('#Allcheck').change(function () {
 
 // 관리자 회원 목록
 $('.admin-member-tab').addClass('admin-tab-selected');
-
-// 예매리스트
-function goReview(){
-location.href="/movieReview.yh?movieNo="+${movieTicket.movieNo};
-   }
