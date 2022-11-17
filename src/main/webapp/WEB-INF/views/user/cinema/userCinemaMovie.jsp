@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>무비유환 : 전체 상영 영화</title>
+<link rel="shortcut icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
+<link rel="icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
 <link href="/resources/css/common.css" rel="stylesheet" />
 <link href="/resources/css/header.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
@@ -43,7 +45,7 @@
 	   	<div class="cinema-movie-year-month">
 		   	<div class="year-month">${movieDay.thisYear }년 ${movieDay.thisMonth }월</div>
 			<c:forEach items="${movieDay.tmdayList }" var="tmday" varStatus="i">
-				<button type="button" class="tmday-button filter-not-clicked" onclick="getMovieList(${cinema.cinemaNo}, ${i.index });">${tmday }</button>
+				<button type="button" class="tmday-button" onclick="getMovieList(${cinema.cinemaNo}, ${i.index });">${tmday }</button>
 			</c:forEach>
 			<hr/>
 	   	</div>
@@ -84,19 +86,12 @@
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     <script>
-    	$('.tmday-button').click(function() {
-    		$(this).removeClass('filter-not-clicked');
-    		$(this).addClass('filter-clicked');
-    		$(this).siblings().removeClass('filter-clicked');
-    		$(this).siblings().addClass('filter-not-clicked');
-    	})
-    	function getMovieList(cinemaNo, movieNo, dayIndex) {
+    	function getMovieList(cinemaNo, dayIndex) {
     		$.ajax({
     			type : "post",
     			url : "/user/cinemaMovieDay.yh",
     			data : {
     				"cinemaNo" : cinemaNo,
-    				"movieNo" : movieNo,
     				"dayIndex" : dayIndex
     			},
     			dataType : "json",

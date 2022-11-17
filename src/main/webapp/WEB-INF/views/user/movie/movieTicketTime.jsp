@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>무비유환 : 영화 예매</title>
+<link rel="shortcut icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
+<link rel="icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
 <link href="/resources/css/common.css" rel="stylesheet" />
 <link href="/resources/css/header.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />
@@ -55,7 +57,7 @@
 					<c:forEach items="${cList }" var="cinema" varStatus="i">
 						<div id="cinema-name-outside${i.count }" class="cinema-name-outside">
 							<label for="cinema-name${i.count }" class="cinema-name-text">${cinema.cinemaName }</label>
-							<input type="radio" id="cinema-name${i.count }" class="cinema-name-radio" name="cinemaName" value="${cinema.cinemaName }" onclick="cinemaNameChoice(${cinema.cinemaNo})"/>
+							<input type="radio" id="cinema-name${i.count }" class="cinema-name-radio" name="cinemaName" value="${cinema.cinemaNo }" onclick="cinemaNameChoice(${cinema.cinemaNo})"/>
 						</div>
 					</c:forEach>
 				</div>
@@ -74,11 +76,11 @@
 					   	<div class="year-month">${movieDay.thisYear }년 ${movieDay.thisMonth }월</div>
 						<c:forEach items="${movieDay.tmdayList }" var="tmday" varStatus="i">
 							<input type="hidden" class="movieday-list" name="movieDay" value="${movieDay.dayList[i.count-1] }" />
-							<button type="button" class="tmday-button" value="${movieDay.dayList[i.count-1] }" onclick="ticketMovieday(${movieDay.dayList[i.count-1]})">${tmday }</button>
+							<button type="button" class="tmday-button" value="${movieDay.dayList[i.count-1] }" onclick="ticketTimeDay('${movieDay.dayList[i.count-1]}')">${tmday }</button>
 						</c:forEach>
 						<hr/>
 						<div class="ticket-movie-time">
-							<p class="font-black">영화관와 영화를 선택해주세요.</p>
+							<p class="font-black">영화관과 영화를 선택해주세요.</p>
 						</div>
 	   				</div>
 				</div>

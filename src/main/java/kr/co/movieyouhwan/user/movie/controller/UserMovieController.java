@@ -685,4 +685,20 @@ public class UserMovieController {
 		mv.setViewName("user/movie/movieTicketComplete");
 		return mv;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping(value="/choiceTicketComplete.yh", produces = "application/json;charset=utf-8", method=RequestMethod.POST)
+	public String ticketTimeMovieChoice(
+			HttpServletRequest request,
+			@RequestParam(value="cinemaNo", required=false) Integer cinemaNo,
+			@RequestParam(value="movieNo", required=false) Integer movieNo,
+			@RequestParam(value="movieDay", required=false) String movieDay) {
+		List<MovieList> mlList = uMovieService.printTicketTimeChoice(cinemaNo, movieNo, movieDay);
+		Gson gson = new Gson();
+		JSONObject object = new JSONObject();
+		object.put("mlList", gson.toJson(mlList));
+		System.out.println(mlList.toString());
+		return object.toJSONString();
+	}
 }

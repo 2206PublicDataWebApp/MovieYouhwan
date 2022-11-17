@@ -8,10 +8,14 @@ $('.movie-tab').addClass('tab-selected');
 
 // 영화관 선택시 영화관, 날짜 별 상영 영화 
 function cinemaNameChoice(cinemaNo) {
-	var radioVal = $('input[name="cinemaName"]:checked').val();
+	// 영화관 이름 가져오기
+	var radioText = $('input[name="cinemaName"]:checked').siblings('label').text();
+	// 상단 div에 영화관 이름 출력
 	var divTag = $('.ticket-cinema-name');
+	// 상단 div p태그 삭제 후 새로운 p태그 출력
 	$(divTag).children('p').remove();
-	$(divTag).append('<p class="cmovie-name">' + radioVal + '</p>');
+	$(divTag).append('<p class="cmovie-name">' + radioText + '</p>');
+	// 영화관 선택시 해당 영화관에서 상영하는 영화만 출력
 	$.ajax({
 		type : "post",
 		url : "/movieTicketTimeCinema.yh",
@@ -27,6 +31,7 @@ function cinemaNameChoice(cinemaNo) {
 				var movieTitle = movie[m].movieTitle;
 				var movieBoxTag = $('<div class="movie-name-outside"></div>');
 				var movieLabelTag = $('<label for="ticket-name'+m+'" class="title-text">' + movieTitle + '</label>')
+				// onclick -> 영화 선택 시 상영 시간표 출력
 				var movieTitleTag = $('<input type="radio" id="ticket-name'+m+'" class="title-radio-button" name="movieNo" value="" onclick="ticketMovieday('+movieNo+', '+cinemaNo+', \''+movieTitle+'\')"/>');
 				movieBoxTag.append(movieLabelTag);
 				movieBoxTag.append(movieTitleTag);
@@ -77,7 +82,7 @@ function ticketMovieday(movieNo, cinemaNo, movieTitle) {
 					var movieStart = movieTime[mt].movieStart;
 					var movieEnd = movieTime[mt].movieEnd;
 					var movieDay = movieTime[mt].movieDay;
-					var movieDivTag = $('<div id="time-choice-wrapper"></div>');
+					var movieDivTag = $('<div class="time-choice-wrapper"></div>');
 					var movieSeatTag = $('<p class="movie-seat-choice">'+ theaterName +' '+ movieTicket + '/' + movieSeat +'</p>');
 					var movieTimeTag = $('<p>'+ movieStart +'~'+ movieEnd+'</p>');
 					movieDivTag.append(movieSeatTag);
@@ -88,9 +93,10 @@ function ticketMovieday(movieNo, cinemaNo, movieTitle) {
 			}
 			var cinemaName = cinema.cinemaName;
 			var movieImgRename = movieImg[0].movieImgRename;
-			registerBtn = $('#time-choice-wrapper');
+			registerBtn = $('.time-choice-wrapper');
 			// 영화 선택 시 영화 선택 확인 jsp 화면에 띄우기
 			registerBtn.click(function() {
+				console.log("클릭!!!!!!!!!!!!!!")
 				registerModal.css('display', 'block');
 				var imgArea = $('#mticket-img');
 				imgArea.append("<img src='/resources/images/movieLodeImg/"+movieImgRename+"' id='choice-movie-img' width='220px' height='320px'/>");
@@ -142,6 +148,48 @@ var movieChoice = $('.movie-seat-choice');
 // 팝업창 열기
 function popUp() {
 	location.href="/movieList.yh";
+}
+
+// 영화 예매 날짜 선택 시 영화관, 영화, 영화 정보 출력하기
+function ticketTimeDay(movieDay) {
+	var cinemaNo = $('input[name="cinemaName"]:checked').val();
+	var movieNo = $('input[name="movieNo"]:checked').val();
+	$.ajax({
+		type : "post",
+		url : "/choiceTicketComplete.yh",
+		data : {
+			"cinemaNo" : cinemaNo,
+			"movieNo" : movieNo,
+			"movieDay" : movieDay
+		},
+		dataType : "json",
+		success : function(result) {
+			const movieList = JSON.parse(result.mlList);
+			var listWrap = $('.ticket-movie-time').html('');
+			for(var m in movieList) {
+				var movieTitle = movieList[m].movieTitle;
+				var theaterName = movieList[m].theaterName
+				var movieTicket = movieList[m].movieTicket
+				var movieSeat = movieList[m].movieSeat
+				var movieStart = movieList[m].movieStart
+				var movieEnd = movieList[m].movieEnd
+
+				var divWrap = $('<div class="ticket-movie-times"></div>');
+				var movieTitleText = $('<p class="font-black">'+ movieTitle +'</p>');
+				var movieListWrap = $('<div class="time-choice-wrapper"></div>');
+				var theaterNameText = $('<p class="font-black seat-time-margin">'+ theaterName + '  ' + movieTicket + ' / '+ movieSeat +'</p>');
+				var movieTimeText = $('<p class="font-black">'+ movieStart + ' ~ ' + movieEnd +'</p>');
+				movieListWrap.append(theaterNameText);
+				movieListWrap.append(movieTimeText);
+				divWrap.append(movieTitleText);
+				divWrap.append(movieListWrap);
+				listWrap.append(divWrap);
+			}
+		},
+		error : function() {
+			alert("관리자에게 문의해주세요. (02-6555-9523)");
+		}
+	});
 }
 
 
@@ -230,6 +278,8 @@ function payMoney() {
 	$('input[name="adultPay"]').attr('value', adultPay);
 	hiddenTag.append('<input type="hidden" value="" name="teenagerPay"/>');
 	$('input[name="teenagerPay"]').attr('value', teenagerPay);
+	hiddenTag.append('<input type="hidden" value="" name="orderNo"/>');
+	$('input[name="orderNo"]').attr('value', orderNo);
 }
 
 

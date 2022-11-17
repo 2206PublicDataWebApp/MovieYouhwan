@@ -144,4 +144,12 @@ public class UserMovieServiceImpl implements UserMovieService{
 		int result=uMovieStore.selectMovieReviewCount(session, memberId, movieNo);
 		return result;
 	}
+
+	// 날짜별 영화 출력
+	@Override
+	public List<MovieList> printTicketTimeChoice(Integer cinemaNo, Integer movieNo, String movieDay) {
+		List<MovieList> mlList = uMovieStore.selectTicketTimeChoice(session, cinemaNo, movieNo, movieDay);
+		return mlList;
+	}
+
 }

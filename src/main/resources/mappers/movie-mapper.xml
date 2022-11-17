@@ -299,4 +299,14 @@
 	<update id="updateMemberPoint">
 		UPDATE MEMBER_TBL SET MEMBER_POINT = MEMBER_POINT + #{userPoint} WHERE MEMBER_ID = #{memberId}
 	</update>
+	<select id="selectTicketTimeChocie" resultMap="MovieListResultMap" parameterType="java.util.HashMap">
+		SELECT MT.MOVIE_NO, TT.THEATER_NO, MT.MOVIE_TITLE, TT.THEATER_NAME, MTT.MOVIE_DAY, MTT.MOVIE_START, MTT.MOVIE_END, MTT.MOVIE_TICKET, MTT.MOVIE_SEAT
+		FROM MOVIE_TBL MT, THEATER_TBL TT, MOVIE_TIME_TBL MTT
+		WHERE MT.MOVIE_NO = MTT.MOVIE_NO
+		AND TT.THEATER_NO = MTT.THEATER_NO
+		AND MTT.MOVIE_DAY = #{movieDay}
+		AND MTT.CINEMA_NO = #{cinemaNo}
+		AND MTT.MOVIE_NO = #{movieNo}
+		ORDER BY MOVIE_START
+	</select>
 </mapper>

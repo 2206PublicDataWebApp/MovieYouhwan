@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>무비유환 : 영화관 정보</title>
+<link rel="shortcut icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
+<link rel="icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
 <link href="/resources/css/common.css" rel="stylesheet" />
 <link href="/resources/css/header.css" rel="stylesheet" />
 <link href="/resources/css/footer.css" rel="stylesheet" />

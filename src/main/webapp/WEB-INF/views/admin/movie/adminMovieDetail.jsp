@@ -6,7 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>무비유환 : 영화 상세(관리자)</title>
+<title>무비유환 : 영화 상세(관리자)</title>4
+<link rel="shortcut icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
+<link rel="icon" href="<c:url value='/resources/favicon.ico'/>" type="image/x-icon" />
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/header.css" rel="stylesheet"/>
 <link href="/resources/css/movie.css" rel="stylesheet">
@@ -49,7 +51,7 @@
 				<p class="detail-actor">감독 : ${movie.movieDirector }</p>
 				<p class="detail-actor">배우 : ${movie.movieActor }</p>
 			</div>
-			<div id="detail-button">
+			<div id="amovie-detail-button">
 				<button class="change-button" onclick="location.href='/admin/adminMovieModify.yh?movieNo=${movie.movieNo}'">수정</button>
 				<button class="change-button" onclick="removeMovieData()">삭제</button>
 				<button class="go-movieList" onclick="location.href='/admin/adminMovieList.yh'">목록</button>
@@ -69,7 +71,7 @@
 		<div class="detail-movieimg">
 			<h4 id="video-text">영화 사진</h4>
 			<c:forEach items="${miList }" var="movieImg" varStatus="i">
-				<img src="/resources/images/movieLodeImg/${movieImg.movieImgRename }" width="490px">
+				<img src="/resources/images/movieLodeImg/${movieImg.movieImgRename }" width="490px"><br>
 			</c:forEach>
 		</div>
 	</div>
