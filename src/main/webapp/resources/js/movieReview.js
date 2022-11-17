@@ -90,8 +90,7 @@ function registerMovieReview(loginUser) {
           alert('이미 리뷰를 등록한 영화입니다.');
         } else if (result == 'success') {
           alert('리뷰가 등록되었습니다.');
-          //$(location).attr('href', '/movieReview.yh?movieNo=' + $('#movieNoInput').val());
-          $(location).reload();
+          $(location).attr('href', '/movieReview.yh?movieNo=' + $('#movieNoInput').val());
         } else if (result == 'loginRequired') {
           alert('로그인이 필요한 서비스입니다.');
           $(location).attr('href', '/member/loginView.yh');
