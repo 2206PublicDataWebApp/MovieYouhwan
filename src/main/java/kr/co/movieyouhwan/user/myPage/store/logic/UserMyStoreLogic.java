@@ -70,11 +70,15 @@ public class UserMyStoreLogic implements UserMyStore{
 		return uMovieTicketList;
 	}
 
+	/**
+	 * 찜 카운트
+	 */
 	@Override
-	public Zzim selectMovieZzimCount(Zzim myZzimCount) {
-		Zzim zzimCount = session.selectOne("MemberMapper.selectMovieZzimCount", myZzimCount);
+	public int selectMovieZzimCount(String memberId) {
+		int zzimCount = session.selectOne("MemberMapper.selectMovieZzimCount", memberId);
 		return zzimCount;
 	}
+
 
 
 

@@ -75,10 +75,11 @@ public class UserMyServiceImpl implements UserMyService{
 	 * 
 	 */
 	@Override
-	public Zzim selectMovieZzimCount(Zzim zzimCount) {
-		Zzim myZzimCount = uMyStore.selectMovieZzimCount(zzimCount);
-		return myZzimCount;
+	public int selectMovieZzimCount(String memberId) {
+		int myzzimCount = uMyStore.selectMovieZzimCount(memberId);
+		return myzzimCount;
 	}
+
 
 
 	

@@ -31,12 +31,13 @@ public interface UserMyStore {
 	public List<MovieTicket> selectAllTiketHistory(SqlSessionTemplate session, String memberId);
 
 
-	public Zzim selectMovieZzimCount(Zzim myZzimCount);
-
-
 	/**
-	 * 영화찜 목록
+	 * 영화찜 카운트
 	 */
+	public int selectMovieZzimCount(String memberId);
+
+
+	
 	
 
 
