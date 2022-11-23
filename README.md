@@ -19,11 +19,12 @@ const movieyouhwan = {
 ## Intention
 1. 영화가 좋은 사람들을 위한 영화 예매 서비스
 2. 혼영이 싫은 사람들을 위한 영화 메이트 매칭 서비스
- 
+
 ## Features
-* 영화 예매
-* 영화 메이트 매칭
-* 스토어 상품 구매
+* I'mport API를 사용하여 영화/상품 결제
+* JavaMail API를 사용하여 이메일 인증
+* Data Faker API를 사용하여 Dummy Data 생성
+* AJAX를 사용하여 실시간 유효성 체크
 
 ## Teams
 #### 김미소(팀장)
