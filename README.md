@@ -51,8 +51,8 @@ const movieyouhwan = {
 * AJAX를 사용하여 회원가입 시 유효성 체크
 
 ## Period
-**Documnent: 2022.10.04 ~ 2022.10.16**
-**Programming: 2022.10.17 ~ 2022.11.17
+**Documnent: 2022.10.04 ~ 2022.10.16**  
+**Programming: 2022.10.17 ~ 2022.11.17**
 
 ## Languages
 <img src="https://img.shields.io/badge/JAVA-007396?style=flat-square&logo=JAVA&logoColor=white"> <img src="https://img.shields.io/badge/html-E34F26?style=flat-square&logo=HTML5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=flat-square&logo=CSS3&logoColor=white"> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"> <img src="https://img.shields.io/badge/jQuery-0769AD?style=flat-square&logo=jQuery&logoColor=white">
@@ -65,4 +65,4 @@ const movieyouhwan = {
 <img src="https://img.shields.io/badge/Ecplise IDE-2C2255?style=flat-square&logo=Eclipse IDE&logoColor=white"> <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat-square&logo=Visual Studio Code&logoColor=white"> <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white"> <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"> <img src="https://img.shields.io/badge/Apache Tomcat-F8DC75?style=flat-square&logo=Apache Tomcat&logoColor=white">
 
 ## Reference
-CGV, Lotte Cinema, MEGABOX
+CGV, LOTTE CINEMA, MEGABOX
